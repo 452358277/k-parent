@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="QuotaInfo">
+	<!-- start autocreate -->
+
+	<resultMap id="QuotaInfoResult" type="com.ppmg.ei.model.QuotaInfoModel">
+		<result column="PK_ID" property="pkId" jdbcType="VARCHAR" />
+		<result column="QUOTA_NAME" property="quotaName" jdbcType="VARCHAR" />
+		<result column="QUOTA_UNIT" property="quotaUnit" jdbcType="VARCHAR" />
+		<result column="IS_INT" property="isInt" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.QuotaInfoModel">
+		INSERT INTO BI.JYJH_QUOTA_INFO (PK_ID,QUOTA_NAME,QUOTA_UNIT,IS_INT,REMARK,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT) values(#{pkId,jdbcType=VARCHAR},#{quotaName,jdbcType=VARCHAR},#{quotaUnit,jdbcType=VARCHAR},#{isInt,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO BI.JYJH_QUOTA_INFO (PK_ID,QUOTA_NAME,QUOTA_UNIT,IS_INT,REMARK,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.pkId,jdbcType=VARCHAR},
+				#{item.quotaName,jdbcType=VARCHAR},
+				#{item.quotaUnit,jdbcType=VARCHAR},
+				#{item.isInt,jdbcType=VARCHAR},
+				#{item.remark,jdbcType=VARCHAR},
+				#{item.status,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  BI.JYJH_QUOTA_INFO WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.QuotaInfoModel">
+		DELETE FROM BI.JYJH_QUOTA_INFO
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="quotaName != null and quotaName != ''" >
+				AND QUOTA_NAME = #{quotaName,jdbcType=VARCHAR}
+			</if>
+			<if test="quotaUnit != null and quotaUnit != ''" >
+				AND QUOTA_UNIT = #{quotaUnit,jdbcType=VARCHAR}
+			</if>
+			<if test="isInt != null and isInt != ''" >
+				AND IS_INT = #{isInt,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  BI.JYJH_QUOTA_INFO WHERE PK_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.QuotaInfoModel">
+		UPDATE BI.JYJH_QUOTA_INFO 
+		<set>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR},
+			</if>
+			<if test="quotaName != null and quotaName != ''" >
+				QUOTA_NAME = #{quotaName,jdbcType=VARCHAR},
+			</if>
+			<if test="quotaUnit != null and quotaUnit != ''" >
+				QUOTA_UNIT = #{quotaUnit,jdbcType=VARCHAR},
+			</if>
+			<if test="isInt != null and isInt != ''" >
+				IS_INT = #{isInt,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null and remark != ''" >
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="QuotaInfoResult">
+		SELECT * FROM BI.JYJH_QUOTA_INFO WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.QuotaInfoModel" resultMap="QuotaInfoResult">
+		SELECT * FROM BI.JYJH_QUOTA_INFO
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="quotaName != null and quotaName != ''" >
+				AND QUOTA_NAME = #{quotaName,jdbcType=VARCHAR}
+			</if>
+			<if test="quotaUnit != null and quotaUnit != ''" >
+				AND QUOTA_UNIT = #{quotaUnit,jdbcType=VARCHAR}
+			</if>
+			<if test="isInt != null and isInt != ''" >
+				AND IS_INT = #{isInt,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM BI.JYJH_QUOTA_INFO
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="QuotaInfoResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.QuotaInfoModel">
+		SELECT COUNT(*) FROM BI.JYJH_QUOTA_INFO
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="quotaName != null and quotaName != ''" >
+				AND QUOTA_NAME = #{quotaName,jdbcType=VARCHAR}
+			</if>
+			<if test="quotaUnit != null and quotaUnit != ''" >
+				AND QUOTA_UNIT = #{quotaUnit,jdbcType=VARCHAR}
+			</if>
+			<if test="isInt != null and isInt != ''" >
+				AND IS_INT = #{isInt,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.QuotaInfoModel" resultMap="QuotaInfoResult">
+		SELECT * FROM BI.JYJH_QUOTA_INFO
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="quotaName != null and quotaName != ''" >
+				AND QUOTA_NAME = #{quotaName,jdbcType=VARCHAR}
+			</if>
+			<if test="quotaUnit != null and quotaUnit != ''" >
+				AND QUOTA_UNIT = #{quotaUnit,jdbcType=VARCHAR}
+			</if>
+			<if test="isInt != null and isInt != ''" >
+				AND IS_INT = #{isInt,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="QuotaInfoResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+</mapper>

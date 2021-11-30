@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AppRole">
+	<!-- 角色用户信息 -->
+	<resultMap id="AppRoleResult2" type="com.ppmg.ei.model.AppRoleModel" extends="AppRoleResult">
+		<collection property="userList" ofType="com.ppmg.ei.model.AppUserModel" column="ID"></collection>
+	</resultMap>
+
+	<!-- start autocreate -->
+
+	<resultMap id="AppRoleResult" type="com.ppmg.ei.model.AppRoleModel">
+		<result column="ID" property="id" jdbcType="NUMERIC" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+		<result column="GUID" property="guid" jdbcType="CHAR" />
+		<result column="CREATEDDATE" property="createddate" jdbcType="TIMESTAMP" />
+		<result column="MODIFIEDDATE" property="modifieddate" jdbcType="TIMESTAMP" />
+		<result column="READONLY" property="readonly" jdbcType="CHAR" />
+		<result column="DISPLAYNAME" property="displayname" jdbcType="VARCHAR" />
+		<result column="COORDINATORID" property="coordinatorid" jdbcType="NUMERIC" />
+		<result column="SHUXING2" property="shuxing2" jdbcType="NUMERIC" />
+		<result column="SORTORDER" property="sortorder" jdbcType="NUMERIC" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.AppRoleModel">
+		INSERT INTO BASE.APP_ROLE (ID,NAME,DESCRIPTION,GUID,CREATEDDATE,MODIFIEDDATE,READONLY,DISPLAYNAME,COORDINATORID,SHUXING2,SORTORDER) values(#{id,jdbcType=NUMERIC},#{name,jdbcType=VARCHAR},#{description,jdbcType=VARCHAR},#{guid,jdbcType=CHAR},#{createddate,jdbcType=TIMESTAMP},#{modifieddate,jdbcType=TIMESTAMP},#{readonly,jdbcType=CHAR},#{displayname,jdbcType=VARCHAR},#{coordinatorid,jdbcType=NUMERIC},#{shuxing2,jdbcType=NUMERIC},#{sortorder,jdbcType=NUMERIC})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO BASE.APP_ROLE (ID,NAME,DESCRIPTION,GUID,CREATEDDATE,MODIFIEDDATE,READONLY,DISPLAYNAME,COORDINATORID,SHUXING2,SORTORDER)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.id,jdbcType=NUMERIC},
+				#{item.name,jdbcType=VARCHAR},
+				#{item.description,jdbcType=VARCHAR},
+				#{item.guid,jdbcType=CHAR},
+				#{item.createddate,jdbcType=TIMESTAMP},
+				#{item.modifieddate,jdbcType=TIMESTAMP},
+				#{item.readonly,jdbcType=CHAR},
+				#{item.displayname,jdbcType=VARCHAR},
+				#{item.coordinatorid,jdbcType=NUMERIC},
+				#{item.shuxing2,jdbcType=NUMERIC},
+				#{item.sortorder,jdbcType=NUMERIC}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  BASE.APP_ROLE WHERE ID = #{id,jdbcType=NUMERIC}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.AppRoleModel">
+		DELETE FROM BASE.APP_ROLE
+		<where>
+			<if test="id != null and id != ''" >
+				ID = #{id,jdbcType=NUMERIC}
+			</if>
+			<if test="name != null and name != ''" >
+				AND NAME = #{name,jdbcType=VARCHAR}
+			</if>
+			<if test="description != null and description != ''" >
+				AND DESCRIPTION = #{description,jdbcType=VARCHAR}
+			</if>
+			<if test="guid != null and guid != ''" >
+				AND GUID = #{guid,jdbcType=CHAR}
+			</if>
+			<if test="createddate != null" >
+				AND CREATEDDATE = #{createddate,jdbcType=VARCHAR}
+			</if>
+			<if test="modifieddate != null" >
+				AND MODIFIEDDATE = #{modifieddate,jdbcType=VARCHAR}
+			</if>
+			<if test="readonly != null and readonly != ''" >
+				AND READONLY = #{readonly,jdbcType=CHAR}
+			</if>
+			<if test="displayname != null and displayname != ''" >
+				AND DISPLAYNAME = #{displayname,jdbcType=VARCHAR}
+			</if>
+			<if test="coordinatorid != null and coordinatorid != ''" >
+				AND COORDINATORID = #{coordinatorid,jdbcType=NUMERIC}
+			</if>
+			<if test="shuxing2 != null and shuxing2 != ''" >
+				AND SHUXING2 = #{shuxing2,jdbcType=NUMERIC}
+			</if>
+			<if test="sortorder != null and sortorder != ''" >
+				AND SORTORDER = #{sortorder,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  BASE.APP_ROLE WHERE ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.AppRoleModel">
+		UPDATE BASE.APP_ROLE 
+		<set>
+			<if test="id != null and id != ''" >
+				ID = #{id,jdbcType=NUMERIC},
+			</if>
+			<if test="name != null and name != ''" >
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null and description != ''" >
+				DESCRIPTION = #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="guid != null and guid != ''" >
+				GUID = #{guid,jdbcType=CHAR},
+			</if>
+			<if test="createddate != null" >
+				CREATEDDATE = #{createddate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifieddate != null" >
+				MODIFIEDDATE = #{modifieddate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="readonly != null and readonly != ''" >
+				READONLY = #{readonly,jdbcType=CHAR},
+			</if>
+			<if test="displayname != null and displayname != ''" >
+				DISPLAYNAME = #{displayname,jdbcType=VARCHAR},
+			</if>
+			<if test="coordinatorid != null and coordinatorid != ''" >
+				COORDINATORID = #{coordinatorid,jdbcType=NUMERIC},
+			</if>
+			<if test="shuxing2 != null and shuxing2 != ''" >
+				SHUXING2 = #{shuxing2,jdbcType=NUMERIC},
+			</if>
+			<if test="sortorder != null and sortorder != ''" >
+				SORTORDER = #{sortorder,jdbcType=NUMERIC},
+			</if>
+		</set>
+		WHERE ID = #{id,jdbcType=NUMERIC}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="AppRoleResult">
+		SELECT * FROM BASE.APP_ROLE WHERE ID = #{id,jdbcType=NUMERIC}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.AppRoleModel" resultMap="AppRoleResult">
+		SELECT * FROM BASE.APP_ROLE
+		<where>
+			<if test="id != null and id != ''" >
+				ID = #{id,jdbcType=NUMERIC}
+			</if>
+			<if test="name != null and name != ''" >
+				AND NAME = #{name,jdbcType=VARCHAR}
+			</if>
+			<if test="description != null and description != ''" >
+				AND DESCRIPTION = #{description,jdbcType=VARCHAR}
+			</if>
+			<if test="guid != null and guid != ''" >
+				AND GUID = #{guid,jdbcType=CHAR}
+			</if>
+			<if test="createddate != null" >
+				AND CREATEDDATE = #{createddate,jdbcType=VARCHAR}
+			</if>
+			<if test="modifieddate != null" >
+				AND MODIFIEDDATE = #{modifieddate,jdbcType=VARCHAR}
+			</if>
+			<if test="readonly != null and readonly != ''" >
+				AND READONLY = #{readonly,jdbcType=CHAR}
+			</if>
+			<if test="displayname != null and displayname != ''" >
+				AND DISPLAYNAME = #{displayname,jdbcType=VARCHAR}
+			</if>
+			<if test="coordinatorid != null and coordinatorid != ''" >
+				AND COORDINATORID = #{coordinatorid,jdbcType=NUMERIC}
+			</if>
+			<if test="shuxing2 != null and shuxing2 != ''" >
+				AND SHUXING2 = #{shuxing2,jdbcType=NUMERIC}
+			</if>
+			<if test="sortorder != null and sortorder != ''" >
+				AND SORTORDER = #{sortorder,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM BASE.APP_ROLE
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="AppRoleResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.AppRoleModel">
+		SELECT COUNT(*) FROM BASE.APP_ROLE
+		<where>
+			<if test="id != null and id != ''" >
+				ID = #{id,jdbcType=NUMERIC}
+			</if>
+			<if test="name != null and name != ''" >
+				AND NAME = #{name,jdbcType=VARCHAR}
+			</if>
+			<if test="description != null and description != ''" >
+				AND DESCRIPTION = #{description,jdbcType=VARCHAR}
+			</if>
+			<if test="guid != null and guid != ''" >
+				AND GUID = #{guid,jdbcType=CHAR}
+			</if>
+			<if test="createddate != null" >
+				AND CREATEDDATE = #{createddate,jdbcType=VARCHAR}
+			</if>
+			<if test="modifieddate != null" >
+				AND MODIFIEDDATE = #{modifieddate,jdbcType=VARCHAR}
+			</if>
+			<if test="readonly != null and readonly != ''" >
+				AND READONLY = #{readonly,jdbcType=CHAR}
+			</if>
+			<if test="displayname != null and displayname != ''" >
+				AND DISPLAYNAME = #{displayname,jdbcType=VARCHAR}
+			</if>
+			<if test="coordinatorid != null and coordinatorid != ''" >
+				AND COORDINATORID = #{coordinatorid,jdbcType=NUMERIC}
+			</if>
+			<if test="shuxing2 != null and shuxing2 != ''" >
+				AND SHUXING2 = #{shuxing2,jdbcType=NUMERIC}
+			</if>
+			<if test="sortorder != null and sortorder != ''" >
+				AND SORTORDER = #{sortorder,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.AppRoleModel" resultMap="AppRoleResult">
+		SELECT * FROM BASE.APP_ROLE
+		<where>
+			<if test="id != null and id != ''" >
+				ID = #{id,jdbcType=NUMERIC}
+			</if>
+			<if test="name != null and name != ''" >
+				AND NAME = #{name,jdbcType=VARCHAR}
+			</if>
+			<if test="description != null and description != ''" >
+				AND DESCRIPTION = #{description,jdbcType=VARCHAR}
+			</if>
+			<if test="guid != null and guid != ''" >
+				AND GUID = #{guid,jdbcType=CHAR}
+			</if>
+			<if test="createddate != null" >
+				AND CREATEDDATE = #{createddate,jdbcType=VARCHAR}
+			</if>
+			<if test="modifieddate != null" >
+				AND MODIFIEDDATE = #{modifieddate,jdbcType=VARCHAR}
+			</if>
+			<if test="readonly != null and readonly != ''" >
+				AND READONLY = #{readonly,jdbcType=CHAR}
+			</if>
+			<if test="displayname != null and displayname != ''" >
+				AND DISPLAYNAME = #{displayname,jdbcType=VARCHAR}
+			</if>
+			<if test="coordinatorid != null and coordinatorid != ''" >
+				AND COORDINATORID = #{coordinatorid,jdbcType=NUMERIC}
+			</if>
+			<if test="shuxing2 != null and shuxing2 != ''" >
+				AND SHUXING2 = #{shuxing2,jdbcType=NUMERIC}
+			</if>
+			<if test="sortorder != null and sortorder != ''" >
+				AND SORTORDER = #{sortorder,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="AppRoleResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+	<!-- 根据平台ID获取角色列表 -->
+	<select id="getRoleListByGroupId" parameterType="java.util.Map" resultMap="AppRoleResult">
+		select * from BASE.APP_ROLE t
+		where t.coordinatorid= #{GROUP_ID}
+		order by t.sortorder
+	</select>
+	<select id="selectByUserId" parameterType="java.lang.String" resultMap="AppRoleResult">
+	  select DISTINCT a.* from BASE.APP_ROLE a,BASE.APP_USERROLE b
+	  where b.ROLEID=a.id
+	  and b.USERID=#{userId,jdbcType=VARCHAR}
+	  and b.APPID='10001'
+	</select>
+</mapper>

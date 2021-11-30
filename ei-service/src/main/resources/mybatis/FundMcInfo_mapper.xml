@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FundMcInfo">
+	<!-- start autocreate -->
+
+	<resultMap id="FundMcInfoResult" type="com.ppmg.ei.model.FundMcInfoModel">
+		<result column="MC_ID" property="mcId" jdbcType="VARCHAR" />
+		<result column="MC_NAME" property="mcName" jdbcType="VARCHAR" />
+		<result column="ENTE_ID" property="enteId" jdbcType="VARCHAR" />
+		<result column="IS_REGISTER" property="isRegister" jdbcType="VARCHAR" />
+		<result column="REGISTER_NO" property="registerNo" jdbcType="VARCHAR" />
+		<result column="OFFICE_ADDR" property="officeAddr" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+		<result column="PARENT_ID" property="parentId" jdbcType="VARCHAR" />
+		<result column="REGISTER_DT" property="registerDt" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<resultMap id="FundMcInfoResult1" type="com.ppmg.ei.model.FundMcInfoModel" extends="FundMcInfoResult">
+		<association property="entBaseInfo" javaType="com.ppmg.ei.model.EntBaseInfoModel" column="ENTE_ID">
+			<result column="CREDIT_CODE" property="creditCode" jdbcType="VARCHAR" />
+			<result column="START_DATE" property="startDate" jdbcType="DATE" />
+			<result column="STATUS" property="status" jdbcType="VARCHAR" />
+			<result column="REGIST_CAPI" property="registCapi" jdbcType="VARCHAR" />
+			<result column="ADDRESS_DETAILS" property="addressDetails" jdbcType="VARCHAR" />
+		</association>
+	</resultMap>
+
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.FundMcInfoModel">
+		INSERT INTO BD_T_FUND_MC_INFO (MC_ID,MC_NAME,ENTE_ID,IS_REGISTER,REGISTER_NO,OFFICE_ADDR,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,USER_ID,PARENT_ID,REGISTER_DT) values(#{mcId,jdbcType=VARCHAR},#{mcName,jdbcType=VARCHAR},#{enteId,jdbcType=VARCHAR},#{isRegister,jdbcType=VARCHAR},#{registerNo,jdbcType=VARCHAR},#{officeAddr,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{userId,jdbcType=VARCHAR},#{parentId,jdbcType=VARCHAR},#{registerDt,jdbcType=TIMESTAMP})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO BD_T_FUND_MC_INFO (MC_ID,MC_NAME,ENTE_ID,IS_REGISTER,REGISTER_NO,OFFICE_ADDR,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,USER_ID,PARENT_ID,REGISTER_DT)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.mcId,jdbcType=VARCHAR},
+				#{item.mcName,jdbcType=VARCHAR},
+				#{item.enteId,jdbcType=VARCHAR},
+				#{item.isRegister,jdbcType=VARCHAR},
+				#{item.registerNo,jdbcType=VARCHAR},
+				#{item.officeAddr,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+				#{item.userId,jdbcType=VARCHAR},
+				#{item.parentId,jdbcType=VARCHAR},
+			    #{item.registerDt,jdbcType=TIMESTAMP}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  BD_T_FUND_MC_INFO WHERE MC_ID = #{mcId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.FundMcInfoModel">
+		DELETE FROM BD_T_FUND_MC_INFO
+		<where>
+			<if test="mcId != null and mcId != ''" >
+				MC_ID = #{mcId,jdbcType=VARCHAR}
+			</if>
+			<if test="mcName != null and mcName != ''" >
+				AND MC_NAME = #{mcName,jdbcType=VARCHAR}
+			</if>
+			<if test="enteId != null and enteId != ''" >
+				AND ENTE_ID = #{enteId,jdbcType=VARCHAR}
+			</if>
+			<if test="isRegister != null and isRegister != ''" >
+				AND IS_REGISTER = #{isRegister,jdbcType=VARCHAR}
+			</if>
+			<if test="registerNo != null and registerNo != ''" >
+				AND REGISTER_NO = #{registerNo,jdbcType=VARCHAR}
+			</if>
+			<if test="officeAddr != null and officeAddr != ''" >
+				AND OFFICE_ADDR = #{officeAddr,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="userId != null and userId != ''" >
+				AND USER_ID = #{userId,jdbcType=VARCHAR}
+			</if>
+			<if test="parentId != null and parentId != ''" >
+				AND PARENT_ID = #{parentId,jdbcType=VARCHAR}
+			</if>
+			<if test="registerDt != null" >
+				AND REGISTER_DT = #{registerDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  BD_T_FUND_MC_INFO WHERE MC_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.FundMcInfoModel">
+		UPDATE BD_T_FUND_MC_INFO 
+		<set>
+			<if test="mcId != null and mcId != ''" >
+				MC_ID = #{mcId,jdbcType=VARCHAR},
+			</if>
+			<if test="mcName != null and mcName != ''" >
+				MC_NAME = #{mcName,jdbcType=VARCHAR},
+			</if>
+			<if test="enteId != null and enteId != ''" >
+				ENTE_ID = #{enteId,jdbcType=VARCHAR},
+			</if>
+			<if test="isRegister != null and isRegister != ''" >
+				IS_REGISTER = #{isRegister,jdbcType=VARCHAR},
+			</if>
+			<if test="registerNo != null and registerNo != ''" >
+				REGISTER_NO = #{registerNo,jdbcType=VARCHAR},
+			</if>
+			<if test="officeAddr != null and officeAddr != ''" >
+				OFFICE_ADDR = #{officeAddr,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="userId != null and userId != ''" >
+				USER_ID = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="parentId != null and parentId != ''" >
+				PARENT_ID = #{parentId,jdbcType=VARCHAR},
+			</if>
+			<if test="registerDt != null" >
+			   REGISTER_DT = #{registerDt,jdbcType=VARCHAR}
+			</if>
+		</set>
+		WHERE MC_ID = #{mcId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="FundMcInfoResult">
+		SELECT * FROM BD_T_FUND_MC_INFO WHERE MC_ID = #{mcId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.FundMcInfoModel" resultMap="FundMcInfoResult">
+		SELECT * FROM BD_T_FUND_MC_INFO
+		<where>
+			<if test="mcId != null and mcId != ''" >
+				MC_ID = #{mcId,jdbcType=VARCHAR}
+			</if>
+			<if test="mcName != null and mcName != ''" >
+				AND MC_NAME = #{mcName,jdbcType=VARCHAR}
+			</if>
+			<if test="enteId != null and enteId != ''" >
+				AND ENTE_ID = #{enteId,jdbcType=VARCHAR}
+			</if>
+			<if test="isRegister != null and isRegister != ''" >
+				AND IS_REGISTER = #{isRegister,jdbcType=VARCHAR}
+			</if>
+			<if test="registerNo != null and registerNo != ''" >
+				AND REGISTER_NO = #{registerNo,jdbcType=VARCHAR}
+			</if>
+			<if test="officeAddr != null and officeAddr != ''" >
+				AND OFFICE_ADDR = #{officeAddr,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="userId != null and userId != ''" >
+				AND USER_ID = #{userId,jdbcType=VARCHAR}
+			</if>
+			<if test="parentId != null and parentId != ''" >
+				AND PARENT_ID = #{parentId,jdbcType=VARCHAR}
+			</if>
+			<if test="registerDt != null" >
+				AND REGISTER_DT = #{registerDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM BD_T_FUND_MC_INFO
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="FundMcInfoResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<sql id="searchSql1">
+		SELECT a.* ,b.CREDIT_CODE,b.START_DATE,b.STATUS,b.REGIST_CAPI,ADDRESS_DETAILS  FROM  EI.BD_T_FUND_MC_INFO a  LEFT join MASTER.T_ENT_BASE_INFO b ON
+		a.ENTE_ID=b.ENTERPRISE_ID
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage1" resultMap="FundMcInfoResult1" parameterType="com.founder.ssm.core.common.SearchCondition">
+		<include refid="searchSql1" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.FundMcInfoModel">
+		SELECT COUNT(*) FROM BD_T_FUND_MC_INFO
+		<where>
+			<if test="mcId != null and mcId != ''" >
+				MC_ID = #{mcId,jdbcType=VARCHAR}
+			</if>
+			<if test="mcName != null and mcName != ''" >
+				AND MC_NAME = #{mcName,jdbcType=VARCHAR}
+			</if>
+			<if test="enteId != null and enteId != ''" >
+				AND ENTE_ID = #{enteId,jdbcType=VARCHAR}
+			</if>
+			<if test="isRegister != null and isRegister != ''" >
+				AND IS_REGISTER = #{isRegister,jdbcType=VARCHAR}
+			</if>
+			<if test="registerNo != null and registerNo != ''" >
+				AND REGISTER_NO = #{registerNo,jdbcType=VARCHAR}
+			</if>
+			<if test="officeAddr != null and officeAddr != ''" >
+				AND OFFICE_ADDR = #{officeAddr,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="userId != null and userId != ''" >
+				AND USER_ID = #{userId,jdbcType=VARCHAR}
+			</if>
+			<if test="parentId != null and parentId != ''" >
+				AND PARENT_ID = #{parentId,jdbcType=VARCHAR}
+			</if>
+			<if test="registerDt != null" >
+				AND REGISTER_DT = #{registerDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.FundMcInfoModel" resultMap="FundMcInfoResult">
+		SELECT * FROM BD_T_FUND_MC_INFO
+		<where>
+			<if test="mcId != null and mcId != ''" >
+				MC_ID = #{mcId,jdbcType=VARCHAR}
+			</if>
+			<if test="mcName != null and mcName != ''" >
+				AND MC_NAME = #{mcName,jdbcType=VARCHAR}
+			</if>
+			<if test="enteId != null and enteId != ''" >
+				AND ENTE_ID = #{enteId,jdbcType=VARCHAR}
+			</if>
+			<if test="isRegister != null and isRegister != ''" >
+				AND IS_REGISTER = #{isRegister,jdbcType=VARCHAR}
+			</if>
+			<if test="registerNo != null and registerNo != ''" >
+				AND REGISTER_NO = #{registerNo,jdbcType=VARCHAR}
+			</if>
+			<if test="officeAddr != null and officeAddr != ''" >
+				AND OFFICE_ADDR = #{officeAddr,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="userId != null and userId != ''" >
+				AND USER_ID = #{userId,jdbcType=VARCHAR}
+			</if>
+			<if test="parentId != null and parentId != ''" >
+				AND PARENT_ID = #{parentId,jdbcType=VARCHAR}
+			</if>
+			<if test="registerDt != null" >
+				AND REGISTER_DT = #{registerDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="FundMcInfoResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+
+	<!-- end autocreate -->
+
+	<select id="selectByFundId" parameterType="java.lang.String" resultMap="FundMcInfoResult">
+             select * from  EI.BD_T_FUND_MC_INFO
+	</select>
+
+	<select id="selectByUserId" parameterType="java.lang.String" resultMap="FundMcInfoResult">
+		select * from  EI.BD_T_FUND_MC_INFO WHERE USER_ID = #{userId,jdbcType=VARCHAR}
+	</select>
+</mapper>

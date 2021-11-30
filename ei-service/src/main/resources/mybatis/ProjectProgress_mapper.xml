@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProjectProgress">
+	<!-- start autocreate -->
+
+	<resultMap id="ProjectProgressResult" type="com.ppmg.ei.model.ProjectProgressModel">
+		<result column="PROGRESS_ID" property="progressId" jdbcType="VARCHAR" />
+		<result column="INVE_ID" property="inveId" jdbcType="VARCHAR" />
+		<result column="INVE_NAME" property="inveName" jdbcType="VARCHAR" />
+		<result column="PROJECT_OBJECT" property="projectObject" jdbcType="VARCHAR" />
+		<result column="PROJECT_OBJECT_NAME" property="projectObjectName" jdbcType="VARCHAR" />
+		<result column="GROUP_ID" property="groupId" jdbcType="VARCHAR" />
+		<result column="PROGRESS_HTML" property="progressHtml" jdbcType="VARCHAR" />
+		<result column="PROGRESS_TEXT" property="progressText" jdbcType="VARCHAR" />
+		<result column="PROGRESS_DATE" property="progressDate" jdbcType="TIMESTAMP" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="PROGRESS_RESOURCE" property="progressResource" jdbcType="VARCHAR" />
+		<result column="PROGRESS_FILE" property="progressFile" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="PROJECT_ID" property="projectId" jdbcType="VARCHAR" />
+		<result column="FIELD_2" property="field2" jdbcType="VARCHAR" />
+		<result column="FIELD_3" property="field3" jdbcType="TIMESTAMP" />
+		<result column="FIELD_4" property="field4" jdbcType="NUMERIC" />
+		<result column="FIELD_5" property="field5" jdbcType="NUMERIC" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.ProjectProgressModel">
+		INSERT INTO PROJECT_PROGRESS (PROGRESS_ID,INVE_ID,INVE_NAME,PROJECT_OBJECT,PROJECT_OBJECT_NAME,GROUP_ID,PROGRESS_HTML,PROGRESS_TEXT,PROGRESS_DATE,STATUS,PROGRESS_RESOURCE,PROGRESS_FILE,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,PROJECT_ID,FIELD_2,FIELD_3,FIELD_4,FIELD_5) values(#{progressId,jdbcType=VARCHAR},#{inveId,jdbcType=VARCHAR},#{inveName,jdbcType=VARCHAR},#{projectObject,jdbcType=VARCHAR},#{projectObjectName,jdbcType=VARCHAR},#{groupId,jdbcType=VARCHAR},#{progressHtml,jdbcType=VARCHAR},#{progressText,jdbcType=VARCHAR},#{progressDate,jdbcType=TIMESTAMP},#{status,jdbcType=VARCHAR},#{progressResource,jdbcType=VARCHAR},#{progressFile,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{projectId,jdbcType=VARCHAR},#{field2,jdbcType=VARCHAR},#{field3,jdbcType=TIMESTAMP},#{field4,jdbcType=NUMERIC},#{field5,jdbcType=NUMERIC})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO PROJECT_PROGRESS (PROGRESS_ID,INVE_ID,INVE_NAME,PROJECT_OBJECT,PROJECT_OBJECT_NAME,GROUP_ID,PROGRESS_HTML,PROGRESS_TEXT,PROGRESS_DATE,STATUS,PROGRESS_RESOURCE,PROGRESS_FILE,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,PROJECT_ID,FIELD_2,FIELD_3,FIELD_4,FIELD_5)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.progressId,jdbcType=VARCHAR},
+				#{item.inveId,jdbcType=VARCHAR},
+				#{item.inveName,jdbcType=VARCHAR},
+				#{item.projectObject,jdbcType=VARCHAR},
+				#{item.projectObjectName,jdbcType=VARCHAR},
+				#{item.groupId,jdbcType=VARCHAR},
+				#{item.progressHtml,jdbcType=VARCHAR},
+				#{item.progressText,jdbcType=VARCHAR},
+				#{item.progressDate,jdbcType=TIMESTAMP},
+				#{item.status,jdbcType=VARCHAR},
+				#{item.progressResource,jdbcType=VARCHAR},
+				#{item.progressFile,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+				#{item.projectId,jdbcType=VARCHAR},
+				#{item.field2,jdbcType=VARCHAR},
+				#{item.field3,jdbcType=TIMESTAMP},
+				#{item.field4,jdbcType=NUMERIC},
+				#{item.field5,jdbcType=NUMERIC}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  PROJECT_PROGRESS WHERE PROGRESS_ID = #{progressId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.ProjectProgressModel">
+		DELETE FROM PROJECT_PROGRESS
+		<where>
+			<if test="progressId != null and progressId != ''" >
+				PROGRESS_ID = #{progressId,jdbcType=VARCHAR}
+			</if>
+			<if test="inveId != null and inveId != ''" >
+				AND INVE_ID = #{inveId,jdbcType=VARCHAR}
+			</if>
+			<if test="inveName != null and inveName != ''" >
+				AND INVE_NAME = #{inveName,jdbcType=VARCHAR}
+			</if>
+			<if test="projectObject != null and projectObject != ''" >
+				AND PROJECT_OBJECT = #{projectObject,jdbcType=VARCHAR}
+			</if>
+			<if test="projectObjectName != null and projectObjectName != ''" >
+				AND PROJECT_OBJECT_NAME = #{projectObjectName,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=VARCHAR}
+			</if>
+			<if test="progressHtml != null and progressHtml != ''" >
+				AND PROGRESS_HTML = #{progressHtml,jdbcType=VARCHAR}
+			</if>
+			<if test="progressText != null and progressText != ''" >
+				AND PROGRESS_TEXT = #{progressText,jdbcType=VARCHAR}
+			</if>
+			<if test="progressDate != null" >
+				AND PROGRESS_DATE = #{progressDate,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="progressResource != null and progressResource != ''" >
+				AND PROGRESS_RESOURCE = #{progressResource,jdbcType=VARCHAR}
+			</if>
+			<if test="progressFile != null and progressFile != ''" >
+				AND PROGRESS_FILE = #{progressFile,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="projectId != null and projectId != ''" >
+				AND PROJECT_ID = #{projectId,jdbcType=VARCHAR}
+			</if>
+			<if test="field2 != null and field2 != ''" >
+				AND FIELD_2 = #{field2,jdbcType=VARCHAR}
+			</if>
+			<if test="field3 != null" >
+				AND FIELD_3 = #{field3,jdbcType=VARCHAR}
+			</if>
+			<if test="field4 != null and field4 != ''" >
+				AND FIELD_4 = #{field4,jdbcType=NUMERIC}
+			</if>
+			<if test="field5 != null and field5 != ''" >
+				AND FIELD_5 = #{field5,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  PROJECT_PROGRESS WHERE PROGRESS_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.ProjectProgressModel">
+		UPDATE PROJECT_PROGRESS 
+		<set>
+			<if test="progressId != null and progressId != ''" >
+				PROGRESS_ID = #{progressId,jdbcType=VARCHAR},
+			</if>
+			<if test="inveId != null and inveId != ''" >
+				INVE_ID = #{inveId,jdbcType=VARCHAR},
+			</if>
+			<if test="inveName != null and inveName != ''" >
+				INVE_NAME = #{inveName,jdbcType=VARCHAR},
+			</if>
+			<if test="projectObject != null and projectObject != ''" >
+				PROJECT_OBJECT = #{projectObject,jdbcType=VARCHAR},
+			</if>
+			<if test="projectObjectName != null and projectObjectName != ''" >
+				PROJECT_OBJECT_NAME = #{projectObjectName,jdbcType=VARCHAR},
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				GROUP_ID = #{groupId,jdbcType=VARCHAR},
+			</if>
+			<if test="progressHtml != null and progressHtml != ''" >
+				PROGRESS_HTML = #{progressHtml,jdbcType=VARCHAR},
+			</if>
+			<if test="progressText != null and progressText != ''" >
+				PROGRESS_TEXT = #{progressText,jdbcType=VARCHAR},
+			</if>
+			<if test="progressDate != null" >
+				PROGRESS_DATE = #{progressDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="progressResource != null and progressResource != ''" >
+				PROGRESS_RESOURCE = #{progressResource,jdbcType=VARCHAR},
+			</if>
+			<if test="progressFile != null and progressFile != ''" >
+				PROGRESS_FILE = #{progressFile,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="projectId != null and projectId != ''" >
+				PROJECT_ID = #{projectId,jdbcType=VARCHAR},
+			</if>
+			<if test="field2 != null and field2 != ''" >
+				FIELD_2 = #{field2,jdbcType=VARCHAR},
+			</if>
+			<if test="field3 != null" >
+				FIELD_3 = #{field3,jdbcType=TIMESTAMP},
+			</if>
+			<if test="field4 != null and field4 != ''" >
+				FIELD_4 = #{field4,jdbcType=NUMERIC},
+			</if>
+			<if test="field5 != null and field5 != ''" >
+				FIELD_5 = #{field5,jdbcType=NUMERIC},
+			</if>
+		</set>
+		WHERE PROGRESS_ID = #{progressId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="ProjectProgressResult">
+		SELECT * FROM PROJECT_PROGRESS WHERE PROGRESS_ID = #{progressId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.ProjectProgressModel" resultMap="ProjectProgressResult">
+		SELECT * FROM PROJECT_PROGRESS
+		<where>
+			<if test="progressId != null and progressId != ''" >
+				PROGRESS_ID = #{progressId,jdbcType=VARCHAR}
+			</if>
+			<if test="inveId != null and inveId != ''" >
+				AND INVE_ID = #{inveId,jdbcType=VARCHAR}
+			</if>
+			<if test="inveName != null and inveName != ''" >
+				AND INVE_NAME = #{inveName,jdbcType=VARCHAR}
+			</if>
+			<if test="projectObject != null and projectObject != ''" >
+				AND PROJECT_OBJECT = #{projectObject,jdbcType=VARCHAR}
+			</if>
+			<if test="projectObjectName != null and projectObjectName != ''" >
+				AND PROJECT_OBJECT_NAME = #{projectObjectName,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=VARCHAR}
+			</if>
+			<if test="progressHtml != null and progressHtml != ''" >
+				AND PROGRESS_HTML = #{progressHtml,jdbcType=VARCHAR}
+			</if>
+			<if test="progressText != null and progressText != ''" >
+				AND PROGRESS_TEXT = #{progressText,jdbcType=VARCHAR}
+			</if>
+			<if test="progressDate != null" >
+				AND PROGRESS_DATE = #{progressDate,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="progressResource != null and progressResource != ''" >
+				AND PROGRESS_RESOURCE = #{progressResource,jdbcType=VARCHAR}
+			</if>
+			<if test="progressFile != null and progressFile != ''" >
+				AND PROGRESS_FILE = #{progressFile,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="projectId != null and projectId != ''" >
+				AND PROJECT_ID = #{projectId,jdbcType=VARCHAR}
+			</if>
+			<if test="field2 != null and field2 != ''" >
+				AND FIELD_2 = #{field2,jdbcType=VARCHAR}
+			</if>
+			<if test="field3 != null" >
+				AND FIELD_3 = #{field3,jdbcType=VARCHAR}
+			</if>
+			<if test="field4 != null and field4 != ''" >
+				AND FIELD_4 = #{field4,jdbcType=NUMERIC}
+			</if>
+			<if test="field5 != null and field5 != ''" >
+				AND FIELD_5 = #{field5,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT T1.*,
+		(SELECT wmsys.wm_concat(t2.comment_html) FROM PROGRESS_COMMENT T2 where t2.progress_id=t1.progress_id and t2.status!='9') as comment_htmls
+		FROM PROJECT_PROGRESS T1
+		<where>
+			T1.STATUS!='9'
+
+			<if test="searchBean.projectObject!='' and searchBean.projectObject!=null">
+				AND T1.PROJECT_OBJECT= #{searchBean.projectObject,jdbcType=VARCHAR}
+			</if>
+
+			<if test="searchBean.projectObject=='' or searchBean.projectObject==null">
+				AND (T1.GROUP_ID IN (
+				select
+				substr(T.SQL_STA,instr(T.SQL_STA,'"')+1,instr(T.SQL_STA,'"',instr(T.SQL_STA,'"')+1)-instr(T.SQL_STA,'"')-1)
+				from BASE.APP_PERMISSION T
+				LEFT JOIN BASE.APP_ROLEPERMISSION RP ON RP.PERMISSIONID=T.ID
+				LEFT JOIN BASE.APP_ROLE R ON R.ID=RP.ROLEID
+				LEFT JOIN BASE.APP_USERROLE UR ON UR.ROLEID=R.ID
+				LEFT JOIN BASE.APP_USER U ON U.ID=UR.USERID
+				WHERE U.DISABLED='0' AND U.ID=#{paramMap.loginUser.userId}
+				AND T.ID IN (10021,10022,10023,10024,10025,10026,10031,10032,10029,10198,10199,10200,10030,10201,10202))
+				OR  T1.CREATE_BY=#{paramMap.loginUser.userId} )
+			</if>
+
+
+			<if test="searchBean.inveId!='' and searchBean.inveId!=null">
+				AND T1.INVE_ID = #{searchBean.inveId,jdbcType=VARCHAR}
+			</if>
+
+			<if test="searchBean.groupId!='' and searchBean.groupId!=null">
+				AND T1.GROUP_ID = #{searchBean.groupId,jdbcType=VARCHAR}
+			</if>
+
+			<if test="searchBean.keyword!='' and searchBean.keyword!=null">
+				<bind name="pattern" value="'%' + searchBean.keyword + '%'" />
+				AND  (T1.PROGRESS_HTML like #{pattern} OR T1.INVE_NAME like #{pattern} OR T1.PROJECT_OBJECT_NAME like #{pattern}
+				 OR   (SELECT wmsys.wm_concat(t2.comment_html) FROM PROGRESS_COMMENT T2 WHERE t2.progress_id = t1.progress_id and t2.status!='9') like #{pattern} )
+			</if>
+
+			<if test="searchBean.startTime!=null">
+				AND  T1.PROGRESS_DATE >= #{searchBean.startTime,jdbcType=DATE}
+
+			</if>
+
+			<if test="searchBean.endTime!=null">
+				AND  T1.PROGRESS_DATE &lt;= #{searchBean.endTime,jdbcType=DATE}
+
+			</if>
+
+			<include refid="searchCondition.searchClause" />
+		</where>
+		ORDER BY T1.CREATE_DT DESC
+	</sql>
+
+	<select id="selectListPage" resultMap="ProjectProgressResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.ProjectProgressModel">
+		SELECT COUNT(*) FROM PROJECT_PROGRESS
+		<where>
+			<if test="progressId != null and progressId != ''" >
+				PROGRESS_ID = #{progressId,jdbcType=VARCHAR}
+			</if>
+			<if test="inveId != null and inveId != ''" >
+				AND INVE_ID = #{inveId,jdbcType=VARCHAR}
+			</if>
+			<if test="inveName != null and inveName != ''" >
+				AND INVE_NAME = #{inveName,jdbcType=VARCHAR}
+			</if>
+			<if test="projectObject != null and projectObject != ''" >
+				AND PROJECT_OBJECT = #{projectObject,jdbcType=VARCHAR}
+			</if>
+			<if test="projectObjectName != null and projectObjectName != ''" >
+				AND PROJECT_OBJECT_NAME = #{projectObjectName,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=VARCHAR}
+			</if>
+			<if test="progressHtml != null and progressHtml != ''" >
+				AND PROGRESS_HTML = #{progressHtml,jdbcType=VARCHAR}
+			</if>
+			<if test="progressText != null and progressText != ''" >
+				AND PROGRESS_TEXT = #{progressText,jdbcType=VARCHAR}
+			</if>
+			<if test="progressDate != null" >
+				AND PROGRESS_DATE = #{progressDate,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="progressResource != null and progressResource != ''" >
+				AND PROGRESS_RESOURCE = #{progressResource,jdbcType=VARCHAR}
+			</if>
+			<if test="progressFile != null and progressFile != ''" >
+				AND PROGRESS_FILE = #{progressFile,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="projectId != null and projectId != ''" >
+				AND PROJECT_ID = #{projectId,jdbcType=VARCHAR}
+			</if>
+			<if test="field2 != null and field2 != ''" >
+				AND FIELD_2 = #{field2,jdbcType=VARCHAR}
+			</if>
+			<if test="field3 != null" >
+				AND FIELD_3 = #{field3,jdbcType=VARCHAR}
+			</if>
+			<if test="field4 != null and field4 != ''" >
+				AND FIELD_4 = #{field4,jdbcType=NUMERIC}
+			</if>
+			<if test="field5 != null and field5 != ''" >
+				AND FIELD_5 = #{field5,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.ProjectProgressModel" resultMap="ProjectProgressResult">
+		SELECT * FROM PROJECT_PROGRESS
+		<where>
+			<if test="progressId != null and progressId != ''" >
+				PROGRESS_ID = #{progressId,jdbcType=VARCHAR}
+			</if>
+			<if test="inveId != null and inveId != ''" >
+				AND INVE_ID = #{inveId,jdbcType=VARCHAR}
+			</if>
+			<if test="inveName != null and inveName != ''" >
+				AND INVE_NAME = #{inveName,jdbcType=VARCHAR}
+			</if>
+			<if test="projectObject != null and projectObject != ''" >
+				AND PROJECT_OBJECT = #{projectObject,jdbcType=VARCHAR}
+			</if>
+			<if test="projectObjectName != null and projectObjectName != ''" >
+				AND PROJECT_OBJECT_NAME = #{projectObjectName,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=VARCHAR}
+			</if>
+			<if test="progressHtml != null and progressHtml != ''" >
+				AND PROGRESS_HTML = #{progressHtml,jdbcType=VARCHAR}
+			</if>
+			<if test="progressText != null and progressText != ''" >
+				AND PROGRESS_TEXT = #{progressText,jdbcType=VARCHAR}
+			</if>
+			<if test="progressDate != null" >
+				AND PROGRESS_DATE = #{progressDate,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="progressResource != null and progressResource != ''" >
+				AND PROGRESS_RESOURCE = #{progressResource,jdbcType=VARCHAR}
+			</if>
+			<if test="progressFile != null and progressFile != ''" >
+				AND PROGRESS_FILE = #{progressFile,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="projectId != null and projectId != ''" >
+				AND PROJECT_ID = #{projectId,jdbcType=VARCHAR}
+			</if>
+			<if test="field2 != null and field2 != ''" >
+				AND FIELD_2 = #{field2,jdbcType=VARCHAR}
+			</if>
+			<if test="field3 != null" >
+				AND FIELD_3 = #{field3,jdbcType=VARCHAR}
+			</if>
+			<if test="field4 != null and field4 != ''" >
+				AND FIELD_4 = #{field4,jdbcType=NUMERIC}
+			</if>
+			<if test="field5 != null and field5 != ''" >
+				AND FIELD_5 = #{field5,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="ProjectProgressResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+</mapper>

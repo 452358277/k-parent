@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="InveRel">
+	<!-- start autocreate -->
+
+	<resultMap id="InveRelResult" type="com.ppmg.ei.model.InveRelModel">
+		<result column="REL_ID" property="relId" jdbcType="VARCHAR" />
+		<result column="INVESTOR1_ID" property="investor1Id" jdbcType="VARCHAR" />
+		<result column="INVESTOR1_NAME" property="investor1Name" jdbcType="VARCHAR" />
+		<result column="INVESTOR2_ID" property="investor2Id" jdbcType="VARCHAR" />
+		<result column="INVESTOR2_NAME" property="investor2Name" jdbcType="VARCHAR" />
+		<result column="REL_TYPE" property="relType" jdbcType="VARCHAR" />
+		<result column="BEGIN_DATE" property="beginDate" jdbcType="TIMESTAMP" />
+		<result column="END_DATE" property="endDate" jdbcType="TIMESTAMP" />
+		<result column="STAKE_PER" property="stakePer" jdbcType="NUMERIC" />
+		<result column="CURRENCY_TYPE" property="currencyType" jdbcType="VARCHAR" />
+		<result column="INVE_AMOUNT" property="inveAmount" jdbcType="NUMERIC" />
+		<result column="POSITION" property="position" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.InveRelModel">
+		INSERT INTO BD_T_INVE_REL (REL_ID,INVESTOR1_ID,INVESTOR1_NAME,INVESTOR2_ID,INVESTOR2_NAME,REL_TYPE,BEGIN_DATE,END_DATE,STAKE_PER,CURRENCY_TYPE,INVE_AMOUNT,POSITION,REMARK,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT) values(#{relId,jdbcType=VARCHAR},#{investor1Id,jdbcType=VARCHAR},#{investor1Name,jdbcType=VARCHAR},#{investor2Id,jdbcType=VARCHAR},#{investor2Name,jdbcType=VARCHAR},#{relType,jdbcType=VARCHAR},#{beginDate,jdbcType=TIMESTAMP},#{endDate,jdbcType=TIMESTAMP},#{stakePer,jdbcType=NUMERIC},#{currencyType,jdbcType=VARCHAR},#{inveAmount,jdbcType=NUMERIC},#{position,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO BD_T_INVE_REL (REL_ID,INVESTOR1_ID,INVESTOR1_NAME,INVESTOR2_ID,INVESTOR2_NAME,REL_TYPE,BEGIN_DATE,END_DATE,STAKE_PER,CURRENCY_TYPE,INVE_AMOUNT,POSITION,REMARK,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.relId,jdbcType=VARCHAR},
+				#{item.investor1Id,jdbcType=VARCHAR},
+				#{item.investor1Name,jdbcType=VARCHAR},
+				#{item.investor2Id,jdbcType=VARCHAR},
+				#{item.investor2Name,jdbcType=VARCHAR},
+				#{item.relType,jdbcType=VARCHAR},
+				#{item.beginDate,jdbcType=TIMESTAMP},
+				#{item.endDate,jdbcType=TIMESTAMP},
+				#{item.stakePer,jdbcType=NUMERIC},
+				#{item.currencyType,jdbcType=VARCHAR},
+				#{item.inveAmount,jdbcType=NUMERIC},
+				#{item.position,jdbcType=VARCHAR},
+				#{item.remark,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  BD_T_INVE_REL WHERE REL_ID = #{relId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.InveRelModel">
+		DELETE FROM BD_T_INVE_REL
+		<where>
+			<if test="relId != null and relId != ''" >
+				REL_ID = #{relId,jdbcType=VARCHAR}
+			</if>
+			<if test="investor1Id != null and investor1Id != ''" >
+				AND INVESTOR1_ID = #{investor1Id,jdbcType=VARCHAR}
+			</if>
+			<if test="investor1Name != null and investor1Name != ''" >
+				AND INVESTOR1_NAME = #{investor1Name,jdbcType=VARCHAR}
+			</if>
+			<if test="investor2Id != null and investor2Id != ''" >
+				AND INVESTOR2_ID = #{investor2Id,jdbcType=VARCHAR}
+			</if>
+			<if test="investor2Name != null and investor2Name != ''" >
+				AND INVESTOR2_NAME = #{investor2Name,jdbcType=VARCHAR}
+			</if>
+			<if test="relType != null and relType != ''" >
+				AND REL_TYPE = #{relType,jdbcType=VARCHAR}
+			</if>
+			<if test="beginDate != null" >
+				AND BEGIN_DATE = #{beginDate,jdbcType=VARCHAR}
+			</if>
+			<if test="endDate != null" >
+				AND END_DATE = #{endDate,jdbcType=VARCHAR}
+			</if>
+			<if test="stakePer != null and stakePer != ''" >
+				AND STAKE_PER = #{stakePer,jdbcType=NUMERIC}
+			</if>
+			<if test="currencyType != null and currencyType != ''" >
+				AND CURRENCY_TYPE = #{currencyType,jdbcType=VARCHAR}
+			</if>
+			<if test="inveAmount != null and inveAmount != ''" >
+				AND INVE_AMOUNT = #{inveAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="position != null and position != ''" >
+				AND POSITION = #{position,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  BD_T_INVE_REL WHERE REL_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.InveRelModel">
+		UPDATE BD_T_INVE_REL 
+		<set>
+			<if test="relId != null and relId != ''" >
+				REL_ID = #{relId,jdbcType=VARCHAR},
+			</if>
+			<if test="investor1Id != null and investor1Id != ''" >
+				INVESTOR1_ID = #{investor1Id,jdbcType=VARCHAR},
+			</if>
+			<if test="investor1Name != null and investor1Name != ''" >
+				INVESTOR1_NAME = #{investor1Name,jdbcType=VARCHAR},
+			</if>
+			<if test="investor2Id != null and investor2Id != ''" >
+				INVESTOR2_ID = #{investor2Id,jdbcType=VARCHAR},
+			</if>
+			<if test="investor2Name != null and investor2Name != ''" >
+				INVESTOR2_NAME = #{investor2Name,jdbcType=VARCHAR},
+			</if>
+			<if test="relType != null and relType != ''" >
+				REL_TYPE = #{relType,jdbcType=VARCHAR},
+			</if>
+			<if test="beginDate != null" >
+				BEGIN_DATE = #{beginDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endDate != null" >
+				END_DATE = #{endDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="stakePer != null and stakePer != ''" >
+				STAKE_PER = #{stakePer,jdbcType=NUMERIC},
+			</if>
+			<if test="currencyType != null and currencyType != ''" >
+				CURRENCY_TYPE = #{currencyType,jdbcType=VARCHAR},
+			</if>
+			<if test="inveAmount != null and inveAmount != ''" >
+				INVE_AMOUNT = #{inveAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="position != null and position != ''" >
+				POSITION = #{position,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null and remark != ''" >
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		WHERE REL_ID = #{relId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="InveRelResult">
+		SELECT * FROM BD_T_INVE_REL WHERE REL_ID = #{relId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.InveRelModel" resultMap="InveRelResult">
+		SELECT * FROM BD_T_INVE_REL
+		<where>
+			<if test="relId != null and relId != ''" >
+				REL_ID = #{relId,jdbcType=VARCHAR}
+			</if>
+			<if test="investor1Id != null and investor1Id != ''" >
+				AND INVESTOR1_ID = #{investor1Id,jdbcType=VARCHAR}
+			</if>
+			<if test="investor1Name != null and investor1Name != ''" >
+				AND INVESTOR1_NAME = #{investor1Name,jdbcType=VARCHAR}
+			</if>
+			<if test="investor2Id != null and investor2Id != ''" >
+				AND INVESTOR2_ID = #{investor2Id,jdbcType=VARCHAR}
+			</if>
+			<if test="investor2Name != null and investor2Name != ''" >
+				AND INVESTOR2_NAME = #{investor2Name,jdbcType=VARCHAR}
+			</if>
+			<if test="relType != null and relType != ''" >
+				AND REL_TYPE = #{relType,jdbcType=VARCHAR}
+			</if>
+			<if test="beginDate != null" >
+				AND BEGIN_DATE = #{beginDate,jdbcType=VARCHAR}
+			</if>
+			<if test="endDate != null" >
+				AND END_DATE = #{endDate,jdbcType=VARCHAR}
+			</if>
+			<if test="stakePer != null and stakePer != ''" >
+				AND STAKE_PER = #{stakePer,jdbcType=NUMERIC}
+			</if>
+			<if test="currencyType != null and currencyType != ''" >
+				AND CURRENCY_TYPE = #{currencyType,jdbcType=VARCHAR}
+			</if>
+			<if test="inveAmount != null and inveAmount != ''" >
+				AND INVE_AMOUNT = #{inveAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="position != null and position != ''" >
+				AND POSITION = #{position,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM BD_T_INVE_REL
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="InveRelResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.InveRelModel">
+		SELECT COUNT(*) FROM BD_T_INVE_REL
+		<where>
+			<if test="relId != null and relId != ''" >
+				REL_ID = #{relId,jdbcType=VARCHAR}
+			</if>
+			<if test="investor1Id != null and investor1Id != ''" >
+				AND INVESTOR1_ID = #{investor1Id,jdbcType=VARCHAR}
+			</if>
+			<if test="investor1Name != null and investor1Name != ''" >
+				AND INVESTOR1_NAME = #{investor1Name,jdbcType=VARCHAR}
+			</if>
+			<if test="investor2Id != null and investor2Id != ''" >
+				AND INVESTOR2_ID = #{investor2Id,jdbcType=VARCHAR}
+			</if>
+			<if test="investor2Name != null and investor2Name != ''" >
+				AND INVESTOR2_NAME = #{investor2Name,jdbcType=VARCHAR}
+			</if>
+			<if test="relType != null and relType != ''" >
+				AND REL_TYPE = #{relType,jdbcType=VARCHAR}
+			</if>
+			<if test="beginDate != null" >
+				AND BEGIN_DATE = #{beginDate,jdbcType=VARCHAR}
+			</if>
+			<if test="endDate != null" >
+				AND END_DATE = #{endDate,jdbcType=VARCHAR}
+			</if>
+			<if test="stakePer != null and stakePer != ''" >
+				AND STAKE_PER = #{stakePer,jdbcType=NUMERIC}
+			</if>
+			<if test="currencyType != null and currencyType != ''" >
+				AND CURRENCY_TYPE = #{currencyType,jdbcType=VARCHAR}
+			</if>
+			<if test="inveAmount != null and inveAmount != ''" >
+				AND INVE_AMOUNT = #{inveAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="position != null and position != ''" >
+				AND POSITION = #{position,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.InveRelModel" resultMap="InveRelResult">
+		SELECT * FROM BD_T_INVE_REL
+		<where>
+			<if test="relId != null and relId != ''" >
+				REL_ID = #{relId,jdbcType=VARCHAR}
+			</if>
+			<if test="investor1Id != null and investor1Id != ''" >
+				AND INVESTOR1_ID = #{investor1Id,jdbcType=VARCHAR}
+			</if>
+			<if test="investor1Name != null and investor1Name != ''" >
+				AND INVESTOR1_NAME = #{investor1Name,jdbcType=VARCHAR}
+			</if>
+			<if test="investor2Id != null and investor2Id != ''" >
+				AND INVESTOR2_ID = #{investor2Id,jdbcType=VARCHAR}
+			</if>
+			<if test="investor2Name != null and investor2Name != ''" >
+				AND INVESTOR2_NAME = #{investor2Name,jdbcType=VARCHAR}
+			</if>
+			<if test="relType != null and relType != ''" >
+				AND REL_TYPE = #{relType,jdbcType=VARCHAR}
+			</if>
+			<if test="beginDate != null" >
+				AND BEGIN_DATE = #{beginDate,jdbcType=VARCHAR}
+			</if>
+			<if test="endDate != null" >
+				AND END_DATE = #{endDate,jdbcType=VARCHAR}
+			</if>
+			<if test="stakePer != null and stakePer != ''" >
+				AND STAKE_PER = #{stakePer,jdbcType=NUMERIC}
+			</if>
+			<if test="currencyType != null and currencyType != ''" >
+				AND CURRENCY_TYPE = #{currencyType,jdbcType=VARCHAR}
+			</if>
+			<if test="inveAmount != null and inveAmount != ''" >
+				AND INVE_AMOUNT = #{inveAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="position != null and position != ''" >
+				AND POSITION = #{position,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="InveRelResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+</mapper>

@@ -1,0 +1,1242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="EnteInfo">
+	<!-- start autocreate -->
+
+	<resultMap id="EnteInfoResult" type="com.ppmg.ei.model.EnteInfoModel">
+		<result column="ENTERPRISE_ID" property="enterpriseId" jdbcType="VARCHAR" />
+		<result column="CH_NAME" property="chName" jdbcType="VARCHAR" />
+		<result column="EN_NAME" property="enName" jdbcType="VARCHAR" />
+		<result column="REGISTER_NAME" property="registerName" jdbcType="VARCHAR" />
+		<result column="LOGO" property="logo" jdbcType="VARCHAR" />
+		<result column="PHASE" property="phase" jdbcType="VARCHAR" />
+		<result column="INDUSTRY" property="industry" jdbcType="VARCHAR" />
+		<result column="SETUP_DT" property="setupDt" jdbcType="TIMESTAMP" />
+		<result column="ENTERPRISE_FORM" property="enterpriseForm" jdbcType="VARCHAR" />
+		<result column="SUB_FORM" property="subForm" jdbcType="VARCHAR" />
+		<result column="REL_TYPE" property="relType" jdbcType="VARCHAR" />
+		<result column="CONTACT" property="contact" jdbcType="VARCHAR" />
+		<result column="CONTACT_TEL" property="contactTel" jdbcType="VARCHAR" />
+		<result column="REL_COMPANY" property="relCompany" jdbcType="VARCHAR" />
+		<result column="CONTROLLER" property="controller" jdbcType="VARCHAR" />
+		<result column="CONTROLLER_TEL" property="controllerTel" jdbcType="VARCHAR" />
+		<result column="BIZ_CARRIER" property="bizCarrier" jdbcType="VARCHAR" />
+		<result column="OPERATION" property="operation" jdbcType="VARCHAR" />
+		<result column="COMPANY_PROFILE" property="companyProfile" jdbcType="VARCHAR" />
+		<result column="PROFILE_FILE" property="profileFile" jdbcType="VARCHAR" />
+		<result column="TAX_COLLECTION" property="taxCollection" jdbcType="VARCHAR" />
+		<result column="TAX_DESC" property="taxDesc" jdbcType="VARCHAR" />
+		<result column="IS_HN_TECH" property="isHnTech" jdbcType="VARCHAR" />
+		<result column="APPR_DT" property="apprDt" jdbcType="TIMESTAMP" />
+		<result column="CERTIFICATE" property="certificate" jdbcType="VARCHAR" />
+		<result column="OTHE_ENTE_TYPE" property="otheEnteType" jdbcType="VARCHAR" />
+		<result column="DIRECTOR_CNT" property="directorCnt" jdbcType="NUMERIC" />
+		<result column="SUPERVISOR_CNT" property="supervisorCnt" jdbcType="NUMERIC" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="ORGN_CODE" property="orgnCode" jdbcType="VARCHAR" />
+		<result column="MAIN_BUSINESS" property="mainBusiness" jdbcType="VARCHAR" />
+		<result column="GROUP_ID" property="groupId" jdbcType="NUMERIC" />
+		<result column="PROJ_GUID" property="projGuid" jdbcType="VARCHAR" />
+		<result column="PATENT_COUNT" property="patentCount" jdbcType="VARCHAR" />
+		<result column="IS_PUBLIC_COMP" property="isPublicComp" jdbcType="VARCHAR" />
+		<result column="STOCK_CODE" property="stockCode" jdbcType="VARCHAR" />
+		<result column="STOCK_NAME" property="stockName" jdbcType="VARCHAR" />
+		<result column="INDUSTRY2" property="industry2" jdbcType="VARCHAR" />
+		<result column="SOCIAL_CODE" property="socialCode" jdbcType="VARCHAR" />
+		<result column="IS_DIRECTOR_CNT" property="isDirectorCnt" jdbcType="VARCHAR" />
+		<result column="IS_SUPERVISOR_CNT" property="isSupervisorCnt" jdbcType="VARCHAR" />
+		<result column="IS_PROVINCE" property="isProvince" jdbcType="VARCHAR" />
+		<result column="REG_AMOUNT" property="regAmount" jdbcType="NUMERIC" />
+		<result column="REG_ADD" property="regAdd" jdbcType="VARCHAR" />
+		<result column="ENTE_ID" property="enteId" jdbcType="VARCHAR" />
+		<result column="IS_REG" property="isReg" jdbcType="VARCHAR" />
+		<result column="IS_ABROAD" property="isAbroad" jdbcType="VARCHAR" />
+		<result column="IS_APPLY_IPO" property="isApplyIpo" jdbcType="VARCHAR" />
+		<result column="IS_NEW_BOARD" property="isNewBoard" jdbcType="VARCHAR" />
+		<result column="IS_HLIGHTS" property="isHlights" jdbcType="VARCHAR" />
+		<result column="HLIGHTS_REMARK" property="hlightsRemark" jdbcType="VARCHAR" />
+		<result column="NEW_AMOUNT" property="newAmount" jdbcType="NUMERIC" />
+		<result column="INDUSTRY_NAME" property="industryName" jdbcType="VARCHAR" />
+		<result column="CUST_NAME" property="custName" jdbcType="VARCHAR" />
+		<result column="PHONE_NO" property="phoneNo" jdbcType="VARCHAR" />
+		<result column="MAIN_CONTACT" property="mainContact" jdbcType="VARCHAR" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+		<result column="REG_AMOUNT_CURRENCY" property="regAmountCurrency" jdbcType="VARCHAR" />
+		<association property="projInfo" javaType="com.ppmg.ei.model.ProjInfoModel" >
+			<result column="proj_id" property="projId" jdbcType="VARCHAR" />
+			<result column="proj_name" property="projName" jdbcType="VARCHAR" />
+			<result column="inve_name" property="inveName" jdbcType="VARCHAR" />
+			<result column="inve_id" property="inveId" jdbcType="VARCHAR" />
+		</association>
+	</resultMap>
+
+
+	<resultMap id="ProjInfoResult" type="com.ppmg.ei.model.ProjInfoModel">
+		<result column="proj_id" property="projId" jdbcType="VARCHAR" />
+		<result column="proj_name" property="projName" jdbcType="VARCHAR" />
+		<result column="inve_name" property="inveName" jdbcType="VARCHAR" />
+		<result column="inve_id" property="inveId" jdbcType="VARCHAR" />
+		<association property="enteInfoModel" javaType="com.ppmg.ei.model.EnteInfoModel" >
+			<result column="ENTERPRISE_ID" property="enterpriseId" jdbcType="VARCHAR" />
+			<result column="CH_NAME" property="chName" jdbcType="VARCHAR" />
+			<result column="EN_NAME" property="enName" jdbcType="VARCHAR" />
+			<result column="REGISTER_NAME" property="registerName" jdbcType="VARCHAR" />
+			<result column="LOGO" property="logo" jdbcType="VARCHAR" />
+			<result column="PHASE" property="phase" jdbcType="VARCHAR" />
+			<result column="INDUSTRY" property="industry" jdbcType="VARCHAR" />
+			<result column="SETUP_DT" property="setupDt" jdbcType="TIMESTAMP" />
+			<result column="ENTERPRISE_FORM" property="enterpriseForm" jdbcType="VARCHAR" />
+			<result column="SUB_FORM" property="subForm" jdbcType="VARCHAR" />
+			<result column="REL_TYPE" property="relType" jdbcType="VARCHAR" />
+			<result column="CONTACT" property="contact" jdbcType="VARCHAR" />
+			<result column="CONTACT_TEL" property="contactTel" jdbcType="VARCHAR" />
+			<result column="REL_COMPANY" property="relCompany" jdbcType="VARCHAR" />
+			<result column="CONTROLLER" property="controller" jdbcType="VARCHAR" />
+			<result column="CONTROLLER_TEL" property="controllerTel" jdbcType="VARCHAR" />
+			<result column="BIZ_CARRIER" property="bizCarrier" jdbcType="VARCHAR" />
+			<result column="OPERATION" property="operation" jdbcType="VARCHAR" />
+			<result column="COMPANY_PROFILE" property="companyProfile" jdbcType="VARCHAR" />
+			<result column="PROFILE_FILE" property="profileFile" jdbcType="VARCHAR" />
+			<result column="TAX_COLLECTION" property="taxCollection" jdbcType="VARCHAR" />
+			<result column="TAX_DESC" property="taxDesc" jdbcType="VARCHAR" />
+			<result column="IS_HN_TECH" property="isHnTech" jdbcType="VARCHAR" />
+			<result column="APPR_DT" property="apprDt" jdbcType="TIMESTAMP" />
+			<result column="CERTIFICATE" property="certificate" jdbcType="VARCHAR" />
+			<result column="OTHE_ENTE_TYPE" property="otheEnteType" jdbcType="VARCHAR" />
+			<result column="DIRECTOR_CNT" property="directorCnt" jdbcType="NUMERIC" />
+			<result column="SUPERVISOR_CNT" property="supervisorCnt" jdbcType="NUMERIC" />
+			<result column="STATUS" property="status" jdbcType="VARCHAR" />
+			<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+			<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+			<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+			<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+			<result column="ORGN_CODE" property="orgnCode" jdbcType="VARCHAR" />
+			<result column="MAIN_BUSINESS" property="mainBusiness" jdbcType="VARCHAR" />
+			<result column="GROUP_ID" property="groupId" jdbcType="NUMERIC" />
+			<result column="PROJ_GUID" property="projGuid" jdbcType="VARCHAR" />
+			<result column="PATENT_COUNT" property="patentCount" jdbcType="VARCHAR" />
+			<result column="IS_PUBLIC_COMP" property="isPublicComp" jdbcType="VARCHAR" />
+			<result column="STOCK_CODE" property="stockCode" jdbcType="VARCHAR" />
+			<result column="STOCK_NAME" property="stockName" jdbcType="VARCHAR" />
+			<result column="INDUSTRY2" property="industry2" jdbcType="VARCHAR" />
+			<result column="SOCIAL_CODE" property="socialCode" jdbcType="VARCHAR" />
+			<result column="IS_DIRECTOR_CNT" property="isDirectorCnt" jdbcType="VARCHAR" />
+			<result column="IS_SUPERVISOR_CNT" property="isSupervisorCnt" jdbcType="VARCHAR" />
+			<result column="IS_PROVINCE" property="isProvince" jdbcType="VARCHAR" />
+			<result column="REG_AMOUNT" property="regAmount" jdbcType="NUMERIC" />
+			<result column="REG_ADD" property="regAdd" jdbcType="VARCHAR" />
+			<result column="ENTE_ID" property="enteId" jdbcType="VARCHAR" />
+			<result column="IS_REG" property="isReg" jdbcType="VARCHAR" />
+			<result column="IS_ABROAD" property="isAbroad" jdbcType="VARCHAR" />
+			<result column="IS_APPLY_IPO" property="isApplyIpo" jdbcType="VARCHAR" />
+			<result column="IS_NEW_BOARD" property="isNewBoard" jdbcType="VARCHAR" />
+			<result column="IS_HLIGHTS" property="isHlights" jdbcType="VARCHAR" />
+			<result column="HLIGHTS_REMARK" property="hlightsRemark" jdbcType="VARCHAR" />
+			<result column="NEW_AMOUNT" property="newAmount" jdbcType="NUMERIC" />
+			<result column="INDUSTRY_NAME" property="industryName" jdbcType="VARCHAR" />
+			<result column="CUST_NAME" property="custName" jdbcType="VARCHAR" />
+			<result column="PHONE_NO" property="phoneNo" jdbcType="VARCHAR" />
+			<result column="MAIN_CONTACT" property="mainContact" jdbcType="VARCHAR" />
+			<result column="email" property="email" jdbcType="VARCHAR" />
+			<result column="REG_AMOUNT_CURRENCY" property="regAmountCurrency" jdbcType="VARCHAR" />
+			<result column="upDt" property="upDt" jdbcType="TIMESTAMP" />
+		</association>
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.EnteInfoModel">
+		INSERT INTO BD_T_ENTE_INFO (ENTERPRISE_ID,CH_NAME,EN_NAME,REGISTER_NAME,LOGO,PHASE,INDUSTRY,SETUP_DT,ENTERPRISE_FORM,SUB_FORM,REL_TYPE,CONTACT,CONTACT_TEL,REL_COMPANY,CONTROLLER,CONTROLLER_TEL,BIZ_CARRIER,OPERATION,COMPANY_PROFILE,PROFILE_FILE,TAX_COLLECTION,TAX_DESC,IS_HN_TECH,APPR_DT,CERTIFICATE,OTHE_ENTE_TYPE,DIRECTOR_CNT,SUPERVISOR_CNT,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,ORGN_CODE,MAIN_BUSINESS,GROUP_ID,PROJ_GUID,PATENT_COUNT,IS_PUBLIC_COMP,STOCK_CODE,STOCK_NAME,INDUSTRY2,SOCIAL_CODE,IS_DIRECTOR_CNT,IS_SUPERVISOR_CNT,IS_PROVINCE,REG_AMOUNT,REG_ADD,ENTE_ID,IS_REG,IS_ABROAD,IS_APPLY_IPO,IS_NEW_BOARD,IS_HLIGHTS,HLIGHTS_REMARK,NEW_AMOUNT,INDUSTRY_NAME,MAIN_CONTACT,EMAIL,REG_AMOUNT_CURRENCY) values(#{enterpriseId,jdbcType=VARCHAR},#{chName,jdbcType=VARCHAR},#{enName,jdbcType=VARCHAR},#{registerName,jdbcType=VARCHAR},#{logo,jdbcType=VARCHAR},#{phase,jdbcType=VARCHAR},#{industry,jdbcType=VARCHAR},#{setupDt,jdbcType=TIMESTAMP},#{enterpriseForm,jdbcType=VARCHAR},#{subForm,jdbcType=VARCHAR},#{relType,jdbcType=VARCHAR},#{contact,jdbcType=VARCHAR},#{contactTel,jdbcType=VARCHAR},#{relCompany,jdbcType=VARCHAR},#{controller,jdbcType=VARCHAR},#{controllerTel,jdbcType=VARCHAR},#{bizCarrier,jdbcType=VARCHAR},#{operation,jdbcType=VARCHAR},#{companyProfile,jdbcType=VARCHAR},#{profileFile,jdbcType=VARCHAR},#{taxCollection,jdbcType=VARCHAR},#{taxDesc,jdbcType=VARCHAR},#{isHnTech,jdbcType=VARCHAR},#{apprDt,jdbcType=TIMESTAMP},#{certificate,jdbcType=VARCHAR},#{otheEnteType,jdbcType=VARCHAR},#{directorCnt,jdbcType=NUMERIC},#{supervisorCnt,jdbcType=NUMERIC},#{status,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{orgnCode,jdbcType=VARCHAR},#{mainBusiness,jdbcType=VARCHAR},#{groupId,jdbcType=NUMERIC},#{projGuid,jdbcType=VARCHAR},#{patentCount,jdbcType=VARCHAR},#{isPublicComp,jdbcType=VARCHAR},#{stockCode,jdbcType=VARCHAR},#{stockName,jdbcType=VARCHAR},#{industry2,jdbcType=VARCHAR},#{socialCode,jdbcType=VARCHAR},#{isDirectorCnt,jdbcType=VARCHAR},#{isSupervisorCnt,jdbcType=VARCHAR},#{isProvince,jdbcType=VARCHAR},#{regAmount,jdbcType=NUMERIC},#{regAdd,jdbcType=VARCHAR},#{enteId,jdbcType=VARCHAR},#{isReg,jdbcType=VARCHAR},#{isAbroad,jdbcType=VARCHAR},#{isApplyIpo,jdbcType=VARCHAR},#{isNewBoard,jdbcType=VARCHAR},#{isHlights,jdbcType=VARCHAR},#{hlightsRemark,jdbcType=VARCHAR},#{newAmount,jdbcType=NUMERIC},#{industryName,jdbcType=VARCHAR},#{mainContact,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},#{regAmountCurrency,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO BD_T_ENTE_INFO (ENTERPRISE_ID,CH_NAME,EN_NAME,REGISTER_NAME,LOGO,PHASE,INDUSTRY,SETUP_DT,ENTERPRISE_FORM,SUB_FORM,REL_TYPE,CONTACT,CONTACT_TEL,REL_COMPANY,CONTROLLER,CONTROLLER_TEL,BIZ_CARRIER,OPERATION,COMPANY_PROFILE,PROFILE_FILE,TAX_COLLECTION,TAX_DESC,IS_HN_TECH,APPR_DT,CERTIFICATE,OTHE_ENTE_TYPE,DIRECTOR_CNT,SUPERVISOR_CNT,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,ORGN_CODE,MAIN_BUSINESS,GROUP_ID,PROJ_GUID,PATENT_COUNT,IS_PUBLIC_COMP,STOCK_CODE,STOCK_NAME,INDUSTRY2,SOCIAL_CODE)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.enterpriseId,jdbcType=VARCHAR},
+				#{item.chName,jdbcType=VARCHAR},
+				#{item.enName,jdbcType=VARCHAR},
+				#{item.registerName,jdbcType=VARCHAR},
+				#{item.logo,jdbcType=VARCHAR},
+				#{item.phase,jdbcType=VARCHAR},
+				#{item.industry,jdbcType=VARCHAR},
+				#{item.setupDt,jdbcType=TIMESTAMP},
+				#{item.enterpriseForm,jdbcType=VARCHAR},
+				#{item.subForm,jdbcType=VARCHAR},
+				#{item.relType,jdbcType=VARCHAR},
+				#{item.contact,jdbcType=VARCHAR},
+				#{item.contactTel,jdbcType=VARCHAR},
+				#{item.relCompany,jdbcType=VARCHAR},
+				#{item.controller,jdbcType=VARCHAR},
+				#{item.controllerTel,jdbcType=VARCHAR},
+				#{item.bizCarrier,jdbcType=VARCHAR},
+				#{item.operation,jdbcType=VARCHAR},
+				#{item.companyProfile,jdbcType=VARCHAR},
+				#{item.profileFile,jdbcType=VARCHAR},
+				#{item.taxCollection,jdbcType=VARCHAR},
+				#{item.taxDesc,jdbcType=VARCHAR},
+				#{item.isHnTech,jdbcType=VARCHAR},
+				#{item.apprDt,jdbcType=TIMESTAMP},
+				#{item.certificate,jdbcType=VARCHAR},
+				#{item.otheEnteType,jdbcType=VARCHAR},
+				#{item.directorCnt,jdbcType=NUMERIC},
+				#{item.supervisorCnt,jdbcType=NUMERIC},
+				#{item.status,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+				#{item.orgnCode,jdbcType=VARCHAR},
+				#{item.mainBusiness,jdbcType=VARCHAR},
+				#{item.groupId,jdbcType=NUMERIC},
+				#{item.projGuid,jdbcType=VARCHAR},
+				#{item.patentCount,jdbcType=VARCHAR},
+				#{item.isPublicComp,jdbcType=VARCHAR},
+				#{item.stockCode,jdbcType=VARCHAR},
+				#{item.stockName,jdbcType=VARCHAR},
+				#{item.industry2,jdbcType=VARCHAR},
+				#{item.socialCode,jdbcType=VARCHAR}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  BD_T_ENTE_INFO WHERE ENTERPRISE_ID = #{enterpriseId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.EnteInfoModel">
+		DELETE FROM BD_T_ENTE_INFO
+		<where>
+			<if test="enterpriseId != null and enterpriseId != ''" >
+				ENTERPRISE_ID = #{enterpriseId,jdbcType=VARCHAR}
+			</if>
+			<if test="chName != null and chName != ''" >
+				AND CH_NAME = #{chName,jdbcType=VARCHAR}
+			</if>
+			<if test="enName != null and enName != ''" >
+				AND EN_NAME = #{enName,jdbcType=VARCHAR}
+			</if>
+			<if test="registerName != null and registerName != ''" >
+				AND REGISTER_NAME = #{registerName,jdbcType=VARCHAR}
+			</if>
+			<if test="logo != null and logo != ''" >
+				AND LOGO = #{logo,jdbcType=VARCHAR}
+			</if>
+			<if test="phase != null and phase != ''" >
+				AND PHASE = #{phase,jdbcType=VARCHAR}
+			</if>
+			<if test="industry != null and industry != ''" >
+				AND INDUSTRY = #{industry,jdbcType=VARCHAR}
+			</if>
+			<if test="setupDt != null" >
+				AND SETUP_DT = #{setupDt,jdbcType=VARCHAR}
+			</if>
+			<if test="enterpriseForm != null and enterpriseForm != ''" >
+				AND ENTERPRISE_FORM = #{enterpriseForm,jdbcType=VARCHAR}
+			</if>
+			<if test="subForm != null and subForm != ''" >
+				AND SUB_FORM = #{subForm,jdbcType=VARCHAR}
+			</if>
+			<if test="relType != null and relType != ''" >
+				AND REL_TYPE = #{relType,jdbcType=VARCHAR}
+			</if>
+			<if test="contact != null and contact != ''" >
+				AND CONTACT = #{contact,jdbcType=VARCHAR}
+			</if>
+			<if test="contactTel != null and contactTel != ''" >
+				AND CONTACT_TEL = #{contactTel,jdbcType=VARCHAR}
+			</if>
+			<if test="relCompany != null and relCompany != ''" >
+				AND REL_COMPANY = #{relCompany,jdbcType=VARCHAR}
+			</if>
+			<if test="controller != null and controller != ''" >
+				AND CONTROLLER = #{controller,jdbcType=VARCHAR}
+			</if>
+			<if test="controllerTel != null and controllerTel != ''" >
+				AND CONTROLLER_TEL = #{controllerTel,jdbcType=VARCHAR}
+			</if>
+			<if test="bizCarrier != null and bizCarrier != ''" >
+				AND BIZ_CARRIER = #{bizCarrier,jdbcType=VARCHAR}
+			</if>
+			<if test="operation != null and operation != ''" >
+				AND OPERATION = #{operation,jdbcType=VARCHAR}
+			</if>
+			<if test="companyProfile != null and companyProfile != ''" >
+				AND COMPANY_PROFILE = #{companyProfile,jdbcType=VARCHAR}
+			</if>
+			<if test="profileFile != null and profileFile != ''" >
+				AND PROFILE_FILE = #{profileFile,jdbcType=VARCHAR}
+			</if>
+			<if test="taxCollection != null and taxCollection != ''" >
+				AND TAX_COLLECTION = #{taxCollection,jdbcType=VARCHAR}
+			</if>
+			<if test="taxDesc != null and taxDesc != ''" >
+				AND TAX_DESC = #{taxDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="isHnTech != null and isHnTech != ''" >
+				AND IS_HN_TECH = #{isHnTech,jdbcType=VARCHAR}
+			</if>
+			<if test="apprDt != null" >
+				AND APPR_DT = #{apprDt,jdbcType=VARCHAR}
+			</if>
+			<if test="certificate != null and certificate != ''" >
+				AND CERTIFICATE = #{certificate,jdbcType=VARCHAR}
+			</if>
+			<if test="otheEnteType != null and otheEnteType != ''" >
+				AND OTHE_ENTE_TYPE = #{otheEnteType,jdbcType=VARCHAR}
+			</if>
+			<if test="directorCnt != null and directorCnt != ''" >
+				AND DIRECTOR_CNT = #{directorCnt,jdbcType=NUMERIC}
+			</if>
+			<if test="supervisorCnt != null and supervisorCnt != ''" >
+				AND SUPERVISOR_CNT = #{supervisorCnt,jdbcType=NUMERIC}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="orgnCode != null and orgnCode != ''" >
+				AND ORGN_CODE = #{orgnCode,jdbcType=VARCHAR}
+			</if>
+			<if test="mainBusiness != null and mainBusiness != ''" >
+				AND MAIN_BUSINESS = #{mainBusiness,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=NUMERIC}
+			</if>
+			<if test="projGuid != null and projGuid != ''" >
+				AND PROJ_GUID = #{projGuid,jdbcType=VARCHAR}
+			</if>
+			<if test="patentCount != null and patentCount != ''" >
+				AND PATENT_COUNT = #{patentCount,jdbcType=VARCHAR}
+			</if>
+			<if test="isPublicComp != null and isPublicComp != ''" >
+				AND IS_PUBLIC_COMP = #{isPublicComp,jdbcType=VARCHAR}
+			</if>
+			<if test="stockCode != null and stockCode != ''" >
+				AND STOCK_CODE = #{stockCode,jdbcType=VARCHAR}
+			</if>
+			<if test="stockName != null and stockName != ''" >
+				AND STOCK_NAME = #{stockName,jdbcType=VARCHAR}
+			</if>
+			<if test="industry2 != null and industry2 != ''" >
+				AND INDUSTRY2 = #{industry2,jdbcType=VARCHAR}
+			</if>
+			<if test="socialCode != null and socialCode != ''" >
+				AND SOCIAL_CODE = #{socialCode,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  BD_T_ENTE_INFO WHERE ENTERPRISE_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.EnteInfoModel">
+		UPDATE BD_T_ENTE_INFO 
+		<set>
+			<if test="enterpriseId != null and enterpriseId != ''" >
+				ENTERPRISE_ID = #{enterpriseId,jdbcType=VARCHAR},
+			</if>
+			<if test="chName != null and chName != ''" >
+				CH_NAME = #{chName,jdbcType=VARCHAR},
+			</if>
+			<if test="enName != null and enName != ''" >
+				EN_NAME = #{enName,jdbcType=VARCHAR},
+			</if>
+			<if test="registerName != null and registerName != ''" >
+				REGISTER_NAME = #{registerName,jdbcType=VARCHAR},
+			</if>
+			<if test="logo != null and logo != ''" >
+				LOGO = #{logo,jdbcType=VARCHAR},
+			</if>
+			<if test="phase != null and phase != ''" >
+				PHASE = #{phase,jdbcType=VARCHAR},
+			</if>
+			<if test="industry != null and industry != ''" >
+				INDUSTRY = #{industry,jdbcType=VARCHAR},
+			</if>
+			<if test="setupDt != null" >
+				SETUP_DT = #{setupDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="enterpriseForm != null and enterpriseForm != ''" >
+				ENTERPRISE_FORM = #{enterpriseForm,jdbcType=VARCHAR},
+			</if>
+			<if test="subForm != null and subForm != ''" >
+				SUB_FORM = #{subForm,jdbcType=VARCHAR},
+			</if>
+			<if test="relType != null and relType != ''" >
+				REL_TYPE = #{relType,jdbcType=VARCHAR},
+			</if>
+			<if test="contact != null and contact != ''" >
+				CONTACT = #{contact,jdbcType=VARCHAR},
+			</if>
+			<if test="contactTel != null and contactTel != ''" >
+				CONTACT_TEL = #{contactTel,jdbcType=VARCHAR},
+			</if>
+			<if test="relCompany != null and relCompany != ''" >
+				REL_COMPANY = #{relCompany,jdbcType=VARCHAR},
+			</if>
+			<if test="controller != null and controller != ''" >
+				CONTROLLER = #{controller,jdbcType=VARCHAR},
+			</if>
+			<if test="controllerTel != null and controllerTel != ''" >
+				CONTROLLER_TEL = #{controllerTel,jdbcType=VARCHAR},
+			</if>
+			<if test="bizCarrier != null and bizCarrier != ''" >
+				BIZ_CARRIER = #{bizCarrier,jdbcType=VARCHAR},
+			</if>
+			<if test="operation != null and operation != ''" >
+				OPERATION = #{operation,jdbcType=VARCHAR},
+			</if>
+			<if test="companyProfile != null and companyProfile != ''" >
+				COMPANY_PROFILE = #{companyProfile,jdbcType=VARCHAR},
+			</if>
+			<if test="profileFile != null and profileFile != ''" >
+				PROFILE_FILE = #{profileFile,jdbcType=VARCHAR},
+			</if>
+			<if test="taxCollection != null and taxCollection != ''" >
+				TAX_COLLECTION = #{taxCollection,jdbcType=VARCHAR},
+			</if>
+			<if test="taxDesc != null and taxDesc != ''" >
+				TAX_DESC = #{taxDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="isHnTech != null and isHnTech != ''" >
+				IS_HN_TECH = #{isHnTech,jdbcType=VARCHAR},
+			</if>
+			<if test="apprDt != null" >
+				APPR_DT = #{apprDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="certificate != null and certificate != ''" >
+				CERTIFICATE = #{certificate,jdbcType=VARCHAR},
+			</if>
+			<if test="otheEnteType != null and otheEnteType != ''" >
+				OTHE_ENTE_TYPE = #{otheEnteType,jdbcType=VARCHAR},
+			</if>
+			<if test="directorCnt != null and directorCnt != ''" >
+				DIRECTOR_CNT = #{directorCnt,jdbcType=NUMERIC},
+			</if>
+			<if test="supervisorCnt != null and supervisorCnt != ''" >
+				SUPERVISOR_CNT = #{supervisorCnt,jdbcType=NUMERIC},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orgnCode != null and orgnCode != ''" >
+				ORGN_CODE = #{orgnCode,jdbcType=VARCHAR},
+			</if>
+			<if test="mainBusiness != null and mainBusiness != ''" >
+				MAIN_BUSINESS = #{mainBusiness,jdbcType=VARCHAR},
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				GROUP_ID = #{groupId,jdbcType=NUMERIC},
+			</if>
+			<if test="projGuid != null and projGuid != ''" >
+				PROJ_GUID = #{projGuid,jdbcType=VARCHAR},
+			</if>
+			<if test="patentCount != null and patentCount != ''" >
+				PATENT_COUNT = #{patentCount,jdbcType=VARCHAR},
+			</if>
+			<if test="isPublicComp != null and isPublicComp != ''" >
+				IS_PUBLIC_COMP = #{isPublicComp,jdbcType=VARCHAR},
+			</if>
+			<if test="stockCode != null and stockCode != ''" >
+				STOCK_CODE = #{stockCode,jdbcType=VARCHAR},
+			</if>
+			<if test="stockName != null and stockName != ''" >
+				STOCK_NAME = #{stockName,jdbcType=VARCHAR},
+			</if>
+			<if test="industry2 != null and industry2 != ''" >
+				INDUSTRY2 = #{industry2,jdbcType=VARCHAR},
+			</if>
+			<if test="socialCode != null and socialCode != ''" >
+				SOCIAL_CODE = #{socialCode,jdbcType=VARCHAR},
+			</if>
+			<if test="isDirectorCnt != null and isDirectorCnt != ''" >
+				 IS_DIRECTOR_CNT = #{isDirectorCnt,jdbcType=VARCHAR},
+			</if>
+			<if test="isSupervisorCnt != null and isSupervisorCnt != ''" >
+				 IS_SUPERVISOR_CNT = #{isSupervisorCnt,jdbcType=VARCHAR},
+			</if>
+
+			<if test="isProvince != null and isProvince != ''" >
+				 IS_PROVINCE = #{isProvince,jdbcType=VARCHAR},
+			</if>
+
+			<if test="regAmount != null and regAmount != ''" >
+				 REG_AMOUNT = #{regAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="regAdd != null and regAdd != ''" >
+				 REG_ADD = #{regAdd,jdbcType=VARCHAR},
+			</if>
+			<if test="enteId != null and enteId != ''" >
+				 ENTE_ID = #{enteId,jdbcType=VARCHAR},
+			</if>
+			<if test="isReg != null and isReg != ''" >
+				 IS_REG = #{isReg,jdbcType=VARCHAR},
+			</if>
+			<if test="isAbroad != null and isAbroad != ''" >
+				 IS_ABROAD = #{isAbroad,jdbcType=VARCHAR},
+			</if>
+			<if test="isApplyIpo != null and isApplyIpo != ''" >
+				 IS_APPLY_IPO = #{isApplyIpo,jdbcType=VARCHAR},
+			</if>
+			<if test="isNewBoard != null and isNewBoard != ''" >
+				 IS_NEW_BOARD = #{isNewBoard,jdbcType=VARCHAR},
+			</if>
+			<if test="isHlights != null and isHlights != ''" >
+				 IS_HLIGHTS = #{isHlights,jdbcType=VARCHAR},
+			</if>
+			<if test="hlightsRemark != null and hlightsRemark != ''" >
+				 HLIGHTS_REMARK = #{hlightsRemark,jdbcType=VARCHAR},
+			</if>
+
+			<if test="newAmount != null and newAmount != ''" >
+			   NEW_AMOUNT = #{newAmount,jdbcType=NUMERIC},
+		    </if>
+
+			<if test="industryName != null and industryName != ''" >
+				 INDUSTRY_NAME = #{industryName,jdbcType=VARCHAR},
+			</if>
+			<if test="mainContact != null and mainContact != ''" >
+				MAIN_CONTACT = #{mainContact,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null and email != ''" >
+				EMAIL = #{email,jdbcType=VARCHAR},
+			</if>
+			<if test="regAmountCurrency != null and regAmountCurrency != ''" >
+				REG_AMOUNT_CURRENCY = #{regAmountCurrency,jdbcType=VARCHAR},
+			</if>
+		</set>
+		WHERE ENTERPRISE_ID = #{enterpriseId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="EnteInfoResult">
+		SELECT * FROM BD_T_ENTE_INFO WHERE ENTERPRISE_ID = #{enterpriseId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.EnteInfoModel" resultMap="EnteInfoResult">
+		SELECT * FROM BD_T_ENTE_INFO
+		<where>
+			<if test="enterpriseId != null and enterpriseId != ''" >
+				ENTERPRISE_ID = #{enterpriseId,jdbcType=VARCHAR}
+			</if>
+			<if test="chName != null and chName != ''" >
+				AND CH_NAME = #{chName,jdbcType=VARCHAR}
+			</if>
+			<if test="enName != null and enName != ''" >
+				AND EN_NAME = #{enName,jdbcType=VARCHAR}
+			</if>
+			<if test="registerName != null and registerName != ''" >
+				AND REGISTER_NAME = #{registerName,jdbcType=VARCHAR}
+			</if>
+			<if test="logo != null and logo != ''" >
+				AND LOGO = #{logo,jdbcType=VARCHAR}
+			</if>
+			<if test="phase != null and phase != ''" >
+				AND PHASE = #{phase,jdbcType=VARCHAR}
+			</if>
+			<if test="industry != null and industry != ''" >
+				AND INDUSTRY = #{industry,jdbcType=VARCHAR}
+			</if>
+			<if test="setupDt != null" >
+				AND SETUP_DT = #{setupDt,jdbcType=VARCHAR}
+			</if>
+			<if test="enterpriseForm != null and enterpriseForm != ''" >
+				AND ENTERPRISE_FORM = #{enterpriseForm,jdbcType=VARCHAR}
+			</if>
+			<if test="subForm != null and subForm != ''" >
+				AND SUB_FORM = #{subForm,jdbcType=VARCHAR}
+			</if>
+			<if test="relType != null and relType != ''" >
+				AND REL_TYPE = #{relType,jdbcType=VARCHAR}
+			</if>
+			<if test="contact != null and contact != ''" >
+				AND CONTACT = #{contact,jdbcType=VARCHAR}
+			</if>
+			<if test="contactTel != null and contactTel != ''" >
+				AND CONTACT_TEL = #{contactTel,jdbcType=VARCHAR}
+			</if>
+			<if test="relCompany != null and relCompany != ''" >
+				AND REL_COMPANY = #{relCompany,jdbcType=VARCHAR}
+			</if>
+			<if test="controller != null and controller != ''" >
+				AND CONTROLLER = #{controller,jdbcType=VARCHAR}
+			</if>
+			<if test="controllerTel != null and controllerTel != ''" >
+				AND CONTROLLER_TEL = #{controllerTel,jdbcType=VARCHAR}
+			</if>
+			<if test="bizCarrier != null and bizCarrier != ''" >
+				AND BIZ_CARRIER = #{bizCarrier,jdbcType=VARCHAR}
+			</if>
+			<if test="operation != null and operation != ''" >
+				AND OPERATION = #{operation,jdbcType=VARCHAR}
+			</if>
+			<if test="companyProfile != null and companyProfile != ''" >
+				AND COMPANY_PROFILE = #{companyProfile,jdbcType=VARCHAR}
+			</if>
+			<if test="profileFile != null and profileFile != ''" >
+				AND PROFILE_FILE = #{profileFile,jdbcType=VARCHAR}
+			</if>
+			<if test="taxCollection != null and taxCollection != ''" >
+				AND TAX_COLLECTION = #{taxCollection,jdbcType=VARCHAR}
+			</if>
+			<if test="taxDesc != null and taxDesc != ''" >
+				AND TAX_DESC = #{taxDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="isHnTech != null and isHnTech != ''" >
+				AND IS_HN_TECH = #{isHnTech,jdbcType=VARCHAR}
+			</if>
+			<if test="apprDt != null" >
+				AND APPR_DT = #{apprDt,jdbcType=VARCHAR}
+			</if>
+			<if test="certificate != null and certificate != ''" >
+				AND CERTIFICATE = #{certificate,jdbcType=VARCHAR}
+			</if>
+			<if test="otheEnteType != null and otheEnteType != ''" >
+				AND OTHE_ENTE_TYPE = #{otheEnteType,jdbcType=VARCHAR}
+			</if>
+			<if test="directorCnt != null and directorCnt != ''" >
+				AND DIRECTOR_CNT = #{directorCnt,jdbcType=NUMERIC}
+			</if>
+			<if test="supervisorCnt != null and supervisorCnt != ''" >
+				AND SUPERVISOR_CNT = #{supervisorCnt,jdbcType=NUMERIC}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="orgnCode != null and orgnCode != ''" >
+				AND ORGN_CODE = #{orgnCode,jdbcType=VARCHAR}
+			</if>
+			<if test="mainBusiness != null and mainBusiness != ''" >
+				AND MAIN_BUSINESS = #{mainBusiness,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=NUMERIC}
+			</if>
+			<if test="projGuid != null and projGuid != ''" >
+				AND PROJ_GUID = #{projGuid,jdbcType=VARCHAR}
+			</if>
+			<if test="patentCount != null and patentCount != ''" >
+				AND PATENT_COUNT = #{patentCount,jdbcType=VARCHAR}
+			</if>
+			<if test="isPublicComp != null and isPublicComp != ''" >
+				AND IS_PUBLIC_COMP = #{isPublicComp,jdbcType=VARCHAR}
+			</if>
+			<if test="stockCode != null and stockCode != ''" >
+				AND STOCK_CODE = #{stockCode,jdbcType=VARCHAR}
+			</if>
+			<if test="stockName != null and stockName != ''" >
+				AND STOCK_NAME = #{stockName,jdbcType=VARCHAR}
+			</if>
+			<if test="industry2 != null and industry2 != ''" >
+				AND INDUSTRY2 = #{industry2,jdbcType=VARCHAR}
+			</if>
+			<if test="socialCode != null and socialCode != ''" >
+				AND SOCIAL_CODE = #{socialCode,jdbcType=VARCHAR}
+			</if>
+			<if test="isDirectorCnt != null and isDirectorCnt != ''" >
+				AND IS_DIRECTOR_CNT = #{isDirectorCnt,jdbcType=VARCHAR}
+			</if>
+			<if test="isSupervisorCnt != null and isSupervisorCnt != ''" >
+				AND IS_SUPERVISOR_CNT = #{isSupervisorCnt,jdbcType=VARCHAR}
+			</if>
+
+			<if test="isProvince != null and isProvince != ''" >
+				AND IS_PROVINCE = #{isProvince,jdbcType=VARCHAR}
+			</if>
+
+			<if test="regAmount != null and regAmount != ''" >
+				AND REG_AMOUNT = #{regAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="regAdd != null and regAdd != ''" >
+				AND REG_ADD = #{regAdd,jdbcType=VARCHAR}
+			</if>
+			<if test="enteId != null and enteId != ''" >
+				AND ENTE_ID = #{enteId,jdbcType=VARCHAR}
+			</if>
+			<if test="isReg != null and isReg != ''" >
+				AND IS_REG = #{isReg,jdbcType=VARCHAR}
+			</if>
+			<if test="isAbroad != null and isAbroad != ''" >
+				AND IS_ABROAD = #{isAbroad,jdbcType=VARCHAR}
+			</if>
+			<if test="isApplyIpo != null and isApplyIpo != ''" >
+				AND IS_APPLY_IPO = #{isApplyIpo,jdbcType=VARCHAR}
+			</if>
+			<if test="isNewBoard != null and isNewBoard != ''" >
+				AND IS_NEW_BOARD = #{isNewBoard,jdbcType=VARCHAR}
+			</if>
+			<if test="isHlights != null and isHlights != ''" >
+				AND IS_HLIGHTS = #{isHlights,jdbcType=VARCHAR}
+			</if>
+			<if test="hlightsRemark != null and hlightsRemark != ''" >
+				AND HLIGHTS_REMARK = #{hlightsRemark,jdbcType=VARCHAR}
+			</if>
+
+			<if test="newAmount != null and newAmount != ''" >
+				AND NEW_AMOUNT = #{newAmount,jdbcType=NUMERIC}
+			</if>
+
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT
+		DISTINCT
+		a.*,
+		b.CUST_NAME,
+		b.PHONE_NO,
+		d.proj_id,
+		d.proj_name,
+		d.inve_id,
+		d.inve_name,
+		d.update_dt as upDt
+		FROM tz_t_proj_info d
+		inner join BD_T_ENTE_INFO a on d.OLD_ENTERPRISE_ID=a.ENTERPRISE_ID and d.status!='2'
+		left join EI_T_CUST_MEMBER b on a.ENTERPRISE_ID=b.ORGN_ID and b.IS_MAIN_CONTACT='1' and b.status='0' and a.STATUS='0'
+		<where>
+		 d.proj_type='1'
+			<if test='paramMap.typeStr=="2"' >
+			and (d.CREATE_BY=#{paramMap.userId}
+			or d.CREATE_BY=#{paramMap.loginName} or
+			d.CREATE_BY in (
+			select z2.id from
+			bd_t_fund_account_maping z1 inner join
+			base.app_user z2 on z1.user_id=z2.loginname
+			where z1.is_rep is null and (z1.create_by = #{paramMap.loginName}
+			or  z1.create_by =#{paramMap.userId} )))
+			/*and (
+				d.CREATE_BY=#{paramMap.userId}
+				or  (
+				d.inve_id in(	select a.fund_id
+				from bd_t_fund_info a
+				inner join tz_t_proj_info b on b.proj_object=a.fund_id and b.proj_type='2' and a.status!='2' and b.status!='2'
+				where
+				a.OLD_SUB_PLAT_PROP in(4,6,5)
+				and ( b.CREATE_BY=#{paramMap.loginName,jdbcType=VARCHAR} or b.CREATE_BY=#{paramMap.userId,jdbcType=VARCHAR} or
+				b.CREATE_BY in (
+				select TO_CHAR(z2.id)as id  from bd_t_fund_account_maping z1 inner join   base.app_user z2 on z1.user_id=z2.loginname where z1.is_rep is null and (z1.create_by = #{paramMap.loginName,jdbcType=VARCHAR}or z1.create_by =#{paramMap.userId,jdbcType=VARCHAR} )
+				)
+				or  a.FUND_ID in (select z2.OBJECT_ID from GF_T_DATA_APPLY z2 where z2.USER_ID =#{paramMap.loginName,jdbcType=VARCHAR} and z2.APPLY_TYPE='2' and z2.STATUS = '2'))
+				)
+				)
+				)*/
+			</if>
+			<if test='paramMap.typeStr=="3"' >
+                and	d.inve_id in(select fund_id from bd_t_fund_info where OLD_SUB_PLAT_PROP in(2,4,6,5)   <![CDATA[and nvl(ISDIRECT,'0')<1]]>  )
+			</if>
+			<if test='paramMap.typeStr=="1"' >
+				and (d.CREATE_BY=#{paramMap.userId} or d.CREATE_BY=#{paramMap.loginName})
+			</if>
+			<include refid="searchCondition.searchClause" />
+			order by d.update_dt desc
+		</where>
+
+	</sql>
+
+	<select id="selectListPage" resultMap="ProjInfoResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+		<include refid="searchSql" />
+	</select>
+	<select id="selectGetListPage" resultMap="EnteInfoResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT *
+		FROM BD_T_ENTE_INFO
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</select>
+
+
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.EnteInfoModel">
+		SELECT COUNT(*) FROM BD_T_ENTE_INFO
+		<where>
+			<if test="enterpriseId != null and enterpriseId != ''" >
+				ENTERPRISE_ID = #{enterpriseId,jdbcType=VARCHAR}
+			</if>
+			<if test="chName != null and chName != ''" >
+				AND CH_NAME = #{chName,jdbcType=VARCHAR}
+			</if>
+			<if test="enName != null and enName != ''" >
+				AND EN_NAME = #{enName,jdbcType=VARCHAR}
+			</if>
+			<if test="registerName != null and registerName != ''" >
+				AND REGISTER_NAME = #{registerName,jdbcType=VARCHAR}
+			</if>
+			<if test="logo != null and logo != ''" >
+				AND LOGO = #{logo,jdbcType=VARCHAR}
+			</if>
+			<if test="phase != null and phase != ''" >
+				AND PHASE = #{phase,jdbcType=VARCHAR}
+			</if>
+			<if test="industry != null and industry != ''" >
+				AND INDUSTRY = #{industry,jdbcType=VARCHAR}
+			</if>
+			<if test="setupDt != null" >
+				AND SETUP_DT = #{setupDt,jdbcType=VARCHAR}
+			</if>
+			<if test="enterpriseForm != null and enterpriseForm != ''" >
+				AND ENTERPRISE_FORM = #{enterpriseForm,jdbcType=VARCHAR}
+			</if>
+			<if test="subForm != null and subForm != ''" >
+				AND SUB_FORM = #{subForm,jdbcType=VARCHAR}
+			</if>
+			<if test="relType != null and relType != ''" >
+				AND REL_TYPE = #{relType,jdbcType=VARCHAR}
+			</if>
+			<if test="contact != null and contact != ''" >
+				AND CONTACT = #{contact,jdbcType=VARCHAR}
+			</if>
+			<if test="contactTel != null and contactTel != ''" >
+				AND CONTACT_TEL = #{contactTel,jdbcType=VARCHAR}
+			</if>
+			<if test="relCompany != null and relCompany != ''" >
+				AND REL_COMPANY = #{relCompany,jdbcType=VARCHAR}
+			</if>
+			<if test="controller != null and controller != ''" >
+				AND CONTROLLER = #{controller,jdbcType=VARCHAR}
+			</if>
+			<if test="controllerTel != null and controllerTel != ''" >
+				AND CONTROLLER_TEL = #{controllerTel,jdbcType=VARCHAR}
+			</if>
+			<if test="bizCarrier != null and bizCarrier != ''" >
+				AND BIZ_CARRIER = #{bizCarrier,jdbcType=VARCHAR}
+			</if>
+			<if test="operation != null and operation != ''" >
+				AND OPERATION = #{operation,jdbcType=VARCHAR}
+			</if>
+			<if test="companyProfile != null and companyProfile != ''" >
+				AND COMPANY_PROFILE = #{companyProfile,jdbcType=VARCHAR}
+			</if>
+			<if test="profileFile != null and profileFile != ''" >
+				AND PROFILE_FILE = #{profileFile,jdbcType=VARCHAR}
+			</if>
+			<if test="taxCollection != null and taxCollection != ''" >
+				AND TAX_COLLECTION = #{taxCollection,jdbcType=VARCHAR}
+			</if>
+			<if test="taxDesc != null and taxDesc != ''" >
+				AND TAX_DESC = #{taxDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="isHnTech != null and isHnTech != ''" >
+				AND IS_HN_TECH = #{isHnTech,jdbcType=VARCHAR}
+			</if>
+			<if test="apprDt != null" >
+				AND APPR_DT = #{apprDt,jdbcType=VARCHAR}
+			</if>
+			<if test="certificate != null and certificate != ''" >
+				AND CERTIFICATE = #{certificate,jdbcType=VARCHAR}
+			</if>
+			<if test="otheEnteType != null and otheEnteType != ''" >
+				AND OTHE_ENTE_TYPE = #{otheEnteType,jdbcType=VARCHAR}
+			</if>
+			<if test="directorCnt != null and directorCnt != ''" >
+				AND DIRECTOR_CNT = #{directorCnt,jdbcType=NUMERIC}
+			</if>
+			<if test="supervisorCnt != null and supervisorCnt != ''" >
+				AND SUPERVISOR_CNT = #{supervisorCnt,jdbcType=NUMERIC}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="orgnCode != null and orgnCode != ''" >
+				AND ORGN_CODE = #{orgnCode,jdbcType=VARCHAR}
+			</if>
+			<if test="mainBusiness != null and mainBusiness != ''" >
+				AND MAIN_BUSINESS = #{mainBusiness,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=NUMERIC}
+			</if>
+			<if test="projGuid != null and projGuid != ''" >
+				AND PROJ_GUID = #{projGuid,jdbcType=VARCHAR}
+			</if>
+			<if test="patentCount != null and patentCount != ''" >
+				AND PATENT_COUNT = #{patentCount,jdbcType=VARCHAR}
+			</if>
+			<if test="isPublicComp != null and isPublicComp != ''" >
+				AND IS_PUBLIC_COMP = #{isPublicComp,jdbcType=VARCHAR}
+			</if>
+			<if test="stockCode != null and stockCode != ''" >
+				AND STOCK_CODE = #{stockCode,jdbcType=VARCHAR}
+			</if>
+			<if test="stockName != null and stockName != ''" >
+				AND STOCK_NAME = #{stockName,jdbcType=VARCHAR}
+			</if>
+			<if test="industry2 != null and industry2 != ''" >
+				AND INDUSTRY2 = #{industry2,jdbcType=VARCHAR}
+			</if>
+			<if test="socialCode != null and socialCode != ''" >
+				AND SOCIAL_CODE = #{socialCode,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.EnteInfoModel" resultMap="EnteInfoResult">
+		SELECT * FROM BD_T_ENTE_INFO
+		<where>
+			<if test="enterpriseId != null and enterpriseId != ''" >
+				ENTERPRISE_ID = #{enterpriseId,jdbcType=VARCHAR}
+			</if>
+			<if test="chName != null and chName != ''" >
+				AND CH_NAME = #{chName,jdbcType=VARCHAR}
+			</if>
+			<if test="enName != null and enName != ''" >
+				AND EN_NAME = #{enName,jdbcType=VARCHAR}
+			</if>
+			<if test="registerName != null and registerName != ''" >
+				AND REGISTER_NAME = #{registerName,jdbcType=VARCHAR}
+			</if>
+			<if test="logo != null and logo != ''" >
+				AND LOGO = #{logo,jdbcType=VARCHAR}
+			</if>
+			<if test="phase != null and phase != ''" >
+				AND PHASE = #{phase,jdbcType=VARCHAR}
+			</if>
+			<if test="industry != null and industry != ''" >
+				AND INDUSTRY = #{industry,jdbcType=VARCHAR}
+			</if>
+			<if test="setupDt != null" >
+				AND SETUP_DT = #{setupDt,jdbcType=VARCHAR}
+			</if>
+			<if test="enterpriseForm != null and enterpriseForm != ''" >
+				AND ENTERPRISE_FORM = #{enterpriseForm,jdbcType=VARCHAR}
+			</if>
+			<if test="subForm != null and subForm != ''" >
+				AND SUB_FORM = #{subForm,jdbcType=VARCHAR}
+			</if>
+			<if test="relType != null and relType != ''" >
+				AND REL_TYPE = #{relType,jdbcType=VARCHAR}
+			</if>
+			<if test="contact != null and contact != ''" >
+				AND CONTACT = #{contact,jdbcType=VARCHAR}
+			</if>
+			<if test="contactTel != null and contactTel != ''" >
+				AND CONTACT_TEL = #{contactTel,jdbcType=VARCHAR}
+			</if>
+			<if test="relCompany != null and relCompany != ''" >
+				AND REL_COMPANY = #{relCompany,jdbcType=VARCHAR}
+			</if>
+			<if test="controller != null and controller != ''" >
+				AND CONTROLLER = #{controller,jdbcType=VARCHAR}
+			</if>
+			<if test="controllerTel != null and controllerTel != ''" >
+				AND CONTROLLER_TEL = #{controllerTel,jdbcType=VARCHAR}
+			</if>
+			<if test="bizCarrier != null and bizCarrier != ''" >
+				AND BIZ_CARRIER = #{bizCarrier,jdbcType=VARCHAR}
+			</if>
+			<if test="operation != null and operation != ''" >
+				AND OPERATION = #{operation,jdbcType=VARCHAR}
+			</if>
+			<if test="companyProfile != null and companyProfile != ''" >
+				AND COMPANY_PROFILE = #{companyProfile,jdbcType=VARCHAR}
+			</if>
+			<if test="profileFile != null and profileFile != ''" >
+				AND PROFILE_FILE = #{profileFile,jdbcType=VARCHAR}
+			</if>
+			<if test="taxCollection != null and taxCollection != ''" >
+				AND TAX_COLLECTION = #{taxCollection,jdbcType=VARCHAR}
+			</if>
+			<if test="taxDesc != null and taxDesc != ''" >
+				AND TAX_DESC = #{taxDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="isHnTech != null and isHnTech != ''" >
+				AND IS_HN_TECH = #{isHnTech,jdbcType=VARCHAR}
+			</if>
+			<if test="apprDt != null" >
+				AND APPR_DT = #{apprDt,jdbcType=VARCHAR}
+			</if>
+			<if test="certificate != null and certificate != ''" >
+				AND CERTIFICATE = #{certificate,jdbcType=VARCHAR}
+			</if>
+			<if test="otheEnteType != null and otheEnteType != ''" >
+				AND OTHE_ENTE_TYPE = #{otheEnteType,jdbcType=VARCHAR}
+			</if>
+			<if test="directorCnt != null and directorCnt != ''" >
+				AND DIRECTOR_CNT = #{directorCnt,jdbcType=NUMERIC}
+			</if>
+			<if test="supervisorCnt != null and supervisorCnt != ''" >
+				AND SUPERVISOR_CNT = #{supervisorCnt,jdbcType=NUMERIC}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="orgnCode != null and orgnCode != ''" >
+				AND ORGN_CODE = #{orgnCode,jdbcType=VARCHAR}
+			</if>
+			<if test="mainBusiness != null and mainBusiness != ''" >
+				AND MAIN_BUSINESS = #{mainBusiness,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=NUMERIC}
+			</if>
+			<if test="projGuid != null and projGuid != ''" >
+				AND PROJ_GUID = #{projGuid,jdbcType=VARCHAR}
+			</if>
+			<if test="patentCount != null and patentCount != ''" >
+				AND PATENT_COUNT = #{patentCount,jdbcType=VARCHAR}
+			</if>
+			<if test="isPublicComp != null and isPublicComp != ''" >
+				AND IS_PUBLIC_COMP = #{isPublicComp,jdbcType=VARCHAR}
+			</if>
+			<if test="stockCode != null and stockCode != ''" >
+				AND STOCK_CODE = #{stockCode,jdbcType=VARCHAR}
+			</if>
+			<if test="stockName != null and stockName != ''" >
+				AND STOCK_NAME = #{stockName,jdbcType=VARCHAR}
+			</if>
+			<if test="industry2 != null and industry2 != ''" >
+				AND INDUSTRY2 = #{industry2,jdbcType=VARCHAR}
+			</if>
+			<if test="socialCode != null and socialCode != ''" >
+				AND SOCIAL_CODE = #{socialCode,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="EnteInfoResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+
+
+	<update id="updateByNull" parameterType="com.ppmg.ei.model.EnteInfoModel">
+		UPDATE BD_T_ENTE_INFO
+		<set>
+			<if test="enterpriseId != null and enterpriseId != ''" >
+				ENTERPRISE_ID = #{enterpriseId,jdbcType=VARCHAR},
+			</if>
+			<if test="chName != null and chName != ''" >
+				CH_NAME = #{chName,jdbcType=VARCHAR},
+			</if>
+				EN_NAME = #{enName,jdbcType=VARCHAR},
+			<if test="registerName != null and registerName != ''" >
+				REGISTER_NAME = #{registerName,jdbcType=VARCHAR},
+			</if>
+			<if test="logo != null and logo != ''" >
+				LOGO = #{logo,jdbcType=VARCHAR},
+			</if>
+			<if test="phase != null and phase != ''" >
+				PHASE = #{phase,jdbcType=VARCHAR},
+			</if>
+			<if test="industry != null and industry != ''" >
+				INDUSTRY = #{industry,jdbcType=VARCHAR},
+			</if>
+				SETUP_DT = #{setupDt,jdbcType=TIMESTAMP},
+			<if test="enterpriseForm != null and enterpriseForm != ''" >
+				ENTERPRISE_FORM = #{enterpriseForm,jdbcType=VARCHAR},
+			</if>
+			<if test="subForm != null and subForm != ''" >
+				SUB_FORM = #{subForm,jdbcType=VARCHAR},
+			</if>
+			<if test="relType != null and relType != ''" >
+				REL_TYPE = #{relType,jdbcType=VARCHAR},
+			</if>
+			<if test="contact != null and contact != ''" >
+				CONTACT = #{contact,jdbcType=VARCHAR},
+			</if>
+			<if test="contactTel != null and contactTel != ''" >
+				CONTACT_TEL = #{contactTel,jdbcType=VARCHAR},
+			</if>
+			<if test="relCompany != null and relCompany != ''" >
+				REL_COMPANY = #{relCompany,jdbcType=VARCHAR},
+			</if>
+			<if test="controller != null and controller != ''" >
+				CONTROLLER = #{controller,jdbcType=VARCHAR},
+			</if>
+			<if test="controllerTel != null and controllerTel != ''" >
+				CONTROLLER_TEL = #{controllerTel,jdbcType=VARCHAR},
+			</if>
+			<if test="bizCarrier != null and bizCarrier != ''" >
+				BIZ_CARRIER = #{bizCarrier,jdbcType=VARCHAR},
+			</if>
+			<if test="operation != null and operation != ''" >
+				OPERATION = #{operation,jdbcType=VARCHAR},
+			</if>
+				COMPANY_PROFILE = #{companyProfile,jdbcType=VARCHAR},
+			<if test="profileFile != null and profileFile != ''" >
+				PROFILE_FILE = #{profileFile,jdbcType=VARCHAR},
+			</if>
+			<if test="taxCollection != null and taxCollection != ''" >
+				TAX_COLLECTION = #{taxCollection,jdbcType=VARCHAR},
+			</if>
+				TAX_DESC = #{taxDesc,jdbcType=VARCHAR},
+			<if test="isHnTech != null and isHnTech != ''" >
+				IS_HN_TECH = #{isHnTech,jdbcType=VARCHAR},
+			</if>
+			<if test="apprDt != null" >
+				APPR_DT = #{apprDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="certificate != null and certificate != ''" >
+				CERTIFICATE = #{certificate,jdbcType=VARCHAR},
+			</if>
+			<if test="otheEnteType != null and otheEnteType != ''" >
+				OTHE_ENTE_TYPE = #{otheEnteType,jdbcType=VARCHAR},
+			</if>
+				DIRECTOR_CNT = #{directorCnt,jdbcType=NUMERIC},
+				SUPERVISOR_CNT = #{supervisorCnt,jdbcType=NUMERIC},
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="orgnCode != null and orgnCode != ''" >
+				ORGN_CODE = #{orgnCode,jdbcType=VARCHAR},
+			</if>
+				MAIN_BUSINESS = #{mainBusiness,jdbcType=VARCHAR},
+			<if test="groupId != null and groupId != ''" >
+				GROUP_ID = #{groupId,jdbcType=NUMERIC},
+			</if>
+			<if test="projGuid != null and projGuid != ''" >
+				PROJ_GUID = #{projGuid,jdbcType=VARCHAR},
+			</if>
+			<if test="patentCount != null and patentCount != ''" >
+				PATENT_COUNT = #{patentCount,jdbcType=VARCHAR},
+			</if>
+			<if test="isPublicComp != null and isPublicComp != ''" >
+				IS_PUBLIC_COMP = #{isPublicComp,jdbcType=VARCHAR},
+			</if>
+				STOCK_CODE = #{stockCode,jdbcType=VARCHAR},
+				STOCK_NAME = #{stockName,jdbcType=VARCHAR},
+			<if test="industry2 != null and industry2 != ''" >
+				INDUSTRY2 = #{industry2,jdbcType=VARCHAR},
+			</if>
+				SOCIAL_CODE = #{socialCode,jdbcType=VARCHAR},
+			<if test="isDirectorCnt != null and isDirectorCnt != ''" >
+				IS_DIRECTOR_CNT = #{isDirectorCnt,jdbcType=VARCHAR},
+			</if>
+			<if test="isSupervisorCnt != null and isSupervisorCnt != ''" >
+				IS_SUPERVISOR_CNT = #{isSupervisorCnt,jdbcType=VARCHAR},
+			</if>
+
+			<if test="isProvince != null and isProvince != ''" >
+				IS_PROVINCE = #{isProvince,jdbcType=VARCHAR},
+			</if>
+				REG_AMOUNT = #{regAmount,jdbcType=NUMERIC},
+				REG_ADD = #{regAdd,jdbcType=VARCHAR},
+			<if test="enteId != null and enteId != ''" >
+				ENTE_ID = #{enteId,jdbcType=VARCHAR},
+			</if>
+			<if test="isReg != null and isReg != ''" >
+				IS_REG = #{isReg,jdbcType=VARCHAR},
+			</if>
+			<if test="isAbroad != null and isAbroad != ''" >
+				IS_ABROAD = #{isAbroad,jdbcType=VARCHAR},
+			</if>
+			<if test="isApplyIpo != null and isApplyIpo != ''" >
+				IS_APPLY_IPO = #{isApplyIpo,jdbcType=VARCHAR},
+			</if>
+			<if test="isNewBoard != null and isNewBoard != ''" >
+				IS_NEW_BOARD = #{isNewBoard,jdbcType=VARCHAR},
+			</if>
+			<if test="isHlights != null and isHlights != ''" >
+				IS_HLIGHTS = #{isHlights,jdbcType=VARCHAR},
+			</if>
+				HLIGHTS_REMARK = #{hlightsRemark,jdbcType=VARCHAR},
+			<if test="newAmount != null and newAmount != ''" >
+				NEW_AMOUNT = #{newAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="industryName != null and industryName != ''" >
+				INDUSTRY_NAME = #{industryName,jdbcType=VARCHAR},
+			</if>
+			<if test="mainContact != null and mainContact != ''" >
+				MAIN_CONTACT = #{mainContact,jdbcType=VARCHAR},
+			</if>
+				EMAIL = #{email,jdbcType=VARCHAR},
+			<if test="regAmountCurrency != null and regAmountCurrency != ''" >
+				REG_AMOUNT_CURRENCY = #{regAmountCurrency,jdbcType=VARCHAR},
+			</if>
+		</set>
+		WHERE ENTERPRISE_ID = #{enterpriseId,jdbcType=VARCHAR}
+	</update>
+
+</mapper>

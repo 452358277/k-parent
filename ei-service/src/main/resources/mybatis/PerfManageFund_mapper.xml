@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PerfManageFund">
+    <!-- start autocreate -->
+
+    <resultMap id="PerfManageFundResult" type="com.ppmg.ei.model.PerfManageFundModel">
+        <result column="ID" property="id" jdbcType="VARCHAR"/>
+        <result column="P_PER_ID" property="pPerId" jdbcType="VARCHAR"/>
+        <result column="FUND_ID" property="fundId" jdbcType="VARCHAR"/>
+        <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR"/>
+        <result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP"/>
+        <result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR"/>
+        <result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP"/>
+        <result column="STATUS" property="status" jdbcType="VARCHAR"/>
+        <result column="YEAR_COUNT" property="yearCount" jdbcType="VARCHAR"/>
+
+        <result column="FUND_NAME" property="fundName" jdbcType="VARCHAR"/>
+        <result column="THIS_START_TIME" property="thisStartTime" jdbcType="TIMESTAMP"/>
+        <result column="THIS_END_TIME" property="thisEndTime" jdbcType="TIMESTAMP"/>
+        <result column="TOU_START_TIME" property="touStartTime" jdbcType="TIMESTAMP"/>
+        <result column="TOU_END_TIME" property="touEndTime" jdbcType="TIMESTAMP"/>
+        <result column="FUND_START_TIME" property="fundStartTime" jdbcType="TIMESTAMP"/>
+        <result column="FUND_END_TIME" property="fundEndTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.ppmg.ei.model.PerfManageFundModel">
+		INSERT INTO PERF_MANAGE_FUND (ID,P_PER_ID,FUND_ID,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,STATUS,YEAR_COUNT
+		,FUND_NAME,THIS_START_TIME,THIS_END_TIME,TOU_START_TIME,TOU_END_TIME,FUND_START_TIME,FUND_END_TIME)
+		values(
+		#{id,jdbcType=VARCHAR},#{pPerId,jdbcType=VARCHAR},#{fundId,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR}
+		,#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},
+		#{status,jdbcType=VARCHAR},#{yearCount,jdbcType=VARCHAR},
+		#{fundName,jdbcType=VARCHAR},
+		#{thisStartTime,jdbcType=TIMESTAMP},
+		#{thisEndTime,jdbcType=TIMESTAMP},
+		#{touStartTime,jdbcType=TIMESTAMP},
+		#{touEndTime,jdbcType=TIMESTAMP},
+		#{fundStartTime,jdbcType=TIMESTAMP},
+		#{fundEndTime,jdbcType=TIMESTAMP}
+		)
+	</insert>
+
+    <insert id="insertBatch" parameterType="List">
+        INSERT INTO PERF_MANAGE_FUND (ID,P_PER_ID,FUND_ID,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,STATUS,YEAR_COUNT
+        ,FUND_NAME,THIS_START_TIME,THIS_END_TIME,TOU_START_TIME,TOU_END_TIME,FUND_START_TIME,FUND_END_TIME)
+        <foreach collection="list" item="item" index="index" separator="union all">
+            ( select
+            #{item.id,jdbcType=VARCHAR},
+            #{item.pPerId,jdbcType=VARCHAR},
+            #{item.fundId,jdbcType=VARCHAR},
+            #{item.createBy,jdbcType=VARCHAR},
+            #{item.createDt,jdbcType=TIMESTAMP},
+            #{item.updateBy,jdbcType=VARCHAR},
+            #{item.updateDt,jdbcType=TIMESTAMP},
+            #{item.status,jdbcType=VARCHAR},
+            #{item.yearCount,jdbcType=VARCHAR},
+
+            #{item.fundName,jdbcType=VARCHAR},
+            #{item.thisStartTime,jdbcType=TIMESTAMP},
+            #{item.thisEndTime,jdbcType=TIMESTAMP},
+            #{item.touStartTime,jdbcType=TIMESTAMP},
+            #{item.touEndTime,jdbcType=TIMESTAMP},
+            #{item.fundStartTime,jdbcType=TIMESTAMP},
+            #{item.fundEndTime,jdbcType=TIMESTAMP}
+            from dual)
+        </foreach>
+    </insert>
+
+    <delete id="deleteById" parameterType="String">
+		DELETE FROM  PERF_MANAGE_FUND WHERE ID = #{id,jdbcType=VARCHAR}
+	</delete>
+
+    <delete id="deletePK" parameterType="com.ppmg.ei.model.PerfManageFundModel">
+        DELETE FROM PERF_MANAGE_FUND
+        <where>
+            <if test="id != null and id != ''">
+                ID = #{id,jdbcType=VARCHAR}
+            </if>
+            <if test="pPerId != null and pPerId != ''">
+                AND P_PER_ID = #{pPerId,jdbcType=VARCHAR}
+            </if>
+            <if test="fundId != null and fundId != ''">
+                AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+            </if>
+            <if test="createBy != null and createBy != ''">
+                AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+            </if>
+            <if test="createDt != null">
+                AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updateDt != null">
+                AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null and status != ''">
+                AND STATUS = #{status,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </delete>
+
+    <delete id="deleteBatch" parameterType="List">
+        DELETE FROM PERF_MANAGE_FUND WHERE ID IN
+        <foreach collection="array" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <update id="updatePK" parameterType="com.ppmg.ei.model.PerfManageFundModel">
+        UPDATE PERF_MANAGE_FUND
+        <set>
+            <if test="id != null and id != ''">
+                ID = #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="pPerId != null and pPerId != ''">
+                P_PER_ID = #{pPerId,jdbcType=VARCHAR},
+            </if>
+            <if test="fundId != null and fundId != ''">
+                FUND_ID = #{fundId,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null and createBy != ''">
+                CREATE_BY = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createDt != null">
+                CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDt != null">
+                UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null and status != ''">
+                STATUS = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="yearCount != null and yearCount != ''">
+                YEAR_COUNT = #{yearCount,jdbcType=VARCHAR},
+            </if>
+
+            <if test="fundName != null and fundName != ''">
+                FUND_NAME = #{fundName,jdbcType=VARCHAR},
+            </if>
+            <if test="thisStartTime != null">
+                THIS_START_TIME = #{thisStartTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="thisEndTime != null">
+                THIS_END_TIME = #{thisEndTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="touStartTime != null">
+                TOU_START_TIME = #{touStartTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="touEndTime != null">
+                TOU_END_TIME = #{touEndTime,jdbcType=TIMESTAMP},
+            </if>
+
+            <if test="fundStartTime != null">
+                FUND_START_TIME = #{fundStartTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fundEndTime != null">
+                FUND_END_TIME = #{fundEndTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        WHERE ID = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectById" parameterType="String" resultMap="PerfManageFundResult">
+		SELECT * FROM PERF_MANAGE_FUND WHERE ID = #{id,jdbcType=VARCHAR}
+	</select>
+
+    <select id="exportZip" parameterType="String" resultType="com.ppmg.ei.model.ExportZipListModel">
+        SELECT
+            p1.fund_id,
+            bf.fund_name,
+            P.CL_FILE_ONESELF,
+            pa.FILE_NAME,
+            pa.FILE_OLD_NAME,
+            pa.FILE_PATH
+        FROM
+            PERF_MANAGE T
+            LEFT JOIN PERF_ONE_NORM OE ON T.P_PER_ID = OE.P_PER_ID
+            LEFT JOIN PERF_SECOND_NORM OP ON OE.O_NORM_ID = OP.O_NORM_ID
+            LEFT JOIN PERF_THREE_NORM Z ON OP.S_NORM_ID = Z.S_NORM_ID
+            LEFT JOIN PERF_SCORE_DETAILS p ON z.t_norm_id = p.t_norm_id
+            LEFT JOIN PERF_SCORE p1 ON p1.ps_id = p.ps_id
+            LEFT JOIN BD_T_FUND_INFO bf ON p1.fund_id = bf.fund_id
+            LEFT JOIN base.FP_ATTACHMENT pa ON P.CL_FILE_ONESELF = pa.FIELD_TOKEN
+        WHERE
+            T.p_per_id = #{pPerId,jdbcType=VARCHAR} AND p1.fund_id = #{fundId,jdbcType=VARCHAR}
+	</select>
+
+    <select id="selectBy" parameterType="com.ppmg.ei.model.PerfManageFundModel" resultMap="PerfManageFundResult">
+        SELECT * FROM PERF_MANAGE_FUND
+        <where>
+            <if test="id != null and id != ''">
+                ID = #{id,jdbcType=VARCHAR}
+            </if>
+            <if test="pPerId != null and pPerId != ''">
+                AND P_PER_ID = #{pPerId,jdbcType=VARCHAR}
+            </if>
+            <if test="fundId != null and fundId != ''">
+                AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+            </if>
+            <if test="createBy != null and createBy != ''">
+                AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+            </if>
+            <if test="createDt != null">
+                AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updateDt != null">
+                AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null and status != ''">
+                AND STATUS = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="yearCount != null and yearCount != ''">
+                AND YEAR_COUNT = #{yearCount,jdbcType=VARCHAR},
+            </if>
+
+            <if test="fundName != null and fundName != ''">
+                AND FUND_NAME = #{fundName,jdbcType=VARCHAR},
+            </if>
+            <if test="thisStartTime != null">
+                AND THIS_START_TIME = #{thisStartTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="thisEndTime != null">
+                AND THIS_END_TIME = #{thisEndTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="touStartTime != null">
+                AND TOU_START_TIME = #{touStartTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="touEndTime != null">
+                AND TOU_END_TIME = #{touEndTime,jdbcType=TIMESTAMP},
+            </if>
+        </where>
+    </select>
+
+    <sql id="searchSql">
+        SELECT b.FUND_ID,b.fund_name,
+        d.inve_start_date as TOU_START_TIME ,
+        d.inve_end_date as TOU_END_TIME,
+        e.YEAR_COUNT,e.P_PER_ID,e.id,
+        e.THIS_START_TIME,e.THIS_END_TIME,
+        (case when e.fund_id
+        is null then ''
+        else '已发布考核' END) status,
+        e.FUND_START_TIME,e.FUND_END_TIME,
+        b.fund_sts,
+        b.status as proj_status
+        FROM BD_T_FUND_INFO b
+        left join BD_T_FUND_INVE_DESC d on b.fund_id = d.fund_id
+        left join (
+        select * from PERF_MANAGE_FUND where YEAR_COUNT = ${paramMap.YEAR}
+        <if test="paramMap.P_PER_ID != null and paramMap.P_PER_ID != ''">
+            and P_PER_ID = ${paramMap.P_PER_ID}
+        </if>
+        ) e
+        on b.fund_id = e.fund_id
+        <where>
+            b.fund_src ='1'                     <!--fund_src:基金来源(0母基金，1二级基金，2三级基金，4SPV基金,5四级基金) -->
+            and b.group_id ='1'                 <!--group_id='1',省政府基金-->
+            and b.status != '2'                 <!--已删除 -->
+            and b.fund_sts not in ('10','11')   <!--10：已终止；11：已注销 ；-->
+            and b.status = '1'					<!--1:已经提交-->
+            <if test="searchBean.touStartTime!=null and searchBean.touStartTime != ''">
+                <!--and (TO_DATE(#{searchBean.touStartTime},'yyyy-mm-dd hh24:mi:ss') between TOU_START_TIME and TOU_END_TIME)
+                or (TO_DATE(#{searchBean.touEndTime},'yyyy-mm-dd hh24:mi:ss') between TOU_START_TIME and TOU_END_TIME)
+                -->
+                and (d.inve_start_date between TO_DATE(#{searchBean.touStartTime},'yyyy-mm-dd hh24:mi:ss') and TO_DATE(#{searchBean.touEndTime},'yyyy-mm-dd hh24:mi:ss'))
+                and  (d.inve_end_date between TO_DATE(#{searchBean.touStartTime},'yyyy-mm-dd hh24:mi:ss') and TO_DATE(#{searchBean.touEndTime},'yyyy-mm-dd hh24:mi:ss'))
+            </if>
+            <include refid="searchCondition.searchClause"/>
+        </where>
+    </sql>
+
+    <select id="selectListPage" resultMap="PerfManageFundResult"
+            parameterType="com.founder.ssm.core.common.SearchCondition">
+        <include refid="searchSql"/>
+    </select>
+
+    <select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+        SELECT COUNT(*) FROM (
+        <include refid="searchSql"/>
+        ) t
+    </select>
+
+    <select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.PerfManageFundModel">
+        SELECT COUNT(*) FROM PERF_MANAGE_FUND
+        <where>
+            <if test="id != null and id != ''">
+                ID = #{id,jdbcType=VARCHAR}
+            </if>
+            <if test="pPerId != null and pPerId != ''">
+                AND P_PER_ID = #{pPerId,jdbcType=VARCHAR}
+            </if>
+            <if test="fundId != null and fundId != ''">
+                AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+            </if>
+            <if test="createBy != null and createBy != ''">
+                AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+            </if>
+            <if test="createDt != null">
+                AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updateDt != null">
+                AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null and status != ''">
+                AND STATUS = #{status,jdbcType=VARCHAR}
+            </if>
+
+            <if test="yearCount != null and yearCount != ''">
+                AND YEAR_COUNT = #{yearCount,jdbcType=VARCHAR},
+            </if>
+
+            <if test="fundName != null and fundName != ''">
+                AND FUND_NAME = #{fundName,jdbcType=VARCHAR},
+            </if>
+            <if test="thisStartTime != null">
+                AND THIS_START_TIME = #{thisStartTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="thisEndTime != null">
+                AND THIS_END_TIME = #{thisEndTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="touStartTime != null">
+                AND TOU_START_TIME = #{touStartTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="touEndTime != null">
+                AND TOU_END_TIME = #{touEndTime,jdbcType=TIMESTAMP},
+            </if>
+        </where>
+    </select>
+
+    <select id="selectList" parameterType="com.ppmg.ei.model.PerfManageFundModel" resultMap="PerfManageFundResult">
+        SELECT * FROM PERF_MANAGE_FUND
+        <where>
+            <if test="id != null and id != ''">
+                ID = #{id,jdbcType=VARCHAR}
+            </if>
+            <if test="pPerId != null and pPerId != ''">
+                AND P_PER_ID = #{pPerId,jdbcType=VARCHAR}
+            </if>
+            <if test="fundId != null and fundId != ''">
+                AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+            </if>
+            <if test="createBy != null and createBy != ''">
+                AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+            </if>
+            <if test="createDt != null">
+                AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updateDt != null">
+                AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null and status != ''">
+                AND STATUS = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="yearCount != null and yearCount != ''">
+                AND YEAR_COUNT = #{yearCount,jdbcType=VARCHAR}
+            </if>
+
+            <if test="fundName != null and fundName != ''">
+                AND FUND_NAME = #{fundName,jdbcType=VARCHAR},
+            </if>
+            <if test="thisStartTime != null">
+                AND THIS_START_TIME = #{thisStartTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="thisEndTime != null">
+                AND THIS_END_TIME = #{thisEndTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="touStartTime != null">
+                AND TOU_START_TIME = #{touStartTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="touEndTime != null">
+                AND TOU_END_TIME = #{touEndTime,jdbcType=TIMESTAMP},
+            </if>
+        </where>
+    </select>
+
+    <select id="selectSql2Obj" parameterType="java.lang.String" resultMap="PerfManageFundResult">
+${value}
+</select>
+    <select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+${value}
+</select>
+    <update id="updateSql" parameterType="java.lang.String">
+${value}
+</update>
+    <select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+${value}
+</select>
+    <!-- end autocreate -->
+</mapper>

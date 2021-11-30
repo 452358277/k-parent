@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CommTLabelItem">
+	<!-- start autocreate -->
+
+	<resultMap id="CommTLabelItemResult" type="com.ppmg.ei.model.CommTLabelItemModel">
+		<result column="ITEM_ID" property="itemId" jdbcType="VARCHAR" />
+		<result column="LABEL_ID" property="labelId" jdbcType="VARCHAR" />
+		<result column="PROPERTY" property="property" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="LABEL_NAME" property="labelName" jdbcType="VARCHAR" />
+
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.CommTLabelItemModel">
+		INSERT INTO BASE.COMM_T_LABEL_ITEM (ITEM_ID,LABEL_ID,PROPERTY,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT) values(#{itemId,jdbcType=VARCHAR},#{labelId,jdbcType=VARCHAR},#{property,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO BASE.COMM_T_LABEL_ITEM (ITEM_ID,LABEL_ID,PROPERTY,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.itemId,jdbcType=VARCHAR},
+				#{item.labelId,jdbcType=VARCHAR},
+				#{item.property,jdbcType=VARCHAR},
+				#{item.status,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  BASE.COMM_T_LABEL_ITEM WHERE ITEM_ID = #{itemId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.CommTLabelItemModel">
+		DELETE FROM BASE.COMM_T_LABEL_ITEM
+		<where>
+			<if test="itemId != null and itemId != ''" >
+				ITEM_ID = #{itemId,jdbcType=VARCHAR}
+			</if>
+			<if test="labelId != null and labelId != ''" >
+				AND LABEL_ID = #{labelId,jdbcType=VARCHAR}
+			</if>
+			<if test="property != null and property != ''" >
+				AND PROPERTY = #{property,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  BASE.COMM_T_LABEL_ITEM WHERE ITEM_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.CommTLabelItemModel">
+		UPDATE BASE.COMM_T_LABEL_ITEM 
+		<set>
+			<if test="itemId != null and itemId != ''" >
+				ITEM_ID = #{itemId,jdbcType=VARCHAR},
+			</if>
+			<if test="labelId != null and labelId != ''" >
+				LABEL_ID = #{labelId,jdbcType=VARCHAR},
+			</if>
+			<if test="property != null and property != ''" >
+				PROPERTY = #{property,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		WHERE ITEM_ID = #{itemId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="CommTLabelItemResult">
+		SELECT * FROM BASE.COMM_T_LABEL_ITEM WHERE ITEM_ID = #{itemId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.CommTLabelItemModel" resultMap="CommTLabelItemResult">
+		SELECT * FROM BASE.COMM_T_LABEL_ITEM
+		<where>
+			<if test="itemId != null and itemId != ''" >
+				ITEM_ID = #{itemId,jdbcType=VARCHAR}
+			</if>
+			<if test="labelId != null and labelId != ''" >
+				AND LABEL_ID = #{labelId,jdbcType=VARCHAR}
+			</if>
+			<if test="property != null and property != ''" >
+				AND PROPERTY = #{property,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM BASE.COMM_T_LABEL_ITEM
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="CommTLabelItemResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.CommTLabelItemModel">
+		SELECT COUNT(*) FROM BASE.COMM_T_LABEL_ITEM
+		<where>
+			<if test="itemId != null and itemId != ''" >
+				ITEM_ID = #{itemId,jdbcType=VARCHAR}
+			</if>
+			<if test="labelId != null and labelId != ''" >
+				AND LABEL_ID = #{labelId,jdbcType=VARCHAR}
+			</if>
+			<if test="property != null and property != ''" >
+				AND PROPERTY = #{property,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.CommTLabelItemModel" resultMap="CommTLabelItemResult">
+		SELECT * FROM BASE.COMM_T_LABEL_ITEM
+		<where>
+			<if test="itemId != null and itemId != ''" >
+				ITEM_ID = #{itemId,jdbcType=VARCHAR}
+			</if>
+			<if test="labelId != null and labelId != ''" >
+				AND LABEL_ID = #{labelId,jdbcType=VARCHAR}
+			</if>
+			<if test="property != null and property != ''" >
+				AND PROPERTY = #{property,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+		order by PROPERTY asc
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="CommTLabelItemResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+	<select id="selectByLabelInfo" parameterType="Map" resultType="Map">
+    select aa.*,bb.LABEL_NAME,bb.ENT_ID,dd.code_name from BASE.COMM_T_LABEL_ITEM aa
+   left join (	select b.LABEL_NAME,b.ITEM_ID,b.ENT_ID from BASE.COMM_T_LABEL_ITEM a
+              inner join BASE.COMM_T_ENT_LABEL_ITEM b on a.ITEM_ID=b.ITEM_ID
+					where  a.LABEL_ID=#{labelId,jdbcType=VARCHAR} and b.ent_id=#{entId,jdbcType=VARCHAR}
+					)bb on aa.ITEM_ID=bb.ITEM_ID
+	left join base.COMM_T_CODE dd on aa.PROPERTY=dd.CODE_VALUE AND dd.parent_id='10270'
+					 where  aa.LABEL_ID=#{labelId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectByLab" parameterType="java.lang.String" resultType="java.lang.String">
+      select WM_CONCAT(PROPERTY) as PROPERTY from BASE.COMM_T_LABEL_ITEM where LABEL_ID=#{labelId}
+	</select>
+
+	<select id="selectImportLabelInfo" parameterType="Map" resultMap="CommTLabelItemResult">
+		select bb.LABEL_NAME,aa.* from BASE.COMM_T_LABEL_ITEM aa
+	   left join (	select b.LABEL_NAME,b.ITEM_ID,b.ENT_ID from BASE.COMM_T_LABEL_ITEM a
+				  inner join BASE.COMM_T_ENT_LABEL_ITEM b on a.ITEM_ID=b.ITEM_ID
+						where  a.LABEL_ID=#{labelId,jdbcType=VARCHAR} and b.ent_id=#{entId,jdbcType=VARCHAR}
+						)bb on aa.ITEM_ID=bb.ITEM_ID
+		left join base.COMM_T_CODE dd on aa.PROPERTY=dd.CODE_VALUE AND dd.parent_id='10270'
+						 where  aa.LABEL_ID=#{labelId,jdbcType=VARCHAR}
+						 order by PROPERTY asc
+	</select>
+
+
+</mapper>

@@ -1,0 +1,699 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProjValuation">
+	<!-- start autocreate -->
+
+	<resultMap id="ProjValuationResult" type="com.ppmg.ei.model.ProjValuationModel">
+		<result column="PK_ID" property="pkId" jdbcType="VARCHAR" />
+		<result column="IA_ID" property="iaId" jdbcType="VARCHAR" />
+		<result column="PRA_ID" property="praId" jdbcType="VARCHAR" />
+		<result column="OBJECT_ID" property="objectId" jdbcType="VARCHAR" />
+		<result column="ASSESS_BY" property="assessBy" jdbcType="VARCHAR" />
+		<result column="ASSESS_DT" property="assessDt" jdbcType="TIMESTAMP" />
+		<result column="TOTAL_VALUE" property="totalValue" jdbcType="NUMERIC" />
+		<result column="TOTAL_CURR" property="totalCurr" jdbcType="VARCHAR" />
+		<result column="CURR_PHASE" property="currPhase" jdbcType="VARCHAR" />
+		<result column="HOLD_SHARE" property="holdShare" jdbcType="NUMERIC" />
+		<result column="VALU_TYPE" property="valuType" jdbcType="VARCHAR" />
+		<result column="INVE_VALUATION" property="inveValuation" jdbcType="NUMERIC" />
+		<result column="IV_CURRENCY" property="ivCurrency" jdbcType="VARCHAR" />
+		<result column="REALIZED_RETURN" property="realizedReturn" jdbcType="NUMERIC" />
+		<result column="REALIZED_CURR" property="realizedCurr" jdbcType="VARCHAR" />
+		<result column="UNREALIZED_RETURN" property="unrealizedReturn" jdbcType="NUMERIC" />
+		<result column="UNREALIZED_CURR" property="unrealizedCurr" jdbcType="VARCHAR" />
+		<result column="VALU_DESC" property="valuDesc" jdbcType="VARCHAR" />
+		<result column="VALU_DT" property="valuDt" jdbcType="TIMESTAMP" />
+		<result column="IRR" property="irr" jdbcType="NUMERIC" />
+		<result column="ATTA_FILE" property="attaFile" jdbcType="VARCHAR" />
+		<result column="TASK_ID" property="taskId" jdbcType="VARCHAR" />
+		<result column="ASSESS_TYPE" property="assessType" jdbcType="VARCHAR" />
+		<result column="ASSESS_SUMMARY" property="assessSummary" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="RETURN_RATIO" property="returnRatio" jdbcType="NUMERIC" />
+		<result column="WHOLE_VALUE" property="wholeValue" jdbcType="NUMERIC" />
+		<result column="ENTE_POST_VALUE" property="entePostValue" jdbcType="NUMERIC" />
+		<result column="INVE_NEW_VALUE" property="inveNewValue" jdbcType="NUMERIC" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.ProjValuationModel">
+		INSERT INTO TZ_T_PROJ_VALUATION (PK_ID,IA_ID,PRA_ID,OBJECT_ID,ASSESS_BY,ASSESS_DT,TOTAL_VALUE,TOTAL_CURR,CURR_PHASE,HOLD_SHARE,VALU_TYPE,INVE_VALUATION,IV_CURRENCY,REALIZED_RETURN,REALIZED_CURR,UNREALIZED_RETURN,UNREALIZED_CURR,VALU_DESC,VALU_DT,IRR,ATTA_FILE,TASK_ID,ASSESS_TYPE,ASSESS_SUMMARY,REMARK,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,RETURN_RATIO,WHOLE_VALUE,ENTE_POST_VALUE,INVE_NEW_VALUE) values(#{pkId,jdbcType=VARCHAR},#{iaId,jdbcType=VARCHAR},#{praId,jdbcType=VARCHAR},#{objectId,jdbcType=VARCHAR},#{assessBy,jdbcType=VARCHAR},#{assessDt,jdbcType=TIMESTAMP},#{totalValue,jdbcType=NUMERIC},#{totalCurr,jdbcType=VARCHAR},#{currPhase,jdbcType=VARCHAR},#{holdShare,jdbcType=NUMERIC},#{valuType,jdbcType=VARCHAR},#{inveValuation,jdbcType=NUMERIC},#{ivCurrency,jdbcType=VARCHAR},#{realizedReturn,jdbcType=NUMERIC},#{realizedCurr,jdbcType=VARCHAR},#{unrealizedReturn,jdbcType=NUMERIC},#{unrealizedCurr,jdbcType=VARCHAR},#{valuDesc,jdbcType=VARCHAR},#{valuDt,jdbcType=TIMESTAMP},#{irr,jdbcType=NUMERIC},#{attaFile,jdbcType=VARCHAR},#{taskId,jdbcType=VARCHAR},#{assessType,jdbcType=VARCHAR},#{assessSummary,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{returnRatio,jdbcType=NUMERIC},#{wholeValue,jdbcType=NUMERIC},#{entePostValue,jdbcType=NUMERIC},#{inveNewValue,jdbcType=NUMERIC})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO TZ_T_PROJ_VALUATION (PK_ID,IA_ID,PRA_ID,OBJECT_ID,ASSESS_BY,ASSESS_DT,TOTAL_VALUE,TOTAL_CURR,CURR_PHASE,HOLD_SHARE,VALU_TYPE,INVE_VALUATION,IV_CURRENCY,REALIZED_RETURN,REALIZED_CURR,UNREALIZED_RETURN,UNREALIZED_CURR,VALU_DESC,VALU_DT,IRR,ATTA_FILE,TASK_ID,ASSESS_TYPE,ASSESS_SUMMARY,REMARK,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,RETURN_RATIO,WHOLE_VALUE)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.pkId,jdbcType=VARCHAR},
+				#{item.iaId,jdbcType=VARCHAR},
+				#{item.praId,jdbcType=VARCHAR},
+				#{item.objectId,jdbcType=VARCHAR},
+				#{item.assessBy,jdbcType=VARCHAR},
+				#{item.assessDt,jdbcType=TIMESTAMP},
+				#{item.totalValue,jdbcType=NUMERIC},
+				#{item.totalCurr,jdbcType=VARCHAR},
+				#{item.currPhase,jdbcType=VARCHAR},
+				#{item.holdShare,jdbcType=NUMERIC},
+				#{item.valuType,jdbcType=VARCHAR},
+				#{item.inveValuation,jdbcType=NUMERIC},
+				#{item.ivCurrency,jdbcType=VARCHAR},
+				#{item.realizedReturn,jdbcType=NUMERIC},
+				#{item.realizedCurr,jdbcType=VARCHAR},
+				#{item.unrealizedReturn,jdbcType=NUMERIC},
+				#{item.unrealizedCurr,jdbcType=VARCHAR},
+				#{item.valuDesc,jdbcType=VARCHAR},
+				#{item.valuDt,jdbcType=TIMESTAMP},
+				#{item.irr,jdbcType=NUMERIC},
+				#{item.attaFile,jdbcType=VARCHAR},
+				#{item.taskId,jdbcType=VARCHAR},
+				#{item.assessType,jdbcType=VARCHAR},
+				#{item.assessSummary,jdbcType=VARCHAR},
+				#{item.remark,jdbcType=VARCHAR},
+				#{item.status,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+				#{item.returnRatio,jdbcType=NUMERIC},
+				#{item.wholeValue,jdbcType=NUMERIC}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  TZ_T_PROJ_VALUATION WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.ProjValuationModel">
+		DELETE FROM TZ_T_PROJ_VALUATION
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="iaId != null and iaId != ''" >
+				AND IA_ID = #{iaId,jdbcType=VARCHAR}
+			</if>
+			<if test="praId != null and praId != ''" >
+				AND PRA_ID = #{praId,jdbcType=VARCHAR}
+			</if>
+			<if test="objectId != null and objectId != ''" >
+				AND OBJECT_ID = #{objectId,jdbcType=VARCHAR}
+			</if>
+			<if test="assessBy != null and assessBy != ''" >
+				AND ASSESS_BY = #{assessBy,jdbcType=VARCHAR}
+			</if>
+			<if test="assessDt != null" >
+				AND ASSESS_DT = #{assessDt,jdbcType=VARCHAR}
+			</if>
+			<if test="totalValue != null and totalValue != ''" >
+				AND TOTAL_VALUE = #{totalValue,jdbcType=NUMERIC}
+			</if>
+			<if test="totalCurr != null and totalCurr != ''" >
+				AND TOTAL_CURR = #{totalCurr,jdbcType=VARCHAR}
+			</if>
+			<if test="currPhase != null and currPhase != ''" >
+				AND CURR_PHASE = #{currPhase,jdbcType=VARCHAR}
+			</if>
+			<if test="holdShare != null and holdShare != ''" >
+				AND HOLD_SHARE = #{holdShare,jdbcType=NUMERIC}
+			</if>
+			<if test="valuType != null and valuType != ''" >
+				AND VALU_TYPE = #{valuType,jdbcType=VARCHAR}
+			</if>
+			<if test="inveValuation != null and inveValuation != ''" >
+				AND INVE_VALUATION = #{inveValuation,jdbcType=NUMERIC}
+			</if>
+			<if test="ivCurrency != null and ivCurrency != ''" >
+				AND IV_CURRENCY = #{ivCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="realizedReturn != null and realizedReturn != ''" >
+				AND REALIZED_RETURN = #{realizedReturn,jdbcType=NUMERIC}
+			</if>
+			<if test="realizedCurr != null and realizedCurr != ''" >
+				AND REALIZED_CURR = #{realizedCurr,jdbcType=VARCHAR}
+			</if>
+			<if test="unrealizedReturn != null and unrealizedReturn != ''" >
+				AND UNREALIZED_RETURN = #{unrealizedReturn,jdbcType=NUMERIC}
+			</if>
+			<if test="unrealizedCurr != null and unrealizedCurr != ''" >
+				AND UNREALIZED_CURR = #{unrealizedCurr,jdbcType=VARCHAR}
+			</if>
+			<if test="valuDesc != null and valuDesc != ''" >
+				AND VALU_DESC = #{valuDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="valuDt != null" >
+				AND VALU_DT = #{valuDt,jdbcType=VARCHAR}
+			</if>
+			<if test="irr != null and irr != ''" >
+				AND IRR = #{irr,jdbcType=NUMERIC}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="taskId != null and taskId != ''" >
+				AND TASK_ID = #{taskId,jdbcType=VARCHAR}
+			</if>
+			<if test="assessType != null and assessType != ''" >
+				AND ASSESS_TYPE = #{assessType,jdbcType=VARCHAR}
+			</if>
+			<if test="assessSummary != null and assessSummary != ''" >
+				AND ASSESS_SUMMARY = #{assessSummary,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="returnRatio != null and returnRatio != ''" >
+				AND RETURN_RATIO = #{returnRatio,jdbcType=NUMERIC}
+			</if>
+			<if test="wholeValue != null and wholeValue != ''" >
+				AND WHOLE_VALUE = #{wholeValue,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  TZ_T_PROJ_VALUATION WHERE PK_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.ProjValuationModel">
+		UPDATE TZ_T_PROJ_VALUATION 
+		<set>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR},
+			</if>
+			<if test="iaId != null and iaId != ''" >
+				IA_ID = #{iaId,jdbcType=VARCHAR},
+			</if>
+			<if test="praId != null and praId != ''" >
+				PRA_ID = #{praId,jdbcType=VARCHAR},
+			</if>
+			<if test="objectId != null and objectId != ''" >
+				OBJECT_ID = #{objectId,jdbcType=VARCHAR},
+			</if>
+			<if test="assessBy != null and assessBy != ''" >
+				ASSESS_BY = #{assessBy,jdbcType=VARCHAR},
+			</if>
+			<if test="assessDt != null" >
+				ASSESS_DT = #{assessDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="totalValue != null and totalValue != ''" >
+				TOTAL_VALUE = #{totalValue,jdbcType=NUMERIC},
+			</if>
+			<if test="totalCurr != null and totalCurr != ''" >
+				TOTAL_CURR = #{totalCurr,jdbcType=VARCHAR},
+			</if>
+			<if test="currPhase != null and currPhase != ''" >
+				CURR_PHASE = #{currPhase,jdbcType=VARCHAR},
+			</if>
+			<if test="holdShare != null and holdShare != ''" >
+				HOLD_SHARE = #{holdShare,jdbcType=NUMERIC},
+			</if>
+			<if test="valuType != null and valuType != ''" >
+				VALU_TYPE = #{valuType,jdbcType=VARCHAR},
+			</if>
+			<if test="inveValuation != null and inveValuation != ''" >
+				INVE_VALUATION = #{inveValuation,jdbcType=NUMERIC},
+			</if>
+			<if test="ivCurrency != null and ivCurrency != ''" >
+				IV_CURRENCY = #{ivCurrency,jdbcType=VARCHAR},
+			</if>
+			<if test="realizedReturn != null and realizedReturn != ''" >
+				REALIZED_RETURN = #{realizedReturn,jdbcType=NUMERIC},
+			</if>
+			<if test="realizedCurr != null and realizedCurr != ''" >
+				REALIZED_CURR = #{realizedCurr,jdbcType=VARCHAR},
+			</if>
+			<if test="unrealizedReturn != null and unrealizedReturn != ''" >
+				UNREALIZED_RETURN = #{unrealizedReturn,jdbcType=NUMERIC},
+			</if>
+			<if test="unrealizedCurr != null and unrealizedCurr != ''" >
+				UNREALIZED_CURR = #{unrealizedCurr,jdbcType=VARCHAR},
+			</if>
+			<if test="valuDesc != null and valuDesc != ''" >
+				VALU_DESC = #{valuDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="valuDt != null" >
+				VALU_DT = #{valuDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="irr != null and irr != ''" >
+				IRR = #{irr,jdbcType=NUMERIC},
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				ATTA_FILE = #{attaFile,jdbcType=VARCHAR},
+			</if>
+			<if test="taskId != null and taskId != ''" >
+				TASK_ID = #{taskId,jdbcType=VARCHAR},
+			</if>
+			<if test="assessType != null and assessType != ''" >
+				ASSESS_TYPE = #{assessType,jdbcType=VARCHAR},
+			</if>
+			<if test="assessSummary != null and assessSummary != ''" >
+				ASSESS_SUMMARY = #{assessSummary,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null and remark != ''" >
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="returnRatio != null and returnRatio != ''" >
+				RETURN_RATIO = #{returnRatio,jdbcType=NUMERIC},
+			</if>
+			<if test="wholeValue != null and wholeValue != ''" >
+				WHOLE_VALUE = #{wholeValue,jdbcType=NUMERIC},
+			</if>
+			<if test="entePostValue != null and entePostValue != ''" >
+				ENTE_POST_VALUE = #{entePostValue,jdbcType=NUMERIC},
+			</if>
+			<if test="inveNewValue != null and inveNewValue != ''" >
+				INVE_NEW_VALUE = #{inveNewValue,jdbcType=NUMERIC},
+			</if>
+		</set>
+		WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="ProjValuationResult">
+		SELECT * FROM TZ_T_PROJ_VALUATION WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.ProjValuationModel" resultMap="ProjValuationResult">
+		SELECT * FROM TZ_T_PROJ_VALUATION
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="iaId != null and iaId != ''" >
+				AND IA_ID = #{iaId,jdbcType=VARCHAR}
+			</if>
+			<if test="praId != null and praId != ''" >
+				AND PRA_ID = #{praId,jdbcType=VARCHAR}
+			</if>
+			<if test="objectId != null and objectId != ''" >
+				AND OBJECT_ID = #{objectId,jdbcType=VARCHAR}
+			</if>
+			<if test="assessBy != null and assessBy != ''" >
+				AND ASSESS_BY = #{assessBy,jdbcType=VARCHAR}
+			</if>
+			<if test="assessDt != null" >
+				AND ASSESS_DT = #{assessDt,jdbcType=VARCHAR}
+			</if>
+			<if test="totalValue != null and totalValue != ''" >
+				AND TOTAL_VALUE = #{totalValue,jdbcType=NUMERIC}
+			</if>
+			<if test="totalCurr != null and totalCurr != ''" >
+				AND TOTAL_CURR = #{totalCurr,jdbcType=VARCHAR}
+			</if>
+			<if test="currPhase != null and currPhase != ''" >
+				AND CURR_PHASE = #{currPhase,jdbcType=VARCHAR}
+			</if>
+			<if test="holdShare != null and holdShare != ''" >
+				AND HOLD_SHARE = #{holdShare,jdbcType=NUMERIC}
+			</if>
+			<if test="valuType != null and valuType != ''" >
+				AND VALU_TYPE = #{valuType,jdbcType=VARCHAR}
+			</if>
+			<if test="inveValuation != null and inveValuation != ''" >
+				AND INVE_VALUATION = #{inveValuation,jdbcType=NUMERIC}
+			</if>
+			<if test="ivCurrency != null and ivCurrency != ''" >
+				AND IV_CURRENCY = #{ivCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="realizedReturn != null and realizedReturn != ''" >
+				AND REALIZED_RETURN = #{realizedReturn,jdbcType=NUMERIC}
+			</if>
+			<if test="realizedCurr != null and realizedCurr != ''" >
+				AND REALIZED_CURR = #{realizedCurr,jdbcType=VARCHAR}
+			</if>
+			<if test="unrealizedReturn != null and unrealizedReturn != ''" >
+				AND UNREALIZED_RETURN = #{unrealizedReturn,jdbcType=NUMERIC}
+			</if>
+			<if test="unrealizedCurr != null and unrealizedCurr != ''" >
+				AND UNREALIZED_CURR = #{unrealizedCurr,jdbcType=VARCHAR}
+			</if>
+			<if test="valuDesc != null and valuDesc != ''" >
+				AND VALU_DESC = #{valuDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="valuDt != null" >
+				AND VALU_DT = #{valuDt,jdbcType=VARCHAR}
+			</if>
+			<if test="irr != null and irr != ''" >
+				AND IRR = #{irr,jdbcType=NUMERIC}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="taskId != null and taskId != ''" >
+				AND TASK_ID = #{taskId,jdbcType=VARCHAR}
+			</if>
+			<if test="assessType != null and assessType != ''" >
+				AND ASSESS_TYPE = #{assessType,jdbcType=VARCHAR}
+			</if>
+			<if test="assessSummary != null and assessSummary != ''" >
+				AND ASSESS_SUMMARY = #{assessSummary,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="returnRatio != null and returnRatio != ''" >
+				AND RETURN_RATIO = #{returnRatio,jdbcType=NUMERIC}
+			</if>
+			<if test="wholeValue != null and wholeValue != ''" >
+				AND WHOLE_VALUE = #{wholeValue,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT t1.PK_ID,
+		t1.IA_ID,
+		t1.PRA_ID,
+		t1.OBJECT_ID,
+		t1.ASSESS_BY,
+		t1.ASSESS_DT,
+		t1.TOTAL_VALUE,
+		t1.TOTAL_CURR,
+		t1.CURR_PHASE,
+		t1.HOLD_SHARE,
+		t1.VALU_TYPE,
+		t1.INVE_VALUATION,
+		t1.IV_CURRENCY,
+		t1.REALIZED_RETURN,
+		t1.REALIZED_CURR,
+		t1.UNREALIZED_RETURN,
+		t1.UNREALIZED_CURR,
+		t1.VALU_DESC,
+		t1.VALU_DT,
+		t1.IRR,
+		t1.ATTA_FILE,
+		t1.TASK_ID,
+		t1.ASSESS_TYPE,
+		t1.ASSESS_SUMMARY,
+		t1.REMARK,
+		t1.STATUS,
+		t1.CREATE_BY,
+		t1.CREATE_DT,
+		t1.UPDATE_BY,
+		t1.UPDATE_DT,
+		t1.RETURN_RATIO,
+		t1.WHOLE_VALUE
+		FROM TZ_T_PROJ_REGULAR_ASSESS t
+		LEFT JOIN  TZ_T_PROJ_VALUATION t1
+		on t.PK_ID= t1.PRA_ID
+		<where>
+		     t.STATUS!='9'
+			and  t.OBJECT_ID=#{paramMap.projObject}
+			and t.AFTER_FUNDER_ID=#{paramMap.inveId}
+			<include refid="searchCondition.searchClause" />
+		</where>
+		order by t1.CREATE_DT desc
+	</sql>
+
+	<select id="selectListPage" resultMap="ProjValuationResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.ProjValuationModel">
+		SELECT COUNT(*) FROM TZ_T_PROJ_VALUATION
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="iaId != null and iaId != ''" >
+				AND IA_ID = #{iaId,jdbcType=VARCHAR}
+			</if>
+			<if test="praId != null and praId != ''" >
+				AND PRA_ID = #{praId,jdbcType=VARCHAR}
+			</if>
+			<if test="objectId != null and objectId != ''" >
+				AND OBJECT_ID = #{objectId,jdbcType=VARCHAR}
+			</if>
+			<if test="assessBy != null and assessBy != ''" >
+				AND ASSESS_BY = #{assessBy,jdbcType=VARCHAR}
+			</if>
+			<if test="assessDt != null" >
+				AND ASSESS_DT = #{assessDt,jdbcType=VARCHAR}
+			</if>
+			<if test="totalValue != null and totalValue != ''" >
+				AND TOTAL_VALUE = #{totalValue,jdbcType=NUMERIC}
+			</if>
+			<if test="totalCurr != null and totalCurr != ''" >
+				AND TOTAL_CURR = #{totalCurr,jdbcType=VARCHAR}
+			</if>
+			<if test="currPhase != null and currPhase != ''" >
+				AND CURR_PHASE = #{currPhase,jdbcType=VARCHAR}
+			</if>
+			<if test="holdShare != null and holdShare != ''" >
+				AND HOLD_SHARE = #{holdShare,jdbcType=NUMERIC}
+			</if>
+			<if test="valuType != null and valuType != ''" >
+				AND VALU_TYPE = #{valuType,jdbcType=VARCHAR}
+			</if>
+			<if test="inveValuation != null and inveValuation != ''" >
+				AND INVE_VALUATION = #{inveValuation,jdbcType=NUMERIC}
+			</if>
+			<if test="ivCurrency != null and ivCurrency != ''" >
+				AND IV_CURRENCY = #{ivCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="realizedReturn != null and realizedReturn != ''" >
+				AND REALIZED_RETURN = #{realizedReturn,jdbcType=NUMERIC}
+			</if>
+			<if test="realizedCurr != null and realizedCurr != ''" >
+				AND REALIZED_CURR = #{realizedCurr,jdbcType=VARCHAR}
+			</if>
+			<if test="unrealizedReturn != null and unrealizedReturn != ''" >
+				AND UNREALIZED_RETURN = #{unrealizedReturn,jdbcType=NUMERIC}
+			</if>
+			<if test="unrealizedCurr != null and unrealizedCurr != ''" >
+				AND UNREALIZED_CURR = #{unrealizedCurr,jdbcType=VARCHAR}
+			</if>
+			<if test="valuDesc != null and valuDesc != ''" >
+				AND VALU_DESC = #{valuDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="valuDt != null" >
+				AND VALU_DT = #{valuDt,jdbcType=VARCHAR}
+			</if>
+			<if test="irr != null and irr != ''" >
+				AND IRR = #{irr,jdbcType=NUMERIC}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="taskId != null and taskId != ''" >
+				AND TASK_ID = #{taskId,jdbcType=VARCHAR}
+			</if>
+			<if test="assessType != null and assessType != ''" >
+				AND ASSESS_TYPE = #{assessType,jdbcType=VARCHAR}
+			</if>
+			<if test="assessSummary != null and assessSummary != ''" >
+				AND ASSESS_SUMMARY = #{assessSummary,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="returnRatio != null and returnRatio != ''" >
+				AND RETURN_RATIO = #{returnRatio,jdbcType=NUMERIC}
+			</if>
+			<if test="wholeValue != null and wholeValue != ''" >
+				AND WHOLE_VALUE = #{wholeValue,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.ProjValuationModel" resultMap="ProjValuationResult">
+		SELECT * FROM TZ_T_PROJ_VALUATION
+		<where>
+		1=1
+			<if test="pkId != null and pkId != ''" >
+				AND PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="iaId != null and iaId != ''" >
+				AND IA_ID = #{iaId,jdbcType=VARCHAR}
+			</if>
+			<if test="praId != null and praId != ''" >
+				AND PRA_ID = #{praId,jdbcType=VARCHAR}
+			</if>
+			<if test="objectId != null and objectId != ''" >
+				AND OBJECT_ID = #{objectId,jdbcType=VARCHAR}
+			</if>
+			<if test="assessBy != null and assessBy != ''" >
+				AND ASSESS_BY = #{assessBy,jdbcType=VARCHAR}
+			</if>
+			<if test="assessDt != null" >
+				AND ASSESS_DT = #{assessDt,jdbcType=VARCHAR}
+			</if>
+			<if test="totalValue != null and totalValue != ''" >
+				AND TOTAL_VALUE = #{totalValue,jdbcType=NUMERIC}
+			</if>
+			<if test="totalCurr != null and totalCurr != ''" >
+				AND TOTAL_CURR = #{totalCurr,jdbcType=VARCHAR}
+			</if>
+			<if test="currPhase != null and currPhase != ''" >
+				AND CURR_PHASE = #{currPhase,jdbcType=VARCHAR}
+			</if>
+			<if test="holdShare != null and holdShare != ''" >
+				AND HOLD_SHARE = #{holdShare,jdbcType=NUMERIC}
+			</if>
+			<if test="valuType != null and valuType != ''" >
+				AND VALU_TYPE = #{valuType,jdbcType=VARCHAR}
+			</if>
+			<if test="inveValuation != null and inveValuation != ''" >
+				AND INVE_VALUATION = #{inveValuation,jdbcType=NUMERIC}
+			</if>
+			<if test="ivCurrency != null and ivCurrency != ''" >
+				AND IV_CURRENCY = #{ivCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="realizedReturn != null and realizedReturn != ''" >
+				AND REALIZED_RETURN = #{realizedReturn,jdbcType=NUMERIC}
+			</if>
+			<if test="realizedCurr != null and realizedCurr != ''" >
+				AND REALIZED_CURR = #{realizedCurr,jdbcType=VARCHAR}
+			</if>
+			<if test="unrealizedReturn != null and unrealizedReturn != ''" >
+				AND UNREALIZED_RETURN = #{unrealizedReturn,jdbcType=NUMERIC}
+			</if>
+			<if test="unrealizedCurr != null and unrealizedCurr != ''" >
+				AND UNREALIZED_CURR = #{unrealizedCurr,jdbcType=VARCHAR}
+			</if>
+			<if test="valuDesc != null and valuDesc != ''" >
+				AND VALU_DESC = #{valuDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="valuDt != null" >
+				AND VALU_DT = #{valuDt,jdbcType=VARCHAR}
+			</if>
+			<if test="irr != null and irr != ''" >
+				AND IRR = #{irr,jdbcType=NUMERIC}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="taskId != null and taskId != ''" >
+				AND TASK_ID = #{taskId,jdbcType=VARCHAR}
+			</if>
+			<if test="assessType != null and assessType != ''" >
+				AND ASSESS_TYPE = #{assessType,jdbcType=VARCHAR}
+			</if>
+			<if test="assessSummary != null and assessSummary != ''" >
+				AND ASSESS_SUMMARY = #{assessSummary,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="returnRatio != null and returnRatio != ''" >
+				AND RETURN_RATIO = #{returnRatio,jdbcType=NUMERIC}
+			</if>
+			<if test="wholeValue != null and wholeValue != ''" >
+				AND WHOLE_VALUE = #{wholeValue,jdbcType=NUMERIC}
+			</if>
+			order by CREATE_DT desc
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="ProjValuationResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+
+
+
+	<select id="selectListEntPage" resultMap="ProjValuationResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+		select * from TZ_T_PROJ_VALUATION
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+		order by CREATE_DT desc
+	</select>
+</mapper>

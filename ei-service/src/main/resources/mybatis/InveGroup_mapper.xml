@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="InveGroup">
+	<!-- start autocreate -->
+
+	<resultMap id="InveGroupResult" type="com.ppmg.ei.model.InveGroupModel">
+		<result column="GROUP_ID" property="groupId" jdbcType="VARCHAR" />
+		<result column="BEGIN_DATE" property="beginDate" jdbcType="CHAR" />
+		<result column="END_DATE" property="endDate" jdbcType="CHAR" />
+		<result column="COOP_CONTENT" property="coopContent" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.InveGroupModel">
+		INSERT INTO BD_T_INVE_GROUP (GROUP_ID,BEGIN_DATE,END_DATE,COOP_CONTENT,REMARK,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT) values(#{groupId,jdbcType=VARCHAR},#{beginDate,jdbcType=CHAR},#{endDate,jdbcType=CHAR},#{coopContent,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO BD_T_INVE_GROUP (GROUP_ID,BEGIN_DATE,END_DATE,COOP_CONTENT,REMARK,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.groupId,jdbcType=VARCHAR},
+				#{item.beginDate,jdbcType=CHAR},
+				#{item.endDate,jdbcType=CHAR},
+				#{item.coopContent,jdbcType=VARCHAR},
+				#{item.remark,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  BD_T_INVE_GROUP WHERE GROUP_ID = #{groupId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.InveGroupModel">
+		DELETE FROM BD_T_INVE_GROUP
+		<where>
+			<if test="groupId != null and groupId != ''" >
+				GROUP_ID = #{groupId,jdbcType=VARCHAR}
+			</if>
+			<if test="beginDate != null and beginDate != ''" >
+				AND BEGIN_DATE = #{beginDate,jdbcType=CHAR}
+			</if>
+			<if test="endDate != null and endDate != ''" >
+				AND END_DATE = #{endDate,jdbcType=CHAR}
+			</if>
+			<if test="coopContent != null and coopContent != ''" >
+				AND COOP_CONTENT = #{coopContent,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  BD_T_INVE_GROUP WHERE GROUP_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.InveGroupModel">
+		UPDATE BD_T_INVE_GROUP 
+		<set>
+			<if test="groupId != null and groupId != ''" >
+				GROUP_ID = #{groupId,jdbcType=VARCHAR},
+			</if>
+			<if test="beginDate != null and beginDate != ''" >
+				BEGIN_DATE = #{beginDate,jdbcType=CHAR},
+			</if>
+			<if test="endDate != null and endDate != ''" >
+				END_DATE = #{endDate,jdbcType=CHAR},
+			</if>
+			<if test="coopContent != null and coopContent != ''" >
+				COOP_CONTENT = #{coopContent,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null and remark != ''" >
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		WHERE GROUP_ID = #{groupId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="InveGroupResult">
+		SELECT * FROM BD_T_INVE_GROUP WHERE GROUP_ID = #{groupId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.InveGroupModel" resultMap="InveGroupResult">
+		SELECT * FROM BD_T_INVE_GROUP
+		<where>
+			<if test="groupId != null and groupId != ''" >
+				GROUP_ID = #{groupId,jdbcType=VARCHAR}
+			</if>
+			<if test="beginDate != null and beginDate != ''" >
+				AND BEGIN_DATE = #{beginDate,jdbcType=CHAR}
+			</if>
+			<if test="endDate != null and endDate != ''" >
+				AND END_DATE = #{endDate,jdbcType=CHAR}
+			</if>
+			<if test="coopContent != null and coopContent != ''" >
+				AND COOP_CONTENT = #{coopContent,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT
+		a5.pk_id,
+		a5.investor_name ,
+		a4.group_id ,
+		a4.begin_date,
+		a4.end_date,
+		a4.remark
+		FROM BD_T_INVE_GROUP a4 left join BD_T_INVE_GROUP_MEMBER a5
+		on a4.group_id = a5.group_id
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="InveGroupResultNew" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<resultMap id="InveGroupResultNew" type="com.ppmg.ei.model.InveGroupModel" extends="InveGroupResult">
+		<result column="PK_ID" property="pkId" jdbcType="VARCHAR" />
+		<result column="INVESTOR_NAME" property="investorName" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.InveGroupModel">
+		SELECT COUNT(*) FROM BD_T_INVE_GROUP
+		<where>
+			<if test="groupId != null and groupId != ''" >
+				GROUP_ID = #{groupId,jdbcType=VARCHAR}
+			</if>
+			<if test="beginDate != null and beginDate != ''" >
+				AND BEGIN_DATE = #{beginDate,jdbcType=CHAR}
+			</if>
+			<if test="endDate != null and endDate != ''" >
+				AND END_DATE = #{endDate,jdbcType=CHAR}
+			</if>
+			<if test="coopContent != null and coopContent != ''" >
+				AND COOP_CONTENT = #{coopContent,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.InveGroupModel" resultMap="InveGroupResult">
+		SELECT * FROM BD_T_INVE_GROUP
+		<where>
+			<if test="groupId != null and groupId != ''" >
+				GROUP_ID = #{groupId,jdbcType=VARCHAR}
+			</if>
+			<if test="beginDate != null and beginDate != ''" >
+				AND BEGIN_DATE = #{beginDate,jdbcType=CHAR}
+			</if>
+			<if test="endDate != null and endDate != ''" >
+				AND END_DATE = #{endDate,jdbcType=CHAR}
+			</if>
+			<if test="coopContent != null and coopContent != ''" >
+				AND COOP_CONTENT = #{coopContent,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="InveGroupResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+</mapper>

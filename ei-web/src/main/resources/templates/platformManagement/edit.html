@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset=utf-8>
+	<meta name=viewport content="width=device-width,initial-scale=1">
+	<title>新增/编辑</title>
+	<link th:href="@{/element-ui/lib/theme-chalk/index.css}" rel=stylesheet>
+	<link th:href="@{/component/group-tree.css}" rel=stylesheet>
+	<link th:href="@{/component/upload/upload.css}" rel=stylesheet>
+	<link th:href="@{/third-plugins/layui/css/layui.css}" rel=stylesheet>
+	<link th:href="@{/css/common.css}" rel=stylesheet>
+	<link th:href="@{/css/tableNewCommon.css}" rel=stylesheet>
+	
+	<style type="text/css">
+    .el-button{
+    	color:#fff;
+    	background-color:#ab0000;
+    	border-color:#ab0000;
+    }
+
+	.hideBorder .el-input__inner {
+		border: none;
+	}
+
+	.hideBorder .el-textarea__inner {
+		border: none;
+	}
+
+    </style>
+	
+</head>
+<body>
+	<div id="app" v-cloak style="padding-right:10px;">
+		<div class="table-form-common-contanier" >
+		<!-- 新增页面 begin-->
+		<el-form ref="formData" :rules="rules"  :model="formData" label-width="160px" label-position="left"
+				 :hide-required-asterisk="true">
+			
+			<el-row>
+			   <el-col :span="12" class="col-item" >
+			  	  <el-form-item  label="平台全称" prop="platName"  >
+					  <div style="display: flex;">
+						  <el-input v-model="formData.platName" placeholder=""  size="small" ref='platName' ></el-input>
+						  <el-button @click="openDiglogBox" icon="el-icon-search" size="mini" style="margin-left:5px;margin-right:5px;" >选择</el-button>
+					  </div>
+
+					  <input-popup  ref="diglogBox" :ajax-url="diglogUrl" style="width:400px;" :params="dialogParams" :table-options="diglogOption" @on-select-data="DiglogBoxSelectData">
+						  <!-- 查询框 begin-->
+						  <el-form :inline="true" > <!-- :model="searchData" -->
+							  <el-row>
+								  <el-col :span="24">
+									  <el-form-item label="同步工商数据">
+										  <el-input style="width:400px;" v-model="dialogParams.keyword" placeholder="请输入企业名称 / 统一社会信用代码 / 组织机构代码 " size="small"></el-input>
+										  <el-button @click="refresh_table_parent" icon="el-icon-search" size="small">查询</el-button>
+									  </el-form-item>
+								  </el-col>
+							  </el-row>
+						  </el-form>
+						  <!-- 查询框 end-->
+					  </input-popup>
+				   </el-form-item>
+			   </el-col>
+				<!--<el-col :span="4" >
+					<div style="padding-top:3px;">
+						<el-button @click="openDiglogBox" icon="el-icon-search" size="small" >选择</el-button> &lt;!&ndash;th:if=" formData.dealMark eq 'add' " &ndash;&gt;
+					</div>
+				</el-col>-->
+
+				<el-col :span="12" class="col-item">
+					<el-form-item  label="平台简称" prop="platShortName"  >
+						<el-input v-model="formData.platShortName" placeholder="请输入平台简称"  size="small" ref='platShortName' ></el-input>
+					</el-form-item>
+				</el-col>
+			</el-row>
+			
+			<el-row>
+				<el-col :span="12" class="col-item">
+					<el-form-item  label="统一社会信用代码" ><!--class ="hideBorder"-->
+						<el-input class ="hideBorder" v-model="formData.creditCode" placeholder=""  size="small" ref='creditCode'  readonly="ture" ></el-input>
+					</el-form-item>
+				</el-col>
+				<el-col :span="12" class="col-item">
+					<el-form-item  label="组织机构代码" >
+						<el-input class ="hideBorder" v-model="formData.orgCode" placeholder=""  size="small" ref='orgCode'  readonly="ture" ></el-input>
+					</el-form-item>
+				</el-col>
+			</el-row>
+
+			<el-row>
+				<el-col :span="12" class="col-item">
+					<el-form-item  label="所属行业"  >
+						<el-input class ="hideBorder" v-model="formData.qkIndustryName" placeholder=""  size="small" ref='qkIndustryName'  readonly="ture" ></el-input>
+					</el-form-item>
+				</el-col>
+				<el-col :span="12" >
+					<el-form-item  label="平台性质" prop="platType" >
+						<select-code v-model="formData.platType" parent-id="601" th:context-path="@{/}" style="width:220px;" />
+					</el-form-item>
+				</el-col>
+			</el-row>
+
+			<el-row>
+				<el-col :span="24" class="col-item">
+					<el-form-item  label="主营业务"  >
+						<el-input class ="hideBorder" type="textarea" v-model="formData.scope" readonly="ture"></el-input>
+					</el-form-item>
+				</el-col>
+			</el-row>
+			<el-row>
+				<el-col :span="24" class="col-item">
+					<el-form-item  label="企业简介"  >
+						<el-input class ="hideBorder" type="textarea" v-model="formData.companyProfile" readonly="ture"></el-input>
+					</el-form-item>
+				</el-col>
+			</el-row>
+
+
+			<el-row>
+				<el-col :span="12" class="col-item">
+					<el-form-item  label="注册资本"  >
+						<el-input class ="hideBorder" v-model="formData.registCapi" placeholder=""  size="small" ref='registCapi'  readonly="ture" ></el-input>
+					</el-form-item>
+				</el-col>
+				<el-col :span="12" class="col-item">
+					<el-form-item  label="成立日期"  >
+						<el-input class ="hideBorder" v-model="formData.stepDate" placeholder=""  size="small" ref='stepDate' readonly="ture" ></el-input>
+					</el-form-item>
+				</el-col>
+			</el-row>
+
+			<el-row>
+				<el-col :span="12" class="col-item">
+					<el-form-item  label="联系人"  >
+						<el-input class ="hideBorder" v-model="formData.contact" placeholder=""  size="small" ref='contact'  readonly="ture" ></el-input>
+					</el-form-item>
+				</el-col>
+				<el-col :span="12" class="col-item">
+					<el-form-item  label="手机"  >
+						<el-input class ="hideBorder" v-model="formData.contactTel" placeholder=""  size="small" ref='contactTel' readonly="ture" ></el-input>
+					</el-form-item>
+				</el-col>
+			</el-row>
+			
+			<el-row>
+				<el-col :span="24" class="col-item">
+					<el-form-item  label="法定代表人"  >
+						<el-input class ="hideBorder" v-model="formData.operName" placeholder=""  size="small" ref='operName'  readonly="ture" ></el-input>
+					</el-form-item>
+				</el-col>
+				<!--<el-col :span="12" >
+					<el-form-item label="主要高管" style="width:297px;"  prop="ptpiExtendOne">
+						<el-input v-model="formData.ptpiExtendOne" placeholder=""  size="small" ref='ptpiExtendOne'  ></el-input>
+					</el-form-item>
+				</el-col>-->
+			</el-row>
+			
+			<el-row>
+				<el-col :span="24" class="col-item">
+					<el-form-item  label="地址"  >
+						<el-input class ="hideBorder" v-model="formData.addressDetails" placeholder=""  size="small" ref='addressDetails'  readonly="ture" ></el-input>
+					</el-form-item>
+				</el-col>
+			</el-row>
+
+		</el-form><!-- 新增页面 end-->
+		</div>
+		<el-row>
+			<el-col :span="24">
+					<purvar:token/>
+					<el-button ref="saveButtonControll" type="danger" style="margin-left: 47%;margin-top: 50px;" @click="saveForm('formData')">保存</el-button>
+			</el-col>
+		</el-row>
+
+	</div>
+	<script type=text/javascript th:src="@{/vue/dist/vue.js}"></script>
+	<script type=text/javascript th:src="@{/element-ui/lib/index.js}"></script>
+	<script type=text/javascript th:src="@{/axios/dist/axios.min.js}"></script>
+	<script type=text/javascript th:src="@{/component/select-code.js}"></script>
+	<script type=text/javascript th:src="@{/component/input-tag.js}"></script>
+	<script type=text/javascript th:src="@{/component/input-popup.js}"></script>
+	<script type=text/javascript th:src="@{/component/upload/upload.js}"></script>
+	<script type=text/javascript th:src="@{/third-plugins/layui/layui.js}"></script>
+	<script th:src="@{/js/common.js}"></script>
+	<script th:inline="javascript">
+		let vm = new Vue({
+			el: '#app',
+			data: function() {
+	        	return {
+		        	//新增页面数据
+		        	formData: {
+                        platName: '',
+                        platShortName: '',
+                        platType: '',
+                        orgCode: '',
+                        qkIndustryName: '',
+                        scope: '',
+                        companyProfile: '',
+                        contact: '',
+                        contactTel: '',
+                        entId: '',
+                        stepDate : '',
+                        ptpiExtendOne : '',
+		        		dealMark: 'add'
+		            },
+
+		        	rules: {
+
+                        platName:[
+		    				{ required: true, message: '请输入平台名称', trigger: 'blur' }
+		            	],
+                        platShortName:[
+                            { required: true, message: '请输入平台简称', trigger: 'blur' },
+                            { min: 1, max: 60, message: '平台简称过长', trigger: 'blur' }
+		            	],
+                        /*ptpiExtendOne:[
+                            { required: true, message: '请选择主要高管', trigger: 'blur'}
+                        ],*/
+                        platType:[
+				    		{ required: true, message: '请选择平台性质', trigger: 'blur'}
+		            	]
+
+		            },
+                    dialogParams:{
+                        keyword:''
+                        //daterange: [],
+                    },
+                    diglogUrl:[[@{/entBaseInfo/list}]],
+
+					diglogOption:[
+						{prop:"name",label:"企业全称",align:"center",width:"200"},
+                        {prop:"operName",label:"法人名称",align:"center",width:"150"},
+						{prop:"creditCode",label:"统一社会信用代码",align:"center",width:"200"},
+                        {prop:"startDate",label:"成立时间",align:"center",width:"150"},
+                        {prop:"status",label:"企业状态",align:"center",width:"100"}
+					],
+
+
+	        	}
+
+	      },
+	      created: function(){
+	    	  let that = this;
+	    	  let dealMark = [[${dealMark}]];
+	    	  let formDataObj = JSON.parse([[${formData}]]);
+
+	    	  if(dealMark=='add'){
+
+	    	  }
+
+	      	if(dealMark=='update'){
+	    		  Vue.nextTick(function () {
+	       	    	 that.formData = formDataObj;
+	       	    	 that.formData.dealMark = 'update';
+	       	    	 //console.log(that.formData);
+                })
+	    	  }
+	      },
+
+	      methods:{
+
+              openDiglogBox(){
+                  if(this.formData.platName==''||this.formData.platName==null){
+                      this.$alert('请先输入平台名称关键字进行查询选择！', '警告', {
+                          confirmButtonText: '确定',
+                          callback: action => {
+                              this.$refs.platName.focus();
+                          }
+                      });
+                      return;
+                  }
+                  if(this.formData.dealMark=='update'){
+                      this.$alert('编辑状态下不能修改平台全称！', '警告', {
+                          confirmButtonText: '确定',
+                          callback: action => {
+
+                          }
+                      });
+                      return;
+                  }else{
+                      this.dialogParams.keyword = this.formData.platName;
+                      this.$refs.diglogBox.openDialog();
+				  }
+
+              },
+              DiglogBoxSelectData(data){
+                  console.log(data[0]);
+                  this.formData.platName= data[0].name;//企业全称
+
+                  this.formData.creditCode= data[0].creditCode;//统一社会信用代码
+                  this.formData.orgCode= data[0].orgCode;//组织机构代码
+
+                  this.formData.qkIndustryName= data[0].qkIndustryName;//所属行业
+
+                  this.formData.scope= data[0].scope;//主营业务
+
+                  this.formData.companyProfile= data[0].companyProfile;//企业简介
+
+                  this.formData.registCapi= data[0].registCapi;//注册资本
+                  this.formData.stepDate= data[0].startDate;//成立日期
+
+                  this.formData.contact= data[0].contact;//联系人
+                  this.formData.contactTel= data[0].contactTel;//联系电话
+
+                  this.formData.operName= data[0].operName;//法定代表人
+                  this.formData.addressDetails= data[0].addressDetails;//地址
+                  this.formData.entId= data[0].enterpriseId;//
+                  console.log(this.formData);
+                  this.$refs.platName.focus();
+              },
+              refresh_table_parent(){
+                  this.$refs.diglogBox.refresh_table();
+              },
+
+
+
+	      	  saveForm(formName){//新增页面点击保存按钮
+                  let that = this;
+                  this.$refs[formName].validate((valid) => {
+                      if (!valid) {
+                          return false;
+                      }
+
+				      that.$refs.saveButtonControll.disabled=true;
+                      let data = that.formData;
+                      let url = [[@{/platformInfo/add}]];
+                      if(that.formData.dealMark=='update'){
+                          url = [[@{/platformInfo/update/}]]+data.pkId;
+                          //data = this.formData;
+                          //console.log(data);
+                          console.log("ddd",this.formData);
+                      }
+                      axios({
+                          url: url,
+                          method: "post",
+                          data:data
+                      })
+                          .then(function (res){
+                              if (res.data.status == '0') {
+                                  try{
+
+                                      that.$message({type: 'success', duration:1000, message: '操作成功!', onClose: function(){
+                                              var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                                              parent.layer.close(index); //再执行关闭
+                                          }});
+
+                                  }catch(err){
+
+                                  }
+
+                              } else{
+                                  that.$message({type: 'info', duration:1000, message: res.data.msg});
+                              }
+                          })
+
+                  });
+	      		 
+	    	  },
+	    	  resetForm(formName) {
+	    	  	this.$refs[formName].resetFields();
+	    	  },
+	    	  
+	      }
+	    });
+	    
+  	</script>
+</body>
+</html>

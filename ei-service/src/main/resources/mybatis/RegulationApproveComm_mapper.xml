@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="RegulationApproveComm">
+	<!-- start autocreate -->
+
+	<resultMap id="RegulationApproveCommResult" type="com.ppmg.ei.model.RegulationApproveCommModel">
+		<result column="COMM_ID" property="commId" jdbcType="VARCHAR" />
+		<result column="IRA_ID" property="iraId" jdbcType="VARCHAR" />
+		<result column="COMM_USER_ID" property="commUserId" jdbcType="VARCHAR" />
+		<result column="COMM_USER_NAME" property="commUserName" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="IS_DELETE" property="isDelete" jdbcType="CHAR" />
+		<result column="SORT_ORDER" property="sortOrder" jdbcType="NUMERIC" />
+		<result column="ROW_VERSION" property="rowVersion" jdbcType="NUMERIC" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.RegulationApproveCommModel">
+		INSERT INTO TZ_T_REGULATION_APPROVE_COMM (COMM_ID,IRA_ID,COMM_USER_ID,COMM_USER_NAME,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,IS_DELETE,SORT_ORDER,ROW_VERSION) values(#{commId,jdbcType=VARCHAR},#{iraId,jdbcType=VARCHAR},#{commUserId,jdbcType=VARCHAR},#{commUserName,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{isDelete,jdbcType=CHAR},#{sortOrder,jdbcType=NUMERIC},#{rowVersion,jdbcType=NUMERIC})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO TZ_T_REGULATION_APPROVE_COMM (COMM_ID,IRA_ID,COMM_USER_ID,COMM_USER_NAME,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,IS_DELETE,SORT_ORDER,ROW_VERSION)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.commId,jdbcType=VARCHAR},
+				#{item.iraId,jdbcType=VARCHAR},
+				#{item.commUserId,jdbcType=VARCHAR},
+				#{item.commUserName,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+				#{item.isDelete,jdbcType=CHAR},
+				#{item.sortOrder,jdbcType=NUMERIC},
+				#{item.rowVersion,jdbcType=NUMERIC}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  TZ_T_REGULATION_APPROVE_COMM WHERE COMM_ID = #{commId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.RegulationApproveCommModel">
+		DELETE FROM TZ_T_REGULATION_APPROVE_COMM
+		<where>
+			<if test="commId != null and commId != ''" >
+				COMM_ID = #{commId,jdbcType=VARCHAR}
+			</if>
+			<if test="iraId != null and iraId != ''" >
+				AND IRA_ID = #{iraId,jdbcType=VARCHAR}
+			</if>
+			<if test="commUserId != null and commUserId != ''" >
+				AND COMM_USER_ID = #{commUserId,jdbcType=VARCHAR}
+			</if>
+			<if test="commUserName != null and commUserName != ''" >
+				AND COMM_USER_NAME = #{commUserName,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="isDelete != null and isDelete != ''" >
+				AND IS_DELETE = #{isDelete,jdbcType=CHAR}
+			</if>
+			<if test="sortOrder != null and sortOrder != ''" >
+				AND SORT_ORDER = #{sortOrder,jdbcType=NUMERIC}
+			</if>
+			<if test="rowVersion != null and rowVersion != ''" >
+				AND ROW_VERSION = #{rowVersion,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  TZ_T_REGULATION_APPROVE_COMM WHERE COMM_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.RegulationApproveCommModel">
+		UPDATE TZ_T_REGULATION_APPROVE_COMM 
+		<set>
+			<if test="commId != null and commId != ''" >
+				COMM_ID = #{commId,jdbcType=VARCHAR},
+			</if>
+			<if test="iraId != null and iraId != ''" >
+				IRA_ID = #{iraId,jdbcType=VARCHAR},
+			</if>
+			<if test="commUserId != null and commUserId != ''" >
+				COMM_USER_ID = #{commUserId,jdbcType=VARCHAR},
+			</if>
+			<if test="commUserName != null and commUserName != ''" >
+				COMM_USER_NAME = #{commUserName,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isDelete != null and isDelete != ''" >
+				IS_DELETE = #{isDelete,jdbcType=CHAR},
+			</if>
+			<if test="sortOrder != null and sortOrder != ''" >
+				SORT_ORDER = #{sortOrder,jdbcType=NUMERIC},
+			</if>
+			<if test="rowVersion != null and rowVersion != ''" >
+				ROW_VERSION = #{rowVersion,jdbcType=NUMERIC},
+			</if>
+		</set>
+		WHERE COMM_ID = #{commId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="RegulationApproveCommResult">
+		SELECT * FROM TZ_T_REGULATION_APPROVE_COMM WHERE COMM_ID = #{commId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.RegulationApproveCommModel" resultMap="RegulationApproveCommResult">
+		SELECT * FROM TZ_T_REGULATION_APPROVE_COMM
+		<where>
+			<if test="commId != null and commId != ''" >
+				COMM_ID = #{commId,jdbcType=VARCHAR}
+			</if>
+			<if test="iraId != null and iraId != ''" >
+				AND IRA_ID = #{iraId,jdbcType=VARCHAR}
+			</if>
+			<if test="commUserId != null and commUserId != ''" >
+				AND COMM_USER_ID = #{commUserId,jdbcType=VARCHAR}
+			</if>
+			<if test="commUserName != null and commUserName != ''" >
+				AND COMM_USER_NAME = #{commUserName,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="isDelete != null and isDelete != ''" >
+				AND IS_DELETE = #{isDelete,jdbcType=CHAR}
+			</if>
+			<if test="sortOrder != null and sortOrder != ''" >
+				AND SORT_ORDER = #{sortOrder,jdbcType=NUMERIC}
+			</if>
+			<if test="rowVersion != null and rowVersion != ''" >
+				AND ROW_VERSION = #{rowVersion,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM TZ_T_REGULATION_APPROVE_COMM
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="RegulationApproveCommResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.RegulationApproveCommModel">
+		SELECT COUNT(*) FROM TZ_T_REGULATION_APPROVE_COMM
+		<where>
+			<if test="commId != null and commId != ''" >
+				COMM_ID = #{commId,jdbcType=VARCHAR}
+			</if>
+			<if test="iraId != null and iraId != ''" >
+				AND IRA_ID = #{iraId,jdbcType=VARCHAR}
+			</if>
+			<if test="commUserId != null and commUserId != ''" >
+				AND COMM_USER_ID = #{commUserId,jdbcType=VARCHAR}
+			</if>
+			<if test="commUserName != null and commUserName != ''" >
+				AND COMM_USER_NAME = #{commUserName,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="isDelete != null and isDelete != ''" >
+				AND IS_DELETE = #{isDelete,jdbcType=CHAR}
+			</if>
+			<if test="sortOrder != null and sortOrder != ''" >
+				AND SORT_ORDER = #{sortOrder,jdbcType=NUMERIC}
+			</if>
+			<if test="rowVersion != null and rowVersion != ''" >
+				AND ROW_VERSION = #{rowVersion,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.RegulationApproveCommModel" resultMap="RegulationApproveCommResult">
+		SELECT * FROM TZ_T_REGULATION_APPROVE_COMM
+		<where>
+			 IS_DELETE != '9'
+			<if test="commId != null and commId != ''" >
+				AND	COMM_ID = #{commId,jdbcType=VARCHAR}
+			</if>
+			<if test="iraId != null and iraId != ''" >
+				AND IRA_ID = #{iraId,jdbcType=VARCHAR}
+			</if>
+			<if test="commUserId != null and commUserId != ''" >
+				AND COMM_USER_ID = #{commUserId,jdbcType=VARCHAR}
+			</if>
+			<if test="commUserName != null and commUserName != ''" >
+				AND COMM_USER_NAME = #{commUserName,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="sortOrder != null and sortOrder != ''" >
+				AND SORT_ORDER = #{sortOrder,jdbcType=NUMERIC}
+			</if>
+			<if test="rowVersion != null and rowVersion != ''" >
+				AND ROW_VERSION = #{rowVersion,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="RegulationApproveCommResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+</mapper>

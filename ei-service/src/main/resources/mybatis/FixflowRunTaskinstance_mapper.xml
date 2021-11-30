@@ -1,0 +1,847 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FixflowRunTaskinstance">
+	<resultMap id="FixflowRunTaskinstanceResult2" type="com.ppmg.ei.model.FixflowRunTaskinstanceModel" extends="FixflowRunTaskinstanceResult">
+		<association property="userModel" javaType="com.ppmg.ei.model.AppUserModel" column="ASSIGNEE">
+			<result column="ASSIGNEE_NAME" property="name" jdbcType="VARCHAR" />
+		</association>
+	</resultMap>
+	<!-- start autocreate -->
+
+	<resultMap id="FixflowRunTaskinstanceResult" type="com.ppmg.ei.model.FixflowRunTaskinstanceModel">
+		<result column="TASKINSTANCE_ID" property="taskinstanceId" jdbcType="VARCHAR" />
+		<result column="PROCESSINSTANCE_ID" property="processinstanceId" jdbcType="VARCHAR" />
+		<result column="PROCESSDEFINITION_ID" property="processdefinitionId" jdbcType="VARCHAR" />
+		<result column="VERSION" property="version" jdbcType="NUMERIC" />
+		<result column="TOKEN_ID" property="tokenId" jdbcType="VARCHAR" />
+		<result column="NODE_ID" property="nodeId" jdbcType="VARCHAR" />
+		<result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+		<result column="PARENTTASK_ID" property="parenttaskId" jdbcType="VARCHAR" />
+		<result column="ASSIGNEE" property="assignee" jdbcType="VARCHAR" />
+		<result column="CLAIM_TIME" property="claimTime" jdbcType="TIMESTAMP" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="START_TIME" property="startTime" jdbcType="TIMESTAMP" />
+		<result column="ISBLOCKING" property="isblocking" jdbcType="VARCHAR" />
+		<result column="END_TIME" property="endTime" jdbcType="TIMESTAMP" />
+		<result column="DUEDATE" property="duedate" jdbcType="TIMESTAMP" />
+		<result column="PRIORITY" property="priority" jdbcType="NUMERIC" />
+		<result column="CATEGORY" property="category" jdbcType="VARCHAR" />
+		<result column="OWNER" property="owner" jdbcType="VARCHAR" />
+		<result column="DELEGATIONSTATESTRING" property="delegationstatestring" jdbcType="VARCHAR" />
+		<result column="BIZKEY" property="bizkey" jdbcType="VARCHAR" />
+		<result column="COMMAND_TYPE" property="commandType" jdbcType="VARCHAR" />
+		<result column="COMMAND_MESSAGE" property="commandMessage" jdbcType="VARCHAR" />
+		<result column="TASK_COMMENT" property="taskComment" jdbcType="VARCHAR" />
+		<result column="NODE_NAME" property="nodeName" jdbcType="VARCHAR" />
+		<result column="PROCESSDEFINITION_KEY" property="processdefinitionKey" jdbcType="VARCHAR" />
+		<result column="FORMURI" property="formuri" jdbcType="VARCHAR" />
+		<result column="TASKGROUP" property="taskgroup" jdbcType="VARCHAR" />
+		<result column="TASKTYPE" property="tasktype" jdbcType="VARCHAR" />
+		<result column="PROCESSDEFINITION_NAME" property="processdefinitionName" jdbcType="VARCHAR" />
+		<result column="ISCANCELLED" property="iscancelled" jdbcType="VARCHAR" />
+		<result column="ISSUSPENDED" property="issuspended" jdbcType="VARCHAR" />
+		<result column="ISOPEN" property="isopen" jdbcType="VARCHAR" />
+		<result column="ISDRAFT" property="isdraft" jdbcType="VARCHAR" />
+		<result column="EXPECTED_EXECUTIONTIME" property="expectedExecutiontime" jdbcType="NUMERIC" />
+		<result column="AGENT" property="agent" jdbcType="VARCHAR" />
+		<result column="ADMIN" property="admin" jdbcType="VARCHAR" />
+		<result column="FORMURIVIEW" property="formuriview" jdbcType="VARCHAR" />
+		<result column="CALLACTIVITY_INSTANCE_ID" property="callactivityInstanceId" jdbcType="VARCHAR" />
+		<result column="COMMAND_ID" property="commandId" jdbcType="VARCHAR" />
+		<result column="PENDINGTASKID" property="pendingtaskid" jdbcType="VARCHAR" />
+		<result column="ARCHIVE_TIME" property="archiveTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.FixflowRunTaskinstanceModel">
+		INSERT INTO BASE.FIXFLOW_RUN_TASKINSTANCE (TASKINSTANCE_ID,PROCESSINSTANCE_ID,PROCESSDEFINITION_ID,VERSION,TOKEN_ID,NODE_ID,DESCRIPTION,PARENTTASK_ID,ASSIGNEE,CLAIM_TIME,NAME,CREATE_TIME,START_TIME,ISBLOCKING,END_TIME,DUEDATE,PRIORITY,CATEGORY,OWNER,DELEGATIONSTATESTRING,BIZKEY,COMMAND_TYPE,COMMAND_MESSAGE,TASK_COMMENT,NODE_NAME,PROCESSDEFINITION_KEY,FORMURI,TASKGROUP,TASKTYPE,PROCESSDEFINITION_NAME,ISCANCELLED,ISSUSPENDED,ISOPEN,ISDRAFT,EXPECTED_EXECUTIONTIME,AGENT,ADMIN,FORMURIVIEW,CALLACTIVITY_INSTANCE_ID,COMMAND_ID,PENDINGTASKID,ARCHIVE_TIME) values(#{taskinstanceId,jdbcType=VARCHAR},#{processinstanceId,jdbcType=VARCHAR},#{processdefinitionId,jdbcType=VARCHAR},#{version,jdbcType=NUMERIC},#{tokenId,jdbcType=VARCHAR},#{nodeId,jdbcType=VARCHAR},#{description,jdbcType=VARCHAR},#{parenttaskId,jdbcType=VARCHAR},#{assignee,jdbcType=VARCHAR},#{claimTime,jdbcType=TIMESTAMP},#{name,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{startTime,jdbcType=TIMESTAMP},#{isblocking,jdbcType=VARCHAR},#{endTime,jdbcType=TIMESTAMP},#{duedate,jdbcType=TIMESTAMP},#{priority,jdbcType=NUMERIC},#{category,jdbcType=VARCHAR},#{owner,jdbcType=VARCHAR},#{delegationstatestring,jdbcType=VARCHAR},#{bizkey,jdbcType=VARCHAR},#{commandType,jdbcType=VARCHAR},#{commandMessage,jdbcType=VARCHAR},#{taskComment,jdbcType=VARCHAR},#{nodeName,jdbcType=VARCHAR},#{processdefinitionKey,jdbcType=VARCHAR},#{formuri,jdbcType=VARCHAR},#{taskgroup,jdbcType=VARCHAR},#{tasktype,jdbcType=VARCHAR},#{processdefinitionName,jdbcType=VARCHAR},#{iscancelled,jdbcType=VARCHAR},#{issuspended,jdbcType=VARCHAR},#{isopen,jdbcType=VARCHAR},#{isdraft,jdbcType=VARCHAR},#{expectedExecutiontime,jdbcType=NUMERIC},#{agent,jdbcType=VARCHAR},#{admin,jdbcType=VARCHAR},#{formuriview,jdbcType=VARCHAR},#{callactivityInstanceId,jdbcType=VARCHAR},#{commandId,jdbcType=VARCHAR},#{pendingtaskid,jdbcType=VARCHAR},#{archiveTime,jdbcType=TIMESTAMP})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO BASE.FIXFLOW_RUN_TASKINSTANCE (TASKINSTANCE_ID,PROCESSINSTANCE_ID,PROCESSDEFINITION_ID,VERSION,TOKEN_ID,NODE_ID,DESCRIPTION,PARENTTASK_ID,ASSIGNEE,CLAIM_TIME,NAME,CREATE_TIME,START_TIME,ISBLOCKING,END_TIME,DUEDATE,PRIORITY,CATEGORY,OWNER,DELEGATIONSTATESTRING,BIZKEY,COMMAND_TYPE,COMMAND_MESSAGE,TASK_COMMENT,NODE_NAME,PROCESSDEFINITION_KEY,FORMURI,TASKGROUP,TASKTYPE,PROCESSDEFINITION_NAME,ISCANCELLED,ISSUSPENDED,ISOPEN,ISDRAFT,EXPECTED_EXECUTIONTIME,AGENT,ADMIN,FORMURIVIEW,CALLACTIVITY_INSTANCE_ID,COMMAND_ID,PENDINGTASKID,ARCHIVE_TIME)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.taskinstanceId,jdbcType=VARCHAR},
+				#{item.processinstanceId,jdbcType=VARCHAR},
+				#{item.processdefinitionId,jdbcType=VARCHAR},
+				#{item.version,jdbcType=NUMERIC},
+				#{item.tokenId,jdbcType=VARCHAR},
+				#{item.nodeId,jdbcType=VARCHAR},
+				#{item.description,jdbcType=VARCHAR},
+				#{item.parenttaskId,jdbcType=VARCHAR},
+				#{item.assignee,jdbcType=VARCHAR},
+				#{item.claimTime,jdbcType=TIMESTAMP},
+				#{item.name,jdbcType=VARCHAR},
+				#{item.createTime,jdbcType=TIMESTAMP},
+				#{item.startTime,jdbcType=TIMESTAMP},
+				#{item.isblocking,jdbcType=VARCHAR},
+				#{item.endTime,jdbcType=TIMESTAMP},
+				#{item.duedate,jdbcType=TIMESTAMP},
+				#{item.priority,jdbcType=NUMERIC},
+				#{item.category,jdbcType=VARCHAR},
+				#{item.owner,jdbcType=VARCHAR},
+				#{item.delegationstatestring,jdbcType=VARCHAR},
+				#{item.bizkey,jdbcType=VARCHAR},
+				#{item.commandType,jdbcType=VARCHAR},
+				#{item.commandMessage,jdbcType=VARCHAR},
+				#{item.taskComment,jdbcType=VARCHAR},
+				#{item.nodeName,jdbcType=VARCHAR},
+				#{item.processdefinitionKey,jdbcType=VARCHAR},
+				#{item.formuri,jdbcType=VARCHAR},
+				#{item.taskgroup,jdbcType=VARCHAR},
+				#{item.tasktype,jdbcType=VARCHAR},
+				#{item.processdefinitionName,jdbcType=VARCHAR},
+				#{item.iscancelled,jdbcType=VARCHAR},
+				#{item.issuspended,jdbcType=VARCHAR},
+				#{item.isopen,jdbcType=VARCHAR},
+				#{item.isdraft,jdbcType=VARCHAR},
+				#{item.expectedExecutiontime,jdbcType=NUMERIC},
+				#{item.agent,jdbcType=VARCHAR},
+				#{item.admin,jdbcType=VARCHAR},
+				#{item.formuriview,jdbcType=VARCHAR},
+				#{item.callactivityInstanceId,jdbcType=VARCHAR},
+				#{item.commandId,jdbcType=VARCHAR},
+				#{item.pendingtaskid,jdbcType=VARCHAR},
+				#{item.archiveTime,jdbcType=TIMESTAMP}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  BASE.FIXFLOW_RUN_TASKINSTANCE WHERE TASKINSTANCE_ID = #{taskinstanceId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.FixflowRunTaskinstanceModel">
+		DELETE FROM BASE.FIXFLOW_RUN_TASKINSTANCE
+		<where>
+			<if test="taskinstanceId != null and taskinstanceId != ''" >
+				TASKINSTANCE_ID = #{taskinstanceId,jdbcType=VARCHAR}
+			</if>
+			<if test="processinstanceId != null and processinstanceId != ''" >
+				AND PROCESSINSTANCE_ID = #{processinstanceId,jdbcType=VARCHAR}
+			</if>
+			<if test="processdefinitionId != null and processdefinitionId != ''" >
+				AND PROCESSDEFINITION_ID = #{processdefinitionId,jdbcType=VARCHAR}
+			</if>
+			<if test="version != null and version != ''" >
+				AND VERSION = #{version,jdbcType=NUMERIC}
+			</if>
+			<if test="tokenId != null and tokenId != ''" >
+				AND TOKEN_ID = #{tokenId,jdbcType=VARCHAR}
+			</if>
+			<if test="nodeId != null and nodeId != ''" >
+				AND NODE_ID = #{nodeId,jdbcType=VARCHAR}
+			</if>
+			<if test="description != null and description != ''" >
+				AND DESCRIPTION = #{description,jdbcType=VARCHAR}
+			</if>
+			<if test="parenttaskId != null and parenttaskId != ''" >
+				AND PARENTTASK_ID = #{parenttaskId,jdbcType=VARCHAR}
+			</if>
+			<if test="assignee != null and assignee != ''" >
+				AND ASSIGNEE = #{assignee,jdbcType=VARCHAR}
+			</if>
+			<if test="claimTime != null" >
+				AND CLAIM_TIME = #{claimTime,jdbcType=VARCHAR}
+			</if>
+			<if test="name != null and name != ''" >
+				AND NAME = #{name,jdbcType=VARCHAR}
+			</if>
+			<if test="createTime != null" >
+				AND CREATE_TIME = #{createTime,jdbcType=VARCHAR}
+			</if>
+			<if test="startTime != null" >
+				AND START_TIME = #{startTime,jdbcType=VARCHAR}
+			</if>
+			<if test="isblocking != null and isblocking != ''" >
+				AND ISBLOCKING = #{isblocking,jdbcType=VARCHAR}
+			</if>
+			<if test="endTime != null" >
+				AND END_TIME = #{endTime,jdbcType=VARCHAR}
+			</if>
+			<if test="duedate != null" >
+				AND DUEDATE = #{duedate,jdbcType=VARCHAR}
+			</if>
+			<if test="priority != null and priority != ''" >
+				AND PRIORITY = #{priority,jdbcType=NUMERIC}
+			</if>
+			<if test="category != null and category != ''" >
+				AND CATEGORY = #{category,jdbcType=VARCHAR}
+			</if>
+			<if test="owner != null and owner != ''" >
+				AND OWNER = #{owner,jdbcType=VARCHAR}
+			</if>
+			<if test="delegationstatestring != null and delegationstatestring != ''" >
+				AND DELEGATIONSTATESTRING = #{delegationstatestring,jdbcType=VARCHAR}
+			</if>
+			<if test="bizkey != null and bizkey != ''" >
+				AND BIZKEY = #{bizkey,jdbcType=VARCHAR}
+			</if>
+			<if test="commandType != null and commandType != ''" >
+				AND COMMAND_TYPE = #{commandType,jdbcType=VARCHAR}
+			</if>
+			<if test="commandMessage != null and commandMessage != ''" >
+				AND COMMAND_MESSAGE = #{commandMessage,jdbcType=VARCHAR}
+			</if>
+			<if test="taskComment != null and taskComment != ''" >
+				AND TASK_COMMENT = #{taskComment,jdbcType=VARCHAR}
+			</if>
+			<if test="nodeName != null and nodeName != ''" >
+				AND NODE_NAME = #{nodeName,jdbcType=VARCHAR}
+			</if>
+			<if test="processdefinitionKey != null and processdefinitionKey != ''" >
+				AND PROCESSDEFINITION_KEY = #{processdefinitionKey,jdbcType=VARCHAR}
+			</if>
+			<if test="formuri != null and formuri != ''" >
+				AND FORMURI = #{formuri,jdbcType=VARCHAR}
+			</if>
+			<if test="taskgroup != null and taskgroup != ''" >
+				AND TASKGROUP = #{taskgroup,jdbcType=VARCHAR}
+			</if>
+			<if test="tasktype != null and tasktype != ''" >
+				AND TASKTYPE = #{tasktype,jdbcType=VARCHAR}
+			</if>
+			<if test="processdefinitionName != null and processdefinitionName != ''" >
+				AND PROCESSDEFINITION_NAME = #{processdefinitionName,jdbcType=VARCHAR}
+			</if>
+			<if test="iscancelled != null and iscancelled != ''" >
+				AND ISCANCELLED = #{iscancelled,jdbcType=VARCHAR}
+			</if>
+			<if test="issuspended != null and issuspended != ''" >
+				AND ISSUSPENDED = #{issuspended,jdbcType=VARCHAR}
+			</if>
+			<if test="isopen != null and isopen != ''" >
+				AND ISOPEN = #{isopen,jdbcType=VARCHAR}
+			</if>
+			<if test="isdraft != null and isdraft != ''" >
+				AND ISDRAFT = #{isdraft,jdbcType=VARCHAR}
+			</if>
+			<if test="expectedExecutiontime != null and expectedExecutiontime != ''" >
+				AND EXPECTED_EXECUTIONTIME = #{expectedExecutiontime,jdbcType=NUMERIC}
+			</if>
+			<if test="agent != null and agent != ''" >
+				AND AGENT = #{agent,jdbcType=VARCHAR}
+			</if>
+			<if test="admin != null and admin != ''" >
+				AND ADMIN = #{admin,jdbcType=VARCHAR}
+			</if>
+			<if test="formuriview != null and formuriview != ''" >
+				AND FORMURIVIEW = #{formuriview,jdbcType=VARCHAR}
+			</if>
+			<if test="callactivityInstanceId != null and callactivityInstanceId != ''" >
+				AND CALLACTIVITY_INSTANCE_ID = #{callactivityInstanceId,jdbcType=VARCHAR}
+			</if>
+			<if test="commandId != null and commandId != ''" >
+				AND COMMAND_ID = #{commandId,jdbcType=VARCHAR}
+			</if>
+			<if test="pendingtaskid != null and pendingtaskid != ''" >
+				AND PENDINGTASKID = #{pendingtaskid,jdbcType=VARCHAR}
+			</if>
+			<if test="archiveTime != null" >
+				AND ARCHIVE_TIME = #{archiveTime,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  BASE.FIXFLOW_RUN_TASKINSTANCE WHERE TASKINSTANCE_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.FixflowRunTaskinstanceModel">
+		UPDATE BASE.FIXFLOW_RUN_TASKINSTANCE 
+		<set>
+			<if test="taskinstanceId != null and taskinstanceId != ''" >
+				TASKINSTANCE_ID = #{taskinstanceId,jdbcType=VARCHAR},
+			</if>
+			<if test="processinstanceId != null and processinstanceId != ''" >
+				PROCESSINSTANCE_ID = #{processinstanceId,jdbcType=VARCHAR},
+			</if>
+			<if test="processdefinitionId != null and processdefinitionId != ''" >
+				PROCESSDEFINITION_ID = #{processdefinitionId,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null and version != ''" >
+				VERSION = #{version,jdbcType=NUMERIC},
+			</if>
+			<if test="tokenId != null and tokenId != ''" >
+				TOKEN_ID = #{tokenId,jdbcType=VARCHAR},
+			</if>
+			<if test="nodeId != null and nodeId != ''" >
+				NODE_ID = #{nodeId,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null and description != ''" >
+				DESCRIPTION = #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="parenttaskId != null and parenttaskId != ''" >
+				PARENTTASK_ID = #{parenttaskId,jdbcType=VARCHAR},
+			</if>
+			<if test="assignee != null and assignee != ''" >
+				ASSIGNEE = #{assignee,jdbcType=VARCHAR},
+			</if>
+			<if test="claimTime != null" >
+				CLAIM_TIME = #{claimTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="name != null and name != ''" >
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null" >
+				CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="startTime != null" >
+				START_TIME = #{startTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isblocking != null and isblocking != ''" >
+				ISBLOCKING = #{isblocking,jdbcType=VARCHAR},
+			</if>
+			<if test="endTime != null" >
+				END_TIME = #{endTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="duedate != null" >
+				DUEDATE = #{duedate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="priority != null and priority != ''" >
+				PRIORITY = #{priority,jdbcType=NUMERIC},
+			</if>
+			<if test="category != null and category != ''" >
+				CATEGORY = #{category,jdbcType=VARCHAR},
+			</if>
+			<if test="owner != null and owner != ''" >
+				OWNER = #{owner,jdbcType=VARCHAR},
+			</if>
+			<if test="delegationstatestring != null and delegationstatestring != ''" >
+				DELEGATIONSTATESTRING = #{delegationstatestring,jdbcType=VARCHAR},
+			</if>
+			<if test="bizkey != null and bizkey != ''" >
+				BIZKEY = #{bizkey,jdbcType=VARCHAR},
+			</if>
+			<if test="commandType != null and commandType != ''" >
+				COMMAND_TYPE = #{commandType,jdbcType=VARCHAR},
+			</if>
+			<if test="commandMessage != null and commandMessage != ''" >
+				COMMAND_MESSAGE = #{commandMessage,jdbcType=VARCHAR},
+			</if>
+			<if test="taskComment != null and taskComment != ''" >
+				TASK_COMMENT = #{taskComment,jdbcType=VARCHAR},
+			</if>
+			<if test="nodeName != null and nodeName != ''" >
+				NODE_NAME = #{nodeName,jdbcType=VARCHAR},
+			</if>
+			<if test="processdefinitionKey != null and processdefinitionKey != ''" >
+				PROCESSDEFINITION_KEY = #{processdefinitionKey,jdbcType=VARCHAR},
+			</if>
+			<if test="formuri != null and formuri != ''" >
+				FORMURI = #{formuri,jdbcType=VARCHAR},
+			</if>
+			<if test="taskgroup != null and taskgroup != ''" >
+				TASKGROUP = #{taskgroup,jdbcType=VARCHAR},
+			</if>
+			<if test="tasktype != null and tasktype != ''" >
+				TASKTYPE = #{tasktype,jdbcType=VARCHAR},
+			</if>
+			<if test="processdefinitionName != null and processdefinitionName != ''" >
+				PROCESSDEFINITION_NAME = #{processdefinitionName,jdbcType=VARCHAR},
+			</if>
+			<if test="iscancelled != null and iscancelled != ''" >
+				ISCANCELLED = #{iscancelled,jdbcType=VARCHAR},
+			</if>
+			<if test="issuspended != null and issuspended != ''" >
+				ISSUSPENDED = #{issuspended,jdbcType=VARCHAR},
+			</if>
+			<if test="isopen != null and isopen != ''" >
+				ISOPEN = #{isopen,jdbcType=VARCHAR},
+			</if>
+			<if test="isdraft != null and isdraft != ''" >
+				ISDRAFT = #{isdraft,jdbcType=VARCHAR},
+			</if>
+			<if test="expectedExecutiontime != null and expectedExecutiontime != ''" >
+				EXPECTED_EXECUTIONTIME = #{expectedExecutiontime,jdbcType=NUMERIC},
+			</if>
+			<if test="agent != null and agent != ''" >
+				AGENT = #{agent,jdbcType=VARCHAR},
+			</if>
+			<if test="admin != null and admin != ''" >
+				ADMIN = #{admin,jdbcType=VARCHAR},
+			</if>
+			<if test="formuriview != null and formuriview != ''" >
+				FORMURIVIEW = #{formuriview,jdbcType=VARCHAR},
+			</if>
+			<if test="callactivityInstanceId != null and callactivityInstanceId != ''" >
+				CALLACTIVITY_INSTANCE_ID = #{callactivityInstanceId,jdbcType=VARCHAR},
+			</if>
+			<if test="commandId != null and commandId != ''" >
+				COMMAND_ID = #{commandId,jdbcType=VARCHAR},
+			</if>
+			<if test="pendingtaskid != null and pendingtaskid != ''" >
+				PENDINGTASKID = #{pendingtaskid,jdbcType=VARCHAR},
+			</if>
+			<if test="archiveTime != null" >
+				ARCHIVE_TIME = #{archiveTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		WHERE TASKINSTANCE_ID = #{taskinstanceId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="FixflowRunTaskinstanceResult">
+		SELECT * FROM BASE.FIXFLOW_RUN_TASKINSTANCE WHERE TASKINSTANCE_ID = #{taskinstanceId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.FixflowRunTaskinstanceModel" resultMap="FixflowRunTaskinstanceResult">
+		SELECT * FROM BASE.FIXFLOW_RUN_TASKINSTANCE
+		<where>
+			<if test="taskinstanceId != null and taskinstanceId != ''" >
+				TASKINSTANCE_ID = #{taskinstanceId,jdbcType=VARCHAR}
+			</if>
+			<if test="processinstanceId != null and processinstanceId != ''" >
+				AND PROCESSINSTANCE_ID = #{processinstanceId,jdbcType=VARCHAR}
+			</if>
+			<if test="processdefinitionId != null and processdefinitionId != ''" >
+				AND PROCESSDEFINITION_ID = #{processdefinitionId,jdbcType=VARCHAR}
+			</if>
+			<if test="version != null and version != ''" >
+				AND VERSION = #{version,jdbcType=NUMERIC}
+			</if>
+			<if test="tokenId != null and tokenId != ''" >
+				AND TOKEN_ID = #{tokenId,jdbcType=VARCHAR}
+			</if>
+			<if test="nodeId != null and nodeId != ''" >
+				AND NODE_ID = #{nodeId,jdbcType=VARCHAR}
+			</if>
+			<if test="description != null and description != ''" >
+				AND DESCRIPTION = #{description,jdbcType=VARCHAR}
+			</if>
+			<if test="parenttaskId != null and parenttaskId != ''" >
+				AND PARENTTASK_ID = #{parenttaskId,jdbcType=VARCHAR}
+			</if>
+			<if test="assignee != null and assignee != ''" >
+				AND ASSIGNEE = #{assignee,jdbcType=VARCHAR}
+			</if>
+			<if test="claimTime != null" >
+				AND CLAIM_TIME = #{claimTime,jdbcType=VARCHAR}
+			</if>
+			<if test="name != null and name != ''" >
+				AND NAME = #{name,jdbcType=VARCHAR}
+			</if>
+			<if test="createTime != null" >
+				AND CREATE_TIME = #{createTime,jdbcType=VARCHAR}
+			</if>
+			<if test="startTime != null" >
+				AND START_TIME = #{startTime,jdbcType=VARCHAR}
+			</if>
+			<if test="isblocking != null and isblocking != ''" >
+				AND ISBLOCKING = #{isblocking,jdbcType=VARCHAR}
+			</if>
+			<if test="endTime != null" >
+				AND END_TIME = #{endTime,jdbcType=VARCHAR}
+			</if>
+			<if test="duedate != null" >
+				AND DUEDATE = #{duedate,jdbcType=VARCHAR}
+			</if>
+			<if test="priority != null and priority != ''" >
+				AND PRIORITY = #{priority,jdbcType=NUMERIC}
+			</if>
+			<if test="category != null and category != ''" >
+				AND CATEGORY = #{category,jdbcType=VARCHAR}
+			</if>
+			<if test="owner != null and owner != ''" >
+				AND OWNER = #{owner,jdbcType=VARCHAR}
+			</if>
+			<if test="delegationstatestring != null and delegationstatestring != ''" >
+				AND DELEGATIONSTATESTRING = #{delegationstatestring,jdbcType=VARCHAR}
+			</if>
+			<if test="bizkey != null and bizkey != ''" >
+				AND BIZKEY = #{bizkey,jdbcType=VARCHAR}
+			</if>
+			<if test="commandType != null and commandType != ''" >
+				AND COMMAND_TYPE = #{commandType,jdbcType=VARCHAR}
+			</if>
+			<if test="commandMessage != null and commandMessage != ''" >
+				AND COMMAND_MESSAGE = #{commandMessage,jdbcType=VARCHAR}
+			</if>
+			<if test="taskComment != null and taskComment != ''" >
+				AND TASK_COMMENT = #{taskComment,jdbcType=VARCHAR}
+			</if>
+			<if test="nodeName != null and nodeName != ''" >
+				AND NODE_NAME = #{nodeName,jdbcType=VARCHAR}
+			</if>
+			<if test="processdefinitionKey != null and processdefinitionKey != ''" >
+				AND PROCESSDEFINITION_KEY = #{processdefinitionKey,jdbcType=VARCHAR}
+			</if>
+			<if test="formuri != null and formuri != ''" >
+				AND FORMURI = #{formuri,jdbcType=VARCHAR}
+			</if>
+			<if test="taskgroup != null and taskgroup != ''" >
+				AND TASKGROUP = #{taskgroup,jdbcType=VARCHAR}
+			</if>
+			<if test="tasktype != null and tasktype != ''" >
+				AND TASKTYPE = #{tasktype,jdbcType=VARCHAR}
+			</if>
+			<if test="processdefinitionName != null and processdefinitionName != ''" >
+				AND PROCESSDEFINITION_NAME = #{processdefinitionName,jdbcType=VARCHAR}
+			</if>
+			<if test="iscancelled != null and iscancelled != ''" >
+				AND ISCANCELLED = #{iscancelled,jdbcType=VARCHAR}
+			</if>
+			<if test="issuspended != null and issuspended != ''" >
+				AND ISSUSPENDED = #{issuspended,jdbcType=VARCHAR}
+			</if>
+			<if test="isopen != null and isopen != ''" >
+				AND ISOPEN = #{isopen,jdbcType=VARCHAR}
+			</if>
+			<if test="isdraft != null and isdraft != ''" >
+				AND ISDRAFT = #{isdraft,jdbcType=VARCHAR}
+			</if>
+			<if test="expectedExecutiontime != null and expectedExecutiontime != ''" >
+				AND EXPECTED_EXECUTIONTIME = #{expectedExecutiontime,jdbcType=NUMERIC}
+			</if>
+			<if test="agent != null and agent != ''" >
+				AND AGENT = #{agent,jdbcType=VARCHAR}
+			</if>
+			<if test="admin != null and admin != ''" >
+				AND ADMIN = #{admin,jdbcType=VARCHAR}
+			</if>
+			<if test="formuriview != null and formuriview != ''" >
+				AND FORMURIVIEW = #{formuriview,jdbcType=VARCHAR}
+			</if>
+			<if test="callactivityInstanceId != null and callactivityInstanceId != ''" >
+				AND CALLACTIVITY_INSTANCE_ID = #{callactivityInstanceId,jdbcType=VARCHAR}
+			</if>
+			<if test="commandId != null and commandId != ''" >
+				AND COMMAND_ID = #{commandId,jdbcType=VARCHAR}
+			</if>
+			<if test="pendingtaskid != null and pendingtaskid != ''" >
+				AND PENDINGTASKID = #{pendingtaskid,jdbcType=VARCHAR}
+			</if>
+			<if test="archiveTime != null" >
+				AND ARCHIVE_TIME = #{archiveTime,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM BASE.FIXFLOW_RUN_TASKINSTANCE
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="FixflowRunTaskinstanceResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+		<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.FixflowRunTaskinstanceModel">
+		SELECT COUNT(*) FROM BASE.FIXFLOW_RUN_TASKINSTANCE
+		<where>
+			<if test="taskinstanceId != null and taskinstanceId != ''" >
+				TASKINSTANCE_ID = #{taskinstanceId,jdbcType=VARCHAR}
+			</if>
+			<if test="processinstanceId != null and processinstanceId != ''" >
+				AND PROCESSINSTANCE_ID = #{processinstanceId,jdbcType=VARCHAR}
+			</if>
+			<if test="processdefinitionId != null and processdefinitionId != ''" >
+				AND PROCESSDEFINITION_ID = #{processdefinitionId,jdbcType=VARCHAR}
+			</if>
+			<if test="version != null and version != ''" >
+				AND VERSION = #{version,jdbcType=NUMERIC}
+			</if>
+			<if test="tokenId != null and tokenId != ''" >
+				AND TOKEN_ID = #{tokenId,jdbcType=VARCHAR}
+			</if>
+			<if test="nodeId != null and nodeId != ''" >
+				AND NODE_ID = #{nodeId,jdbcType=VARCHAR}
+			</if>
+			<if test="description != null and description != ''" >
+				AND DESCRIPTION = #{description,jdbcType=VARCHAR}
+			</if>
+			<if test="parenttaskId != null and parenttaskId != ''" >
+				AND PARENTTASK_ID = #{parenttaskId,jdbcType=VARCHAR}
+			</if>
+			<if test="assignee != null and assignee != ''" >
+				AND ASSIGNEE = #{assignee,jdbcType=VARCHAR}
+			</if>
+			<if test="claimTime != null" >
+				AND CLAIM_TIME = #{claimTime,jdbcType=VARCHAR}
+			</if>
+			<if test="name != null and name != ''" >
+				AND NAME = #{name,jdbcType=VARCHAR}
+			</if>
+			<if test="createTime != null" >
+				AND CREATE_TIME = #{createTime,jdbcType=VARCHAR}
+			</if>
+			<if test="startTime != null" >
+				AND START_TIME = #{startTime,jdbcType=VARCHAR}
+			</if>
+			<if test="isblocking != null and isblocking != ''" >
+				AND ISBLOCKING = #{isblocking,jdbcType=VARCHAR}
+			</if>
+			<if test="endTime != null" >
+				AND END_TIME = #{endTime,jdbcType=VARCHAR}
+			</if>
+			<if test="duedate != null" >
+				AND DUEDATE = #{duedate,jdbcType=VARCHAR}
+			</if>
+			<if test="priority != null and priority != ''" >
+				AND PRIORITY = #{priority,jdbcType=NUMERIC}
+			</if>
+			<if test="category != null and category != ''" >
+				AND CATEGORY = #{category,jdbcType=VARCHAR}
+			</if>
+			<if test="owner != null and owner != ''" >
+				AND OWNER = #{owner,jdbcType=VARCHAR}
+			</if>
+			<if test="delegationstatestring != null and delegationstatestring != ''" >
+				AND DELEGATIONSTATESTRING = #{delegationstatestring,jdbcType=VARCHAR}
+			</if>
+			<if test="bizkey != null and bizkey != ''" >
+				AND BIZKEY = #{bizkey,jdbcType=VARCHAR}
+			</if>
+			<if test="commandType != null and commandType != ''" >
+				AND COMMAND_TYPE = #{commandType,jdbcType=VARCHAR}
+			</if>
+			<if test="commandMessage != null and commandMessage != ''" >
+				AND COMMAND_MESSAGE = #{commandMessage,jdbcType=VARCHAR}
+			</if>
+			<if test="taskComment != null and taskComment != ''" >
+				AND TASK_COMMENT = #{taskComment,jdbcType=VARCHAR}
+			</if>
+			<if test="nodeName != null and nodeName != ''" >
+				AND NODE_NAME = #{nodeName,jdbcType=VARCHAR}
+			</if>
+			<if test="processdefinitionKey != null and processdefinitionKey != ''" >
+				AND PROCESSDEFINITION_KEY = #{processdefinitionKey,jdbcType=VARCHAR}
+			</if>
+			<if test="formuri != null and formuri != ''" >
+				AND FORMURI = #{formuri,jdbcType=VARCHAR}
+			</if>
+			<if test="taskgroup != null and taskgroup != ''" >
+				AND TASKGROUP = #{taskgroup,jdbcType=VARCHAR}
+			</if>
+			<if test="tasktype != null and tasktype != ''" >
+				AND TASKTYPE = #{tasktype,jdbcType=VARCHAR}
+			</if>
+			<if test="processdefinitionName != null and processdefinitionName != ''" >
+				AND PROCESSDEFINITION_NAME = #{processdefinitionName,jdbcType=VARCHAR}
+			</if>
+			<if test="iscancelled != null and iscancelled != ''" >
+				AND ISCANCELLED = #{iscancelled,jdbcType=VARCHAR}
+			</if>
+			<if test="issuspended != null and issuspended != ''" >
+				AND ISSUSPENDED = #{issuspended,jdbcType=VARCHAR}
+			</if>
+			<if test="isopen != null and isopen != ''" >
+				AND ISOPEN = #{isopen,jdbcType=VARCHAR}
+			</if>
+			<if test="isdraft != null and isdraft != ''" >
+				AND ISDRAFT = #{isdraft,jdbcType=VARCHAR}
+			</if>
+			<if test="expectedExecutiontime != null and expectedExecutiontime != ''" >
+				AND EXPECTED_EXECUTIONTIME = #{expectedExecutiontime,jdbcType=NUMERIC}
+			</if>
+			<if test="agent != null and agent != ''" >
+				AND AGENT = #{agent,jdbcType=VARCHAR}
+			</if>
+			<if test="admin != null and admin != ''" >
+				AND ADMIN = #{admin,jdbcType=VARCHAR}
+			</if>
+			<if test="formuriview != null and formuriview != ''" >
+				AND FORMURIVIEW = #{formuriview,jdbcType=VARCHAR}
+			</if>
+			<if test="callactivityInstanceId != null and callactivityInstanceId != ''" >
+				AND CALLACTIVITY_INSTANCE_ID = #{callactivityInstanceId,jdbcType=VARCHAR}
+			</if>
+			<if test="commandId != null and commandId != ''" >
+				AND COMMAND_ID = #{commandId,jdbcType=VARCHAR}
+			</if>
+			<if test="pendingtaskid != null and pendingtaskid != ''" >
+				AND PENDINGTASKID = #{pendingtaskid,jdbcType=VARCHAR}
+			</if>
+			<if test="archiveTime != null" >
+				AND ARCHIVE_TIME = #{archiveTime,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.FixflowRunTaskinstanceModel" resultMap="FixflowRunTaskinstanceResult">
+		SELECT * FROM BASE.FIXFLOW_RUN_TASKINSTANCE
+		<where>
+			<if test="taskinstanceId != null and taskinstanceId != ''" >
+				TASKINSTANCE_ID = #{taskinstanceId,jdbcType=VARCHAR}
+			</if>
+			<if test="processinstanceId != null and processinstanceId != ''" >
+				AND PROCESSINSTANCE_ID = #{processinstanceId,jdbcType=VARCHAR}
+			</if>
+			<if test="processdefinitionId != null and processdefinitionId != ''" >
+				AND PROCESSDEFINITION_ID = #{processdefinitionId,jdbcType=VARCHAR}
+			</if>
+			<if test="version != null and version != ''" >
+				AND VERSION = #{version,jdbcType=NUMERIC}
+			</if>
+			<if test="tokenId != null and tokenId != ''" >
+				AND TOKEN_ID = #{tokenId,jdbcType=VARCHAR}
+			</if>
+			<if test="nodeId != null and nodeId != ''" >
+				AND NODE_ID = #{nodeId,jdbcType=VARCHAR}
+			</if>
+			<if test="description != null and description != ''" >
+				AND DESCRIPTION = #{description,jdbcType=VARCHAR}
+			</if>
+			<if test="parenttaskId != null and parenttaskId != ''" >
+				AND PARENTTASK_ID = #{parenttaskId,jdbcType=VARCHAR}
+			</if>
+			<if test="assignee != null and assignee != ''" >
+				AND ASSIGNEE = #{assignee,jdbcType=VARCHAR}
+			</if>
+			<if test="claimTime != null" >
+				AND CLAIM_TIME = #{claimTime,jdbcType=VARCHAR}
+			</if>
+			<if test="name != null and name != ''" >
+				AND NAME = #{name,jdbcType=VARCHAR}
+			</if>
+			<if test="createTime != null" >
+				AND CREATE_TIME = #{createTime,jdbcType=VARCHAR}
+			</if>
+			<if test="startTime != null" >
+				AND START_TIME = #{startTime,jdbcType=VARCHAR}
+			</if>
+			<if test="isblocking != null and isblocking != ''" >
+				AND ISBLOCKING = #{isblocking,jdbcType=VARCHAR}
+			</if>
+			<if test="endTime != null" >
+				AND END_TIME = #{endTime,jdbcType=VARCHAR}
+			</if>
+			<if test="duedate != null" >
+				AND DUEDATE = #{duedate,jdbcType=VARCHAR}
+			</if>
+			<if test="priority != null and priority != ''" >
+				AND PRIORITY = #{priority,jdbcType=NUMERIC}
+			</if>
+			<if test="category != null and category != ''" >
+				AND CATEGORY = #{category,jdbcType=VARCHAR}
+			</if>
+			<if test="owner != null and owner != ''" >
+				AND OWNER = #{owner,jdbcType=VARCHAR}
+			</if>
+			<if test="delegationstatestring != null and delegationstatestring != ''" >
+				AND DELEGATIONSTATESTRING = #{delegationstatestring,jdbcType=VARCHAR}
+			</if>
+			<if test="bizkey != null and bizkey != ''" >
+				AND BIZKEY = #{bizkey,jdbcType=VARCHAR}
+			</if>
+			<if test="commandType != null and commandType != ''" >
+				AND COMMAND_TYPE = #{commandType,jdbcType=VARCHAR}
+			</if>
+			<if test="commandMessage != null and commandMessage != ''" >
+				AND COMMAND_MESSAGE = #{commandMessage,jdbcType=VARCHAR}
+			</if>
+			<if test="taskComment != null and taskComment != ''" >
+				AND TASK_COMMENT = #{taskComment,jdbcType=VARCHAR}
+			</if>
+			<if test="nodeName != null and nodeName != ''" >
+				AND NODE_NAME = #{nodeName,jdbcType=VARCHAR}
+			</if>
+			<if test="processdefinitionKey != null and processdefinitionKey != ''" >
+				AND PROCESSDEFINITION_KEY = #{processdefinitionKey,jdbcType=VARCHAR}
+			</if>
+			<if test="formuri != null and formuri != ''" >
+				AND FORMURI = #{formuri,jdbcType=VARCHAR}
+			</if>
+			<if test="taskgroup != null and taskgroup != ''" >
+				AND TASKGROUP = #{taskgroup,jdbcType=VARCHAR}
+			</if>
+			<if test="tasktype != null and tasktype != ''" >
+				AND TASKTYPE = #{tasktype,jdbcType=VARCHAR}
+			</if>
+			<if test="processdefinitionName != null and processdefinitionName != ''" >
+				AND PROCESSDEFINITION_NAME = #{processdefinitionName,jdbcType=VARCHAR}
+			</if>
+			<if test="iscancelled != null and iscancelled != ''" >
+				AND ISCANCELLED = #{iscancelled,jdbcType=VARCHAR}
+			</if>
+			<if test="issuspended != null and issuspended != ''" >
+				AND ISSUSPENDED = #{issuspended,jdbcType=VARCHAR}
+			</if>
+			<if test="isopen != null and isopen != ''" >
+				AND ISOPEN = #{isopen,jdbcType=VARCHAR}
+			</if>
+			<if test="isdraft != null and isdraft != ''" >
+				AND ISDRAFT = #{isdraft,jdbcType=VARCHAR}
+			</if>
+			<if test="expectedExecutiontime != null and expectedExecutiontime != ''" >
+				AND EXPECTED_EXECUTIONTIME = #{expectedExecutiontime,jdbcType=NUMERIC}
+			</if>
+			<if test="agent != null and agent != ''" >
+				AND AGENT = #{agent,jdbcType=VARCHAR}
+			</if>
+			<if test="admin != null and admin != ''" >
+				AND ADMIN = #{admin,jdbcType=VARCHAR}
+			</if>
+			<if test="formuriview != null and formuriview != ''" >
+				AND FORMURIVIEW = #{formuriview,jdbcType=VARCHAR}
+			</if>
+			<if test="callactivityInstanceId != null and callactivityInstanceId != ''" >
+				AND CALLACTIVITY_INSTANCE_ID = #{callactivityInstanceId,jdbcType=VARCHAR}
+			</if>
+			<if test="commandId != null and commandId != ''" >
+				AND COMMAND_ID = #{commandId,jdbcType=VARCHAR}
+			</if>
+			<if test="pendingtaskid != null and pendingtaskid != ''" >
+				AND PENDINGTASKID = #{pendingtaskid,jdbcType=VARCHAR}
+			</if>
+			<if test="archiveTime != null" >
+				AND ARCHIVE_TIME = #{archiveTime,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="FixflowRunTaskinstanceResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+	<!-- 根据项目ID获取项目立项审批信息列表 -->
+	<select id="getProjAppTaskListByProjId" parameterType="java.lang.String" resultMap="FixflowRunTaskinstanceResult2">
+		SELECT T.PROCESSINSTANCE_ID,T.TASKINSTANCE_ID,T.PROCESSDEFINITION_ID,T.NODE_NAME, U.NAME ASSIGNEE_NAME, T.CREATE_TIME, T.END_TIME, T.COMMAND_MESSAGE, T.TASK_COMMENT
+		 FROM BASE.FIXFLOW_RUN_TASKINSTANCE T
+		LEFT JOIN BASE.APP_USER U ON T.ASSIGNEE=U.ID
+		LEFT JOIN EI.TZ_T_PROJ_APP_INFO P ON T.PROCESSINSTANCE_ID=P.PROCESS_INST_ID
+		WHERE P.PROJ_ID=#{PROJ_ID}
+		ORDER BY T.CREATE_TIME
+	</select>
+	<!-- 根据项目ID获取项目决策审批信息列表 -->
+	<select id="getProjDecisionTaskListByProjId" parameterType="java.lang.String" resultMap="FixflowRunTaskinstanceResult2">
+		SELECT T.PROCESSINSTANCE_ID,T.TASKINSTANCE_ID,T.PROCESSDEFINITION_ID,T.NODE_NAME, U.NAME ASSIGNEE_NAME, T.CREATE_TIME, T.END_TIME, T.COMMAND_MESSAGE, T.TASK_COMMENT
+		 FROM BASE.FIXFLOW_RUN_TASKINSTANCE T
+		LEFT JOIN BASE.APP_USER U ON T.ASSIGNEE=U.ID
+		LEFT JOIN EI.TZ_T_PROJ_INFO P ON T.PROCESSINSTANCE_ID=P.PROCESS_INST_ID
+		WHERE P.PROJ_ID=#{PROJ_ID}
+		ORDER BY T.CREATE_TIME
+	</select>
+	<!-- 根据流程ID获取流程审批信息列表 -->
+	<select id="getListByProcessinstanceId" parameterType="java.lang.String" resultMap="FixflowRunTaskinstanceResult2">
+		SELECT T.*
+		 FROM BASE.FIXFLOW_RUN_TASKINSTANCE T
+		WHERE T.PROCESSINSTANCE_ID=#{PROJ_ID}
+		ORDER BY T.CREATE_TIME DESC
+	</select>
+
+	<select id="getFixFlowByTaskId" parameterType="java.lang.String" resultType="Map">
+         select * from base.fixflow_run_taskinstance where PROCESSINSTANCE_ID=#{processId}
+         order by CREATE_TIME desc
+	</select>
+
+</mapper>

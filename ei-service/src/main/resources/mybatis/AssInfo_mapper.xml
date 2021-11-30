@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AssInfo">
+	<!-- start autocreate -->
+
+	<resultMap id="AssInfoResult" type="com.ppmg.ei.model.AssInfoModel">
+		<result column="INFO_ID" property="infoId" jdbcType="VARCHAR" />
+		<result column="PROJ_ID" property="projId" jdbcType="VARCHAR" />
+		<result column="ASS_OBJ" property="assObj" jdbcType="VARCHAR" />
+		<result column="ASS_OBJ_ID" property="assObjId" jdbcType="VARCHAR" />
+		<result column="POST_ID" property="postId" jdbcType="VARCHAR" />
+		<result column="COMPANY_ID" property="companyId" jdbcType="VARCHAR" />
+		<result column="DEPT_ID" property="deptId" jdbcType="VARCHAR" />
+		<result column="INFO_NAME" property="infoName" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="SET_PROCESS_ID" property="setProcessId" jdbcType="VARCHAR" />
+		<result column="FINAL_SCORE" property="finalScore" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="INFO_ATTA" property="infoAtta" jdbcType="VARCHAR" />
+		<result column="IS_DELETE" property="isDelete" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="UNDEFINED1" property="undefined1" jdbcType="VARCHAR" />
+		<result column="UNDEFINED2" property="undefined2" jdbcType="VARCHAR" />
+		<result column="UNDEFINED3" property="undefined3" jdbcType="VARCHAR" />
+		<result column="UNDEFINED4" property="undefined4" jdbcType="TIMESTAMP" />
+		<result column="UNDEFINED5" property="undefined5" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.AssInfoModel">
+		INSERT INTO PA.ASS_INFO (INFO_ID,PROJ_ID,ASS_OBJ,ASS_OBJ_ID,POST_ID,COMPANY_ID,DEPT_ID,INFO_NAME,STATUS,SET_PROCESS_ID,FINAL_SCORE,REMARK,INFO_ATTA,IS_DELETE,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,UNDEFINED1,UNDEFINED2,UNDEFINED3,UNDEFINED4,UNDEFINED5) values(#{infoId,jdbcType=VARCHAR},#{projId,jdbcType=VARCHAR},#{assObj,jdbcType=VARCHAR},#{assObjId,jdbcType=VARCHAR},#{postId,jdbcType=VARCHAR},#{companyId,jdbcType=VARCHAR},#{deptId,jdbcType=VARCHAR},#{infoName,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{setProcessId,jdbcType=VARCHAR},#{finalScore,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},#{infoAtta,jdbcType=VARCHAR},#{isDelete,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{undefined1,jdbcType=VARCHAR},#{undefined2,jdbcType=VARCHAR},#{undefined3,jdbcType=VARCHAR},#{undefined4,jdbcType=TIMESTAMP},#{undefined5,jdbcType=TIMESTAMP})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO PA.ASS_INFO (INFO_ID,PROJ_ID,ASS_OBJ,ASS_OBJ_ID,POST_ID,COMPANY_ID,DEPT_ID,INFO_NAME,STATUS,SET_PROCESS_ID,FINAL_SCORE,REMARK,INFO_ATTA,IS_DELETE,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,UNDEFINED1,UNDEFINED2,UNDEFINED3,UNDEFINED4,UNDEFINED5)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.infoId,jdbcType=VARCHAR},
+				#{item.projId,jdbcType=VARCHAR},
+				#{item.assObj,jdbcType=VARCHAR},
+				#{item.assObjId,jdbcType=VARCHAR},
+				#{item.postId,jdbcType=VARCHAR},
+				#{item.companyId,jdbcType=VARCHAR},
+				#{item.deptId,jdbcType=VARCHAR},
+				#{item.infoName,jdbcType=VARCHAR},
+				#{item.status,jdbcType=VARCHAR},
+				#{item.setProcessId,jdbcType=VARCHAR},
+				#{item.finalScore,jdbcType=VARCHAR},
+				#{item.remark,jdbcType=VARCHAR},
+				#{item.infoAtta,jdbcType=VARCHAR},
+				#{item.isDelete,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+				#{item.undefined1,jdbcType=VARCHAR},
+				#{item.undefined2,jdbcType=VARCHAR},
+				#{item.undefined3,jdbcType=VARCHAR},
+				#{item.undefined4,jdbcType=TIMESTAMP},
+				#{item.undefined5,jdbcType=TIMESTAMP}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  PA.ASS_INFO WHERE INFO_ID = #{infoId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.AssInfoModel">
+		DELETE FROM PA.ASS_INFO
+		<where>
+			<if test="infoId != null and infoId != ''" >
+				INFO_ID = #{infoId,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="assObj != null and assObj != ''" >
+				AND ASS_OBJ = #{assObj,jdbcType=VARCHAR}
+			</if>
+			<if test="assObjId != null and assObjId != ''" >
+				AND ASS_OBJ_ID = #{assObjId,jdbcType=VARCHAR}
+			</if>
+			<if test="postId != null and postId != ''" >
+				AND POST_ID = #{postId,jdbcType=VARCHAR}
+			</if>
+			<if test="companyId != null and companyId != ''" >
+				AND COMPANY_ID = #{companyId,jdbcType=VARCHAR}
+			</if>
+			<if test="deptId != null and deptId != ''" >
+				AND DEPT_ID = #{deptId,jdbcType=VARCHAR}
+			</if>
+			<if test="infoName != null and infoName != ''" >
+				AND INFO_NAME = #{infoName,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="setProcessId != null and setProcessId != ''" >
+				AND SET_PROCESS_ID = #{setProcessId,jdbcType=VARCHAR}
+			</if>
+			<if test="finalScore != null and finalScore != ''" >
+				AND FINAL_SCORE = #{finalScore,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="infoAtta != null and infoAtta != ''" >
+				AND INFO_ATTA = #{infoAtta,jdbcType=VARCHAR}
+			</if>
+			<if test="isDelete != null and isDelete != ''" >
+				AND IS_DELETE = #{isDelete,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="undefined1 != null and undefined1 != ''" >
+				AND UNDEFINED1 = #{undefined1,jdbcType=VARCHAR}
+			</if>
+			<if test="undefined2 != null and undefined2 != ''" >
+				AND UNDEFINED2 = #{undefined2,jdbcType=VARCHAR}
+			</if>
+			<if test="undefined3 != null and undefined3 != ''" >
+				AND UNDEFINED3 = #{undefined3,jdbcType=VARCHAR}
+			</if>
+			<if test="undefined4 != null" >
+				AND UNDEFINED4 = #{undefined4,jdbcType=VARCHAR}
+			</if>
+			<if test="undefined5 != null" >
+				AND UNDEFINED5 = #{undefined5,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  PA.ASS_INFO WHERE INFO_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.AssInfoModel">
+		UPDATE PA.ASS_INFO 
+		<set>
+			<if test="infoId != null and infoId != ''" >
+				INFO_ID = #{infoId,jdbcType=VARCHAR},
+			</if>
+			<if test="projId != null and projId != ''" >
+				PROJ_ID = #{projId,jdbcType=VARCHAR},
+			</if>
+			<if test="assObj != null and assObj != ''" >
+				ASS_OBJ = #{assObj,jdbcType=VARCHAR},
+			</if>
+			<if test="assObjId != null and assObjId != ''" >
+				ASS_OBJ_ID = #{assObjId,jdbcType=VARCHAR},
+			</if>
+			<if test="postId != null and postId != ''" >
+				POST_ID = #{postId,jdbcType=VARCHAR},
+			</if>
+			<if test="companyId != null and companyId != ''" >
+				COMPANY_ID = #{companyId,jdbcType=VARCHAR},
+			</if>
+			<if test="deptId != null and deptId != ''" >
+				DEPT_ID = #{deptId,jdbcType=VARCHAR},
+			</if>
+			<if test="infoName != null and infoName != ''" >
+				INFO_NAME = #{infoName,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="setProcessId != null and setProcessId != ''" >
+				SET_PROCESS_ID = #{setProcessId,jdbcType=VARCHAR},
+			</if>
+			<if test="finalScore != null and finalScore != ''" >
+				FINAL_SCORE = #{finalScore,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null and remark != ''" >
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="infoAtta != null and infoAtta != ''" >
+				INFO_ATTA = #{infoAtta,jdbcType=VARCHAR},
+			</if>
+			<if test="isDelete != null and isDelete != ''" >
+				IS_DELETE = #{isDelete,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="undefined1 != null and undefined1 != ''" >
+				UNDEFINED1 = #{undefined1,jdbcType=VARCHAR},
+			</if>
+			<if test="undefined2 != null and undefined2 != ''" >
+				UNDEFINED2 = #{undefined2,jdbcType=VARCHAR},
+			</if>
+			<if test="undefined3 != null and undefined3 != ''" >
+				UNDEFINED3 = #{undefined3,jdbcType=VARCHAR},
+			</if>
+			<if test="undefined4 != null" >
+				UNDEFINED4 = #{undefined4,jdbcType=TIMESTAMP},
+			</if>
+			<if test="undefined5 != null" >
+				UNDEFINED5 = #{undefined5,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		WHERE INFO_ID = #{infoId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="AssInfoResult">
+		SELECT * FROM PA.ASS_INFO WHERE INFO_ID = #{infoId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.AssInfoModel" resultMap="AssInfoResult">
+		SELECT * FROM PA.ASS_INFO
+		<where>
+			<if test="infoId != null and infoId != ''" >
+				INFO_ID = #{infoId,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="assObj != null and assObj != ''" >
+				AND ASS_OBJ = #{assObj,jdbcType=VARCHAR}
+			</if>
+			<if test="assObjId != null and assObjId != ''" >
+				AND ASS_OBJ_ID = #{assObjId,jdbcType=VARCHAR}
+			</if>
+			<if test="postId != null and postId != ''" >
+				AND POST_ID = #{postId,jdbcType=VARCHAR}
+			</if>
+			<if test="companyId != null and companyId != ''" >
+				AND COMPANY_ID = #{companyId,jdbcType=VARCHAR}
+			</if>
+			<if test="deptId != null and deptId != ''" >
+				AND DEPT_ID = #{deptId,jdbcType=VARCHAR}
+			</if>
+			<if test="infoName != null and infoName != ''" >
+				AND INFO_NAME = #{infoName,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="setProcessId != null and setProcessId != ''" >
+				AND SET_PROCESS_ID = #{setProcessId,jdbcType=VARCHAR}
+			</if>
+			<if test="finalScore != null and finalScore != ''" >
+				AND FINAL_SCORE = #{finalScore,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="infoAtta != null and infoAtta != ''" >
+				AND INFO_ATTA = #{infoAtta,jdbcType=VARCHAR}
+			</if>
+			<if test="isDelete != null and isDelete != ''" >
+				AND IS_DELETE = #{isDelete,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="undefined1 != null and undefined1 != ''" >
+				AND UNDEFINED1 = #{undefined1,jdbcType=VARCHAR}
+			</if>
+			<if test="undefined2 != null and undefined2 != ''" >
+				AND UNDEFINED2 = #{undefined2,jdbcType=VARCHAR}
+			</if>
+			<if test="undefined3 != null and undefined3 != ''" >
+				AND UNDEFINED3 = #{undefined3,jdbcType=VARCHAR}
+			</if>
+			<if test="undefined4 != null" >
+				AND UNDEFINED4 = #{undefined4,jdbcType=VARCHAR}
+			</if>
+			<if test="undefined5 != null" >
+				AND UNDEFINED5 = #{undefined5,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM PA.ASS_INFO
+		<where>
+			ass_obj = '0' and is_delete = '0'
+			<if test="paramMap.orgIdOrDeptId != null and paramMap.orgIdOrDeptId != '' ">
+				AND ASS_OBJ_ID=#{paramMap.orgIdOrDeptId}
+			</if>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="AssInfoResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.AssInfoModel">
+		SELECT COUNT(*) FROM PA.ASS_INFO
+
+		<where>
+			<if test="infoId != null and infoId != ''" >
+				INFO_ID = #{infoId,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="assObj != null and assObj != ''" >
+				AND ASS_OBJ = #{assObj,jdbcType=VARCHAR}
+			</if>
+			<if test="assObjId != null and assObjId != ''" >
+				AND ASS_OBJ_ID = #{assObjId,jdbcType=VARCHAR}
+			</if>
+			<if test="postId != null and postId != ''" >
+				AND POST_ID = #{postId,jdbcType=VARCHAR}
+			</if>
+			<if test="companyId != null and companyId != ''" >
+				AND COMPANY_ID = #{companyId,jdbcType=VARCHAR}
+			</if>
+			<if test="deptId != null and deptId != ''" >
+				AND DEPT_ID = #{deptId,jdbcType=VARCHAR}
+			</if>
+			<if test="infoName != null and infoName != ''" >
+				AND INFO_NAME = #{infoName,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="setProcessId != null and setProcessId != ''" >
+				AND SET_PROCESS_ID = #{setProcessId,jdbcType=VARCHAR}
+			</if>
+			<if test="finalScore != null and finalScore != ''" >
+				AND FINAL_SCORE = #{finalScore,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="infoAtta != null and infoAtta != ''" >
+				AND INFO_ATTA = #{infoAtta,jdbcType=VARCHAR}
+			</if>
+			<if test="isDelete != null and isDelete != ''" >
+				AND IS_DELETE = #{isDelete,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="undefined1 != null and undefined1 != ''" >
+				AND UNDEFINED1 = #{undefined1,jdbcType=VARCHAR}
+			</if>
+			<if test="undefined2 != null and undefined2 != ''" >
+				AND UNDEFINED2 = #{undefined2,jdbcType=VARCHAR}
+			</if>
+			<if test="undefined3 != null and undefined3 != ''" >
+				AND UNDEFINED3 = #{undefined3,jdbcType=VARCHAR}
+			</if>
+			<if test="undefined4 != null" >
+				AND UNDEFINED4 = #{undefined4,jdbcType=VARCHAR}
+			</if>
+			<if test="undefined5 != null" >
+				AND UNDEFINED5 = #{undefined5,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.AssInfoModel" resultMap="AssInfoResult">
+		SELECT * FROM PA.ASS_INFO
+		<where>
+			<if test="infoId != null and infoId != ''" >
+				INFO_ID = #{infoId,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="assObj != null and assObj != ''" >
+				AND ASS_OBJ = #{assObj,jdbcType=VARCHAR}
+			</if>
+			<if test="assObjId != null and assObjId != ''" >
+				AND ASS_OBJ_ID = #{assObjId,jdbcType=VARCHAR}
+			</if>
+			<if test="postId != null and postId != ''" >
+				AND POST_ID = #{postId,jdbcType=VARCHAR}
+			</if>
+			<if test="companyId != null and companyId != ''" >
+				AND COMPANY_ID = #{companyId,jdbcType=VARCHAR}
+			</if>
+			<if test="deptId != null and deptId != ''" >
+				AND DEPT_ID = #{deptId,jdbcType=VARCHAR}
+			</if>
+			<if test="infoName != null and infoName != ''" >
+				AND INFO_NAME = #{infoName,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="setProcessId != null and setProcessId != ''" >
+				AND SET_PROCESS_ID = #{setProcessId,jdbcType=VARCHAR}
+			</if>
+			<if test="finalScore != null and finalScore != ''" >
+				AND FINAL_SCORE = #{finalScore,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="infoAtta != null and infoAtta != ''" >
+				AND INFO_ATTA = #{infoAtta,jdbcType=VARCHAR}
+			</if>
+			<if test="isDelete != null and isDelete != ''" >
+				AND IS_DELETE = #{isDelete,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="undefined1 != null and undefined1 != ''" >
+				AND UNDEFINED1 = #{undefined1,jdbcType=VARCHAR}
+			</if>
+			<if test="undefined2 != null and undefined2 != ''" >
+				AND UNDEFINED2 = #{undefined2,jdbcType=VARCHAR}
+			</if>
+			<if test="undefined3 != null and undefined3 != ''" >
+				AND UNDEFINED3 = #{undefined3,jdbcType=VARCHAR}
+			</if>
+			<if test="undefined4 != null" >
+				AND UNDEFINED4 = #{undefined4,jdbcType=VARCHAR}
+			</if>
+			<if test="undefined5 != null" >
+				AND UNDEFINED5 = #{undefined5,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="AssInfoResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+</mapper>

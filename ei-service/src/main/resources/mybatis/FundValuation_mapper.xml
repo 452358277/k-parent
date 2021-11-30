@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FundValuation">
+    <!-- 基本信息 -->
+    <resultMap id="FundValuationResult2" type="com.ppmg.ei.model.FundValuationModel" extends="FundValuationResult">
+        <result column="ASSESS_BY_NAME" property="assessByName" jdbcType="VARCHAR" />
+        <result column="INVE_VALUATION_DISPLAY" property="inveValuationDisplay" jdbcType="VARCHAR" />
+    </resultMap>
+	<!-- start autocreate -->
+
+	<resultMap id="FundValuationResult" type="com.ppmg.ei.model.FundValuationModel">
+		<result column="PK_ID" property="pkId" jdbcType="VARCHAR" />
+		<result column="FUND_ID" property="fundId" jdbcType="VARCHAR" />
+		<result column="FUND_STS" property="fundSts" jdbcType="VARCHAR" />
+		<result column="ASSESS_BY" property="assessBy" jdbcType="VARCHAR" />
+		<result column="ASSESS_DT" property="assessDt" jdbcType="TIMESTAMP" />
+		<result column="INVE_VALUATION" property="inveValuation" jdbcType="NUMERIC" />
+		<result column="IV_CURRENCY" property="ivCurrency" jdbcType="VARCHAR" />
+		<result column="VALU_TYPE" property="valuType" jdbcType="VARCHAR" />
+		<result column="VALU_DESC" property="valuDesc" jdbcType="VARCHAR" />
+		<result column="VALU_DT" property="valuDt" jdbcType="TIMESTAMP" />
+		<result column="IRR" property="irr" jdbcType="NUMERIC" />
+		<result column="ATTA_FILE" property="attaFile" jdbcType="VARCHAR" />
+		<result column="TASK_ID" property="taskId" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.FundValuationModel">
+		INSERT INTO RZ_T_FUND_VALUATION (PK_ID,FUND_ID,FUND_STS,ASSESS_BY,ASSESS_DT,INVE_VALUATION,IV_CURRENCY,VALU_TYPE,VALU_DESC,VALU_DT,IRR,ATTA_FILE,TASK_ID,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT) values(#{pkId,jdbcType=VARCHAR},#{fundId,jdbcType=VARCHAR},#{fundSts,jdbcType=VARCHAR},#{assessBy,jdbcType=VARCHAR},#{assessDt,jdbcType=TIMESTAMP},#{inveValuation,jdbcType=NUMERIC},#{ivCurrency,jdbcType=VARCHAR},#{valuType,jdbcType=VARCHAR},#{valuDesc,jdbcType=VARCHAR},#{valuDt,jdbcType=TIMESTAMP},#{irr,jdbcType=NUMERIC},#{attaFile,jdbcType=VARCHAR},#{taskId,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO RZ_T_FUND_VALUATION (PK_ID,FUND_ID,FUND_STS,ASSESS_BY,ASSESS_DT,INVE_VALUATION,IV_CURRENCY,VALU_TYPE,VALU_DESC,VALU_DT,IRR,ATTA_FILE,TASK_ID,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.pkId,jdbcType=VARCHAR},
+				#{item.fundId,jdbcType=VARCHAR},
+				#{item.fundSts,jdbcType=VARCHAR},
+				#{item.assessBy,jdbcType=VARCHAR},
+				#{item.assessDt,jdbcType=TIMESTAMP},
+				#{item.inveValuation,jdbcType=NUMERIC},
+				#{item.ivCurrency,jdbcType=VARCHAR},
+				#{item.valuType,jdbcType=VARCHAR},
+				#{item.valuDesc,jdbcType=VARCHAR},
+				#{item.valuDt,jdbcType=TIMESTAMP},
+				#{item.irr,jdbcType=NUMERIC},
+				#{item.attaFile,jdbcType=VARCHAR},
+				#{item.taskId,jdbcType=VARCHAR},
+				#{item.status,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  RZ_T_FUND_VALUATION WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.FundValuationModel">
+		DELETE FROM RZ_T_FUND_VALUATION
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundSts != null and fundSts != ''" >
+				AND FUND_STS = #{fundSts,jdbcType=VARCHAR}
+			</if>
+			<if test="assessBy != null and assessBy != ''" >
+				AND ASSESS_BY = #{assessBy,jdbcType=VARCHAR}
+			</if>
+			<if test="assessDt != null" >
+				AND ASSESS_DT = #{assessDt,jdbcType=VARCHAR}
+			</if>
+			<if test="inveValuation != null and inveValuation != ''" >
+				AND INVE_VALUATION = #{inveValuation,jdbcType=NUMERIC}
+			</if>
+			<if test="ivCurrency != null and ivCurrency != ''" >
+				AND IV_CURRENCY = #{ivCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="valuType != null and valuType != ''" >
+				AND VALU_TYPE = #{valuType,jdbcType=VARCHAR}
+			</if>
+			<if test="valuDesc != null and valuDesc != ''" >
+				AND VALU_DESC = #{valuDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="valuDt != null" >
+				AND VALU_DT = #{valuDt,jdbcType=VARCHAR}
+			</if>
+			<if test="irr != null and irr != ''" >
+				AND IRR = #{irr,jdbcType=NUMERIC}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="taskId != null and taskId != ''" >
+				AND TASK_ID = #{taskId,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  RZ_T_FUND_VALUATION WHERE PK_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.FundValuationModel">
+		UPDATE RZ_T_FUND_VALUATION 
+		<set>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR},
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				FUND_ID = #{fundId,jdbcType=VARCHAR},
+			</if>
+			<if test="fundSts != null and fundSts != ''" >
+				FUND_STS = #{fundSts,jdbcType=VARCHAR},
+			</if>
+			<if test="assessBy != null and assessBy != ''" >
+				ASSESS_BY = #{assessBy,jdbcType=VARCHAR},
+			</if>
+			<if test="assessDt != null" >
+				ASSESS_DT = #{assessDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="inveValuation != null and inveValuation != ''" >
+				INVE_VALUATION = #{inveValuation,jdbcType=NUMERIC},
+			</if>
+			<if test="ivCurrency != null and ivCurrency != ''" >
+				IV_CURRENCY = #{ivCurrency,jdbcType=VARCHAR},
+			</if>
+			<if test="valuType != null and valuType != ''" >
+				VALU_TYPE = #{valuType,jdbcType=VARCHAR},
+			</if>
+			<if test="valuDesc != null and valuDesc != ''" >
+				VALU_DESC = #{valuDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="valuDt != null" >
+				VALU_DT = #{valuDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="irr != null and irr != ''" >
+				IRR = #{irr,jdbcType=NUMERIC},
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				ATTA_FILE = #{attaFile,jdbcType=VARCHAR},
+			</if>
+			<if test="taskId != null and taskId != ''" >
+				TASK_ID = #{taskId,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="FundValuationResult">
+		SELECT * FROM RZ_T_FUND_VALUATION WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.FundValuationModel" resultMap="FundValuationResult">
+		SELECT * FROM RZ_T_FUND_VALUATION
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundSts != null and fundSts != ''" >
+				AND FUND_STS = #{fundSts,jdbcType=VARCHAR}
+			</if>
+			<if test="assessBy != null and assessBy != ''" >
+				AND ASSESS_BY = #{assessBy,jdbcType=VARCHAR}
+			</if>
+			<if test="assessDt != null" >
+				AND ASSESS_DT = #{assessDt,jdbcType=VARCHAR}
+			</if>
+			<if test="inveValuation != null and inveValuation != ''" >
+				AND INVE_VALUATION = #{inveValuation,jdbcType=NUMERIC}
+			</if>
+			<if test="ivCurrency != null and ivCurrency != ''" >
+				AND IV_CURRENCY = #{ivCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="valuType != null and valuType != ''" >
+				AND VALU_TYPE = #{valuType,jdbcType=VARCHAR}
+			</if>
+			<if test="valuDesc != null and valuDesc != ''" >
+				AND VALU_DESC = #{valuDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="valuDt != null" >
+				AND VALU_DT = #{valuDt,jdbcType=VARCHAR}
+			</if>
+			<if test="irr != null and irr != ''" >
+				AND IRR = #{irr,jdbcType=NUMERIC}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="taskId != null and taskId != ''" >
+				AND TASK_ID = #{taskId,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT T1.*,V.NAME ASSESS_BY_NAME,
+			RTrim(to_char(NVL(T1.INVE_VALUATION, 0) / 100000000, 'FM99999999990.99'), '.') as INVE_VALUATION_DISPLAY
+		FROM RZ_T_FUND_VALUATION T1
+		LEFT JOIN BASE.APP_USER V ON T1.ASSESS_BY=TO_CHAR(V.ID)
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="FundValuationResult2" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.FundValuationModel">
+		SELECT COUNT(*) FROM RZ_T_FUND_VALUATION
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundSts != null and fundSts != ''" >
+				AND FUND_STS = #{fundSts,jdbcType=VARCHAR}
+			</if>
+			<if test="assessBy != null and assessBy != ''" >
+				AND ASSESS_BY = #{assessBy,jdbcType=VARCHAR}
+			</if>
+			<if test="assessDt != null" >
+				AND ASSESS_DT = #{assessDt,jdbcType=VARCHAR}
+			</if>
+			<if test="inveValuation != null and inveValuation != ''" >
+				AND INVE_VALUATION = #{inveValuation,jdbcType=NUMERIC}
+			</if>
+			<if test="ivCurrency != null and ivCurrency != ''" >
+				AND IV_CURRENCY = #{ivCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="valuType != null and valuType != ''" >
+				AND VALU_TYPE = #{valuType,jdbcType=VARCHAR}
+			</if>
+			<if test="valuDesc != null and valuDesc != ''" >
+				AND VALU_DESC = #{valuDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="valuDt != null" >
+				AND VALU_DT = #{valuDt,jdbcType=VARCHAR}
+			</if>
+			<if test="irr != null and irr != ''" >
+				AND IRR = #{irr,jdbcType=NUMERIC}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="taskId != null and taskId != ''" >
+				AND TASK_ID = #{taskId,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.FundValuationModel" resultMap="FundValuationResult">
+		SELECT * FROM RZ_T_FUND_VALUATION
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundSts != null and fundSts != ''" >
+				AND FUND_STS = #{fundSts,jdbcType=VARCHAR}
+			</if>
+			<if test="assessBy != null and assessBy != ''" >
+				AND ASSESS_BY = #{assessBy,jdbcType=VARCHAR}
+			</if>
+			<if test="assessDt != null" >
+				AND ASSESS_DT = #{assessDt,jdbcType=VARCHAR}
+			</if>
+			<if test="inveValuation != null and inveValuation != ''" >
+				AND INVE_VALUATION = #{inveValuation,jdbcType=NUMERIC}
+			</if>
+			<if test="ivCurrency != null and ivCurrency != ''" >
+				AND IV_CURRENCY = #{ivCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="valuType != null and valuType != ''" >
+				AND VALU_TYPE = #{valuType,jdbcType=VARCHAR}
+			</if>
+			<if test="valuDesc != null and valuDesc != ''" >
+				AND VALU_DESC = #{valuDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="valuDt != null" >
+				AND VALU_DT = #{valuDt,jdbcType=VARCHAR}
+			</if>
+			<if test="irr != null and irr != ''" >
+				AND IRR = #{irr,jdbcType=NUMERIC}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="taskId != null and taskId != ''" >
+				AND TASK_ID = #{taskId,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="FundValuationResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+</mapper>

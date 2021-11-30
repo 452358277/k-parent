@@ -1,0 +1,1136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="XjlTPaymentRequest">
+	<!-- start autocreate -->
+
+	<resultMap id="XjlTPaymentRequestResult" type="com.ppmg.ei.model.XjlTPaymentRequestModel">
+		<result column="PQ_ID" property="pqId" jdbcType="VARCHAR" />
+		<result column="INVEST_PAYMENT_TYPE" property="investPaymentType" jdbcType="VARCHAR" />
+		<result column="INVESTOR" property="investor" jdbcType="VARCHAR" />
+		<result column="RECEIVER" property="receiver" jdbcType="VARCHAR" />
+		<result column="APP_USER" property="appUser" jdbcType="VARCHAR" />
+		<result column="APP_DT" property="appDt" jdbcType="TIMESTAMP" />
+		<result column="FINANCE_TYPE" property="financeType" jdbcType="VARCHAR" />
+		<result column="PAY_DT" property="payDt" jdbcType="TIMESTAMP" />
+		<result column="PAY_AMOUNT" property="payAmount" jdbcType="NUMERIC" />
+		<result column="PAY_CURRENCY" property="payCurrency" jdbcType="VARCHAR" />
+		<result column="RMB_INVE_AMOUNT" property="rmbInveAmount" jdbcType="NUMERIC" />
+		<result column="PAYEE_NAME" property="payeeName" jdbcType="VARCHAR" />
+		<result column="DUE_BANK" property="dueBank" jdbcType="VARCHAR" />
+		<result column="RECEIVABLE_ACCOUNT" property="receivableAccount" jdbcType="VARCHAR" />
+		<result column="PAYMENT_ACCOUNT" property="paymentAccount" jdbcType="VARCHAR" />
+		<result column="DESC_FILE" property="descFile" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="PROCESS_INST_ID" property="processInstId" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="PROJECT_OR_FUND_ID" property="projectOrFundId" jdbcType="VARCHAR" />
+		<result column="PROJECT_OR_FUND_NAME" property="projectOrFundName" jdbcType="VARCHAR" />
+		<result column="INVESTOR_ID" property="investorId" jdbcType="VARCHAR" />
+		<result column="RECEIVER_ID" property="receiverId" jdbcType="VARCHAR" />
+		<result column="APP_USER_ID" property="appUserId" jdbcType="VARCHAR" />
+		<result column="LEDGER_OBJECT" property="ledgerObject" jdbcType="VARCHAR" />
+		<result column="TOTAL_INVE_AMOUNT" property="totalInveAmount" jdbcType="NUMERIC" />
+		<result column="TOTAL_INVE_CURRENCY" property="totalInveCurrency" jdbcType="VARCHAR" />
+		<result column="TOTAL_INVE_AMOUNT_RMB" property="totalInveAmountRmb" jdbcType="NUMERIC" />
+		<result column="SUM_INVE_AMOUNT" property="sumInveAmount" jdbcType="NUMERIC" />
+		<result column="SUM_INVE_CURRENCY" property="sumInveCurrency" jdbcType="VARCHAR" />
+		<result column="UNPAID_AMOUNT" property="unpaidAmount" jdbcType="NUMERIC" />
+		<result column="UNPAID_CURRENCY" property="unpaidCurrency" jdbcType="VARCHAR" />
+		<result column="TOTAL_PERIOD" property="totalPeriod" jdbcType="NUMERIC" />
+		<result column="CURRENT_PERIOD" property="currentPeriod" jdbcType="NUMERIC" />
+		<result column="DEPT_ID" property="deptId" jdbcType="VARCHAR" />
+		<result column="DEPT_NAME" property="deptName" jdbcType="VARCHAR" />
+		<result column="GROUP_ID" property="groupId" jdbcType="VARCHAR" />
+		<result column="GROUP_NAME" property="groupName" jdbcType="VARCHAR" />
+		<result column="MONEY_DESC" property="moneyDesc" jdbcType="VARCHAR" />
+		<result column="MONEY_DESC_ATT" property="moneyDescAtt" jdbcType="VARCHAR" />
+		<result column="ACTUAL_PAY_DATE" property="actualPayDate" jdbcType="TIMESTAMP" />
+		<result column="ATTA_FILE" property="attaFile" jdbcType="VARCHAR" />
+		<result column="CONTRACT_FILE_ID" property="contractFileId" jdbcType="VARCHAR" />
+		<result column="RECEIVER_ID2" property="receiverId2" jdbcType="VARCHAR" />
+		<result column="RECEIVER2" property="receiver2" jdbcType="VARCHAR" />
+		<result column="ACTUAL_PAY_AMOUNT" property="actualPayAmount" jdbcType="NUMERIC" />
+		<result column="AMOUNT_TYPE" property="amountType" jdbcType="VARCHAR" />
+		<result column="PROCESS_INST_ID_TWO" property="processInstIdTwo" jdbcType="VARCHAR" />
+		<result column="END_TIME" property="endTime" jdbcType="TIMESTAMP" />
+		<result column="OPEN_BANK" property="openBank" jdbcType="VARCHAR" />
+		<result column="RMB_ACTUAL_PAY_AMOUNT" property="rmbActualPayAmount" jdbcType="NUMERIC" />
+		<result column="RECEIVABLES_DATE" property="receivablesDate" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.XjlTPaymentRequestModel">
+		INSERT INTO XJL_T_PAYMENT_REQUEST (PQ_ID,INVEST_PAYMENT_TYPE,INVESTOR,RECEIVER,APP_USER,APP_DT,FINANCE_TYPE,PAY_DT,PAY_AMOUNT,PAY_CURRENCY,RMB_INVE_AMOUNT,PAYEE_NAME,DUE_BANK,RECEIVABLE_ACCOUNT,PAYMENT_ACCOUNT,DESC_FILE,REMARK,STATUS,PROCESS_INST_ID,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,PROJECT_OR_FUND_ID,PROJECT_OR_FUND_NAME,INVESTOR_ID,RECEIVER_ID,APP_USER_ID,LEDGER_OBJECT,TOTAL_INVE_AMOUNT,TOTAL_INVE_CURRENCY,TOTAL_INVE_AMOUNT_RMB,SUM_INVE_AMOUNT,SUM_INVE_CURRENCY,UNPAID_AMOUNT,UNPAID_CURRENCY,TOTAL_PERIOD,CURRENT_PERIOD,DEPT_ID,DEPT_NAME,GROUP_ID,GROUP_NAME,MONEY_DESC,MONEY_DESC_ATT,ACTUAL_PAY_DATE,ATTA_FILE,CONTRACT_FILE_ID,RECEIVER_ID2,RECEIVER2,ACTUAL_PAY_AMOUNT,AMOUNT_TYPE,PROCESS_INST_ID_TWO,END_TIME,OPEN_BANK,RMB_ACTUAL_PAY_AMOUNT,RECEIVABLES_DATE) values(#{pqId,jdbcType=VARCHAR},#{investPaymentType,jdbcType=VARCHAR},#{investor,jdbcType=VARCHAR},#{receiver,jdbcType=VARCHAR},#{appUser,jdbcType=VARCHAR},#{appDt,jdbcType=TIMESTAMP},#{financeType,jdbcType=VARCHAR},#{payDt,jdbcType=TIMESTAMP},#{payAmount,jdbcType=NUMERIC},#{payCurrency,jdbcType=VARCHAR},#{rmbInveAmount,jdbcType=NUMERIC},#{payeeName,jdbcType=VARCHAR},#{dueBank,jdbcType=VARCHAR},#{receivableAccount,jdbcType=VARCHAR},#{paymentAccount,jdbcType=VARCHAR},#{descFile,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{processInstId,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{projectOrFundId,jdbcType=VARCHAR},#{projectOrFundName,jdbcType=VARCHAR},#{investorId,jdbcType=VARCHAR},#{receiverId,jdbcType=VARCHAR},#{appUserId,jdbcType=VARCHAR},#{ledgerObject,jdbcType=VARCHAR},#{totalInveAmount,jdbcType=NUMERIC},#{totalInveCurrency,jdbcType=VARCHAR},#{totalInveAmountRmb,jdbcType=NUMERIC},#{sumInveAmount,jdbcType=NUMERIC},#{sumInveCurrency,jdbcType=VARCHAR},#{unpaidAmount,jdbcType=NUMERIC},#{unpaidCurrency,jdbcType=VARCHAR},#{totalPeriod,jdbcType=NUMERIC},#{currentPeriod,jdbcType=NUMERIC},#{deptId,jdbcType=VARCHAR},#{deptName,jdbcType=VARCHAR},#{groupId,jdbcType=VARCHAR},#{groupName,jdbcType=VARCHAR},#{moneyDesc,jdbcType=VARCHAR},#{moneyDescAtt,jdbcType=VARCHAR},#{actualPayDate,jdbcType=TIMESTAMP},#{attaFile,jdbcType=VARCHAR},#{contractFileId,jdbcType=VARCHAR},#{receiverId2,jdbcType=VARCHAR},#{receiver2,jdbcType=VARCHAR},#{actualPayAmount,jdbcType=NUMERIC},#{amountType,jdbcType=VARCHAR},#{processInstIdTwo,jdbcType=VARCHAR},#{endTime,jdbcType=TIMESTAMP},#{openBank,jdbcType=VARCHAR},#{rmbActualPayAmount,jdbcType=NUMERIC},#{receivablesDate,jdbcType=TIMESTAMP})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO XJL_T_PAYMENT_REQUEST (PQ_ID,INVEST_PAYMENT_TYPE,INVESTOR,RECEIVER,APP_USER,APP_DT,FINANCE_TYPE,PAY_DT,PAY_AMOUNT,PAY_CURRENCY,RMB_INVE_AMOUNT,PAYEE_NAME,DUE_BANK,RECEIVABLE_ACCOUNT,PAYMENT_ACCOUNT,DESC_FILE,REMARK,STATUS,PROCESS_INST_ID,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,PROJECT_OR_FUND_ID,PROJECT_OR_FUND_NAME,INVESTOR_ID,RECEIVER_ID,APP_USER_ID,LEDGER_OBJECT,TOTAL_INVE_AMOUNT,TOTAL_INVE_CURRENCY,TOTAL_INVE_AMOUNT_RMB,SUM_INVE_AMOUNT,SUM_INVE_CURRENCY,UNPAID_AMOUNT,UNPAID_CURRENCY,TOTAL_PERIOD,CURRENT_PERIOD,DEPT_ID,DEPT_NAME,GROUP_ID,GROUP_NAME,MONEY_DESC,MONEY_DESC_ATT,ACTUAL_PAY_DATE,ATTA_FILE,CONTRACT_FILE_ID,RECEIVER_ID2,RECEIVER2,ACTUAL_PAY_AMOUNT,AMOUNT_TYPE,PROCESS_INST_ID_TWO,END_TIME,OPEN_BANK,RMB_ACTUAL_PAY_AMOUNT,RECEIVABLES_DATE)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.pqId,jdbcType=VARCHAR},
+				#{item.investPaymentType,jdbcType=VARCHAR},
+				#{item.investor,jdbcType=VARCHAR},
+				#{item.receiver,jdbcType=VARCHAR},
+				#{item.appUser,jdbcType=VARCHAR},
+				#{item.appDt,jdbcType=TIMESTAMP},
+				#{item.financeType,jdbcType=VARCHAR},
+				#{item.payDt,jdbcType=TIMESTAMP},
+				#{item.payAmount,jdbcType=NUMERIC},
+				#{item.payCurrency,jdbcType=VARCHAR},
+				#{item.rmbInveAmount,jdbcType=NUMERIC},
+				#{item.payeeName,jdbcType=VARCHAR},
+				#{item.dueBank,jdbcType=VARCHAR},
+				#{item.receivableAccount,jdbcType=VARCHAR},
+				#{item.paymentAccount,jdbcType=VARCHAR},
+				#{item.descFile,jdbcType=VARCHAR},
+				#{item.remark,jdbcType=VARCHAR},
+				#{item.status,jdbcType=VARCHAR},
+				#{item.processInstId,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+				#{item.projectOrFundId,jdbcType=VARCHAR},
+				#{item.projectOrFundName,jdbcType=VARCHAR},
+				#{item.investorId,jdbcType=VARCHAR},
+				#{item.receiverId,jdbcType=VARCHAR},
+				#{item.appUserId,jdbcType=VARCHAR},
+				#{item.ledgerObject,jdbcType=VARCHAR},
+				#{item.totalInveAmount,jdbcType=NUMERIC},
+				#{item.totalInveCurrency,jdbcType=VARCHAR},
+				#{item.totalInveAmountRmb,jdbcType=NUMERIC},
+				#{item.sumInveAmount,jdbcType=NUMERIC},
+				#{item.sumInveCurrency,jdbcType=VARCHAR},
+				#{item.unpaidAmount,jdbcType=NUMERIC},
+				#{item.unpaidCurrency,jdbcType=VARCHAR},
+				#{item.totalPeriod,jdbcType=NUMERIC},
+				#{item.currentPeriod,jdbcType=NUMERIC},
+				#{item.deptId,jdbcType=VARCHAR},
+				#{item.deptName,jdbcType=VARCHAR},
+				#{item.groupId,jdbcType=VARCHAR},
+				#{item.groupName,jdbcType=VARCHAR},
+				#{item.moneyDesc,jdbcType=VARCHAR},
+				#{item.moneyDescAtt,jdbcType=VARCHAR},
+				#{item.actualPayDate,jdbcType=TIMESTAMP},
+				#{item.attaFile,jdbcType=VARCHAR},
+				#{item.contractFileId,jdbcType=VARCHAR},
+				#{item.receiverId2,jdbcType=VARCHAR},
+				#{item.receiver2,jdbcType=VARCHAR},
+				#{item.actualPayAmount,jdbcType=NUMERIC},
+				#{item.amountType,jdbcType=VARCHAR},
+			    #{item.processInstIdTwo,jdbcType=VARCHAR},
+			    #{item.endTime,jdbcType=TIMESTAMP},
+			    #{item.openBank,jdbcType=VARCHAR},
+			    #{item.rmbActualPayAmount,jdbcType=NUMERIC},
+			    #{item.receivablesDate,jdbcType=TIMESTAMP}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  XJL_T_PAYMENT_REQUEST WHERE PQ_ID = #{pqId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.XjlTPaymentRequestModel">
+		DELETE FROM XJL_T_PAYMENT_REQUEST
+		<where>
+			<if test="pqId != null and pqId != ''" >
+				PQ_ID = #{pqId,jdbcType=VARCHAR}
+			</if>
+			<if test="investPaymentType != null and investPaymentType != ''" >
+				AND INVEST_PAYMENT_TYPE = #{investPaymentType,jdbcType=VARCHAR}
+			</if>
+			<if test="investor != null and investor != ''" >
+				AND INVESTOR = #{investor,jdbcType=VARCHAR}
+			</if>
+			<if test="receiver != null and receiver != ''" >
+				AND RECEIVER = #{receiver,jdbcType=VARCHAR}
+			</if>
+			<if test="appUser != null and appUser != ''" >
+				AND APP_USER = #{appUser,jdbcType=VARCHAR}
+			</if>
+			<if test="appDt != null" >
+				AND APP_DT = #{appDt,jdbcType=VARCHAR}
+			</if>
+			<if test="financeType != null and financeType != ''" >
+				AND FINANCE_TYPE = #{financeType,jdbcType=VARCHAR}
+			</if>
+			<if test="payDt != null" >
+				AND PAY_DT = #{payDt,jdbcType=VARCHAR}
+			</if>
+			<if test="payAmount != null and payAmount != ''" >
+				AND PAY_AMOUNT = #{payAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="payCurrency != null and payCurrency != ''" >
+				AND PAY_CURRENCY = #{payCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="rmbInveAmount != null and rmbInveAmount != ''" >
+				AND RMB_INVE_AMOUNT = #{rmbInveAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="payeeName != null and payeeName != ''" >
+				AND PAYEE_NAME = #{payeeName,jdbcType=VARCHAR}
+			</if>
+			<if test="dueBank != null and dueBank != ''" >
+				AND DUE_BANK = #{dueBank,jdbcType=VARCHAR}
+			</if>
+			<if test="receivableAccount != null and receivableAccount != ''" >
+				AND RECEIVABLE_ACCOUNT = #{receivableAccount,jdbcType=VARCHAR}
+			</if>
+			<if test="paymentAccount != null and paymentAccount != ''" >
+				AND PAYMENT_ACCOUNT = #{paymentAccount,jdbcType=VARCHAR}
+			</if>
+			<if test="descFile != null and descFile != ''" >
+				AND DESC_FILE = #{descFile,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="projectOrFundId != null and projectOrFundId != ''" >
+				AND PROJECT_OR_FUND_ID = #{projectOrFundId,jdbcType=VARCHAR}
+			</if>
+			<if test="projectOrFundName != null and projectOrFundName != ''" >
+				AND PROJECT_OR_FUND_NAME = #{projectOrFundName,jdbcType=VARCHAR}
+			</if>
+			<if test="investorId != null and investorId != ''" >
+				AND INVESTOR_ID = #{investorId,jdbcType=VARCHAR}
+			</if>
+			<if test="receiverId != null and receiverId != ''" >
+				AND RECEIVER_ID = #{receiverId,jdbcType=VARCHAR}
+			</if>
+			<if test="appUserId != null and appUserId != ''" >
+				AND APP_USER_ID = #{appUserId,jdbcType=VARCHAR}
+			</if>
+			<if test="ledgerObject != null and ledgerObject != ''" >
+				AND LEDGER_OBJECT = #{ledgerObject,jdbcType=VARCHAR}
+			</if>
+			<if test="totalInveAmount != null and totalInveAmount != ''" >
+				AND TOTAL_INVE_AMOUNT = #{totalInveAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="totalInveCurrency != null and totalInveCurrency != ''" >
+				AND TOTAL_INVE_CURRENCY = #{totalInveCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="totalInveAmountRmb != null and totalInveAmountRmb != ''" >
+				AND TOTAL_INVE_AMOUNT_RMB = #{totalInveAmountRmb,jdbcType=NUMERIC}
+			</if>
+			<if test="sumInveAmount != null and sumInveAmount != ''" >
+				AND SUM_INVE_AMOUNT = #{sumInveAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="sumInveCurrency != null and sumInveCurrency != ''" >
+				AND SUM_INVE_CURRENCY = #{sumInveCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="unpaidAmount != null and unpaidAmount != ''" >
+				AND UNPAID_AMOUNT = #{unpaidAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="unpaidCurrency != null and unpaidCurrency != ''" >
+				AND UNPAID_CURRENCY = #{unpaidCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="totalPeriod != null and totalPeriod != ''" >
+				AND TOTAL_PERIOD = #{totalPeriod,jdbcType=NUMERIC}
+			</if>
+			<if test="currentPeriod != null and currentPeriod != ''" >
+				AND CURRENT_PERIOD = #{currentPeriod,jdbcType=NUMERIC}
+			</if>
+			<if test="deptId != null and deptId != ''" >
+				AND DEPT_ID = #{deptId,jdbcType=VARCHAR}
+			</if>
+			<if test="deptName != null and deptName != ''" >
+				AND DEPT_NAME = #{deptName,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=VARCHAR}
+			</if>
+			<if test="groupName != null and groupName != ''" >
+				AND GROUP_NAME = #{groupName,jdbcType=VARCHAR}
+			</if>
+			<if test="moneyDesc != null and moneyDesc != ''" >
+				AND MONEY_DESC = #{moneyDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="moneyDescAtt != null and moneyDescAtt != ''" >
+				AND MONEY_DESC_ATT = #{moneyDescAtt,jdbcType=VARCHAR}
+			</if>
+			<if test="actualPayDate != null" >
+				AND ACTUAL_PAY_DATE = #{actualPayDate,jdbcType=VARCHAR}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+
+			<if test="contractFileId != null and contractFileId != ''" >
+				AND CONTRACT_FILE_ID = #{contractFileId,jdbcType=VARCHAR}
+			</if>
+			<if test="receiverId2 != null and receiverId2 != ''" >
+				AND RECEIVER_ID2 = #{receiverId2,jdbcType=VARCHAR}
+			</if>
+			<if test="receiver2 != null and receiver2 != ''" >
+				AND RECEIVER2 = #{receiver2,jdbcType=VARCHAR}
+			</if>
+			<if test="actualPayAmount != null and actualPayAmount != ''" >
+				AND ACTUAL_PAY_AMOUNT = #{actualPayAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="amountType != null and amountType != ''" >
+				AND AMOUNT_TYPE = #{amountType,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstIdTwo != null and processInstIdTwo != ''" >
+				AND PROCESS_INST_ID_TWO = #{processInstIdTwo,jdbcType=VARCHAR}
+			</if>
+			<if test="endTime != null " >
+				AND END_TIME = #{endTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="openBank != null and openBank != ''" >
+				AND OPEN_BANK = #{openBank,jdbcType=VARCHAR}
+			</if>
+			<if test="rmbActualPayAmount != null " >
+				AND RMB_ACTUAL_PAY_AMOUNT = #{rmbActualPayAmount,jdbcType=VARCHAR}
+			</if>
+			<if test="receivablesDate != null " >
+				AND RECEIVABLES_DATE = #{receivablesDate,jdbcType=TIMESTAMP}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  XJL_T_PAYMENT_REQUEST WHERE PQ_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.XjlTPaymentRequestModel">
+		UPDATE XJL_T_PAYMENT_REQUEST 
+		<set>
+			<if test="pqId != null and pqId != ''" >
+				PQ_ID = #{pqId,jdbcType=VARCHAR},
+			</if>
+			<if test="investPaymentType != null and investPaymentType != ''" >
+				INVEST_PAYMENT_TYPE = #{investPaymentType,jdbcType=VARCHAR},
+			</if>
+			<if test="investor != null and investor != ''" >
+				INVESTOR = #{investor,jdbcType=VARCHAR},
+			</if>
+			<if test="receiver != null and receiver != ''" >
+				RECEIVER = #{receiver,jdbcType=VARCHAR},
+			</if>
+			<if test="appUser != null and appUser != ''" >
+				APP_USER = #{appUser,jdbcType=VARCHAR},
+			</if>
+			<if test="appDt != null" >
+				APP_DT = #{appDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="financeType != null and financeType != ''" >
+				FINANCE_TYPE = #{financeType,jdbcType=VARCHAR},
+			</if>
+			<if test="payDt != null" >
+				PAY_DT = #{payDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="payAmount != null and payAmount != ''" >
+				PAY_AMOUNT = #{payAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="payCurrency != null and payCurrency != ''" >
+				PAY_CURRENCY = #{payCurrency,jdbcType=VARCHAR},
+			</if>
+			<if test="rmbInveAmount != null and rmbInveAmount != ''" >
+				RMB_INVE_AMOUNT = #{rmbInveAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="payeeName != null and payeeName != ''" >
+				PAYEE_NAME = #{payeeName,jdbcType=VARCHAR},
+			</if>
+			<if test="dueBank != null and dueBank != ''" >
+				DUE_BANK = #{dueBank,jdbcType=VARCHAR},
+			</if>
+			<if test="receivableAccount != null and receivableAccount != ''" >
+				RECEIVABLE_ACCOUNT = #{receivableAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="paymentAccount != null and paymentAccount != ''" >
+				PAYMENT_ACCOUNT = #{paymentAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="descFile != null and descFile != ''" >
+				DESC_FILE = #{descFile,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null and remark != ''" >
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="projectOrFundId != null and projectOrFundId != ''" >
+				PROJECT_OR_FUND_ID = #{projectOrFundId,jdbcType=VARCHAR},
+			</if>
+			<if test="projectOrFundName != null and projectOrFundName != ''" >
+				PROJECT_OR_FUND_NAME = #{projectOrFundName,jdbcType=VARCHAR},
+			</if>
+			<if test="investorId != null and investorId != ''" >
+				INVESTOR_ID = #{investorId,jdbcType=VARCHAR},
+			</if>
+			<if test="receiverId != null and receiverId != ''" >
+				RECEIVER_ID = #{receiverId,jdbcType=VARCHAR},
+			</if>
+			<if test="appUserId != null and appUserId != ''" >
+				APP_USER_ID = #{appUserId,jdbcType=VARCHAR},
+			</if>
+			<if test="ledgerObject != null and ledgerObject != ''" >
+				LEDGER_OBJECT = #{ledgerObject,jdbcType=VARCHAR},
+			</if>
+			<if test="totalInveAmount != null and totalInveAmount != ''" >
+				TOTAL_INVE_AMOUNT = #{totalInveAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="totalInveCurrency != null and totalInveCurrency != ''" >
+				TOTAL_INVE_CURRENCY = #{totalInveCurrency,jdbcType=VARCHAR},
+			</if>
+			<if test="totalInveAmountRmb != null and totalInveAmountRmb != ''" >
+				TOTAL_INVE_AMOUNT_RMB = #{totalInveAmountRmb,jdbcType=NUMERIC},
+			</if>
+			<if test="sumInveAmount != null " >
+				SUM_INVE_AMOUNT = #{sumInveAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="sumInveCurrency != null and sumInveCurrency != ''" >
+				SUM_INVE_CURRENCY = #{sumInveCurrency,jdbcType=VARCHAR},
+			</if>
+			<if test="unpaidAmount != null" >
+				UNPAID_AMOUNT = #{unpaidAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="unpaidCurrency != null and unpaidCurrency != ''" >
+				UNPAID_CURRENCY = #{unpaidCurrency,jdbcType=VARCHAR},
+			</if>
+			<if test="totalPeriod != null and totalPeriod != ''" >
+				TOTAL_PERIOD = #{totalPeriod,jdbcType=NUMERIC},
+			</if>
+			<if test="currentPeriod != null and currentPeriod != ''" >
+				CURRENT_PERIOD = #{currentPeriod,jdbcType=NUMERIC},
+			</if>
+			<if test="deptId != null and deptId != ''" >
+				DEPT_ID = #{deptId,jdbcType=VARCHAR},
+			</if>
+			<if test="deptName != null and deptName != ''" >
+				DEPT_NAME = #{deptName,jdbcType=VARCHAR},
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				GROUP_ID = #{groupId,jdbcType=VARCHAR},
+			</if>
+			<if test="groupName != null and groupName != ''" >
+				GROUP_NAME = #{groupName,jdbcType=VARCHAR},
+			</if>
+			<if test="moneyDesc != null and moneyDesc != ''" >
+				MONEY_DESC = #{moneyDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="moneyDescAtt != null and moneyDescAtt != ''" >
+				MONEY_DESC_ATT = #{moneyDescAtt,jdbcType=VARCHAR},
+			</if>
+			<if test="actualPayDate != null" >
+				ACTUAL_PAY_DATE = #{actualPayDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				ATTA_FILE = #{attaFile,jdbcType=VARCHAR},
+			</if>
+			<if test="contractFileId != null and contractFileId != ''" >
+				 CONTRACT_FILE_ID = #{contractFileId,jdbcType=VARCHAR},
+			</if>
+			<if test="receiverId2 != null and receiverId2 != ''" >
+				 RECEIVER_ID2 = #{receiverId2,jdbcType=VARCHAR},
+			</if>
+			<if test="receiver2 != null and receiver2 != ''" >
+				 RECEIVER2 = #{receiver2,jdbcType=VARCHAR},
+			</if>
+			<if test="actualPayAmount != null and actualPayAmount != ''" >
+				 ACTUAL_PAY_AMOUNT = #{actualPayAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="amountType != null and amountType != ''" >
+				 AMOUNT_TYPE = #{amountType,jdbcType=VARCHAR},
+			</if>
+			<if test="processInstIdTwo != null and processInstIdTwo != ''" >
+				 PROCESS_INST_ID_TWO = #{processInstIdTwo,jdbcType=VARCHAR},
+			</if>
+			<if test="endTime != null " >
+				 END_TIME = #{endTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="openBank != null and openBank != ''" >
+				 OPEN_BANK = #{openBank,jdbcType=VARCHAR},
+			</if>
+			<if test="rmbActualPayAmount != null " >
+				 RMB_ACTUAL_PAY_AMOUNT = #{rmbActualPayAmount,jdbcType=VARCHAR},
+			</if>
+			<if test="receivablesDate != null " >
+				 RECEIVABLES_DATE = #{receivablesDate,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		WHERE PQ_ID = #{pqId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="XjlTPaymentRequestResult">
+		SELECT * FROM XJL_T_PAYMENT_REQUEST WHERE PQ_ID = #{pqId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.XjlTPaymentRequestModel" resultMap="XjlTPaymentRequestResult">
+		SELECT * FROM XJL_T_PAYMENT_REQUEST
+		<where>
+			<if test="pqId != null and pqId != ''" >
+				PQ_ID = #{pqId,jdbcType=VARCHAR}
+			</if>
+			<if test="investPaymentType != null and investPaymentType != ''" >
+				AND INVEST_PAYMENT_TYPE = #{investPaymentType,jdbcType=VARCHAR}
+			</if>
+			<if test="investor != null and investor != ''" >
+				AND INVESTOR = #{investor,jdbcType=VARCHAR}
+			</if>
+			<if test="receiver != null and receiver != ''" >
+				AND RECEIVER = #{receiver,jdbcType=VARCHAR}
+			</if>
+			<if test="appUser != null and appUser != ''" >
+				AND APP_USER = #{appUser,jdbcType=VARCHAR}
+			</if>
+			<if test="appDt != null" >
+				AND APP_DT = #{appDt,jdbcType=VARCHAR}
+			</if>
+			<if test="financeType != null and financeType != ''" >
+				AND FINANCE_TYPE = #{financeType,jdbcType=VARCHAR}
+			</if>
+			<if test="payDt != null" >
+				AND PAY_DT = #{payDt,jdbcType=VARCHAR}
+			</if>
+			<if test="payAmount != null and payAmount != ''" >
+				AND PAY_AMOUNT = #{payAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="payCurrency != null and payCurrency != ''" >
+				AND PAY_CURRENCY = #{payCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="rmbInveAmount != null and rmbInveAmount != ''" >
+				AND RMB_INVE_AMOUNT = #{rmbInveAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="payeeName != null and payeeName != ''" >
+				AND PAYEE_NAME = #{payeeName,jdbcType=VARCHAR}
+			</if>
+			<if test="dueBank != null and dueBank != ''" >
+				AND DUE_BANK = #{dueBank,jdbcType=VARCHAR}
+			</if>
+			<if test="receivableAccount != null and receivableAccount != ''" >
+				AND RECEIVABLE_ACCOUNT = #{receivableAccount,jdbcType=VARCHAR}
+			</if>
+			<if test="paymentAccount != null and paymentAccount != ''" >
+				AND PAYMENT_ACCOUNT = #{paymentAccount,jdbcType=VARCHAR}
+			</if>
+			<if test="descFile != null and descFile != ''" >
+				AND DESC_FILE = #{descFile,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="projectOrFundId != null and projectOrFundId != ''" >
+				AND PROJECT_OR_FUND_ID = #{projectOrFundId,jdbcType=VARCHAR}
+			</if>
+			<if test="projectOrFundName != null and projectOrFundName != ''" >
+				AND PROJECT_OR_FUND_NAME = #{projectOrFundName,jdbcType=VARCHAR}
+			</if>
+			<if test="investorId != null and investorId != ''" >
+				AND INVESTOR_ID = #{investorId,jdbcType=VARCHAR}
+			</if>
+			<if test="receiverId != null and receiverId != ''" >
+				AND RECEIVER_ID = #{receiverId,jdbcType=VARCHAR}
+			</if>
+			<if test="appUserId != null and appUserId != ''" >
+				AND APP_USER_ID = #{appUserId,jdbcType=VARCHAR}
+			</if>
+			<if test="ledgerObject != null and ledgerObject != ''" >
+				AND LEDGER_OBJECT = #{ledgerObject,jdbcType=VARCHAR}
+			</if>
+			<if test="totalInveAmount != null and totalInveAmount != ''" >
+				AND TOTAL_INVE_AMOUNT = #{totalInveAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="totalInveCurrency != null and totalInveCurrency != ''" >
+				AND TOTAL_INVE_CURRENCY = #{totalInveCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="totalInveAmountRmb != null and totalInveAmountRmb != ''" >
+				AND TOTAL_INVE_AMOUNT_RMB = #{totalInveAmountRmb,jdbcType=NUMERIC}
+			</if>
+			<if test="sumInveAmount != null and sumInveAmount != ''" >
+				AND SUM_INVE_AMOUNT = #{sumInveAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="sumInveCurrency != null and sumInveCurrency != ''" >
+				AND SUM_INVE_CURRENCY = #{sumInveCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="unpaidAmount != null and unpaidAmount != ''" >
+				AND UNPAID_AMOUNT = #{unpaidAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="unpaidCurrency != null and unpaidCurrency != ''" >
+				AND UNPAID_CURRENCY = #{unpaidCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="totalPeriod != null and totalPeriod != ''" >
+				AND TOTAL_PERIOD = #{totalPeriod,jdbcType=NUMERIC}
+			</if>
+			<if test="currentPeriod != null and currentPeriod != ''" >
+				AND CURRENT_PERIOD = #{currentPeriod,jdbcType=NUMERIC}
+			</if>
+			<if test="deptId != null and deptId != ''" >
+				AND DEPT_ID = #{deptId,jdbcType=VARCHAR}
+			</if>
+			<if test="deptName != null and deptName != ''" >
+				AND DEPT_NAME = #{deptName,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=VARCHAR}
+			</if>
+			<if test="groupName != null and groupName != ''" >
+				AND GROUP_NAME = #{groupName,jdbcType=VARCHAR}
+			</if>
+			<if test="moneyDesc != null and moneyDesc != ''" >
+				AND MONEY_DESC = #{moneyDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="moneyDescAtt != null and moneyDescAtt != ''" >
+				AND MONEY_DESC_ATT = #{moneyDescAtt,jdbcType=VARCHAR}
+			</if>
+			<if test="actualPayDate != null" >
+				AND ACTUAL_PAY_DATE = #{actualPayDate,jdbcType=VARCHAR}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="contractFileId != null and contractFileId != ''" >
+				AND CONTRACT_FILE_ID = #{contractFileId,jdbcType=VARCHAR}
+			</if>
+			<if test="receiverId2 != null and receiverId2 != ''" >
+				AND RECEIVER_ID2 = #{receiverId2,jdbcType=VARCHAR}
+			</if>
+			<if test="receiver2 != null and receiver2 != ''" >
+				AND RECEIVER2 = #{receiver2,jdbcType=VARCHAR}
+			</if>
+			<if test="actualPayAmount != null and actualPayAmount != ''" >
+				AND ACTUAL_PAY_AMOUNT = #{actualPayAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="amountType != null and amountType != ''" >
+				AND AMOUNT_TYPE = #{amountType,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstIdTwo != null and processInstIdTwo != ''" >
+				AND PROCESS_INST_ID_TWO = #{processInstIdTwo,jdbcType=VARCHAR}
+			</if>
+			<if test="endTime != null " >
+				AND END_TIME = #{endTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="openBank != null and openBank != ''" >
+				AND OPEN_BANK = #{openBank,jdbcType=VARCHAR}
+			</if>
+			<if test="rmbActualPayAmount != null " >
+				AND RMB_ACTUAL_PAY_AMOUNT = #{rmbActualPayAmount,jdbcType=VARCHAR}
+			</if>
+			<if test="receivablesDate != null " >
+				AND RECEIVABLES_DATE = #{receivablesDate,jdbcType=TIMESTAMP}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM XJL_T_PAYMENT_REQUEST
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+		ORDER BY PQ_ID DESC
+	</sql>
+
+	<select id="selectListPage" resultMap="XjlTPaymentRequestResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+		<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.XjlTPaymentRequestModel">
+		SELECT COUNT(*) FROM XJL_T_PAYMENT_REQUEST
+		<where>
+			<if test="pqId != null and pqId != ''" >
+				PQ_ID = #{pqId,jdbcType=VARCHAR}
+			</if>
+			<if test="investPaymentType != null and investPaymentType != ''" >
+				AND INVEST_PAYMENT_TYPE = #{investPaymentType,jdbcType=VARCHAR}
+			</if>
+			<if test="investor != null and investor != ''" >
+				AND INVESTOR = #{investor,jdbcType=VARCHAR}
+			</if>
+			<if test="receiver != null and receiver != ''" >
+				AND RECEIVER = #{receiver,jdbcType=VARCHAR}
+			</if>
+			<if test="appUser != null and appUser != ''" >
+				AND APP_USER = #{appUser,jdbcType=VARCHAR}
+			</if>
+			<if test="appDt != null" >
+				AND APP_DT = #{appDt,jdbcType=VARCHAR}
+			</if>
+			<if test="financeType != null and financeType != ''" >
+				AND FINANCE_TYPE = #{financeType,jdbcType=VARCHAR}
+			</if>
+			<if test="payDt != null" >
+				AND PAY_DT = #{payDt,jdbcType=VARCHAR}
+			</if>
+			<if test="payAmount != null and payAmount != ''" >
+				AND PAY_AMOUNT = #{payAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="payCurrency != null and payCurrency != ''" >
+				AND PAY_CURRENCY = #{payCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="rmbInveAmount != null and rmbInveAmount != ''" >
+				AND RMB_INVE_AMOUNT = #{rmbInveAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="payeeName != null and payeeName != ''" >
+				AND PAYEE_NAME = #{payeeName,jdbcType=VARCHAR}
+			</if>
+			<if test="dueBank != null and dueBank != ''" >
+				AND DUE_BANK = #{dueBank,jdbcType=VARCHAR}
+			</if>
+			<if test="receivableAccount != null and receivableAccount != ''" >
+				AND RECEIVABLE_ACCOUNT = #{receivableAccount,jdbcType=VARCHAR}
+			</if>
+			<if test="paymentAccount != null and paymentAccount != ''" >
+				AND PAYMENT_ACCOUNT = #{paymentAccount,jdbcType=VARCHAR}
+			</if>
+			<if test="descFile != null and descFile != ''" >
+				AND DESC_FILE = #{descFile,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="projectOrFundId != null and projectOrFundId != ''" >
+				AND PROJECT_OR_FUND_ID = #{projectOrFundId,jdbcType=VARCHAR}
+			</if>
+			<if test="projectOrFundName != null and projectOrFundName != ''" >
+				AND PROJECT_OR_FUND_NAME = #{projectOrFundName,jdbcType=VARCHAR}
+			</if>
+			<if test="investorId != null and investorId != ''" >
+				AND INVESTOR_ID = #{investorId,jdbcType=VARCHAR}
+			</if>
+			<if test="receiverId != null and receiverId != ''" >
+				AND RECEIVER_ID = #{receiverId,jdbcType=VARCHAR}
+			</if>
+			<if test="appUserId != null and appUserId != ''" >
+				AND APP_USER_ID = #{appUserId,jdbcType=VARCHAR}
+			</if>
+			<if test="ledgerObject != null and ledgerObject != ''" >
+				AND LEDGER_OBJECT = #{ledgerObject,jdbcType=VARCHAR}
+			</if>
+			<if test="totalInveAmount != null and totalInveAmount != ''" >
+				AND TOTAL_INVE_AMOUNT = #{totalInveAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="totalInveCurrency != null and totalInveCurrency != ''" >
+				AND TOTAL_INVE_CURRENCY = #{totalInveCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="totalInveAmountRmb != null and totalInveAmountRmb != ''" >
+				AND TOTAL_INVE_AMOUNT_RMB = #{totalInveAmountRmb,jdbcType=NUMERIC}
+			</if>
+			<if test="sumInveAmount != null and sumInveAmount != ''" >
+				AND SUM_INVE_AMOUNT = #{sumInveAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="sumInveCurrency != null and sumInveCurrency != ''" >
+				AND SUM_INVE_CURRENCY = #{sumInveCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="unpaidAmount != null and unpaidAmount != ''" >
+				AND UNPAID_AMOUNT = #{unpaidAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="unpaidCurrency != null and unpaidCurrency != ''" >
+				AND UNPAID_CURRENCY = #{unpaidCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="totalPeriod != null and totalPeriod != ''" >
+				AND TOTAL_PERIOD = #{totalPeriod,jdbcType=NUMERIC}
+			</if>
+			<if test="currentPeriod != null and currentPeriod != ''" >
+				AND CURRENT_PERIOD = #{currentPeriod,jdbcType=NUMERIC}
+			</if>
+			<if test="deptId != null and deptId != ''" >
+				AND DEPT_ID = #{deptId,jdbcType=VARCHAR}
+			</if>
+			<if test="deptName != null and deptName != ''" >
+				AND DEPT_NAME = #{deptName,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=VARCHAR}
+			</if>
+			<if test="groupName != null and groupName != ''" >
+				AND GROUP_NAME = #{groupName,jdbcType=VARCHAR}
+			</if>
+			<if test="moneyDesc != null and moneyDesc != ''" >
+				AND MONEY_DESC = #{moneyDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="moneyDescAtt != null and moneyDescAtt != ''" >
+				AND MONEY_DESC_ATT = #{moneyDescAtt,jdbcType=VARCHAR}
+			</if>
+			<if test="actualPayDate != null" >
+				AND ACTUAL_PAY_DATE = #{actualPayDate,jdbcType=VARCHAR}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="contractFileId != null and contractFileId != ''" >
+				AND CONTRACT_FILE_ID = #{contractFileId,jdbcType=VARCHAR}
+			</if>
+			<if test="receiverId2 != null and receiverId2 != ''" >
+				AND RECEIVER_ID2 = #{receiverId2,jdbcType=VARCHAR}
+			</if>
+			<if test="receiver2 != null and receiver2 != ''" >
+				AND RECEIVER2 = #{receiver2,jdbcType=VARCHAR}
+			</if>
+			<if test="actualPayAmount != null and actualPayAmount != ''" >
+				AND ACTUAL_PAY_AMOUNT = #{actualPayAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="amountType != null and amountType != ''" >
+				AND AMOUNT_TYPE = #{amountType,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstIdTwo != null and processInstIdTwo != ''" >
+				AND PROCESS_INST_ID_TWO = #{processInstIdTwo,jdbcType=VARCHAR}
+			</if>
+			<if test="endTime != null " >
+				AND END_TIME = #{endTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="openBank != null and openBank != ''" >
+				AND OPEN_BANK = #{openBank,jdbcType=VARCHAR}
+			</if>
+			<if test="rmbActualPayAmount != null " >
+				AND RMB_ACTUAL_PAY_AMOUNT = #{rmbActualPayAmount,jdbcType=VARCHAR}
+			</if>
+			<if test="receivablesDate != null " >
+				AND RECEIVABLES_DATE = #{receivablesDate,jdbcType=TIMESTAMP}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.XjlTPaymentRequestModel" resultMap="XjlTPaymentRequestResult">
+		SELECT * FROM XJL_T_PAYMENT_REQUEST
+		<where>
+			<if test="pqId != null and pqId != ''" >
+				PQ_ID = #{pqId,jdbcType=VARCHAR}
+			</if>
+			<if test="investPaymentType != null and investPaymentType != ''" >
+				AND INVEST_PAYMENT_TYPE = #{investPaymentType,jdbcType=VARCHAR}
+			</if>
+			<if test="investor != null and investor != ''" >
+				AND INVESTOR = #{investor,jdbcType=VARCHAR}
+			</if>
+			<if test="receiver != null and receiver != ''" >
+				AND RECEIVER = #{receiver,jdbcType=VARCHAR}
+			</if>
+			<if test="appUser != null and appUser != ''" >
+				AND APP_USER = #{appUser,jdbcType=VARCHAR}
+			</if>
+			<if test="appDt != null" >
+				AND APP_DT = #{appDt,jdbcType=VARCHAR}
+			</if>
+			<if test="financeType != null and financeType != ''" >
+				AND FINANCE_TYPE = #{financeType,jdbcType=VARCHAR}
+			</if>
+			<if test="payDt != null" >
+				AND PAY_DT = #{payDt,jdbcType=VARCHAR}
+			</if>
+			<if test="payAmount != null and payAmount != ''" >
+				AND PAY_AMOUNT = #{payAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="payCurrency != null and payCurrency != ''" >
+				AND PAY_CURRENCY = #{payCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="rmbInveAmount != null and rmbInveAmount != ''" >
+				AND RMB_INVE_AMOUNT = #{rmbInveAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="payeeName != null and payeeName != ''" >
+				AND PAYEE_NAME = #{payeeName,jdbcType=VARCHAR}
+			</if>
+			<if test="dueBank != null and dueBank != ''" >
+				AND DUE_BANK = #{dueBank,jdbcType=VARCHAR}
+			</if>
+			<if test="receivableAccount != null and receivableAccount != ''" >
+				AND RECEIVABLE_ACCOUNT = #{receivableAccount,jdbcType=VARCHAR}
+			</if>
+			<if test="paymentAccount != null and paymentAccount != ''" >
+				AND PAYMENT_ACCOUNT = #{paymentAccount,jdbcType=VARCHAR}
+			</if>
+			<if test="descFile != null and descFile != ''" >
+				AND DESC_FILE = #{descFile,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="projectOrFundId != null and projectOrFundId != ''" >
+				AND PROJECT_OR_FUND_ID = #{projectOrFundId,jdbcType=VARCHAR}
+			</if>
+			<if test="projectOrFundName != null and projectOrFundName != ''" >
+				AND PROJECT_OR_FUND_NAME = #{projectOrFundName,jdbcType=VARCHAR}
+			</if>
+			<if test="investorId != null and investorId != ''" >
+				AND INVESTOR_ID = #{investorId,jdbcType=VARCHAR}
+			</if>
+			<if test="receiverId != null and receiverId != ''" >
+				AND RECEIVER_ID = #{receiverId,jdbcType=VARCHAR}
+			</if>
+			<if test="appUserId != null and appUserId != ''" >
+				AND APP_USER_ID = #{appUserId,jdbcType=VARCHAR}
+			</if>
+			<if test="ledgerObject != null and ledgerObject != ''" >
+				AND LEDGER_OBJECT = #{ledgerObject,jdbcType=VARCHAR}
+			</if>
+			<if test="totalInveAmount != null and totalInveAmount != ''" >
+				AND TOTAL_INVE_AMOUNT = #{totalInveAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="totalInveCurrency != null and totalInveCurrency != ''" >
+				AND TOTAL_INVE_CURRENCY = #{totalInveCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="totalInveAmountRmb != null and totalInveAmountRmb != ''" >
+				AND TOTAL_INVE_AMOUNT_RMB = #{totalInveAmountRmb,jdbcType=NUMERIC}
+			</if>
+			<if test="sumInveAmount != null and sumInveAmount != ''" >
+				AND SUM_INVE_AMOUNT = #{sumInveAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="sumInveCurrency != null and sumInveCurrency != ''" >
+				AND SUM_INVE_CURRENCY = #{sumInveCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="unpaidAmount != null and unpaidAmount != ''" >
+				AND UNPAID_AMOUNT = #{unpaidAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="unpaidCurrency != null and unpaidCurrency != ''" >
+				AND UNPAID_CURRENCY = #{unpaidCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="totalPeriod != null and totalPeriod != ''" >
+				AND TOTAL_PERIOD = #{totalPeriod,jdbcType=NUMERIC}
+			</if>
+			<if test="currentPeriod != null and currentPeriod != ''" >
+				AND CURRENT_PERIOD = #{currentPeriod,jdbcType=NUMERIC}
+			</if>
+			<if test="deptId != null and deptId != ''" >
+				AND DEPT_ID = #{deptId,jdbcType=VARCHAR}
+			</if>
+			<if test="deptName != null and deptName != ''" >
+				AND DEPT_NAME = #{deptName,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=VARCHAR}
+			</if>
+			<if test="groupName != null and groupName != ''" >
+				AND GROUP_NAME = #{groupName,jdbcType=VARCHAR}
+			</if>
+			<if test="moneyDesc != null and moneyDesc != ''" >
+				AND MONEY_DESC = #{moneyDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="moneyDescAtt != null and moneyDescAtt != ''" >
+				AND MONEY_DESC_ATT = #{moneyDescAtt,jdbcType=VARCHAR}
+			</if>
+			<if test="actualPayDate != null" >
+				AND ACTUAL_PAY_DATE = #{actualPayDate,jdbcType=VARCHAR}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="contractFileId != null and contractFileId != ''" >
+				AND CONTRACT_FILE_ID = #{contractFileId,jdbcType=VARCHAR}
+			</if>
+			<if test="receiverId2 != null and receiverId2 != ''" >
+				AND RECEIVER_ID2 = #{receiverId2,jdbcType=VARCHAR}
+			</if>
+			<if test="receiver2 != null and receiver2 != ''" >
+				AND RECEIVER2 = #{receiver2,jdbcType=VARCHAR}
+			</if>
+			<if test="actualPayAmount != null and actualPayAmount != ''" >
+				AND ACTUAL_PAY_AMOUNT = #{actualPayAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="amountType != null and amountType != ''" >
+				AND AMOUNT_TYPE = #{amountType,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstIdTwo != null and processInstIdTwo != ''" >
+				AND PROCESS_INST_ID_TWO = #{processInstIdTwo,jdbcType=VARCHAR}
+			</if>
+			<if test="endTime != null " >
+				AND END_TIME = #{endTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="openBank != null and openBank != ''" >
+				AND OPEN_BANK = #{openBank,jdbcType=VARCHAR}
+			</if>
+			<if test="rmbActualPayAmount != null " >
+				AND RMB_ACTUAL_PAY_AMOUNT = #{rmbActualPayAmount,jdbcType=VARCHAR}
+			</if>
+			<if test="receivablesDate != null " >
+				AND RECEIVABLES_DATE = #{receivablesDate,jdbcType=TIMESTAMP}
+			</if>
+		</where>
+		order by PQ_ID desc
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="XjlTPaymentRequestResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+
+	<select id="selectByListProjId" parameterType="java.lang.String"  resultMap="XjlTPaymentRequestResult">
+         select *  from  EI.XJL_T_PAYMENT_REQUEST
+         where
+         PROJECT_OR_FUND_ID=#{projId,jdbcType=VARCHAR}
+
+          and STATUS!=9 order by CREATE_DT desc
+	</select>
+
+	<select id="selectCountSum" parameterType="java.lang.String" resultType="Double">
+        SELECT SUM(ACTUAL_PAY_AMOUNT)FROM EI.XJL_T_PAYMENT_REQUEST
+        where
+         PROJECT_OR_FUND_ID=#{projectOrFundId,jdbcType=VARCHAR} and STATUS!='9'
+         and FINANCE_TYPE='1'
+	</select>
+
+	<select id="selectSumRmbActualPayAmount" parameterType="java.lang.String" resultType="Double">
+        SELECT SUM(RMB_ACTUAL_PAY_AMOUNT)FROM EI.XJL_T_PAYMENT_REQUEST
+        where
+         PROJECT_OR_FUND_ID=#{projectOrFundId,jdbcType=VARCHAR}
+         and FINANCE_TYPE='1' AND STATUS='4'
+	</select>
+	<select id="selectSumPass" parameterType="java.lang.String" resultType="Double">
+        SELECT SUM(RMB_ACTUAL_PAY_AMOUNT)FROM EI.XJL_T_PAYMENT_REQUEST
+        where
+         PROJECT_OR_FUND_ID=#{projectOrFundId,jdbcType=VARCHAR} and STATUS='4'
+         and FINANCE_TYPE='1'
+	</select>
+
+
+	<select id="selectCountBySum" parameterType="com.ppmg.ei.model.XjlTPaymentRequestModel" resultType="Double">
+        SELECT SUM(ACTUAL_PAY_AMOUNT)FROM EI.XJL_T_PAYMENT_REQUEST
+        where
+         STATUS!='9'
+         and PROJECT_OR_FUND_ID=#{projectOrFundId}
+        <![CDATA[and PQ_ID<=#{pqId}]]>
+         and FINANCE_TYPE='1'
+	</select>
+
+	<select id="selectListByPoId" parameterType="com.ppmg.ei.model.XjlTPaymentRequestModel" resultMap="XjlTPaymentRequestResult">
+     select * from EI.XJL_T_PAYMENT_REQUEST  where
+       STATUS!='9'
+      and PROJECT_OR_FUND_ID=#{projectOrFundId}
+      and FINANCE_TYPE='1'
+      <![CDATA[and PQ_ID>=#{pqId}]]>
+
+	</select>
+
+	<select id="selectsumAllPay" parameterType="java.lang.String" resultType="Double" >
+        select sum(ACTUAL_PAY_AMOUNT) from XJL_T_PAYMENT_REQUEST a
+        where a.PROJECT_OR_FUND_ID in(
+        select proj_id from TZ_T_PROJ_INFO
+        where INVE_ID=#{inveId,jdbcType=VARCHAR} and status!='2' and PROJ_TYPE='5' and PROJ_STATUS not in(1,10))
+
+	</select>
+
+		<select id="selectInveMoneyListPage" resultMap="XjlTPaymentRequestResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+			select * from EI.XJL_T_PAYMENT_REQUEST
+			<where>
+				<include refid="searchCondition.searchClause" />
+			</where>
+			order by UPDATE_DT desc
+		</select>
+
+	<update id="deleteByIds" parameterType="java.util.HashMap">
+		UPDATE EI.XJL_T_PAYMENT_REQUEST
+		SET status = #{status},
+		UPDATE_BY=#{userId},
+		UPDATE_DT=SYSDATE
+		<where>
+			PQ_ID IN
+			<foreach item="item" collection="ids" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</where>
+	</update>
+
+
+	<select id="selectNoPassList" parameterType="java.lang.String"  resultMap="XjlTPaymentRequestResult">
+         select *  from  EI.XJL_T_PAYMENT_REQUEST
+         where
+         PROJECT_OR_FUND_ID=#{projId,jdbcType=VARCHAR}
+          and STATUS in(1,3)
+	</select>
+	<!-- end autocreate -->
+</mapper>

@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ApplyInfo">
+	<!-- start autocreate -->
+
+	<resultMap id="ApplyInfoResult" type="com.ppmg.ei.model.ApplyInfoModel">
+		<result column="APPLY_NO" property="applyNo" jdbcType="VARCHAR" />
+		<result column="APPLICANT_ID" property="applicantId" jdbcType="NUMERIC" />
+		<result column="APPLICANT_NAME" property="applicantName" jdbcType="VARCHAR" />
+		<result column="APPLICANT_COMPANY" property="applicantCompany" jdbcType="VARCHAR" />
+		<result column="APPLICANT_DEPARTMENT" property="applicantDepartment" jdbcType="VARCHAR" />
+		<result column="APPLY_TIME" property="applyTime" jdbcType="TIMESTAMP" />
+		<result column="APPLY_STATUS" property="applyStatus" jdbcType="VARCHAR" />
+		<result column="APPLY_TYPE" property="applyType" jdbcType="VARCHAR" />
+		<result column="APPLY_DESC" property="applyDesc" jdbcType="VARCHAR" />
+		<result column="APPLY_REASON" property="applyReason" jdbcType="VARCHAR" />
+		<result column="APPLICANT_COMPANY_ID" property="applicantCompanyId" jdbcType="NUMERIC" />
+		<result column="APPLICANT_DEPARTMENT_ID" property="applicantDepartmentId" jdbcType="NUMERIC" />
+		<result column="APPLY_NAME" property="applyName" jdbcType="VARCHAR" />
+		<result column="PROCESS_STATUS" property="processStatus" jdbcType="VARCHAR" />
+		<result column="PROCESS_INST_ID" property="processInstId" jdbcType="VARCHAR" />
+		<result column="ATTACHMENT" property="attachment" jdbcType="VARCHAR" />
+		<result column="PROCESS_END_TIME" property="processEndTime" jdbcType="TIMESTAMP" />
+		<result column="TOTAL_AMOUNT" property="totalAmount" jdbcType="NUMERIC" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.ApplyInfoModel">
+		INSERT INTO OA.FOUNDER_OA_APPLY_INFO (APPLY_NO,APPLICANT_ID,APPLICANT_NAME,APPLICANT_COMPANY,APPLICANT_DEPARTMENT,APPLY_TIME,APPLY_STATUS,APPLY_TYPE,APPLY_DESC,APPLY_REASON,APPLICANT_COMPANY_ID,APPLICANT_DEPARTMENT_ID,APPLY_NAME,PROCESS_STATUS,PROCESS_INST_ID,ATTACHMENT,PROCESS_END_TIME,TOTAL_AMOUNT,REMARK) values(#{applyNo,jdbcType=VARCHAR},#{applicantId,jdbcType=NUMERIC},#{applicantName,jdbcType=VARCHAR},#{applicantCompany,jdbcType=VARCHAR},#{applicantDepartment,jdbcType=VARCHAR},#{applyTime,jdbcType=TIMESTAMP},#{applyStatus,jdbcType=VARCHAR},#{applyType,jdbcType=VARCHAR},#{applyDesc,jdbcType=VARCHAR},#{applyReason,jdbcType=VARCHAR},#{applicantCompanyId,jdbcType=NUMERIC},#{applicantDepartmentId,jdbcType=NUMERIC},#{applyName,jdbcType=VARCHAR},#{processStatus,jdbcType=VARCHAR},#{processInstId,jdbcType=VARCHAR},#{attachment,jdbcType=VARCHAR},#{processEndTime,jdbcType=TIMESTAMP},#{totalAmount,jdbcType=NUMERIC},#{remark,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO OA.FOUNDER_OA_APPLY_INFO (APPLY_NO,APPLICANT_ID,APPLICANT_NAME,APPLICANT_COMPANY,APPLICANT_DEPARTMENT,APPLY_TIME,APPLY_STATUS,APPLY_TYPE,APPLY_DESC,APPLY_REASON,APPLICANT_COMPANY_ID,APPLICANT_DEPARTMENT_ID,APPLY_NAME,PROCESS_STATUS,PROCESS_INST_ID,ATTACHMENT,PROCESS_END_TIME,TOTAL_AMOUNT,REMARK)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.applyNo,jdbcType=VARCHAR},
+				#{item.applicantId,jdbcType=NUMERIC},
+				#{item.applicantName,jdbcType=VARCHAR},
+				#{item.applicantCompany,jdbcType=VARCHAR},
+				#{item.applicantDepartment,jdbcType=VARCHAR},
+				#{item.applyTime,jdbcType=TIMESTAMP},
+				#{item.applyStatus,jdbcType=VARCHAR},
+				#{item.applyType,jdbcType=VARCHAR},
+				#{item.applyDesc,jdbcType=VARCHAR},
+				#{item.applyReason,jdbcType=VARCHAR},
+				#{item.applicantCompanyId,jdbcType=NUMERIC},
+				#{item.applicantDepartmentId,jdbcType=NUMERIC},
+				#{item.applyName,jdbcType=VARCHAR},
+				#{item.processStatus,jdbcType=VARCHAR},
+				#{item.processInstId,jdbcType=VARCHAR},
+				#{item.attachment,jdbcType=VARCHAR},
+				#{item.processEndTime,jdbcType=TIMESTAMP},
+				#{item.totalAmount,jdbcType=NUMERIC},
+				#{item.remark,jdbcType=VARCHAR}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  OA.FOUNDER_OA_APPLY_INFO WHERE APPLY_NO = #{applyNo,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.ApplyInfoModel">
+		DELETE FROM OA.FOUNDER_OA_APPLY_INFO
+		<where>
+			<if test="applyNo != null and applyNo != ''" >
+				APPLY_NO = #{applyNo,jdbcType=VARCHAR}
+			</if>
+			<if test="applicantId != null and applicantId != ''" >
+				AND APPLICANT_ID = #{applicantId,jdbcType=NUMERIC}
+			</if>
+			<if test="applicantName != null and applicantName != ''" >
+				AND APPLICANT_NAME = #{applicantName,jdbcType=VARCHAR}
+			</if>
+			<if test="applicantCompany != null and applicantCompany != ''" >
+				AND APPLICANT_COMPANY = #{applicantCompany,jdbcType=VARCHAR}
+			</if>
+			<if test="applicantDepartment != null and applicantDepartment != ''" >
+				AND APPLICANT_DEPARTMENT = #{applicantDepartment,jdbcType=VARCHAR}
+			</if>
+			<if test="applyTime != null" >
+				AND APPLY_TIME = #{applyTime,jdbcType=VARCHAR}
+			</if>
+			<if test="applyStatus != null and applyStatus != ''" >
+				AND APPLY_STATUS = #{applyStatus,jdbcType=VARCHAR}
+			</if>
+			<if test="applyType != null and applyType != ''" >
+				AND APPLY_TYPE = #{applyType,jdbcType=VARCHAR}
+			</if>
+			<if test="applyDesc != null and applyDesc != ''" >
+				AND APPLY_DESC = #{applyDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="applyReason != null and applyReason != ''" >
+				AND APPLY_REASON = #{applyReason,jdbcType=VARCHAR}
+			</if>
+			<if test="applicantCompanyId != null and applicantCompanyId != ''" >
+				AND APPLICANT_COMPANY_ID = #{applicantCompanyId,jdbcType=NUMERIC}
+			</if>
+			<if test="applicantDepartmentId != null and applicantDepartmentId != ''" >
+				AND APPLICANT_DEPARTMENT_ID = #{applicantDepartmentId,jdbcType=NUMERIC}
+			</if>
+			<if test="applyName != null and applyName != ''" >
+				AND APPLY_NAME = #{applyName,jdbcType=VARCHAR}
+			</if>
+			<if test="processStatus != null and processStatus != ''" >
+				AND PROCESS_STATUS = #{processStatus,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="attachment != null and attachment != ''" >
+				AND ATTACHMENT = #{attachment,jdbcType=VARCHAR}
+			</if>
+			<if test="processEndTime != null" >
+				AND PROCESS_END_TIME = #{processEndTime,jdbcType=VARCHAR}
+			</if>
+			<if test="totalAmount != null and totalAmount != ''" >
+				AND TOTAL_AMOUNT = #{totalAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  OA.FOUNDER_OA_APPLY_INFO WHERE APPLY_NO IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.ApplyInfoModel">
+		UPDATE OA.FOUNDER_OA_APPLY_INFO 
+		<set>
+			<if test="applyNo != null and applyNo != ''" >
+				APPLY_NO = #{applyNo,jdbcType=VARCHAR},
+			</if>
+			<if test="applicantId != null and applicantId != ''" >
+				APPLICANT_ID = #{applicantId,jdbcType=NUMERIC},
+			</if>
+			<if test="applicantName != null and applicantName != ''" >
+				APPLICANT_NAME = #{applicantName,jdbcType=VARCHAR},
+			</if>
+			<if test="applicantCompany != null and applicantCompany != ''" >
+				APPLICANT_COMPANY = #{applicantCompany,jdbcType=VARCHAR},
+			</if>
+			<if test="applicantDepartment != null and applicantDepartment != ''" >
+				APPLICANT_DEPARTMENT = #{applicantDepartment,jdbcType=VARCHAR},
+			</if>
+			<if test="applyTime != null" >
+				APPLY_TIME = #{applyTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="applyStatus != null and applyStatus != ''" >
+				APPLY_STATUS = #{applyStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="applyType != null and applyType != ''" >
+				APPLY_TYPE = #{applyType,jdbcType=VARCHAR},
+			</if>
+			<if test="applyDesc != null and applyDesc != ''" >
+				APPLY_DESC = #{applyDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="applyReason != null and applyReason != ''" >
+				APPLY_REASON = #{applyReason,jdbcType=VARCHAR},
+			</if>
+			<if test="applicantCompanyId != null and applicantCompanyId != ''" >
+				APPLICANT_COMPANY_ID = #{applicantCompanyId,jdbcType=NUMERIC},
+			</if>
+			<if test="applicantDepartmentId != null and applicantDepartmentId != ''" >
+				APPLICANT_DEPARTMENT_ID = #{applicantDepartmentId,jdbcType=NUMERIC},
+			</if>
+			<if test="applyName != null and applyName != ''" >
+				APPLY_NAME = #{applyName,jdbcType=VARCHAR},
+			</if>
+			<if test="processStatus != null and processStatus != ''" >
+				PROCESS_STATUS = #{processStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR},
+			</if>
+			<if test="attachment != null and attachment != ''" >
+				ATTACHMENT = #{attachment,jdbcType=VARCHAR},
+			</if>
+			<if test="processEndTime != null" >
+				PROCESS_END_TIME = #{processEndTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="totalAmount != null and totalAmount != ''" >
+				TOTAL_AMOUNT = #{totalAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="remark != null and remark != ''" >
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		WHERE APPLY_NO = #{applyNo,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="ApplyInfoResult">
+		SELECT * FROM OA.FOUNDER_OA_APPLY_INFO WHERE APPLY_NO = #{applyNo,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.ApplyInfoModel" resultMap="ApplyInfoResult">
+		SELECT * FROM OA.FOUNDER_OA_APPLY_INFO
+		<where>
+			<if test="applyNo != null and applyNo != ''" >
+				APPLY_NO = #{applyNo,jdbcType=VARCHAR}
+			</if>
+			<if test="applicantId != null and applicantId != ''" >
+				AND APPLICANT_ID = #{applicantId,jdbcType=NUMERIC}
+			</if>
+			<if test="applicantName != null and applicantName != ''" >
+				AND APPLICANT_NAME = #{applicantName,jdbcType=VARCHAR}
+			</if>
+			<if test="applicantCompany != null and applicantCompany != ''" >
+				AND APPLICANT_COMPANY = #{applicantCompany,jdbcType=VARCHAR}
+			</if>
+			<if test="applicantDepartment != null and applicantDepartment != ''" >
+				AND APPLICANT_DEPARTMENT = #{applicantDepartment,jdbcType=VARCHAR}
+			</if>
+			<if test="applyTime != null" >
+				AND APPLY_TIME = #{applyTime,jdbcType=VARCHAR}
+			</if>
+			<if test="applyStatus != null and applyStatus != ''" >
+				AND APPLY_STATUS = #{applyStatus,jdbcType=VARCHAR}
+			</if>
+			<if test="applyType != null and applyType != ''" >
+				AND APPLY_TYPE = #{applyType,jdbcType=VARCHAR}
+			</if>
+			<if test="applyDesc != null and applyDesc != ''" >
+				AND APPLY_DESC = #{applyDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="applyReason != null and applyReason != ''" >
+				AND APPLY_REASON = #{applyReason,jdbcType=VARCHAR}
+			</if>
+			<if test="applicantCompanyId != null and applicantCompanyId != ''" >
+				AND APPLICANT_COMPANY_ID = #{applicantCompanyId,jdbcType=NUMERIC}
+			</if>
+			<if test="applicantDepartmentId != null and applicantDepartmentId != ''" >
+				AND APPLICANT_DEPARTMENT_ID = #{applicantDepartmentId,jdbcType=NUMERIC}
+			</if>
+			<if test="applyName != null and applyName != ''" >
+				AND APPLY_NAME = #{applyName,jdbcType=VARCHAR}
+			</if>
+			<if test="processStatus != null and processStatus != ''" >
+				AND PROCESS_STATUS = #{processStatus,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="attachment != null and attachment != ''" >
+				AND ATTACHMENT = #{attachment,jdbcType=VARCHAR}
+			</if>
+			<if test="processEndTime != null" >
+				AND PROCESS_END_TIME = #{processEndTime,jdbcType=VARCHAR}
+			</if>
+			<if test="totalAmount != null and totalAmount != ''" >
+				AND TOTAL_AMOUNT = #{totalAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM OA.FOUNDER_OA_APPLY_INFO
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="ApplyInfoResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.ApplyInfoModel">
+		SELECT COUNT(*) FROM OA.FOUNDER_OA_APPLY_INFO
+		<where>
+			<if test="applyNo != null and applyNo != ''" >
+				APPLY_NO = #{applyNo,jdbcType=VARCHAR}
+			</if>
+			<if test="applicantId != null and applicantId != ''" >
+				AND APPLICANT_ID = #{applicantId,jdbcType=NUMERIC}
+			</if>
+			<if test="applicantName != null and applicantName != ''" >
+				AND APPLICANT_NAME = #{applicantName,jdbcType=VARCHAR}
+			</if>
+			<if test="applicantCompany != null and applicantCompany != ''" >
+				AND APPLICANT_COMPANY = #{applicantCompany,jdbcType=VARCHAR}
+			</if>
+			<if test="applicantDepartment != null and applicantDepartment != ''" >
+				AND APPLICANT_DEPARTMENT = #{applicantDepartment,jdbcType=VARCHAR}
+			</if>
+			<if test="applyTime != null" >
+				AND APPLY_TIME = #{applyTime,jdbcType=VARCHAR}
+			</if>
+			<if test="applyStatus != null and applyStatus != ''" >
+				AND APPLY_STATUS = #{applyStatus,jdbcType=VARCHAR}
+			</if>
+			<if test="applyType != null and applyType != ''" >
+				AND APPLY_TYPE = #{applyType,jdbcType=VARCHAR}
+			</if>
+			<if test="applyDesc != null and applyDesc != ''" >
+				AND APPLY_DESC = #{applyDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="applyReason != null and applyReason != ''" >
+				AND APPLY_REASON = #{applyReason,jdbcType=VARCHAR}
+			</if>
+			<if test="applicantCompanyId != null and applicantCompanyId != ''" >
+				AND APPLICANT_COMPANY_ID = #{applicantCompanyId,jdbcType=NUMERIC}
+			</if>
+			<if test="applicantDepartmentId != null and applicantDepartmentId != ''" >
+				AND APPLICANT_DEPARTMENT_ID = #{applicantDepartmentId,jdbcType=NUMERIC}
+			</if>
+			<if test="applyName != null and applyName != ''" >
+				AND APPLY_NAME = #{applyName,jdbcType=VARCHAR}
+			</if>
+			<if test="processStatus != null and processStatus != ''" >
+				AND PROCESS_STATUS = #{processStatus,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="attachment != null and attachment != ''" >
+				AND ATTACHMENT = #{attachment,jdbcType=VARCHAR}
+			</if>
+			<if test="processEndTime != null" >
+				AND PROCESS_END_TIME = #{processEndTime,jdbcType=VARCHAR}
+			</if>
+			<if test="totalAmount != null and totalAmount != ''" >
+				AND TOTAL_AMOUNT = #{totalAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.ApplyInfoModel" resultMap="ApplyInfoResult">
+		SELECT * FROM OA.FOUNDER_OA_APPLY_INFO
+		<where>
+			<if test="applyNo != null and applyNo != ''" >
+				APPLY_NO = #{applyNo,jdbcType=VARCHAR}
+			</if>
+			<if test="applicantId != null and applicantId != ''" >
+				AND APPLICANT_ID = #{applicantId,jdbcType=NUMERIC}
+			</if>
+			<if test="applicantName != null and applicantName != ''" >
+				AND APPLICANT_NAME = #{applicantName,jdbcType=VARCHAR}
+			</if>
+			<if test="applicantCompany != null and applicantCompany != ''" >
+				AND APPLICANT_COMPANY = #{applicantCompany,jdbcType=VARCHAR}
+			</if>
+			<if test="applicantDepartment != null and applicantDepartment != ''" >
+				AND APPLICANT_DEPARTMENT = #{applicantDepartment,jdbcType=VARCHAR}
+			</if>
+			<if test="applyTime != null" >
+				AND APPLY_TIME = #{applyTime,jdbcType=VARCHAR}
+			</if>
+			<if test="applyStatus != null and applyStatus != ''" >
+				AND APPLY_STATUS = #{applyStatus,jdbcType=VARCHAR}
+			</if>
+			<if test="applyType != null and applyType != ''" >
+				AND APPLY_TYPE = #{applyType,jdbcType=VARCHAR}
+			</if>
+			<if test="applyDesc != null and applyDesc != ''" >
+				AND APPLY_DESC = #{applyDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="applyReason != null and applyReason != ''" >
+				AND APPLY_REASON = #{applyReason,jdbcType=VARCHAR}
+			</if>
+			<if test="applicantCompanyId != null and applicantCompanyId != ''" >
+				AND APPLICANT_COMPANY_ID = #{applicantCompanyId,jdbcType=NUMERIC}
+			</if>
+			<if test="applicantDepartmentId != null and applicantDepartmentId != ''" >
+				AND APPLICANT_DEPARTMENT_ID = #{applicantDepartmentId,jdbcType=NUMERIC}
+			</if>
+			<if test="applyName != null and applyName != ''" >
+				AND APPLY_NAME = #{applyName,jdbcType=VARCHAR}
+			</if>
+			<if test="processStatus != null and processStatus != ''" >
+				AND PROCESS_STATUS = #{processStatus,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="attachment != null and attachment != ''" >
+				AND ATTACHMENT = #{attachment,jdbcType=VARCHAR}
+			</if>
+			<if test="processEndTime != null" >
+				AND PROCESS_END_TIME = #{processEndTime,jdbcType=VARCHAR}
+			</if>
+			<if test="totalAmount != null and totalAmount != ''" >
+				AND TOTAL_AMOUNT = #{totalAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="ApplyInfoResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+</mapper>

@@ -1,0 +1,632 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FounderOaApplyContract">
+	<!-- 母基金合同 -->
+	<resultMap id="FounderOaApplyContractResult2" type="com.ppmg.ei.model.FounderOaApplyContractModel" extends="FounderOaApplyContractResult">
+		<association property="applyInfoModel" resultMap="FounderOaApplyInfo.FounderOaApplyInfoResult" column="APPLY_NO"></association>
+		<collection property="attachmentList" ofType="com.ppmg.ei.model.EiTAttachmentModel" column="ATTACHMENT">
+			<result column="ATTACHMENT_FILE_ID" property="fileId" jdbcType="VARCHAR" />
+			<result column="ATTACHMENT_FILE_SOURCE" property="fileSource" jdbcType="VARCHAR" />
+			<result column="ATTACHMENT_ATT_NAME" property="fileOldName" jdbcType="VARCHAR" />
+			<result column="ATTACHMENT_ATT_URL" property="filePath" jdbcType="VARCHAR" />
+			<result column="ATTACHMENT_ATT_SIZE" property="fileSize" jdbcType="VARCHAR" />
+		</collection>
+	</resultMap>
+	<!-- start autocreate -->
+
+	<resultMap id="FounderOaApplyContractResult" type="com.ppmg.ei.model.FounderOaApplyContractModel">
+		<result column="APPLY_NO" property="applyNo" jdbcType="VARCHAR" />
+		<result column="CONTRACT_NAME" property="contractName" jdbcType="VARCHAR" />
+		<result column="CONTRACT_NO" property="contractNo" jdbcType="VARCHAR" />
+		<result column="CONTRACT_TYPE" property="contractType" jdbcType="VARCHAR" />
+		<result column="CONTRACT_DEPARTMENT" property="contractDepartment" jdbcType="VARCHAR" />
+		<result column="CONTRACT_CONTENT" property="contractContent" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="SEAL_NO" property="sealNo" jdbcType="VARCHAR" />
+		<result column="SEAL_COPIES" property="sealCopies" jdbcType="NUMERIC" />
+		<result column="FILE_NAME" property="fileName" jdbcType="VARCHAR" />
+		<result column="ATTACHMENT" property="attachment" jdbcType="VARCHAR" />
+		<result column="CONTRACT_DEPARTMENT_ID" property="contractDepartmentId" jdbcType="VARCHAR" />
+		<result column="AMOUNT" property="amount" jdbcType="NUMERIC" />
+		<result column="BILL_OPTIONS" property="billOptions" jdbcType="VARCHAR" />
+		<result column="ORG_CONTRACT_NO" property="orgContractNo" jdbcType="VARCHAR" />
+		<result column="ORG_CONTRACT_FLAG" property="orgContractFlag" jdbcType="VARCHAR" />
+		<result column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+		<result column="ORG_NAME" property="orgName" jdbcType="VARCHAR" />
+		<result column="AMOUNT_MONEY" property="amountMoney" jdbcType="NUMERIC" />
+		<result column="AMOUNT_CURR" property="amountCurr" jdbcType="VARCHAR" />
+		<result column="APPLY_NO2" property="applyNo2" jdbcType="VARCHAR" />
+		<result column="REL_FUND_ID" property="relFundId" jdbcType="VARCHAR" />
+		<result column="REL_FUND_NAME" property="relFundName" jdbcType="VARCHAR" />
+		<result column="REL_PLAT_ID" property="relPlatId" jdbcType="VARCHAR" />
+		<result column="REL_PLAT_NAME" property="relPlatName" jdbcType="VARCHAR" />
+		<result column="START_TIME" property="startTime" jdbcType="TIMESTAMP" />
+		<result column="END_TIME" property="endTime" jdbcType="TIMESTAMP" />
+		<result column="EFFEC_STATUS" property="effecStatus" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.FounderOaApplyContractModel">
+		INSERT INTO OA.FOUNDER_OA_APPLY_CONTRACT (APPLY_NO,CONTRACT_NAME,CONTRACT_NO,CONTRACT_TYPE,CONTRACT_DEPARTMENT,CONTRACT_CONTENT,REMARK,SEAL_NO,SEAL_COPIES,FILE_NAME,ATTACHMENT,CONTRACT_DEPARTMENT_ID,AMOUNT,BILL_OPTIONS,ORG_CONTRACT_NO,ORG_CONTRACT_FLAG,ORG_ID,ORG_NAME,AMOUNT_MONEY,AMOUNT_CURR,APPLY_NO2,REL_FUND_ID,REL_FUND_NAME,REL_PLAT_ID,REL_PLAT_NAME,START_TIME,END_TIME,EFFEC_STATUS) values(#{applyNo,jdbcType=VARCHAR},#{contractName,jdbcType=VARCHAR},#{contractNo,jdbcType=VARCHAR},#{contractType,jdbcType=VARCHAR},#{contractDepartment,jdbcType=VARCHAR},#{contractContent,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},#{sealNo,jdbcType=VARCHAR},#{sealCopies,jdbcType=NUMERIC},#{fileName,jdbcType=VARCHAR},#{attachment,jdbcType=VARCHAR},#{contractDepartmentId,jdbcType=VARCHAR},#{amount,jdbcType=NUMERIC},#{billOptions,jdbcType=VARCHAR},#{orgContractNo,jdbcType=VARCHAR},#{orgContractFlag,jdbcType=VARCHAR},#{orgId,jdbcType=VARCHAR},#{orgName,jdbcType=VARCHAR},#{amountMoney,jdbcType=NUMERIC},#{amountCurr,jdbcType=VARCHAR},#{applyNo2,jdbcType=VARCHAR},#{relFundId,jdbcType=VARCHAR},#{relFundName,jdbcType=VARCHAR},#{relPlatId,jdbcType=VARCHAR},#{relPlatName,jdbcType=VARCHAR},#{startTime,jdbcType=TIMESTAMP},#{endTime,jdbcType=TIMESTAMP},#{effecStatus,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO OA.FOUNDER_OA_APPLY_CONTRACT (APPLY_NO,CONTRACT_NAME,CONTRACT_NO,CONTRACT_TYPE,CONTRACT_DEPARTMENT,CONTRACT_CONTENT,REMARK,SEAL_NO,SEAL_COPIES,FILE_NAME,ATTACHMENT,CONTRACT_DEPARTMENT_ID,AMOUNT,BILL_OPTIONS,ORG_CONTRACT_NO,ORG_CONTRACT_FLAG,ORG_ID,ORG_NAME,AMOUNT_MONEY,AMOUNT_CURR,APPLY_NO2,REL_FUND_ID,REL_FUND_NAME,REL_PLAT_ID,REL_PLAT_NAME,START_TIME,END_TIME,EFFEC_STATUS)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.applyNo,jdbcType=VARCHAR},
+				#{item.contractName,jdbcType=VARCHAR},
+				#{item.contractNo,jdbcType=VARCHAR},
+				#{item.contractType,jdbcType=VARCHAR},
+				#{item.contractDepartment,jdbcType=VARCHAR},
+				#{item.contractContent,jdbcType=VARCHAR},
+				#{item.remark,jdbcType=VARCHAR},
+				#{item.sealNo,jdbcType=VARCHAR},
+				#{item.sealCopies,jdbcType=NUMERIC},
+				#{item.fileName,jdbcType=VARCHAR},
+				#{item.attachment,jdbcType=VARCHAR},
+				#{item.contractDepartmentId,jdbcType=VARCHAR},
+				#{item.amount,jdbcType=NUMERIC},
+				#{item.billOptions,jdbcType=VARCHAR},
+				#{item.orgContractNo,jdbcType=VARCHAR},
+				#{item.orgContractFlag,jdbcType=VARCHAR},
+				#{item.orgId,jdbcType=VARCHAR},
+				#{item.orgName,jdbcType=VARCHAR},
+				#{item.amountMoney,jdbcType=NUMERIC},
+				#{item.amountCurr,jdbcType=VARCHAR},
+				#{item.applyNo2,jdbcType=VARCHAR},
+				#{item.relFundId,jdbcType=VARCHAR},
+				#{item.relFundName,jdbcType=VARCHAR},
+				#{item.relPlatId,jdbcType=VARCHAR},
+				#{item.relPlatName,jdbcType=VARCHAR},
+				#{item.startTime,jdbcType=TIMESTAMP},
+				#{item.endTime,jdbcType=TIMESTAMP},
+				#{item.effecStatus,jdbcType=VARCHAR}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  OA.FOUNDER_OA_APPLY_CONTRACT WHERE APPLY_NO = #{applyNo,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.FounderOaApplyContractModel">
+		DELETE FROM OA.FOUNDER_OA_APPLY_CONTRACT
+		<where>
+			<if test="applyNo != null and applyNo != ''" >
+				APPLY_NO = #{applyNo,jdbcType=VARCHAR}
+			</if>
+			<if test="contractName != null and contractName != ''" >
+				AND CONTRACT_NAME = #{contractName,jdbcType=VARCHAR}
+			</if>
+			<if test="contractNo != null and contractNo != ''" >
+				AND CONTRACT_NO = #{contractNo,jdbcType=VARCHAR}
+			</if>
+			<if test="contractType != null and contractType != ''" >
+				AND CONTRACT_TYPE = #{contractType,jdbcType=VARCHAR}
+			</if>
+			<if test="contractDepartment != null and contractDepartment != ''" >
+				AND CONTRACT_DEPARTMENT = #{contractDepartment,jdbcType=VARCHAR}
+			</if>
+			<if test="contractContent != null and contractContent != ''" >
+				AND CONTRACT_CONTENT = #{contractContent,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="sealNo != null and sealNo != ''" >
+				AND SEAL_NO = #{sealNo,jdbcType=VARCHAR}
+			</if>
+			<if test="sealCopies != null and sealCopies != ''" >
+				AND SEAL_COPIES = #{sealCopies,jdbcType=NUMERIC}
+			</if>
+			<if test="fileName != null and fileName != ''" >
+				AND FILE_NAME = #{fileName,jdbcType=VARCHAR}
+			</if>
+			<if test="attachment != null and attachment != ''" >
+				AND ATTACHMENT = #{attachment,jdbcType=VARCHAR}
+			</if>
+			<if test="contractDepartmentId != null and contractDepartmentId != ''" >
+				AND CONTRACT_DEPARTMENT_ID = #{contractDepartmentId,jdbcType=VARCHAR}
+			</if>
+			<if test="amount != null and amount != ''" >
+				AND AMOUNT = #{amount,jdbcType=NUMERIC}
+			</if>
+			<if test="billOptions != null and billOptions != ''" >
+				AND BILL_OPTIONS = #{billOptions,jdbcType=VARCHAR}
+			</if>
+			<if test="orgContractNo != null and orgContractNo != ''" >
+				AND ORG_CONTRACT_NO = #{orgContractNo,jdbcType=VARCHAR}
+			</if>
+			<if test="orgContractFlag != null and orgContractFlag != ''" >
+				AND ORG_CONTRACT_FLAG = #{orgContractFlag,jdbcType=VARCHAR}
+			</if>
+			<if test="orgId != null and orgId != ''" >
+				AND ORG_ID = #{orgId,jdbcType=VARCHAR}
+			</if>
+			<if test="orgName != null and orgName != ''" >
+				AND ORG_NAME = #{orgName,jdbcType=VARCHAR}
+			</if>
+			<if test="amountMoney != null and amountMoney != ''" >
+				AND AMOUNT_MONEY = #{amountMoney,jdbcType=NUMERIC}
+			</if>
+			<if test="amountCurr != null and amountCurr != ''" >
+				AND AMOUNT_CURR = #{amountCurr,jdbcType=VARCHAR}
+			</if>
+			<if test="applyNo2 != null and applyNo2 != ''" >
+				AND APPLY_NO2 = #{applyNo2,jdbcType=VARCHAR}
+			</if>
+			<if test="relFundId != null and relFundId != ''" >
+				AND REL_FUND_ID = #{relFundId,jdbcType=VARCHAR}
+			</if>
+			<if test="relFundName != null and relFundName != ''" >
+				AND REL_FUND_NAME = #{relFundName,jdbcType=VARCHAR}
+			</if>
+			<if test="relPlatId != null and relPlatId != ''" >
+				AND REL_PLAT_ID = #{relPlatId,jdbcType=VARCHAR}
+			</if>
+			<if test="relPlatName != null and relPlatName != ''" >
+				AND REL_PLAT_NAME = #{relPlatName,jdbcType=VARCHAR}
+			</if>
+			<if test="startTime != null" >
+				AND START_TIME = #{startTime,jdbcType=VARCHAR}
+			</if>
+			<if test="endTime != null" >
+				AND END_TIME = #{endTime,jdbcType=VARCHAR}
+			</if>
+			<if test="effecStatus != null and effecStatus != ''" >
+				AND EFFEC_STATUS = #{effecStatus,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  OA.FOUNDER_OA_APPLY_CONTRACT WHERE APPLY_NO IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.FounderOaApplyContractModel">
+		UPDATE OA.FOUNDER_OA_APPLY_CONTRACT 
+		<set>
+			<if test="applyNo != null and applyNo != ''" >
+				APPLY_NO = #{applyNo,jdbcType=VARCHAR},
+			</if>
+			<if test="contractName != null and contractName != ''" >
+				CONTRACT_NAME = #{contractName,jdbcType=VARCHAR},
+			</if>
+			<if test="contractNo != null and contractNo != ''" >
+				CONTRACT_NO = #{contractNo,jdbcType=VARCHAR},
+			</if>
+			<if test="contractType != null and contractType != ''" >
+				CONTRACT_TYPE = #{contractType,jdbcType=VARCHAR},
+			</if>
+			<if test="contractDepartment != null and contractDepartment != ''" >
+				CONTRACT_DEPARTMENT = #{contractDepartment,jdbcType=VARCHAR},
+			</if>
+			<if test="contractContent != null and contractContent != ''" >
+				CONTRACT_CONTENT = #{contractContent,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null and remark != ''" >
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="sealNo != null and sealNo != ''" >
+				SEAL_NO = #{sealNo,jdbcType=VARCHAR},
+			</if>
+			<if test="sealCopies != null and sealCopies != ''" >
+				SEAL_COPIES = #{sealCopies,jdbcType=NUMERIC},
+			</if>
+			<if test="fileName != null and fileName != ''" >
+				FILE_NAME = #{fileName,jdbcType=VARCHAR},
+			</if>
+			<if test="attachment != null and attachment != ''" >
+				ATTACHMENT = #{attachment,jdbcType=VARCHAR},
+			</if>
+			<if test="contractDepartmentId != null and contractDepartmentId != ''" >
+				CONTRACT_DEPARTMENT_ID = #{contractDepartmentId,jdbcType=VARCHAR},
+			</if>
+			<if test="amount != null and amount != ''" >
+				AMOUNT = #{amount,jdbcType=NUMERIC},
+			</if>
+			<if test="billOptions != null and billOptions != ''" >
+				BILL_OPTIONS = #{billOptions,jdbcType=VARCHAR},
+			</if>
+			<if test="orgContractNo != null and orgContractNo != ''" >
+				ORG_CONTRACT_NO = #{orgContractNo,jdbcType=VARCHAR},
+			</if>
+			<if test="orgContractFlag != null and orgContractFlag != ''" >
+				ORG_CONTRACT_FLAG = #{orgContractFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="orgId != null and orgId != ''" >
+				ORG_ID = #{orgId,jdbcType=VARCHAR},
+			</if>
+			<if test="orgName != null and orgName != ''" >
+				ORG_NAME = #{orgName,jdbcType=VARCHAR},
+			</if>
+			<if test="amountMoney != null and amountMoney != ''" >
+				AMOUNT_MONEY = #{amountMoney,jdbcType=NUMERIC},
+			</if>
+			<if test="amountCurr != null and amountCurr != ''" >
+				AMOUNT_CURR = #{amountCurr,jdbcType=VARCHAR},
+			</if>
+			<if test="applyNo2 != null and applyNo2 != ''" >
+				APPLY_NO2 = #{applyNo2,jdbcType=VARCHAR},
+			</if>
+			<if test="relFundId != null and relFundId != ''" >
+				REL_FUND_ID = #{relFundId,jdbcType=VARCHAR},
+			</if>
+			<if test="relFundName != null and relFundName != ''" >
+				REL_FUND_NAME = #{relFundName,jdbcType=VARCHAR},
+			</if>
+			<if test="relPlatId != null and relPlatId != ''" >
+				REL_PLAT_ID = #{relPlatId,jdbcType=VARCHAR},
+			</if>
+			<if test="relPlatName != null and relPlatName != ''" >
+				REL_PLAT_NAME = #{relPlatName,jdbcType=VARCHAR},
+			</if>
+			<if test="startTime != null" >
+				START_TIME = #{startTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endTime != null" >
+				END_TIME = #{endTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="effecStatus != null and effecStatus != ''" >
+				EFFEC_STATUS = #{effecStatus,jdbcType=VARCHAR},
+			</if>
+		</set>
+		WHERE APPLY_NO = #{applyNo,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="FounderOaApplyContractResult">
+		SELECT * FROM OA.FOUNDER_OA_APPLY_CONTRACT WHERE APPLY_NO = #{applyNo,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.FounderOaApplyContractModel" resultMap="FounderOaApplyContractResult">
+		SELECT * FROM OA.FOUNDER_OA_APPLY_CONTRACT
+		<where>
+			<if test="applyNo != null and applyNo != ''" >
+				APPLY_NO = #{applyNo,jdbcType=VARCHAR}
+			</if>
+			<if test="contractName != null and contractName != ''" >
+				AND CONTRACT_NAME = #{contractName,jdbcType=VARCHAR}
+			</if>
+			<if test="contractNo != null and contractNo != ''" >
+				AND CONTRACT_NO = #{contractNo,jdbcType=VARCHAR}
+			</if>
+			<if test="contractType != null and contractType != ''" >
+				AND CONTRACT_TYPE = #{contractType,jdbcType=VARCHAR}
+			</if>
+			<if test="contractDepartment != null and contractDepartment != ''" >
+				AND CONTRACT_DEPARTMENT = #{contractDepartment,jdbcType=VARCHAR}
+			</if>
+			<if test="contractContent != null and contractContent != ''" >
+				AND CONTRACT_CONTENT = #{contractContent,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="sealNo != null and sealNo != ''" >
+				AND SEAL_NO = #{sealNo,jdbcType=VARCHAR}
+			</if>
+			<if test="sealCopies != null and sealCopies != ''" >
+				AND SEAL_COPIES = #{sealCopies,jdbcType=NUMERIC}
+			</if>
+			<if test="fileName != null and fileName != ''" >
+				AND FILE_NAME = #{fileName,jdbcType=VARCHAR}
+			</if>
+			<if test="attachment != null and attachment != ''" >
+				AND ATTACHMENT = #{attachment,jdbcType=VARCHAR}
+			</if>
+			<if test="contractDepartmentId != null and contractDepartmentId != ''" >
+				AND CONTRACT_DEPARTMENT_ID = #{contractDepartmentId,jdbcType=VARCHAR}
+			</if>
+			<if test="amount != null and amount != ''" >
+				AND AMOUNT = #{amount,jdbcType=NUMERIC}
+			</if>
+			<if test="billOptions != null and billOptions != ''" >
+				AND BILL_OPTIONS = #{billOptions,jdbcType=VARCHAR}
+			</if>
+			<if test="orgContractNo != null and orgContractNo != ''" >
+				AND ORG_CONTRACT_NO = #{orgContractNo,jdbcType=VARCHAR}
+			</if>
+			<if test="orgContractFlag != null and orgContractFlag != ''" >
+				AND ORG_CONTRACT_FLAG = #{orgContractFlag,jdbcType=VARCHAR}
+			</if>
+			<if test="orgId != null and orgId != ''" >
+				AND ORG_ID = #{orgId,jdbcType=VARCHAR}
+			</if>
+			<if test="orgName != null and orgName != ''" >
+				AND ORG_NAME = #{orgName,jdbcType=VARCHAR}
+			</if>
+			<if test="amountMoney != null and amountMoney != ''" >
+				AND AMOUNT_MONEY = #{amountMoney,jdbcType=NUMERIC}
+			</if>
+			<if test="amountCurr != null and amountCurr != ''" >
+				AND AMOUNT_CURR = #{amountCurr,jdbcType=VARCHAR}
+			</if>
+			<if test="applyNo2 != null and applyNo2 != ''" >
+				AND APPLY_NO2 = #{applyNo2,jdbcType=VARCHAR}
+			</if>
+			<if test="relFundId != null and relFundId != ''" >
+				AND REL_FUND_ID = #{relFundId,jdbcType=VARCHAR}
+			</if>
+			<if test="relFundName != null and relFundName != ''" >
+				AND REL_FUND_NAME = #{relFundName,jdbcType=VARCHAR}
+			</if>
+			<if test="relPlatId != null and relPlatId != ''" >
+				AND REL_PLAT_ID = #{relPlatId,jdbcType=VARCHAR}
+			</if>
+			<if test="relPlatName != null and relPlatName != ''" >
+				AND REL_PLAT_NAME = #{relPlatName,jdbcType=VARCHAR}
+			</if>
+			<if test="startTime != null" >
+				AND START_TIME = #{startTime,jdbcType=VARCHAR}
+			</if>
+			<if test="endTime != null" >
+				AND END_TIME = #{endTime,jdbcType=VARCHAR}
+			</if>
+			<if test="effecStatus != null and effecStatus != ''" >
+				AND EFFEC_STATUS = #{effecStatus,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM OA.FOUNDER_OA_APPLY_CONTRACT T
+		LEFT JOIN OA.FOUNDER_OA_APPLY_INFO T2 ON T.APPLY_NO=T2.APPLY_NO
+		<where>
+			(ORG_CONTRACT_FLAG = 0 or ORG_CONTRACT_FLAG is null)
+			<!--<if test="paramMap.orgIdOrDeptId != null and paramMap.orgIdOrDeptId != '' ">
+				AND (T.ORG_ID=#{paramMap.orgIdOrDeptId}  or T.CONTRACT_DEPARTMENT_ID=#{paramMap.orgIdOrDeptId})
+			</if>-->
+			<if test="paramMap.loginUser.userId!='1200119390' and paramMap.loginUser.userId!='13209' ">
+					AND T2.APPLICANT_ID=#{paramMap.loginUser.userId}
+
+			</if>
+			<include refid="searchCondition.searchClause" />
+		</where>
+
+		order by t.APPLY_NO desc
+	</sql>
+
+	<select id="selectListPage" resultMap="FounderOaApplyContractResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.FounderOaApplyContractModel">
+		SELECT COUNT(*) FROM OA.FOUNDER_OA_APPLY_CONTRACT
+		<where>
+			<if test="applyNo != null and applyNo != ''" >
+				APPLY_NO = #{applyNo,jdbcType=VARCHAR}
+			</if>
+			<if test="contractName != null and contractName != ''" >
+				AND CONTRACT_NAME = #{contractName,jdbcType=VARCHAR}
+			</if>
+			<if test="contractNo != null and contractNo != ''" >
+				AND CONTRACT_NO = #{contractNo,jdbcType=VARCHAR}
+			</if>
+			<if test="contractType != null and contractType != ''" >
+				AND CONTRACT_TYPE = #{contractType,jdbcType=VARCHAR}
+			</if>
+			<if test="contractDepartment != null and contractDepartment != ''" >
+				AND CONTRACT_DEPARTMENT = #{contractDepartment,jdbcType=VARCHAR}
+			</if>
+			<if test="contractContent != null and contractContent != ''" >
+				AND CONTRACT_CONTENT = #{contractContent,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="sealNo != null and sealNo != ''" >
+				AND SEAL_NO = #{sealNo,jdbcType=VARCHAR}
+			</if>
+			<if test="sealCopies != null and sealCopies != ''" >
+				AND SEAL_COPIES = #{sealCopies,jdbcType=NUMERIC}
+			</if>
+			<if test="fileName != null and fileName != ''" >
+				AND FILE_NAME = #{fileName,jdbcType=VARCHAR}
+			</if>
+			<if test="attachment != null and attachment != ''" >
+				AND ATTACHMENT = #{attachment,jdbcType=VARCHAR}
+			</if>
+			<if test="contractDepartmentId != null and contractDepartmentId != ''" >
+				AND CONTRACT_DEPARTMENT_ID = #{contractDepartmentId,jdbcType=VARCHAR}
+			</if>
+			<if test="amount != null and amount != ''" >
+				AND AMOUNT = #{amount,jdbcType=NUMERIC}
+			</if>
+			<if test="billOptions != null and billOptions != ''" >
+				AND BILL_OPTIONS = #{billOptions,jdbcType=VARCHAR}
+			</if>
+			<if test="orgContractNo != null and orgContractNo != ''" >
+				AND ORG_CONTRACT_NO = #{orgContractNo,jdbcType=VARCHAR}
+			</if>
+			<if test="orgContractFlag != null and orgContractFlag != ''" >
+				AND ORG_CONTRACT_FLAG = #{orgContractFlag,jdbcType=VARCHAR}
+			</if>
+			<if test="orgId != null and orgId != ''" >
+				AND ORG_ID = #{orgId,jdbcType=VARCHAR}
+			</if>
+			<if test="orgName != null and orgName != ''" >
+				AND ORG_NAME = #{orgName,jdbcType=VARCHAR}
+			</if>
+			<if test="amountMoney != null and amountMoney != ''" >
+				AND AMOUNT_MONEY = #{amountMoney,jdbcType=NUMERIC}
+			</if>
+			<if test="amountCurr != null and amountCurr != ''" >
+				AND AMOUNT_CURR = #{amountCurr,jdbcType=VARCHAR}
+			</if>
+			<if test="applyNo2 != null and applyNo2 != ''" >
+				AND APPLY_NO2 = #{applyNo2,jdbcType=VARCHAR}
+			</if>
+			<if test="relFundId != null and relFundId != ''" >
+				AND REL_FUND_ID = #{relFundId,jdbcType=VARCHAR}
+			</if>
+			<if test="relFundName != null and relFundName != ''" >
+				AND REL_FUND_NAME = #{relFundName,jdbcType=VARCHAR}
+			</if>
+			<if test="relPlatId != null and relPlatId != ''" >
+				AND REL_PLAT_ID = #{relPlatId,jdbcType=VARCHAR}
+			</if>
+			<if test="relPlatName != null and relPlatName != ''" >
+				AND REL_PLAT_NAME = #{relPlatName,jdbcType=VARCHAR}
+			</if>
+			<if test="startTime != null" >
+				AND START_TIME = #{startTime,jdbcType=VARCHAR}
+			</if>
+			<if test="endTime != null" >
+				AND END_TIME = #{endTime,jdbcType=VARCHAR}
+			</if>
+			<if test="effecStatus != null and effecStatus != ''" >
+				AND EFFEC_STATUS = #{effecStatus,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.FounderOaApplyContractModel" resultMap="FounderOaApplyContractResult">
+		SELECT * FROM OA.FOUNDER_OA_APPLY_CONTRACT
+		<where>
+			<if test="applyNo != null and applyNo != ''" >
+				APPLY_NO = #{applyNo,jdbcType=VARCHAR}
+			</if>
+			<if test="contractName != null and contractName != ''" >
+				AND CONTRACT_NAME = #{contractName,jdbcType=VARCHAR}
+			</if>
+			<if test="contractNo != null and contractNo != ''" >
+				AND CONTRACT_NO = #{contractNo,jdbcType=VARCHAR}
+			</if>
+			<if test="contractType != null and contractType != ''" >
+				AND CONTRACT_TYPE = #{contractType,jdbcType=VARCHAR}
+			</if>
+			<if test="contractDepartment != null and contractDepartment != ''" >
+				AND CONTRACT_DEPARTMENT = #{contractDepartment,jdbcType=VARCHAR}
+			</if>
+			<if test="contractContent != null and contractContent != ''" >
+				AND CONTRACT_CONTENT = #{contractContent,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="sealNo != null and sealNo != ''" >
+				AND SEAL_NO = #{sealNo,jdbcType=VARCHAR}
+			</if>
+			<if test="sealCopies != null and sealCopies != ''" >
+				AND SEAL_COPIES = #{sealCopies,jdbcType=NUMERIC}
+			</if>
+			<if test="fileName != null and fileName != ''" >
+				AND FILE_NAME = #{fileName,jdbcType=VARCHAR}
+			</if>
+			<if test="attachment != null and attachment != ''" >
+				AND ATTACHMENT = #{attachment,jdbcType=VARCHAR}
+			</if>
+			<if test="contractDepartmentId != null and contractDepartmentId != ''" >
+				AND CONTRACT_DEPARTMENT_ID = #{contractDepartmentId,jdbcType=VARCHAR}
+			</if>
+			<if test="amount != null and amount != ''" >
+				AND AMOUNT = #{amount,jdbcType=NUMERIC}
+			</if>
+			<if test="billOptions != null and billOptions != ''" >
+				AND BILL_OPTIONS = #{billOptions,jdbcType=VARCHAR}
+			</if>
+			<if test="orgContractNo != null and orgContractNo != ''" >
+				AND ORG_CONTRACT_NO = #{orgContractNo,jdbcType=VARCHAR}
+			</if>
+			<if test="orgContractFlag != null and orgContractFlag != ''" >
+				AND ORG_CONTRACT_FLAG = #{orgContractFlag,jdbcType=VARCHAR}
+			</if>
+			<if test="orgId != null and orgId != ''" >
+				AND ORG_ID = #{orgId,jdbcType=VARCHAR}
+			</if>
+			<if test="orgName != null and orgName != ''" >
+				AND ORG_NAME = #{orgName,jdbcType=VARCHAR}
+			</if>
+			<if test="amountMoney != null and amountMoney != ''" >
+				AND AMOUNT_MONEY = #{amountMoney,jdbcType=NUMERIC}
+			</if>
+			<if test="amountCurr != null and amountCurr != ''" >
+				AND AMOUNT_CURR = #{amountCurr,jdbcType=VARCHAR}
+			</if>
+			<if test="applyNo2 != null and applyNo2 != ''" >
+				AND APPLY_NO2 = #{applyNo2,jdbcType=VARCHAR}
+			</if>
+			<if test="relFundId != null and relFundId != ''" >
+				AND REL_FUND_ID = #{relFundId,jdbcType=VARCHAR}
+			</if>
+			<if test="relFundName != null and relFundName != ''" >
+				AND REL_FUND_NAME = #{relFundName,jdbcType=VARCHAR}
+			</if>
+			<if test="relPlatId != null and relPlatId != ''" >
+				AND REL_PLAT_ID = #{relPlatId,jdbcType=VARCHAR}
+			</if>
+			<if test="relPlatName != null and relPlatName != ''" >
+				AND REL_PLAT_NAME = #{relPlatName,jdbcType=VARCHAR}
+			</if>
+			<if test="startTime != null" >
+				AND START_TIME = #{startTime,jdbcType=VARCHAR}
+			</if>
+			<if test="endTime != null" >
+				AND END_TIME = #{endTime,jdbcType=VARCHAR}
+			</if>
+			<if test="effecStatus != null and effecStatus != ''" >
+				AND EFFEC_STATUS = #{effecStatus,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="FounderOaApplyContractResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+
+	<delete id="deleteByIds" parameterType="java.util.HashMap">
+		DELETE FROM  OA.FOUNDER_OA_APPLY_CONTRACT
+		<where>
+			APPLY_NO IN
+			<foreach item="item" collection="ids" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</where>
+	</delete>
+
+
+	<!-- 获取母基金合同列表 -->
+	<select id="selectApplyContractListByFundId" resultMap="FounderOaApplyContractResult2" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT H.*,
+		A1.FILE_ID ATTACHMENT_FILE_ID,'OA' ATTACHMENT_FILE_SOURCE,A1.FILE_OLD_NAME ATTACHMENT_ATT_NAME,
+		'/eiweb/uploadServlet?method=getExistFile'||chr(38)||'sessionKey='||A1.File_Id|| chr(38)||'fileName='||A1.FILE_NAME||chr(38)||'fieldToken='||A1.FIELD_TOKEN||chr(38)||'fileOldName='||A1.FILE_OLD_NAME||chr(38)||'isNew=Y' ATTACHMENT_ATT_URL,
+		RTrim(to_char(NVL(A1.FILE_SIZE, 0) / 1024, 'FM99999999990'), '.') || 'KB' AS ATTACHMENT_ATT_SIZE
+		FROM (
+			SELECT C.*,
+			I.PROCESS_STATUS,
+			I.APPLY_TIME,
+			I.PROCESS_INST_ID,
+			I.APPLICANT_ID,
+			I.APPLY_STATUS,
+			I.APPLICANT_NAME,
+			I.APPLICANT_DEPARTMENT
+			from OA.FOUNDER_OA_APPLY_INFO I ,OA.FOUNDER_OA_APPLY_CONTRACT C
+			WHERE I.APPLY_NO = C.APPLY_NO) H
+		LEFT JOIN OA.FOUNDER_FILE_INFO A1 ON H.ATTACHMENT=A1.FIELD_TOKEN
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+		AND (H.ORG_CONTRACT_FLAG = 0 or H.ORG_CONTRACT_FLAG = 3 or H.ORG_CONTRACT_FLAG is null)
+		ORDER BY APPLY_TIME DESC
+	</select>
+
+</mapper>

@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProjContractInfo">
+	<!-- start autocreate -->
+
+	<resultMap id="ProjContractInfoResult" type="com.ppmg.ei.model.ProjContractInfoModel">
+		<result column="ID" property="id" jdbcType="VARCHAR" />
+		<result column="PROJ_ID" property="projId" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="PROJ_NAME" property="projName" jdbcType="VARCHAR" />
+		<result column="INVE_NAME" property="inveName" jdbcType="VARCHAR" />
+		<result column="INVE_ID" property="inveId" jdbcType="VARCHAR" />
+		<result column="PROJ_FILE" property="projFile" jdbcType="VARCHAR" />
+		<result column="FOUNCE_INFO" property="founceInfo" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="PROCESS_INST_ID" property="processInstId" jdbcType="VARCHAR" />
+		<result column="FILE_INFO_ID" property="fileInfoId" jdbcType="VARCHAR" />
+
+	</resultMap>
+
+
+	<resultMap id="ProjContractInfoResult1" type="com.ppmg.ei.model.ProjContractInfoModel">
+		<result column="ID" property="id" jdbcType="VARCHAR" />
+		<result column="PROJ_ID" property="projId" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="PROJ_NAME" property="projName" jdbcType="VARCHAR" />
+		<result column="INVE_NAME" property="inveName" jdbcType="VARCHAR" />
+		<result column="INVE_ID" property="inveId" jdbcType="VARCHAR" />
+		<result column="PROJ_FILE" property="projFile" jdbcType="VARCHAR" />
+		<result column="FOUNCE_INFO" property="founceInfo" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="PROCESS_INST_ID" property="processInstId" jdbcType="VARCHAR" />
+		<collection property="projContractFileList" ofType="com.ppmg.ei.model.ProjContractFileModel" column="id">
+			<result column="FILE_ID" property="fileId" jdbcType="VARCHAR" />
+			<result column="PROJ_ID" property="projId" jdbcType="VARCHAR" />
+			<result column="FILE_TYPE" property="fileType" jdbcType="VARCHAR" />
+			<result column="FILE_TITLE" property="fileTitle" jdbcType="VARCHAR" />
+			<result column="FIRST_PARTY" property="firstParty" jdbcType="VARCHAR" />
+			<result column="SECOND_PARTY" property="secondParty" jdbcType="VARCHAR" />
+			<result column="DRAFTSMAN" property="draftsman" jdbcType="VARCHAR" />
+			<result column="DRAFT_DT" property="draftDt" jdbcType="TIMESTAMP" />
+			<result column="DIRECTOR_COUNT" property="directorCount" jdbcType="NUMERIC" />
+			<result column="YH_DIRE_COUNT" property="yhDireCount" jdbcType="NUMERIC" />
+			<result column="SUPERVISOR_COUNT" property="supervisorCount" jdbcType="NUMERIC" />
+			<result column="YH_SUPE_COUNT" property="yhSupeCount" jdbcType="NUMERIC" />
+			<result column="CONTRACT_FILE" property="contractFile" jdbcType="VARCHAR" />
+			<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+			<result column="FINAL_FILE" property="finalFile" jdbcType="VARCHAR" />
+			<result column="STATUS" property="status" jdbcType="VARCHAR" />
+			<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+			<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+			<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+			<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+			<result column="PROCESS_INST_ID" property="processInstId" jdbcType="VARCHAR" />
+			<result column="PROJ_GUID" property="projGuid" jdbcType="VARCHAR" />
+			<result column="PROCESSVERSIONINSTANCEGUID" property="processversioninstanceguid" jdbcType="VARCHAR" />
+			<result column="SVG_PK_GUID" property="svgPkGuid" jdbcType="VARCHAR" />
+			<result column="SVG_ATTA_GUID" property="svgAttaGuid" jdbcType="VARCHAR" />
+			<result column="SIGN_DT" property="signDt" jdbcType="TIMESTAMP" />
+			<result column="SIGN_AMOUNT" property="signAmount" jdbcType="NUMERIC" />
+			<result column="SIGN_AMOUNT_CURR" property="signAmountCurr" jdbcType="VARCHAR" />
+			<result column="SIGN_AMOUNT_RMB" property="signAmountRmb" jdbcType="NUMERIC" />
+			<result column="AFTER_FUNDER_ID" property="afterFunderId" jdbcType="VARCHAR" />
+			<result column="END_AGREE_AMONT" property="endAgreeAmont" jdbcType="NUMERIC" />
+			<result column="END_AGREE_AMONT_CURR" property="endAgreeAmontCurr" jdbcType="VARCHAR" />
+			<result column="END_AGREE_AMONT_RMB" property="endAgreeAmontRmb" jdbcType="NUMERIC" />
+			<result column="THIS_AGREE_AMONT" property="thisAgreeAmont" jdbcType="NUMERIC" />
+			<result column="THIS_AGREE_AMONT_CURR" property="thisAgreeAmontCurr" jdbcType="VARCHAR" />
+			<result column="THIS_AGREE_AMONT_RMB" property="thisAgreeAmontRmb" jdbcType="NUMERIC" />
+			<result column="PROJ_ID_PI" property="projIdPi" jdbcType="VARCHAR" />
+			<result column="CSID" property="csid" jdbcType="VARCHAR" />
+			<result column="OBJECT_ID" property="objectId" jdbcType="VARCHAR" />
+			<result column="PROJ_OBJECT_NAME" property="projObjectName" jdbcType="VARCHAR" />
+			<result column="GROUP_ID" property="groupId" jdbcType="VARCHAR" />
+			<result column="SHARE_RATIO" property="shareRatio" jdbcType="NUMERIC" />
+			<result column="SUB_FUND_AMONT" property="subFundAmont" jdbcType="NUMERIC" />
+			<result column="SUB_FUND_AMONT_CURR" property="subFundAmontCurr" jdbcType="VARCHAR" />
+			<result column="SUB_FUND_AMONT_RMB" property="subFundAmontRmb" jdbcType="NUMERIC" />
+			<result column="CURRENT_AMOUNT" property="currentAmount" jdbcType="NUMERIC" />
+			<result column="CURRENT_AMOUNT_CURR" property="currentAmountCurr" jdbcType="VARCHAR" />
+			<result column="CURRENT_AMOUNT_RMB" property="currentAmountRmb" jdbcType="NUMERIC" />
+			<result column="CURRENT_RATIO" property="currentRatio" jdbcType="NUMERIC" />
+			<result column="MAJOR_TERM" property="majorTerm" jdbcType="VARCHAR" />
+			<result column="FILE_INFO_ID" property="fileInfoId" jdbcType="VARCHAR" />
+		</collection>
+
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.ProjContractInfoModel">
+		INSERT INTO TZ_T_PROJ_CONTRACT_INFO (ID,PROJ_ID,REMARK,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,PROJ_NAME,INVE_NAME,INVE_ID,PROJ_FILE,FOUNCE_INFO,STATUS,PROCESS_INST_ID,FILE_INFO_ID) values(#{id,jdbcType=VARCHAR},#{projId,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{projName,jdbcType=VARCHAR},#{inveName,jdbcType=VARCHAR},#{inveId,jdbcType=VARCHAR},#{projFile,jdbcType=VARCHAR},#{founceInfo,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{processInstId,jdbcType=VARCHAR},#{fileInfoId,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO TZ_T_PROJ_CONTRACT_INFO (ID,PROJ_ID,REMARK,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,PROJ_NAME,INVE_NAME,INVE_ID,PROJ_FILE,FOUNCE_INFO,STATUS,PROCESS_INST_ID,FILE_INFO_ID)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.id,jdbcType=VARCHAR},
+				#{item.projId,jdbcType=VARCHAR},
+				#{item.remark,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+				#{item.projName,jdbcType=VARCHAR},
+				#{item.inveName,jdbcType=VARCHAR},
+				#{item.inveId,jdbcType=VARCHAR},
+				#{item.projFile,jdbcType=VARCHAR},
+				#{item.founceInfo,jdbcType=VARCHAR},
+			    #{item.status,jdbcType=VARCHAR},
+			    #{item.processInstId,jdbcType=VARCHAR},
+			    #{item.fileInfoId,jdbcType=VARCHAR}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  TZ_T_PROJ_CONTRACT_INFO WHERE ID = #{id,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.ProjContractInfoModel">
+		DELETE FROM TZ_T_PROJ_CONTRACT_INFO
+		<where>
+			<if test="id != null and id != ''" >
+				ID = #{id,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="projName != null and projName != ''" >
+				AND PROJ_NAME = #{projName,jdbcType=VARCHAR}
+			</if>
+			<if test="inveName != null and inveName != ''" >
+				AND INVE_NAME = #{inveName,jdbcType=VARCHAR}
+			</if>
+			<if test="inveId != null and inveId != ''" >
+				AND INVE_ID = #{inveId,jdbcType=VARCHAR}
+			</if>
+			<if test="projFile != null and projFile != ''" >
+				AND PROJ_FILE = #{projFile,jdbcType=VARCHAR}
+			</if>
+			<if test="founceInfo != null and founceInfo != ''" >
+				AND FOUNCE_INFO = #{founceInfo,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="fileInfoId != null and fileInfoId != ''" >
+				AND FILE_INFO_ID = #{fileInfoId,jdbcType=VARCHAR}
+			</if>
+
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  TZ_T_PROJ_CONTRACT_INFO WHERE ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.ProjContractInfoModel">
+		UPDATE TZ_T_PROJ_CONTRACT_INFO 
+		<set>
+			<if test="id != null and id != ''" >
+				ID = #{id,jdbcType=VARCHAR},
+			</if>
+			<if test="projId != null and projId != ''" >
+				PROJ_ID = #{projId,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null and remark != ''" >
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="projName != null and projName != ''" >
+				PROJ_NAME = #{projName,jdbcType=VARCHAR},
+			</if>
+			<if test="inveName != null and inveName != ''" >
+				INVE_NAME = #{inveName,jdbcType=VARCHAR},
+			</if>
+			<if test="inveId != null and inveId != ''" >
+				INVE_ID = #{inveId,jdbcType=VARCHAR},
+			</if>
+			<if test="projFile != null and projFile != ''" >
+				PROJ_FILE = #{projFile,jdbcType=VARCHAR},
+			</if>
+			<if test="founceInfo != null and founceInfo != ''" >
+				FOUNCE_INFO = #{founceInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null and status != ''" >
+				 STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				 PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR},
+			</if>
+			<if test="fileInfoId != null and fileInfoId != ''" >
+				 FILE_INFO_ID = #{fileInfoId,jdbcType=VARCHAR},
+			</if>
+		</set>
+		WHERE ID = #{id,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="ProjContractInfoResult">
+		SELECT * FROM TZ_T_PROJ_CONTRACT_INFO WHERE ID = #{id,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.ProjContractInfoModel" resultMap="ProjContractInfoResult">
+		SELECT * FROM TZ_T_PROJ_CONTRACT_INFO
+		<where>
+			<if test="id != null and id != ''" >
+				ID = #{id,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="projName != null and projName != ''" >
+				AND PROJ_NAME = #{projName,jdbcType=VARCHAR}
+			</if>
+			<if test="inveName != null and inveName != ''" >
+				AND INVE_NAME = #{inveName,jdbcType=VARCHAR}
+			</if>
+			<if test="inveId != null and inveId != ''" >
+				AND INVE_ID = #{inveId,jdbcType=VARCHAR}
+			</if>
+			<if test="projFile != null and projFile != ''" >
+				AND PROJ_FILE = #{projFile,jdbcType=VARCHAR}
+			</if>
+			<if test="founceInfo != null and founceInfo != ''" >
+				AND FOUNCE_INFO = #{founceInfo,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="fileInfoId != null and fileInfoId != ''" >
+				AND FILE_INFO_ID = #{fileInfoId,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM TZ_T_PROJ_CONTRACT_INFO
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="ProjContractInfoResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+	<select id="selectListByInfoPage" resultMap="ProjContractInfoResult1" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT a.id,b.*  FROM TZ_T_PROJ_CONTRACT_INFO a
+		left join TZ_T_PROJ_CONTRACT_FILE b  on a.id=b.FILE_INFO_ID
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</select>
+
+
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.ProjContractInfoModel">
+		SELECT COUNT(*) FROM TZ_T_PROJ_CONTRACT_INFO
+		<where>
+			<if test="id != null and id != ''" >
+				ID = #{id,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="projName != null and projName != ''" >
+				AND PROJ_NAME = #{projName,jdbcType=VARCHAR}
+			</if>
+			<if test="inveName != null and inveName != ''" >
+				AND INVE_NAME = #{inveName,jdbcType=VARCHAR}
+			</if>
+			<if test="inveId != null and inveId != ''" >
+				AND INVE_ID = #{inveId,jdbcType=VARCHAR}
+			</if>
+			<if test="projFile != null and projFile != ''" >
+				AND PROJ_FILE = #{projFile,jdbcType=VARCHAR}
+			</if>
+			<if test="founceInfo != null and founceInfo != ''" >
+				AND FOUNCE_INFO = #{founceInfo,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="fileInfoId != null and fileInfoId != ''" >
+				AND FILE_INFO_ID = #{fileInfoId,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.ProjContractInfoModel" resultMap="ProjContractInfoResult">
+		SELECT * FROM TZ_T_PROJ_CONTRACT_INFO
+		<where>
+			<if test="id != null and id != ''" >
+				ID = #{id,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="projName != null and projName != ''" >
+				AND PROJ_NAME = #{projName,jdbcType=VARCHAR}
+			</if>
+			<if test="inveName != null and inveName != ''" >
+				AND INVE_NAME = #{inveName,jdbcType=VARCHAR}
+			</if>
+			<if test="inveId != null and inveId != ''" >
+				AND INVE_ID = #{inveId,jdbcType=VARCHAR}
+			</if>
+			<if test="projFile != null and projFile != ''" >
+				AND PROJ_FILE = #{projFile,jdbcType=VARCHAR}
+			</if>
+			<if test="founceInfo != null and founceInfo != ''" >
+				AND FOUNCE_INFO = #{founceInfo,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="fileInfoId != null and fileInfoId != ''" >
+				AND FILE_INFO_ID = #{fileInfoId,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="ProjContractInfoResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+
+</mapper>

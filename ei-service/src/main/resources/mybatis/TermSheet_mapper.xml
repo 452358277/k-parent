@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TermSheet">
+	<resultMap id="TermSheetResult2" type="com.ppmg.ei.model.TermSheetModel" extends="TermSheetResult">
+		<collection property="eDocAttList" ofType="com.ppmg.ei.model.EiTAttachmentModel" column="E_DOC">
+			<result column="E_DOC_NAME" property="fileOldName" jdbcType="VARCHAR" />
+			<result column="E_DOC_URL" property="filePath" jdbcType="VARCHAR" />
+		</collection>
+		<collection property="formVersionAttList" ofType="com.ppmg.ei.model.EiTAttachmentModel" column="FORM_VERSION">
+			<result column="FORM_VERSION_NAME" property="fileOldName" jdbcType="VARCHAR" />
+			<result column="FORM_VERSION_URL" property="filePath" jdbcType="VARCHAR" />
+		</collection>
+	</resultMap>
+	<!-- start autocreate -->
+
+	<resultMap id="TermSheetResult" type="com.ppmg.ei.model.TermSheetModel">
+		<result column="SHEET_ID" property="sheetId" jdbcType="VARCHAR" />
+		<result column="PROJ_ID" property="projId" jdbcType="VARCHAR" />
+		<result column="SHEET_TYPE" property="sheetType" jdbcType="VARCHAR" />
+		<result column="SIGN_DT" property="signDt" jdbcType="TIMESTAMP" />
+		<result column="E_DOC" property="eDoc" jdbcType="VARCHAR" />
+		<result column="FORM_VERSION" property="formVersion" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="PROCESS_INST_ID" property="processInstId" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.TermSheetModel">
+		INSERT INTO TZ_T_TERM_SHEET (SHEET_ID,PROJ_ID,SHEET_TYPE,SIGN_DT,E_DOC,FORM_VERSION,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,PROCESS_INST_ID) values(#{sheetId,jdbcType=VARCHAR},#{projId,jdbcType=VARCHAR},#{sheetType,jdbcType=VARCHAR},#{signDt,jdbcType=TIMESTAMP},#{eDoc,jdbcType=VARCHAR},#{formVersion,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{processInstId,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO TZ_T_TERM_SHEET (SHEET_ID,PROJ_ID,SHEET_TYPE,SIGN_DT,E_DOC,FORM_VERSION,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,PROCESS_INST_ID)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.sheetId,jdbcType=VARCHAR},
+				#{item.projId,jdbcType=VARCHAR},
+				#{item.sheetType,jdbcType=VARCHAR},
+				#{item.signDt,jdbcType=TIMESTAMP},
+				#{item.eDoc,jdbcType=VARCHAR},
+				#{item.formVersion,jdbcType=VARCHAR},
+				#{item.status,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+				#{item.processInstId,jdbcType=VARCHAR}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  TZ_T_TERM_SHEET WHERE SHEET_ID = #{sheetId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.TermSheetModel">
+		DELETE FROM TZ_T_TERM_SHEET
+		<where>
+			<if test="sheetId != null and sheetId != ''" >
+				SHEET_ID = #{sheetId,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="sheetType != null and sheetType != ''" >
+				AND SHEET_TYPE = #{sheetType,jdbcType=VARCHAR}
+			</if>
+			<if test="signDt != null" >
+				AND SIGN_DT = #{signDt,jdbcType=VARCHAR}
+			</if>
+			<if test="eDoc != null and eDoc != ''" >
+				AND E_DOC = #{eDoc,jdbcType=VARCHAR}
+			</if>
+			<if test="formVersion != null and formVersion != ''" >
+				AND FORM_VERSION = #{formVersion,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  TZ_T_TERM_SHEET WHERE SHEET_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.TermSheetModel">
+		UPDATE TZ_T_TERM_SHEET 
+		<set>
+			<if test="sheetId != null and sheetId != ''" >
+				SHEET_ID = #{sheetId,jdbcType=VARCHAR},
+			</if>
+			<if test="projId != null and projId != ''" >
+				PROJ_ID = #{projId,jdbcType=VARCHAR},
+			</if>
+			<if test="sheetType != null and sheetType != ''" >
+				SHEET_TYPE = #{sheetType,jdbcType=VARCHAR},
+			</if>
+			<if test="signDt != null" >
+				SIGN_DT = #{signDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="eDoc != null and eDoc != ''" >
+				E_DOC = #{eDoc,jdbcType=VARCHAR},
+			</if>
+			<if test="formVersion != null and formVersion != ''" >
+				FORM_VERSION = #{formVersion,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR},
+			</if>
+		</set>
+		WHERE SHEET_ID = #{sheetId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="TermSheetResult">
+		SELECT * FROM TZ_T_TERM_SHEET WHERE SHEET_ID = #{sheetId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.TermSheetModel" resultMap="TermSheetResult">
+		SELECT * FROM TZ_T_TERM_SHEET
+		<where>
+			<if test="sheetId != null and sheetId != ''" >
+				SHEET_ID = #{sheetId,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="sheetType != null and sheetType != ''" >
+				AND SHEET_TYPE = #{sheetType,jdbcType=VARCHAR}
+			</if>
+			<if test="signDt != null" >
+				AND SIGN_DT = #{signDt,jdbcType=VARCHAR}
+			</if>
+			<if test="eDoc != null and eDoc != ''" >
+				AND E_DOC = #{eDoc,jdbcType=VARCHAR}
+			</if>
+			<if test="formVersion != null and formVersion != ''" >
+				AND FORM_VERSION = #{formVersion,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT A.FILE_OLD_NAME E_DOC_NAME, 
+			   A1.FILE_OLD_NAME FORM_VERSION_NAME,T.*,
+         '/eiweb/uploadServlet?method=getExistFile'||chr(38)||'sessionKey='||A.File_Id|| chr(38)||'fileName='||A.FILE_NAME||chr(38)||'fieldToken='||A.FIELD_TOKEN||chr(38)||'fileOldName='||A.FILE_OLD_NAME||chr(38)||'isNew=Y' E_DOC_URL,  
+        '/eiweb/uploadServlet?method=getExistFile'||chr(38)||'sessionKey='||A1.File_Id|| chr(38)||'fileName='||A1.FILE_NAME||chr(38)||'fieldToken='||A1.FIELD_TOKEN||chr(38)||'fileOldName='||A1.FILE_OLD_NAME||chr(38)||'isNew=Y' FORM_VERSION_URL 
+		FROM TZ_T_TERM_SHEET T
+		LEFT JOIN EI_T_ATTACHMENT A ON T.E_DOC=A.FIELD_TOKEN
+		LEFT JOIN EI_T_ATTACHMENT A1 ON T.FORM_VERSION=A1.FIELD_TOKEN
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+		ORDER BY T.CREATE_DT DESC
+	</sql>
+
+	<select id="selectListPage" resultMap="TermSheetResult2" parameterType="com.founder.ssm.core.common.SearchCondition">
+		<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.TermSheetModel">
+		SELECT COUNT(*) FROM TZ_T_TERM_SHEET
+		<where>
+			<if test="sheetId != null and sheetId != ''" >
+				SHEET_ID = #{sheetId,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="sheetType != null and sheetType != ''" >
+				AND SHEET_TYPE = #{sheetType,jdbcType=VARCHAR}
+			</if>
+			<if test="signDt != null" >
+				AND SIGN_DT = #{signDt,jdbcType=VARCHAR}
+			</if>
+			<if test="eDoc != null and eDoc != ''" >
+				AND E_DOC = #{eDoc,jdbcType=VARCHAR}
+			</if>
+			<if test="formVersion != null and formVersion != ''" >
+				AND FORM_VERSION = #{formVersion,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.TermSheetModel" resultMap="TermSheetResult">
+		SELECT * FROM TZ_T_TERM_SHEET
+		<where>
+			<if test="sheetId != null and sheetId != ''" >
+				SHEET_ID = #{sheetId,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="sheetType != null and sheetType != ''" >
+				AND SHEET_TYPE = #{sheetType,jdbcType=VARCHAR}
+			</if>
+			<if test="signDt != null" >
+				AND SIGN_DT = #{signDt,jdbcType=VARCHAR}
+			</if>
+			<if test="eDoc != null and eDoc != ''" >
+				AND E_DOC = #{eDoc,jdbcType=VARCHAR}
+			</if>
+			<if test="formVersion != null and formVersion != ''" >
+				AND FORM_VERSION = #{formVersion,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="TermSheetResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+</mapper>

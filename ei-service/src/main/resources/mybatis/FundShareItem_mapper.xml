@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FundShareItem">
+	<!-- 基金基本信息 -->
+	<resultMap id="FundShareItemResult2" type="com.ppmg.ei.model.FundShareItemModel" extends="FundShareItemResult">
+		<result column="FUND_ID" property="fundId" jdbcType="VARCHAR" />
+		<result column="INVESTOR_NAME" property="investorName" jdbcType="VARCHAR" />
+		<result column="DUES_PERCENT" property="duesPercent" jdbcType="VARCHAR" />
+		<result column="NOT_PAID_AMOUNT" property="notPaidAmount" jdbcType="NUMERIC" />
+	</resultMap>
+	<!-- start autocreate -->
+
+	<resultMap id="FundShareItemResult" type="com.ppmg.ei.model.FundShareItemModel">
+		<result column="ITEM_ID" property="itemId" jdbcType="VARCHAR" />
+		<result column="PK_ID" property="pkId" jdbcType="VARCHAR" />
+		<result column="INVE_DT" property="inveDt" jdbcType="TIMESTAMP" />
+		<result column="INVE_AMOUNT" property="inveAmount" jdbcType="NUMERIC" />
+		<result column="CLOSE_ROUND" property="closeRound" jdbcType="NUMERIC" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="INVE_CURRENCY" property="inveCurrency" jdbcType="VARCHAR" />
+		<result column="DUES_AMOUNT" property="duesAmount" jdbcType="NUMERIC" />
+		<result column="PAYMENT_AMOUNT" property="paymentAmount" jdbcType="NUMERIC" />
+		<result column="ARRIVE_DATE" property="arriveDate" jdbcType="TIMESTAMP" />
+		<result column="TOTAL_FINANCIAL" property="totalFinancial" jdbcType="NUMERIC" />
+		<result column="DESC_FILE" property="descFile" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.FundShareItemModel">
+		INSERT INTO RZ_T_FUND_SHARE_ITEM (ITEM_ID,PK_ID,INVE_DT,INVE_AMOUNT,CLOSE_ROUND,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,STATUS,INVE_CURRENCY,DUES_AMOUNT,PAYMENT_AMOUNT,ARRIVE_DATE,TOTAL_FINANCIAL,DESC_FILE) values(#{itemId,jdbcType=VARCHAR},#{pkId,jdbcType=VARCHAR},#{inveDt,jdbcType=TIMESTAMP},#{inveAmount,jdbcType=NUMERIC},#{closeRound,jdbcType=NUMERIC},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{status,jdbcType=VARCHAR},#{inveCurrency,jdbcType=VARCHAR},#{duesAmount,jdbcType=NUMERIC},#{paymentAmount,jdbcType=NUMERIC},#{arriveDate,jdbcType=TIMESTAMP},#{totalFinancial,jdbcType=NUMERIC},#{descFile,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO RZ_T_FUND_SHARE_ITEM (ITEM_ID,PK_ID,INVE_DT,INVE_AMOUNT,CLOSE_ROUND,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,STATUS,INVE_CURRENCY,DUES_AMOUNT,PAYMENT_AMOUNT,ARRIVE_DATE,TOTAL_FINANCIAL,DESC_FILE)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.itemId,jdbcType=VARCHAR},
+				#{item.pkId,jdbcType=VARCHAR},
+				#{item.inveDt,jdbcType=TIMESTAMP},
+				#{item.inveAmount,jdbcType=NUMERIC},
+				#{item.closeRound,jdbcType=NUMERIC},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+				#{item.status,jdbcType=VARCHAR},
+				#{item.inveCurrency,jdbcType=VARCHAR},
+				#{item.duesAmount,jdbcType=NUMERIC},
+				#{item.paymentAmount,jdbcType=NUMERIC},
+				#{item.arriveDate,jdbcType=TIMESTAMP},
+				#{item.totalFinancial,jdbcType=NUMERIC},
+			    #{item.descFile,jdbcType=VARCHAR}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  RZ_T_FUND_SHARE_ITEM WHERE ITEM_ID = #{itemId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.FundShareItemModel">
+		DELETE FROM RZ_T_FUND_SHARE_ITEM
+		<where>
+			<if test="itemId != null and itemId != ''" >
+				ITEM_ID = #{itemId,jdbcType=VARCHAR}
+			</if>
+			<if test="pkId != null and pkId != ''" >
+				AND PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="inveDt != null" >
+				AND INVE_DT = #{inveDt,jdbcType=VARCHAR}
+			</if>
+			<if test="inveAmount != null and inveAmount != ''" >
+				AND INVE_AMOUNT = #{inveAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="closeRound != null and closeRound != ''" >
+				AND CLOSE_ROUND = #{closeRound,jdbcType=NUMERIC}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="inveCurrency != null and inveCurrency != ''" >
+				AND INVE_CURRENCY = #{inveCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="duesAmount != null and duesAmount != ''" >
+				AND DUES_AMOUNT = #{duesAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="paymentAmount != null and paymentAmount != ''" >
+				AND PAYMENT_AMOUNT = #{paymentAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="arriveDate != null" >
+				AND ARRIVE_DATE = #{arriveDate,jdbcType=VARCHAR}
+			</if>
+			<if test="totalFinancial != null and totalFinancial != ''" >
+				AND TOTAL_FINANCIAL = #{totalFinancial,jdbcType=NUMERIC}
+			</if>
+			<if test="descFile != null and descFile != ''" >
+				AND DESC_FILE = #{descFile,jdbcType=VARCHAR}
+			</if>
+
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  RZ_T_FUND_SHARE_ITEM WHERE ITEM_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.FundShareItemModel">
+		UPDATE RZ_T_FUND_SHARE_ITEM 
+		<set>
+			<if test="itemId != null and itemId != ''" >
+				ITEM_ID = #{itemId,jdbcType=VARCHAR},
+			</if>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR},
+			</if>
+			<if test="inveDt != null" >
+				INVE_DT = #{inveDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="inveAmount != null " >
+				INVE_AMOUNT = #{inveAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="closeRound != null and closeRound != ''" >
+				CLOSE_ROUND = #{closeRound,jdbcType=NUMERIC},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="inveCurrency != null and inveCurrency != ''" >
+				INVE_CURRENCY = #{inveCurrency,jdbcType=VARCHAR},
+			</if>
+			<if test="duesAmount != null " >
+				DUES_AMOUNT = #{duesAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="paymentAmount != null" >
+				PAYMENT_AMOUNT = #{paymentAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="arriveDate != null" >
+				ARRIVE_DATE = #{arriveDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="totalFinancial != null" >
+				TOTAL_FINANCIAL = #{totalFinancial,jdbcType=NUMERIC},
+			</if>
+			<if test="descFile != null and descFile != ''" >
+				 DESC_FILE = #{descFile,jdbcType=VARCHAR},
+			</if>
+		</set>
+		WHERE ITEM_ID = #{itemId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="FundShareItemResult">
+		SELECT * FROM RZ_T_FUND_SHARE_ITEM WHERE ITEM_ID = #{itemId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.FundShareItemModel" resultMap="FundShareItemResult">
+		SELECT * FROM RZ_T_FUND_SHARE_ITEM
+		<where>
+			<if test="itemId != null and itemId != ''" >
+				ITEM_ID = #{itemId,jdbcType=VARCHAR}
+			</if>
+			<if test="pkId != null and pkId != ''" >
+				AND PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="inveDt != null" >
+				AND INVE_DT = #{inveDt,jdbcType=VARCHAR}
+			</if>
+			<if test="inveAmount != null and inveAmount != ''" >
+				AND INVE_AMOUNT = #{inveAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="closeRound != null and closeRound != ''" >
+				AND CLOSE_ROUND = #{closeRound,jdbcType=NUMERIC}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="inveCurrency != null and inveCurrency != ''" >
+				AND INVE_CURRENCY = #{inveCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="duesAmount != null and duesAmount != ''" >
+				AND DUES_AMOUNT = #{duesAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="paymentAmount != null and paymentAmount != ''" >
+				AND PAYMENT_AMOUNT = #{paymentAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="arriveDate != null" >
+				AND ARRIVE_DATE = #{arriveDate,jdbcType=VARCHAR}
+			</if>
+			<if test="totalFinancial != null and totalFinancial != ''" >
+				AND TOTAL_FINANCIAL = #{totalFinancial,jdbcType=NUMERIC}
+			</if>
+			<if test="descFile != null and descFile != ''" >
+				AND DESC_FILE = #{descFile,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT  S.FUND_ID,
+				T.CLOSE_ROUND,
+		        MAX(T.ARRIVE_DATE) AS ARRIVE_DATE,
+				SUM(T.DUES_AMOUNT) DUES_AMOUNT,
+				SUM(T.PAYMENT_AMOUNT) PAYMENT_AMOUNT,
+				SUM(T.INVE_AMOUNT) INVE_AMOUNT,
+				SUM(T.TOTAL_FINANCIAL) TOTAL_FINANCIAL,
+				DECODE(SUM(T.INVE_AMOUNT),0,'','','',RTrim(to_char(NVL(SUM(T.PAYMENT_AMOUNT)*100, 0) / SUM(T.INVE_AMOUNT), 'FM99999999990.99'), '.') ||'%') AS DUES_PERCENT,
+				SUM(T.INVE_AMOUNT) - SUM(T.TOTAL_FINANCIAL) AS NOT_PAID_AMOUNT,
+				COUNT(I.INVESTOR_NAME) INVESTOR_NAME
+			FROM RZ_T_FUND_SHARE_ITEM T
+			LEFT JOIN RZ_T_FUND_SHARE_INFO S
+			ON T.PK_ID = S.PK_ID
+			LEFT JOIN BD_T_INVE_INFO I
+			ON S.INVESTOR_ID = I.INVESTOR_ID
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+		AND S.FUND_ID = ${paramMap.FUND_ID}
+		GROUP BY S.FUND_ID, T.CLOSE_ROUND
+	</sql>
+
+	<select id="selectListPage" resultMap="FundShareItemResult2" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.FundShareItemModel">
+		SELECT COUNT(*) FROM RZ_T_FUND_SHARE_ITEM
+		<where>
+			<if test="itemId != null and itemId != ''" >
+				ITEM_ID = #{itemId,jdbcType=VARCHAR}
+			</if>
+			<if test="pkId != null and pkId != ''" >
+				AND PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="inveDt != null" >
+				AND INVE_DT = #{inveDt,jdbcType=VARCHAR}
+			</if>
+			<if test="inveAmount != null and inveAmount != ''" >
+				AND INVE_AMOUNT = #{inveAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="closeRound != null and closeRound != ''" >
+				AND CLOSE_ROUND = #{closeRound,jdbcType=NUMERIC}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="inveCurrency != null and inveCurrency != ''" >
+				AND INVE_CURRENCY = #{inveCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="duesAmount != null and duesAmount != ''" >
+				AND DUES_AMOUNT = #{duesAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="paymentAmount != null and paymentAmount != ''" >
+				AND PAYMENT_AMOUNT = #{paymentAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="arriveDate != null" >
+				AND ARRIVE_DATE = #{arriveDate,jdbcType=VARCHAR}
+			</if>
+			<if test="totalFinancial != null and totalFinancial != ''" >
+				AND TOTAL_FINANCIAL = #{totalFinancial,jdbcType=NUMERIC}
+			</if>
+			<if test="descFile != null and descFile != ''" >
+				AND DESC_FILE = #{descFile,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.FundShareItemModel" resultMap="FundShareItemResult2">
+		SELECT t.*,
+		DECODE(T.INVE_AMOUNT,0,'','','',RTrim(to_char(NVL(T.PAYMENT_AMOUNT, 0)*100 / T.INVE_AMOUNT, 'FM99999999990.99'), '.') ||'%') AS DUES_PERCENT,
+		T.INVE_AMOUNT - T.TOTAL_FINANCIAL AS NOT_PAID_AMOUNT,
+		I.INVESTOR_NAME
+		FROM RZ_T_FUND_SHARE_ITEM T
+		LEFT JOIN RZ_T_FUND_SHARE_INFO S ON T.PK_ID = S.PK_ID
+		LEFT JOIN BD_T_INVE_INFO I ON S.INVESTOR_ID = I.INVESTOR_ID
+		<where>
+			<if test="itemId != null and itemId != ''" >
+				T.ITEM_ID = #{itemId,jdbcType=VARCHAR}
+			</if>
+			<if test="pkId != null and pkId != ''" >
+				AND T.PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="inveDt != null" >
+				AND T.INVE_DT = #{inveDt,jdbcType=VARCHAR}
+			</if>
+			<if test="inveAmount != null and inveAmount != ''" >
+				AND T.INVE_AMOUNT = #{inveAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="closeRound != null and closeRound != ''" >
+				AND T.CLOSE_ROUND = #{closeRound,jdbcType=NUMERIC}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND T.CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND T.CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND T.UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND T.UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND T.STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="inveCurrency != null and inveCurrency != ''" >
+				AND T.INVE_CURRENCY = #{inveCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="duesAmount != null and duesAmount != ''" >
+				AND T.DUES_AMOUNT = #{duesAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="paymentAmount != null and paymentAmount != ''" >
+				AND T.PAYMENT_AMOUNT = #{paymentAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="arriveDate != null" >
+				AND T.ARRIVE_DATE = #{arriveDate,jdbcType=VARCHAR}
+			</if>
+			<if test="totalFinancial != null and totalFinancial != ''" >
+				AND T.TOTAL_FINANCIAL = #{totalFinancial,jdbcType=NUMERIC}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND S.FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+		</where>
+		order by T.CREATE_DT desc
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="FundShareItemResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+
+	<select id="selectItemList" parameterType="java.lang.String" resultMap="FundShareItemResult">
+     select * from  RZ_T_FUND_SHARE_ITEM  where PK_ID=#{pkId,jdbcType=VARCHAR} and status='0'
+     ORDER BY CREATE_DT DESC
+	</select>
+	<select id="selectByFundIdList" resultMap="FundShareItemResult2" parameterType="java.lang.String" >
+		SELECT  S.FUND_ID,
+		T.CLOSE_ROUND,
+		MAX(T.ARRIVE_DATE) AS ARRIVE_DATE,
+		SUM(T.DUES_AMOUNT) DUES_AMOUNT,
+		SUM(T.PAYMENT_AMOUNT) PAYMENT_AMOUNT,
+		SUM(S.INVE_AMOUNT) INVE_AMOUNT,
+		DECODE(sign(count(T.DESC_FILE)-1),-1,'否','是' ) as DESC_FILE,
+		SUM(T.TOTAL_FINANCIAL) TOTAL_FINANCIAL,
+		DECODE(SUM(S.INVE_AMOUNT),0,'','','',RTrim(to_char(NVL(SUM(T.PAYMENT_AMOUNT), 0) / SUM(S.INVE_AMOUNT), 'FM99999999990.9999'), '.')*100 ||'%') AS DUES_PERCENT,
+		SUM(S.INVE_AMOUNT) - SUM(T.TOTAL_FINANCIAL) AS NOT_PAID_AMOUNT,
+		COUNT(I.INVESTOR_NAME) INVESTOR_NAME
+		FROM RZ_T_FUND_SHARE_ITEM T
+		LEFT JOIN RZ_T_FUND_SHARE_INFO S
+		ON T.PK_ID = S.PK_ID
+		LEFT JOIN BD_T_INVE_INFO I
+		ON S.INVESTOR_ID = I.INVESTOR_ID
+		where T.STATUS='0'
+		AND S.FUND_ID = #{fundId,jdbcType=VARCHAR}
+		GROUP BY S.FUND_ID, T.CLOSE_ROUND
+		order by T.close_round asc
+	</select>
+
+	<select id="selectSumDuesAmount"  parameterType="java.lang.String" resultType="Double">
+     select sum(PAYMENT_AMOUNT) from (SELECT  S.FUND_ID,
+		SUM(T.PAYMENT_AMOUNT) PAYMENT_AMOUNT
+		FROM RZ_T_FUND_SHARE_ITEM T
+		LEFT JOIN RZ_T_FUND_SHARE_INFO S
+		ON T.PK_ID = S.PK_ID
+		LEFT JOIN BD_T_INVE_INFO I
+		ON S.INVESTOR_ID = I.INVESTOR_ID
+		where T.STATUS='0'
+		AND S.FUND_ID = #{fundId,jdbcType=VARCHAR}
+		GROUP BY S.FUND_ID, T.CLOSE_ROUND) group by FUND_ID
+	</select>
+
+	<select id="selectSumGovDuesAmount" parameterType="java.lang.String" resultType="Double">
+		select sum(PAYMENT_AMOUNT) from RZ_T_FUND_SHARE_ITEM where pk_id in
+		(SELECT pk_id FROM RZ_T_FUND_SHARE_INFO WHERE FUND_ID=#{fundId} and ente_id='0') and status='0'
+
+
+	</select>
+	<!-- end autocreate -->
+	<select id="selectByCloseRound" parameterType="com.ppmg.ei.model.FundShareItemModel" resultType="Double">
+         select sum(PAYMENT_AMOUNT) FROM
+         RZ_T_FUND_SHARE_ITEM T
+		  LEFT JOIN RZ_T_FUND_SHARE_INFO S ON T.PK_ID = S.PK_ID and T.STATUS='0'
+		  LEFT JOIN BD_T_INVE_INFO I ON S.INVESTOR_ID = I.INVESTOR_ID
+		  WHERE
+          S.FUND_ID = #{fundId,jdbcType=VARCHAR}
+          and I.INVESTOR_NAME=#{investorName}
+		  <![CDATA[and T.ITEM_ID<=#{itemId}]]>
+	</select>
+
+	<select id="selectByFundCloseRound" parameterType="com.ppmg.ei.model.FundShareItemModel" resultType="Double" >
+       select sum(PAYMENT_AMOUNT) FROM
+          RZ_T_FUND_SHARE_ITEM T
+		  LEFT JOIN RZ_T_FUND_SHARE_INFO S ON T.PK_ID = S.PK_ID and T.STATUS='0'
+		  LEFT JOIN BD_T_INVE_INFO I ON S.INVESTOR_ID = I.INVESTOR_ID and I.STATUS='0'
+		  WHERE
+          S.FUND_ID =(SELECT ff.FUND_ID from RZ_T_FUND_SHARE_INFO ff where PK_ID=#{pkId})
+          and I.INVESTOR_NAME=(select II.INVESTOR_NAME from RZ_T_FUND_SHARE_INFO SS
+		  LEFT JOIN BD_T_INVE_INFO II ON SS.INVESTOR_ID = II.INVESTOR_ID
+		  WHERE SS.PK_ID=#{pkId})
+	</select>
+
+	<select id="selectByC" parameterType="com.ppmg.ei.model.FundShareItemModel" resultType="com.ppmg.ei.model.FundShareItemModel" >
+         select PAYMENT_AMOUNT,pk_id from RZ_T_FUND_SHARE_ITEM
+         where pk_id=#{pkId} and CLOSE_ROUND=#{closeRound} and status='0'
+
+	</select>
+	<select id="selectBySum" parameterType="java.lang.String" resultType="Double">
+         select sum(PAYMENT_AMOUNT)from RZ_T_FUND_SHARE_ITEM
+         where pk_id=#{pkId} and status='0'
+	</select>
+
+	<select id="selectByCR" parameterType="com.ppmg.ei.model.FundShareItemModel" resultType="Double">
+          select sum(PAYMENT_AMOUNT)from RZ_T_FUND_SHARE_ITEM
+         where pk_id=#{pkId} and status='0' AND <![CDATA[and CLOSE_ROUND<#{closeRound}]]>
+	</select>
+	<select id="selectByLastCR" parameterType="com.ppmg.ei.model.FundShareItemModel" resultType="Double">
+          select sum(PAYMENT_AMOUNT)from RZ_T_FUND_SHARE_ITEM
+         where pk_id=#{pkId} and status='0' AND <![CDATA[and CLOSE_ROUND>#{closeRound}]]>
+	</select>
+
+	<select id="selectBySumPay" parameterType="java.lang.String" resultType="Double" >
+
+	select sum(PAYMENT_AMOUNT) from RZ_T_FUND_SHARE_INFO a
+	left join RZ_T_FUND_SHARE_ITEM b
+	on a.pk_id=b.pk_id
+	where a.fund_id=#{fundId} and b.status='0'
+	</select>
+</mapper>

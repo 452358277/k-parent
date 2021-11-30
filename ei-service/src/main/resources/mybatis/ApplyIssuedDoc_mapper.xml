@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ApplyIssuedDoc">
+	<!-- start autocreate -->
+
+	<resultMap id="ApplyIssuedDocResult" type="com.ppmg.ei.model.ApplyIssuedDocModel">
+		<result column="APPLY_NO" property="applyNo" jdbcType="VARCHAR" />
+		<result column="DOCUMENT_NO" property="documentNo" jdbcType="VARCHAR" />
+		<result column="ISSUED_STATUS" property="issuedStatus" jdbcType="VARCHAR" />
+		<result column="ISSUED_TITLE" property="issuedTitle" jdbcType="VARCHAR" />
+		<result column="ISSUED_KEYWORDS" property="issuedKeywords" jdbcType="VARCHAR" />
+		<result column="ISSUED_LEVEL" property="issuedLevel" jdbcType="VARCHAR" />
+		<result column="ISSUED_URGENCY" property="issuedUrgency" jdbcType="VARCHAR" />
+		<result column="CONTENT" property="content" jdbcType="VARCHAR" />
+		<result column="ATTACHMENT" property="attachment" jdbcType="VARCHAR" />
+		<result column="PRINT_COPIES" property="printCopies" jdbcType="NUMERIC" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="LEADER_ID" property="leaderId" jdbcType="NUMERIC" />
+		<result column="LEADER_NAME" property="leaderName" jdbcType="VARCHAR" />
+		<result column="DESTINATION_MS" property="destinationMs" jdbcType="VARCHAR" />
+		<result column="DESTINATION_CC" property="destinationCc" jdbcType="VARCHAR" />
+		<result column="DESTINATION_MSG" property="destinationMsg" jdbcType="VARCHAR" />
+		<result column="DESTINATION_MSG_NAME" property="destinationMsgName" jdbcType="VARCHAR" />
+		<result column="IS_DANGWEI_SEND" property="isDangweiSend" jdbcType="VARCHAR" />
+		<result column="IS_JIWEI_SEND" property="isJiweiSend" jdbcType="VARCHAR" />
+		<result column="PRINT_AMOUNT" property="printAmount" jdbcType="NUMERIC" />
+		<result column="MEETING_DEPART" property="meetingDepart" jdbcType="VARCHAR" />
+		<result column="ISSUE_DOCUMENT_TIME" property="issueDocumentTime" jdbcType="TIMESTAMP" />
+		<result column="ISSUE_DOCUMENT_NO" property="issueDocumentNo" jdbcType="VARCHAR" />
+		<result column="URGENCY_DEGREE" property="urgencyDegree" jdbcType="VARCHAR" />
+		<result column="ISSUE_DOCUMENT_TYPE" property="issueDocumentType" jdbcType="VARCHAR" />
+		<result column="ISSUE_DOCUMENT_CLASS" property="issueDocumentClass" jdbcType="VARCHAR" />
+		<result column="MEETING_DEPART_ID" property="meetingDepartId" jdbcType="VARCHAR" />
+		<result column="DESTINATION_MS_NAME" property="destinationMsName" jdbcType="VARCHAR" />
+		<result column="DESTINATION_CC_NAME" property="destinationCcName" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.ApplyIssuedDocModel">
+		INSERT INTO OA.FOUNDER_OA_APPLY_ISSUED_DOC (APPLY_NO,DOCUMENT_NO,ISSUED_STATUS,ISSUED_TITLE,ISSUED_KEYWORDS,ISSUED_LEVEL,ISSUED_URGENCY,CONTENT,ATTACHMENT,PRINT_COPIES,REMARK,LEADER_ID,LEADER_NAME,DESTINATION_MS,DESTINATION_CC,DESTINATION_MSG,DESTINATION_MSG_NAME,IS_DANGWEI_SEND,IS_JIWEI_SEND,PRINT_AMOUNT,MEETING_DEPART,ISSUE_DOCUMENT_TIME,ISSUE_DOCUMENT_NO,URGENCY_DEGREE,ISSUE_DOCUMENT_TYPE,ISSUE_DOCUMENT_CLASS,MEETING_DEPART_ID,DESTINATION_MS_NAME,DESTINATION_CC_NAME) values(#{applyNo,jdbcType=VARCHAR},#{documentNo,jdbcType=VARCHAR},#{issuedStatus,jdbcType=VARCHAR},#{issuedTitle,jdbcType=VARCHAR},#{issuedKeywords,jdbcType=VARCHAR},#{issuedLevel,jdbcType=VARCHAR},#{issuedUrgency,jdbcType=VARCHAR},#{content,jdbcType=VARCHAR},#{attachment,jdbcType=VARCHAR},#{printCopies,jdbcType=NUMERIC},#{remark,jdbcType=VARCHAR},#{leaderId,jdbcType=NUMERIC},#{leaderName,jdbcType=VARCHAR},#{destinationMs,jdbcType=VARCHAR},#{destinationCc,jdbcType=VARCHAR},#{destinationMsg,jdbcType=VARCHAR},#{destinationMsgName,jdbcType=VARCHAR},#{isDangweiSend,jdbcType=VARCHAR},#{isJiweiSend,jdbcType=VARCHAR},#{printAmount,jdbcType=NUMERIC},#{meetingDepart,jdbcType=VARCHAR},#{issueDocumentTime,jdbcType=TIMESTAMP},#{issueDocumentNo,jdbcType=VARCHAR},#{urgencyDegree,jdbcType=VARCHAR},#{issueDocumentType,jdbcType=VARCHAR},#{issueDocumentClass,jdbcType=VARCHAR},#{meetingDepartId,jdbcType=VARCHAR},#{destinationMsName,jdbcType=VARCHAR},#{destinationCcName,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO OA.FOUNDER_OA_APPLY_ISSUED_DOC (APPLY_NO,DOCUMENT_NO,ISSUED_STATUS,ISSUED_TITLE,ISSUED_KEYWORDS,ISSUED_LEVEL,ISSUED_URGENCY,CONTENT,ATTACHMENT,PRINT_COPIES,REMARK,LEADER_ID,LEADER_NAME,DESTINATION_MS,DESTINATION_CC,DESTINATION_MSG,DESTINATION_MSG_NAME,IS_DANGWEI_SEND,IS_JIWEI_SEND,PRINT_AMOUNT,MEETING_DEPART,ISSUE_DOCUMENT_TIME,ISSUE_DOCUMENT_NO,URGENCY_DEGREE,ISSUE_DOCUMENT_TYPE,ISSUE_DOCUMENT_CLASS,MEETING_DEPART_ID)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.applyNo,jdbcType=VARCHAR},
+				#{item.documentNo,jdbcType=VARCHAR},
+				#{item.issuedStatus,jdbcType=VARCHAR},
+				#{item.issuedTitle,jdbcType=VARCHAR},
+				#{item.issuedKeywords,jdbcType=VARCHAR},
+				#{item.issuedLevel,jdbcType=VARCHAR},
+				#{item.issuedUrgency,jdbcType=VARCHAR},
+				#{item.content,jdbcType=VARCHAR},
+				#{item.attachment,jdbcType=VARCHAR},
+				#{item.printCopies,jdbcType=NUMERIC},
+				#{item.remark,jdbcType=VARCHAR},
+				#{item.leaderId,jdbcType=NUMERIC},
+				#{item.leaderName,jdbcType=VARCHAR},
+				#{item.destinationMs,jdbcType=VARCHAR},
+				#{item.destinationCc,jdbcType=VARCHAR},
+				#{item.destinationMsg,jdbcType=VARCHAR},
+				#{item.destinationMsgName,jdbcType=VARCHAR},
+				#{item.isDangweiSend,jdbcType=VARCHAR},
+				#{item.isJiweiSend,jdbcType=VARCHAR},
+				#{item.printAmount,jdbcType=NUMERIC},
+				#{item.meetingDepart,jdbcType=VARCHAR},
+				#{item.issueDocumentTime,jdbcType=TIMESTAMP},
+				#{item.issueDocumentNo,jdbcType=VARCHAR},
+				#{item.urgencyDegree,jdbcType=VARCHAR},
+				#{item.issueDocumentType,jdbcType=VARCHAR},
+				#{item.issueDocumentClass,jdbcType=VARCHAR},
+				#{item.meetingDepartId,jdbcType=VARCHAR}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  OA.FOUNDER_OA_APPLY_ISSUED_DOC WHERE APPLY_NO = #{applyNo,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.ApplyIssuedDocModel">
+		DELETE FROM OA.FOUNDER_OA_APPLY_ISSUED_DOC
+		<where>
+			<if test="applyNo != null and applyNo != ''" >
+				APPLY_NO = #{applyNo,jdbcType=VARCHAR}
+			</if>
+			<if test="documentNo != null and documentNo != ''" >
+				AND DOCUMENT_NO = #{documentNo,jdbcType=VARCHAR}
+			</if>
+			<if test="issuedStatus != null and issuedStatus != ''" >
+				AND ISSUED_STATUS = #{issuedStatus,jdbcType=VARCHAR}
+			</if>
+			<if test="issuedTitle != null and issuedTitle != ''" >
+				AND ISSUED_TITLE = #{issuedTitle,jdbcType=VARCHAR}
+			</if>
+			<if test="issuedKeywords != null and issuedKeywords != ''" >
+				AND ISSUED_KEYWORDS = #{issuedKeywords,jdbcType=VARCHAR}
+			</if>
+			<if test="issuedLevel != null and issuedLevel != ''" >
+				AND ISSUED_LEVEL = #{issuedLevel,jdbcType=VARCHAR}
+			</if>
+			<if test="issuedUrgency != null and issuedUrgency != ''" >
+				AND ISSUED_URGENCY = #{issuedUrgency,jdbcType=VARCHAR}
+			</if>
+			<if test="content != null and content != ''" >
+				AND CONTENT = #{content,jdbcType=VARCHAR}
+			</if>
+			<if test="attachment != null and attachment != ''" >
+				AND ATTACHMENT = #{attachment,jdbcType=VARCHAR}
+			</if>
+			<if test="printCopies != null and printCopies != ''" >
+				AND PRINT_COPIES = #{printCopies,jdbcType=NUMERIC}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="leaderId != null and leaderId != ''" >
+				AND LEADER_ID = #{leaderId,jdbcType=NUMERIC}
+			</if>
+			<if test="leaderName != null and leaderName != ''" >
+				AND LEADER_NAME = #{leaderName,jdbcType=VARCHAR}
+			</if>
+			<if test="destinationMs != null and destinationMs != ''" >
+				AND DESTINATION_MS = #{destinationMs,jdbcType=VARCHAR}
+			</if>
+			<if test="destinationCc != null and destinationCc != ''" >
+				AND DESTINATION_CC = #{destinationCc,jdbcType=VARCHAR}
+			</if>
+			<if test="destinationMsg != null and destinationMsg != ''" >
+				AND DESTINATION_MSG = #{destinationMsg,jdbcType=VARCHAR}
+			</if>
+			<if test="destinationMsgName != null and destinationMsgName != ''" >
+				AND DESTINATION_MSG_NAME = #{destinationMsgName,jdbcType=VARCHAR}
+			</if>
+			<if test="isDangweiSend != null and isDangweiSend != ''" >
+				AND IS_DANGWEI_SEND = #{isDangweiSend,jdbcType=VARCHAR}
+			</if>
+			<if test="isJiweiSend != null and isJiweiSend != ''" >
+				AND IS_JIWEI_SEND = #{isJiweiSend,jdbcType=VARCHAR}
+			</if>
+			<if test="printAmount != null and printAmount != ''" >
+				AND PRINT_AMOUNT = #{printAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="meetingDepart != null and meetingDepart != ''" >
+				AND MEETING_DEPART = #{meetingDepart,jdbcType=VARCHAR}
+			</if>
+			<if test="issueDocumentTime != null" >
+				AND ISSUE_DOCUMENT_TIME = #{issueDocumentTime,jdbcType=VARCHAR}
+			</if>
+			<if test="issueDocumentNo != null and issueDocumentNo != ''" >
+				AND ISSUE_DOCUMENT_NO = #{issueDocumentNo,jdbcType=VARCHAR}
+			</if>
+			<if test="urgencyDegree != null and urgencyDegree != ''" >
+				AND URGENCY_DEGREE = #{urgencyDegree,jdbcType=VARCHAR}
+			</if>
+			<if test="issueDocumentType != null and issueDocumentType != ''" >
+				AND ISSUE_DOCUMENT_TYPE = #{issueDocumentType,jdbcType=VARCHAR}
+			</if>
+			<if test="issueDocumentClass != null and issueDocumentClass != ''" >
+				AND ISSUE_DOCUMENT_CLASS = #{issueDocumentClass,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingDepartId != null and meetingDepartId != ''" >
+				AND MEETING_DEPART_ID = #{meetingDepartId,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  OA.FOUNDER_OA_APPLY_ISSUED_DOC WHERE APPLY_NO IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.ApplyIssuedDocModel">
+		UPDATE OA.FOUNDER_OA_APPLY_ISSUED_DOC 
+		<set>
+			<if test="applyNo != null and applyNo != ''" >
+				APPLY_NO = #{applyNo,jdbcType=VARCHAR},
+			</if>
+			<if test="documentNo != null and documentNo != ''" >
+				DOCUMENT_NO = #{documentNo,jdbcType=VARCHAR},
+			</if>
+			<if test="issuedStatus != null and issuedStatus != ''" >
+				ISSUED_STATUS = #{issuedStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="issuedTitle != null and issuedTitle != ''" >
+				ISSUED_TITLE = #{issuedTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="issuedKeywords != null and issuedKeywords != ''" >
+				ISSUED_KEYWORDS = #{issuedKeywords,jdbcType=VARCHAR},
+			</if>
+			<if test="issuedLevel != null and issuedLevel != ''" >
+				ISSUED_LEVEL = #{issuedLevel,jdbcType=VARCHAR},
+			</if>
+			<if test="issuedUrgency != null and issuedUrgency != ''" >
+				ISSUED_URGENCY = #{issuedUrgency,jdbcType=VARCHAR},
+			</if>
+			<if test="content != null and content != ''" >
+				CONTENT = #{content,jdbcType=VARCHAR},
+			</if>
+			<if test="attachment != null and attachment != ''" >
+				ATTACHMENT = #{attachment,jdbcType=VARCHAR},
+			</if>
+			<if test="printCopies != null and printCopies != ''" >
+				PRINT_COPIES = #{printCopies,jdbcType=NUMERIC},
+			</if>
+			<if test="remark != null and remark != ''" >
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="leaderId != null and leaderId != ''" >
+				LEADER_ID = #{leaderId,jdbcType=NUMERIC},
+			</if>
+			<if test="leaderName != null and leaderName != ''" >
+				LEADER_NAME = #{leaderName,jdbcType=VARCHAR},
+			</if>
+			<if test="destinationMs != null and destinationMs != ''" >
+				DESTINATION_MS = #{destinationMs,jdbcType=VARCHAR},
+			</if>
+			<if test="destinationCc != null and destinationCc != ''" >
+				DESTINATION_CC = #{destinationCc,jdbcType=VARCHAR},
+			</if>
+			<if test="destinationMsg != null and destinationMsg != ''" >
+				DESTINATION_MSG = #{destinationMsg,jdbcType=VARCHAR},
+			</if>
+			<if test="destinationMsgName != null and destinationMsgName != ''" >
+				DESTINATION_MSG_NAME = #{destinationMsgName,jdbcType=VARCHAR},
+			</if>
+			<if test="isDangweiSend != null and isDangweiSend != ''" >
+				IS_DANGWEI_SEND = #{isDangweiSend,jdbcType=VARCHAR},
+			</if>
+			<if test="isJiweiSend != null and isJiweiSend != ''" >
+				IS_JIWEI_SEND = #{isJiweiSend,jdbcType=VARCHAR},
+			</if>
+			<if test="printAmount != null and printAmount != ''" >
+				PRINT_AMOUNT = #{printAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="meetingDepart != null and meetingDepart != ''" >
+				MEETING_DEPART = #{meetingDepart,jdbcType=VARCHAR},
+			</if>
+			<if test="issueDocumentTime != null" >
+				ISSUE_DOCUMENT_TIME = #{issueDocumentTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="issueDocumentNo != null and issueDocumentNo != ''" >
+				ISSUE_DOCUMENT_NO = #{issueDocumentNo,jdbcType=VARCHAR},
+			</if>
+			<if test="urgencyDegree != null and urgencyDegree != ''" >
+				URGENCY_DEGREE = #{urgencyDegree,jdbcType=VARCHAR},
+			</if>
+			<if test="issueDocumentType != null and issueDocumentType != ''" >
+				ISSUE_DOCUMENT_TYPE = #{issueDocumentType,jdbcType=VARCHAR},
+			</if>
+			<if test="issueDocumentClass != null and issueDocumentClass != ''" >
+				ISSUE_DOCUMENT_CLASS = #{issueDocumentClass,jdbcType=VARCHAR},
+			</if>
+			<if test="meetingDepartId != null and meetingDepartId != ''" >
+				MEETING_DEPART_ID = #{meetingDepartId,jdbcType=VARCHAR},
+			</if>
+		</set>
+		WHERE APPLY_NO = #{applyNo,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="ApplyIssuedDocResult">
+		SELECT * FROM OA.FOUNDER_OA_APPLY_ISSUED_DOC WHERE APPLY_NO = #{applyNo,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.ApplyIssuedDocModel" resultMap="ApplyIssuedDocResult">
+		SELECT * FROM OA.FOUNDER_OA_APPLY_ISSUED_DOC
+		<where>
+			<if test="applyNo != null and applyNo != ''" >
+				APPLY_NO = #{applyNo,jdbcType=VARCHAR}
+			</if>
+			<if test="documentNo != null and documentNo != ''" >
+				AND DOCUMENT_NO = #{documentNo,jdbcType=VARCHAR}
+			</if>
+			<if test="issuedStatus != null and issuedStatus != ''" >
+				AND ISSUED_STATUS = #{issuedStatus,jdbcType=VARCHAR}
+			</if>
+			<if test="issuedTitle != null and issuedTitle != ''" >
+				AND ISSUED_TITLE = #{issuedTitle,jdbcType=VARCHAR}
+			</if>
+			<if test="issuedKeywords != null and issuedKeywords != ''" >
+				AND ISSUED_KEYWORDS = #{issuedKeywords,jdbcType=VARCHAR}
+			</if>
+			<if test="issuedLevel != null and issuedLevel != ''" >
+				AND ISSUED_LEVEL = #{issuedLevel,jdbcType=VARCHAR}
+			</if>
+			<if test="issuedUrgency != null and issuedUrgency != ''" >
+				AND ISSUED_URGENCY = #{issuedUrgency,jdbcType=VARCHAR}
+			</if>
+			<if test="content != null and content != ''" >
+				AND CONTENT = #{content,jdbcType=VARCHAR}
+			</if>
+			<if test="attachment != null and attachment != ''" >
+				AND ATTACHMENT = #{attachment,jdbcType=VARCHAR}
+			</if>
+			<if test="printCopies != null and printCopies != ''" >
+				AND PRINT_COPIES = #{printCopies,jdbcType=NUMERIC}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="leaderId != null and leaderId != ''" >
+				AND LEADER_ID = #{leaderId,jdbcType=NUMERIC}
+			</if>
+			<if test="leaderName != null and leaderName != ''" >
+				AND LEADER_NAME = #{leaderName,jdbcType=VARCHAR}
+			</if>
+			<if test="destinationMs != null and destinationMs != ''" >
+				AND DESTINATION_MS = #{destinationMs,jdbcType=VARCHAR}
+			</if>
+			<if test="destinationCc != null and destinationCc != ''" >
+				AND DESTINATION_CC = #{destinationCc,jdbcType=VARCHAR}
+			</if>
+			<if test="destinationMsg != null and destinationMsg != ''" >
+				AND DESTINATION_MSG = #{destinationMsg,jdbcType=VARCHAR}
+			</if>
+			<if test="destinationMsgName != null and destinationMsgName != ''" >
+				AND DESTINATION_MSG_NAME = #{destinationMsgName,jdbcType=VARCHAR}
+			</if>
+			<if test="isDangweiSend != null and isDangweiSend != ''" >
+				AND IS_DANGWEI_SEND = #{isDangweiSend,jdbcType=VARCHAR}
+			</if>
+			<if test="isJiweiSend != null and isJiweiSend != ''" >
+				AND IS_JIWEI_SEND = #{isJiweiSend,jdbcType=VARCHAR}
+			</if>
+			<if test="printAmount != null and printAmount != ''" >
+				AND PRINT_AMOUNT = #{printAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="meetingDepart != null and meetingDepart != ''" >
+				AND MEETING_DEPART = #{meetingDepart,jdbcType=VARCHAR}
+			</if>
+			<if test="issueDocumentTime != null" >
+				AND ISSUE_DOCUMENT_TIME = #{issueDocumentTime,jdbcType=VARCHAR}
+			</if>
+			<if test="issueDocumentNo != null and issueDocumentNo != ''" >
+				AND ISSUE_DOCUMENT_NO = #{issueDocumentNo,jdbcType=VARCHAR}
+			</if>
+			<if test="urgencyDegree != null and urgencyDegree != ''" >
+				AND URGENCY_DEGREE = #{urgencyDegree,jdbcType=VARCHAR}
+			</if>
+			<if test="issueDocumentType != null and issueDocumentType != ''" >
+				AND ISSUE_DOCUMENT_TYPE = #{issueDocumentType,jdbcType=VARCHAR}
+			</if>
+			<if test="issueDocumentClass != null and issueDocumentClass != ''" >
+				AND ISSUE_DOCUMENT_CLASS = #{issueDocumentClass,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingDepartId != null and meetingDepartId != ''" >
+				AND MEETING_DEPART_ID = #{meetingDepartId,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM OA.FOUNDER_OA_APPLY_ISSUED_DOC
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="ApplyIssuedDocResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.ApplyIssuedDocModel">
+		SELECT COUNT(*) FROM OA.FOUNDER_OA_APPLY_ISSUED_DOC
+		<where>
+			<if test="applyNo != null and applyNo != ''" >
+				APPLY_NO = #{applyNo,jdbcType=VARCHAR}
+			</if>
+			<if test="documentNo != null and documentNo != ''" >
+				AND DOCUMENT_NO = #{documentNo,jdbcType=VARCHAR}
+			</if>
+			<if test="issuedStatus != null and issuedStatus != ''" >
+				AND ISSUED_STATUS = #{issuedStatus,jdbcType=VARCHAR}
+			</if>
+			<if test="issuedTitle != null and issuedTitle != ''" >
+				AND ISSUED_TITLE = #{issuedTitle,jdbcType=VARCHAR}
+			</if>
+			<if test="issuedKeywords != null and issuedKeywords != ''" >
+				AND ISSUED_KEYWORDS = #{issuedKeywords,jdbcType=VARCHAR}
+			</if>
+			<if test="issuedLevel != null and issuedLevel != ''" >
+				AND ISSUED_LEVEL = #{issuedLevel,jdbcType=VARCHAR}
+			</if>
+			<if test="issuedUrgency != null and issuedUrgency != ''" >
+				AND ISSUED_URGENCY = #{issuedUrgency,jdbcType=VARCHAR}
+			</if>
+			<if test="content != null and content != ''" >
+				AND CONTENT = #{content,jdbcType=VARCHAR}
+			</if>
+			<if test="attachment != null and attachment != ''" >
+				AND ATTACHMENT = #{attachment,jdbcType=VARCHAR}
+			</if>
+			<if test="printCopies != null and printCopies != ''" >
+				AND PRINT_COPIES = #{printCopies,jdbcType=NUMERIC}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="leaderId != null and leaderId != ''" >
+				AND LEADER_ID = #{leaderId,jdbcType=NUMERIC}
+			</if>
+			<if test="leaderName != null and leaderName != ''" >
+				AND LEADER_NAME = #{leaderName,jdbcType=VARCHAR}
+			</if>
+			<if test="destinationMs != null and destinationMs != ''" >
+				AND DESTINATION_MS = #{destinationMs,jdbcType=VARCHAR}
+			</if>
+			<if test="destinationCc != null and destinationCc != ''" >
+				AND DESTINATION_CC = #{destinationCc,jdbcType=VARCHAR}
+			</if>
+			<if test="destinationMsg != null and destinationMsg != ''" >
+				AND DESTINATION_MSG = #{destinationMsg,jdbcType=VARCHAR}
+			</if>
+			<if test="destinationMsgName != null and destinationMsgName != ''" >
+				AND DESTINATION_MSG_NAME = #{destinationMsgName,jdbcType=VARCHAR}
+			</if>
+			<if test="isDangweiSend != null and isDangweiSend != ''" >
+				AND IS_DANGWEI_SEND = #{isDangweiSend,jdbcType=VARCHAR}
+			</if>
+			<if test="isJiweiSend != null and isJiweiSend != ''" >
+				AND IS_JIWEI_SEND = #{isJiweiSend,jdbcType=VARCHAR}
+			</if>
+			<if test="printAmount != null and printAmount != ''" >
+				AND PRINT_AMOUNT = #{printAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="meetingDepart != null and meetingDepart != ''" >
+				AND MEETING_DEPART = #{meetingDepart,jdbcType=VARCHAR}
+			</if>
+			<if test="issueDocumentTime != null" >
+				AND ISSUE_DOCUMENT_TIME = #{issueDocumentTime,jdbcType=VARCHAR}
+			</if>
+			<if test="issueDocumentNo != null and issueDocumentNo != ''" >
+				AND ISSUE_DOCUMENT_NO = #{issueDocumentNo,jdbcType=VARCHAR}
+			</if>
+			<if test="urgencyDegree != null and urgencyDegree != ''" >
+				AND URGENCY_DEGREE = #{urgencyDegree,jdbcType=VARCHAR}
+			</if>
+			<if test="issueDocumentType != null and issueDocumentType != ''" >
+				AND ISSUE_DOCUMENT_TYPE = #{issueDocumentType,jdbcType=VARCHAR}
+			</if>
+			<if test="issueDocumentClass != null and issueDocumentClass != ''" >
+				AND ISSUE_DOCUMENT_CLASS = #{issueDocumentClass,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingDepartId != null and meetingDepartId != ''" >
+				AND MEETING_DEPART_ID = #{meetingDepartId,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.ApplyIssuedDocModel" resultMap="ApplyIssuedDocResult">
+		SELECT * FROM OA.FOUNDER_OA_APPLY_ISSUED_DOC
+		<where>
+			<if test="applyNo != null and applyNo != ''" >
+				APPLY_NO = #{applyNo,jdbcType=VARCHAR}
+			</if>
+			<if test="documentNo != null and documentNo != ''" >
+				AND DOCUMENT_NO = #{documentNo,jdbcType=VARCHAR}
+			</if>
+			<if test="issuedStatus != null and issuedStatus != ''" >
+				AND ISSUED_STATUS = #{issuedStatus,jdbcType=VARCHAR}
+			</if>
+			<if test="issuedTitle != null and issuedTitle != ''" >
+				AND ISSUED_TITLE = #{issuedTitle,jdbcType=VARCHAR}
+			</if>
+			<if test="issuedKeywords != null and issuedKeywords != ''" >
+				AND ISSUED_KEYWORDS = #{issuedKeywords,jdbcType=VARCHAR}
+			</if>
+			<if test="issuedLevel != null and issuedLevel != ''" >
+				AND ISSUED_LEVEL = #{issuedLevel,jdbcType=VARCHAR}
+			</if>
+			<if test="issuedUrgency != null and issuedUrgency != ''" >
+				AND ISSUED_URGENCY = #{issuedUrgency,jdbcType=VARCHAR}
+			</if>
+			<if test="content != null and content != ''" >
+				AND CONTENT = #{content,jdbcType=VARCHAR}
+			</if>
+			<if test="attachment != null and attachment != ''" >
+				AND ATTACHMENT = #{attachment,jdbcType=VARCHAR}
+			</if>
+			<if test="printCopies != null and printCopies != ''" >
+				AND PRINT_COPIES = #{printCopies,jdbcType=NUMERIC}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="leaderId != null and leaderId != ''" >
+				AND LEADER_ID = #{leaderId,jdbcType=NUMERIC}
+			</if>
+			<if test="leaderName != null and leaderName != ''" >
+				AND LEADER_NAME = #{leaderName,jdbcType=VARCHAR}
+			</if>
+			<if test="destinationMs != null and destinationMs != ''" >
+				AND DESTINATION_MS = #{destinationMs,jdbcType=VARCHAR}
+			</if>
+			<if test="destinationCc != null and destinationCc != ''" >
+				AND DESTINATION_CC = #{destinationCc,jdbcType=VARCHAR}
+			</if>
+			<if test="destinationMsg != null and destinationMsg != ''" >
+				AND DESTINATION_MSG = #{destinationMsg,jdbcType=VARCHAR}
+			</if>
+			<if test="destinationMsgName != null and destinationMsgName != ''" >
+				AND DESTINATION_MSG_NAME = #{destinationMsgName,jdbcType=VARCHAR}
+			</if>
+			<if test="isDangweiSend != null and isDangweiSend != ''" >
+				AND IS_DANGWEI_SEND = #{isDangweiSend,jdbcType=VARCHAR}
+			</if>
+			<if test="isJiweiSend != null and isJiweiSend != ''" >
+				AND IS_JIWEI_SEND = #{isJiweiSend,jdbcType=VARCHAR}
+			</if>
+			<if test="printAmount != null and printAmount != ''" >
+				AND PRINT_AMOUNT = #{printAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="meetingDepart != null and meetingDepart != ''" >
+				AND MEETING_DEPART = #{meetingDepart,jdbcType=VARCHAR}
+			</if>
+			<if test="issueDocumentTime != null" >
+				AND ISSUE_DOCUMENT_TIME = #{issueDocumentTime,jdbcType=VARCHAR}
+			</if>
+			<if test="issueDocumentNo != null and issueDocumentNo != ''" >
+				AND ISSUE_DOCUMENT_NO = #{issueDocumentNo,jdbcType=VARCHAR}
+			</if>
+			<if test="urgencyDegree != null and urgencyDegree != ''" >
+				AND URGENCY_DEGREE = #{urgencyDegree,jdbcType=VARCHAR}
+			</if>
+			<if test="issueDocumentType != null and issueDocumentType != ''" >
+				AND ISSUE_DOCUMENT_TYPE = #{issueDocumentType,jdbcType=VARCHAR}
+			</if>
+			<if test="issueDocumentClass != null and issueDocumentClass != ''" >
+				AND ISSUE_DOCUMENT_CLASS = #{issueDocumentClass,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingDepartId != null and meetingDepartId != ''" >
+				AND MEETING_DEPART_ID = #{meetingDepartId,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="ApplyIssuedDocResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+</mapper>

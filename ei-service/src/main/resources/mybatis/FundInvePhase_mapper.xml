@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FundInvePhase">
+	<!-- start autocreate -->
+
+	<resultMap id="FundInvePhaseResult" type="com.ppmg.ei.model.FundInvePhaseModel">
+		<result column="PK_ID" property="pkId" jdbcType="VARCHAR" />
+		<result column="FUND_ID" property="fundId" jdbcType="VARCHAR" />
+		<result column="PHASE_A" property="phaseA" jdbcType="NUMERIC" />
+		<result column="PHASE_B" property="phaseB" jdbcType="NUMERIC" />
+		<result column="PHASE_C" property="phaseC" jdbcType="NUMERIC" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.FundInvePhaseModel">
+		INSERT INTO BD_T_FUND_INVE_PHASE (PK_ID,FUND_ID,PHASE_A,PHASE_B,PHASE_C,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT) values(#{pkId,jdbcType=VARCHAR},#{fundId,jdbcType=VARCHAR},#{phaseA,jdbcType=NUMERIC},#{phaseB,jdbcType=NUMERIC},#{phaseC,jdbcType=NUMERIC},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO BD_T_FUND_INVE_PHASE (PK_ID,FUND_ID,PHASE_A,PHASE_B,PHASE_C,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.pkId,jdbcType=VARCHAR},
+				#{item.fundId,jdbcType=VARCHAR},
+				#{item.phaseA,jdbcType=NUMERIC},
+				#{item.phaseB,jdbcType=NUMERIC},
+				#{item.phaseC,jdbcType=NUMERIC},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  BD_T_FUND_INVE_PHASE WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.FundInvePhaseModel">
+		DELETE FROM BD_T_FUND_INVE_PHASE
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="phaseA != null and phaseA != ''" >
+				AND PHASE_A = #{phaseA,jdbcType=NUMERIC}
+			</if>
+			<if test="phaseB != null and phaseB != ''" >
+				AND PHASE_B = #{phaseB,jdbcType=NUMERIC}
+			</if>
+			<if test="phaseC != null and phaseC != ''" >
+				AND PHASE_C = #{phaseC,jdbcType=NUMERIC}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  BD_T_FUND_INVE_PHASE WHERE PK_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.FundInvePhaseModel">
+		UPDATE BD_T_FUND_INVE_PHASE 
+		<set>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR},
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				FUND_ID = #{fundId,jdbcType=VARCHAR},
+			</if>
+			<if test="phaseA != null and phaseA != ''" >
+				PHASE_A = #{phaseA,jdbcType=NUMERIC},
+			</if>
+			<if test="phaseB != null and phaseB != ''" >
+				PHASE_B = #{phaseB,jdbcType=NUMERIC},
+			</if>
+			<if test="phaseC != null and phaseC != ''" >
+				PHASE_C = #{phaseC,jdbcType=NUMERIC},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="FundInvePhaseResult">
+		SELECT * FROM BD_T_FUND_INVE_PHASE WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.FundInvePhaseModel" resultMap="FundInvePhaseResult">
+		SELECT * FROM BD_T_FUND_INVE_PHASE
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="phaseA != null and phaseA != ''" >
+				AND PHASE_A = #{phaseA,jdbcType=NUMERIC}
+			</if>
+			<if test="phaseB != null and phaseB != ''" >
+				AND PHASE_B = #{phaseB,jdbcType=NUMERIC}
+			</if>
+			<if test="phaseC != null and phaseC != ''" >
+				AND PHASE_C = #{phaseC,jdbcType=NUMERIC}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM BD_T_FUND_INVE_PHASE
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="FundInvePhaseResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.FundInvePhaseModel">
+		SELECT COUNT(*) FROM BD_T_FUND_INVE_PHASE
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="phaseA != null and phaseA != ''" >
+				AND PHASE_A = #{phaseA,jdbcType=NUMERIC}
+			</if>
+			<if test="phaseB != null and phaseB != ''" >
+				AND PHASE_B = #{phaseB,jdbcType=NUMERIC}
+			</if>
+			<if test="phaseC != null and phaseC != ''" >
+				AND PHASE_C = #{phaseC,jdbcType=NUMERIC}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.FundInvePhaseModel" resultMap="FundInvePhaseResult">
+		SELECT * FROM BD_T_FUND_INVE_PHASE
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="phaseA != null and phaseA != ''" >
+				AND PHASE_A = #{phaseA,jdbcType=NUMERIC}
+			</if>
+			<if test="phaseB != null and phaseB != ''" >
+				AND PHASE_B = #{phaseB,jdbcType=NUMERIC}
+			</if>
+			<if test="phaseC != null and phaseC != ''" >
+				AND PHASE_C = #{phaseC,jdbcType=NUMERIC}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="FundInvePhaseResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+</mapper>

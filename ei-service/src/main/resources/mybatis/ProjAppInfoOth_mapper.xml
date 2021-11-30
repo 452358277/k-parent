@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProjAppInfoOth">
+	<!-- start autocreate -->
+
+	<resultMap id="ProjAppInfoOthResult" type="com.ppmg.ei.model.ProjAppInfoOthModel">
+		<result column="PK_ID" property="pkId" jdbcType="VARCHAR" />
+		<result column="DECI_NO" property="deciNo" jdbcType="VARCHAR" />
+		<result column="PROJ_ID" property="projId" jdbcType="VARCHAR" />
+		<result column="PROJ_NAME" property="projName" jdbcType="VARCHAR" />
+		<result column="INVE_TYPE" property="inveType" jdbcType="VARCHAR" />
+		<result column="INDUSTRY" property="industry" jdbcType="VARCHAR" />
+		<result column="DECI_DATE" property="deciDate" jdbcType="TIMESTAMP" />
+		<result column="INTEND_AMOUNT" property="intendAmount" jdbcType="NUMERIC" />
+		<result column="INTEND_CURR" property="intendCurr" jdbcType="VARCHAR" />
+		<result column="INTEND_RMB_AMOUNT" property="intendRmbAmount" jdbcType="NUMERIC" />
+		<result column="DEPT_ID" property="deptId" jdbcType="VARCHAR" />
+		<result column="GROUP_ID" property="groupId" jdbcType="VARCHAR" />
+		<result column="PROCESS_INST_ID" property="processInstId" jdbcType="VARCHAR" />
+		<result column="ATTA_FILE" property="attaFile" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="PROJ_FULL_NAME" property="projFullName" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.ProjAppInfoOthModel">
+		INSERT INTO TZ_T_PROJ_APP_INFO_OTH (PK_ID,DECI_NO,PROJ_ID,PROJ_NAME,INVE_TYPE,INDUSTRY,DECI_DATE,INTEND_AMOUNT,INTEND_CURR,INTEND_RMB_AMOUNT,DEPT_ID,GROUP_ID,PROCESS_INST_ID,ATTA_FILE,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,REMARK,PROJ_FULL_NAME) values(#{pkId,jdbcType=VARCHAR},#{deciNo,jdbcType=VARCHAR},#{projId,jdbcType=VARCHAR},#{projName,jdbcType=VARCHAR},#{inveType,jdbcType=VARCHAR},#{industry,jdbcType=VARCHAR},#{deciDate,jdbcType=TIMESTAMP},#{intendAmount,jdbcType=NUMERIC},#{intendCurr,jdbcType=VARCHAR},#{intendRmbAmount,jdbcType=NUMERIC},#{deptId,jdbcType=VARCHAR},#{groupId,jdbcType=VARCHAR},#{processInstId,jdbcType=VARCHAR},#{attaFile,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{remark,jdbcType=VARCHAR},#{projFullName,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO TZ_T_PROJ_APP_INFO_OTH (PK_ID,DECI_NO,PROJ_ID,PROJ_NAME,INVE_TYPE,INDUSTRY,DECI_DATE,INTEND_AMOUNT,INTEND_CURR,INTEND_RMB_AMOUNT,DEPT_ID,GROUP_ID,PROCESS_INST_ID,ATTA_FILE,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,REMARK,PROJ_FULL_NAME)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.pkId,jdbcType=VARCHAR},
+				#{item.deciNo,jdbcType=VARCHAR},
+				#{item.projId,jdbcType=VARCHAR},
+				#{item.projName,jdbcType=VARCHAR},
+				#{item.inveType,jdbcType=VARCHAR},
+				#{item.industry,jdbcType=VARCHAR},
+				#{item.deciDate,jdbcType=TIMESTAMP},
+				#{item.intendAmount,jdbcType=NUMERIC},
+				#{item.intendCurr,jdbcType=VARCHAR},
+				#{item.intendRmbAmount,jdbcType=NUMERIC},
+				#{item.deptId,jdbcType=VARCHAR},
+				#{item.groupId,jdbcType=VARCHAR},
+				#{item.processInstId,jdbcType=VARCHAR},
+				#{item.attaFile,jdbcType=VARCHAR},
+				#{item.status,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+				#{item.remark,jdbcType=VARCHAR},
+				#{item.projFullName,jdbcType=VARCHAR}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  TZ_T_PROJ_APP_INFO_OTH WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.ProjAppInfoOthModel">
+		DELETE FROM TZ_T_PROJ_APP_INFO_OTH
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="deciNo != null and deciNo != ''" >
+				AND DECI_NO = #{deciNo,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="projName != null and projName != ''" >
+				AND PROJ_NAME = #{projName,jdbcType=VARCHAR}
+			</if>
+			<if test="inveType != null and inveType != ''" >
+				AND INVE_TYPE = #{inveType,jdbcType=VARCHAR}
+			</if>
+			<if test="industry != null and industry != ''" >
+				AND INDUSTRY = #{industry,jdbcType=VARCHAR}
+			</if>
+			<if test="deciDate != null" >
+				AND DECI_DATE = #{deciDate,jdbcType=VARCHAR}
+			</if>
+			<if test="intendAmount != null and intendAmount != ''" >
+				AND INTEND_AMOUNT = #{intendAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="intendCurr != null and intendCurr != ''" >
+				AND INTEND_CURR = #{intendCurr,jdbcType=VARCHAR}
+			</if>
+			<if test="intendRmbAmount != null and intendRmbAmount != ''" >
+				AND INTEND_RMB_AMOUNT = #{intendRmbAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="deptId != null and deptId != ''" >
+				AND DEPT_ID = #{deptId,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="projFullName != null and projFullName != ''" >
+				AND PROJ_FULL_NAME = #{projFullName,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  TZ_T_PROJ_APP_INFO_OTH WHERE PK_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.ProjAppInfoOthModel">
+		UPDATE TZ_T_PROJ_APP_INFO_OTH 
+		<set>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR},
+			</if>
+			<if test="deciNo != null and deciNo != ''" >
+				DECI_NO = #{deciNo,jdbcType=VARCHAR},
+			</if>
+			<if test="projId != null and projId != ''" >
+				PROJ_ID = #{projId,jdbcType=VARCHAR},
+			</if>
+			<if test="projName != null and projName != ''" >
+				PROJ_NAME = #{projName,jdbcType=VARCHAR},
+			</if>
+			<if test="inveType != null and inveType != ''" >
+				INVE_TYPE = #{inveType,jdbcType=VARCHAR},
+			</if>
+			<if test="industry != null and industry != ''" >
+				INDUSTRY = #{industry,jdbcType=VARCHAR},
+			</if>
+			<if test="deciDate != null" >
+				DECI_DATE = #{deciDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="intendAmount != null and intendAmount != ''" >
+				INTEND_AMOUNT = #{intendAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="intendCurr != null and intendCurr != ''" >
+				INTEND_CURR = #{intendCurr,jdbcType=VARCHAR},
+			</if>
+			<if test="intendRmbAmount != null and intendRmbAmount != ''" >
+				INTEND_RMB_AMOUNT = #{intendRmbAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="deptId != null and deptId != ''" >
+				DEPT_ID = #{deptId,jdbcType=VARCHAR},
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				GROUP_ID = #{groupId,jdbcType=VARCHAR},
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR},
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				ATTA_FILE = #{attaFile,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null and remark != ''" >
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="projFullName != null and projFullName != ''" >
+				PROJ_FULL_NAME = #{projFullName,jdbcType=VARCHAR},
+			</if>
+		</set>
+		WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="ProjAppInfoOthResult">
+		SELECT * FROM TZ_T_PROJ_APP_INFO_OTH WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.ProjAppInfoOthModel" resultMap="ProjAppInfoOthResult">
+		SELECT * FROM TZ_T_PROJ_APP_INFO_OTH
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="deciNo != null and deciNo != ''" >
+				AND DECI_NO = #{deciNo,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="projName != null and projName != ''" >
+				AND PROJ_NAME = #{projName,jdbcType=VARCHAR}
+			</if>
+			<if test="inveType != null and inveType != ''" >
+				AND INVE_TYPE = #{inveType,jdbcType=VARCHAR}
+			</if>
+			<if test="industry != null and industry != ''" >
+				AND INDUSTRY = #{industry,jdbcType=VARCHAR}
+			</if>
+			<if test="deciDate != null" >
+				AND DECI_DATE = #{deciDate,jdbcType=VARCHAR}
+			</if>
+			<if test="intendAmount != null and intendAmount != ''" >
+				AND INTEND_AMOUNT = #{intendAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="intendCurr != null and intendCurr != ''" >
+				AND INTEND_CURR = #{intendCurr,jdbcType=VARCHAR}
+			</if>
+			<if test="intendRmbAmount != null and intendRmbAmount != ''" >
+				AND INTEND_RMB_AMOUNT = #{intendRmbAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="deptId != null and deptId != ''" >
+				AND DEPT_ID = #{deptId,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="projFullName != null and projFullName != ''" >
+				AND PROJ_FULL_NAME = #{projFullName,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM TZ_T_PROJ_APP_INFO_OTH T1
+		<if test="paramMap.loginUser.userId!='1200119390' and paramMap.loginUser.userId!='13209' ">
+			LEFT JOIN  ( SELECT count(1) as cnt FROM BASE.APP_USERROLE WHERE ROLEID in (select ROLEID from base.APP_ROLEPERMISSION t where t.PERMISSIONID=10107) AND APPID = 10001  and USERID=TO_CHAR(#{paramMap.loginUser.userId}) ) tt  on 1=1
+		</if>
+		<where>
+			STATUS != '9'
+			<if test="paramMap.loginUser.userId!='1200119390' and paramMap.loginUser.userId!='13209' ">
+				<if test="paramMap.orgIdOrDeptId != null and paramMap.orgIdOrDeptId != '' ">
+					AND (group_id=#{paramMap.orgIdOrDeptId}  or dept_id=#{paramMap.orgIdOrDeptId})
+				</if>
+				AND  (case when tt.cnt!=0 then t1.create_by else TO_CHAR(#{paramMap.loginUser.userId})  end)=TO_CHAR(#{paramMap.loginUser.userId})
+			</if>
+
+			<include refid="searchCondition.searchClause" />
+		</where>
+		order by T1.create_dt desc
+	</sql>
+
+	<select id="selectListPage" resultMap="ProjAppInfoOthResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.ProjAppInfoOthModel">
+		SELECT COUNT(*) FROM TZ_T_PROJ_APP_INFO_OTH
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="deciNo != null and deciNo != ''" >
+				AND DECI_NO = #{deciNo,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="projName != null and projName != ''" >
+				AND PROJ_NAME = #{projName,jdbcType=VARCHAR}
+			</if>
+			<if test="inveType != null and inveType != ''" >
+				AND INVE_TYPE = #{inveType,jdbcType=VARCHAR}
+			</if>
+			<if test="industry != null and industry != ''" >
+				AND INDUSTRY = #{industry,jdbcType=VARCHAR}
+			</if>
+			<if test="deciDate != null" >
+				AND DECI_DATE = #{deciDate,jdbcType=VARCHAR}
+			</if>
+			<if test="intendAmount != null and intendAmount != ''" >
+				AND INTEND_AMOUNT = #{intendAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="intendCurr != null and intendCurr != ''" >
+				AND INTEND_CURR = #{intendCurr,jdbcType=VARCHAR}
+			</if>
+			<if test="intendRmbAmount != null and intendRmbAmount != ''" >
+				AND INTEND_RMB_AMOUNT = #{intendRmbAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="deptId != null and deptId != ''" >
+				AND DEPT_ID = #{deptId,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="projFullName != null and projFullName != ''" >
+				AND PROJ_FULL_NAME = #{projFullName,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.ProjAppInfoOthModel" resultMap="ProjAppInfoOthResult">
+		SELECT * FROM TZ_T_PROJ_APP_INFO_OTH
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="deciNo != null and deciNo != ''" >
+				AND DECI_NO = #{deciNo,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="projName != null and projName != ''" >
+				AND PROJ_NAME = #{projName,jdbcType=VARCHAR}
+			</if>
+			<if test="inveType != null and inveType != ''" >
+				AND INVE_TYPE = #{inveType,jdbcType=VARCHAR}
+			</if>
+			<if test="industry != null and industry != ''" >
+				AND INDUSTRY = #{industry,jdbcType=VARCHAR}
+			</if>
+			<if test="deciDate != null" >
+				AND DECI_DATE = #{deciDate,jdbcType=VARCHAR}
+			</if>
+			<if test="intendAmount != null and intendAmount != ''" >
+				AND INTEND_AMOUNT = #{intendAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="intendCurr != null and intendCurr != ''" >
+				AND INTEND_CURR = #{intendCurr,jdbcType=VARCHAR}
+			</if>
+			<if test="intendRmbAmount != null and intendRmbAmount != ''" >
+				AND INTEND_RMB_AMOUNT = #{intendRmbAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="deptId != null and deptId != ''" >
+				AND DEPT_ID = #{deptId,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="projFullName != null and projFullName != ''" >
+				AND PROJ_FULL_NAME = #{projFullName,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="ProjAppInfoOthResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+</mapper>

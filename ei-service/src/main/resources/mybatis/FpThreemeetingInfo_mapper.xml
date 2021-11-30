@@ -1,0 +1,657 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FpThreemeetingInfo">
+	<!-- start autocreate -->
+
+	<resultMap id="FpThreemeetingInfoResult" type="com.ppmg.ei.model.FpThreemeetingInfoModel">
+		<result column="PK_ID" property="pkId" jdbcType="VARCHAR" />
+		<result column="CARRIER" property="carrier" jdbcType="VARCHAR" />
+		<result column="IS_THREE" property="isThree" jdbcType="VARCHAR" />
+		<result column="MEETING_TITLE" property="meetingTitle" jdbcType="VARCHAR" />
+		<result column="ARCH_TYPE" property="archType" jdbcType="VARCHAR" />
+		<result column="ARCH_DT" property="archDt" jdbcType="TIMESTAMP" />
+		<result column="EVENT_TYPE" property="eventType" jdbcType="VARCHAR" />
+		<result column="IMPORT_LEVEL" property="importLevel" jdbcType="VARCHAR" />
+		<result column="INFORM_LEADER" property="informLeader" jdbcType="VARCHAR" />
+		<result column="MEET_SUBJECT" property="meetSubject" jdbcType="VARCHAR" />
+		<result column="KEYWORD" property="keyword" jdbcType="VARCHAR" />
+		<result column="ATTA_FILE" property="attaFile" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="PROCESS_INST_ID" property="processInstId" jdbcType="VARCHAR" />
+		<result column="AFT_MEET_FILE" property="aftMeetFile" jdbcType="VARCHAR" />
+
+		<result column="LEGAL_APPROVAL" property="legalApproval" jdbcType="VARCHAR" />
+		<result column="HAP_DATE" property="hapDate" jdbcType="TIMESTAMP" />
+		<result column="DEAL_WAY" property="dealWay" jdbcType="VARCHAR" />
+		<result column="MEETING_FILE" property="meetingFile" jdbcType="VARCHAR" />
+		<result column="MEETING_TYPE" property="meetingType" jdbcType="VARCHAR" />
+		<result column="IS_FINANCE_APPROVAL" property="isFinanceApproval" jdbcType="VARCHAR" />
+
+
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.FpThreemeetingInfoModel">
+		INSERT INTO TZ_T_FP_THREEMEETING_INFO (PK_ID,CARRIER,IS_THREE,MEETING_TITLE,ARCH_TYPE,ARCH_DT,EVENT_TYPE,IMPORT_LEVEL,INFORM_LEADER,MEET_SUBJECT,KEYWORD,ATTA_FILE,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,PROCESS_INST_ID,AFT_MEET_FILE,IS_FINANCE_APPROVAL) values(#{pkId,jdbcType=VARCHAR},#{carrier,jdbcType=VARCHAR},#{isThree,jdbcType=VARCHAR},#{meetingTitle,jdbcType=VARCHAR},#{archType,jdbcType=VARCHAR},#{archDt,jdbcType=TIMESTAMP},#{eventType,jdbcType=VARCHAR},#{importLevel,jdbcType=VARCHAR},#{informLeader,jdbcType=VARCHAR},#{meetSubject,jdbcType=VARCHAR},#{keyword,jdbcType=VARCHAR},#{attaFile,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{processInstId,jdbcType=VARCHAR},#{aftMeetFile,jdbcType=VARCHAR},#{isFinanceApproval,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO TZ_T_FP_THREEMEETING_INFO (PK_ID,CARRIER,IS_THREE,MEETING_TITLE,ARCH_TYPE,ARCH_DT,EVENT_TYPE,IMPORT_LEVEL,INFORM_LEADER,MEET_SUBJECT,KEYWORD,ATTA_FILE,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,PROCESS_INST_ID,AFT_MEET_FILE)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.pkId,jdbcType=VARCHAR},
+				#{item.carrier,jdbcType=VARCHAR},
+				#{item.isThree,jdbcType=VARCHAR},
+				#{item.meetingTitle,jdbcType=VARCHAR},
+				#{item.archType,jdbcType=VARCHAR},
+				#{item.archDt,jdbcType=TIMESTAMP},
+				#{item.eventType,jdbcType=VARCHAR},
+				#{item.importLevel,jdbcType=VARCHAR},
+				#{item.informLeader,jdbcType=VARCHAR},
+				#{item.meetSubject,jdbcType=VARCHAR},
+				#{item.keyword,jdbcType=VARCHAR},
+				#{item.attaFile,jdbcType=VARCHAR},
+				#{item.status,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+				#{item.processInstId,jdbcType=VARCHAR},
+				#{item.aftMeetFile,jdbcType=VARCHAR}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  TZ_T_FP_THREEMEETING_INFO WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.FpThreemeetingInfoModel">
+		DELETE FROM TZ_T_FP_THREEMEETING_INFO
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="carrier != null and carrier != ''" >
+				AND CARRIER = #{carrier,jdbcType=VARCHAR}
+			</if>
+			<if test="isThree != null and isThree != ''" >
+				AND IS_THREE = #{isThree,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingTitle != null and meetingTitle != ''" >
+				AND MEETING_TITLE = #{meetingTitle,jdbcType=VARCHAR}
+			</if>
+			<if test="archType != null and archType != ''" >
+				AND ARCH_TYPE = #{archType,jdbcType=VARCHAR}
+			</if>
+			<if test="archDt != null" >
+				AND ARCH_DT = #{archDt,jdbcType=VARCHAR}
+			</if>
+			<if test="eventType != null and eventType != ''" >
+				AND EVENT_TYPE = #{eventType,jdbcType=VARCHAR}
+			</if>
+			<if test="importLevel != null and importLevel != ''" >
+				AND IMPORT_LEVEL = #{importLevel,jdbcType=VARCHAR}
+			</if>
+			<if test="informLeader != null and informLeader != ''" >
+				AND INFORM_LEADER = #{informLeader,jdbcType=VARCHAR}
+			</if>
+			<if test="meetSubject != null and meetSubject != ''" >
+				AND MEET_SUBJECT = #{meetSubject,jdbcType=VARCHAR}
+			</if>
+			<if test="keyword != null and keyword != ''" >
+				AND KEYWORD = #{keyword,jdbcType=VARCHAR}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="aftMeetFile != null and aftMeetFile != ''" >
+				AND AFT_MEET_FILE = #{aftMeetFile,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  TZ_T_FP_THREEMEETING_INFO WHERE PK_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.FpThreemeetingInfoModel">
+		UPDATE TZ_T_FP_THREEMEETING_INFO 
+		<set>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR},
+			</if>
+			<if test="carrier != null and carrier != ''" >
+				CARRIER = #{carrier,jdbcType=VARCHAR},
+			</if>
+			<if test="isThree != null and isThree != ''" >
+				IS_THREE = #{isThree,jdbcType=VARCHAR},
+			</if>
+			<if test="meetingTitle != null and meetingTitle != ''" >
+				MEETING_TITLE = #{meetingTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="archType != null and archType != ''" >
+				ARCH_TYPE = #{archType,jdbcType=VARCHAR},
+			</if>
+			<if test="archDt != null" >
+				ARCH_DT = #{archDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="eventType != null and eventType != ''" >
+				EVENT_TYPE = #{eventType,jdbcType=VARCHAR},
+			</if>
+			<if test="importLevel != null and importLevel != ''" >
+				IMPORT_LEVEL = #{importLevel,jdbcType=VARCHAR},
+			</if>
+			<if test="informLeader != null and informLeader != ''" >
+				INFORM_LEADER = #{informLeader,jdbcType=VARCHAR},
+			</if>
+			<if test="meetSubject != null and meetSubject != ''" >
+				MEET_SUBJECT = #{meetSubject,jdbcType=VARCHAR},
+			</if>
+			<if test="keyword != null and keyword != ''" >
+				KEYWORD = #{keyword,jdbcType=VARCHAR},
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				ATTA_FILE = #{attaFile,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR},
+			</if>
+			<if test="aftMeetFile != null and aftMeetFile != ''" >
+				AFT_MEET_FILE = #{aftMeetFile,jdbcType=VARCHAR},
+			</if>
+			<if test="isFinanceApproval != null and isFinanceApproval != ''" >
+				IS_FINANCE_APPROVAL = #{isFinanceApproval,jdbcType=VARCHAR},
+			</if>
+
+		</set>
+		WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="FpThreemeetingInfoResult">
+		SELECT * FROM TZ_T_FP_THREEMEETING_INFO WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.FpThreemeetingInfoModel" resultMap="FpThreemeetingInfoResult">
+		SELECT * FROM TZ_T_FP_THREEMEETING_INFO
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="carrier != null and carrier != ''" >
+				AND CARRIER = #{carrier,jdbcType=VARCHAR}
+			</if>
+			<if test="isThree != null and isThree != ''" >
+				AND IS_THREE = #{isThree,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingTitle != null and meetingTitle != ''" >
+				AND MEETING_TITLE = #{meetingTitle,jdbcType=VARCHAR}
+			</if>
+			<if test="archType != null and archType != ''" >
+				AND ARCH_TYPE = #{archType,jdbcType=VARCHAR}
+			</if>
+			<if test="archDt != null" >
+				AND ARCH_DT = #{archDt,jdbcType=VARCHAR}
+			</if>
+			<if test="eventType != null and eventType != ''" >
+				AND EVENT_TYPE = #{eventType,jdbcType=VARCHAR}
+			</if>
+			<if test="importLevel != null and importLevel != ''" >
+				AND IMPORT_LEVEL = #{importLevel,jdbcType=VARCHAR}
+			</if>
+			<if test="informLeader != null and informLeader != ''" >
+				AND INFORM_LEADER = #{informLeader,jdbcType=VARCHAR}
+			</if>
+			<if test="meetSubject != null and meetSubject != ''" >
+				AND MEET_SUBJECT = #{meetSubject,jdbcType=VARCHAR}
+			</if>
+			<if test="keyword != null and keyword != ''" >
+				AND KEYWORD = #{keyword,jdbcType=VARCHAR}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="aftMeetFile != null and aftMeetFile != ''" >
+				AND AFT_MEET_FILE = #{aftMeetFile,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM TZ_T_FP_THREEMEETING_INFO
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+		ORDER BY CREATE_DT DESC
+	</sql>
+
+	<select id="selectListPage" resultMap="FpThreemeetingInfoResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.FpThreemeetingInfoModel">
+		SELECT COUNT(*) FROM TZ_T_FP_THREEMEETING_INFO
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="carrier != null and carrier != ''" >
+				AND CARRIER = #{carrier,jdbcType=VARCHAR}
+			</if>
+			<if test="isThree != null and isThree != ''" >
+				AND IS_THREE = #{isThree,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingTitle != null and meetingTitle != ''" >
+				AND MEETING_TITLE = #{meetingTitle,jdbcType=VARCHAR}
+			</if>
+			<if test="archType != null and archType != ''" >
+				AND ARCH_TYPE = #{archType,jdbcType=VARCHAR}
+			</if>
+			<if test="archDt != null" >
+				AND ARCH_DT = #{archDt,jdbcType=VARCHAR}
+			</if>
+			<if test="eventType != null and eventType != ''" >
+				AND EVENT_TYPE = #{eventType,jdbcType=VARCHAR}
+			</if>
+			<if test="importLevel != null and importLevel != ''" >
+				AND IMPORT_LEVEL = #{importLevel,jdbcType=VARCHAR}
+			</if>
+			<if test="informLeader != null and informLeader != ''" >
+				AND INFORM_LEADER = #{informLeader,jdbcType=VARCHAR}
+			</if>
+			<if test="meetSubject != null and meetSubject != ''" >
+				AND MEET_SUBJECT = #{meetSubject,jdbcType=VARCHAR}
+			</if>
+			<if test="keyword != null and keyword != ''" >
+				AND KEYWORD = #{keyword,jdbcType=VARCHAR}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="aftMeetFile != null and aftMeetFile != ''" >
+				AND AFT_MEET_FILE = #{aftMeetFile,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.FpThreemeetingInfoModel" resultMap="FpThreemeetingInfoResult">
+		SELECT * FROM TZ_T_FP_THREEMEETING_INFO
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="carrier != null and carrier != ''" >
+				AND CARRIER = #{carrier,jdbcType=VARCHAR}
+			</if>
+			<if test="isThree != null and isThree != ''" >
+				AND IS_THREE = #{isThree,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingTitle != null and meetingTitle != ''" >
+				AND MEETING_TITLE = #{meetingTitle,jdbcType=VARCHAR}
+			</if>
+			<if test="archType != null and archType != ''" >
+				AND ARCH_TYPE = #{archType,jdbcType=VARCHAR}
+			</if>
+			<if test="archDt != null" >
+				AND ARCH_DT = #{archDt,jdbcType=VARCHAR}
+			</if>
+			<if test="eventType != null and eventType != ''" >
+				AND EVENT_TYPE = #{eventType,jdbcType=VARCHAR}
+			</if>
+			<if test="importLevel != null and importLevel != ''" >
+				AND IMPORT_LEVEL = #{importLevel,jdbcType=VARCHAR}
+			</if>
+			<if test="informLeader != null and informLeader != ''" >
+				AND INFORM_LEADER = #{informLeader,jdbcType=VARCHAR}
+			</if>
+			<if test="meetSubject != null and meetSubject != ''" >
+				AND MEET_SUBJECT = #{meetSubject,jdbcType=VARCHAR}
+			</if>
+			<if test="keyword != null and keyword != ''" >
+				AND KEYWORD = #{keyword,jdbcType=VARCHAR}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="aftMeetFile != null and aftMeetFile != ''" >
+				AND AFT_MEET_FILE = #{aftMeetFile,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="FpThreemeetingInfoResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+	<!--新加-->
+	<resultMap id="FpThreemeetingInfoResultAll"  type="com.ppmg.ei.model.FpThreemeetingInfoModel">
+		<result column="PK_ID" property="pkId" jdbcType="VARCHAR" />
+		<result column="CARRIER" property="carrier" jdbcType="VARCHAR" />
+		<result column="IS_THREE" property="isThree" jdbcType="VARCHAR" />
+		<result column="MEETING_TITLE" property="meetingTitle" jdbcType="VARCHAR" />
+		<result column="ARCH_TYPE" property="archType" jdbcType="VARCHAR" />
+		<result column="ARCH_DT" property="archDt" jdbcType="TIMESTAMP" />
+		<result column="EVENT_TYPE" property="eventType" jdbcType="VARCHAR" />
+		<result column="IMPORT_LEVEL" property="importLevel" jdbcType="VARCHAR" />
+		<result column="INFORM_LEADER" property="informLeader" jdbcType="VARCHAR" />
+		<result column="MEET_SUBJECT" property="meetSubject" jdbcType="VARCHAR" />
+		<result column="KEYWORD" property="keyword" jdbcType="VARCHAR" />
+		<result column="ATTA_FILE" property="attaFile" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="PROCESS_INST_ID" property="processInstId" jdbcType="VARCHAR" />
+		<result column="AFT_MEET_FILE" property="aftMeetFile" jdbcType="VARCHAR" />
+
+		<result column="LEGAL_APPROVAL" property="legalApproval" jdbcType="VARCHAR" />
+		<result column="HAP_DATE" property="hapDate" jdbcType="TIMESTAMP" />
+		<result column="DEAL_WAY" property="dealWay" jdbcType="VARCHAR" />
+		<result column="MEETING_FILE" property="meetingFile" jdbcType="VARCHAR" />
+		<result column="MEETING_TYPE" property="meetingType" jdbcType="VARCHAR" />
+		<collection property="projMemberModel" ofType="com.ppmg.ei.model.ProjMemberModel">
+			<result column="PK_IDS" property="pkId" jdbcType="VARCHAR" />
+			<result column="PROJ_ID" property="projId" jdbcType="VARCHAR" />
+			<result column="MEMBER_ID" property="memberId" jdbcType="VARCHAR" />
+			<result column="MEMBER_NAME" property="memberName" jdbcType="VARCHAR" />
+			<result column="IS_PM" property="isPm" jdbcType="VARCHAR" />
+			<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+			<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+			<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+			<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+			<result column="PROJ_GUID" property="projGuid" jdbcType="VARCHAR" />
+			<result column="APPROVE_STATUS" property="approveStatus" jdbcType="VARCHAR" />
+			<result column="IS_GROUP" property="isGroup" jdbcType="VARCHAR" />
+		</collection>
+
+	</resultMap>
+	<sql id="searchSql2">
+		<!--SELECT a.*,b.pk_id AS pk_ids,b.proj_id,b.member_id,b.member_name,b.is_pm FROM TZ_T_FP_THREEMEETING_INFO a left join TZ_T_PROJ_MEMBER b on a.carrier = b.proj_id-->
+	<!--select * from (
+    SELECT a.*,b.pk_id AS pk_ids,b.proj_id,b.member_id,b.member_name,b.is_pm
+    FROM TZ_T_FP_THREEMEETING_INFO a
+    left join TZ_T_PROJ_MEMBER b
+    on a.pk_id = b.proj_id
+    )-->
+	select * from TZ_T_FP_THREEMEETING_INFO a
+    <where>
+        <include refid="searchCondition.searchClause" />
+    </where>
+	order by a.update_dt desc
+</sql>
+
+<select id="fundFpThreemeetingInfoListPageMapper" resultMap="FpThreemeetingInfoResultAll" parameterType="com.founder.ssm.core.common.SearchCondition">
+    <include refid="searchSql2" />
+</select>
+<select id="selectCountMapper" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+    SELECT COUNT(*) FROM TZ_T_FP_THREEMEETING_INFO a
+    left join TZ_T_PROJ_MEMBER b
+    on a.pk_id = b.proj_id
+    <where>
+        <include refid="searchCondition.searchClause" />
+    </where>
+</select>
+
+<insert id="addFpThreemeetingInfoMapper" parameterType="List">
+    insert into TZ_T_FP_THREEMEETING_INFO
+    (PK_ID,CARRIER,IS_THREE,MEETING_TITLE,ARCH_TYPE,ARCH_DT,EVENT_TYPE,IMPORT_LEVEL,INFORM_LEADER,MEET_SUBJECT,KEYWORD,ATTA_FILE
+    ,STATUS,CREATE_BY,UPDATE_BY,PROCESS_INST_ID,AFT_MEET_FILE,
+    HAP_DATE,DEAL_WAY,MEETING_FILE,MEETING_TYPE,LEGAL_APPROVAL)
+    <foreach collection="list" item="item" index="index" separator="union all">
+        (select
+            #{item.pkId,jdbcType=VARCHAR},
+            #{item.carrier,jdbcType=VARCHAR},
+            #{item.isThree,jdbcType=VARCHAR},
+            #{item.meetingTitle,jdbcType=VARCHAR},
+            #{item.archType,jdbcType=VARCHAR},
+            #{item.archDt,jdbcType=TIMESTAMP},
+            #{item.eventType,jdbcType=VARCHAR},
+            #{item.importLevel,jdbcType=VARCHAR},
+            #{item.informLeader,jdbcType=VARCHAR},
+            #{item.meetSubject,jdbcType=VARCHAR},
+            #{item.keyword,jdbcType=VARCHAR},
+            #{item.attaFile,jdbcType=VARCHAR},
+            #{item.status,jdbcType=VARCHAR},
+            #{item.createBy,jdbcType=VARCHAR},
+            #{item.updateBy,jdbcType=VARCHAR},
+            #{item.processInstId,jdbcType=VARCHAR},
+            #{item.aftMeetFile,jdbcType=VARCHAR},
+
+            #{item.hapDate,jdbcType=DATE},
+            #{item.dealWay,jdbcType=VARCHAR},
+            #{item.meetingFile,jdbcType=VARCHAR},
+            #{item.meetingType,jdbcType=VARCHAR},
+            #{item.legalApproval,jdbcType=VARCHAR}
+
+        from dual)
+    </foreach>
+</insert>
+<update id="updateFpThreemeetingInfoMapper" parameterType="com.ppmg.ei.model.FpThreemeetingInfoModel">
+    UPDATE TZ_T_FP_THREEMEETING_INFO
+    <set>
+        <if test="pkId != null and pkId != ''" >
+            PK_ID = #{pkId,jdbcType=VARCHAR},
+        </if>
+        <if test="carrier != null and carrier != ''" >
+            CARRIER = #{carrier,jdbcType=VARCHAR},
+        </if>
+        <if test="isThree != null and isThree != ''" >
+            IS_THREE = #{isThree,jdbcType=VARCHAR},
+        </if>
+        <if test="meetingTitle != null and meetingTitle != ''" >
+            MEETING_TITLE = #{meetingTitle,jdbcType=VARCHAR},
+        </if>
+        <if test="archType != null and archType != ''" >
+            ARCH_TYPE = #{archType,jdbcType=VARCHAR},
+        </if>
+        <if test="archDt != null" >
+            ARCH_DT = #{archDt,jdbcType=TIMESTAMP},
+        </if>
+        <if test="eventType != null and eventType != ''" >
+            EVENT_TYPE = #{eventType,jdbcType=VARCHAR},
+        </if>
+        <if test="importLevel != null and importLevel != ''" >
+            IMPORT_LEVEL = #{importLevel,jdbcType=VARCHAR},
+        </if>
+        <if test="informLeader != null and informLeader != ''" >
+            INFORM_LEADER = #{informLeader,jdbcType=VARCHAR},
+        </if>
+        <if test="meetSubject != null and meetSubject != ''" >
+            MEET_SUBJECT = #{meetSubject,jdbcType=VARCHAR},
+        </if>
+        <if test="keyword != null and keyword != ''" >
+            KEYWORD = #{keyword,jdbcType=VARCHAR},
+        </if>
+        <if test="attaFile != null and attaFile != ''" >
+            ATTA_FILE = #{attaFile,jdbcType=VARCHAR},
+       </if>
+        <if test="status != null and status != ''" >
+            STATUS = #{status,jdbcType=VARCHAR},
+        </if>
+        <if test="createBy != null and createBy != ''" >
+            CREATE_BY = #{createBy,jdbcType=VARCHAR},
+        </if>
+        <if test="createDt != null" >
+            CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+        </if>
+        <if test="updateBy != null and updateBy != ''" >
+            UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+        </if>
+        <if test="updateDt != null" >
+            UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+        </if>
+        <if test="processInstId != null and processInstId != ''" >
+            PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR},
+        </if>
+        <if test="aftMeetFile != null and aftMeetFile != ''" >
+            AFT_MEET_FILE = #{aftMeetFile,jdbcType=VARCHAR},
+        </if>
+
+        <if test="hapDate != null" >
+            HAP_DATE = #{hapDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="dealWay != null and dealWay != ''" >
+            DEAL_WAY = #{dealWay,jdbcType=VARCHAR},
+        </if>
+        <if test="meetingFile != null and meetingFile != ''" >
+            MEETING_FILE = #{meetingFile,jdbcType=VARCHAR},
+        </if>
+        <if test="meetingType != null and meetingType != ''" >
+            MEETING_TYPE = #{meetingType,jdbcType=VARCHAR},
+        </if>
+        <if test="legalApproval != null and legalApproval != ''" >
+            LEGAL_APPROVAL = #{legalApproval,jdbcType=VARCHAR},
+        </if>
+		<if test="isFinanceApproval != null and isFinanceApproval != ''" >
+			IS_FINANCE_APPROVAL = #{isFinanceApproval,jdbcType=VARCHAR},
+		</if>
+    </set>
+    WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+</update>
+<!--查詢人事派遣人員-->
+	<resultMap id="YhStaffListResult" type="com.ppmg.ei.model.YhStaffListPhModel">
+		<result column="PK_ID" property="pkId" jdbcType="VARCHAR" />
+		<result column="PROJ_ID" property="projId" jdbcType="VARCHAR" />
+		<result column="OBJECT_ID" property="objectId" jdbcType="VARCHAR" />
+		<result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+		<result column="IS_DIRECTOR" property="isDirector" jdbcType="VARCHAR" />
+		<result column="IS_SUPERVISOR" property="isSupervisor" jdbcType="VARCHAR" />
+		<result column="IS_TOP_MANAGE" property="isTopManage" jdbcType="VARCHAR" />
+		<result column="IS_ADVISORY" property="isAdvisory" jdbcType="VARCHAR" />
+		<result column="IS_OBSERVER" property="isObserver" jdbcType="VARCHAR" />
+		<result column="IS_IC" property="isIc" jdbcType="VARCHAR" />
+		<result column="JOB_START_DATE" property="jobStartDate" jdbcType="TIMESTAMP" />
+		<result column="JOB_END_DATE" property="jobEndDate" jdbcType="TIMESTAMP" />
+		<result column="IS_REWARD" property="isReward" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+		<result column="PROJ_GUID" property="projGuid" jdbcType="VARCHAR" />
+		<result column="USER_TYPE" property="userType" jdbcType="VARCHAR" />
+		<result column="ASSIGN_ID" property="assignId" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="searchSqlNumber">
+		SELECT * FROM TZ_T_YH_STAFF_LIST
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectNumbers" resultMap="YhStaffListResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+		<include refid="searchSqlNumber" />
+	</select>
+</mapper>

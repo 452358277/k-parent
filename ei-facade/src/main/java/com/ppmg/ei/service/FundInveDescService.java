@@ -1,0 +1,9 @@
+package com.ppmg.ei.service;
+
+import com.founder.ssm.core.service.BaseService;
+
+import com.ppmg.ei.model.FundInveDescModel;
+
+public interface FundInveDescService extends BaseService<FundInveDescModel>  {
+
+}

@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ChangeLog">
+	<!-- start autocreate -->
+
+	<resultMap id="ChangeLogResult" type="com.ppmg.ei.model.ChangeLogModel">
+		<result column="LOG_ID" property="logId" jdbcType="VARCHAR" />
+		<result column="ENTERPRISE_ID" property="enterpriseId" jdbcType="VARCHAR" />
+		<result column="CHG_MODULE" property="chgModule" jdbcType="VARCHAR" />
+		<result column="CHG_ITEM" property="chgItem" jdbcType="VARCHAR" />
+		<result column="CHG_AFTER_CONTENT" property="chgAfterContent" jdbcType="VARCHAR" />
+		<result column="CHG_BEFORE_CONTENT" property="chgBeforeContent" jdbcType="VARCHAR" />
+		<result column="CHG_DATE" property="chgDate" jdbcType="TIMESTAMP" />
+		<result column="DELETE_FLAG" property="deleteFlag" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.ChangeLogModel">
+		INSERT INTO T_ENT_CHANGE_LOG (LOG_ID,ENTERPRISE_ID,CHG_MODULE,CHG_ITEM,CHG_AFTER_CONTENT,CHG_BEFORE_CONTENT,CHG_DATE,DELETE_FLAG,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT) values(#{logId,jdbcType=VARCHAR},#{enterpriseId,jdbcType=VARCHAR},#{chgModule,jdbcType=VARCHAR},#{chgItem,jdbcType=VARCHAR},#{chgAfterContent,jdbcType=VARCHAR},#{chgBeforeContent,jdbcType=VARCHAR},#{chgDate,jdbcType=TIMESTAMP},#{deleteFlag,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO T_ENT_CHANGE_LOG (LOG_ID,ENTERPRISE_ID,CHG_MODULE,CHG_ITEM,CHG_AFTER_CONTENT,CHG_BEFORE_CONTENT,CHG_DATE,DELETE_FLAG,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.logId,jdbcType=VARCHAR},
+				#{item.enterpriseId,jdbcType=VARCHAR},
+				#{item.chgModule,jdbcType=VARCHAR},
+				#{item.chgItem,jdbcType=VARCHAR},
+				#{item.chgAfterContent,jdbcType=VARCHAR},
+				#{item.chgBeforeContent,jdbcType=VARCHAR},
+				#{item.chgDate,jdbcType=TIMESTAMP},
+				#{item.deleteFlag,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  T_ENT_CHANGE_LOG WHERE LOG_ID = #{logId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.ChangeLogModel">
+		DELETE FROM T_ENT_CHANGE_LOG
+		<where>
+			<if test="logId != null and logId != ''" >
+				LOG_ID = #{logId,jdbcType=VARCHAR}
+			</if>
+			<if test="enterpriseId != null and enterpriseId != ''" >
+				AND ENTERPRISE_ID = #{enterpriseId,jdbcType=VARCHAR}
+			</if>
+			<if test="chgModule != null and chgModule != ''" >
+				AND CHG_MODULE = #{chgModule,jdbcType=VARCHAR}
+			</if>
+			<if test="chgItem != null and chgItem != ''" >
+				AND CHG_ITEM = #{chgItem,jdbcType=VARCHAR}
+			</if>
+			<if test="chgAfterContent != null and chgAfterContent != ''" >
+				AND CHG_AFTER_CONTENT = #{chgAfterContent,jdbcType=VARCHAR}
+			</if>
+			<if test="chgBeforeContent != null and chgBeforeContent != ''" >
+				AND CHG_BEFORE_CONTENT = #{chgBeforeContent,jdbcType=VARCHAR}
+			</if>
+			<if test="chgDate != null" >
+				AND CHG_DATE = #{chgDate,jdbcType=VARCHAR}
+			</if>
+			<if test="deleteFlag != null and deleteFlag != ''" >
+				AND DELETE_FLAG = #{deleteFlag,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  T_ENT_CHANGE_LOG WHERE LOG_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.ChangeLogModel">
+		UPDATE T_ENT_CHANGE_LOG 
+		<set>
+			<if test="logId != null and logId != ''" >
+				LOG_ID = #{logId,jdbcType=VARCHAR},
+			</if>
+			<if test="enterpriseId != null and enterpriseId != ''" >
+				ENTERPRISE_ID = #{enterpriseId,jdbcType=VARCHAR},
+			</if>
+			<if test="chgModule != null and chgModule != ''" >
+				CHG_MODULE = #{chgModule,jdbcType=VARCHAR},
+			</if>
+			<if test="chgItem != null and chgItem != ''" >
+				CHG_ITEM = #{chgItem,jdbcType=VARCHAR},
+			</if>
+			<if test="chgAfterContent != null and chgAfterContent != ''" >
+				CHG_AFTER_CONTENT = #{chgAfterContent,jdbcType=VARCHAR},
+			</if>
+			<if test="chgBeforeContent != null and chgBeforeContent != ''" >
+				CHG_BEFORE_CONTENT = #{chgBeforeContent,jdbcType=VARCHAR},
+			</if>
+			<if test="chgDate != null" >
+				CHG_DATE = #{chgDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="deleteFlag != null and deleteFlag != ''" >
+				DELETE_FLAG = #{deleteFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		WHERE LOG_ID = #{logId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="ChangeLogResult">
+		SELECT * FROM T_ENT_CHANGE_LOG WHERE LOG_ID = #{logId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.ChangeLogModel" resultMap="ChangeLogResult">
+		SELECT * FROM T_ENT_CHANGE_LOG
+		<where>
+			<if test="logId != null and logId != ''" >
+				LOG_ID = #{logId,jdbcType=VARCHAR}
+			</if>
+			<if test="enterpriseId != null and enterpriseId != ''" >
+				AND ENTERPRISE_ID = #{enterpriseId,jdbcType=VARCHAR}
+			</if>
+			<if test="chgModule != null and chgModule != ''" >
+				AND CHG_MODULE = #{chgModule,jdbcType=VARCHAR}
+			</if>
+			<if test="chgItem != null and chgItem != ''" >
+				AND CHG_ITEM = #{chgItem,jdbcType=VARCHAR}
+			</if>
+			<if test="chgAfterContent != null and chgAfterContent != ''" >
+				AND CHG_AFTER_CONTENT = #{chgAfterContent,jdbcType=VARCHAR}
+			</if>
+			<if test="chgBeforeContent != null and chgBeforeContent != ''" >
+				AND CHG_BEFORE_CONTENT = #{chgBeforeContent,jdbcType=VARCHAR}
+			</if>
+			<if test="chgDate != null" >
+				AND CHG_DATE = #{chgDate,jdbcType=VARCHAR}
+			</if>
+			<if test="deleteFlag != null and deleteFlag != ''" >
+				AND DELETE_FLAG = #{deleteFlag,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM T_ENT_CHANGE_LOG
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="ChangeLogResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.ChangeLogModel">
+		SELECT COUNT(*) FROM T_ENT_CHANGE_LOG
+		<where>
+			<if test="logId != null and logId != ''" >
+				LOG_ID = #{logId,jdbcType=VARCHAR}
+			</if>
+			<if test="enterpriseId != null and enterpriseId != ''" >
+				AND ENTERPRISE_ID = #{enterpriseId,jdbcType=VARCHAR}
+			</if>
+			<if test="chgModule != null and chgModule != ''" >
+				AND CHG_MODULE = #{chgModule,jdbcType=VARCHAR}
+			</if>
+			<if test="chgItem != null and chgItem != ''" >
+				AND CHG_ITEM = #{chgItem,jdbcType=VARCHAR}
+			</if>
+			<if test="chgAfterContent != null and chgAfterContent != ''" >
+				AND CHG_AFTER_CONTENT = #{chgAfterContent,jdbcType=VARCHAR}
+			</if>
+			<if test="chgBeforeContent != null and chgBeforeContent != ''" >
+				AND CHG_BEFORE_CONTENT = #{chgBeforeContent,jdbcType=VARCHAR}
+			</if>
+			<if test="chgDate != null" >
+				AND CHG_DATE = #{chgDate,jdbcType=VARCHAR}
+			</if>
+			<if test="deleteFlag != null and deleteFlag != ''" >
+				AND DELETE_FLAG = #{deleteFlag,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.ChangeLogModel" resultMap="ChangeLogResult">
+		SELECT * FROM T_ENT_CHANGE_LOG
+		<where>
+			<if test="logId != null and logId != ''" >
+				LOG_ID = #{logId,jdbcType=VARCHAR}
+			</if>
+			<if test="enterpriseId != null and enterpriseId != ''" >
+				AND ENTERPRISE_ID = #{enterpriseId,jdbcType=VARCHAR}
+			</if>
+			<if test="chgModule != null and chgModule != ''" >
+				AND CHG_MODULE = #{chgModule,jdbcType=VARCHAR}
+			</if>
+			<if test="chgItem != null and chgItem != ''" >
+				AND CHG_ITEM = #{chgItem,jdbcType=VARCHAR}
+			</if>
+			<if test="chgAfterContent != null and chgAfterContent != ''" >
+				AND CHG_AFTER_CONTENT = #{chgAfterContent,jdbcType=VARCHAR}
+			</if>
+			<if test="chgBeforeContent != null and chgBeforeContent != ''" >
+				AND CHG_BEFORE_CONTENT = #{chgBeforeContent,jdbcType=VARCHAR}
+			</if>
+			<if test="chgDate != null" >
+				AND CHG_DATE = #{chgDate,jdbcType=VARCHAR}
+			</if>
+			<if test="deleteFlag != null and deleteFlag != ''" >
+				AND DELETE_FLAG = #{deleteFlag,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="ChangeLogResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+</mapper>

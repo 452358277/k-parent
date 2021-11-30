@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AssProject">
+	<!-- start autocreate -->
+
+	<resultMap id="AssProjectResult" type="com.ppmg.ei.model.AssProjectModel">
+		<result column="PROJ_ID" property="projId" jdbcType="VARCHAR" />
+		<result column="PROJ_NAME" property="projName" jdbcType="VARCHAR" />
+		<result column="PROJ_START_TIME" property="projStartTime" jdbcType="TIMESTAMP" />
+		<result column="PROJ_END_TIME" property="projEndTime" jdbcType="TIMESTAMP" />
+		<result column="PROJ_TYPE" property="projType" jdbcType="VARCHAR" />
+		<result column="PROJ_STATUS" property="projStatus" jdbcType="VARCHAR" />
+		<result column="PROJ_ATTA" property="projAtta" jdbcType="VARCHAR" />
+		<result column="IS_DELETE" property="isDelete" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.AssProjectModel">
+		INSERT INTO PA.ASS_PROJECT (PROJ_ID,PROJ_NAME,PROJ_START_TIME,PROJ_END_TIME,PROJ_TYPE,PROJ_STATUS,PROJ_ATTA,IS_DELETE,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT) values(#{projId,jdbcType=VARCHAR},#{projName,jdbcType=VARCHAR},#{projStartTime,jdbcType=TIMESTAMP},#{projEndTime,jdbcType=TIMESTAMP},#{projType,jdbcType=VARCHAR},#{projStatus,jdbcType=VARCHAR},#{projAtta,jdbcType=VARCHAR},#{isDelete,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO PA.ASS_PROJECT (PROJ_ID,PROJ_NAME,PROJ_START_TIME,PROJ_END_TIME,PROJ_TYPE,PROJ_STATUS,PROJ_ATTA,IS_DELETE,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.projId,jdbcType=VARCHAR},
+				#{item.projName,jdbcType=VARCHAR},
+				#{item.projStartTime,jdbcType=TIMESTAMP},
+				#{item.projEndTime,jdbcType=TIMESTAMP},
+				#{item.projType,jdbcType=VARCHAR},
+				#{item.projStatus,jdbcType=VARCHAR},
+				#{item.projAtta,jdbcType=VARCHAR},
+				#{item.isDelete,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  PA.ASS_PROJECT WHERE PROJ_ID = #{projId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.AssProjectModel">
+		DELETE FROM PA.ASS_PROJECT
+		<where>
+			<if test="projId != null and projId != ''" >
+				PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="projName != null and projName != ''" >
+				AND PROJ_NAME = #{projName,jdbcType=VARCHAR}
+			</if>
+			<if test="projStartTime != null" >
+				AND PROJ_START_TIME = #{projStartTime,jdbcType=VARCHAR}
+			</if>
+			<if test="projEndTime != null" >
+				AND PROJ_END_TIME = #{projEndTime,jdbcType=VARCHAR}
+			</if>
+			<if test="projType != null and projType != ''" >
+				AND PROJ_TYPE = #{projType,jdbcType=VARCHAR}
+			</if>
+			<if test="projStatus != null and projStatus != ''" >
+				AND PROJ_STATUS = #{projStatus,jdbcType=VARCHAR}
+			</if>
+			<if test="projAtta != null and projAtta != ''" >
+				AND PROJ_ATTA = #{projAtta,jdbcType=VARCHAR}
+			</if>
+			<if test="isDelete != null and isDelete != ''" >
+				AND IS_DELETE = #{isDelete,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  PA.ASS_PROJECT WHERE PROJ_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.AssProjectModel">
+		UPDATE PA.ASS_PROJECT 
+		<set>
+			<if test="projId != null and projId != ''" >
+				PROJ_ID = #{projId,jdbcType=VARCHAR},
+			</if>
+			<if test="projName != null and projName != ''" >
+				PROJ_NAME = #{projName,jdbcType=VARCHAR},
+			</if>
+			<if test="projStartTime != null" >
+				PROJ_START_TIME = #{projStartTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="projEndTime != null" >
+				PROJ_END_TIME = #{projEndTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="projType != null and projType != ''" >
+				PROJ_TYPE = #{projType,jdbcType=VARCHAR},
+			</if>
+			<if test="projStatus != null and projStatus != ''" >
+				PROJ_STATUS = #{projStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="projAtta != null and projAtta != ''" >
+				PROJ_ATTA = #{projAtta,jdbcType=VARCHAR},
+			</if>
+			<if test="isDelete != null and isDelete != ''" >
+				IS_DELETE = #{isDelete,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		WHERE PROJ_ID = #{projId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="AssProjectResult">
+		SELECT * FROM PA.ASS_PROJECT WHERE PROJ_ID = #{projId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.AssProjectModel" resultMap="AssProjectResult">
+		SELECT * FROM PA.ASS_PROJECT
+		<where>
+			<if test="projId != null and projId != ''" >
+				PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="projName != null and projName != ''" >
+				AND PROJ_NAME = #{projName,jdbcType=VARCHAR}
+			</if>
+			<if test="projStartTime != null" >
+				AND PROJ_START_TIME = #{projStartTime,jdbcType=VARCHAR}
+			</if>
+			<if test="projEndTime != null" >
+				AND PROJ_END_TIME = #{projEndTime,jdbcType=VARCHAR}
+			</if>
+			<if test="projType != null and projType != ''" >
+				AND PROJ_TYPE = #{projType,jdbcType=VARCHAR}
+			</if>
+			<if test="projStatus != null and projStatus != ''" >
+				AND PROJ_STATUS = #{projStatus,jdbcType=VARCHAR}
+			</if>
+			<if test="projAtta != null and projAtta != ''" >
+				AND PROJ_ATTA = #{projAtta,jdbcType=VARCHAR}
+			</if>
+			<if test="isDelete != null and isDelete != ''" >
+				AND IS_DELETE = #{isDelete,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM PA.ASS_PROJECT
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="AssProjectResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.AssProjectModel">
+		SELECT COUNT(*) FROM PA.ASS_PROJECT
+		<where>
+			<if test="projId != null and projId != ''" >
+				PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="projName != null and projName != ''" >
+				AND PROJ_NAME = #{projName,jdbcType=VARCHAR}
+			</if>
+			<if test="projStartTime != null" >
+				AND PROJ_START_TIME = #{projStartTime,jdbcType=VARCHAR}
+			</if>
+			<if test="projEndTime != null" >
+				AND PROJ_END_TIME = #{projEndTime,jdbcType=VARCHAR}
+			</if>
+			<if test="projType != null and projType != ''" >
+				AND PROJ_TYPE = #{projType,jdbcType=VARCHAR}
+			</if>
+			<if test="projStatus != null and projStatus != ''" >
+				AND PROJ_STATUS = #{projStatus,jdbcType=VARCHAR}
+			</if>
+			<if test="projAtta != null and projAtta != ''" >
+				AND PROJ_ATTA = #{projAtta,jdbcType=VARCHAR}
+			</if>
+			<if test="isDelete != null and isDelete != ''" >
+				AND IS_DELETE = #{isDelete,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.AssProjectModel" resultMap="AssProjectResult">
+		SELECT * FROM PA.ASS_PROJECT
+		<where>
+			<if test="projId != null and projId != ''" >
+				PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="projName != null and projName != ''" >
+				AND PROJ_NAME = #{projName,jdbcType=VARCHAR}
+			</if>
+			<if test="projStartTime != null" >
+				AND PROJ_START_TIME = #{projStartTime,jdbcType=VARCHAR}
+			</if>
+			<if test="projEndTime != null" >
+				AND PROJ_END_TIME = #{projEndTime,jdbcType=VARCHAR}
+			</if>
+			<if test="projType != null and projType != ''" >
+				AND PROJ_TYPE = #{projType,jdbcType=VARCHAR}
+			</if>
+			<if test="projStatus != null and projStatus != ''" >
+				AND PROJ_STATUS = #{projStatus,jdbcType=VARCHAR}
+			</if>
+			<if test="projAtta != null and projAtta != ''" >
+				AND PROJ_ATTA = #{projAtta,jdbcType=VARCHAR}
+			</if>
+			<if test="isDelete != null and isDelete != ''" >
+				AND IS_DELETE = #{isDelete,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="AssProjectResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+</mapper>

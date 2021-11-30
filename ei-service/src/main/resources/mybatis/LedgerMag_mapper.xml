@@ -1,0 +1,1074 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="LedgerMag">
+	<!-- start autocreate -->
+
+	<resultMap id="LedgerMagResult" type="com.ppmg.ei.model.LedgerMagModel">
+		<result column="LEDGER_ID" property="ledgerId" jdbcType="VARCHAR" />
+		<result column="INVEST_PAYMENT_TYPE" property="investPaymentType" jdbcType="VARCHAR" />
+		<result column="F_NUMBER" property="fNumber" jdbcType="VARCHAR" />
+		<result column="COMPANY_NAME" property="companyName" jdbcType="VARCHAR" />
+		<result column="COMPANY_NUMBER" property="companyNumber" jdbcType="VARCHAR" />
+		<result column="FUND_NAME" property="fundName" jdbcType="VARCHAR" />
+		<result column="BIZ_DATE" property="bizDate" jdbcType="TIMESTAMP" />
+		<result column="CUSTOMER_NAME" property="customerName" jdbcType="VARCHAR" />
+		<result column="CUSTOMER_NUM" property="customerNum" jdbcType="VARCHAR" />
+		<result column="FINANCE_TYPE" property="financeType" jdbcType="VARCHAR" />
+		<result column="REC_BILL_TYPE_NAME" property="recBillTypeName" jdbcType="VARCHAR" />
+		<result column="REC_BILL_TYPE_NUM" property="recBillTypeNum" jdbcType="VARCHAR" />
+		<result column="CURRENCY_NAME" property="currencyName" jdbcType="VARCHAR" />
+		<result column="CURRENCY_NUM" property="currencyNum" jdbcType="VARCHAR" />
+		<result column="AMT" property="amt" jdbcType="NUMERIC" />
+		<result column="FSEQ" property="fseq" jdbcType="VARCHAR" />
+		<result column="OPP_ACCOUNT_NAME" property="oppAccountName" jdbcType="VARCHAR" />
+		<result column="OPP_ACCOUNT_NUM" property="oppAccountNum" jdbcType="VARCHAR" />
+		<result column="ASSSEQ" property="assseq" jdbcType="VARCHAR" />
+		<result column="ASS_CUSTOMER_NUM" property="assCustomerNum" jdbcType="VARCHAR" />
+		<result column="ASS_CUSTOMER_NAME" property="assCustomerName" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="DESC_FILE" property="descFile" jdbcType="VARCHAR" />
+		<result column="DESCRIPTIONDATA" property="descriptiondata" jdbcType="VARCHAR" />
+		<result column="ACTUALLOCAMT" property="actuallocamt" jdbcType="NUMERIC" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="GROUP_ID" property="groupId" jdbcType="VARCHAR" />
+		<result column="CUSTOMER_TYPE" property="customerType" jdbcType="VARCHAR" />
+		<result column="RECORD_DATE" property="recordDate" jdbcType="TIMESTAMP" />
+		<result column="ACCOUNT_BALANCE" property="accountBalance" jdbcType="NUMERIC" />
+		<result column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
+		<result column="BACK_TYPE" property="backType" jdbcType="VARCHAR" />
+		<result column="GAIN_AMOUNT" property="gainAmount" jdbcType="NUMERIC" />
+		<result column="ACCOUNTS" property="accounts" jdbcType="VARCHAR" />
+		<result column="IS_COMPLY" property="isComply" jdbcType="VARCHAR" />
+		<result column="IS_PAY_SAME" property="isPaySame" jdbcType="VARCHAR" />
+		<result column="IS_PERFECT" property="isPerfect" jdbcType="VARCHAR" />
+		<result column="PROJ_ID" property="projId" jdbcType="VARCHAR" />
+		<result column="LEDGER_TYPE" property="ledgerType" jdbcType="VARCHAR" />
+		<result column="OCCUR_AMOUNT" property="occurAmount" jdbcType="NUMERIC" />
+		<result column="OCCUR_CURR" property="occurCurr" jdbcType="VARCHAR" />
+		<result column="EXIT_TYPE" property="exitType" jdbcType="VARCHAR" />
+		<result column="EXIT_ROUND" property="exitRound" jdbcType="VARCHAR" />
+		<result column="PAY_WAY" property="payWay" jdbcType="VARCHAR" />
+		<result column="OCCUR_DT" property="occurDt" jdbcType="VARCHAR" />
+		<result column="INVE_NAME" property="inveName" jdbcType="VARCHAR" />
+		<result column="INVE_ID" property="inveId" jdbcType="VARCHAR" />
+		<result column="LEDGER_OBJECT" property="ledgerObject" jdbcType="VARCHAR" />
+		<result column="QUIT_WAY" property="quitWay" jdbcType="VARCHAR" />
+		<result column="CONTACT" property="contact" jdbcType="VARCHAR" />
+		<result column="CONTACT_NO" property="contactNo" jdbcType="VARCHAR" />
+		<result column="ACCOUNT_BANK" property="accountBank" jdbcType="VARCHAR" />
+		<result column="ACCOUNT_NO" property="accountNo" jdbcType="VARCHAR" />
+		<result column="RMB_INVE_AMOUNT" property="rmbInveAmount" jdbcType="NUMERIC" />
+		<result column="OBJECT_ID" property="objectId" jdbcType="VARCHAR" />
+		<result column="OBJECT_NAME" property="objectName" jdbcType="VARCHAR" />
+		<result column="FUND_ID" property="fundId" jdbcType="VARCHAR" />
+		<result column="FUND_NAME" property="fundName" jdbcType="VARCHAR" />
+		<result column="IS_COMPLETE" property="isComplete" jdbcType="VARCHAR" />
+		<result column="FOF_INVE_AMOUNT" property="fofInveAmount" jdbcType="NUMERIC" />
+		<result column="FOF_INVE_CURR" property="fofInveCurr" jdbcType="VARCHAR" />
+		<result column="FOF_INVE_RMB" property="fofInveRmb" jdbcType="NUMERIC" />
+		<result column="DATA_TYPE" property="dataType" jdbcType="VARCHAR" />
+
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.LedgerMagModel">
+		INSERT INTO XJL_T_LEDGER_MAG (LEDGER_ID,INVEST_PAYMENT_TYPE,F_NUMBER,COMPANY_NAME,COMPANY_NUMBER,BIZ_DATE,CUSTOMER_NAME,CUSTOMER_NUM,FINANCE_TYPE,REC_BILL_TYPE_NAME,REC_BILL_TYPE_NUM,CURRENCY_NAME,CURRENCY_NUM,AMT,FSEQ,OPP_ACCOUNT_NAME,OPP_ACCOUNT_NUM,ASSSEQ,ASS_CUSTOMER_NUM,ASS_CUSTOMER_NAME,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,DESC_FILE,DESCRIPTIONDATA,ACTUALLOCAMT,REMARK,GROUP_ID,CUSTOMER_TYPE,RECORD_DATE,ACCOUNT_BALANCE,PRODUCT_ID,BACK_TYPE,GAIN_AMOUNT,ACCOUNTS,IS_COMPLY,IS_PAY_SAME,IS_PERFECT,PROJ_ID,LEDGER_TYPE,OCCUR_AMOUNT,OCCUR_CURR,EXIT_TYPE,EXIT_ROUND,PAY_WAY,OCCUR_DT,INVE_NAME,INVE_ID,LEDGER_OBJECT,FUND_ID,FUND_NAME,QUIT_WAY,CONTACT,CONTACT_NO,ACCOUNT_BANK,ACCOUNT_NO,RMB_INVE_AMOUNT,OBJECT_NAME,OBJECT_ID,IS_COMPLETE,FOF_INVE_AMOUNT,FOF_INVE_CURR,FOF_INVE_RMB,DATA_TYPE) values(#{ledgerId,jdbcType=VARCHAR},#{investPaymentType,jdbcType=VARCHAR},#{fNumber,jdbcType=VARCHAR},#{companyName,jdbcType=VARCHAR},#{companyNumber,jdbcType=VARCHAR},#{bizDate,jdbcType=TIMESTAMP},#{customerName,jdbcType=VARCHAR},#{customerNum,jdbcType=VARCHAR},#{financeType,jdbcType=VARCHAR},#{recBillTypeName,jdbcType=VARCHAR},#{recBillTypeNum,jdbcType=VARCHAR},#{currencyName,jdbcType=VARCHAR},#{currencyNum,jdbcType=VARCHAR},#{amt,jdbcType=NUMERIC},#{fseq,jdbcType=VARCHAR},#{oppAccountName,jdbcType=VARCHAR},#{oppAccountNum,jdbcType=VARCHAR},#{assseq,jdbcType=VARCHAR},#{assCustomerNum,jdbcType=VARCHAR},#{assCustomerName,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{descFile,jdbcType=VARCHAR},#{descriptiondata,jdbcType=VARCHAR},#{actuallocamt,jdbcType=NUMERIC},#{remark,jdbcType=VARCHAR},#{groupId,jdbcType=VARCHAR},#{customerType,jdbcType=VARCHAR},#{recordDate,jdbcType=TIMESTAMP},#{accountBalance,jdbcType=NUMERIC},#{productId,jdbcType=VARCHAR},#{backType,jdbcType=VARCHAR},#{gainAmount,jdbcType=NUMERIC},#{accounts,jdbcType=VARCHAR},#{isComply,jdbcType=VARCHAR},#{isPaySame,jdbcType=VARCHAR},#{isPerfect,jdbcType=VARCHAR},#{projId,jdbcType=VARCHAR},#{ledgerType,jdbcType=VARCHAR},#{occurAmount,jdbcType=NUMERIC},#{occurCurr,jdbcType=VARCHAR},#{exitType,jdbcType=VARCHAR},#{exitRound,jdbcType=VARCHAR},#{payWay,jdbcType=VARCHAR},#{occurDt,jdbcType=TIMESTAMP},#{inveName,jdbcType=VARCHAR},#{inveId,jdbcType=VARCHAR},#{ledgerObject,jdbcType=VARCHAR},#{fundId,jdbcType=VARCHAR},#{fundName,jdbcType=VARCHAR},#{quitWay,jdbcType=VARCHAR},#{contact,jdbcType=VARCHAR},#{contactNo,jdbcType=VARCHAR},#{accountBank,jdbcType=VARCHAR},#{accountNo,jdbcType=VARCHAR},#{rmbInveAmount,jdbcType=NUMERIC},#{objectName,jdbcType=VARCHAR},#{objectId,jdbcType=VARCHAR},#{isComplete,jdbcType=VARCHAR},#{fofInveAmount,jdbcType=NUMERIC},#{fofInveCurr,jdbcType=VARCHAR},#{fofInveRmb,jdbcType=NUMERIC},#{dataType,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO XJL_T_LEDGER_MAG (LEDGER_ID,INVEST_PAYMENT_TYPE,F_NUMBER,COMPANY_NAME,COMPANY_NUMBER,BIZ_DATE,CUSTOMER_NAME,CUSTOMER_NUM,FINANCE_TYPE,REC_BILL_TYPE_NAME,REC_BILL_TYPE_NUM,CURRENCY_NAME,CURRENCY_NUM,AMT,FSEQ,OPP_ACCOUNT_NAME,OPP_ACCOUNT_NUM,ASSSEQ,ASS_CUSTOMER_NUM,ASS_CUSTOMER_NAME,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,DESC_FILE,DESCRIPTIONDATA,ACTUALLOCAMT,REMARK,GROUP_ID,CUSTOMER_TYPE,RECORD_DATE,ACCOUNT_BALANCE,productId,backType,GAIN_AMOUNT,ACCOUNTS,IS_COMPLY,IS_PAY_SAME,IS_PERFECT)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.ledgerId,jdbcType=VARCHAR},
+				#{item.investPaymentType,jdbcType=VARCHAR},
+				#{item.fNumber,jdbcType=VARCHAR},
+				#{item.companyName,jdbcType=VARCHAR},
+				#{item.companyNumber,jdbcType=VARCHAR},
+				#{item.bizDate,jdbcType=TIMESTAMP},
+				#{item.customerName,jdbcType=VARCHAR},
+				#{item.customerNum,jdbcType=VARCHAR},
+				#{item.financeType,jdbcType=VARCHAR},
+				#{item.recBillTypeName,jdbcType=VARCHAR},
+				#{item.recBillTypeNum,jdbcType=VARCHAR},
+				#{item.currencyName,jdbcType=VARCHAR},
+				#{item.currencyNum,jdbcType=VARCHAR},
+				#{item.amt,jdbcType=NUMERIC},
+				#{item.fseq,jdbcType=VARCHAR},
+				#{item.oppAccountName,jdbcType=VARCHAR},
+				#{item.oppAccountNum,jdbcType=VARCHAR},
+				#{item.assseq,jdbcType=VARCHAR},
+				#{item.assCustomerNum,jdbcType=VARCHAR},
+				#{item.assCustomerName,jdbcType=VARCHAR},
+				#{item.status,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+				#{item.descFile,jdbcType=VARCHAR},
+				#{item.descriptiondata,jdbcType=VARCHAR},
+				#{item.actuallocamt,jdbcType=NUMERIC},
+				#{item.remark,jdbcType=VARCHAR},
+				#{item.groupId,jdbcType=VARCHAR},
+			    #{item.customerType,jdbcType=VARCHAR}
+			    #{item.recordDate,jdbcType=TIMESTAMP},
+			    #{item.accountBalance,jdbcType=NUMERIC},
+			    #{item.productId,jdbcType=VARCHAR},
+			    #{item.backType,jdbcType=VARCHAR},
+			    #{item.gainAmount,jdbcType=NUMERIC},
+			    #{item.accounts,jdbcType=VARCHAR},
+			    #{item.isComply,jdbcType=VARCHAR},
+			    #{item.isPaySame,jdbcType=VARCHAR},
+			    #{item.isPerfect,jdbcType=VARCHAR}
+
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  XJL_T_LEDGER_MAG WHERE LEDGER_ID = #{ledgerId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.LedgerMagModel">
+		DELETE FROM XJL_T_LEDGER_MAG
+		<where>
+			<if test="ledgerId != null and ledgerId != ''" >
+				LEDGER_ID = #{ledgerId,jdbcType=VARCHAR}
+			</if>
+			<if test="investPaymentType != null and investPaymentType != ''" >
+				AND INVEST_PAYMENT_TYPE = #{investPaymentType,jdbcType=VARCHAR}
+			</if>
+			<if test="fNumber != null and fNumber != ''" >
+				AND F_NUMBER = #{fNumber,jdbcType=VARCHAR}
+			</if>
+			<if test="companyName != null and companyName != ''" >
+				AND COMPANY_NAME = #{companyName,jdbcType=VARCHAR}
+			</if>
+			<if test="companyNumber != null and companyNumber != ''" >
+				AND COMPANY_NUMBER = #{companyNumber,jdbcType=VARCHAR}
+			</if>
+			<if test="bizDate != null" >
+				AND BIZ_DATE = #{bizDate,jdbcType=VARCHAR}
+			</if>
+			<if test="customerName != null and customerName != ''" >
+				AND CUSTOMER_NAME = #{customerName,jdbcType=VARCHAR}
+			</if>
+			<if test="customerNum != null and customerNum != ''" >
+				AND CUSTOMER_NUM = #{customerNum,jdbcType=VARCHAR}
+			</if>
+			<if test="financeType != null and financeType != ''" >
+				AND FINANCE_TYPE = #{financeType,jdbcType=VARCHAR}
+			</if>
+			<if test="recBillTypeName != null and recBillTypeName != ''" >
+				AND REC_BILL_TYPE_NAME = #{recBillTypeName,jdbcType=VARCHAR}
+			</if>
+			<if test="recBillTypeNum != null and recBillTypeNum != ''" >
+				AND REC_BILL_TYPE_NUM = #{recBillTypeNum,jdbcType=VARCHAR}
+			</if>
+			<if test="currencyName != null and currencyName != ''" >
+				AND CURRENCY_NAME = #{currencyName,jdbcType=VARCHAR}
+			</if>
+			<if test="currencyNum != null and currencyNum != ''" >
+				AND CURRENCY_NUM = #{currencyNum,jdbcType=VARCHAR}
+			</if>
+			<if test="amt != null and amt != ''" >
+				AND AMT = #{amt,jdbcType=NUMERIC}
+			</if>
+			<if test="fseq != null and fseq != ''" >
+				AND FSEQ = #{fseq,jdbcType=VARCHAR}
+			</if>
+			<if test="oppAccountName != null and oppAccountName != ''" >
+				AND OPP_ACCOUNT_NAME = #{oppAccountName,jdbcType=VARCHAR}
+			</if>
+			<if test="oppAccountNum != null and oppAccountNum != ''" >
+				AND OPP_ACCOUNT_NUM = #{oppAccountNum,jdbcType=VARCHAR}
+			</if>
+			<if test="assseq != null and assseq != ''" >
+				AND ASSSEQ = #{assseq,jdbcType=VARCHAR}
+			</if>
+			<if test="assCustomerNum != null and assCustomerNum != ''" >
+				AND ASS_CUSTOMER_NUM = #{assCustomerNum,jdbcType=VARCHAR}
+			</if>
+			<if test="assCustomerName != null and assCustomerName != ''" >
+				AND ASS_CUSTOMER_NAME = #{assCustomerName,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=TIMESTAMP}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP}
+			</if>
+			<if test="descFile != null and descFile != ''" >
+				AND DESC_FILE = #{descFile,jdbcType=VARCHAR}
+			</if>
+			<if test="descriptiondata != null and descriptiondata != ''" >
+				AND DESCRIPTIONDATA = #{descriptiondata,jdbcType=VARCHAR}
+			</if>
+			<if test="actuallocamt != null and actuallocamt != ''" >
+				AND ACTUALLOCAMT = #{actuallocamt,jdbcType=NUMERIC}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=VARCHAR}
+			</if>
+			<if test="customerType != null and customerType != ''" >
+				AND CUSTOMER_TYPE = #{customerType,jdbcType=VARCHAR}
+			</if>
+
+			<if test="recordDate != null" >
+				AND RECORD_DATE = #{recordDate,jdbcType=TIMESTAMP}
+			</if>
+
+			<if test="accountBalance != null and accountBalance != ''" >
+				AND ACCOUNT_BALANCE = #{accountBalance,jdbcType=NUMERIC}
+			</if>
+			<if test="productId != null and productId != ''" >
+				AND PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+			</if>
+			<if test="backType != null and backType != ''" >
+				AND BACK_TYPE = #{backType,jdbcType=VARCHAR}
+			</if>
+			<if test="gainAmount != null and gainAmount != ''" >
+				AND GAIN_AMOUNT = #{gainAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="accounts != null and accounts != ''" >
+				AND ACCOUNTS = #{accounts,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  XJL_T_LEDGER_MAG WHERE LEDGER_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.LedgerMagModel">
+		UPDATE XJL_T_LEDGER_MAG 
+		<set>
+			<if test="ledgerId != null and ledgerId != ''" >
+				LEDGER_ID = #{ledgerId,jdbcType=VARCHAR},
+			</if>
+			<if test="investPaymentType != null and investPaymentType != ''" >
+				INVEST_PAYMENT_TYPE = #{investPaymentType,jdbcType=VARCHAR},
+			</if>
+			<if test="fNumber != null and fNumber != ''" >
+				F_NUMBER = #{fNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="companyName != null and companyName != ''" >
+				COMPANY_NAME = #{companyName,jdbcType=VARCHAR},
+			</if>
+			<if test="companyNumber != null and companyNumber != ''" >
+				COMPANY_NUMBER = #{companyNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="bizDate != null" >
+				BIZ_DATE = #{bizDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="customerName != null " >
+				CUSTOMER_NAME = #{customerName,jdbcType=VARCHAR},
+			</if>
+			<if test="customerNum != null and customerNum != ''" >
+				CUSTOMER_NUM = #{customerNum,jdbcType=VARCHAR},
+			</if>
+			<if test="financeType != null and financeType != ''" >
+				FINANCE_TYPE = #{financeType,jdbcType=VARCHAR},
+			</if>
+			<if test="recBillTypeName != null and recBillTypeName != ''" >
+				REC_BILL_TYPE_NAME = #{recBillTypeName,jdbcType=VARCHAR},
+			</if>
+			<if test="recBillTypeNum != null and recBillTypeNum != ''" >
+				REC_BILL_TYPE_NUM = #{recBillTypeNum,jdbcType=VARCHAR},
+			</if>
+			<if test="currencyName != null and currencyName != ''" >
+				CURRENCY_NAME = #{currencyName,jdbcType=VARCHAR},
+			</if>
+			<if test="currencyNum != null and currencyNum != ''" >
+				CURRENCY_NUM = #{currencyNum,jdbcType=VARCHAR},
+			</if>
+			<if test="amt != null and amt != ''" >
+				AMT = #{amt,jdbcType=NUMERIC},
+			</if>
+			<if test="fseq != null and fseq != ''" >
+				FSEQ = #{fseq,jdbcType=VARCHAR},
+			</if>
+			<if test="oppAccountName != null and oppAccountName != ''" >
+				OPP_ACCOUNT_NAME = #{oppAccountName,jdbcType=VARCHAR},
+			</if>
+			<if test="oppAccountNum != null and oppAccountNum != ''" >
+				OPP_ACCOUNT_NUM = #{oppAccountNum,jdbcType=VARCHAR},
+			</if>
+			<if test="assseq != null and assseq != ''" >
+				ASSSEQ = #{assseq,jdbcType=VARCHAR},
+			</if>
+			<if test="assCustomerNum != null and assCustomerNum != ''" >
+				ASS_CUSTOMER_NUM = #{assCustomerNum,jdbcType=VARCHAR},
+			</if>
+			<if test="assCustomerName != null and assCustomerName != ''" >
+				ASS_CUSTOMER_NAME = #{assCustomerName,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="descFile != null and descFile != ''" >
+				DESC_FILE = #{descFile,jdbcType=VARCHAR},
+			</if>
+			<if test="descriptiondata != null and descriptiondata != ''" >
+				DESCRIPTIONDATA = #{descriptiondata,jdbcType=VARCHAR},
+			</if>
+			<if test="actuallocamt != null and actuallocamt != ''" >
+				ACTUALLOCAMT = #{actuallocamt,jdbcType=NUMERIC},
+			</if>
+			<if test="remark != null and remark != ''" >
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				GROUP_ID = #{groupId,jdbcType=VARCHAR},
+			</if>
+			<if test="customerType != null and customerType != ''" >
+				CUSTOMER_TYPE = #{customerType,jdbcType=VARCHAR},
+			</if>
+			<if test="recordDate != null" >
+				 RECORD_DATE = #{recordDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="accountBalance != null " >
+				 ACCOUNT_BALANCE = #{accountBalance,jdbcType=NUMERIC},
+			</if>
+			<if test="productId != null" >
+				 PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+			</if>
+			<if test="backType != null and backType != ''" >
+				 BACK_TYPE = #{backType,jdbcType=VARCHAR},
+			</if>
+			<if test="gainAmount != null and gainAmount != ''" >
+				 GAIN_AMOUNT = #{gainAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="accounts != null and accounts != ''" >
+				 ACCOUNTS = #{accounts,jdbcType=VARCHAR},
+			</if>
+			<if test="isComply != null and isComply != ''" >
+				IS_COMPLY = #{isComply,jdbcType=VARCHAR},
+			</if>
+			<if test="isPaySame != null and isPaySame != ''" >
+				IS_PAY_SAME = #{isPaySame,jdbcType=VARCHAR},
+			</if>
+			<if test="isPerfect != null and isPerfect != ''" >
+				IS_PERFECT = #{isPerfect,jdbcType=VARCHAR},
+			</if>
+
+			<if test="projId != null and projId != ''" >
+				PROJ_ID = #{projId,jdbcType=VARCHAR},
+			</if>
+
+			<if test="ledgerType != null and ledgerType != ''" >
+			 LEDGER_TYPE = #{ledgerType,jdbcType=VARCHAR},
+		    </if>
+			<if test="occurAmount != null and occurAmount != ''" >
+				OCCUR_AMOUNT = #{occurAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="occurCurr != null and occurCurr != ''" >
+				OCCUR_CURR = #{occurCurr,jdbcType=VARCHAR},
+			</if>
+			<if test="exitType != null and exitType != ''" >
+				EXIT_TYPE = #{exitType,jdbcType=VARCHAR},
+			</if>
+			<if test="exitRound != null and exitRound != ''" >
+				EXIT_ROUND = #{exitRound,jdbcType=VARCHAR},
+			</if>
+			<if test="payWay != null and payWay != ''" >
+				PAY_WAY = #{payWay,jdbcType=VARCHAR},
+			</if>
+			<if test="occurDt != null" >
+				OCCUR_DT = #{occurDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="inveName != null and inveName != ''" >
+				INVE_NAME = #{inveName,jdbcType=VARCHAR},
+			</if>
+			<if test="inveId != null and inveName != ''" >
+				INVE_ID = #{inveId,jdbcType=VARCHAR},
+			</if>
+			<if test="ledgerObject != null and ledgerObject != ''" >
+				LEDGER_OBJECT = #{ledgerObject,jdbcType=VARCHAR},
+			</if>
+
+			<if test="fundId != null and fundId != ''" >
+				FUND_ID = #{fundId,jdbcType=VARCHAR},
+			</if>
+
+			<if test="fundName != null and fundName != ''" >
+				FUND_NAME = #{fundName,jdbcType=VARCHAR},
+			</if>
+			<if test="quitWay != null and quitWay != ''" >
+				QUIT_WAY = #{quitWay,jdbcType=VARCHAR},
+			</if>
+			<if test="contact != null and contact != ''" >
+				CONTACT = #{contact,jdbcType=VARCHAR},
+			</if>
+
+			<if test="contactNo != null and contactNo != ''" >
+				CONTACT_NO = #{contactNo,jdbcType=VARCHAR},
+			</if>
+
+			<if test="accountBank != null and accountBank != ''" >
+				ACCOUNT_BANK = #{accountBank,jdbcType=VARCHAR},
+			</if>
+
+			<if test="accountNo != null and accountNo != ''" >
+				ACCOUNT_NO = #{accountNo,jdbcType=VARCHAR},
+			</if>
+
+			<if test="rmbInveAmount != null " >
+				RMB_INVE_AMOUNT = #{rmbInveAmount,jdbcType=VARCHAR},
+			</if>
+
+			<if test="objectName != null and objectName != ''" >
+				OBJECT_NAME = #{objectName,jdbcType=VARCHAR},
+			</if>
+
+			<if test="objectId != null and objectId != ''" >
+				OBJECT_ID = #{objectId,jdbcType=VARCHAR},
+			</if>
+			<if test="isComplete != null and isComplete != ''" >
+				IS_COMPLETE = #{isComplete,jdbcType=VARCHAR},
+			</if>
+			<if test="fofInveAmount != null and fofInveAmount != ''" >
+				FOF_INVE_AMOUNT = #{fofInveAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="fofInveCurr != null and fofInveCurr != ''" >
+				FOF_INVE_CURR = #{fofInveCurr,jdbcType=VARCHAR},
+			</if>
+
+			<if test="fofInveRmb != null and fofInveRmb != ''" >
+				FOF_INVE_RMB = #{fofInveRmb,jdbcType=NUMERIC},
+			</if>
+		</set>
+		WHERE LEDGER_ID = #{ledgerId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="LedgerMagResult">
+		SELECT * FROM XJL_T_LEDGER_MAG WHERE LEDGER_ID = #{ledgerId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.LedgerMagModel" resultMap="LedgerMagResult">
+		SELECT * FROM XJL_T_LEDGER_MAG
+		<where>
+			<if test="ledgerId != null and ledgerId != ''" >
+				LEDGER_ID = #{ledgerId,jdbcType=VARCHAR}
+			</if>
+			<if test="investPaymentType != null and investPaymentType != ''" >
+				AND INVEST_PAYMENT_TYPE = #{investPaymentType,jdbcType=VARCHAR}
+			</if>
+			<if test="fNumber != null and fNumber != ''" >
+				AND F_NUMBER = #{fNumber,jdbcType=VARCHAR}
+			</if>
+			<if test="companyName != null and companyName != ''" >
+				AND COMPANY_NAME = #{companyName,jdbcType=VARCHAR}
+			</if>
+			<if test="companyNumber != null and companyNumber != ''" >
+				AND COMPANY_NUMBER = #{companyNumber,jdbcType=VARCHAR}
+			</if>
+			<if test="bizDate != null" >
+				AND BIZ_DATE = #{bizDate,jdbcType=VARCHAR}
+			</if>
+			<if test="customerName != null and customerName != ''" >
+				AND CUSTOMER_NAME = #{customerName,jdbcType=VARCHAR}
+			</if>
+			<if test="customerNum != null and customerNum != ''" >
+				AND CUSTOMER_NUM = #{customerNum,jdbcType=VARCHAR}
+			</if>
+			<if test="financeType != null and financeType != ''" >
+				AND FINANCE_TYPE = #{financeType,jdbcType=VARCHAR}
+			</if>
+			<if test="recBillTypeName != null and recBillTypeName != ''" >
+				AND REC_BILL_TYPE_NAME = #{recBillTypeName,jdbcType=VARCHAR}
+			</if>
+			<if test="recBillTypeNum != null and recBillTypeNum != ''" >
+				AND REC_BILL_TYPE_NUM = #{recBillTypeNum,jdbcType=VARCHAR}
+			</if>
+			<if test="currencyName != null and currencyName != ''" >
+				AND CURRENCY_NAME = #{currencyName,jdbcType=VARCHAR}
+			</if>
+			<if test="currencyNum != null and currencyNum != ''" >
+				AND CURRENCY_NUM = #{currencyNum,jdbcType=VARCHAR}
+			</if>
+			<if test="amt != null and amt != ''" >
+				AND AMT = #{amt,jdbcType=NUMERIC}
+			</if>
+			<if test="fseq != null and fseq != ''" >
+				AND FSEQ = #{fseq,jdbcType=VARCHAR}
+			</if>
+			<if test="oppAccountName != null and oppAccountName != ''" >
+				AND OPP_ACCOUNT_NAME = #{oppAccountName,jdbcType=VARCHAR}
+			</if>
+			<if test="oppAccountNum != null and oppAccountNum != ''" >
+				AND OPP_ACCOUNT_NUM = #{oppAccountNum,jdbcType=VARCHAR}
+			</if>
+			<if test="assseq != null and assseq != ''" >
+				AND ASSSEQ = #{assseq,jdbcType=VARCHAR}
+			</if>
+			<if test="assCustomerNum != null and assCustomerNum != ''" >
+				AND ASS_CUSTOMER_NUM = #{assCustomerNum,jdbcType=VARCHAR}
+			</if>
+			<if test="assCustomerName != null and assCustomerName != ''" >
+				AND ASS_CUSTOMER_NAME = #{assCustomerName,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="descFile != null and descFile != ''" >
+				AND DESC_FILE = #{descFile,jdbcType=VARCHAR}
+			</if>
+			<if test="descriptiondata != null and descriptiondata != ''" >
+				AND DESCRIPTIONDATA = #{descriptiondata,jdbcType=VARCHAR}
+			</if>
+			<if test="actuallocamt != null and actuallocamt != ''" >
+				AND ACTUALLOCAMT = #{actuallocamt,jdbcType=NUMERIC}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=VARCHAR}
+			</if>
+			<if test="customerType != null and customerType != ''" >
+				AND CUSTOMER_TYPE = #{customerType,jdbcType=VARCHAR}
+			</if>
+			<if test="recordDate != null" >
+				AND RECORD_DATE = #{recordDate,jdbcType=TIMESTAMP}
+			</if>
+
+			<if test="accountBalance != null and accountBalance != ''" >
+				AND ACCOUNT_BALANCE = #{accountBalance,jdbcType=NUMERIC}
+			</if>
+
+			<if test="productId != null and productId != ''" >
+				AND PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+			</if>
+			<if test="backType != null and backType != ''" >
+				AND BACK_TYPE = #{backType,jdbcType=VARCHAR}
+			</if>
+			<if test="gainAmount != null and gainAmount != ''" >
+				AND GAIN_AMOUNT = #{gainAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="accounts != null and accounts != ''" >
+				AND ACCOUNTS = #{accounts,jdbcType=VARCHAR}
+			</if>
+
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+
+			<if test="ledgerType != null and ledgerType != ''" >
+				AND LEDGER_TYPE = #{ledgerType,jdbcType=VARCHAR}
+			</if>
+			<if test="occurAmount != null and occurAmount != ''" >
+				AND OCCUR_AMOUNT = #{occurAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="occurCurr != null and occurCurr != ''" >
+				AND OCCUR_CURR = #{occurCurr,jdbcType=VARCHAR}
+			</if>
+			<if test="exitType != null and exitType != ''" >
+				AND EXIT_TYPE = #{exitType,jdbcType=VARCHAR}
+			</if>
+			<if test="exitRound != null and exitRound != ''" >
+				AND EXIT_ROUND = #{exitRound,jdbcType=VARCHAR}
+			</if>
+			<if test="payWay != null and payWay != ''" >
+				AND PAY_WAY = #{payWay,jdbcType=VARCHAR}
+			</if>
+			<if test="occurDt != null " >
+				AND OCCUR_DT = #{occurDt,jdbcType=TIMESTAMP}
+			</if>
+			<if test="inveName != null and inveName != ''" >
+				AND INVE_NAME = #{inveName,jdbcType=VARCHAR}
+			</if>
+			<if test="inveId != null and inveName != ''" >
+				AND INVE_ID = #{inveId,jdbcType=VARCHAR}
+			</if>
+
+			<if test="ledgerObject != null and ledgerObject != ''" >
+				AND LEDGER_OBJECT = #{ledgerObject,jdbcType=VARCHAR}
+			</if>
+
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+
+			<if test="fundName != null and fundName != ''" >
+				AND FUND_NAME = #{fundName,jdbcType=VARCHAR}
+			</if>
+			<if test="quitWay != null and quitWay != ''" >
+				AND QUIT_WAY = #{quitWay,jdbcType=VARCHAR}
+			</if>
+			<if test="contact != null and contact != ''" >
+				AND CONTACT = #{contact,jdbcType=VARCHAR}
+			</if>
+
+			<if test="contactNo != null and contactNo != ''" >
+				AND CONTACT_NO = #{contactNo,jdbcType=VARCHAR}
+			</if>
+
+			<if test="accountBank != null and accountBank != ''" >
+				AND ACCOUNT_BANK = #{accountBank,jdbcType=VARCHAR}
+			</if>
+
+			<if test="accountNo != null and accountNo != ''" >
+				AND ACCOUNT_NO = #{accountNo,jdbcType=VARCHAR}
+			</if>
+
+			<if test="rmbInveAmount != null " >
+				AND RMB_INVE_AMOUNT = #{rmbInveAmount,jdbcType=NUMERIC}
+			</if>
+
+			<if test="objectName != null and objectName != ''" >
+				AND OBJECT_NAME = #{objectName,jdbcType=VARCHAR}
+			</if>
+
+			<if test="objectId != null and objectId != ''" >
+				AND OBJECT_ID = #{objectName,jdbcType=VARCHAR}
+			</if>
+
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM XJL_T_LEDGER_MAG
+		<where>
+			STATUS!='1'  AND group_id=#{paramMap.groupId}
+			<if test='paramMap.NAME == "1" ' >
+				AND COMPANY_NUMBER=#{paramMap.FUNDID}
+			</if>
+			<include refid="searchCondition.searchClause" />
+		</where>
+     order by BIZ_DATE desc
+	</sql>
+
+	<select id="selectListPage" resultMap="LedgerMagResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<sql id="selectcashFlowSql">
+		SELECT * FROM EI.XJL_T_LEDGER_MAG
+		<where>
+			STATUS!='1'  and INVEST_PAYMENT_TYPE='2'
+			<if test="searchBean.keyword!='' and searchBean.keyword!=null">
+				<bind name="pattern" value="'%' + searchBean.keyword + '%'" />
+				AND ( COMPANY_NAME like #{pattern} OR CUSTOMER_NAME like #{pattern} or REMARK like #{pattern} )
+			</if>
+			<if test="searchBean.startTime!=null and searchBean.startTime != ''">
+				AND BIZ_DATE  <![CDATA[>=]]> TO_DATE(#{searchBean.startTime},'yyyy-mm-dd hh24:mi:ss')
+			</if>
+			<if test="searchBean.endTime!=null and searchBean.endTime != ''">
+				AND BIZ_DATE  <![CDATA[<=]]> TO_DATE(#{searchBean.endTime},'yyyy-mm-dd hh24:mi:ss')
+			</if>
+			<if test="searchBean.fundIds!=null">
+				AND  COMPANY_NUMBER in
+				<foreach item="item" index="index" collection="searchBean.fundIds" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+
+			<if test='paramMap.NAME=="0" ' >
+				AND COMPANY_NUMBER IN (select FUND_ID from BD_T_FUND_USER_RELATE FU
+				WHERE FU.USER_ID=#{paramMap.USER_ID})
+				AND ACCOUNTS IN (select ACCOUNTS from BD_T_FUND_USER_RELATE FU
+				WHERE FU.USER_ID=#{paramMap.USER_ID})
+			</if>
+			<if test='paramMap.NAME =="2"' >
+				AND COMPANY_NUMBER IN (select FUND_ID from BD_T_FUND_USER_RELATE FU
+				WHERE FU.USER_ID=#{paramMap.USER_ID})
+			</if>
+			<!--<if test='paramMap.NAME == "1" and (paramMap.FUNDID != null and paramMap.FUNDID != "")' >
+				AND COMPANY_NUMBER=#{paramMap.FUNDID}
+			</if>-->
+
+			<include refid="searchCondition.searchClause" />
+		</where>
+		ORDER BY BIZ_DATE DESC nulls last,LEDGER_ID desc
+	</sql>
+	<select id="selectcashFlowPage" resultMap="LedgerMagResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+		<include refid="selectcashFlowSql" />
+	</select>
+
+
+	<sql id="selectLedgerSql">
+		SELECT c.* FROM
+		EI.BD_T_FOF_BANK_RELATE a,
+		EI.BD_T_BANK_INFO b,
+		EI.XJL_T_LEDGER_MAG c
+		where
+		c.COMPANY_NUMBER=a.FUND_ID
+		and a.BANK_ID=b.BANK_ID
+		and b.BANK_ID=#{paramMap.BANK_ID}
+		and c.COMPANY_NUMBER=#{paramMap.COMPANY_NUMBER}
+		and c.status='0'
+		and c.CREATE_BY=(select USER_ID from EI.BD_T_BANK_INFO
+		where BANK_ID=#{paramMap.BANK_ID})
+		<include refid="searchCondition.searchClause" />
+		ORDER BY c.CREATE_DT DESC
+	</sql>
+
+	<select id="selectLedgerPage" resultMap="LedgerMagResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+		<include refid="selectLedgerSql" />
+	</select>
+
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.LedgerMagModel">
+		SELECT COUNT(*) FROM XJL_T_LEDGER_MAG
+		<where>
+			<if test="ledgerId != null and ledgerId != ''" >
+				LEDGER_ID = #{ledgerId,jdbcType=VARCHAR}
+			</if>
+			<if test="investPaymentType != null and investPaymentType != ''" >
+				AND INVEST_PAYMENT_TYPE = #{investPaymentType,jdbcType=VARCHAR}
+			</if>
+			<if test="fNumber != null and fNumber != ''" >
+				AND F_NUMBER = #{fNumber,jdbcType=VARCHAR}
+			</if>
+			<if test="companyName != null and companyName != ''" >
+				AND COMPANY_NAME = #{companyName,jdbcType=VARCHAR}
+			</if>
+			<if test="companyNumber != null and companyNumber != ''" >
+				AND COMPANY_NUMBER = #{companyNumber,jdbcType=VARCHAR}
+			</if>
+			<if test="bizDate != null" >
+				AND BIZ_DATE = #{bizDate,jdbcType=VARCHAR}
+			</if>
+			<if test="customerName != null and customerName != ''" >
+				AND CUSTOMER_NAME = #{customerName,jdbcType=VARCHAR}
+			</if>
+			<if test="customerNum != null and customerNum != ''" >
+				AND CUSTOMER_NUM = #{customerNum,jdbcType=VARCHAR}
+			</if>
+			<if test="financeType != null and financeType != ''" >
+				AND FINANCE_TYPE = #{financeType,jdbcType=VARCHAR}
+			</if>
+			<if test="recBillTypeName != null and recBillTypeName != ''" >
+				AND REC_BILL_TYPE_NAME = #{recBillTypeName,jdbcType=VARCHAR}
+			</if>
+			<if test="recBillTypeNum != null and recBillTypeNum != ''" >
+				AND REC_BILL_TYPE_NUM = #{recBillTypeNum,jdbcType=VARCHAR}
+			</if>
+			<if test="currencyName != null and currencyName != ''" >
+				AND CURRENCY_NAME = #{currencyName,jdbcType=VARCHAR}
+			</if>
+			<if test="currencyNum != null and currencyNum != ''" >
+				AND CURRENCY_NUM = #{currencyNum,jdbcType=VARCHAR}
+			</if>
+			<if test="amt != null and amt != ''" >
+				AND AMT = #{amt,jdbcType=NUMERIC}
+			</if>
+			<if test="fseq != null and fseq != ''" >
+				AND FSEQ = #{fseq,jdbcType=VARCHAR}
+			</if>
+			<if test="oppAccountName != null and oppAccountName != ''" >
+				AND OPP_ACCOUNT_NAME = #{oppAccountName,jdbcType=VARCHAR}
+			</if>
+			<if test="oppAccountNum != null and oppAccountNum != ''" >
+				AND OPP_ACCOUNT_NUM = #{oppAccountNum,jdbcType=VARCHAR}
+			</if>
+			<if test="assseq != null and assseq != ''" >
+				AND ASSSEQ = #{assseq,jdbcType=VARCHAR}
+			</if>
+			<if test="assCustomerNum != null and assCustomerNum != ''" >
+				AND ASS_CUSTOMER_NUM = #{assCustomerNum,jdbcType=VARCHAR}
+			</if>
+			<if test="assCustomerName != null and assCustomerName != ''" >
+				AND ASS_CUSTOMER_NAME = #{assCustomerName,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="descFile != null and descFile != ''" >
+				AND DESC_FILE = #{descFile,jdbcType=VARCHAR}
+			</if>
+			<if test="descriptiondata != null and descriptiondata != ''" >
+				AND DESCRIPTIONDATA = #{descriptiondata,jdbcType=VARCHAR}
+			</if>
+			<if test="actuallocamt != null and actuallocamt != ''" >
+				AND ACTUALLOCAMT = #{actuallocamt,jdbcType=NUMERIC}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=VARCHAR}
+			</if>
+			<if test="recordDate != null" >
+				AND RECORD_DATE = #{recordDate,jdbcType=TIMESTAMP}
+			</if>
+
+			<if test="accountBalance != null and accountBalance != ''" >
+				AND ACCOUNT_BALANCE = #{accountBalance,jdbcType=NUMERIC}
+			</if>
+
+			<if test="productId != null and productId != ''" >
+				AND PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+			</if>
+			<if test="backType != null and backType != ''" >
+				AND BACK_TYPE = #{backType,jdbcType=VARCHAR}
+			</if>
+			<if test="gainAmount != null and gainAmount != ''" >
+				AND GAIN_AMOUNT = #{gainAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="accounts != null and accounts != ''" >
+				AND ACCOUNTS = #{accounts,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.LedgerMagModel" resultMap="LedgerMagResult">
+		SELECT * FROM XJL_T_LEDGER_MAG
+		<where>
+			<if test="ledgerId != null and ledgerId != ''" >
+				LEDGER_ID = #{ledgerId,jdbcType=VARCHAR}
+			</if>
+			<if test="investPaymentType != null and investPaymentType != ''" >
+				AND INVEST_PAYMENT_TYPE = #{investPaymentType,jdbcType=VARCHAR}
+			</if>
+			<if test="fNumber != null and fNumber != ''" >
+				AND F_NUMBER = #{fNumber,jdbcType=VARCHAR}
+			</if>
+			<if test="companyName != null and companyName != ''" >
+				AND COMPANY_NAME = #{companyName,jdbcType=VARCHAR}
+			</if>
+			<if test="companyNumber != null and companyNumber != ''" >
+				AND COMPANY_NUMBER = #{companyNumber,jdbcType=VARCHAR}
+			</if>
+			<if test="bizDate != null" >
+				AND BIZ_DATE = #{bizDate,jdbcType=VARCHAR}
+			</if>
+			<if test="customerName != null and customerName != ''" >
+				AND CUSTOMER_NAME = #{customerName,jdbcType=VARCHAR}
+			</if>
+			<if test="customerNum != null and customerNum != ''" >
+				AND CUSTOMER_NUM = #{customerNum,jdbcType=VARCHAR}
+			</if>
+			<if test="financeType != null and financeType != ''" >
+				AND FINANCE_TYPE = #{financeType,jdbcType=VARCHAR}
+			</if>
+			<if test="recBillTypeName != null and recBillTypeName != ''" >
+				AND REC_BILL_TYPE_NAME = #{recBillTypeName,jdbcType=VARCHAR}
+			</if>
+			<if test="recBillTypeNum != null and recBillTypeNum != ''" >
+				AND REC_BILL_TYPE_NUM = #{recBillTypeNum,jdbcType=VARCHAR}
+			</if>
+			<if test="currencyName != null and currencyName != ''" >
+				AND CURRENCY_NAME = #{currencyName,jdbcType=VARCHAR}
+			</if>
+			<if test="currencyNum != null and currencyNum != ''" >
+				AND CURRENCY_NUM = #{currencyNum,jdbcType=VARCHAR}
+			</if>
+			<if test="amt != null and amt != ''" >
+				AND AMT = #{amt,jdbcType=NUMERIC}
+			</if>
+			<if test="fseq != null and fseq != ''" >
+				AND FSEQ = #{fseq,jdbcType=VARCHAR}
+			</if>
+			<if test="oppAccountName != null and oppAccountName != ''" >
+				AND OPP_ACCOUNT_NAME = #{oppAccountName,jdbcType=VARCHAR}
+			</if>
+			<if test="oppAccountNum != null and oppAccountNum != ''" >
+				AND OPP_ACCOUNT_NUM = #{oppAccountNum,jdbcType=VARCHAR}
+			</if>
+			<if test="assseq != null and assseq != ''" >
+				AND ASSSEQ = #{assseq,jdbcType=VARCHAR}
+			</if>
+			<if test="assCustomerNum != null and assCustomerNum != ''" >
+				AND ASS_CUSTOMER_NUM = #{assCustomerNum,jdbcType=VARCHAR}
+			</if>
+			<if test="assCustomerName != null and assCustomerName != ''" >
+				AND ASS_CUSTOMER_NAME = #{assCustomerName,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="descFile != null and descFile != ''" >
+				AND DESC_FILE = #{descFile,jdbcType=VARCHAR}
+			</if>
+			<if test="descriptiondata != null and descriptiondata != ''" >
+				AND DESCRIPTIONDATA = #{descriptiondata,jdbcType=VARCHAR}
+			</if>
+			<if test="actuallocamt != null and actuallocamt != ''" >
+				AND ACTUALLOCAMT = #{actuallocamt,jdbcType=NUMERIC}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=VARCHAR}
+			</if>
+			<if test="customerType != null and customerType != ''" >
+				AND CUSTOMER_TYPE = #{customerType,jdbcType=VARCHAR}
+			</if>
+			<if test="recordDate != null" >
+				AND RECORD_DATE = #{recordDate,jdbcType=TIMESTAMP}
+			</if>
+
+			<if test="accountBalance != null and accountBalance != ''" >
+				AND ACCOUNT_BALANCE = #{accountBalance,jdbcType=NUMERIC}
+			</if>
+
+			<if test="productId != null and productId != ''" >
+				AND PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+			</if>
+			<if test="backType != null and backType != ''" >
+				AND BACK_TYPE = #{backType,jdbcType=VARCHAR}
+			</if>
+			<if test="gainAmount != null and gainAmount != ''" >
+				AND GAIN_AMOUNT = #{gainAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="accounts != null and accounts != ''" >
+				AND ACCOUNTS = #{accounts,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="objectId != null and objectId != ''" >
+				AND OBJECT_ID = #{objectId,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+		</where>
+		ORDER BY BIZ_DATE DESC nulls last,LEDGER_ID desc
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="LedgerMagResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+
+
+	<select id="LedgerMaggetAPPxjl" resultMap="LedgerMagResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+		select t.*,t2.FUND_NAME from XJL_T_LEDGER_MAG t
+	            LEFT JOIN BD_T_FUND_INFO T2 ON T2.ENTE_ID=T.COMPANY_NUMBER AND T2.FUND_STS!='8'
+						WHERE T.STATUS!='1'
+				<if test="paramMap.projectObject != null and paramMap.projectObject != ''" >
+					AND T.CUSTOMER_NUM=#{paramMap.projectObject}
+				</if>
+				<if test="paramMap.inveId != null and paramMap.inveId != ''" >
+					AND T2.FUND_ID=#{paramMap.inveId}
+				</if>
+				<include refid="searchCondition.searchClause" />
+					order by T.BIZ_DATE  DESC nulls last
+	</select>
+
+
+	<!-- end autocreate -->
+	<select id="selectListFundPage" resultMap="LedgerMagResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT * FROM XJL_T_LEDGER_MAG
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+		order by OCCUR_DT desc NULLS LAST
+	</select>
+
+
+	<update id="updateByObject" parameterType="com.ppmg.ei.model.LedgerMagModel">
+		update XJL_T_LEDGER_MAG set status='1'
+		where
+		proj_Id=#{projId}
+		and object_id=#{objectId}
+
+	</update>
+
+	<select id="selectListByOccDt" parameterType="com.ppmg.ei.model.LedgerMagModel" resultMap="LedgerMagResult">
+		SELECT * FROM XJL_T_LEDGER_MAG
+		<where>
+			OCCUR_DT is not null
+			<if test="ledgerType != null and ledgerType != ''" >
+				AND LEDGER_TYPE = #{ledgerType,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+		</where>
+		order by OCCUR_DT asc
+	</select>
+
+	<select id="getMagList" parameterType="com.ppmg.ei.model.LedgerMagModel" resultMap="LedgerMagResult">
+		SELECT * FROM XJL_T_LEDGER_MAG
+		<where>
+		        status='0'
+				AND OBJECT_ID = #{objectId,jdbcType=VARCHAR}
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+		</where>
+
+	</select>
+
+
+
+</mapper>

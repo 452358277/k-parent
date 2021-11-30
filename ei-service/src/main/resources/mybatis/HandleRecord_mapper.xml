@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="HandleRecord">
+	<!-- start autocreate -->
+
+	<resultMap id="HandleRecordResult" type="com.ppmg.ei.model.HandleRecordModel">
+		<result column="PK_ID" property="pkId" jdbcType="VARCHAR" />
+		<result column="HANDLE_ID" property="handleId" jdbcType="VARCHAR" />
+		<result column="SEND_MONTH" property="sendMonth" jdbcType="VARCHAR" />
+		<result column="GROUP_ID" property="groupId" jdbcType="VARCHAR" />
+		<result column="INVEST_ID" property="investId" jdbcType="VARCHAR" />
+		<result column="ENTER_ID" property="enterId" jdbcType="VARCHAR" />
+		<result column="COLUM_NAME" property="columName" jdbcType="VARCHAR" />
+		<result column="CONTENT" property="content" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="COLUM_REMARK" property="columRemark" jdbcType="VARCHAR" />
+		<result column="COLUM_RESOURCE" property="columResource" jdbcType="VARCHAR" />
+		<result column="PROJECT_OR_FUND_ID" property="projectOrFundId" jdbcType="VARCHAR" />
+		<result column="CONTENT_OLD" property="contentOld" jdbcType="VARCHAR" />
+
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.HandleRecordModel">
+		INSERT INTO EI_MY_HANDLE_RECORD (PK_ID,HANDLE_ID,SEND_MONTH,GROUP_ID,INVEST_ID,ENTER_ID,COLUM_NAME,CONTENT,CREATE_DT,CREATE_BY,UPDATE_DT,UPDATE_BY,COLUM_REMARK,COLUM_RESOURCE,PROJECT_OR_FUND_ID,CONTENT_OLD) values(#{pkId,jdbcType=VARCHAR},#{handleId,jdbcType=VARCHAR},#{sendMonth,jdbcType=VARCHAR},#{groupId,jdbcType=VARCHAR},#{investId,jdbcType=VARCHAR},#{enterId,jdbcType=VARCHAR},#{columName,jdbcType=VARCHAR},#{content,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{createBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{columRemark,jdbcType=VARCHAR},#{columResource,jdbcType=VARCHAR},#{projectOrFundId,jdbcType=VARCHAR},#{contentOld,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO EI_MY_HANDLE_RECORD (PK_ID,HANDLE_ID,SEND_MONTH,GROUP_ID,INVEST_ID,ENTER_ID,COLUM_NAME,CONTENT,CREATE_DT,CREATE_BY,UPDATE_DT,UPDATE_BY,COLUM_REMARK,COLUM_RESOURCE,PROJECT_OR_FUND_ID)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.pkId,jdbcType=VARCHAR},
+				#{item.handleId,jdbcType=VARCHAR},
+				#{item.sendMonth,jdbcType=VARCHAR},
+				#{item.groupId,jdbcType=VARCHAR},
+				#{item.investId,jdbcType=VARCHAR},
+				#{item.enterId,jdbcType=VARCHAR},
+				#{item.columName,jdbcType=VARCHAR},
+				#{item.content,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.columRemark,jdbcType=VARCHAR},
+				#{item.columResource,jdbcType=VARCHAR},
+				#{item.projectOrFundId,jdbcType=VARCHAR}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  EI_MY_HANDLE_RECORD WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.HandleRecordModel">
+		DELETE FROM EI_MY_HANDLE_RECORD
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="handleId != null and handleId != ''" >
+				AND HANDLE_ID = #{handleId,jdbcType=VARCHAR}
+			</if>
+			<if test="sendMonth != null and sendMonth != ''" >
+				AND SEND_MONTH = #{sendMonth,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=VARCHAR}
+			</if>
+			<if test="investId != null and investId != ''" >
+				AND INVEST_ID = #{investId,jdbcType=VARCHAR}
+			</if>
+			<if test="enterId != null and enterId != ''" >
+				AND ENTER_ID = #{enterId,jdbcType=VARCHAR}
+			</if>
+			<if test="columName != null and columName != ''" >
+				AND COLUM_NAME = #{columName,jdbcType=VARCHAR}
+			</if>
+			<if test="content != null and content != ''" >
+				AND CONTENT = #{content,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="columRemark != null and columRemark != ''" >
+				AND COLUM_REMARK = #{columRemark,jdbcType=VARCHAR}
+			</if>
+			<if test="columResource != null and columResource != ''" >
+				AND COLUM_RESOURCE = #{columResource,jdbcType=VARCHAR}
+			</if>
+			<if test="projectOrFundId != null and projectOrFundId != ''" >
+				AND PROJECT_OR_FUND_ID = #{projectOrFundId,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  EI_MY_HANDLE_RECORD WHERE PK_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.HandleRecordModel">
+		UPDATE EI_MY_HANDLE_RECORD 
+		<set>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR},
+			</if>
+			<if test="handleId != null and handleId != ''" >
+				HANDLE_ID = #{handleId,jdbcType=VARCHAR},
+			</if>
+			<if test="sendMonth != null and sendMonth != ''" >
+				SEND_MONTH = #{sendMonth,jdbcType=VARCHAR},
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				GROUP_ID = #{groupId,jdbcType=VARCHAR},
+			</if>
+			<if test="investId != null and investId != ''" >
+				INVEST_ID = #{investId,jdbcType=VARCHAR},
+			</if>
+			<if test="enterId != null and enterId != ''" >
+				ENTER_ID = #{enterId,jdbcType=VARCHAR},
+			</if>
+			<if test="columName != null and columName != ''" >
+				COLUM_NAME = #{columName,jdbcType=VARCHAR},
+			</if>
+			<if test="content != null and content != ''" >
+				CONTENT = #{content,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="columRemark != null and columRemark != ''" >
+				COLUM_REMARK = #{columRemark,jdbcType=VARCHAR},
+			</if>
+			<if test="columResource != null and columResource != ''" >
+				COLUM_RESOURCE = #{columResource,jdbcType=VARCHAR},
+			</if>
+			<if test="projectOrFundId != null and projectOrFundId != ''" >
+				PROJECT_OR_FUND_ID = #{projectOrFundId,jdbcType=VARCHAR},
+			</if>
+			<if test="contentOld != null and contentOld != ''" >
+				CONTENT_OLD = #{contentOld,jdbcType=VARCHAR},
+			</if>
+
+		</set>
+		WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="HandleRecordResult">
+		SELECT * FROM EI_MY_HANDLE_RECORD WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.HandleRecordModel" resultMap="HandleRecordResult">
+		SELECT * FROM EI_MY_HANDLE_RECORD
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="handleId != null and handleId != ''" >
+				AND HANDLE_ID = #{handleId,jdbcType=VARCHAR}
+			</if>
+			<if test="sendMonth != null and sendMonth != ''" >
+				AND SEND_MONTH = #{sendMonth,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=VARCHAR}
+			</if>
+			<if test="investId != null and investId != ''" >
+				AND INVEST_ID = #{investId,jdbcType=VARCHAR}
+			</if>
+			<if test="enterId != null and enterId != ''" >
+				AND ENTER_ID = #{enterId,jdbcType=VARCHAR}
+			</if>
+			<if test="columName != null and columName != ''" >
+				AND COLUM_NAME = #{columName,jdbcType=VARCHAR}
+			</if>
+			<if test="content != null and content != ''" >
+				AND CONTENT = #{content,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="columRemark != null and columRemark != ''" >
+				AND COLUM_REMARK = #{columRemark,jdbcType=VARCHAR}
+			</if>
+			<if test="columResource != null and columResource != ''" >
+				AND COLUM_RESOURCE = #{columResource,jdbcType=VARCHAR}
+			</if>
+			<if test="projectOrFundId != null and projectOrFundId != ''" >
+				AND PROJECT_OR_FUND_ID = #{projectOrFundId,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM EI_MY_HANDLE_RECORD
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="HandleRecordResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.HandleRecordModel">
+		SELECT COUNT(*) FROM EI_MY_HANDLE_RECORD
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="handleId != null and handleId != ''" >
+				AND HANDLE_ID = #{handleId,jdbcType=VARCHAR}
+			</if>
+			<if test="sendMonth != null and sendMonth != ''" >
+				AND SEND_MONTH = #{sendMonth,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=VARCHAR}
+			</if>
+			<if test="investId != null and investId != ''" >
+				AND INVEST_ID = #{investId,jdbcType=VARCHAR}
+			</if>
+			<if test="enterId != null and enterId != ''" >
+				AND ENTER_ID = #{enterId,jdbcType=VARCHAR}
+			</if>
+			<if test="columName != null and columName != ''" >
+				AND COLUM_NAME = #{columName,jdbcType=VARCHAR}
+			</if>
+			<if test="content != null and content != ''" >
+				AND CONTENT = #{content,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="columRemark != null and columRemark != ''" >
+				AND COLUM_REMARK = #{columRemark,jdbcType=VARCHAR}
+			</if>
+			<if test="columResource != null and columResource != ''" >
+				AND COLUM_RESOURCE = #{columResource,jdbcType=VARCHAR}
+			</if>
+			<if test="projectOrFundId != null and projectOrFundId != ''" >
+				AND PROJECT_OR_FUND_ID = #{projectOrFundId,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.HandleRecordModel" resultMap="HandleRecordResult">
+		SELECT * FROM EI_MY_HANDLE_RECORD
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="handleId != null and handleId != ''" >
+				AND HANDLE_ID = #{handleId,jdbcType=VARCHAR}
+			</if>
+			<if test="sendMonth != null and sendMonth != ''" >
+				AND SEND_MONTH = #{sendMonth,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=VARCHAR}
+			</if>
+			<if test="investId != null and investId != ''" >
+				AND INVEST_ID = #{investId,jdbcType=VARCHAR}
+			</if>
+			<if test="enterId != null and enterId != ''" >
+				AND ENTER_ID = #{enterId,jdbcType=VARCHAR}
+			</if>
+			<if test="columName != null and columName != ''" >
+				AND COLUM_NAME = #{columName,jdbcType=VARCHAR}
+			</if>
+			<if test="content != null and content != ''" >
+				AND CONTENT = #{content,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="columRemark != null and columRemark != ''" >
+				AND COLUM_REMARK = #{columRemark,jdbcType=VARCHAR}
+			</if>
+			<if test="columResource != null and columResource != ''" >
+				AND COLUM_RESOURCE = #{columResource,jdbcType=VARCHAR}
+			</if>
+			<if test="projectOrFundId != null and projectOrFundId != ''" >
+				AND PROJECT_OR_FUND_ID = #{projectOrFundId,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="HandleRecordResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+</mapper>

@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SurveyPlan">
+	<!-- start autocreate -->
+
+	<resultMap id="SurveyPlanResult" type="com.ppmg.ei.model.SurveyPlanModel">
+		<result column="PLAN_ID" property="planId" jdbcType="VARCHAR" />
+		<result column="CARRIER" property="carrier" jdbcType="VARCHAR" />
+		<result column="CARRIER_NAME" property="carrierName" jdbcType="VARCHAR" />
+		<result column="CARRIER_TYPE" property="carrierType" jdbcType="VARCHAR" />
+		<result column="PLAN_NAME" property="planName" jdbcType="VARCHAR" />
+		<result column="SURVEY_CONTENT" property="surveyContent" jdbcType="VARCHAR" />
+		<result column="IMP_ORG" property="impOrg" jdbcType="VARCHAR" />
+		<result column="SURVEY_FEE" property="surveyFee" jdbcType="NUMERIC" />
+		<result column="START_DATE" property="startDate" jdbcType="TIMESTAMP" />
+		<result column="END_DATE" property="endDate" jdbcType="TIMESTAMP" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="PROCESS_INST_ID" property="processInstId" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="MEETING_FILE" property="meetingFile" jdbcType="VARCHAR" />
+		<result column="ATTA_DETAIL" property="attaDetail" jdbcType="VARCHAR" />
+		<result column="ATTA_FILE" property="attaFile" jdbcType="VARCHAR" />
+		<result column="PARTNER_ORGA_ID" property="partnerOrgaId" jdbcType="VARCHAR" />
+		<result column="INTERIOR" property="interior" jdbcType="VARCHAR" />
+		<result column="PROJ_ID" property="projId" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.SurveyPlanModel">
+		INSERT INTO TZ_T_SURVEY_PLAN (PLAN_ID,CARRIER,CARRIER_NAME,CARRIER_TYPE,PLAN_NAME,SURVEY_CONTENT,IMP_ORG,SURVEY_FEE,START_DATE,END_DATE,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,PROCESS_INST_ID,STATUS,MEETING_FILE,ATTA_DETAIL,ATTA_FILE,PARTNER_ORGA_ID,INTERIOR,PROJ_ID) values(#{planId,jdbcType=VARCHAR},#{carrier,jdbcType=VARCHAR},#{carrierName,jdbcType=VARCHAR},#{carrierType,jdbcType=VARCHAR},#{planName,jdbcType=VARCHAR},#{surveyContent,jdbcType=VARCHAR},#{impOrg,jdbcType=VARCHAR},#{surveyFee,jdbcType=NUMERIC},#{startDate,jdbcType=TIMESTAMP},#{endDate,jdbcType=TIMESTAMP},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{processInstId,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{meetingFile,jdbcType=VARCHAR},#{attaDetail,jdbcType=VARCHAR},#{attaFile,jdbcType=VARCHAR},#{partnerOrgaId,jdbcType=VARCHAR},#{interior,jdbcType=VARCHAR},#{projId,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO TZ_T_SURVEY_PLAN (PLAN_ID,CARRIER,CARRIER_NAME,CARRIER_TYPE,PLAN_NAME,SURVEY_CONTENT,IMP_ORG,SURVEY_FEE,START_DATE,END_DATE,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,PROCESS_INST_ID,STATUS,MEETING_FILE,ATTA_DETAIL,ATTA_FILE,PARTNER_ORGA_ID,INTERIOR,PROJ_ID)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.planId,jdbcType=VARCHAR},
+				#{item.carrier,jdbcType=VARCHAR},
+				#{item.carrierName,jdbcType=VARCHAR},
+				#{item.carrierType,jdbcType=VARCHAR},
+				#{item.planName,jdbcType=VARCHAR},
+				#{item.surveyContent,jdbcType=VARCHAR},
+				#{item.impOrg,jdbcType=VARCHAR},
+				#{item.surveyFee,jdbcType=NUMERIC},
+				#{item.startDate,jdbcType=TIMESTAMP},
+				#{item.endDate,jdbcType=TIMESTAMP},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+				#{item.processInstId,jdbcType=VARCHAR},
+				#{item.status,jdbcType=VARCHAR},
+				#{item.meetingFile,jdbcType=VARCHAR},
+				#{item.attaDetail,jdbcType=VARCHAR},
+				#{item.attaFile,jdbcType=VARCHAR},
+				#{item.partnerOrgaId,jdbcType=VARCHAR},
+			    #{item.interior,jdbcType=VARCHAR},
+			    #{item.projId,jdbcType=VARCHAR}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  TZ_T_SURVEY_PLAN WHERE PLAN_ID = #{planId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.SurveyPlanModel">
+		DELETE FROM TZ_T_SURVEY_PLAN
+		<where>
+			<if test="planId != null and planId != ''" >
+				PLAN_ID = #{planId,jdbcType=VARCHAR}
+			</if>
+			<if test="carrier != null and carrier != ''" >
+				AND CARRIER = #{carrier,jdbcType=VARCHAR}
+			</if>
+			<if test="carrierName != null and carrierName != ''" >
+				AND CARRIER_NAME = #{carrierName,jdbcType=VARCHAR}
+			</if>
+			<if test="carrierType != null and carrierType != ''" >
+				AND CARRIER_TYPE = #{carrierType,jdbcType=VARCHAR}
+			</if>
+			<if test="planName != null and planName != ''" >
+				AND PLAN_NAME = #{planName,jdbcType=VARCHAR}
+			</if>
+			<if test="surveyContent != null and surveyContent != ''" >
+				AND SURVEY_CONTENT = #{surveyContent,jdbcType=VARCHAR}
+			</if>
+			<if test="impOrg != null and impOrg != ''" >
+				AND IMP_ORG = #{impOrg,jdbcType=VARCHAR}
+			</if>
+			<if test="surveyFee != null and surveyFee != ''" >
+				AND SURVEY_FEE = #{surveyFee,jdbcType=NUMERIC}
+			</if>
+			<if test="startDate != null" >
+				AND START_DATE = #{startDate,jdbcType=VARCHAR}
+			</if>
+			<if test="endDate != null" >
+				AND END_DATE = #{endDate,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingFile != null and meetingFile != ''" >
+				AND MEETING_FILE = #{meetingFile,jdbcType=VARCHAR}
+			</if>
+			<if test="attaDetail != null and attaDetail != ''" >
+				AND ATTA_DETAIL = #{attaDetail,jdbcType=VARCHAR}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="partnerOrgaId != null and partnerOrgaId != ''" >
+				AND PARTNER_ORGA_ID = #{partnerOrgaId,jdbcType=VARCHAR}
+			</if>
+			<if test="interior != null and interior != ''" >
+				AND INTERIOR = #{interior,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  TZ_T_SURVEY_PLAN WHERE PLAN_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.SurveyPlanModel">
+		UPDATE TZ_T_SURVEY_PLAN 
+		<set>
+			<if test="planId != null and planId != ''" >
+				PLAN_ID = #{planId,jdbcType=VARCHAR},
+			</if>
+			<if test="carrier != null and carrier != ''" >
+				CARRIER = #{carrier,jdbcType=VARCHAR},
+			</if>
+			<if test="carrierName != null and carrierName != ''" >
+				CARRIER_NAME = #{carrierName,jdbcType=VARCHAR},
+			</if>
+			<if test="carrierType != null and carrierType != ''" >
+				CARRIER_TYPE = #{carrierType,jdbcType=VARCHAR},
+			</if>
+			<if test="planName != null and planName != ''" >
+				PLAN_NAME = #{planName,jdbcType=VARCHAR},
+			</if>
+			<if test="surveyContent != null and surveyContent != ''" >
+				SURVEY_CONTENT = #{surveyContent,jdbcType=VARCHAR},
+			</if>
+			<if test="impOrg != null and impOrg != ''" >
+				IMP_ORG = #{impOrg,jdbcType=VARCHAR},
+			</if>
+			<if test="surveyFee != null and surveyFee != ''" >
+				SURVEY_FEE = #{surveyFee,jdbcType=NUMERIC},
+			</if>
+			<if test="startDate != null" >
+				START_DATE = #{startDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endDate != null" >
+				END_DATE = #{endDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="meetingFile != null and meetingFile != ''" >
+				MEETING_FILE = #{meetingFile,jdbcType=VARCHAR},
+			</if>
+			<if test="attaDetail != null and attaDetail != ''" >
+				ATTA_DETAIL = #{attaDetail,jdbcType=VARCHAR},
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				ATTA_FILE = #{attaFile,jdbcType=VARCHAR},
+			</if>
+			<if test="partnerOrgaId != null and partnerOrgaId != ''" >
+				PARTNER_ORGA_ID = #{partnerOrgaId,jdbcType=VARCHAR},
+			</if>
+			<if test="interior != null and interior != ''" >
+				 INTERIOR = #{interior,jdbcType=VARCHAR},
+			</if>
+			<if test="projId != null and projId != ''" >
+				 PROJ_ID = #{projId,jdbcType=VARCHAR},
+			</if>
+		</set>
+		WHERE PLAN_ID = #{planId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="SurveyPlanResult">
+		SELECT * FROM TZ_T_SURVEY_PLAN WHERE PLAN_ID = #{planId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.SurveyPlanModel" resultMap="SurveyPlanResult">
+		SELECT * FROM TZ_T_SURVEY_PLAN
+		<where>
+		    status!='9'
+			<if test="planId != null and planId != ''" >
+				AND PLAN_ID = #{planId,jdbcType=VARCHAR}
+			</if>
+			<if test="carrier != null and carrier != ''" >
+				AND CARRIER = #{carrier,jdbcType=VARCHAR}
+			</if>
+			<if test="carrierName != null and carrierName != ''" >
+				AND CARRIER_NAME = #{carrierName,jdbcType=VARCHAR}
+			</if>
+			<if test="carrierType != null and carrierType != ''" >
+				AND CARRIER_TYPE = #{carrierType,jdbcType=VARCHAR}
+			</if>
+			<if test="planName != null and planName != ''" >
+				AND PLAN_NAME = #{planName,jdbcType=VARCHAR}
+			</if>
+			<if test="surveyContent != null and surveyContent != ''" >
+				AND SURVEY_CONTENT = #{surveyContent,jdbcType=VARCHAR}
+			</if>
+			<if test="impOrg != null and impOrg != ''" >
+				AND IMP_ORG = #{impOrg,jdbcType=VARCHAR}
+			</if>
+			<if test="surveyFee != null and surveyFee != ''" >
+				AND SURVEY_FEE = #{surveyFee,jdbcType=NUMERIC}
+			</if>
+			<if test="startDate != null" >
+				AND START_DATE = #{startDate,jdbcType=VARCHAR}
+			</if>
+			<if test="endDate != null" >
+				AND END_DATE = #{endDate,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingFile != null and meetingFile != ''" >
+				AND MEETING_FILE = #{meetingFile,jdbcType=VARCHAR}
+			</if>
+			<if test="attaDetail != null and attaDetail != ''" >
+				AND ATTA_DETAIL = #{attaDetail,jdbcType=VARCHAR}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="partnerOrgaId != null and partnerOrgaId != ''" >
+				AND PARTNER_ORGA_ID = #{partnerOrgaId,jdbcType=VARCHAR}
+			</if>
+			<if test="interior != null and interior != ''" >
+				AND INTERIOR = #{interior,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM TZ_T_SURVEY_PLAN
+
+		<where>
+			<if test='paramMap.planName != null and paramMap.planName != ""' >
+				PLAN_NAME like #{paramMap.planName,jdbcType=VARCHAR}
+			</if>
+			<include refid="searchCondition.searchClause" />
+		</where>
+		ORDER BY UPDATE_DT DESC
+	</sql>
+
+	<select id="selectListPage" resultMap="SurveyPlanResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.SurveyPlanModel">
+		SELECT COUNT(*) FROM TZ_T_SURVEY_PLAN
+		<where>
+			<if test="planId != null and planId != ''" >
+				PLAN_ID = #{planId,jdbcType=VARCHAR}
+			</if>
+			<if test="carrier != null and carrier != ''" >
+				AND CARRIER = #{carrier,jdbcType=VARCHAR}
+			</if>
+			<if test="carrierName != null and carrierName != ''" >
+				AND CARRIER_NAME = #{carrierName,jdbcType=VARCHAR}
+			</if>
+			<if test="carrierType != null and carrierType != ''" >
+				AND CARRIER_TYPE = #{carrierType,jdbcType=VARCHAR}
+			</if>
+			<if test="planName != null and planName != ''" >
+				AND PLAN_NAME = #{planName,jdbcType=VARCHAR}
+			</if>
+			<if test="surveyContent != null and surveyContent != ''" >
+				AND SURVEY_CONTENT = #{surveyContent,jdbcType=VARCHAR}
+			</if>
+			<if test="impOrg != null and impOrg != ''" >
+				AND IMP_ORG = #{impOrg,jdbcType=VARCHAR}
+			</if>
+			<if test="surveyFee != null and surveyFee != ''" >
+				AND SURVEY_FEE = #{surveyFee,jdbcType=NUMERIC}
+			</if>
+			<if test="startDate != null" >
+				AND START_DATE = #{startDate,jdbcType=VARCHAR}
+			</if>
+			<if test="endDate != null" >
+				AND END_DATE = #{endDate,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingFile != null and meetingFile != ''" >
+				AND MEETING_FILE = #{meetingFile,jdbcType=VARCHAR}
+			</if>
+			<if test="attaDetail != null and attaDetail != ''" >
+				AND ATTA_DETAIL = #{attaDetail,jdbcType=VARCHAR}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="partnerOrgaId != null and partnerOrgaId != ''" >
+				AND PARTNER_ORGA_ID = #{partnerOrgaId,jdbcType=VARCHAR}
+			</if>
+			<if test="interior != null and interior != ''" >
+				AND INTERIOR = #{interior,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.SurveyPlanModel" resultMap="SurveyPlanResult">
+		SELECT * FROM TZ_T_SURVEY_PLAN
+		<where>
+		     status!='9'
+			<if test="planId != null and planId != ''" >
+				AND PLAN_ID = #{planId,jdbcType=VARCHAR}
+			</if>
+			<if test="carrier != null and carrier != ''" >
+				AND CARRIER = #{carrier,jdbcType=VARCHAR}
+			</if>
+			<if test="carrierName != null and carrierName != ''" >
+				AND CARRIER_NAME = #{carrierName,jdbcType=VARCHAR}
+			</if>
+			<if test="carrierType != null and carrierType != ''" >
+				AND CARRIER_TYPE = #{carrierType,jdbcType=VARCHAR}
+			</if>
+			<if test="planName != null and planName != ''" >
+				AND PLAN_NAME = #{planName,jdbcType=VARCHAR}
+			</if>
+			<if test="surveyContent != null and surveyContent != ''" >
+				AND SURVEY_CONTENT = #{surveyContent,jdbcType=VARCHAR}
+			</if>
+			<if test="impOrg != null and impOrg != ''" >
+				AND IMP_ORG = #{impOrg,jdbcType=VARCHAR}
+			</if>
+			<if test="surveyFee != null and surveyFee != ''" >
+				AND SURVEY_FEE = #{surveyFee,jdbcType=NUMERIC}
+			</if>
+			<if test="startDate != null" >
+				AND START_DATE = #{startDate,jdbcType=VARCHAR}
+			</if>
+			<if test="endDate != null" >
+				AND END_DATE = #{endDate,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingFile != null and meetingFile != ''" >
+				AND MEETING_FILE = #{meetingFile,jdbcType=VARCHAR}
+			</if>
+			<if test="attaDetail != null and attaDetail != ''" >
+				AND ATTA_DETAIL = #{attaDetail,jdbcType=VARCHAR}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="partnerOrgaId != null and partnerOrgaId != ''" >
+				AND PARTNER_ORGA_ID = #{partnerOrgaId,jdbcType=VARCHAR}
+			</if>
+			<if test="interior != null and interior != ''" >
+				AND INTERIOR = #{interior,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="SurveyPlanResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+	<update id="deleteByIds" parameterType="java.util.HashMap">
+		UPDATE EI.TZ_T_SURVEY_PLAN
+		SET status = #{status},
+		UPDATE_BY=#{userId},
+		UPDATE_DT=SYSDATE
+		<where>
+			PLAN_ID IN
+			<foreach item="item" collection="ids" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</where>
+	</update>
+</mapper>

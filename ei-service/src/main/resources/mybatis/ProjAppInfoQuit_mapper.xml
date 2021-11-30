@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProjAppInfoQuit">
+	<!-- start autocreate -->
+
+	<resultMap id="ProjAppInfoQuitResult" type="com.ppmg.ei.model.ProjAppInfoQuitModel">
+		<result column="QUIT_PROJ_ID" property="quitProjId" jdbcType="VARCHAR" />
+		<result column="QUIT_NAME" property="quitName" jdbcType="VARCHAR" />
+		<result column="QUIT_DATE" property="quitDate" jdbcType="TIMESTAMP" />
+		<result column="QUIT_WAY" property="quitWay" jdbcType="VARCHAR" />
+		<result column="WHEN_CURRENCY" property="whenCurrency" jdbcType="NUMERIC" />
+		<result column="QUIT_CURRENCY" property="quitCurrency" jdbcType="NUMERIC" />
+		<result column="NOW_SHARE" property="nowShare" jdbcType="NUMERIC" />
+		<result column="OVER_AMOUNT" property="overAmount" jdbcType="NUMERIC" />
+		<result column="OVER_SHARE" property="overShare" jdbcType="NUMERIC" />
+		<result column="RESIDUE_SHARE" property="residueShare" jdbcType="NUMERIC" />
+		<result column="QUIT_CAUSE" property="quitCause" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="QUIT_FILE" property="quitFile" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="PROJ_ID" property="projId" jdbcType="VARCHAR" />
+		<result column="STOP_GREAT" property="stopGreat" jdbcType="VARCHAR" />
+		<result column="PROCESS_INST_ID" property="processInstId" jdbcType="VARCHAR" />
+		<result column="STOP_STATUS" property="stopStatus" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.ProjAppInfoQuitModel">
+		INSERT INTO TZ_T_PROJ_APP_INFO_QUIT (QUIT_PROJ_ID,QUIT_NAME,QUIT_DATE,QUIT_WAY,WHEN_CURRENCY,QUIT_CURRENCY
+		,NOW_SHARE,OVER_AMOUNT,OVER_SHARE,RESIDUE_SHARE,QUIT_CAUSE,REMARK,QUIT_FILE,STATUS,CREATE_BY,UPDATE_BY
+		,PROJ_ID,STOP_GREAT,PROCESS_INST_ID,STOP_STATUS)
+		values(#{quitProjId,jdbcType=VARCHAR},#{quitName,jdbcType=VARCHAR},#{quitDate,jdbcType=TIMESTAMP},#{quitWay,jdbcType=VARCHAR},#{whenCurrency,jdbcType=NUMERIC},#{quitCurrency,jdbcType=NUMERIC},#{nowShare,jdbcType=NUMERIC}
+		,#{overAmount,jdbcType=NUMERIC},#{overShare,jdbcType=NUMERIC},#{residueShare,jdbcType=NUMERIC}
+		,#{quitCause,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},#{quitFile,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR}
+		,#{createBy,jdbcType=VARCHAR},#{updateBy,jdbcType=VARCHAR},#{projId,jdbcType=VARCHAR},#{stopGreat,jdbcType=VARCHAR}
+		,#{processInstId,jdbcType=VARCHAR},#{stopStatus,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO TZ_T_PROJ_APP_INFO_QUIT (QUIT_PROJ_ID,QUIT_NAME,QUIT_DATE,QUIT_WAY,WHEN_CURRENCY,QUIT_CURRENCY,NOW_SHARE,OVER_AMOUNT,OVER_SHARE,RESIDUE_SHARE,QUIT_CAUSE
+		,REMARK,QUIT_FILE,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,PROJ_ID,STOP_GREAT,PROCESS_INST_ID,STOP_STATUS)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+			#{item.quitProjId,jdbcType=VARCHAR},
+			#{item.quitName,jdbcType=VARCHAR},
+			#{item.quitDate,jdbcType=TIMESTAMP},
+			#{item.quitWay,jdbcType=VARCHAR},
+			#{item.whenCurrency,jdbcType=NUMERIC},
+			#{item.quitCurrency,jdbcType=NUMERIC},
+			#{item.nowShare,jdbcType=NUMERIC},
+			#{item.overAmount,jdbcType=NUMERIC},
+			#{item.overShare,jdbcType=NUMERIC},
+			#{item.residueShare,jdbcType=NUMERIC},
+			#{item.quitCause,jdbcType=VARCHAR},
+			#{item.remark,jdbcType=VARCHAR},
+			#{item.quitFile,jdbcType=VARCHAR},
+			#{item.status,jdbcType=VARCHAR},
+			#{item.createBy,jdbcType=VARCHAR},
+			#{item.createDt,jdbcType=TIMESTAMP},
+			#{item.updateBy,jdbcType=VARCHAR},
+			#{item.updateDt,jdbcType=TIMESTAMP},
+			#{item.projId,jdbcType=VARCHAR},
+			#{item.stopGreat,jdbcType=VARCHAR},
+			#{item.processInstId,jdbcType=VARCHAR},
+			#{item.stopStatus,jdbcType=VARCHAR}
+			from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  TZ_T_PROJ_APP_INFO_QUIT WHERE QUIT_PROJ_ID = #{quitProjId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.ProjAppInfoQuitModel">
+		DELETE FROM TZ_T_PROJ_APP_INFO_QUIT
+		<where>
+			<if test="quitProjId != null and quitProjId != ''" >
+				QUIT_PROJ_ID = #{quitProjId,jdbcType=VARCHAR}
+			</if>
+			<if test="quitName != null and quitName != ''" >
+				AND QUIT_NAME = #{quitName,jdbcType=VARCHAR}
+			</if>
+			<if test="quitDate != null" >
+				AND QUIT_DATE = #{quitDate,jdbcType=VARCHAR}
+			</if>
+			<if test="quitWay != null and quitWay != ''" >
+				AND QUIT_WAY = #{quitWay,jdbcType=VARCHAR}
+			</if>
+			<if test="whenCurrency != null and whenCurrency != ''" >
+				AND WHEN_CURRENCY = #{whenCurrency,jdbcType=NUMERIC}
+			</if>
+			<if test="quitCurrency != null and quitCurrency != ''" >
+				AND QUIT_CURRENCY = #{quitCurrency,jdbcType=NUMERIC}
+			</if>
+			<if test="nowShare != null and nowShare != ''" >
+				AND NOW_SHARE = #{nowShare,jdbcType=NUMERIC}
+			</if>
+			<if test="overAmount != null and overAmount != ''" >
+				AND OVER_AMOUNT = #{overAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="overShare != null and overShare != ''" >
+				AND OVER_SHARE = #{overShare,jdbcType=NUMERIC}
+			</if>
+			<if test="residueShare != null and residueShare != ''" >
+				AND RESIDUE_SHARE = #{residueShare,jdbcType=NUMERIC}
+			</if>
+			<if test="quitCause != null and quitCause != ''" >
+				AND QUIT_CAUSE = #{quitCause,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="quitFile != null and quitFile != ''" >
+				AND QUIT_FILE = #{quitFile,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="stopGreat != null and stopGreat != ''" >
+				AND STOP_GREAT = #{stopGreat,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  TZ_T_PROJ_APP_INFO_QUIT WHERE QUIT_PROJ_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.ProjAppInfoQuitModel">
+		UPDATE TZ_T_PROJ_APP_INFO_QUIT
+		<set>
+			<if test="quitProjId != null and quitProjId != ''" >
+				QUIT_PROJ_ID = #{quitProjId,jdbcType=VARCHAR},
+			</if>
+			<if test="quitName != null and quitName != ''" >
+				QUIT_NAME = #{quitName,jdbcType=VARCHAR},
+			</if>
+			<if test="quitDate != null" >
+				QUIT_DATE = #{quitDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="quitWay != null and quitWay != ''" >
+				QUIT_WAY = #{quitWay,jdbcType=VARCHAR},
+			</if>
+			<if test="whenCurrency != null and whenCurrency != ''" >
+				WHEN_CURRENCY = #{whenCurrency,jdbcType=NUMERIC},
+			</if>
+			<if test="quitCurrency != null and quitCurrency != ''" >
+				QUIT_CURRENCY = #{quitCurrency,jdbcType=NUMERIC},
+			</if>
+			<if test="nowShare != null and nowShare != ''" >
+				NOW_SHARE = #{nowShare,jdbcType=NUMERIC},
+			</if>
+			<if test="overAmount != null and overAmount != ''" >
+				OVER_AMOUNT = #{overAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="overShare != null and overShare != ''" >
+				OVER_SHARE = #{overShare,jdbcType=NUMERIC},
+			</if>
+			<if test="residueShare != null and residueShare != ''" >
+				RESIDUE_SHARE = #{residueShare,jdbcType=NUMERIC},
+			</if>
+			<if test="quitCause != null and quitCause != ''" >
+				QUIT_CAUSE = #{quitCause,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null and remark != ''" >
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="quitFile != null and quitFile != ''" >
+				QUIT_FILE = #{quitFile,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="projId != null and projId != ''" >
+				PROJ_ID = #{projId,jdbcType=VARCHAR},
+			</if>
+			<if test="stopGreat != null and stopGreat != ''" >
+				STOP_GREAT = #{stopGreat,jdbcType=VARCHAR},
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR},
+			</if>
+			<if test="stopStatus != null and stopStatus != ''" >
+				STOP_STATUS = #{stopStatus,jdbcType=VARCHAR},
+			</if>
+		</set>
+		WHERE QUIT_PROJ_ID = #{quitProjId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="ProjAppInfoQuitResult">
+		SELECT * FROM TZ_T_PROJ_APP_INFO_QUIT WHERE QUIT_PROJ_ID = #{quitProjId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.ProjAppInfoQuitModel" resultMap="ProjAppInfoQuitResult">
+		SELECT * FROM TZ_T_PROJ_APP_INFO_QUIT
+		<where>
+			<if test="quitProjId != null and quitProjId != ''" >
+				QUIT_PROJ_ID = #{quitProjId,jdbcType=VARCHAR}
+			</if>
+			<if test="quitName != null and quitName != ''" >
+				AND QUIT_NAME = #{quitName,jdbcType=VARCHAR}
+			</if>
+			<if test="quitDate != null" >
+				AND QUIT_DATE = #{quitDate,jdbcType=VARCHAR}
+			</if>
+			<if test="quitWay != null and quitWay != ''" >
+				AND QUIT_WAY = #{quitWay,jdbcType=VARCHAR}
+			</if>
+			<if test="whenCurrency != null and whenCurrency != ''" >
+				AND WHEN_CURRENCY = #{whenCurrency,jdbcType=NUMERIC}
+			</if>
+			<if test="quitCurrency != null and quitCurrency != ''" >
+				AND QUIT_CURRENCY = #{quitCurrency,jdbcType=NUMERIC}
+			</if>
+			<if test="nowShare != null and nowShare != ''" >
+				AND NOW_SHARE = #{nowShare,jdbcType=NUMERIC}
+			</if>
+			<if test="overAmount != null and overAmount != ''" >
+				AND OVER_AMOUNT = #{overAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="overShare != null and overShare != ''" >
+				AND OVER_SHARE = #{overShare,jdbcType=NUMERIC}
+			</if>
+			<if test="residueShare != null and residueShare != ''" >
+				AND RESIDUE_SHARE = #{residueShare,jdbcType=NUMERIC}
+			</if>
+			<if test="quitCause != null and quitCause != ''" >
+				AND QUIT_CAUSE = #{quitCause,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="quitFile != null and quitFile != ''" >
+				AND QUIT_FILE = #{quitFile,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="stopGreat != null and stopGreat != ''" >
+				AND STOP_GREAT = #{stopGreat,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM TZ_T_PROJ_APP_INFO_QUIT
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+		order by update_dt desc
+	</sql>
+
+	<select id="selectListPage" resultMap="ProjAppInfoQuitResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+		<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+		<include refid="searchSql" />
+		) t
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.ProjAppInfoQuitModel">
+		SELECT COUNT(*) FROM TZ_T_PROJ_APP_INFO_QUIT
+		<where>
+			<if test="quitProjId != null and quitProjId != ''" >
+				QUIT_PROJ_ID = #{quitProjId,jdbcType=VARCHAR}
+			</if>
+			<if test="quitName != null and quitName != ''" >
+				AND QUIT_NAME = #{quitName,jdbcType=VARCHAR}
+			</if>
+			<if test="quitDate != null" >
+				AND QUIT_DATE = #{quitDate,jdbcType=VARCHAR}
+			</if>
+			<if test="quitWay != null and quitWay != ''" >
+				AND QUIT_WAY = #{quitWay,jdbcType=VARCHAR}
+			</if>
+			<if test="whenCurrency != null and whenCurrency != ''" >
+				AND WHEN_CURRENCY = #{whenCurrency,jdbcType=NUMERIC}
+			</if>
+			<if test="quitCurrency != null and quitCurrency != ''" >
+				AND QUIT_CURRENCY = #{quitCurrency,jdbcType=NUMERIC}
+			</if>
+			<if test="nowShare != null and nowShare != ''" >
+				AND NOW_SHARE = #{nowShare,jdbcType=NUMERIC}
+			</if>
+			<if test="overAmount != null and overAmount != ''" >
+				AND OVER_AMOUNT = #{overAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="overShare != null and overShare != ''" >
+				AND OVER_SHARE = #{overShare,jdbcType=NUMERIC}
+			</if>
+			<if test="residueShare != null and residueShare != ''" >
+				AND RESIDUE_SHARE = #{residueShare,jdbcType=NUMERIC}
+			</if>
+			<if test="quitCause != null and quitCause != ''" >
+				AND QUIT_CAUSE = #{quitCause,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="quitFile != null and quitFile != ''" >
+				AND QUIT_FILE = #{quitFile,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="stopGreat != null and stopGreat != ''" >
+				AND STOP_GREAT = #{stopGreat,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.ProjAppInfoQuitModel" resultMap="ProjAppInfoQuitResult">
+		SELECT * FROM TZ_T_PROJ_APP_INFO_QUIT
+		<where>
+			<if test="quitProjId != null and quitProjId != ''" >
+				QUIT_PROJ_ID = #{quitProjId,jdbcType=VARCHAR}
+			</if>
+			<if test="quitName != null and quitName != ''" >
+				AND QUIT_NAME = #{quitName,jdbcType=VARCHAR}
+			</if>
+			<if test="quitDate != null" >
+				AND QUIT_DATE = #{quitDate,jdbcType=VARCHAR}
+			</if>
+			<if test="quitWay != null and quitWay != ''" >
+				AND QUIT_WAY = #{quitWay,jdbcType=VARCHAR}
+			</if>
+			<if test="whenCurrency != null and whenCurrency != ''" >
+				AND WHEN_CURRENCY = #{whenCurrency,jdbcType=NUMERIC}
+			</if>
+			<if test="quitCurrency != null and quitCurrency != ''" >
+				AND QUIT_CURRENCY = #{quitCurrency,jdbcType=NUMERIC}
+			</if>
+			<if test="nowShare != null and nowShare != ''" >
+				AND NOW_SHARE = #{nowShare,jdbcType=NUMERIC}
+			</if>
+			<if test="overAmount != null and overAmount != ''" >
+				AND OVER_AMOUNT = #{overAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="overShare != null and overShare != ''" >
+				AND OVER_SHARE = #{overShare,jdbcType=NUMERIC}
+			</if>
+			<if test="residueShare != null and residueShare != ''" >
+				AND RESIDUE_SHARE = #{residueShare,jdbcType=NUMERIC}
+			</if>
+			<if test="quitCause != null and quitCause != ''" >
+				AND QUIT_CAUSE = #{quitCause,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="quitFile != null and quitFile != ''" >
+				AND QUIT_FILE = #{quitFile,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="stopGreat != null and stopGreat != ''" >
+				AND STOP_GREAT = #{stopGreat,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="ProjAppInfoQuitResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+</mapper>

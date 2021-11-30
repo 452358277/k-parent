@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PlatformInfo">
+	<!-- 基本信息 -->
+	<resultMap id="PlatformInfoResult2" type="com.ppmg.ei.model.PlatformInfoModel" extends="PlatformInfoResult">
+		<result column="YH_RATIO_IN_MC" property="yhRatioInMc" jdbcType="VARCHAR" />
+		<result column="RMB_CURRENT_AMOUNT" property="rmbCurrentAmount" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<!-- start autocreate -->
+
+	<resultMap id="PlatformInfoResult" type="com.ppmg.ei.model.PlatformInfoModel">
+		<result column="PK_ID" property="pkId" jdbcType="VARCHAR" />
+		<result column="PLAT_NAME" property="platName" jdbcType="VARCHAR" />
+		<result column="PLAT_SHORT_NAME" property="platShortName" jdbcType="VARCHAR" />
+		<result column="PLAT_CODE" property="platCode" jdbcType="VARCHAR" />
+		<result column="PLAT_TYPE" property="platType" jdbcType="VARCHAR" />
+		<result column="STEP_DATE" property="stepDate" jdbcType="TIMESTAMP" />
+		<result column="ENT_ID" property="entId" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="DEL_FLAG" property="delFlag" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="PTPI_EXTEND_ONE" property="ptpiExtendOne" jdbcType="VARCHAR" />
+		<result column="PTPI_EXTEND_TWO" property="ptpiExtendTwo" jdbcType="VARCHAR" />
+		<result column="PTPI_EXTEND_THREE" property="ptpiExtendThree" jdbcType="VARCHAR" />
+		<result column="PTPI_EXTEND_FOUR" property="ptpiExtendFour" jdbcType="VARCHAR" />
+		<result column="PTPI_EXTEND_FIVE" property="ptpiExtendFive" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.PlatformInfoModel">
+		INSERT INTO PT_T_PLATFORM_INFO (PK_ID,PLAT_NAME,PLAT_SHORT_NAME,PLAT_CODE,PLAT_TYPE,STEP_DATE,ENT_ID,REMARK,DEL_FLAG,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,PTPI_EXTEND_ONE,PTPI_EXTEND_TWO,PTPI_EXTEND_THREE,PTPI_EXTEND_FOUR,PTPI_EXTEND_FIVE) values(#{pkId,jdbcType=VARCHAR},#{platName,jdbcType=VARCHAR},#{platShortName,jdbcType=VARCHAR},#{platCode,jdbcType=VARCHAR},#{platType,jdbcType=VARCHAR},#{stepDate,jdbcType=TIMESTAMP},#{entId,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},#{delFlag,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{ptpiExtendOne,jdbcType=VARCHAR},#{ptpiExtendTwo,jdbcType=VARCHAR},#{ptpiExtendThree,jdbcType=VARCHAR},#{ptpiExtendFour,jdbcType=VARCHAR},#{ptpiExtendFive,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO PT_T_PLATFORM_INFO (PK_ID,PLAT_NAME,PLAT_SHORT_NAME,PLAT_CODE,PLAT_TYPE,STEP_DATE,ENT_ID,REMARK,DEL_FLAG,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,PTPI_EXTEND_ONE,PTPI_EXTEND_TWO,PTPI_EXTEND_THREE,PTPI_EXTEND_FOUR,PTPI_EXTEND_FIVE)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.pkId,jdbcType=VARCHAR},
+				#{item.platName,jdbcType=VARCHAR},
+				#{item.platShortName,jdbcType=VARCHAR},
+				#{item.platCode,jdbcType=VARCHAR},
+				#{item.platType,jdbcType=VARCHAR},
+				#{item.stepDate,jdbcType=TIMESTAMP},
+				#{item.entId,jdbcType=VARCHAR},
+				#{item.remark,jdbcType=VARCHAR},
+				#{item.delFlag,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+				#{item.ptpiExtendOne,jdbcType=VARCHAR},
+				#{item.ptpiExtendTwo,jdbcType=VARCHAR},
+				#{item.ptpiExtendThree,jdbcType=VARCHAR},
+				#{item.ptpiExtendFour,jdbcType=VARCHAR},
+				#{item.ptpiExtendFive,jdbcType=VARCHAR}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  PT_T_PLATFORM_INFO WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.PlatformInfoModel">
+		DELETE FROM PT_T_PLATFORM_INFO
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="platName != null and platName != ''" >
+				AND PLAT_NAME = #{platName,jdbcType=VARCHAR}
+			</if>
+			<if test="platShortName != null and platShortName != ''" >
+				AND PLAT_SHORT_NAME = #{platShortName,jdbcType=VARCHAR}
+			</if>
+			<if test="platCode != null and platCode != ''" >
+				AND PLAT_CODE = #{platCode,jdbcType=VARCHAR}
+			</if>
+			<if test="platType != null and platType != ''" >
+				AND PLAT_TYPE = #{platType,jdbcType=VARCHAR}
+			</if>
+			<if test="stepDate != null" >
+				AND STEP_DATE = #{stepDate,jdbcType=VARCHAR}
+			</if>
+			<if test="entId != null and entId != ''" >
+				AND ENT_ID = #{entId,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="delFlag != null and delFlag != ''" >
+				AND DEL_FLAG = #{delFlag,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="ptpiExtendOne != null and ptpiExtendOne != ''" >
+				AND PTPI_EXTEND_ONE = #{ptpiExtendOne,jdbcType=VARCHAR}
+			</if>
+			<if test="ptpiExtendTwo != null and ptpiExtendTwo != ''" >
+				AND PTPI_EXTEND_TWO = #{ptpiExtendTwo,jdbcType=VARCHAR}
+			</if>
+			<if test="ptpiExtendThree != null and ptpiExtendThree != ''" >
+				AND PTPI_EXTEND_THREE = #{ptpiExtendThree,jdbcType=VARCHAR}
+			</if>
+			<if test="ptpiExtendFour != null and ptpiExtendFour != ''" >
+				AND PTPI_EXTEND_FOUR = #{ptpiExtendFour,jdbcType=VARCHAR}
+			</if>
+			<if test="ptpiExtendFive != null and ptpiExtendFive != ''" >
+				AND PTPI_EXTEND_FIVE = #{ptpiExtendFive,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  PT_T_PLATFORM_INFO WHERE PK_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.PlatformInfoModel">
+		UPDATE PT_T_PLATFORM_INFO 
+		<set>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR},
+			</if>
+			<if test="platName != null and platName != ''" >
+				PLAT_NAME = #{platName,jdbcType=VARCHAR},
+			</if>
+			<if test="platShortName != null and platShortName != ''" >
+				PLAT_SHORT_NAME = #{platShortName,jdbcType=VARCHAR},
+			</if>
+			<if test="platCode != null and platCode != ''" >
+				PLAT_CODE = #{platCode,jdbcType=VARCHAR},
+			</if>
+			<if test="platType != null and platType != ''" >
+				PLAT_TYPE = #{platType,jdbcType=VARCHAR},
+			</if>
+			<if test="stepDate != null" >
+				STEP_DATE = #{stepDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="entId != null and entId != ''" >
+				ENT_ID = #{entId,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null and remark != ''" >
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="delFlag != null and delFlag != ''" >
+				DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="ptpiExtendOne != null and ptpiExtendOne != ''" >
+				PTPI_EXTEND_ONE = #{ptpiExtendOne,jdbcType=VARCHAR},
+			</if>
+			<if test="ptpiExtendTwo != null and ptpiExtendTwo != ''" >
+				PTPI_EXTEND_TWO = #{ptpiExtendTwo,jdbcType=VARCHAR},
+			</if>
+			<if test="ptpiExtendThree != null and ptpiExtendThree != ''" >
+				PTPI_EXTEND_THREE = #{ptpiExtendThree,jdbcType=VARCHAR},
+			</if>
+			<if test="ptpiExtendFour != null and ptpiExtendFour != ''" >
+				PTPI_EXTEND_FOUR = #{ptpiExtendFour,jdbcType=VARCHAR},
+			</if>
+			<if test="ptpiExtendFive != null and ptpiExtendFive != ''" >
+				PTPI_EXTEND_FIVE = #{ptpiExtendFive,jdbcType=VARCHAR},
+			</if>
+		</set>
+		WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="PlatformInfoResult">
+		SELECT * FROM PT_T_PLATFORM_INFO WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.PlatformInfoModel" resultMap="PlatformInfoResult">
+		SELECT * FROM PT_T_PLATFORM_INFO
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="platName != null and platName != ''" >
+				AND PLAT_NAME = #{platName,jdbcType=VARCHAR}
+			</if>
+			<if test="platShortName != null and platShortName != ''" >
+				AND PLAT_SHORT_NAME = #{platShortName,jdbcType=VARCHAR}
+			</if>
+			<if test="platCode != null and platCode != ''" >
+				AND PLAT_CODE = #{platCode,jdbcType=VARCHAR}
+			</if>
+			<if test="platType != null and platType != ''" >
+				AND PLAT_TYPE = #{platType,jdbcType=VARCHAR}
+			</if>
+			<if test="stepDate != null" >
+				AND STEP_DATE = #{stepDate,jdbcType=VARCHAR}
+			</if>
+			<if test="entId != null and entId != ''" >
+				AND ENT_ID = #{entId,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="delFlag != null and delFlag != ''" >
+				AND DEL_FLAG = #{delFlag,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="ptpiExtendOne != null and ptpiExtendOne != ''" >
+				AND PTPI_EXTEND_ONE = #{ptpiExtendOne,jdbcType=VARCHAR}
+			</if>
+			<if test="ptpiExtendTwo != null and ptpiExtendTwo != ''" >
+				AND PTPI_EXTEND_TWO = #{ptpiExtendTwo,jdbcType=VARCHAR}
+			</if>
+			<if test="ptpiExtendThree != null and ptpiExtendThree != ''" >
+				AND PTPI_EXTEND_THREE = #{ptpiExtendThree,jdbcType=VARCHAR}
+			</if>
+			<if test="ptpiExtendFour != null and ptpiExtendFour != ''" >
+				AND PTPI_EXTEND_FOUR = #{ptpiExtendFour,jdbcType=VARCHAR}
+			</if>
+			<if test="ptpiExtendFive != null and ptpiExtendFive != ''" >
+				AND PTPI_EXTEND_FIVE = #{ptpiExtendFive,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT T.* FROM PT_T_PLATFORM_INFO T
+		LEFT JOIN MASTER.T_ENT_BASE_INFO T2 ON T2.ENTERPRISE_ID=T.ENT_ID AND T2.DELETE_FLAG='0'
+		<where>
+			DEL_FLAG='0'
+			<include refid="searchCondition.searchClause" />
+
+			<if test="searchBean.keyword!='' and searchBean.keyword!=null">
+				<bind name="pattern" value="'%' + searchBean.keyword + '%'" />
+				AND  (T.PLAT_SHORT_NAME like #{pattern} OR T2.OPER_NAME like #{pattern} )
+			</if>
+			<if test="paramMap.loginUser.userId!='1200119390'">
+				<if test="paramMap.groupId != null and paramMap.groupId != '' ">
+					AND PLAT_CODE=#{paramMap.groupId}
+				</if>
+			</if>
+
+			<if test="searchBean.startTime!=null">
+				AND  T.STEP_DATE >= #{searchBean.startTime,jdbcType=DATE}
+			</if>
+
+			<if test="searchBean.endTime!=null">
+				AND  T.STEP_DATE &lt;= #{searchBean.endTime,jdbcType=DATE}
+
+			</if>
+
+
+		</where>
+		ORDER BY T.CREATE_DT DESC
+	</sql>
+
+	<select id="selectListPage" resultMap="PlatformInfoResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.PlatformInfoModel">
+		SELECT COUNT(*) FROM PT_T_PLATFORM_INFO
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="platName != null and platName != ''" >
+				AND PLAT_NAME = #{platName,jdbcType=VARCHAR}
+			</if>
+			<if test="platShortName != null and platShortName != ''" >
+				AND PLAT_SHORT_NAME = #{platShortName,jdbcType=VARCHAR}
+			</if>
+			<if test="platCode != null and platCode != ''" >
+				AND PLAT_CODE = #{platCode,jdbcType=VARCHAR}
+			</if>
+			<if test="platType != null and platType != ''" >
+				AND PLAT_TYPE = #{platType,jdbcType=VARCHAR}
+			</if>
+			<if test="stepDate != null" >
+				AND STEP_DATE = #{stepDate,jdbcType=VARCHAR}
+			</if>
+			<if test="entId != null and entId != ''" >
+				AND ENT_ID = #{entId,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="delFlag != null and delFlag != ''" >
+				AND DEL_FLAG = #{delFlag,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="ptpiExtendOne != null and ptpiExtendOne != ''" >
+				AND PTPI_EXTEND_ONE = #{ptpiExtendOne,jdbcType=VARCHAR}
+			</if>
+			<if test="ptpiExtendTwo != null and ptpiExtendTwo != ''" >
+				AND PTPI_EXTEND_TWO = #{ptpiExtendTwo,jdbcType=VARCHAR}
+			</if>
+			<if test="ptpiExtendThree != null and ptpiExtendThree != ''" >
+				AND PTPI_EXTEND_THREE = #{ptpiExtendThree,jdbcType=VARCHAR}
+			</if>
+			<if test="ptpiExtendFour != null and ptpiExtendFour != ''" >
+				AND PTPI_EXTEND_FOUR = #{ptpiExtendFour,jdbcType=VARCHAR}
+			</if>
+			<if test="ptpiExtendFive != null and ptpiExtendFive != ''" >
+				AND PTPI_EXTEND_FIVE = #{ptpiExtendFive,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.PlatformInfoModel" resultMap="PlatformInfoResult">
+		SELECT * FROM PT_T_PLATFORM_INFO
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="platName != null and platName != ''" >
+				AND PLAT_NAME = #{platName,jdbcType=VARCHAR}
+			</if>
+			<if test="platShortName != null and platShortName != ''" >
+				AND PLAT_SHORT_NAME = #{platShortName,jdbcType=VARCHAR}
+			</if>
+			<if test="platCode != null and platCode != ''" >
+				AND PLAT_CODE = #{platCode,jdbcType=VARCHAR}
+			</if>
+			<if test="platType != null and platType != ''" >
+				AND PLAT_TYPE = #{platType,jdbcType=VARCHAR}
+			</if>
+			<if test="stepDate != null" >
+				AND STEP_DATE = #{stepDate,jdbcType=VARCHAR}
+			</if>
+			<if test="entId != null and entId != ''" >
+				AND ENT_ID = #{entId,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="delFlag != null and delFlag != ''" >
+				AND DEL_FLAG = #{delFlag,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="ptpiExtendOne != null and ptpiExtendOne != ''" >
+				AND PTPI_EXTEND_ONE = #{ptpiExtendOne,jdbcType=VARCHAR}
+			</if>
+			<if test="ptpiExtendTwo != null and ptpiExtendTwo != ''" >
+				AND PTPI_EXTEND_TWO = #{ptpiExtendTwo,jdbcType=VARCHAR}
+			</if>
+			<if test="ptpiExtendThree != null and ptpiExtendThree != ''" >
+				AND PTPI_EXTEND_THREE = #{ptpiExtendThree,jdbcType=VARCHAR}
+			</if>
+			<if test="ptpiExtendFour != null and ptpiExtendFour != ''" >
+				AND PTPI_EXTEND_FOUR = #{ptpiExtendFour,jdbcType=VARCHAR}
+			</if>
+			<if test="ptpiExtendFive != null and ptpiExtendFive != ''" >
+				AND PTPI_EXTEND_FIVE = #{ptpiExtendFive,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="PlatformInfoResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+
+	<select id="getZYGGName" parameterType="java.lang.String" resultType="String">
+		SELECT WMSYS.WM_CONCAT(U.NAME) FROM BASE.APP_USER U WHERE U.ID IN (${value})
+	</select>
+
+
+	<!-- 获取平台详细信息 -->
+	<select id="getPlatformInfoByPlatId" parameterType="Map" resultMap="PlatformInfoResult2">
+		select (SELECT RTrim(to_char(NVL(SUM(F.RMB_CURRENT_AMOUNT), 0) / 100000000, 'FM99999999990.99'), '.') || ' 亿元 (人民币)'
+				  FROM BD_T_FUND_INFO F
+				 WHERE F.FUND_STS != '8'
+				   AND F.FUND_SRC='1'
+				   AND F.PLAT_PROP IN ('2','4','8')
+				<if test='PLAT_CODE != "6"' >
+					AND (F.GROUP_ID = P.PLAT_CODE OR F.MC_ID = P.PLAT_CODE)
+				</if>
+				   ) AS RMB_CURRENT_AMOUNT,
+			   NVL((SELECT I.STOCK_PERCENT
+					  FROM MASTER.T_ENT_OWNERSHIP_STRUCTURE I
+					 WHERE I.ENTERPRISE_ID = P.ENT_ID
+					   AND I.STOCK_NAME LIKE '%元禾控股%'),0)||'%' AS YH_RATIO_IN_MC,
+			   p.*
+		  from PT_T_PLATFORM_INFO p
+		 WHERE P.PK_ID = #{PK_ID}
+	</select>
+</mapper>

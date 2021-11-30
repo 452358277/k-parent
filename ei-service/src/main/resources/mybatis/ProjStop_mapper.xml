@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProjStop">
+	<!-- start autocreate -->
+
+	<resultMap id="ProjStopResult" type="com.ppmg.ei.model.ProjStopModel">
+		<result column="STOP_ID" property="stopId" jdbcType="VARCHAR" />
+		<result column="PROJ_ID" property="projId" jdbcType="VARCHAR" />
+		<result column="STOP_LAW_WORKS" property="stopLawWorks" jdbcType="VARCHAR" />
+		<result column="STOP_GREAT" property="stopGreat" jdbcType="VARCHAR" />
+		<result column="STOP_DATE" property="stopDate" jdbcType="TIMESTAMP" />
+		<result column="STOP_CAUSE" property="stopCause" jdbcType="VARCHAR" />
+		<result column="STOP_FILE" property="stopFile" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="PROJ_TYPE" property="projType" jdbcType="VARCHAR" />
+		<result column="STOP_TYPE" property="stopType" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="PROCESS_INST_ID" property="processInstId" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.ProjStopModel">
+		INSERT INTO TZ_T_PROJ_STOP (STOP_ID,PROJ_ID,STOP_LAW_WORKS,STOP_GREAT,STOP_DATE,STOP_CAUSE
+		,STOP_FILE,STATUS,PROJ_TYPE,STOP_TYPE,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,PROCESS_INST_ID)
+		values(#{stopId,jdbcType=VARCHAR},#{projId,jdbcType=VARCHAR},#{stopLawWorks,jdbcType=VARCHAR},
+		#{stopGreat,jdbcType=VARCHAR},#{stopDate,jdbcType=TIMESTAMP},#{stopCause,jdbcType=VARCHAR},
+		#{stopFile,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{projType,jdbcType=VARCHAR},
+		#{stopType,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},
+		#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{processInstId,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO TZ_T_PROJ_STOP (STOP_ID,PROJ_ID,STOP_LAW_WORKS,STOP_GREAT,STOP_DATE,STOP_CAUSE,STOP_FILE,STATUS,PROJ_TYPE,STOP_TYPE,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.stopId,jdbcType=VARCHAR},
+				#{item.projId,jdbcType=VARCHAR},
+				#{item.stopLawWorks,jdbcType=VARCHAR},
+				#{item.stopGreat,jdbcType=VARCHAR},
+				#{item.stopDate,jdbcType=TIMESTAMP},
+				#{item.stopCause,jdbcType=VARCHAR},
+				#{item.stopFile,jdbcType=VARCHAR},
+				#{item.status,jdbcType=VARCHAR},
+				#{item.projType,jdbcType=VARCHAR},
+				#{item.stopType,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  TZ_T_PROJ_STOP WHERE STOP_ID = #{stopId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.ProjStopModel">
+		DELETE FROM TZ_T_PROJ_STOP
+		<where>
+			<if test="stopId != null and stopId != ''" >
+				STOP_ID = #{stopId,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="stopLawWorks != null and stopLawWorks != ''" >
+				AND STOP_LAW_WORKS = #{stopLawWorks,jdbcType=VARCHAR}
+			</if>
+			<if test="stopGreat != null and stopGreat != ''" >
+				AND STOP_GREAT = #{stopGreat,jdbcType=VARCHAR}
+			</if>
+			<if test="stopDate != null" >
+				AND STOP_DATE = #{stopDate,jdbcType=VARCHAR}
+			</if>
+			<if test="stopCause != null and stopCause != ''" >
+				AND STOP_CAUSE = #{stopCause,jdbcType=VARCHAR}
+			</if>
+			<if test="stopFile != null and stopFile != ''" >
+				AND STOP_FILE = #{stopFile,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="projType != null and projType != ''" >
+				AND PROJ_TYPE = #{projType,jdbcType=VARCHAR}
+			</if>
+			<if test="stopType != null and stopType != ''" >
+				AND STOP_TYPE = #{stopType,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  TZ_T_PROJ_STOP WHERE STOP_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.ProjStopModel">
+		UPDATE TZ_T_PROJ_STOP 
+		<set>
+			<if test="stopId != null and stopId != ''" >
+				STOP_ID = #{stopId,jdbcType=VARCHAR},
+			</if>
+			<if test="projId != null and projId != ''" >
+				PROJ_ID = #{projId,jdbcType=VARCHAR},
+			</if>
+			<if test="stopLawWorks != null and stopLawWorks != ''" >
+				STOP_LAW_WORKS = #{stopLawWorks,jdbcType=VARCHAR},
+			</if>
+			<if test="stopGreat != null and stopGreat != ''" >
+				STOP_GREAT = #{stopGreat,jdbcType=VARCHAR},
+			</if>
+			<if test="stopDate != null" >
+				STOP_DATE = #{stopDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="stopCause != null and stopCause != ''" >
+				STOP_CAUSE = #{stopCause,jdbcType=VARCHAR},
+			</if>
+			<if test="stopFile != null and stopFile != ''" >
+				STOP_FILE = #{stopFile,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="projType != null and projType != ''" >
+				PROJ_TYPE = #{projType,jdbcType=VARCHAR},
+			</if>
+			<if test="stopType != null and stopType != ''" >
+				STOP_TYPE = #{stopType,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR},
+			</if>
+		</set>
+		WHERE STOP_ID = #{stopId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="ProjStopResult">
+		SELECT * FROM TZ_T_PROJ_STOP WHERE STOP_ID = #{stopId,jdbcType=VARCHAR}
+	</select>
+	<!---->
+	<select id="selectProjIdMapper" parameterType="String" resultMap="ProjStopResult">
+		SELECT * FROM TZ_T_PROJ_STOP WHERE PROJ_ID = #{projId,jdbcType=VARCHAR} and status !='-1'
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.ProjStopModel" resultMap="ProjStopResult">
+		SELECT * FROM TZ_T_PROJ_STOP
+		<where>
+			<if test="stopId != null and stopId != ''" >
+				STOP_ID = #{stopId,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="stopLawWorks != null and stopLawWorks != ''" >
+				AND STOP_LAW_WORKS = #{stopLawWorks,jdbcType=VARCHAR}
+			</if>
+			<if test="stopGreat != null and stopGreat != ''" >
+				AND STOP_GREAT = #{stopGreat,jdbcType=VARCHAR}
+			</if>
+			<if test="stopDate != null" >
+				AND STOP_DATE = #{stopDate,jdbcType=VARCHAR}
+			</if>
+			<if test="stopCause != null and stopCause != ''" >
+				AND STOP_CAUSE = #{stopCause,jdbcType=VARCHAR}
+			</if>
+			<if test="stopFile != null and stopFile != ''" >
+				AND STOP_FILE = #{stopFile,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="projType != null and projType != ''" >
+				AND PROJ_TYPE = #{projType,jdbcType=VARCHAR}
+			</if>
+			<if test="stopType != null and stopType != ''" >
+				AND STOP_TYPE = #{stopType,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM TZ_T_PROJ_STOP
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="ProjStopResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.ProjStopModel">
+		SELECT COUNT(*) FROM TZ_T_PROJ_STOP
+		<where>
+			<if test="stopId != null and stopId != ''" >
+				STOP_ID = #{stopId,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="stopLawWorks != null and stopLawWorks != ''" >
+				AND STOP_LAW_WORKS = #{stopLawWorks,jdbcType=VARCHAR}
+			</if>
+			<if test="stopGreat != null and stopGreat != ''" >
+				AND STOP_GREAT = #{stopGreat,jdbcType=VARCHAR}
+			</if>
+			<if test="stopDate != null" >
+				AND STOP_DATE = #{stopDate,jdbcType=VARCHAR}
+			</if>
+			<if test="stopCause != null and stopCause != ''" >
+				AND STOP_CAUSE = #{stopCause,jdbcType=VARCHAR}
+			</if>
+			<if test="stopFile != null and stopFile != ''" >
+				AND STOP_FILE = #{stopFile,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="projType != null and projType != ''" >
+				AND PROJ_TYPE = #{projType,jdbcType=VARCHAR}
+			</if>
+			<if test="stopType != null and stopType != ''" >
+				AND STOP_TYPE = #{stopType,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.ProjStopModel" resultMap="ProjStopResult">
+		SELECT * FROM TZ_T_PROJ_STOP
+		<where>
+			<if test="stopId != null and stopId != ''" >
+				STOP_ID = #{stopId,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="stopLawWorks != null and stopLawWorks != ''" >
+				AND STOP_LAW_WORKS = #{stopLawWorks,jdbcType=VARCHAR}
+			</if>
+			<if test="stopGreat != null and stopGreat != ''" >
+				AND STOP_GREAT = #{stopGreat,jdbcType=VARCHAR}
+			</if>
+			<if test="stopDate != null" >
+				AND STOP_DATE = #{stopDate,jdbcType=VARCHAR}
+			</if>
+			<if test="stopCause != null and stopCause != ''" >
+				AND STOP_CAUSE = #{stopCause,jdbcType=VARCHAR}
+			</if>
+			<if test="stopFile != null and stopFile != ''" >
+				AND STOP_FILE = #{stopFile,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="projType != null and projType != ''" >
+				AND PROJ_TYPE = #{projType,jdbcType=VARCHAR}
+			</if>
+			<if test="stopType != null and stopType != ''" >
+				AND STOP_TYPE = #{stopType,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="ProjStopResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+	<resultMap id="FpPaymentRequestResult" type="com.ppmg.ei.model.FpPaymentRequestStopModel">
+		<result column="PQ_ID" property="pqId" jdbcType="VARCHAR" />
+		<result column="APP_USER" property="appUser" jdbcType="VARCHAR" />
+		<result column="APP_DT" property="appDt" jdbcType="TIMESTAMP" />
+		<result column="PROJ_ID" property="projId" jdbcType="VARCHAR" />
+		<result column="REL_PLAN_ID" property="relPlanId" jdbcType="VARCHAR" />
+		<result column="PROJ_TEAM_AGREE" property="projTeamAgree" jdbcType="VARCHAR" />
+		<result column="CUR_PAY_AMOUNT" property="curPayAmount" jdbcType="NUMERIC" />
+		<result column="CUR_PAY_CURRENCY" property="curPayCurrency" jdbcType="VARCHAR" />
+		<result column="TOTAL_INVE_AMOUNT" property="totalInveAmount" jdbcType="NUMERIC" />
+		<result column="TOTAL_INVE_CURRENCY" property="totalInveCurrency" jdbcType="VARCHAR" />
+		<result column="SUM_INVE_AMOUNT" property="sumInveAmount" jdbcType="NUMERIC" />
+		<result column="SUM_INVE_CURRENCY" property="sumInveCurrency" jdbcType="VARCHAR" />
+		<result column="TOTAL_PERIOD" property="totalPeriod" jdbcType="NUMERIC" />
+		<result column="CURRENT_PERIOD" property="currentPeriod" jdbcType="NUMERIC" />
+		<result column="UNPAID_AMOUNT" property="unpaidAmount" jdbcType="NUMERIC" />
+		<result column="UNPAID_CURRENCY" property="unpaidCurrency" jdbcType="VARCHAR" />
+		<result column="PAY_REASON" property="payReason" jdbcType="VARCHAR" />
+		<result column="PAYEE_NAME" property="payeeName" jdbcType="VARCHAR" />
+		<result column="DUE_BANK" property="dueBank" jdbcType="VARCHAR" />
+		<result column="RECEIVABLE_ACCOUNT" property="receivableAccount" jdbcType="VARCHAR" />
+		<result column="FUNDS_SRC" property="fundsSrc" jdbcType="VARCHAR" />
+		<result column="PAYMENT_ACCOUNT" property="paymentAccount" jdbcType="VARCHAR" />
+		<result column="REL_FILE" property="relFile" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="PROCESS_INST_ID" property="processInstId" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="TOTAL_INVE_AMOUNT_RMB" property="totalInveAmountRmb" jdbcType="NUMERIC" />
+		<result column="PRE_MONEY_IMPL_DESC" property="preMoneyImplDesc" jdbcType="CLOB" javaType="java.lang.String" />
+		<result column="PRE_MONEY_USER_DESC" property="preMoneyUserDesc" jdbcType="CLOB" javaType="java.lang.String" />
+		<result column="CUR_MONEY_PURPOSE" property="curMoneyPurpose" jdbcType="CLOB" javaType="java.lang.String" />
+		<result column="PRE_MONEY_IMPL_DESC_ATT" property="preMoneyImplDescAtt" jdbcType="VARCHAR" />
+		<result column="PRE_MONEY_USER_DESC_ATT" property="preMoneyUserDescAtt" jdbcType="VARCHAR" />
+		<result column="CUR_MONEY_PURPOSE_ATT" property="curMoneyPurposeAtt" jdbcType="VARCHAR" />
+		<result column="CUR_PAY_AMOUNT_RMB" property="curPayAmountRmb" jdbcType="NUMERIC" />
+		<result column="MONEY_DESC" property="moneyDesc" jdbcType="VARCHAR" />
+		<result column="MONEY_DESC_ATT" property="moneyDescAtt" jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="selectByIdStop" parameterType="String" resultMap="FpPaymentRequestResult">
+		SELECT * FROM XJL_T_FP_PAYMENT_REQUEST WHERE PROJ_ID = #{projId,jdbcType=VARCHAR} and status = '2'
+	</select>
+</mapper>

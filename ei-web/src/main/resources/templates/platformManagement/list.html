@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset=utf-8>
+    <meta name=viewport content="width=device-width,initial-scale=1">
+    <title></title>
+    <link th:href="@{/element-ui/lib/theme-chalk/index.css}" rel=stylesheet>
+    <link th:href="@{/component/box-toggle/box-toggle.css}" rel=stylesheet>
+    <link th:href="@{/third-plugins/layui/css/layui.css}" rel=stylesheet>
+    <link th:href="@{/component/link-tag/link-tag.css}" rel=stylesheet>
+    <link th:href="@{/css/common.css}" rel=stylesheet>
+
+    <style type="text/css">
+        .searchBox .el-form-item{
+            margin-bottom: 10px;
+        }
+        .box-toggle {
+            width: 100%;
+            border-bottom: 1px solid #ccc;
+        }
+        .el-button{
+            color:#fff;
+            background-color:#ab0000;
+            border-color:#ab0000;
+        }
+
+        .el-table th {
+            background: #eae3d8 !important;
+            color: #997528;
+        }
+    </style>
+</head>
+<body style="overflow-x:hidden;overflow-y:auto">
+<div id="app" v-cloak >
+
+    <!-- 查询框 begin-->
+    <!-- <box-toggle> -->
+    <div class='searchBox'>
+        <el-form :inline="true" :model="searchData" label-width="100px">
+
+            <el-row>
+                <el-col :span="24" >
+                    <el-form-item label="关键字" size="small" >
+                        <el-input style="width:452px;" v-model="searchData.keyword" placeholder="请输入平台名称 / 法定代表人 / 执行事务合伙人委派代表" size="small"></el-input>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+            <el-row>
+                <el-col :span="24" >
+                    <el-form-item label="成立时间" size="small" >
+                        <el-date-picker
+                                v-model="searchData.startTime"
+                                align="right"
+                                type="date"
+                                format="yyyy-MM-dd"
+                                value-format="yyyy-MM-dd"
+                                placeholder="从">
+                        </el-date-picker>
+                        -
+                        <el-date-picker
+                                v-model="searchData.endTime"
+                                align="right"
+                                type="date"
+                                format="yyyy-MM-dd"
+                                value-format="yyyy-MM-dd"
+                                placeholder="到">
+                        </el-date-picker>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+            <el-row>
+                <el-col :span="16" >
+                    <el-form-item label="平台性质" size="small" >
+                        <link-tag ref="linktag" v-model="searchData.platType" @on-change-tag="search" parent-id="601" th:context-path="@{/}"></link-tag>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="8" >
+                    <el-form-item>
+                        <el-button type="danger" @click="search" icon="el-icon-search" size="small">查询</el-button>
+                        <el-button type="danger" @click="reset" icon="el-icon-refresh" size="small">重置</el-button>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+
+        </el-form>
+    </div>
+    <!-- </box-toggle> -->
+    <!-- 查询框 end-->
+
+    <!-- 列表+分页 begin-->
+    <template >
+        <!-- 列表 begin-->
+        <div style="margin:2px 0 2px 5px;">
+            <el-button type="danger" @click="add" icon="el-icon-circle-plus-outline" size="small">新增</el-button>
+        </div>
+        <el-table :data="page.data" @sort-change="sortChange" @selection-change="handleSelectionChange" border style="width: 100%">
+            <el-table-column header-align='center' type="index" label="No" min-width="5%"></el-table-column>
+            <!--<el-table-column type="selection" min-width="5%"></el-table-column>-->
+            <el-table-column header-align='center' prop="pkId" v-if="false" label="平台信息主键pkId" min-width="10%"></el-table-column>
+            <el-table-column header-align='center' prop="platCode" v-if="false" label="平台ID" min-width="5%"></el-table-column>
+            <el-table-column header-align='center' prop="entId" v-if="false" label="企业ID" min-width="5%"></el-table-column>
+            <el-table-column header-align='center' prop="platShortName" label="平台简称" min-width="10%"></el-table-column>
+            <el-table-column header-align='center' prop="registCapi" label="认缴资本" min-width="10%"></el-table-column>
+            <el-table-column header-align='center' prop="operName" label="法定代表人/执行事务合伙人委派代表" min-width="20%"></el-table-column>
+            <el-table-column header-align='center' prop="stepDate" label="成立日期" min-width="12%"></el-table-column>
+            <el-table-column header-align='center' prop="platType" label="平台性质" min-width="12%"></el-table-column>
+            <el-table-column header-align='center' label="操作" class-name="11" min-width="10%" > <!-- fixed='right' -->
+                <template slot-scope="scope">
+                    <!--<el-button type="danger" @click="update(scope.row)" icon="el-icon-edit" size="mini" title="编辑"></el-button>
+                    <el-button type="danger" @click="detail(scope.row)" icon="el-icon-view" size="mini" title="查看"></el-button>-->
+                    <el-button type="danger" @click="platformInformation(scope.row)" size="mini" title="平台详情">平台详情</el-button><!--icon="el-icon-more"-->
+                </template>
+            </el-table-column>
+        </el-table><!-- 列表 end-->
+        <!-- 列表分页 begin-->
+        <div class="block">
+            <el-pagination @size-change="handleSizeChange"
+                           @current-change="handleCurrentChange" :current-page="page.currPage"
+                           :page-sizes="[10, 20, 30, 40]" :page-size="page.pageSize"
+                           layout="total, sizes, prev, pager, next, jumper"
+                           :total="page.totalCount"> </el-pagination>
+        </div><!-- 列表分页 end-->
+    </template><!-- 列表+分页 end-->
+
+</div>
+<script type=text/javascript th:src="@{/vue/dist/vue.js}"></script>
+<script type=text/javascript th:src="@{/element-ui/lib/index.js}"></script>
+<script type=text/javascript th:src="@{/axios/dist/axios.min.js}"></script>
+<script type=text/javascript th:src="@{/component/box-toggle/box-toggle.js}"></script>
+<script type=text/javascript th:src="@{/component/link-tag/link-tag.js}"></script>
+
+<script th:src="@{/third-plugins/layui/layui.js}"></script>
+<script th:src="@{/js/common.js}"></script>
+
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: function() {
+            return {
+
+                //查询条件数据
+                searchData:{
+                    keyword:'',
+                    startTime:'',
+                    endTime:'',
+                    platType:''
+                },
+                deleteIds:[],
+                //分页对象数据
+                page:{
+                    data:[],
+                    pageSize:10,
+                    currPage:1,
+                    totalPage:1,
+                    totalCount:1,
+                }
+            }
+        },
+        created: function(){
+            gotoPage(this.searchData,1,10);
+        },
+        methods:{
+            search(){//点击查询按钮查询
+                gotoPage(this.searchData, 1, 10);
+            },
+            handleSizeChange(pageSize) {//分页控件改变每页大小
+                this.page.pageSize = pageSize;
+                gotoPage(this.searchData, this.page.currPage, pageSize);
+            },
+            handleCurrentChange(currPage) {//分页控件改变页码
+                this.page.currPage = currPage;
+                gotoPage(this.searchData, currPage, this.page.pageSize);
+            },
+            sortChange(sort){//表格排序方法
+                this.searchData.sort=sort.prop;
+                this.searchData.order=sort.order;
+                gotoPage(this.searchData, 1, 10);
+            },
+            reset(){//点击重置按钮
+                this.searchData = { keyword:'',
+                                    startTime:'',
+                                    endTime:'',
+                                    platType:''};
+                gotoPage(this.searchData,1,10);
+            },
+            add(){//点击新增按钮
+
+                let that = this;
+                let url = '[[@{/platformInfo/toEdit}]]'+'?dealMark=add';
+
+                openWindow("新增",url, '1000px', '600px', function(){
+                    that.reset();
+                });
+
+            },
+            update(row){
+                let that = this;
+                let url = '[[@{/platformInfo/toEdit}]]'+'?dealMark=update&pkId='+row.pkId;
+                openWindow("编辑",url, '1000px', '600px', function(){
+                    that.reset();
+                });
+            },
+
+            handleSelectionChange(val){
+                this.deleteIds = [];
+                for(let i=0; i<val.length; i++){
+                    this.deleteIds.push(val[i].jobId);
+                }
+            },
+
+            detail(row){
+
+                let that = this;
+                let url = '[[@{/platformInfo/toDetail}]]'+'?pkId='+row.pkId;
+                openWindow("详情",url, '1000px', '600px', function(){
+                    that.reset();
+                });
+            },
+
+            platformInformation(row){
+                let that = this;
+                let url = '[[@{/platformInformation}]]'+'?pkId='+row.pkId+'&groupId='+row.platCode+'&entId='+row.entId;
+                window.open(url,'_blank');
+            },
+
+        }
+    });
+
+    function gotoPage(params, currPage, pageSize){
+
+        params.currPage = currPage;
+        params.pageSize = pageSize;
+
+        console.log(params);
+
+        let url = '[[@{/platformInfo/list}]]';
+        axios({
+            url: url,
+            method: "post",
+            data: params
+        })
+            .then(function (res){
+                console.log(res.data);
+                if (res.data.status == '0') {
+                    vm.page = res.data;
+                }else{
+                    vm.$message({type: 'info', duration:1000, message: res.data.msg});
+                }
+            })
+    }
+
+</script>
+</body>
+</html>

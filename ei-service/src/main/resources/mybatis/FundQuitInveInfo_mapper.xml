@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FundQuitInveInfo">
+	<!-- start autocreate -->
+
+	<resultMap id="FundQuitInveInfoResult" type="com.ppmg.ei.model.FundQuitInveInfoModel">
+		<result column="FQI_ID" property="fqiId" jdbcType="VARCHAR" />
+		<result column="FUND_ID" property="fundId" jdbcType="VARCHAR" />
+		<result column="PROJ_ID" property="projId" jdbcType="VARCHAR" />
+		<result column="INVE_PROJ_NUM" property="inveProjNum" jdbcType="NUMERIC" />
+		<result column="INVE_ENT_NUM" property="inveEntNum" jdbcType="NUMERIC" />
+		<result column="INVE_AMT" property="inveAmt" jdbcType="NUMERIC" />
+		<result column="INVE_PROVINCE_NUM" property="inveProvinceNum" jdbcType="NUMERIC" />
+		<result column="INVE_PROVINCE_AMT" property="inveProvinceAmt" jdbcType="NUMERIC" />
+		<result column="INVE_LISTED_NUM" property="inveListedNum" jdbcType="NUMERIC" />
+		<result column="INVE_IPO_NUM" property="inveIpoNum" jdbcType="NUMERIC" />
+		<result column="INVE_NEW_THIRD_NUM" property="inveNewThirdNum" jdbcType="NUMERIC" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="IS_DELETE" property="isDelete" jdbcType="CHAR" />
+		<result column="SORT_ORDER" property="sortOrder" jdbcType="NUMERIC" />
+		<result column="ROW_VERSION" property="rowVersion" jdbcType="NUMERIC" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.FundQuitInveInfoModel">
+		INSERT INTO BD_T_FUND_QUIT_INVE_INFO (FQI_ID,FUND_ID,PROJ_ID,INVE_PROJ_NUM,INVE_ENT_NUM,INVE_AMT,INVE_PROVINCE_NUM,INVE_PROVINCE_AMT,INVE_LISTED_NUM,INVE_IPO_NUM,INVE_NEW_THIRD_NUM,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,IS_DELETE,SORT_ORDER,ROW_VERSION) values(#{fqiId,jdbcType=VARCHAR},#{fundId,jdbcType=VARCHAR},#{projId,jdbcType=VARCHAR},#{inveProjNum,jdbcType=NUMERIC},#{inveEntNum,jdbcType=NUMERIC},#{inveAmt,jdbcType=NUMERIC},#{inveProvinceNum,jdbcType=NUMERIC},#{inveProvinceAmt,jdbcType=NUMERIC},#{inveListedNum,jdbcType=NUMERIC},#{inveIpoNum,jdbcType=NUMERIC},#{inveNewThirdNum,jdbcType=NUMERIC},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{isDelete,jdbcType=CHAR},#{sortOrder,jdbcType=NUMERIC},#{rowVersion,jdbcType=NUMERIC})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO BD_T_FUND_QUIT_INVE_INFO (FQI_ID,FUND_ID,PROJ_ID,INVE_PROJ_NUM,INVE_ENT_NUM,INVE_AMT,INVE_PROVINCE_NUM,INVE_PROVINCE_AMT,INVE_LISTED_NUM,INVE_IPO_NUM,INVE_NEW_THIRD_NUM,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,IS_DELETE,SORT_ORDER,ROW_VERSION)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.fqiId,jdbcType=VARCHAR},
+				#{item.fundId,jdbcType=VARCHAR},
+				#{item.projId,jdbcType=VARCHAR},
+				#{item.inveProjNum,jdbcType=NUMERIC},
+				#{item.inveEntNum,jdbcType=NUMERIC},
+				#{item.inveAmt,jdbcType=NUMERIC},
+				#{item.inveProvinceNum,jdbcType=NUMERIC},
+				#{item.inveProvinceAmt,jdbcType=NUMERIC},
+				#{item.inveListedNum,jdbcType=NUMERIC},
+				#{item.inveIpoNum,jdbcType=NUMERIC},
+				#{item.inveNewThirdNum,jdbcType=NUMERIC},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+				#{item.isDelete,jdbcType=CHAR},
+				#{item.sortOrder,jdbcType=NUMERIC},
+				#{item.rowVersion,jdbcType=NUMERIC}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  BD_T_FUND_QUIT_INVE_INFO WHERE FQI_ID = #{fqiId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.FundQuitInveInfoModel">
+		DELETE FROM BD_T_FUND_QUIT_INVE_INFO
+		<where>
+			<if test="fqiId != null and fqiId != ''" >
+				FQI_ID = #{fqiId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="inveProjNum != null and inveProjNum != ''" >
+				AND INVE_PROJ_NUM = #{inveProjNum,jdbcType=NUMERIC}
+			</if>
+			<if test="inveEntNum != null and inveEntNum != ''" >
+				AND INVE_ENT_NUM = #{inveEntNum,jdbcType=NUMERIC}
+			</if>
+			<if test="inveAmt != null and inveAmt != ''" >
+				AND INVE_AMT = #{inveAmt,jdbcType=NUMERIC}
+			</if>
+			<if test="inveProvinceNum != null and inveProvinceNum != ''" >
+				AND INVE_PROVINCE_NUM = #{inveProvinceNum,jdbcType=NUMERIC}
+			</if>
+			<if test="inveProvinceAmt != null and inveProvinceAmt != ''" >
+				AND INVE_PROVINCE_AMT = #{inveProvinceAmt,jdbcType=NUMERIC}
+			</if>
+			<if test="inveListedNum != null and inveListedNum != ''" >
+				AND INVE_LISTED_NUM = #{inveListedNum,jdbcType=NUMERIC}
+			</if>
+			<if test="inveIpoNum != null and inveIpoNum != ''" >
+				AND INVE_IPO_NUM = #{inveIpoNum,jdbcType=NUMERIC}
+			</if>
+			<if test="inveNewThirdNum != null and inveNewThirdNum != ''" >
+				AND INVE_NEW_THIRD_NUM = #{inveNewThirdNum,jdbcType=NUMERIC}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="isDelete != null and isDelete != ''" >
+				AND IS_DELETE = #{isDelete,jdbcType=CHAR}
+			</if>
+			<if test="sortOrder != null and sortOrder != ''" >
+				AND SORT_ORDER = #{sortOrder,jdbcType=NUMERIC}
+			</if>
+			<if test="rowVersion != null and rowVersion != ''" >
+				AND ROW_VERSION = #{rowVersion,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  BD_T_FUND_QUIT_INVE_INFO WHERE FQI_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.FundQuitInveInfoModel">
+		UPDATE BD_T_FUND_QUIT_INVE_INFO 
+		<set>
+			<if test="fqiId != null and fqiId != ''" >
+				FQI_ID = #{fqiId,jdbcType=VARCHAR},
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				FUND_ID = #{fundId,jdbcType=VARCHAR},
+			</if>
+			<if test="projId != null and projId != ''" >
+				PROJ_ID = #{projId,jdbcType=VARCHAR},
+			</if>
+			<if test="inveProjNum != null and inveProjNum != ''" >
+				INVE_PROJ_NUM = #{inveProjNum,jdbcType=NUMERIC},
+			</if>
+			<if test="inveEntNum != null and inveEntNum != ''" >
+				INVE_ENT_NUM = #{inveEntNum,jdbcType=NUMERIC},
+			</if>
+			<if test="inveAmt != null and inveAmt != ''" >
+				INVE_AMT = #{inveAmt,jdbcType=NUMERIC},
+			</if>
+			<if test="inveProvinceNum != null and inveProvinceNum != ''" >
+				INVE_PROVINCE_NUM = #{inveProvinceNum,jdbcType=NUMERIC},
+			</if>
+			<if test="inveProvinceAmt != null and inveProvinceAmt != ''" >
+				INVE_PROVINCE_AMT = #{inveProvinceAmt,jdbcType=NUMERIC},
+			</if>
+			<if test="inveListedNum != null and inveListedNum != ''" >
+				INVE_LISTED_NUM = #{inveListedNum,jdbcType=NUMERIC},
+			</if>
+			<if test="inveIpoNum != null and inveIpoNum != ''" >
+				INVE_IPO_NUM = #{inveIpoNum,jdbcType=NUMERIC},
+			</if>
+			<if test="inveNewThirdNum != null and inveNewThirdNum != ''" >
+				INVE_NEW_THIRD_NUM = #{inveNewThirdNum,jdbcType=NUMERIC},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isDelete != null and isDelete != ''" >
+				IS_DELETE = #{isDelete,jdbcType=CHAR},
+			</if>
+			<if test="sortOrder != null and sortOrder != ''" >
+				SORT_ORDER = #{sortOrder,jdbcType=NUMERIC},
+			</if>
+			<if test="rowVersion != null and rowVersion != ''" >
+				ROW_VERSION = #{rowVersion,jdbcType=NUMERIC},
+			</if>
+		</set>
+		WHERE FQI_ID = #{fqiId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="FundQuitInveInfoResult">
+		SELECT * FROM BD_T_FUND_QUIT_INVE_INFO WHERE FQI_ID = #{fqiId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.FundQuitInveInfoModel" resultMap="FundQuitInveInfoResult">
+		SELECT * FROM BD_T_FUND_QUIT_INVE_INFO
+		<where>
+			<if test="fqiId != null and fqiId != ''" >
+				FQI_ID = #{fqiId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="inveProjNum != null and inveProjNum != ''" >
+				AND INVE_PROJ_NUM = #{inveProjNum,jdbcType=NUMERIC}
+			</if>
+			<if test="inveEntNum != null and inveEntNum != ''" >
+				AND INVE_ENT_NUM = #{inveEntNum,jdbcType=NUMERIC}
+			</if>
+			<if test="inveAmt != null and inveAmt != ''" >
+				AND INVE_AMT = #{inveAmt,jdbcType=NUMERIC}
+			</if>
+			<if test="inveProvinceNum != null and inveProvinceNum != ''" >
+				AND INVE_PROVINCE_NUM = #{inveProvinceNum,jdbcType=NUMERIC}
+			</if>
+			<if test="inveProvinceAmt != null and inveProvinceAmt != ''" >
+				AND INVE_PROVINCE_AMT = #{inveProvinceAmt,jdbcType=NUMERIC}
+			</if>
+			<if test="inveListedNum != null and inveListedNum != ''" >
+				AND INVE_LISTED_NUM = #{inveListedNum,jdbcType=NUMERIC}
+			</if>
+			<if test="inveIpoNum != null and inveIpoNum != ''" >
+				AND INVE_IPO_NUM = #{inveIpoNum,jdbcType=NUMERIC}
+			</if>
+			<if test="inveNewThirdNum != null and inveNewThirdNum != ''" >
+				AND INVE_NEW_THIRD_NUM = #{inveNewThirdNum,jdbcType=NUMERIC}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="isDelete != null and isDelete != ''" >
+				AND IS_DELETE = #{isDelete,jdbcType=CHAR}
+			</if>
+			<if test="sortOrder != null and sortOrder != ''" >
+				AND SORT_ORDER = #{sortOrder,jdbcType=NUMERIC}
+			</if>
+			<if test="rowVersion != null and rowVersion != ''" >
+				AND ROW_VERSION = #{rowVersion,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM BD_T_FUND_QUIT_INVE_INFO
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="FundQuitInveInfoResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.FundQuitInveInfoModel">
+		SELECT COUNT(*) FROM BD_T_FUND_QUIT_INVE_INFO
+		<where>
+			<if test="fqiId != null and fqiId != ''" >
+				FQI_ID = #{fqiId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="inveProjNum != null and inveProjNum != ''" >
+				AND INVE_PROJ_NUM = #{inveProjNum,jdbcType=NUMERIC}
+			</if>
+			<if test="inveEntNum != null and inveEntNum != ''" >
+				AND INVE_ENT_NUM = #{inveEntNum,jdbcType=NUMERIC}
+			</if>
+			<if test="inveAmt != null and inveAmt != ''" >
+				AND INVE_AMT = #{inveAmt,jdbcType=NUMERIC}
+			</if>
+			<if test="inveProvinceNum != null and inveProvinceNum != ''" >
+				AND INVE_PROVINCE_NUM = #{inveProvinceNum,jdbcType=NUMERIC}
+			</if>
+			<if test="inveProvinceAmt != null and inveProvinceAmt != ''" >
+				AND INVE_PROVINCE_AMT = #{inveProvinceAmt,jdbcType=NUMERIC}
+			</if>
+			<if test="inveListedNum != null and inveListedNum != ''" >
+				AND INVE_LISTED_NUM = #{inveListedNum,jdbcType=NUMERIC}
+			</if>
+			<if test="inveIpoNum != null and inveIpoNum != ''" >
+				AND INVE_IPO_NUM = #{inveIpoNum,jdbcType=NUMERIC}
+			</if>
+			<if test="inveNewThirdNum != null and inveNewThirdNum != ''" >
+				AND INVE_NEW_THIRD_NUM = #{inveNewThirdNum,jdbcType=NUMERIC}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="isDelete != null and isDelete != ''" >
+				AND IS_DELETE = #{isDelete,jdbcType=CHAR}
+			</if>
+			<if test="sortOrder != null and sortOrder != ''" >
+				AND SORT_ORDER = #{sortOrder,jdbcType=NUMERIC}
+			</if>
+			<if test="rowVersion != null and rowVersion != ''" >
+				AND ROW_VERSION = #{rowVersion,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.FundQuitInveInfoModel" resultMap="FundQuitInveInfoResult">
+		SELECT * FROM BD_T_FUND_QUIT_INVE_INFO
+		<where>
+			<if test="fqiId != null and fqiId != ''" >
+				FQI_ID = #{fqiId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="inveProjNum != null and inveProjNum != ''" >
+				AND INVE_PROJ_NUM = #{inveProjNum,jdbcType=NUMERIC}
+			</if>
+			<if test="inveEntNum != null and inveEntNum != ''" >
+				AND INVE_ENT_NUM = #{inveEntNum,jdbcType=NUMERIC}
+			</if>
+			<if test="inveAmt != null and inveAmt != ''" >
+				AND INVE_AMT = #{inveAmt,jdbcType=NUMERIC}
+			</if>
+			<if test="inveProvinceNum != null and inveProvinceNum != ''" >
+				AND INVE_PROVINCE_NUM = #{inveProvinceNum,jdbcType=NUMERIC}
+			</if>
+			<if test="inveProvinceAmt != null and inveProvinceAmt != ''" >
+				AND INVE_PROVINCE_AMT = #{inveProvinceAmt,jdbcType=NUMERIC}
+			</if>
+			<if test="inveListedNum != null and inveListedNum != ''" >
+				AND INVE_LISTED_NUM = #{inveListedNum,jdbcType=NUMERIC}
+			</if>
+			<if test="inveIpoNum != null and inveIpoNum != ''" >
+				AND INVE_IPO_NUM = #{inveIpoNum,jdbcType=NUMERIC}
+			</if>
+			<if test="inveNewThirdNum != null and inveNewThirdNum != ''" >
+				AND INVE_NEW_THIRD_NUM = #{inveNewThirdNum,jdbcType=NUMERIC}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="isDelete != null and isDelete != ''" >
+				AND IS_DELETE = #{isDelete,jdbcType=CHAR}
+			</if>
+			<if test="sortOrder != null and sortOrder != ''" >
+				AND SORT_ORDER = #{sortOrder,jdbcType=NUMERIC}
+			</if>
+			<if test="rowVersion != null and rowVersion != ''" >
+				AND ROW_VERSION = #{rowVersion,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="FundQuitInveInfoResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+</mapper>

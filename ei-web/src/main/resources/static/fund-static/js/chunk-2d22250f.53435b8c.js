@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d22250f"],{cda9:function(c,n,e){"use strict";e.r(n);var t=function(){var c=this,n=c.$createElement,e=c._self._c||n;return e("div")},a=[],d={name:"choiceFund"},u=d,i=e("4ac2"),o=Object(i["a"])(u,t,a,!1,null,"dcdbd22c",null);n["default"]=o.exports}}]);

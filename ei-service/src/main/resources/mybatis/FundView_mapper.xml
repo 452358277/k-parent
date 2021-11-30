@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FundView">
+	<!-- start autocreate -->
+
+	<resultMap id="FundViewResult" type="com.ppmg.ei.model.FundViewModel">
+		<result column="PK_ID" property="pkId" jdbcType="VARCHAR" />
+		<result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+		<result column="IS_REP" property="isRep" jdbcType="VARCHAR" />
+		<result column="FUND_ID" property="fundId" jdbcType="VARCHAR" />
+		<result column="FUND_NAME" property="fundName" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="ADMIN_ID" property="adminId" jdbcType="VARCHAR" />
+		<result column="ADMIN_NAME" property="adminName" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.FundViewModel">
+		INSERT INTO BD_T_FUND_VIEW (PK_ID,USER_ID,IS_REP,FUND_ID,FUND_NAME,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,REMARK,ADMIN_ID,ADMIN_NAME) values(#{pkId,jdbcType=VARCHAR},#{userId,jdbcType=VARCHAR},#{isRep,jdbcType=VARCHAR},#{fundId,jdbcType=VARCHAR},#{fundName,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{remark,jdbcType=VARCHAR},#{adminId,jdbcType=VARCHAR},#{adminName,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO BD_T_FUND_VIEW (PK_ID,USER_ID,IS_REP,FUND_ID,FUND_NAME,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,REMARK,ADMIN_ID,ADMIN_NAME)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.pkId,jdbcType=VARCHAR},
+				#{item.userId,jdbcType=VARCHAR},
+				#{item.isRep,jdbcType=VARCHAR},
+				#{item.fundId,jdbcType=VARCHAR},
+				#{item.fundName,jdbcType=VARCHAR},
+				#{item.status,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+				#{item.remark,jdbcType=VARCHAR},
+				#{item.adminId,jdbcType=VARCHAR},
+				#{item.adminName,jdbcType=VARCHAR}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  BD_T_FUND_VIEW WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.FundViewModel">
+		DELETE FROM BD_T_FUND_VIEW
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="userId != null and userId != ''" >
+				AND USER_ID = #{userId,jdbcType=VARCHAR}
+			</if>
+			<if test="isRep != null and isRep != ''" >
+				AND IS_REP = #{isRep,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundName != null and fundName != ''" >
+				AND FUND_NAME = #{fundName,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="adminId != null and adminId != ''" >
+				AND ADMIN_ID = #{adminId,jdbcType=VARCHAR}
+			</if>
+			<if test="adminName != null and adminName != ''" >
+				AND ADMIN_NAME = #{adminName,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  BD_T_FUND_VIEW WHERE PK_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.FundViewModel">
+		UPDATE BD_T_FUND_VIEW 
+		<set>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null and userId != ''" >
+				USER_ID = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="isRep != null and isRep != ''" >
+				IS_REP = #{isRep,jdbcType=VARCHAR},
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				FUND_ID = #{fundId,jdbcType=VARCHAR},
+			</if>
+			<if test="fundName != null and fundName != ''" >
+				FUND_NAME = #{fundName,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null and remark != ''" >
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="adminId != null and adminId != ''" >
+				ADMIN_ID = #{adminId,jdbcType=VARCHAR},
+			</if>
+			<if test="adminName != null and adminName != ''" >
+				ADMIN_NAME = #{adminName,jdbcType=VARCHAR},
+			</if>
+		</set>
+		WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="FundViewResult">
+		SELECT * FROM BD_T_FUND_VIEW WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.FundViewModel" resultMap="FundViewResult">
+		SELECT * FROM BD_T_FUND_VIEW
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="userId != null and userId != ''" >
+				AND USER_ID = #{userId,jdbcType=VARCHAR}
+			</if>
+			<if test="isRep != null and isRep != ''" >
+				AND IS_REP = #{isRep,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundName != null and fundName != ''" >
+				AND FUND_NAME = #{fundName,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="adminId != null and adminId != ''" >
+				AND ADMIN_ID = #{adminId,jdbcType=VARCHAR}
+			</if>
+			<if test="adminName != null and adminName != ''" >
+				AND ADMIN_NAME = #{adminName,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM BD_T_FUND_VIEW
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="FundViewResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.FundViewModel">
+		SELECT COUNT(*) FROM BD_T_FUND_VIEW
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="userId != null and userId != ''" >
+				AND USER_ID = #{userId,jdbcType=VARCHAR}
+			</if>
+			<if test="isRep != null and isRep != ''" >
+				AND IS_REP = #{isRep,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundName != null and fundName != ''" >
+				AND FUND_NAME = #{fundName,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="adminId != null and adminId != ''" >
+				AND ADMIN_ID = #{adminId,jdbcType=VARCHAR}
+			</if>
+			<if test="adminName != null and adminName != ''" >
+				AND ADMIN_NAME = #{adminName,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.FundViewModel" resultMap="FundViewResult">
+		SELECT * FROM BD_T_FUND_VIEW
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="userId != null and userId != ''" >
+				AND USER_ID = #{userId,jdbcType=VARCHAR}
+			</if>
+			<if test="isRep != null and isRep != ''" >
+				AND IS_REP = #{isRep,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundName != null and fundName != ''" >
+				AND FUND_NAME = #{fundName,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="adminId != null and adminId != ''" >
+				AND ADMIN_ID = #{adminId,jdbcType=VARCHAR}
+			</if>
+			<if test="adminName != null and adminName != ''" >
+				AND ADMIN_NAME = #{adminName,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="FundViewResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+
+
+	<update id="deleteByFundId" parameterType="String">
+		DELETE FROM  BD_T_FUND_VIEW WHERE FUND_ID = #{fundId,jdbcType=VARCHAR}
+	</update>
+</mapper>

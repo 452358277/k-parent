@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AppUserrole">
+	<!-- start autocreate -->
+
+	<resultMap id="AppUserroleResult" type="com.ppmg.ei.model.AppUserroleModel">
+		<result column="APPID" property="appid" jdbcType="NUMERIC" />
+		<result column="USERID" property="userid" jdbcType="NUMERIC" />
+		<result column="ROLEID" property="roleid" jdbcType="NUMERIC" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.AppUserroleModel">
+		INSERT INTO BASE.APP_USERROLE (APPID,USERID,ROLEID) values(#{appid,jdbcType=NUMERIC},#{userid,jdbcType=NUMERIC},#{roleid,jdbcType=NUMERIC})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO BASE.APP_USERROLE (APPID,USERID,ROLEID)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.appid,jdbcType=NUMERIC},
+				#{item.userid,jdbcType=NUMERIC},
+				#{item.roleid,jdbcType=NUMERIC}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  BASE.APP_USERROLE WHERE APPID = #{appid,jdbcType=NUMERIC} and USERID= #{userid,jdbcType=NUMERIC} and ROLEID= #{roleid,jdbcType=NUMERIC}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.AppUserroleModel">
+		DELETE FROM BASE.APP_USERROLE
+		<where>
+			<if test="appid != null and appid != ''" >
+				APPID = #{appid,jdbcType=NUMERIC}
+			</if>
+			<if test="userid != null and userid != ''" >
+				AND USERID = #{userid,jdbcType=NUMERIC}
+			</if>
+			<if test="roleid != null and roleid != ''" >
+				AND ROLEID = #{roleid,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  BASE.APP_USERROLE WHERE APPID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.AppUserroleModel">
+		UPDATE BASE.APP_USERROLE 
+		<set>
+			<if test="appid != null and appid != ''" >
+				APPID = #{appid,jdbcType=NUMERIC},
+			</if>
+			<if test="userid != null and userid != ''" >
+				USERID = #{userid,jdbcType=NUMERIC},
+			</if>
+			<if test="roleid != null and roleid != ''" >
+				ROLEID = #{roleid,jdbcType=NUMERIC},
+			</if>
+		</set>
+		WHERE APPID = #{appid,jdbcType=NUMERIC} and USERID= #{userid,jdbcType=NUMERIC} and ROLEID= #{roleid,jdbcType=NUMERIC}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="AppUserroleResult">
+		SELECT * FROM BASE.APP_USERROLE WHERE APPID = #{appid,jdbcType=NUMERIC} and USERID= #{userid,jdbcType=NUMERIC} and ROLEID= #{roleid,jdbcType=NUMERIC}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.AppUserroleModel" resultMap="AppUserroleResult">
+		SELECT * FROM BASE.APP_USERROLE
+		<where>
+			<if test="appid != null and appid != ''" >
+				APPID = #{appid,jdbcType=NUMERIC}
+			</if>
+			<if test="userid != null and userid != ''" >
+				AND USERID = #{userid,jdbcType=NUMERIC}
+			</if>
+			<if test="roleid != null and roleid != ''" >
+				AND ROLEID = #{roleid,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM BASE.APP_USERROLE
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="AppUserroleResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.AppUserroleModel">
+		SELECT COUNT(*) FROM BASE.APP_USERROLE
+		<where>
+			<if test="appid != null and appid != ''" >
+				APPID = #{appid,jdbcType=NUMERIC}
+			</if>
+			<if test="userid != null and userid != ''" >
+				AND USERID = #{userid,jdbcType=NUMERIC}
+			</if>
+			<if test="roleid != null and roleid != ''" >
+				AND ROLEID = #{roleid,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.AppUserroleModel" resultMap="AppUserroleResult">
+		SELECT * FROM BASE.APP_USERROLE
+		<where>
+			<if test="appid != null and appid != ''" >
+				APPID = #{appid,jdbcType=NUMERIC}
+			</if>
+			<if test="userid != null and userid != ''" >
+				AND USERID = #{userid,jdbcType=NUMERIC}
+			</if>
+			<if test="roleid != null and roleid != ''" >
+				AND ROLEID = #{roleid,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="AppUserroleResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+    <!-- 根据角色ID删除用户 -->
+    <delete id="deleteByRoleId" parameterType="com.ppmg.ei.model.AppUserroleModel">
+        DELETE FROM BASE.APP_USERROLE
+        <where>
+            <if test="appid != null and appid != ''" >
+                APPID = #{appid,jdbcType=NUMERIC}
+            </if>
+            <if test="userid != null and userid != ''" >
+                AND USERID = #{userid,jdbcType=NUMERIC}
+            </if>
+            <if test="roleid != null and roleid != ''" >
+                AND ROLEID = #{roleid,jdbcType=NUMERIC}
+            </if>
+        </where>
+    </delete>
+	<!-- 根据角色ID删除用户 -->
+	<select id="getUserIdByRoleId" parameterType="java.lang.String" resultType="java.lang.String">
+		select wm_concat(t.userid) from APP_USERROLE t
+		where t.roleid=#{ROLE_ID}
+		group by t.roleid
+	</select>
+</mapper>

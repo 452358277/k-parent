@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset=utf-8>
+    <meta name=viewport content="width=device-width,initial-scale=1">
+    <title>详情</title>
+    <link th:href="@{/element-ui/lib/theme-chalk/index.css}" rel=stylesheet>
+    <link th:href="@{/component/upload/upload.css}" rel=stylesheet>
+    <link th:href="@{/third-plugins/layui/css/layui.css}" rel=stylesheet>
+    <link th:href="@{/css/common.css}" rel=stylesheet>
+    <link th:href="@{/css/tableCommon.css}" rel=stylesheet>
+
+    <style type="text/css">
+        .el-button{
+            color:#fff;
+            background-color:#ab0000;
+            border-color:#ab0000;
+        }
+
+    </style>
+
+</head>
+<body>
+<div id="app" style="padding: 5px;" v-cloak class="TableCommon">
+    <!-- 详情页面 begin-->
+    <el-row>
+        <el-col :span="24">
+            <div class="bg-purple-quote">平台信息</div>
+        </el-col>
+    </el-row>
+    <div class="table-P1-view">
+        <div class="item_view">
+            <div class="item">
+                <div class="left">平台全称</div>
+                <div class="right">[[${ viewData.platName }]]</div>
+            </div>
+            <div class="item">
+                <div class="left">平台简称</div>
+                <div class="right">[[${ viewData.platShortName }]]</div>
+            </div>
+        </div>
+        <div class="item_view">
+            <div class="item">
+                <div class="left">信用代码</div>
+                <div class="right">[[${ viewData.creditCode }]]</div>
+            </div>
+            <div class="item">
+                <div class="left">平台性质</div>
+                <div class="right">[[${ viewData.platType }]]</div>
+            </div>
+        </div>
+        <div class="item_view">
+            <div class="item">
+                <div class="left">注册资本</div>
+                <div class="right">[[${ viewData.registCapi }]]</div>
+            </div>
+            <div class="item">
+                <div class="left">成立日期</div>
+                <div class="right">[[${#dates.format(viewData.stepDate , 'yyyy-MM-dd')}]]</div>
+            </div>
+        </div>
+        <div class="item_view">
+            <div class="item">
+                <div class="left">法定代表人</div>
+                <div class="right">[[${ viewData.operName }]]</div>
+            </div>
+            <div class="item">
+                <div class="left">主要高管</div>
+                <div class="right">[[${ viewData.ptpiExtendOne }]]</div>
+            </div>
+        </div>
+        <div class="editItem">
+            <div class="left">地址</div>
+            <div class="right"><p style="white-space: pre-wrap;">[[${ viewData.addressDetails }]]</p></div>
+        </div>
+    </div>
+
+</div>
+<script type=text/javascript th:src="@{/vue/dist/vue.js}"></script>
+<script type=text/javascript th:src="@{/element-ui/lib/index.js}"></script>
+<script type=text/javascript th:src="@{/axios/dist/axios.min.js}"></script>
+<script type=text/javascript th:src="@{/component/upload/upload.js}"></script>
+<script type=text/javascript th:src="@{/third-plugins/layui/layui.js}"></script>
+<script type=text/javascript th:src="@{/js/common.js}"></script>
+
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: function() {
+        },
+        created: function(){
+            let that = this;
+            Vue.nextTick(function () {
+                console.log(that.viewData);
+
+            })
+        },
+        watch: {
+        },
+        methods:{
+            view(row){
+            },
+        }
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,893 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProjQuitAppl">
+	<!-- start autocreate -->
+
+	<resultMap id="ProjQuitApplResult" type="com.ppmg.ei.model.ProjQuitApplModel">
+		<result column="APP_ID" property="appId" jdbcType="VARCHAR" />
+		<result column="IA_ID" property="iaId" jdbcType="VARCHAR" />
+		<result column="APP_USER" property="appUser" jdbcType="VARCHAR" />
+		<result column="APP_DT" property="appDt" jdbcType="TIMESTAMP" />
+		<result column="QUIT_TYPE" property="quitType" jdbcType="VARCHAR" />
+		<result column="QUIT_WAY" property="quitWay" jdbcType="VARCHAR" />
+		<result column="QUIT_DT" property="quitDt" jdbcType="TIMESTAMP" />
+		<result column="SALE_OBJECT" property="saleObject" jdbcType="VARCHAR" />
+		<result column="REVENUE" property="revenue" jdbcType="NUMERIC" />
+		<result column="CURRENCY_REVENUE" property="currencyRevenue" jdbcType="VARCHAR" />
+		<result column="COST" property="cost" jdbcType="NUMERIC" />
+		<result column="CURRENCY_COST" property="currencyCost" jdbcType="VARCHAR" />
+		<result column="PROFIT" property="profit" jdbcType="NUMERIC" />
+		<result column="CURRENCY_PROFIT" property="currencyProfit" jdbcType="VARCHAR" />
+		<result column="SHARES_RATE" property="sharesRate" jdbcType="NUMERIC" />
+		<result column="SELL_SHARES" property="sellShares" jdbcType="NUMERIC" />
+		<result column="PRICE" property="price" jdbcType="NUMERIC" />
+		<result column="CURRENCY_PRICE" property="currencyPrice" jdbcType="VARCHAR" />
+		<result column="EARNING" property="earning" jdbcType="NUMERIC" />
+		<result column="CURRENCY_EARNING" property="currencyEarning" jdbcType="VARCHAR" />
+		<result column="COMPANY" property="company" jdbcType="VARCHAR" />
+		<result column="HOLDER_ID" property="holderId" jdbcType="VARCHAR" />
+		<result column="DOC_LIST" property="docList" jdbcType="VARCHAR" />
+		<result column="APP_REASONS" property="appReasons" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="ATTA_FILE" property="attaFile" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="PROCESS_INST_ID" property="processInstId" jdbcType="VARCHAR" />
+		<result column="ROW_ID" property="rowId" jdbcType="VARCHAR" />
+		<result column="PROCESSVERSIONINSTANCEGUID" property="processversioninstanceguid" jdbcType="VARCHAR" />
+		<result column="RMB_COST" property="rmbCost" jdbcType="NUMERIC" />
+		<result column="AFTER_FUNDER_ID" property="afterFunderId" jdbcType="VARCHAR" />
+		<result column="OBJECT_ID" property="objectId" jdbcType="VARCHAR" />
+		<result column="PROJ_OBJECT_NAME" property="projObjectName" jdbcType="VARCHAR" />
+		<result column="IS_DISTRIBUTE" property="isDistribute" jdbcType="VARCHAR" />
+		<result column="DISTRIBUTE_MONEY" property="distributeMoney" jdbcType="NUMERIC" />
+		<result column="DISTRIBUTE_GOV_MONEY" property="distributeGovMoney" jdbcType="NUMERIC" />
+		<result column="DISTRIBUTE_DT" property="distributeDt" jdbcType="TIMESTAMP" />
+
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.ProjQuitApplModel">
+		INSERT INTO TZ_T_PROJ_QUIT_APPL (APP_ID,IA_ID,APP_USER,APP_DT,QUIT_TYPE,QUIT_WAY,QUIT_DT,SALE_OBJECT,REVENUE,CURRENCY_REVENUE,COST,CURRENCY_COST,PROFIT,CURRENCY_PROFIT,SHARES_RATE,SELL_SHARES,PRICE,CURRENCY_PRICE,EARNING,CURRENCY_EARNING,COMPANY,HOLDER_ID,DOC_LIST,APP_REASONS,STATUS,REMARK,ATTA_FILE,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,PROCESS_INST_ID,ROW_ID,PROCESSVERSIONINSTANCEGUID,RMB_COST,AFTER_FUNDER_ID,OBJECT_ID,PROJ_OBJECT_NAME,IS_DISTRIBUTE,DISTRIBUTE_MONEY,DISTRIBUTE_GOV_MONEY,DISTRIBUTE_DT) values(#{appId,jdbcType=VARCHAR},#{iaId,jdbcType=VARCHAR},#{appUser,jdbcType=VARCHAR},#{appDt,jdbcType=TIMESTAMP},#{quitType,jdbcType=VARCHAR},#{quitWay,jdbcType=VARCHAR},#{quitDt,jdbcType=TIMESTAMP},#{saleObject,jdbcType=VARCHAR},#{revenue,jdbcType=NUMERIC},#{currencyRevenue,jdbcType=VARCHAR},#{cost,jdbcType=NUMERIC},#{currencyCost,jdbcType=VARCHAR},#{profit,jdbcType=NUMERIC},#{currencyProfit,jdbcType=VARCHAR},#{sharesRate,jdbcType=NUMERIC},#{sellShares,jdbcType=NUMERIC},#{price,jdbcType=NUMERIC},#{currencyPrice,jdbcType=VARCHAR},#{earning,jdbcType=NUMERIC},#{currencyEarning,jdbcType=VARCHAR},#{company,jdbcType=VARCHAR},#{holderId,jdbcType=VARCHAR},#{docList,jdbcType=VARCHAR},#{appReasons,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},#{attaFile,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{processInstId,jdbcType=VARCHAR},#{rowId,jdbcType=VARCHAR},#{processversioninstanceguid,jdbcType=VARCHAR},#{rmbCost,jdbcType=NUMERIC},#{afterFunderId,jdbcType=VARCHAR},#{objectId,jdbcType=VARCHAR},#{projObjectName,jdbcType=VARCHAR},#{isDistribute,jdbcType=VARCHAR},#{distributeMoney,jdbcType=NUMERIC},#{distributeGovMoney,jdbcType=NUMERIC},#{distributeDt,jdbcType=TIMESTAMP})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO TZ_T_PROJ_QUIT_APPL (APP_ID,IA_ID,APP_USER,APP_DT,QUIT_TYPE,QUIT_WAY,QUIT_DT,SALE_OBJECT,REVENUE,CURRENCY_REVENUE,COST,CURRENCY_COST,PROFIT,CURRENCY_PROFIT,SHARES_RATE,SELL_SHARES,PRICE,CURRENCY_PRICE,EARNING,CURRENCY_EARNING,COMPANY,HOLDER_ID,DOC_LIST,APP_REASONS,STATUS,REMARK,ATTA_FILE,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,PROCESS_INST_ID,ROW_ID,PROCESSVERSIONINSTANCEGUID,RMB_COST,AFTER_FUNDER_ID,OBJECT_ID,PROJ_OBJECT_NAME)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.appId,jdbcType=VARCHAR},
+				#{item.iaId,jdbcType=VARCHAR},
+				#{item.appUser,jdbcType=VARCHAR},
+				#{item.appDt,jdbcType=TIMESTAMP},
+				#{item.quitType,jdbcType=VARCHAR},
+				#{item.quitWay,jdbcType=VARCHAR},
+				#{item.quitDt,jdbcType=TIMESTAMP},
+				#{item.saleObject,jdbcType=VARCHAR},
+				#{item.revenue,jdbcType=NUMERIC},
+				#{item.currencyRevenue,jdbcType=VARCHAR},
+				#{item.cost,jdbcType=NUMERIC},
+				#{item.currencyCost,jdbcType=VARCHAR},
+				#{item.profit,jdbcType=NUMERIC},
+				#{item.currencyProfit,jdbcType=VARCHAR},
+				#{item.sharesRate,jdbcType=NUMERIC},
+				#{item.sellShares,jdbcType=NUMERIC},
+				#{item.price,jdbcType=NUMERIC},
+				#{item.currencyPrice,jdbcType=VARCHAR},
+				#{item.earning,jdbcType=NUMERIC},
+				#{item.currencyEarning,jdbcType=VARCHAR},
+				#{item.company,jdbcType=VARCHAR},
+				#{item.holderId,jdbcType=VARCHAR},
+				#{item.docList,jdbcType=VARCHAR},
+				#{item.appReasons,jdbcType=VARCHAR},
+				#{item.status,jdbcType=VARCHAR},
+				#{item.remark,jdbcType=VARCHAR},
+				#{item.attaFile,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+				#{item.processInstId,jdbcType=VARCHAR},
+				#{item.rowId,jdbcType=VARCHAR},
+				#{item.processversioninstanceguid,jdbcType=VARCHAR},
+				#{item.rmbCost,jdbcType=NUMERIC},
+				#{item.afterFunderId,jdbcType=VARCHAR},
+				#{item.objectId,jdbcType=VARCHAR},
+				#{item.projObjectName,jdbcType=VARCHAR}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  TZ_T_PROJ_QUIT_APPL WHERE APP_ID = #{appId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.ProjQuitApplModel">
+		DELETE FROM TZ_T_PROJ_QUIT_APPL
+		<where>
+			<if test="appId != null and appId != ''" >
+				APP_ID = #{appId,jdbcType=VARCHAR}
+			</if>
+			<if test="iaId != null and iaId != ''" >
+				AND IA_ID = #{iaId,jdbcType=VARCHAR}
+			</if>
+			<if test="appUser != null and appUser != ''" >
+				AND APP_USER = #{appUser,jdbcType=VARCHAR}
+			</if>
+			<if test="appDt != null" >
+				AND APP_DT = #{appDt,jdbcType=VARCHAR}
+			</if>
+			<if test="quitType != null and quitType != ''" >
+				AND QUIT_TYPE = #{quitType,jdbcType=VARCHAR}
+			</if>
+			<if test="quitWay != null and quitWay != ''" >
+				AND QUIT_WAY = #{quitWay,jdbcType=VARCHAR}
+			</if>
+			<if test="quitDt != null" >
+				AND QUIT_DT = #{quitDt,jdbcType=VARCHAR}
+			</if>
+			<if test="saleObject != null and saleObject != ''" >
+				AND SALE_OBJECT = #{saleObject,jdbcType=VARCHAR}
+			</if>
+			<if test="revenue != null and revenue != ''" >
+				AND REVENUE = #{revenue,jdbcType=NUMERIC}
+			</if>
+			<if test="currencyRevenue != null and currencyRevenue != ''" >
+				AND CURRENCY_REVENUE = #{currencyRevenue,jdbcType=VARCHAR}
+			</if>
+			<if test="cost != null and cost != ''" >
+				AND COST = #{cost,jdbcType=NUMERIC}
+			</if>
+			<if test="currencyCost != null and currencyCost != ''" >
+				AND CURRENCY_COST = #{currencyCost,jdbcType=VARCHAR}
+			</if>
+			<if test="profit != null and profit != ''" >
+				AND PROFIT = #{profit,jdbcType=NUMERIC}
+			</if>
+			<if test="currencyProfit != null and currencyProfit != ''" >
+				AND CURRENCY_PROFIT = #{currencyProfit,jdbcType=VARCHAR}
+			</if>
+			<if test="sharesRate != null and sharesRate != ''" >
+				AND SHARES_RATE = #{sharesRate,jdbcType=NUMERIC}
+			</if>
+			<if test="sellShares != null and sellShares != ''" >
+				AND SELL_SHARES = #{sellShares,jdbcType=NUMERIC}
+			</if>
+			<if test="price != null and price != ''" >
+				AND PRICE = #{price,jdbcType=NUMERIC}
+			</if>
+			<if test="currencyPrice != null and currencyPrice != ''" >
+				AND CURRENCY_PRICE = #{currencyPrice,jdbcType=VARCHAR}
+			</if>
+			<if test="earning != null and earning != ''" >
+				AND EARNING = #{earning,jdbcType=NUMERIC}
+			</if>
+			<if test="currencyEarning != null and currencyEarning != ''" >
+				AND CURRENCY_EARNING = #{currencyEarning,jdbcType=VARCHAR}
+			</if>
+			<if test="company != null and company != ''" >
+				AND COMPANY = #{company,jdbcType=VARCHAR}
+			</if>
+			<if test="holderId != null and holderId != ''" >
+				AND HOLDER_ID = #{holderId,jdbcType=VARCHAR}
+			</if>
+			<if test="docList != null and docList != ''" >
+				AND DOC_LIST = #{docList,jdbcType=VARCHAR}
+			</if>
+			<if test="appReasons != null and appReasons != ''" >
+				AND APP_REASONS = #{appReasons,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="rowId != null and rowId != ''" >
+				AND ROW_ID = #{rowId,jdbcType=VARCHAR}
+			</if>
+			<if test="processversioninstanceguid != null and processversioninstanceguid != ''" >
+				AND PROCESSVERSIONINSTANCEGUID = #{processversioninstanceguid,jdbcType=VARCHAR}
+			</if>
+			<if test="rmbCost != null and rmbCost != ''" >
+				AND RMB_COST = #{rmbCost,jdbcType=NUMERIC}
+			</if>
+			<if test="afterFunderId != null and afterFunderId != ''" >
+				AND AFTER_FUNDER_ID = #{afterFunderId,jdbcType=VARCHAR}
+			</if>
+			<if test="objectId != null and objectId != ''" >
+				AND OBJECT_ID = #{objectId,jdbcType=VARCHAR}
+			</if>
+			<if test="projObjectName != null and projObjectName != ''" >
+				AND PROJ_OBJECT_NAME = #{projObjectName,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  TZ_T_PROJ_QUIT_APPL WHERE APP_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.ProjQuitApplModel">
+		UPDATE TZ_T_PROJ_QUIT_APPL 
+		<set>
+			<if test="appId != null and appId != ''" >
+				APP_ID = #{appId,jdbcType=VARCHAR},
+			</if>
+			<if test="iaId != null and iaId != ''" >
+				IA_ID = #{iaId,jdbcType=VARCHAR},
+			</if>
+			<if test="appUser != null and appUser != ''" >
+				APP_USER = #{appUser,jdbcType=VARCHAR},
+			</if>
+			<if test="appDt != null" >
+				APP_DT = #{appDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="quitType != null and quitType != ''" >
+				QUIT_TYPE = #{quitType,jdbcType=VARCHAR},
+			</if>
+			<if test="quitWay != null and quitWay != ''" >
+				QUIT_WAY = #{quitWay,jdbcType=VARCHAR},
+			</if>
+			<if test="quitDt != null" >
+				QUIT_DT = #{quitDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="saleObject != null and saleObject != ''" >
+				SALE_OBJECT = #{saleObject,jdbcType=VARCHAR},
+			</if>
+			<if test="revenue != null and revenue != ''" >
+				REVENUE = #{revenue,jdbcType=NUMERIC},
+			</if>
+			<if test="currencyRevenue != null and currencyRevenue != ''" >
+				CURRENCY_REVENUE = #{currencyRevenue,jdbcType=VARCHAR},
+			</if>
+			<if test="cost != null and cost != ''" >
+				COST = #{cost,jdbcType=NUMERIC},
+			</if>
+			<if test="currencyCost != null and currencyCost != ''" >
+				CURRENCY_COST = #{currencyCost,jdbcType=VARCHAR},
+			</if>
+			<if test="profit != null and profit != ''" >
+				PROFIT = #{profit,jdbcType=NUMERIC},
+			</if>
+			<if test="currencyProfit != null and currencyProfit != ''" >
+				CURRENCY_PROFIT = #{currencyProfit,jdbcType=VARCHAR},
+			</if>
+			<if test="sharesRate != null and sharesRate != ''" >
+				SHARES_RATE = #{sharesRate,jdbcType=NUMERIC},
+			</if>
+			<if test="sellShares != null and sellShares != ''" >
+				SELL_SHARES = #{sellShares,jdbcType=NUMERIC},
+			</if>
+			<if test="price != null and price != ''" >
+				PRICE = #{price,jdbcType=NUMERIC},
+			</if>
+			<if test="currencyPrice != null and currencyPrice != ''" >
+				CURRENCY_PRICE = #{currencyPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="earning != null and earning != ''" >
+				EARNING = #{earning,jdbcType=NUMERIC},
+			</if>
+			<if test="currencyEarning != null and currencyEarning != ''" >
+				CURRENCY_EARNING = #{currencyEarning,jdbcType=VARCHAR},
+			</if>
+			<if test="company != null and company != ''" >
+				COMPANY = #{company,jdbcType=VARCHAR},
+			</if>
+			<if test="holderId != null and holderId != ''" >
+				HOLDER_ID = #{holderId,jdbcType=VARCHAR},
+			</if>
+			<if test="docList != null and docList != ''" >
+				DOC_LIST = #{docList,jdbcType=VARCHAR},
+			</if>
+			<if test="appReasons != null and appReasons != ''" >
+				APP_REASONS = #{appReasons,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null and remark != ''" >
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				ATTA_FILE = #{attaFile,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR},
+			</if>
+			<if test="rowId != null and rowId != ''" >
+				ROW_ID = #{rowId,jdbcType=VARCHAR},
+			</if>
+			<if test="processversioninstanceguid != null and processversioninstanceguid != ''" >
+				PROCESSVERSIONINSTANCEGUID = #{processversioninstanceguid,jdbcType=VARCHAR},
+			</if>
+			<if test="rmbCost != null and rmbCost != ''" >
+				RMB_COST = #{rmbCost,jdbcType=NUMERIC},
+			</if>
+			<if test="afterFunderId != null and afterFunderId != ''" >
+				AFTER_FUNDER_ID = #{afterFunderId,jdbcType=VARCHAR},
+			</if>
+			<if test="objectId != null and objectId != ''" >
+				OBJECT_ID = #{objectId,jdbcType=VARCHAR},
+			</if>
+			<if test="projObjectName != null and projObjectName != ''" >
+				PROJ_OBJECT_NAME = #{projObjectName,jdbcType=VARCHAR},
+			</if>
+			<if test="isDistribute != null and isDistribute != ''" >
+				IS_DISTRIBUTE = #{isDistribute,jdbcType=VARCHAR},
+			</if>
+			<if test="distributeMoney != null" >
+				DISTRIBUTE_MONEY = #{distributeMoney,jdbcType=NUMERIC},
+			</if>
+			<if test="distributeGovMoney != null" >
+				DISTRIBUTE_GOV_MONEY = #{distributeGovMoney,jdbcType=NUMERIC},
+			</if>
+			<if test="distributeDt != null" >
+				DISTRIBUTE_DT = #{distributeDt,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		WHERE APP_ID = #{appId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="ProjQuitApplResult">
+		SELECT * FROM TZ_T_PROJ_QUIT_APPL WHERE APP_ID = #{appId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.ProjQuitApplModel" resultMap="ProjQuitApplResult">
+		SELECT * FROM TZ_T_PROJ_QUIT_APPL
+		<where>
+			<if test="appId != null and appId != ''" >
+				APP_ID = #{appId,jdbcType=VARCHAR}
+			</if>
+			<if test="iaId != null and iaId != ''" >
+				AND IA_ID = #{iaId,jdbcType=VARCHAR}
+			</if>
+			<if test="appUser != null and appUser != ''" >
+				AND APP_USER = #{appUser,jdbcType=VARCHAR}
+			</if>
+			<if test="appDt != null" >
+				AND APP_DT = #{appDt,jdbcType=VARCHAR}
+			</if>
+			<if test="quitType != null and quitType != ''" >
+				AND QUIT_TYPE = #{quitType,jdbcType=VARCHAR}
+			</if>
+			<if test="quitWay != null and quitWay != ''" >
+				AND QUIT_WAY = #{quitWay,jdbcType=VARCHAR}
+			</if>
+			<if test="quitDt != null" >
+				AND QUIT_DT = #{quitDt,jdbcType=VARCHAR}
+			</if>
+			<if test="saleObject != null and saleObject != ''" >
+				AND SALE_OBJECT = #{saleObject,jdbcType=VARCHAR}
+			</if>
+			<if test="revenue != null and revenue != ''" >
+				AND REVENUE = #{revenue,jdbcType=NUMERIC}
+			</if>
+			<if test="currencyRevenue != null and currencyRevenue != ''" >
+				AND CURRENCY_REVENUE = #{currencyRevenue,jdbcType=VARCHAR}
+			</if>
+			<if test="cost != null and cost != ''" >
+				AND COST = #{cost,jdbcType=NUMERIC}
+			</if>
+			<if test="currencyCost != null and currencyCost != ''" >
+				AND CURRENCY_COST = #{currencyCost,jdbcType=VARCHAR}
+			</if>
+			<if test="profit != null and profit != ''" >
+				AND PROFIT = #{profit,jdbcType=NUMERIC}
+			</if>
+			<if test="currencyProfit != null and currencyProfit != ''" >
+				AND CURRENCY_PROFIT = #{currencyProfit,jdbcType=VARCHAR}
+			</if>
+			<if test="sharesRate != null and sharesRate != ''" >
+				AND SHARES_RATE = #{sharesRate,jdbcType=NUMERIC}
+			</if>
+			<if test="sellShares != null and sellShares != ''" >
+				AND SELL_SHARES = #{sellShares,jdbcType=NUMERIC}
+			</if>
+			<if test="price != null and price != ''" >
+				AND PRICE = #{price,jdbcType=NUMERIC}
+			</if>
+			<if test="currencyPrice != null and currencyPrice != ''" >
+				AND CURRENCY_PRICE = #{currencyPrice,jdbcType=VARCHAR}
+			</if>
+			<if test="earning != null and earning != ''" >
+				AND EARNING = #{earning,jdbcType=NUMERIC}
+			</if>
+			<if test="currencyEarning != null and currencyEarning != ''" >
+				AND CURRENCY_EARNING = #{currencyEarning,jdbcType=VARCHAR}
+			</if>
+			<if test="company != null and company != ''" >
+				AND COMPANY = #{company,jdbcType=VARCHAR}
+			</if>
+			<if test="holderId != null and holderId != ''" >
+				AND HOLDER_ID = #{holderId,jdbcType=VARCHAR}
+			</if>
+			<if test="docList != null and docList != ''" >
+				AND DOC_LIST = #{docList,jdbcType=VARCHAR}
+			</if>
+			<if test="appReasons != null and appReasons != ''" >
+				AND APP_REASONS = #{appReasons,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="rowId != null and rowId != ''" >
+				AND ROW_ID = #{rowId,jdbcType=VARCHAR}
+			</if>
+			<if test="processversioninstanceguid != null and processversioninstanceguid != ''" >
+				AND PROCESSVERSIONINSTANCEGUID = #{processversioninstanceguid,jdbcType=VARCHAR}
+			</if>
+			<if test="rmbCost != null and rmbCost != ''" >
+				AND RMB_COST = #{rmbCost,jdbcType=NUMERIC}
+			</if>
+			<if test="afterFunderId != null and afterFunderId != ''" >
+				AND AFTER_FUNDER_ID = #{afterFunderId,jdbcType=VARCHAR}
+			</if>
+			<if test="objectId != null and objectId != ''" >
+				AND OBJECT_ID = #{objectId,jdbcType=VARCHAR}
+			</if>
+			<if test="projObjectName != null and projObjectName != ''" >
+				AND PROJ_OBJECT_NAME = #{projObjectName,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT APP_ID,IA_ID,APP_USER,APP_DT,QUIT_TYPE,QUIT_WAY,QUIT_DT,SALE_OBJECT,REVENUE,CURRENCY_REVENUE,COST,CURRENCY_COST,PROFIT,CURRENCY_PROFIT,SHARES_RATE,SELL_SHARES,PRICE,CURRENCY_PRICE,EARNING,CURRENCY_EARNING,COMPANY,HOLDER_ID,DOC_LIST,APP_REASONS,STATUS,REMARK,ATTA_FILE,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,PROCESS_INST_ID,PROCESSVERSIONINSTANCEGUID,RMB_COST,AFTER_FUNDER_ID,OBJECT_ID,PROJ_OBJECT_NAME,IS_DISTRIBUTE,DISTRIBUTE_MONEY,DISTRIBUTE_GOV_MONEY,DISTRIBUTE_DT
+		FROM TZ_T_PROJ_QUIT_APPL
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+		order by  CREATE_DT desc
+	</sql>
+
+	<select id="selectListPage" resultMap="ProjQuitApplResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.ProjQuitApplModel">
+		SELECT COUNT(*) FROM TZ_T_PROJ_QUIT_APPL
+		<where>
+			<if test="appId != null and appId != ''" >
+				APP_ID = #{appId,jdbcType=VARCHAR}
+			</if>
+			<if test="iaId != null and iaId != ''" >
+				AND IA_ID = #{iaId,jdbcType=VARCHAR}
+			</if>
+			<if test="appUser != null and appUser != ''" >
+				AND APP_USER = #{appUser,jdbcType=VARCHAR}
+			</if>
+			<if test="appDt != null" >
+				AND APP_DT = #{appDt,jdbcType=VARCHAR}
+			</if>
+			<if test="quitType != null and quitType != ''" >
+				AND QUIT_TYPE = #{quitType,jdbcType=VARCHAR}
+			</if>
+			<if test="quitWay != null and quitWay != ''" >
+				AND QUIT_WAY = #{quitWay,jdbcType=VARCHAR}
+			</if>
+			<if test="quitDt != null" >
+				AND QUIT_DT = #{quitDt,jdbcType=VARCHAR}
+			</if>
+			<if test="saleObject != null and saleObject != ''" >
+				AND SALE_OBJECT = #{saleObject,jdbcType=VARCHAR}
+			</if>
+			<if test="revenue != null and revenue != ''" >
+				AND REVENUE = #{revenue,jdbcType=NUMERIC}
+			</if>
+			<if test="currencyRevenue != null and currencyRevenue != ''" >
+				AND CURRENCY_REVENUE = #{currencyRevenue,jdbcType=VARCHAR}
+			</if>
+			<if test="cost != null and cost != ''" >
+				AND COST = #{cost,jdbcType=NUMERIC}
+			</if>
+			<if test="currencyCost != null and currencyCost != ''" >
+				AND CURRENCY_COST = #{currencyCost,jdbcType=VARCHAR}
+			</if>
+			<if test="profit != null and profit != ''" >
+				AND PROFIT = #{profit,jdbcType=NUMERIC}
+			</if>
+			<if test="currencyProfit != null and currencyProfit != ''" >
+				AND CURRENCY_PROFIT = #{currencyProfit,jdbcType=VARCHAR}
+			</if>
+			<if test="sharesRate != null and sharesRate != ''" >
+				AND SHARES_RATE = #{sharesRate,jdbcType=NUMERIC}
+			</if>
+			<if test="sellShares != null and sellShares != ''" >
+				AND SELL_SHARES = #{sellShares,jdbcType=NUMERIC}
+			</if>
+			<if test="price != null and price != ''" >
+				AND PRICE = #{price,jdbcType=NUMERIC}
+			</if>
+			<if test="currencyPrice != null and currencyPrice != ''" >
+				AND CURRENCY_PRICE = #{currencyPrice,jdbcType=VARCHAR}
+			</if>
+			<if test="earning != null and earning != ''" >
+				AND EARNING = #{earning,jdbcType=NUMERIC}
+			</if>
+			<if test="currencyEarning != null and currencyEarning != ''" >
+				AND CURRENCY_EARNING = #{currencyEarning,jdbcType=VARCHAR}
+			</if>
+			<if test="company != null and company != ''" >
+				AND COMPANY = #{company,jdbcType=VARCHAR}
+			</if>
+			<if test="holderId != null and holderId != ''" >
+				AND HOLDER_ID = #{holderId,jdbcType=VARCHAR}
+			</if>
+			<if test="docList != null and docList != ''" >
+				AND DOC_LIST = #{docList,jdbcType=VARCHAR}
+			</if>
+			<if test="appReasons != null and appReasons != ''" >
+				AND APP_REASONS = #{appReasons,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="rowId != null and rowId != ''" >
+				AND ROW_ID = #{rowId,jdbcType=VARCHAR}
+			</if>
+			<if test="processversioninstanceguid != null and processversioninstanceguid != ''" >
+				AND PROCESSVERSIONINSTANCEGUID = #{processversioninstanceguid,jdbcType=VARCHAR}
+			</if>
+			<if test="rmbCost != null and rmbCost != ''" >
+				AND RMB_COST = #{rmbCost,jdbcType=NUMERIC}
+			</if>
+			<if test="afterFunderId != null and afterFunderId != ''" >
+				AND AFTER_FUNDER_ID = #{afterFunderId,jdbcType=VARCHAR}
+			</if>
+			<if test="objectId != null and objectId != ''" >
+				AND OBJECT_ID = #{objectId,jdbcType=VARCHAR}
+			</if>
+			<if test="projObjectName != null and projObjectName != ''" >
+				AND PROJ_OBJECT_NAME = #{projObjectName,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.ProjQuitApplModel" resultMap="ProjQuitApplResult">
+		SELECT * FROM TZ_T_PROJ_QUIT_APPL
+		<where>
+		     1=1
+			<if test="appId != null and appId != ''" >
+				APP_ID = #{appId,jdbcType=VARCHAR}
+			</if>
+			<if test="iaId != null and iaId != ''" >
+				AND IA_ID = #{iaId,jdbcType=VARCHAR}
+			</if>
+			<if test="appUser != null and appUser != ''" >
+				AND APP_USER = #{appUser,jdbcType=VARCHAR}
+			</if>
+			<if test="appDt != null" >
+				AND APP_DT = #{appDt,jdbcType=VARCHAR}
+			</if>
+			<if test="quitType != null and quitType != ''" >
+				AND QUIT_TYPE = #{quitType,jdbcType=VARCHAR}
+			</if>
+			<if test="quitWay != null and quitWay != ''" >
+				AND QUIT_WAY = #{quitWay,jdbcType=VARCHAR}
+			</if>
+			<if test="quitDt != null" >
+				AND QUIT_DT = #{quitDt,jdbcType=VARCHAR}
+			</if>
+			<if test="saleObject != null and saleObject != ''" >
+				AND SALE_OBJECT = #{saleObject,jdbcType=VARCHAR}
+			</if>
+			<if test="revenue != null and revenue != ''" >
+				AND REVENUE = #{revenue,jdbcType=NUMERIC}
+			</if>
+			<if test="currencyRevenue != null and currencyRevenue != ''" >
+				AND CURRENCY_REVENUE = #{currencyRevenue,jdbcType=VARCHAR}
+			</if>
+			<if test="cost != null and cost != ''" >
+				AND COST = #{cost,jdbcType=NUMERIC}
+			</if>
+			<if test="currencyCost != null and currencyCost != ''" >
+				AND CURRENCY_COST = #{currencyCost,jdbcType=VARCHAR}
+			</if>
+			<if test="profit != null and profit != ''" >
+				AND PROFIT = #{profit,jdbcType=NUMERIC}
+			</if>
+			<if test="currencyProfit != null and currencyProfit != ''" >
+				AND CURRENCY_PROFIT = #{currencyProfit,jdbcType=VARCHAR}
+			</if>
+			<if test="sharesRate != null and sharesRate != ''" >
+				AND SHARES_RATE = #{sharesRate,jdbcType=NUMERIC}
+			</if>
+			<if test="sellShares != null and sellShares != ''" >
+				AND SELL_SHARES = #{sellShares,jdbcType=NUMERIC}
+			</if>
+			<if test="price != null and price != ''" >
+				AND PRICE = #{price,jdbcType=NUMERIC}
+			</if>
+			<if test="currencyPrice != null and currencyPrice != ''" >
+				AND CURRENCY_PRICE = #{currencyPrice,jdbcType=VARCHAR}
+			</if>
+			<if test="earning != null and earning != ''" >
+				AND EARNING = #{earning,jdbcType=NUMERIC}
+			</if>
+			<if test="currencyEarning != null and currencyEarning != ''" >
+				AND CURRENCY_EARNING = #{currencyEarning,jdbcType=VARCHAR}
+			</if>
+			<if test="company != null and company != ''" >
+				AND COMPANY = #{company,jdbcType=VARCHAR}
+			</if>
+			<if test="holderId != null and holderId != ''" >
+				AND HOLDER_ID = #{holderId,jdbcType=VARCHAR}
+			</if>
+			<if test="docList != null and docList != ''" >
+				AND DOC_LIST = #{docList,jdbcType=VARCHAR}
+			</if>
+			<if test="appReasons != null and appReasons != ''" >
+				AND APP_REASONS = #{appReasons,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="rowId != null and rowId != ''" >
+				AND ROW_ID = #{rowId,jdbcType=VARCHAR}
+			</if>
+			<if test="processversioninstanceguid != null and processversioninstanceguid != ''" >
+				AND PROCESSVERSIONINSTANCEGUID = #{processversioninstanceguid,jdbcType=VARCHAR}
+			</if>
+			<if test="rmbCost != null and rmbCost != ''" >
+				AND RMB_COST = #{rmbCost,jdbcType=NUMERIC}
+			</if>
+			<if test="afterFunderId != null and afterFunderId != ''" >
+				AND AFTER_FUNDER_ID = #{afterFunderId,jdbcType=VARCHAR}
+			</if>
+			<if test="objectId != null and objectId != ''" >
+				AND OBJECT_ID = #{objectId,jdbcType=VARCHAR}
+			</if>
+			<if test="projObjectName != null and projObjectName != ''" >
+				AND PROJ_OBJECT_NAME = #{projObjectName,jdbcType=VARCHAR}
+			</if>
+		</where>
+		order by CREATE_DT desc
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="ProjQuitApplResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<select id="seleSumRevenue" parameterType="java.lang.String" resultType="Double"  >
+         select sum(REVENUE) from TZ_T_PROJ_QUIT_APPL where STATUS='0' and IA_ID=#{projId}
+	</select>
+	<!-- end autocreate -->
+
+	<update id="updateInfo" parameterType="com.ppmg.ei.model.ProjQuitApplModel">
+		UPDATE TZ_T_PROJ_QUIT_APPL
+		<set>
+			<if test="appId != null and appId != ''" >
+				APP_ID = #{appId,jdbcType=VARCHAR},
+			</if>
+			<if test="iaId != null and iaId != ''" >
+				IA_ID = #{iaId,jdbcType=VARCHAR},
+			</if>
+			<if test="appUser != null and appUser != ''" >
+				APP_USER = #{appUser,jdbcType=VARCHAR},
+			</if>
+			<if test="appDt != null" >
+				APP_DT = #{appDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="quitType != null and quitType != ''" >
+				QUIT_TYPE = #{quitType,jdbcType=VARCHAR},
+			</if>
+			<if test="quitWay != null and quitWay != ''" >
+				QUIT_WAY = #{quitWay,jdbcType=VARCHAR},
+			</if>
+			<if test="quitDt != null" >
+				QUIT_DT = #{quitDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="saleObject != null and saleObject != ''" >
+				SALE_OBJECT = #{saleObject,jdbcType=VARCHAR},
+			</if>
+			<if test="revenue != null and revenue != ''" >
+				REVENUE = #{revenue,jdbcType=NUMERIC},
+			</if>
+			<if test="currencyRevenue != null and currencyRevenue != ''" >
+				CURRENCY_REVENUE = #{currencyRevenue,jdbcType=VARCHAR},
+			</if>
+			<if test="cost != null and cost != ''" >
+				COST = #{cost,jdbcType=NUMERIC},
+			</if>
+			<if test="currencyCost != null and currencyCost != ''" >
+				CURRENCY_COST = #{currencyCost,jdbcType=VARCHAR},
+			</if>
+			<if test="profit != null and profit != ''" >
+				PROFIT = #{profit,jdbcType=NUMERIC},
+			</if>
+			<if test="currencyProfit != null and currencyProfit != ''" >
+				CURRENCY_PROFIT = #{currencyProfit,jdbcType=VARCHAR},
+			</if>
+			<if test="sharesRate != null and sharesRate != ''" >
+				SHARES_RATE = #{sharesRate,jdbcType=NUMERIC},
+			</if>
+			<if test="sellShares != null and sellShares != ''" >
+				SELL_SHARES = #{sellShares,jdbcType=NUMERIC},
+			</if>
+			<if test="price != null and price != ''" >
+				PRICE = #{price,jdbcType=NUMERIC},
+			</if>
+			<if test="currencyPrice != null and currencyPrice != ''" >
+				CURRENCY_PRICE = #{currencyPrice,jdbcType=VARCHAR},
+			</if>
+			<if test="earning != null and earning != ''" >
+				EARNING = #{earning,jdbcType=NUMERIC},
+			</if>
+			<if test="currencyEarning != null and currencyEarning != ''" >
+				CURRENCY_EARNING = #{currencyEarning,jdbcType=VARCHAR},
+			</if>
+			<if test="company != null and company != ''" >
+				COMPANY = #{company,jdbcType=VARCHAR},
+			</if>
+			<if test="holderId != null and holderId != ''" >
+				HOLDER_ID = #{holderId,jdbcType=VARCHAR},
+			</if>
+			<if test="docList != null and docList != ''" >
+				DOC_LIST = #{docList,jdbcType=VARCHAR},
+			</if>
+			<if test="appReasons != null and appReasons != ''" >
+				APP_REASONS = #{appReasons,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null and remark != ''" >
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				ATTA_FILE = #{attaFile,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR},
+			</if>
+			<if test="rowId != null and rowId != ''" >
+				ROW_ID = #{rowId,jdbcType=VARCHAR},
+			</if>
+			<if test="processversioninstanceguid != null and processversioninstanceguid != ''" >
+				PROCESSVERSIONINSTANCEGUID = #{processversioninstanceguid,jdbcType=VARCHAR},
+			</if>
+			<if test="rmbCost != null and rmbCost != ''" >
+				RMB_COST = #{rmbCost,jdbcType=NUMERIC},
+			</if>
+			<if test="afterFunderId != null and afterFunderId != ''" >
+				AFTER_FUNDER_ID = #{afterFunderId,jdbcType=VARCHAR},
+			</if>
+			<if test="objectId != null and objectId != ''" >
+				OBJECT_ID = #{objectId,jdbcType=VARCHAR},
+			</if>
+			<if test="projObjectName != null and projObjectName != ''" >
+				PROJ_OBJECT_NAME = #{projObjectName,jdbcType=VARCHAR},
+			</if>
+				IS_DISTRIBUTE = #{isDistribute,jdbcType=VARCHAR},
+				DISTRIBUTE_MONEY = #{distributeMoney,jdbcType=NUMERIC},
+				DISTRIBUTE_GOV_MONEY = #{distributeGovMoney,jdbcType=NUMERIC},
+				DISTRIBUTE_DT = #{distributeDt,jdbcType=TIMESTAMP}
+
+		</set>
+		WHERE APP_ID = #{appId,jdbcType=VARCHAR}
+	</update>
+</mapper>

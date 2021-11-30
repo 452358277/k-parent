@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Expert">
+    <!-- start autocreate -->
+
+    <resultMap id="ExpertResult" type="com.ppmg.ei.model.ExpertModel">
+        <result column="EXPERT_ID" property="expertId" jdbcType="VARCHAR"/>
+        <result column="EXPERT_NO" property="expertNo" jdbcType="VARCHAR"/>
+        <result column="EXPERT_NAME" property="expertName" jdbcType="VARCHAR"/>
+        <result column="SEX" property="sex" jdbcType="VARCHAR"/>
+        <result column="BIRTHDAY" property="birthday" jdbcType="TIMESTAMP"/>
+        <result column="UNIVERSITY" property="university" jdbcType="VARCHAR"/>
+        <result column="EDUCATION" property="education" jdbcType="VARCHAR"/>
+        <result column="MAJOR" property="major" jdbcType="VARCHAR"/>
+        <result column="COMPANY" property="company" jdbcType="VARCHAR"/>
+        <result column="POSITION" property="position" jdbcType="VARCHAR"/>
+        <result column="CONTRACT_ADDR" property="contractAddr" jdbcType="VARCHAR"/>
+        <result column="TECH_TITLE" property="techTitle" jdbcType="VARCHAR"/>
+        <result column="COMPANY_PHONE" property="companyPhone" jdbcType="VARCHAR"/>
+        <result column="FAX" property="fax" jdbcType="VARCHAR"/>
+        <result column="EMAIL" property="email" jdbcType="VARCHAR"/>
+        <result column="MOBILE_PHONE" property="mobilePhone" jdbcType="VARCHAR"/>
+        <result column="EDUCATION_DETAIL" property="educationDetail" jdbcType="VARCHAR"/>
+        <result column="WORK_DETAIL" property="workDetail" jdbcType="VARCHAR"/>
+        <result column="PERFORMANCE" property="performance" jdbcType="VARCHAR"/>
+        <result column="PROJ_DETAIL" property="projDetail" jdbcType="VARCHAR"/>
+        <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR"/>
+        <result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP"/>
+        <result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR"/>
+        <result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP"/>
+        <result column="SPE_DETAIL" property="speDetail" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="ExpertListResult" type="com.ppmg.ei.model.ExpertListModel">
+        <result column="EXPERT_ID" property="expertId" jdbcType="VARCHAR"/>
+        <result column="EXPERT_NO" property="expertNo" jdbcType="VARCHAR"/>
+        <result column="EXPERT_NAME" property="expertName" jdbcType="VARCHAR"/>
+        <result column="SEX" property="sex" jdbcType="VARCHAR"/>
+        <result column="BIRTHDAY" property="birthday" jdbcType="TIMESTAMP"/>
+        <result column="UNIVERSITY" property="university" jdbcType="VARCHAR"/>
+        <result column="EDUCATION" property="education" jdbcType="VARCHAR"/>
+        <result column="MAJOR" property="major" jdbcType="VARCHAR"/>
+        <result column="COMPANY" property="company" jdbcType="VARCHAR"/>
+        <result column="POSITION" property="position" jdbcType="VARCHAR"/>
+        <result column="CONTRACT_ADDR" property="contractAddr" jdbcType="VARCHAR"/>
+        <result column="TECH_TITLE" property="techTitle" jdbcType="VARCHAR"/>
+        <result column="COMPANY_PHONE" property="companyPhone" jdbcType="VARCHAR"/>
+        <result column="FAX" property="fax" jdbcType="VARCHAR"/>
+        <result column="EMAIL" property="email" jdbcType="VARCHAR"/>
+        <result column="MOBILE_PHONE" property="mobilePhone" jdbcType="VARCHAR"/>
+        <result column="EDUCATION_DETAIL" property="educationDetail" jdbcType="VARCHAR"/>
+        <result column="WORK_DETAIL" property="workDetail" jdbcType="VARCHAR"/>
+        <result column="PERFORMANCE" property="performance" jdbcType="VARCHAR"/>
+        <result column="PROJ_DETAIL" property="projDetail" jdbcType="VARCHAR"/>
+        <result column="SPE_DETAIL" property="speDetail" jdbcType="VARCHAR"/>
+        <collection property="labelModels" ofType="com.ppmg.ei.model.ExpertLabelModel">
+            <result column="PK_ID" property="pkId" jdbcType="VARCHAR" />
+            <result column="LABEL" property="label" jdbcType="VARCHAR" />
+        </collection>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.ppmg.ei.model.ExpertModel">
+		INSERT INTO BD_T_FUND_EXPERT (EXPERT_ID,EXPERT_NO,EXPERT_NAME,SEX,BIRTHDAY,UNIVERSITY,EDUCATION,MAJOR,COMPANY,POSITION,CONTRACT_ADDR,TECH_TITLE,COMPANY_PHONE,FAX,EMAIL,MOBILE_PHONE,EDUCATION_DETAIL,WORK_DETAIL,PERFORMANCE,PROJ_DETAIL,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,SPE_DETAIL) values(#{expertId,jdbcType=VARCHAR},#{expertNo,jdbcType=VARCHAR},#{expertName,jdbcType=VARCHAR},#{sex,jdbcType=VARCHAR},#{birthday,jdbcType=TIMESTAMP},#{university,jdbcType=VARCHAR},#{education,jdbcType=VARCHAR},#{major,jdbcType=VARCHAR},#{company,jdbcType=VARCHAR},#{position,jdbcType=VARCHAR},#{contractAddr,jdbcType=VARCHAR},#{techTitle,jdbcType=VARCHAR},#{companyPhone,jdbcType=VARCHAR},#{fax,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},#{mobilePhone,jdbcType=VARCHAR},#{educationDetail,jdbcType=VARCHAR},#{workDetail,jdbcType=VARCHAR},#{performance,jdbcType=VARCHAR},#{projDetail,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{speDetail,jdbcType=VARCHAR})
+	</insert>
+
+    <insert id="insertBatch" parameterType="List">
+        INSERT INTO BD_T_FUND_EXPERT
+        (EXPERT_ID,EXPERT_NO,EXPERT_NAME,SEX,BIRTHDAY,UNIVERSITY,EDUCATION,MAJOR,COMPANY,POSITION,CONTRACT_ADDR,TECH_TITLE,COMPANY_PHONE,FAX,EMAIL,MOBILE_PHONE,EDUCATION_DETAIL,WORK_DETAIL,PERFORMANCE,PROJ_DETAIL,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,SPE_DETAIL)
+        <foreach collection="list" item="item" index="index" separator="union all">
+            ( select
+            #{item.expertId,jdbcType=VARCHAR},
+            #{item.expertNo,jdbcType=VARCHAR},
+            #{item.expertName,jdbcType=VARCHAR},
+            #{item.sex,jdbcType=VARCHAR},
+            #{item.birthday,jdbcType=TIMESTAMP},
+            #{item.university,jdbcType=VARCHAR},
+            #{item.education,jdbcType=VARCHAR},
+            #{item.major,jdbcType=VARCHAR},
+            #{item.company,jdbcType=VARCHAR},
+            #{item.position,jdbcType=VARCHAR},
+            #{item.contractAddr,jdbcType=VARCHAR},
+            #{item.techTitle,jdbcType=VARCHAR},
+            #{item.companyPhone,jdbcType=VARCHAR},
+            #{item.fax,jdbcType=VARCHAR},
+            #{item.email,jdbcType=VARCHAR},
+            #{item.mobilePhone,jdbcType=VARCHAR},
+            #{item.educationDetail,jdbcType=VARCHAR},
+            #{item.workDetail,jdbcType=VARCHAR},
+            #{item.performance,jdbcType=VARCHAR},
+            #{item.projDetail,jdbcType=VARCHAR},
+            #{item.createBy,jdbcType=VARCHAR},
+            #{item.createDt,jdbcType=TIMESTAMP},
+            #{item.updateBy,jdbcType=VARCHAR},
+            #{item.updateDt,jdbcType=TIMESTAMP},
+            #{item.speDetail,jdbcType=VARCHAR}
+            from dual)
+        </foreach>
+    </insert>
+
+    <delete id="deleteById" parameterType="String">
+		DELETE FROM  BD_T_FUND_EXPERT WHERE EXPERT_ID = #{expertId,jdbcType=VARCHAR}
+	</delete>
+
+    <delete id="deletePK" parameterType="com.ppmg.ei.model.ExpertModel">
+        DELETE FROM BD_T_FUND_EXPERT
+        <where>
+            <if test="expertId != null and expertId != ''">
+                EXPERT_ID = #{expertId,jdbcType=VARCHAR}
+            </if>
+            <if test="expertNo != null and expertNo != ''">
+                AND EXPERT_NO = #{expertNo,jdbcType=VARCHAR}
+            </if>
+            <if test="expertName != null and expertName != ''">
+                AND EXPERT_NAME = #{expertName,jdbcType=VARCHAR}
+            </if>
+            <if test="sex != null and sex != ''">
+                AND SEX = #{sex,jdbcType=VARCHAR}
+            </if>
+            <if test="birthday != null">
+                AND BIRTHDAY = #{birthday,jdbcType=VARCHAR}
+            </if>
+            <if test="university != null and university != ''">
+                AND UNIVERSITY = #{university,jdbcType=VARCHAR}
+            </if>
+            <if test="education != null and education != ''">
+                AND EDUCATION = #{education,jdbcType=VARCHAR}
+            </if>
+            <if test="major != null and major != ''">
+                AND MAJOR = #{major,jdbcType=VARCHAR}
+            </if>
+            <if test="company != null and company != ''">
+                AND COMPANY = #{company,jdbcType=VARCHAR}
+            </if>
+            <if test="position != null and position != ''">
+                AND POSITION = #{position,jdbcType=VARCHAR}
+            </if>
+            <if test="contractAddr != null and contractAddr != ''">
+                AND CONTRACT_ADDR = #{contractAddr,jdbcType=VARCHAR}
+            </if>
+            <if test="techTitle != null and techTitle != ''">
+                AND TECH_TITLE = #{techTitle,jdbcType=VARCHAR}
+            </if>
+            <if test="companyPhone != null and companyPhone != ''">
+                AND COMPANY_PHONE = #{companyPhone,jdbcType=VARCHAR}
+            </if>
+            <if test="fax != null and fax != ''">
+                AND FAX = #{fax,jdbcType=VARCHAR}
+            </if>
+            <if test="email != null and email != ''">
+                AND EMAIL = #{email,jdbcType=VARCHAR}
+            </if>
+            <if test="mobilePhone != null and mobilePhone != ''">
+                AND MOBILE_PHONE = #{mobilePhone,jdbcType=VARCHAR}
+            </if>
+            <if test="educationDetail != null and educationDetail != ''">
+                AND EDUCATION_DETAIL = #{educationDetail,jdbcType=VARCHAR}
+            </if>
+            <if test="workDetail != null and workDetail != ''">
+                AND WORK_DETAIL = #{workDetail,jdbcType=VARCHAR}
+            </if>
+            <if test="performance != null and performance != ''">
+                AND PERFORMANCE = #{performance,jdbcType=VARCHAR}
+            </if>
+            <if test="projDetail != null and projDetail != ''">
+                AND PROJ_DETAIL = #{projDetail,jdbcType=VARCHAR}
+            </if>
+            <if test="createBy != null and createBy != ''">
+                AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+            </if>
+            <if test="createDt != null">
+                AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updateDt != null">
+                AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+            </if>
+            <if test="speDetail != null and speDetail != ''">
+                AND SPE_DETAIL = #{speDetail,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </delete>
+
+    <delete id="deleteBatch" parameterType="List">
+        DELETE FROM BD_T_FUND_EXPERT WHERE EXPERT_ID IN
+        <foreach collection="array" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <update id="updatePK" parameterType="com.ppmg.ei.model.ExpertModel">
+        UPDATE BD_T_FUND_EXPERT
+        <set>
+            <if test="expertId != null and expertId != ''">
+                EXPERT_ID = #{expertId,jdbcType=VARCHAR},
+            </if>
+            <if test="expertNo != null and expertNo != ''">
+                EXPERT_NO = #{expertNo,jdbcType=VARCHAR},
+            </if>
+            <if test="expertName != null and expertName != ''">
+                EXPERT_NAME = #{expertName,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null and sex != ''">
+                SEX = #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null">
+                BIRTHDAY = #{birthday,jdbcType=TIMESTAMP},
+            </if>
+            <if test="university != null and university != ''">
+                UNIVERSITY = #{university,jdbcType=VARCHAR},
+            </if>
+            <if test="education != null and education != ''">
+                EDUCATION = #{education,jdbcType=VARCHAR},
+            </if>
+            <if test="major != null and major != ''">
+                MAJOR = #{major,jdbcType=VARCHAR},
+            </if>
+            <if test="company != null and company != ''">
+                COMPANY = #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="position != null and position != ''">
+                POSITION = #{position,jdbcType=VARCHAR},
+            </if>
+            <if test="contractAddr != null and contractAddr != ''">
+                CONTRACT_ADDR = #{contractAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="techTitle != null and techTitle != ''">
+                TECH_TITLE = #{techTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="companyPhone != null and companyPhone != ''">
+                COMPANY_PHONE = #{companyPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="fax != null and fax != ''">
+                FAX = #{fax,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null and email != ''">
+                EMAIL = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="mobilePhone != null and mobilePhone != ''">
+                MOBILE_PHONE = #{mobilePhone,jdbcType=VARCHAR},
+            </if>
+            <if test="educationDetail != null and educationDetail != ''">
+                EDUCATION_DETAIL = #{educationDetail,jdbcType=VARCHAR},
+            </if>
+            <if test="workDetail != null and workDetail != ''">
+                WORK_DETAIL = #{workDetail,jdbcType=VARCHAR},
+            </if>
+            <if test="performance != null and performance != ''">
+                PERFORMANCE = #{performance,jdbcType=VARCHAR},
+            </if>
+            <if test="projDetail != null and projDetail != ''">
+                PROJ_DETAIL = #{projDetail,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null and createBy != ''">
+                CREATE_BY = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createDt != null">
+                CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDt != null">
+                UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="speDetail != null and speDetail != ''">
+                SPE_DETAIL = #{speDetail,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE EXPERT_ID = #{expertId,jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectById" parameterType="String" resultType="com.ppmg.ei.model.ExpertModel">
+		SELECT *  FROM EI.BD_T_FUND_EXPERT WHERE EXPERT_ID = #{expertId,jdbcType=VARCHAR}
+	</select>
+
+
+    <select id="selectBy" parameterType="com.ppmg.ei.model.ExpertModel" resultMap="ExpertResult">
+        SELECT * FROM BD_T_FUND_EXPERT
+        <where>
+            <if test="expertId != null and expertId != ''">
+                EXPERT_ID = #{expertId,jdbcType=VARCHAR}
+            </if>
+            <if test="expertNo != null and expertNo != ''">
+                AND EXPERT_NO = #{expertNo,jdbcType=VARCHAR}
+            </if>
+            <if test="expertName != null and expertName != ''">
+                AND EXPERT_NAME = #{expertName,jdbcType=VARCHAR}
+            </if>
+            <if test="sex != null and sex != ''">
+                AND SEX = #{sex,jdbcType=VARCHAR}
+            </if>
+            <if test="birthday != null">
+                AND BIRTHDAY = #{birthday,jdbcType=VARCHAR}
+            </if>
+            <if test="university != null and university != ''">
+                AND UNIVERSITY = #{university,jdbcType=VARCHAR}
+            </if>
+            <if test="education != null and education != ''">
+                AND EDUCATION = #{education,jdbcType=VARCHAR}
+            </if>
+            <if test="major != null and major != ''">
+                AND MAJOR = #{major,jdbcType=VARCHAR}
+            </if>
+            <if test="company != null and company != ''">
+                AND COMPANY = #{company,jdbcType=VARCHAR}
+            </if>
+            <if test="position != null and position != ''">
+                AND POSITION = #{position,jdbcType=VARCHAR}
+            </if>
+            <if test="contractAddr != null and contractAddr != ''">
+                AND CONTRACT_ADDR = #{contractAddr,jdbcType=VARCHAR}
+            </if>
+            <if test="techTitle != null and techTitle != ''">
+                AND TECH_TITLE = #{techTitle,jdbcType=VARCHAR}
+            </if>
+            <if test="companyPhone != null and companyPhone != ''">
+                AND COMPANY_PHONE = #{companyPhone,jdbcType=VARCHAR}
+            </if>
+            <if test="fax != null and fax != ''">
+                AND FAX = #{fax,jdbcType=VARCHAR}
+            </if>
+            <if test="email != null and email != ''">
+                AND EMAIL = #{email,jdbcType=VARCHAR}
+            </if>
+            <if test="mobilePhone != null and mobilePhone != ''">
+                AND MOBILE_PHONE = #{mobilePhone,jdbcType=VARCHAR}
+            </if>
+            <if test="educationDetail != null and educationDetail != ''">
+                AND EDUCATION_DETAIL = #{educationDetail,jdbcType=VARCHAR}
+            </if>
+            <if test="workDetail != null and workDetail != ''">
+                AND WORK_DETAIL = #{workDetail,jdbcType=VARCHAR}
+            </if>
+            <if test="performance != null and performance != ''">
+                AND PERFORMANCE = #{performance,jdbcType=VARCHAR}
+            </if>
+            <if test="projDetail != null and projDetail != ''">
+                AND PROJ_DETAIL = #{projDetail,jdbcType=VARCHAR}
+            </if>
+            <if test="createBy != null and createBy != ''">
+                AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+            </if>
+            <if test="createDt != null">
+                AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updateDt != null">
+                AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+            </if>
+            <if test="speDetail != null and speDetail != ''">
+                AND SPE_DETAIL = #{speDetail,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <sql id="searchSql">
+        SELECT * FROM BD_T_FUND_EXPERT
+        <where>
+            <include refid="searchCondition.searchClause"/>
+        </where>
+    </sql>
+
+    <select id="selectListPage" resultType="com.ppmg.ei.model.ExpertListModel"
+            parameterType="com.founder.ssm.core.common.SearchCondition">
+        SELECT
+        BTFE.*
+        FROM BD_T_FUND_EXPERT BTFE
+        <where>
+            1 = 1
+            <if test="searchBean.keyWord != null and searchBean.keyWord != ''">
+                AND BTFE.EXPERT_NAME LIKE CONCAT(CONCAT ('%',#{searchBean.keyWord,jdbcType=VARCHAR}),'%')
+            </if>
+        </where>
+        ORDER BY BTFE.CREATE_DT DESC
+    </select>
+
+
+    <select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+        SELECT
+        COUNT(DISTINCT (BTFE.EXPERT_ID))
+        FROM BD_T_FUND_EXPERT BTFE
+        LEFT JOIN BD_T_FUND_EXPERT_LABEL BTFEL ON BTFE.EXPERT_ID = BTFEL.EXPERT_ID
+        <where>
+            1 = 1
+            <if test="searchBean.keyWord != null and searchBean.keyWord != ''">
+                AND BTFE.EXPERT_NAME LIKE  CONCAT(CONCAT ('%',#{searchBean.keyWord,jdbcType=VARCHAR}),'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.ExpertModel">
+        SELECT COUNT(*) FROM BD_T_FUND_EXPERT
+        <where>
+            <if test="expertId != null and expertId != ''">
+                EXPERT_ID = #{expertId,jdbcType=VARCHAR}
+            </if>
+            <if test="expertNo != null and expertNo != ''">
+                AND EXPERT_NO = #{expertNo,jdbcType=VARCHAR}
+            </if>
+            <if test="expertName != null and expertName != ''">
+                AND EXPERT_NAME = #{expertName,jdbcType=VARCHAR}
+            </if>
+            <if test="sex != null and sex != ''">
+                AND SEX = #{sex,jdbcType=VARCHAR}
+            </if>
+            <if test="birthday != null">
+                AND BIRTHDAY = #{birthday,jdbcType=VARCHAR}
+            </if>
+            <if test="university != null and university != ''">
+                AND UNIVERSITY = #{university,jdbcType=VARCHAR}
+            </if>
+            <if test="education != null and education != ''">
+                AND EDUCATION = #{education,jdbcType=VARCHAR}
+            </if>
+            <if test="major != null and major != ''">
+                AND MAJOR = #{major,jdbcType=VARCHAR}
+            </if>
+            <if test="company != null and company != ''">
+                AND COMPANY = #{company,jdbcType=VARCHAR}
+            </if>
+            <if test="position != null and position != ''">
+                AND POSITION = #{position,jdbcType=VARCHAR}
+            </if>
+            <if test="contractAddr != null and contractAddr != ''">
+                AND CONTRACT_ADDR = #{contractAddr,jdbcType=VARCHAR}
+            </if>
+            <if test="techTitle != null and techTitle != ''">
+                AND TECH_TITLE = #{techTitle,jdbcType=VARCHAR}
+            </if>
+            <if test="companyPhone != null and companyPhone != ''">
+                AND COMPANY_PHONE = #{companyPhone,jdbcType=VARCHAR}
+            </if>
+            <if test="fax != null and fax != ''">
+                AND FAX = #{fax,jdbcType=VARCHAR}
+            </if>
+            <if test="email != null and email != ''">
+                AND EMAIL = #{email,jdbcType=VARCHAR}
+            </if>
+            <if test="mobilePhone != null and mobilePhone != ''">
+                AND MOBILE_PHONE = #{mobilePhone,jdbcType=VARCHAR}
+            </if>
+            <if test="educationDetail != null and educationDetail != ''">
+                AND EDUCATION_DETAIL = #{educationDetail,jdbcType=VARCHAR}
+            </if>
+            <if test="workDetail != null and workDetail != ''">
+                AND WORK_DETAIL = #{workDetail,jdbcType=VARCHAR}
+            </if>
+            <if test="performance != null and performance != ''">
+                AND PERFORMANCE = #{performance,jdbcType=VARCHAR}
+            </if>
+            <if test="projDetail != null and projDetail != ''">
+                AND PROJ_DETAIL = #{projDetail,jdbcType=VARCHAR}
+            </if>
+            <if test="createBy != null and createBy != ''">
+                AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+            </if>
+            <if test="createDt != null">
+                AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updateDt != null">
+                AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+            </if>
+            <if test="speDetail != null and speDetail != ''">
+                AND SPE_DETAIL = #{speDetail,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectList" parameterType="com.ppmg.ei.model.ExpertModel"
+            resultType="com.ppmg.ei.model.ExpertListModel">
+        SELECT
+        BTFE.EXPERT_ID,
+        BTFE.EXPERT_NAME,
+        BTFE.SEX,
+        BTFE.BIRTHDAY,
+        BTFE.UNIVERSITY,
+        BTFE.EDUCATION,
+        BTFE.MAJOR,
+        BTFE.COMPANY,
+        BTFE.POSITION,
+        BTFE.CONTRACT_ADDR,
+        BTFE.TECH_TITLE,
+        BTFE.COMPANY_PHONE,
+        BTFE.FAX,
+        BTFE.EMAIL,
+        BTFE.MOBILE_PHONE,
+        BTFE.EDUCATION_DETAIL,
+        BTFE.WORK_DETAIL,
+        BTFE.PERFORMANCE,
+        BTFE.PROJ_DETAIL,
+        BTFE.SPE_DETAIL,
+        BTFEL.LABEL,
+        BTFEL.REMARK,
+        BCTC.CODE_NAME AS labelName
+        FROM BD_T_FUND_EXPERT BTFE
+        LEFT JOIN BD_T_FUND_EXPERT_LABEL BTFEL ON BTFE.EXPERT_ID = BTFEL.EXPERT_ID
+        LEFT JOIN BASE.COMM_T_CODE BCTC ON BCTC.CODE_VALUE = BTFEL.LABEL
+        <where>
+            BTFE.EXPERT_ID = #{expertId,jdbcType=VARCHAR} AND BCTC.PARENT_ID='9024'
+        </where>
+    </select>
+
+    <select id="selectSql2Obj" parameterType="java.lang.String" resultMap="ExpertResult">
+		${value}
+	</select>
+    <select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+    <update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+    <select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+
+    <select id="selectCodeName" parameterType="String" resultType="com.ppmg.ei.model.CommTCodeModel">
+        SELECT
+        BCTC.CODE_VALUE,
+        BCTC.CODE_NAME
+        FROM BASE.COMM_T_CODE BCTC
+        <where>
+            BCTC.PARENT_ID='9024'
+        </where>
+    </select>
+    <!-- end autocreate -->
+</mapper>

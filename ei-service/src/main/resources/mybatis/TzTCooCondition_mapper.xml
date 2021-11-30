@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TzTCooCondition">
+	<!-- start autocreate -->
+
+	<resultMap id="TzTCooConditionResult" type="com.ppmg.ei.model.TzTCooConditionModel">
+		<result column="CONDITION_ID" property="conditionId" jdbcType="VARCHAR" />
+		<result column="FUND_NAME" property="fundName" jdbcType="VARCHAR" />
+		<result column="FUND_SIZE" property="fundSize" jdbcType="NUMERIC" />
+		<result column="MAN_DEP" property="manDep" jdbcType="VARCHAR" />
+		<result column="REGISTRANT" property="registrant" jdbcType="VARCHAR" />
+		<result column="REG_DATE" property="regDate" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="METHOD_FILE" property="methodFile" jdbcType="VARCHAR" />
+		<result column="CONDITION_FILE" property="conditionFile" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="CARRIER" property="carrier" jdbcType="VARCHAR" />
+		<result column="CARRIER_NAME" property="carrierName" jdbcType="VARCHAR" />
+		<result column="CARRIER_TYPE" property="carrierType" jdbcType="VARCHAR" />
+		<result column="PROCESS_INST_ID" property="processInstId" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="MEETING_FILE" property="meetingFile" jdbcType="VARCHAR" />
+		<result column="FUND_ID" property="fundId" jdbcType="VARCHAR" />
+		<result column="PLAN_SIZE" property="planSize" jdbcType="NUMERIC" />
+		<result column="PLAN_NUM" property="planNum" jdbcType="NUMERIC" />
+		<result column="START_DATE" property="startDate" jdbcType="TIMESTAMP" />
+		<result column="END_DATE" property="endDate" jdbcType="TIMESTAMP" />
+		<result column="SPECIAL_FILE" property="specialFile" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.TzTCooConditionModel">
+		INSERT INTO TZ_T_COO_CONDITION (CONDITION_ID,FUND_NAME,FUND_SIZE,MAN_DEP,REGISTRANT,REG_DATE,REMARK,METHOD_FILE,CONDITION_FILE,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,CARRIER,CARRIER_NAME,CARRIER_TYPE,PROCESS_INST_ID,STATUS,MEETING_FILE,FUND_ID,PLAN_SIZE,PLAN_NUM,START_DATE,END_DATE,SPECIAL_FILE) values(#{conditionId,jdbcType=VARCHAR},#{fundName,jdbcType=VARCHAR},#{fundSize,jdbcType=NUMERIC},#{manDep,jdbcType=VARCHAR},#{registrant,jdbcType=VARCHAR},#{regDate,jdbcType=TIMESTAMP},#{remark,jdbcType=VARCHAR},#{methodFile,jdbcType=VARCHAR},#{conditionFile,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{carrier,jdbcType=VARCHAR},#{carrierName,jdbcType=VARCHAR},#{carrierType,jdbcType=VARCHAR},#{processInstId,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{meetingFile,jdbcType=VARCHAR},#{fundId,jdbcType=VARCHAR},#{planSize,jdbcType=NUMERIC},#{planNum,jdbcType=NUMERIC},#{startDate,jdbcType=TIMESTAMP},#{endDate,jdbcType=TIMESTAMP},#{specialFile,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO TZ_T_COO_CONDITION (CONDITION_ID,FUND_NAME,FUND_SIZE,MAN_DEP,REGISTRANT,REG_DATE,REMARK,METHOD_FILE,CONDITION_FILE,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,CARRIER,CARRIER_NAME,CARRIER_TYPE,PROCESS_INST_ID,STATUS,MEETING_FILE,FUND_ID,PLAN_SIZE,PLAN_NUM,START_DATE,END_DATE,SPECIAL_FILE)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.conditionId,jdbcType=VARCHAR},
+				#{item.fundName,jdbcType=VARCHAR},
+				#{item.fundSize,jdbcType=NUMERIC},
+				#{item.manDep,jdbcType=VARCHAR},
+				#{item.registrant,jdbcType=VARCHAR},
+				#{item.regDate,jdbcType=TIMESTAMP},
+				#{item.remark,jdbcType=VARCHAR},
+				#{item.methodFile,jdbcType=VARCHAR},
+				#{item.conditionFile,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+				#{item.carrier,jdbcType=VARCHAR},
+				#{item.carrierName,jdbcType=VARCHAR},
+				#{item.carrierType,jdbcType=VARCHAR},
+				#{item.processInstId,jdbcType=VARCHAR},
+				#{item.status,jdbcType=VARCHAR},
+				#{item.meetingFile,jdbcType=VARCHAR},
+				#{item.fundId,jdbcType=VARCHAR},
+				#{item.planSize,jdbcType=NUMERIC},
+				#{item.planNum,jdbcType=NUMERIC},
+				#{item.startDate,jdbcType=TIMESTAMP},
+				#{item.endDate,jdbcType=TIMESTAMP},
+				#{item.specialFile,jdbcType=VARCHAR}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  TZ_T_COO_CONDITION WHERE CONDITION_ID = #{conditionId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.TzTCooConditionModel">
+		DELETE FROM TZ_T_COO_CONDITION
+		<where>
+			<if test="conditionId != null and conditionId != ''" >
+				CONDITION_ID = #{conditionId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundName != null and fundName != ''" >
+				AND FUND_NAME = #{fundName,jdbcType=VARCHAR}
+			</if>
+			<if test="fundSize != null and fundSize != ''" >
+				AND FUND_SIZE = #{fundSize,jdbcType=NUMERIC}
+			</if>
+			<if test="manDep != null and manDep != ''" >
+				AND MAN_DEP = #{manDep,jdbcType=VARCHAR}
+			</if>
+			<if test="registrant != null and registrant != ''" >
+				AND REGISTRANT = #{registrant,jdbcType=VARCHAR}
+			</if>
+			<if test="regDate != null" >
+				AND REG_DATE = #{regDate,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="methodFile != null and methodFile != ''" >
+				AND METHOD_FILE = #{methodFile,jdbcType=VARCHAR}
+			</if>
+			<if test="conditionFile != null and conditionFile != ''" >
+				AND CONDITION_FILE = #{conditionFile,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="carrier != null and carrier != ''" >
+				AND CARRIER = #{carrier,jdbcType=VARCHAR}
+			</if>
+			<if test="carrierName != null and carrierName != ''" >
+				AND CARRIER_NAME = #{carrierName,jdbcType=VARCHAR}
+			</if>
+			<if test="carrierType != null and carrierType != ''" >
+				AND CARRIER_TYPE = #{carrierType,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingFile != null and meetingFile != ''" >
+				AND MEETING_FILE = #{meetingFile,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="planSize != null and planSize != ''" >
+				AND PLAN_SIZE = #{planSize,jdbcType=NUMERIC}
+			</if>
+			<if test="planNum != null and planNum != ''" >
+				AND PLAN_NUM = #{planNum,jdbcType=NUMERIC}
+			</if>
+			<if test="startDate != null" >
+				AND START_DATE = #{startDate,jdbcType=VARCHAR}
+			</if>
+			<if test="endDate != null" >
+				AND END_DATE = #{endDate,jdbcType=VARCHAR}
+			</if>
+			<if test="specialFile != null and specialFile != ''" >
+				AND SPECIAL_FILE = #{specialFile,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  TZ_T_COO_CONDITION WHERE CONDITION_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.TzTCooConditionModel">
+		UPDATE TZ_T_COO_CONDITION 
+		<set>
+			<if test="conditionId != null and conditionId != ''" >
+				CONDITION_ID = #{conditionId,jdbcType=VARCHAR},
+			</if>
+			<if test="fundName != null and fundName != ''" >
+				FUND_NAME = #{fundName,jdbcType=VARCHAR},
+			</if>
+			<if test="fundSize != null and fundSize != ''" >
+				FUND_SIZE = #{fundSize,jdbcType=NUMERIC},
+			</if>
+			<if test="manDep != null and manDep != ''" >
+				MAN_DEP = #{manDep,jdbcType=VARCHAR},
+			</if>
+			<if test="registrant != null and registrant != ''" >
+				REGISTRANT = #{registrant,jdbcType=VARCHAR},
+			</if>
+			<if test="regDate != null" >
+				REG_DATE = #{regDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null and remark != ''" >
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="methodFile != null and methodFile != ''" >
+				METHOD_FILE = #{methodFile,jdbcType=VARCHAR},
+			</if>
+			<if test="conditionFile != null and conditionFile != ''" >
+				CONDITION_FILE = #{conditionFile,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="carrier != null and carrier != ''" >
+				CARRIER = #{carrier,jdbcType=VARCHAR},
+			</if>
+			<if test="carrierName != null and carrierName != ''" >
+				CARRIER_NAME = #{carrierName,jdbcType=VARCHAR},
+			</if>
+			<if test="carrierType != null and carrierType != ''" >
+				CARRIER_TYPE = #{carrierType,jdbcType=VARCHAR},
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="meetingFile != null and meetingFile != ''" >
+				MEETING_FILE = #{meetingFile,jdbcType=VARCHAR},
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				FUND_ID = #{fundId,jdbcType=VARCHAR},
+			</if>
+			<if test="planSize != null and planSize != ''" >
+				PLAN_SIZE = #{planSize,jdbcType=NUMERIC},
+			</if>
+			<if test="planNum != null and planNum != ''" >
+				PLAN_NUM = #{planNum,jdbcType=NUMERIC},
+			</if>
+			<if test="startDate != null" >
+				START_DATE = #{startDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endDate != null" >
+				END_DATE = #{endDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="specialFile != null and specialFile != ''" >
+				SPECIAL_FILE = #{specialFile,jdbcType=VARCHAR},
+			</if>
+		</set>
+		WHERE CONDITION_ID = #{conditionId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="TzTCooConditionResult">
+		SELECT * FROM TZ_T_COO_CONDITION WHERE CONDITION_ID = #{conditionId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.TzTCooConditionModel" resultMap="TzTCooConditionResult">
+		SELECT * FROM TZ_T_COO_CONDITION
+		<where>
+			<if test="conditionId != null and conditionId != ''" >
+				CONDITION_ID = #{conditionId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundName != null and fundName != ''" >
+				AND FUND_NAME = #{fundName,jdbcType=VARCHAR}
+			</if>
+			<if test="fundSize != null and fundSize != ''" >
+				AND FUND_SIZE = #{fundSize,jdbcType=NUMERIC}
+			</if>
+			<if test="manDep != null and manDep != ''" >
+				AND MAN_DEP = #{manDep,jdbcType=VARCHAR}
+			</if>
+			<if test="registrant != null and registrant != ''" >
+				AND REGISTRANT = #{registrant,jdbcType=VARCHAR}
+			</if>
+			<if test="regDate != null" >
+				AND REG_DATE = #{regDate,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="methodFile != null and methodFile != ''" >
+				AND METHOD_FILE = #{methodFile,jdbcType=VARCHAR}
+			</if>
+			<if test="conditionFile != null and conditionFile != ''" >
+				AND CONDITION_FILE = #{conditionFile,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="carrier != null and carrier != ''" >
+				AND CARRIER = #{carrier,jdbcType=VARCHAR}
+			</if>
+			<if test="carrierName != null and carrierName != ''" >
+				AND CARRIER_NAME = #{carrierName,jdbcType=VARCHAR}
+			</if>
+			<if test="carrierType != null and carrierType != ''" >
+				AND CARRIER_TYPE = #{carrierType,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingFile != null and meetingFile != ''" >
+				AND MEETING_FILE = #{meetingFile,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="planSize != null and planSize != ''" >
+				AND PLAN_SIZE = #{planSize,jdbcType=NUMERIC}
+			</if>
+			<if test="planNum != null and planNum != ''" >
+				AND PLAN_NUM = #{planNum,jdbcType=NUMERIC}
+			</if>
+			<if test="startDate != null" >
+				AND START_DATE = #{startDate,jdbcType=VARCHAR}
+			</if>
+			<if test="endDate != null" >
+				AND END_DATE = #{endDate,jdbcType=VARCHAR}
+			</if>
+			<if test="specialFile != null and specialFile != ''" >
+				AND SPECIAL_FILE = #{specialFile,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM TZ_T_COO_CONDITION
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="TzTCooConditionResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.TzTCooConditionModel">
+		SELECT COUNT(*) FROM TZ_T_COO_CONDITION
+		<where>
+			<if test="conditionId != null and conditionId != ''" >
+				CONDITION_ID = #{conditionId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundName != null and fundName != ''" >
+				AND FUND_NAME = #{fundName,jdbcType=VARCHAR}
+			</if>
+			<if test="fundSize != null and fundSize != ''" >
+				AND FUND_SIZE = #{fundSize,jdbcType=NUMERIC}
+			</if>
+			<if test="manDep != null and manDep != ''" >
+				AND MAN_DEP = #{manDep,jdbcType=VARCHAR}
+			</if>
+			<if test="registrant != null and registrant != ''" >
+				AND REGISTRANT = #{registrant,jdbcType=VARCHAR}
+			</if>
+			<if test="regDate != null" >
+				AND REG_DATE = #{regDate,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="methodFile != null and methodFile != ''" >
+				AND METHOD_FILE = #{methodFile,jdbcType=VARCHAR}
+			</if>
+			<if test="conditionFile != null and conditionFile != ''" >
+				AND CONDITION_FILE = #{conditionFile,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="carrier != null and carrier != ''" >
+				AND CARRIER = #{carrier,jdbcType=VARCHAR}
+			</if>
+			<if test="carrierName != null and carrierName != ''" >
+				AND CARRIER_NAME = #{carrierName,jdbcType=VARCHAR}
+			</if>
+			<if test="carrierType != null and carrierType != ''" >
+				AND CARRIER_TYPE = #{carrierType,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingFile != null and meetingFile != ''" >
+				AND MEETING_FILE = #{meetingFile,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="planSize != null and planSize != ''" >
+				AND PLAN_SIZE = #{planSize,jdbcType=NUMERIC}
+			</if>
+			<if test="planNum != null and planNum != ''" >
+				AND PLAN_NUM = #{planNum,jdbcType=NUMERIC}
+			</if>
+			<if test="startDate != null" >
+				AND START_DATE = #{startDate,jdbcType=VARCHAR}
+			</if>
+			<if test="endDate != null" >
+				AND END_DATE = #{endDate,jdbcType=VARCHAR}
+			</if>
+			<if test="specialFile != null and specialFile != ''" >
+				AND SPECIAL_FILE = #{specialFile,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.TzTCooConditionModel" resultMap="TzTCooConditionResult">
+		SELECT * FROM TZ_T_COO_CONDITION
+		<where>
+			<if test="conditionId != null and conditionId != ''" >
+				CONDITION_ID = #{conditionId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundName != null and fundName != ''" >
+				AND FUND_NAME = #{fundName,jdbcType=VARCHAR}
+			</if>
+			<if test="fundSize != null and fundSize != ''" >
+				AND FUND_SIZE = #{fundSize,jdbcType=NUMERIC}
+			</if>
+			<if test="manDep != null and manDep != ''" >
+				AND MAN_DEP = #{manDep,jdbcType=VARCHAR}
+			</if>
+			<if test="registrant != null and registrant != ''" >
+				AND REGISTRANT = #{registrant,jdbcType=VARCHAR}
+			</if>
+			<if test="regDate != null" >
+				AND REG_DATE = #{regDate,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="methodFile != null and methodFile != ''" >
+				AND METHOD_FILE = #{methodFile,jdbcType=VARCHAR}
+			</if>
+			<if test="conditionFile != null and conditionFile != ''" >
+				AND CONDITION_FILE = #{conditionFile,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="carrier != null and carrier != ''" >
+				AND CARRIER = #{carrier,jdbcType=VARCHAR}
+			</if>
+			<if test="carrierName != null and carrierName != ''" >
+				AND CARRIER_NAME = #{carrierName,jdbcType=VARCHAR}
+			</if>
+			<if test="carrierType != null and carrierType != ''" >
+				AND CARRIER_TYPE = #{carrierType,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingFile != null and meetingFile != ''" >
+				AND MEETING_FILE = #{meetingFile,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="planSize != null and planSize != ''" >
+				AND PLAN_SIZE = #{planSize,jdbcType=NUMERIC}
+			</if>
+			<if test="planNum != null and planNum != ''" >
+				AND PLAN_NUM = #{planNum,jdbcType=NUMERIC}
+			</if>
+			<if test="startDate != null" >
+				AND START_DATE = #{startDate,jdbcType=VARCHAR}
+			</if>
+			<if test="endDate != null" >
+				AND END_DATE = #{endDate,jdbcType=VARCHAR}
+			</if>
+			<if test="specialFile != null and specialFile != ''" >
+				AND SPECIAL_FILE = #{specialFile,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="TzTCooConditionResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+</mapper>

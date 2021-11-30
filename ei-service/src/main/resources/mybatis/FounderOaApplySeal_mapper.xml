@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FounderOaApplySeal">
+	<!-- start autocreate -->
+
+	<resultMap id="FounderOaApplySealResult" type="com.ppmg.ei.model.FounderOaApplySealModel">
+		<result column="APPLY_NO" property="applyNo" jdbcType="VARCHAR" />
+		<result column="SEAL_CONTENT" property="sealContent" jdbcType="VARCHAR" />
+		<result column="SEAL_TIME" property="sealTime" jdbcType="TIMESTAMP" />
+		<result column="SEAL_COPIES" property="sealCopies" jdbcType="NUMERIC" />
+		<result column="SEAL_NO" property="sealNo" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="RESPONSIBLE_PERSON" property="responsiblePerson" jdbcType="VARCHAR" />
+		<result column="SEAL_USES" property="sealUses" jdbcType="VARCHAR" />
+		<result column="ATTACHMENT" property="attachment" jdbcType="VARCHAR" />
+		<result column="ISCOPY" property="iscopy" jdbcType="CHAR" />
+		<result column="ISNUM" property="isnum" jdbcType="NUMERIC" />
+		<result column="LICENSE" property="license" jdbcType="VARCHAR" />
+		<result column="LEADER_ID" property="leaderId" jdbcType="NUMERIC" />
+		<result column="LEADER_NAME" property="leaderName" jdbcType="VARCHAR" />
+		<result column="TYPE" property="type" jdbcType="VARCHAR" />
+		<result column="IS_NOTICE" property="isNotice" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.FounderOaApplySealModel">
+		INSERT INTO OA.FOUNDER_OA_APPLY_SEAL (APPLY_NO,SEAL_CONTENT,SEAL_TIME,SEAL_COPIES,SEAL_NO,REMARK,RESPONSIBLE_PERSON,SEAL_USES,ATTACHMENT,ISCOPY,ISNUM,LICENSE,LEADER_ID,LEADER_NAME,TYPE,IS_NOTICE) values(#{applyNo,jdbcType=VARCHAR},#{sealContent,jdbcType=VARCHAR},#{sealTime,jdbcType=TIMESTAMP},#{sealCopies,jdbcType=NUMERIC},#{sealNo,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},#{responsiblePerson,jdbcType=VARCHAR},#{sealUses,jdbcType=VARCHAR},#{attachment,jdbcType=VARCHAR},#{iscopy,jdbcType=CHAR},#{isnum,jdbcType=NUMERIC},#{license,jdbcType=VARCHAR},#{leaderId,jdbcType=NUMERIC},#{leaderName,jdbcType=VARCHAR},#{type,jdbcType=VARCHAR},#{isNotice,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO OA.FOUNDER_OA_APPLY_SEAL (APPLY_NO,SEAL_CONTENT,SEAL_TIME,SEAL_COPIES,SEAL_NO,REMARK,RESPONSIBLE_PERSON,SEAL_USES,ATTACHMENT,ISCOPY,ISNUM,LICENSE,LEADER_ID,LEADER_NAME,TYPE,IS_NOTICE)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.applyNo,jdbcType=VARCHAR},
+				#{item.sealContent,jdbcType=VARCHAR},
+				#{item.sealTime,jdbcType=TIMESTAMP},
+				#{item.sealCopies,jdbcType=NUMERIC},
+				#{item.sealNo,jdbcType=VARCHAR},
+				#{item.remark,jdbcType=VARCHAR},
+				#{item.responsiblePerson,jdbcType=VARCHAR},
+				#{item.sealUses,jdbcType=VARCHAR},
+				#{item.attachment,jdbcType=VARCHAR},
+				#{item.iscopy,jdbcType=CHAR},
+				#{item.isnum,jdbcType=NUMERIC},
+				#{item.license,jdbcType=VARCHAR},
+				#{item.leaderId,jdbcType=NUMERIC},
+				#{item.leaderName,jdbcType=VARCHAR},
+				#{item.type,jdbcType=VARCHAR},
+				#{item.isNotice,jdbcType=VARCHAR}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  OA.FOUNDER_OA_APPLY_SEAL WHERE APPLY_NO = #{applyNo,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.FounderOaApplySealModel">
+		DELETE FROM OA.FOUNDER_OA_APPLY_SEAL
+		<where>
+			<if test="applyNo != null and applyNo != ''" >
+				APPLY_NO = #{applyNo,jdbcType=VARCHAR}
+			</if>
+			<if test="sealContent != null and sealContent != ''" >
+				AND SEAL_CONTENT = #{sealContent,jdbcType=VARCHAR}
+			</if>
+			<if test="sealTime != null" >
+				AND SEAL_TIME = #{sealTime,jdbcType=VARCHAR}
+			</if>
+			<if test="sealCopies != null and sealCopies != ''" >
+				AND SEAL_COPIES = #{sealCopies,jdbcType=NUMERIC}
+			</if>
+			<if test="sealNo != null and sealNo != ''" >
+				AND SEAL_NO = #{sealNo,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="responsiblePerson != null and responsiblePerson != ''" >
+				AND RESPONSIBLE_PERSON = #{responsiblePerson,jdbcType=VARCHAR}
+			</if>
+			<if test="sealUses != null and sealUses != ''" >
+				AND SEAL_USES = #{sealUses,jdbcType=VARCHAR}
+			</if>
+			<if test="attachment != null and attachment != ''" >
+				AND ATTACHMENT = #{attachment,jdbcType=VARCHAR}
+			</if>
+			<if test="iscopy != null and iscopy != ''" >
+				AND ISCOPY = #{iscopy,jdbcType=CHAR}
+			</if>
+			<if test="isnum != null and isnum != ''" >
+				AND ISNUM = #{isnum,jdbcType=NUMERIC}
+			</if>
+			<if test="license != null and license != ''" >
+				AND LICENSE = #{license,jdbcType=VARCHAR}
+			</if>
+			<if test="leaderId != null and leaderId != ''" >
+				AND LEADER_ID = #{leaderId,jdbcType=NUMERIC}
+			</if>
+			<if test="leaderName != null and leaderName != ''" >
+				AND LEADER_NAME = #{leaderName,jdbcType=VARCHAR}
+			</if>
+			<if test="type != null and type != ''" >
+				AND TYPE = #{type,jdbcType=VARCHAR}
+			</if>
+			<if test="isNotice != null and isNotice != ''" >
+				AND IS_NOTICE = #{isNotice,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  OA.FOUNDER_OA_APPLY_SEAL WHERE APPLY_NO IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.FounderOaApplySealModel">
+		UPDATE OA.FOUNDER_OA_APPLY_SEAL
+		<set>
+			<if test="applyNo != null and applyNo != ''" >
+				APPLY_NO = #{applyNo,jdbcType=VARCHAR},
+			</if>
+			<if test="sealContent != null and sealContent != ''" >
+				SEAL_CONTENT = #{sealContent,jdbcType=VARCHAR},
+			</if>
+			<if test="sealTime != null" >
+				SEAL_TIME = #{sealTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="sealCopies != null and sealCopies != ''" >
+				SEAL_COPIES = #{sealCopies,jdbcType=NUMERIC},
+			</if>
+			<if test="sealNo != null and sealNo != ''" >
+				SEAL_NO = #{sealNo,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null and remark != ''" >
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="responsiblePerson != null and responsiblePerson != ''" >
+				RESPONSIBLE_PERSON = #{responsiblePerson,jdbcType=VARCHAR},
+			</if>
+			<if test="sealUses != null and sealUses != ''" >
+				SEAL_USES = #{sealUses,jdbcType=VARCHAR},
+			</if>
+			<if test="attachment != null and attachment != ''" >
+				ATTACHMENT = #{attachment,jdbcType=VARCHAR},
+			</if>
+			<if test="iscopy != null and iscopy != ''" >
+				ISCOPY = #{iscopy,jdbcType=CHAR},
+			</if>
+			<if test="isnum != null and isnum != ''" >
+				ISNUM = #{isnum,jdbcType=NUMERIC},
+			</if>
+			<if test="license != null and license != ''" >
+				LICENSE = #{license,jdbcType=VARCHAR},
+			</if>
+			<if test="leaderId != null and leaderId != ''" >
+				LEADER_ID = #{leaderId,jdbcType=NUMERIC},
+			</if>
+			<if test="leaderName != null and leaderName != ''" >
+				LEADER_NAME = #{leaderName,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null and type != ''" >
+				TYPE = #{type,jdbcType=VARCHAR},
+			</if>
+			<if test="isNotice != null and isNotice != ''" >
+				IS_NOTICE = #{isNotice,jdbcType=VARCHAR},
+			</if>
+		</set>
+		WHERE APPLY_NO = #{applyNo,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="FounderOaApplySealResult">
+		SELECT * FROM OA.FOUNDER_OA_APPLY_SEAL WHERE APPLY_NO = #{applyNo,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.FounderOaApplySealModel" resultMap="FounderOaApplySealResult">
+		SELECT * FROM OA.FOUNDER_OA_APPLY_SEAL
+		<where>
+			<if test="applyNo != null and applyNo != ''" >
+				APPLY_NO = #{applyNo,jdbcType=VARCHAR}
+			</if>
+			<if test="sealContent != null and sealContent != ''" >
+				AND SEAL_CONTENT = #{sealContent,jdbcType=VARCHAR}
+			</if>
+			<if test="sealTime != null" >
+				AND SEAL_TIME = #{sealTime,jdbcType=VARCHAR}
+			</if>
+			<if test="sealCopies != null and sealCopies != ''" >
+				AND SEAL_COPIES = #{sealCopies,jdbcType=NUMERIC}
+			</if>
+			<if test="sealNo != null and sealNo != ''" >
+				AND SEAL_NO = #{sealNo,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="responsiblePerson != null and responsiblePerson != ''" >
+				AND RESPONSIBLE_PERSON = #{responsiblePerson,jdbcType=VARCHAR}
+			</if>
+			<if test="sealUses != null and sealUses != ''" >
+				AND SEAL_USES = #{sealUses,jdbcType=VARCHAR}
+			</if>
+			<if test="attachment != null and attachment != ''" >
+				AND ATTACHMENT = #{attachment,jdbcType=VARCHAR}
+			</if>
+			<if test="iscopy != null and iscopy != ''" >
+				AND ISCOPY = #{iscopy,jdbcType=CHAR}
+			</if>
+			<if test="isnum != null and isnum != ''" >
+				AND ISNUM = #{isnum,jdbcType=NUMERIC}
+			</if>
+			<if test="license != null and license != ''" >
+				AND LICENSE = #{license,jdbcType=VARCHAR}
+			</if>
+			<if test="leaderId != null and leaderId != ''" >
+				AND LEADER_ID = #{leaderId,jdbcType=NUMERIC}
+			</if>
+			<if test="leaderName != null and leaderName != ''" >
+				AND LEADER_NAME = #{leaderName,jdbcType=VARCHAR}
+			</if>
+			<if test="type != null and type != ''" >
+				AND TYPE = #{type,jdbcType=VARCHAR}
+			</if>
+			<if test="isNotice != null and isNotice != ''" >
+				AND IS_NOTICE = #{isNotice,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM OA.FOUNDER_OA_APPLY_SEAL
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="FounderOaApplySealResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.FounderOaApplySealModel">
+		SELECT COUNT(*) FROM OA.FOUNDER_OA_APPLY_SEAL
+		<where>
+			<if test="applyNo != null and applyNo != ''" >
+				APPLY_NO = #{applyNo,jdbcType=VARCHAR}
+			</if>
+			<if test="sealContent != null and sealContent != ''" >
+				AND SEAL_CONTENT = #{sealContent,jdbcType=VARCHAR}
+			</if>
+			<if test="sealTime != null" >
+				AND SEAL_TIME = #{sealTime,jdbcType=VARCHAR}
+			</if>
+			<if test="sealCopies != null and sealCopies != ''" >
+				AND SEAL_COPIES = #{sealCopies,jdbcType=NUMERIC}
+			</if>
+			<if test="sealNo != null and sealNo != ''" >
+				AND SEAL_NO = #{sealNo,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="responsiblePerson != null and responsiblePerson != ''" >
+				AND RESPONSIBLE_PERSON = #{responsiblePerson,jdbcType=VARCHAR}
+			</if>
+			<if test="sealUses != null and sealUses != ''" >
+				AND SEAL_USES = #{sealUses,jdbcType=VARCHAR}
+			</if>
+			<if test="attachment != null and attachment != ''" >
+				AND ATTACHMENT = #{attachment,jdbcType=VARCHAR}
+			</if>
+			<if test="iscopy != null and iscopy != ''" >
+				AND ISCOPY = #{iscopy,jdbcType=CHAR}
+			</if>
+			<if test="isnum != null and isnum != ''" >
+				AND ISNUM = #{isnum,jdbcType=NUMERIC}
+			</if>
+			<if test="license != null and license != ''" >
+				AND LICENSE = #{license,jdbcType=VARCHAR}
+			</if>
+			<if test="leaderId != null and leaderId != ''" >
+				AND LEADER_ID = #{leaderId,jdbcType=NUMERIC}
+			</if>
+			<if test="leaderName != null and leaderName != ''" >
+				AND LEADER_NAME = #{leaderName,jdbcType=VARCHAR}
+			</if>
+			<if test="type != null and type != ''" >
+				AND TYPE = #{type,jdbcType=VARCHAR}
+			</if>
+			<if test="isNotice != null and isNotice != ''" >
+				AND IS_NOTICE = #{isNotice,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.FounderOaApplySealModel" resultMap="FounderOaApplySealResult">
+		SELECT * FROM OA.FOUNDER_OA_APPLY_SEAL
+		<where>
+			<if test="applyNo != null and applyNo != ''" >
+				APPLY_NO = #{applyNo,jdbcType=VARCHAR}
+			</if>
+			<if test="sealContent != null and sealContent != ''" >
+				AND SEAL_CONTENT = #{sealContent,jdbcType=VARCHAR}
+			</if>
+			<if test="sealTime != null" >
+				AND SEAL_TIME = #{sealTime,jdbcType=VARCHAR}
+			</if>
+			<if test="sealCopies != null and sealCopies != ''" >
+				AND SEAL_COPIES = #{sealCopies,jdbcType=NUMERIC}
+			</if>
+			<if test="sealNo != null and sealNo != ''" >
+				AND SEAL_NO = #{sealNo,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="responsiblePerson != null and responsiblePerson != ''" >
+				AND RESPONSIBLE_PERSON = #{responsiblePerson,jdbcType=VARCHAR}
+			</if>
+			<if test="sealUses != null and sealUses != ''" >
+				AND SEAL_USES = #{sealUses,jdbcType=VARCHAR}
+			</if>
+			<if test="attachment != null and attachment != ''" >
+				AND ATTACHMENT = #{attachment,jdbcType=VARCHAR}
+			</if>
+			<if test="iscopy != null and iscopy != ''" >
+				AND ISCOPY = #{iscopy,jdbcType=CHAR}
+			</if>
+			<if test="isnum != null and isnum != ''" >
+				AND ISNUM = #{isnum,jdbcType=NUMERIC}
+			</if>
+			<if test="license != null and license != ''" >
+				AND LICENSE = #{license,jdbcType=VARCHAR}
+			</if>
+			<if test="leaderId != null and leaderId != ''" >
+				AND LEADER_ID = #{leaderId,jdbcType=NUMERIC}
+			</if>
+			<if test="leaderName != null and leaderName != ''" >
+				AND LEADER_NAME = #{leaderName,jdbcType=VARCHAR}
+			</if>
+			<if test="type != null and type != ''" >
+				AND TYPE = #{type,jdbcType=VARCHAR}
+			</if>
+			<if test="isNotice != null and isNotice != ''" >
+				AND IS_NOTICE = #{isNotice,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="FounderOaApplySealResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+</mapper>

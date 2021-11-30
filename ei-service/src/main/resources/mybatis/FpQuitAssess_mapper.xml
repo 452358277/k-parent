@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FpQuitAssess">
+	<resultMap id="FpQuitAssessResult2" type="com.ppmg.ei.model.FpQuitAssessModel" extends="FpQuitAssessResult">
+		<collection property="attaFileList" ofType="com.ppmg.ei.model.EiTAttachmentModel" column="ATTA_FILE">
+			<result column="ASSESS_ATT_NAME" property="fileOldName" jdbcType="VARCHAR" />
+			<result column="ASSESS_ATT_URL" property="filePath" jdbcType="VARCHAR" />
+		</collection>
+	</resultMap>
+	<!-- start autocreate -->
+
+	<resultMap id="FpQuitAssessResult" type="com.ppmg.ei.model.FpQuitAssessModel">
+		<result column="ASSESS_ID" property="assessId" jdbcType="VARCHAR" />
+		<result column="PROJ_ID" property="projId" jdbcType="VARCHAR" />
+		<result column="ASSESS_BY" property="assessBy" jdbcType="VARCHAR" />
+		<result column="ASSESS_DT" property="assessDt" jdbcType="TIMESTAMP" />
+		<result column="ASSESS_SUMMARY" property="assessSummary" jdbcType="VARCHAR" />
+		<result column="ATTA_FILE" property="attaFile" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.FpQuitAssessModel">
+		INSERT INTO TZ_T_FP_QUIT_ASSESS (ASSESS_ID,PROJ_ID,ASSESS_BY,ASSESS_DT,ASSESS_SUMMARY,ATTA_FILE,STATUS,CREATE_DT,CREATE_BY,UPDATE_BY,UPDATE_DT) values(#{assessId,jdbcType=VARCHAR},#{projId,jdbcType=VARCHAR},#{assessBy,jdbcType=VARCHAR},#{assessDt,jdbcType=TIMESTAMP},#{assessSummary,jdbcType=VARCHAR},#{attaFile,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{createBy,jdbcType=VARCHAR},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO TZ_T_FP_QUIT_ASSESS (ASSESS_ID,PROJ_ID,ASSESS_BY,ASSESS_DT,ASSESS_SUMMARY,ATTA_FILE,STATUS,CREATE_DT,CREATE_BY,UPDATE_BY,UPDATE_DT)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.assessId,jdbcType=VARCHAR},
+				#{item.projId,jdbcType=VARCHAR},
+				#{item.assessBy,jdbcType=VARCHAR},
+				#{item.assessDt,jdbcType=TIMESTAMP},
+				#{item.assessSummary,jdbcType=VARCHAR},
+				#{item.attaFile,jdbcType=VARCHAR},
+				#{item.status,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  TZ_T_FP_QUIT_ASSESS WHERE ASSESS_ID = #{assessId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.FpQuitAssessModel">
+		DELETE FROM TZ_T_FP_QUIT_ASSESS
+		<where>
+			<if test="assessId != null and assessId != ''" >
+				ASSESS_ID = #{assessId,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="assessBy != null and assessBy != ''" >
+				AND ASSESS_BY = #{assessBy,jdbcType=VARCHAR}
+			</if>
+			<if test="assessDt != null" >
+				AND ASSESS_DT = #{assessDt,jdbcType=VARCHAR}
+			</if>
+			<if test="assessSummary != null and assessSummary != ''" >
+				AND ASSESS_SUMMARY = #{assessSummary,jdbcType=VARCHAR}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  TZ_T_FP_QUIT_ASSESS WHERE ASSESS_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.FpQuitAssessModel">
+		UPDATE TZ_T_FP_QUIT_ASSESS 
+		<set>
+			<if test="assessId != null and assessId != ''" >
+				ASSESS_ID = #{assessId,jdbcType=VARCHAR},
+			</if>
+			<if test="projId != null and projId != ''" >
+				PROJ_ID = #{projId,jdbcType=VARCHAR},
+			</if>
+			<if test="assessBy != null and assessBy != ''" >
+				ASSESS_BY = #{assessBy,jdbcType=VARCHAR},
+			</if>
+			<if test="assessDt != null" >
+				ASSESS_DT = #{assessDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="assessSummary != null and assessSummary != ''" >
+				ASSESS_SUMMARY = #{assessSummary,jdbcType=VARCHAR},
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				ATTA_FILE = #{attaFile,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		WHERE ASSESS_ID = #{assessId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="FpQuitAssessResult">
+		SELECT * FROM TZ_T_FP_QUIT_ASSESS WHERE ASSESS_ID = #{assessId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.FpQuitAssessModel" resultMap="FpQuitAssessResult">
+		SELECT * FROM TZ_T_FP_QUIT_ASSESS
+		<where>
+			<if test="assessId != null and assessId != ''" >
+				ASSESS_ID = #{assessId,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="assessBy != null and assessBy != ''" >
+				AND ASSESS_BY = #{assessBy,jdbcType=VARCHAR}
+			</if>
+			<if test="assessDt != null" >
+				AND ASSESS_DT = #{assessDt,jdbcType=VARCHAR}
+			</if>
+			<if test="assessSummary != null and assessSummary != ''" >
+				AND ASSESS_SUMMARY = #{assessSummary,jdbcType=VARCHAR}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT A.FILE_OLD_NAME ASSESS_ATT_NAME,T.*,
+		'/eiweb/uploadServlet?method=getExistFile'||chr(38)||'sessionKey='||A.File_Id|| chr(38)||'fileName='||A.FILE_NAME||chr(38)||'fieldToken='||A.FIELD_TOKEN||chr(38)||'fileOldName='||A.FILE_OLD_NAME||chr(38)||'isNew=Y' ASSESS_ATT_URL 
+		FROM TZ_T_FP_QUIT_ASSESS T
+		LEFT JOIN EI_T_ATTACHMENT A ON T.ATTA_FILE=A.FIELD_TOKEN
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+		ORDER BY T.CREATE_DT DESC
+	</sql>
+
+	<select id="selectListPage" resultMap="FpQuitAssessResult2" parameterType="com.founder.ssm.core.common.SearchCondition">
+		<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.FpQuitAssessModel">
+		SELECT COUNT(*) FROM TZ_T_FP_QUIT_ASSESS
+		<where>
+			<if test="assessId != null and assessId != ''" >
+				ASSESS_ID = #{assessId,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="assessBy != null and assessBy != ''" >
+				AND ASSESS_BY = #{assessBy,jdbcType=VARCHAR}
+			</if>
+			<if test="assessDt != null" >
+				AND ASSESS_DT = #{assessDt,jdbcType=VARCHAR}
+			</if>
+			<if test="assessSummary != null and assessSummary != ''" >
+				AND ASSESS_SUMMARY = #{assessSummary,jdbcType=VARCHAR}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.FpQuitAssessModel" resultMap="FpQuitAssessResult">
+		SELECT * FROM TZ_T_FP_QUIT_ASSESS
+		<where>
+			<if test="assessId != null and assessId != ''" >
+				ASSESS_ID = #{assessId,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="assessBy != null and assessBy != ''" >
+				AND ASSESS_BY = #{assessBy,jdbcType=VARCHAR}
+			</if>
+			<if test="assessDt != null" >
+				AND ASSESS_DT = #{assessDt,jdbcType=VARCHAR}
+			</if>
+			<if test="assessSummary != null and assessSummary != ''" >
+				AND ASSESS_SUMMARY = #{assessSummary,jdbcType=VARCHAR}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="FpQuitAssessResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+</mapper>

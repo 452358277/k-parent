@@ -1,0 +1,824 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BdTFundCostInfo">
+	<!-- start autocreate -->
+
+	<resultMap id="BdTFundCostInfoResult" type="com.ppmg.ei.model.BdTFundCostInfoModel">
+		<result column="ID" property="id" jdbcType="VARCHAR" />
+		<result column="COST_FILE" property="costFile" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="FUND_ID" property="fundId" jdbcType="VARCHAR" />
+		<result column="YEAR" property="year" jdbcType="VARCHAR" />
+		<result column="QUARTER" property="quarter" jdbcType="VARCHAR" />
+		<result column="TOTAL_ASSETS" property="totalAssets" jdbcType="NUMERIC" />
+		<result column="TOTAL_MANAGE" property="totalManage" jdbcType="NUMERIC" />
+		<result column="TOTAL_DEPOSIT" property="totalDeposit" jdbcType="NUMERIC" />
+		<result column="TOTAL_CONSULT" property="totalConsult" jdbcType="NUMERIC" />
+		<result column="TOTAL_AUDIT" property="totalAudit" jdbcType="NUMERIC" />
+		<result column="TOTAL_LAWYER" property="totalLawyer" jdbcType="NUMERIC" />
+		<result column="TOTAL_OTHER" property="totalOther" jdbcType="NUMERIC" />
+		<result column="FILE_DESC" property="fileDesc" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="TIME" property="time" jdbcType="TIMESTAMP" />
+		<result column="TOTAL_FOOD" property="totalFood" jdbcType="NUMERIC" />
+		<result column="ASSESSMENT_DATE" property="assessmentDate" jdbcType="TIMESTAMP" />
+		<result column="END_TOTAL_ASSETS" property="endTotalAssets" jdbcType="NUMERIC" />
+		<result column="END_NET_ASSETS" property="endNetAssets" jdbcType="NUMERIC" />
+		<result column="TOTAL_MANAGE_PAY" property="totalManagePay" jdbcType="NUMERIC" />
+		<result column="TOTAL_CONSULT_PAY" property="totalConsultPay" jdbcType="NUMERIC" />
+		<result column="TOTAL_DEPOSIT_PAY" property="totalDepositPay" jdbcType="NUMERIC" />
+		<result column="TOTAL_OUTSOURCE" property="totalOutsource" jdbcType="NUMERIC" />
+		<result column="TOTAL_OUTSOURCE_PAY" property="totalOutsourcePay" jdbcType="NUMERIC" />
+		<result column="TOTAL_ACHIEVEMENT" property="totalAchievement" jdbcType="NUMERIC" />
+		<result column="TOTAL_ACHIEVEMENT_PAY" property="totalAchievementPay" jdbcType="NUMERIC" />
+		<result column="TOTAL_BONUS" property="totalBonus" jdbcType="NUMERIC" />
+		<result column="TOTAL_PROFIT" property="totalProfit" jdbcType="NUMERIC" />
+		<result column="TOTAL_RESIDUE" property="totalResidue" jdbcType="NUMERIC" />
+		<result column="TOTAL_AVAILABLE_FUNDS" property="totalAvailableFunds" jdbcType="NUMERIC" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.BdTFundCostInfoModel">
+		INSERT INTO BD_T_FUND_COST_INFO (ID,COST_FILE,REMARK,FUND_ID,YEAR,QUARTER,TOTAL_ASSETS,TOTAL_MANAGE,TOTAL_DEPOSIT,TOTAL_CONSULT,TOTAL_AUDIT,TOTAL_LAWYER,TOTAL_OTHER,FILE_DESC,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,STATUS,TIME,TOTAL_FOOD,ASSESSMENT_DATE,END_TOTAL_ASSETS,END_NET_ASSETS,TOTAL_MANAGE_PAY,TOTAL_CONSULT_PAY,TOTAL_DEPOSIT_PAY,TOTAL_OUTSOURCE,TOTAL_OUTSOURCE_PAY,TOTAL_ACHIEVEMENT,TOTAL_ACHIEVEMENT_PAY,TOTAL_BONUS,TOTAL_PROFIT,TOTAL_RESIDUE,TOTAL_AVAILABLE_FUNDS) values(#{id,jdbcType=VARCHAR},#{costFile,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},#{fundId,jdbcType=VARCHAR},#{year,jdbcType=VARCHAR},#{quarter,jdbcType=VARCHAR},#{totalAssets,jdbcType=NUMERIC},#{totalManage,jdbcType=NUMERIC},#{totalDeposit,jdbcType=NUMERIC},#{totalConsult,jdbcType=NUMERIC},#{totalAudit,jdbcType=NUMERIC},#{totalLawyer,jdbcType=NUMERIC},#{totalOther,jdbcType=NUMERIC},#{fileDesc,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{status,jdbcType=VARCHAR},#{time,jdbcType=TIMESTAMP},#{totalFood,jdbcType=NUMERIC},#{assessmentDate,jdbcType=TIMESTAMP},#{endTotalAssets,jdbcType=NUMERIC},#{endNetAssets,jdbcType=NUMERIC},#{totalManagePay,jdbcType=NUMERIC},#{totalConsultPay,jdbcType=NUMERIC},#{totalDepositPay,jdbcType=NUMERIC},#{totalOutsource,jdbcType=NUMERIC},#{totalOutsourcePay,jdbcType=NUMERIC},#{totalAchievement,jdbcType=NUMERIC},#{totalAchievementPay,jdbcType=NUMERIC},#{totalBonus,jdbcType=NUMERIC},#{totalProfit,jdbcType=NUMERIC},#{totalResidue,jdbcType=NUMERIC},#{totalAvailableFunds,jdbcType=NUMERIC})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO BD_T_FUND_COST_INFO (ID,COST_FILE,REMARK,FUND_ID,YEAR,QUARTER,TOTAL_ASSETS,TOTAL_MANAGE,TOTAL_DEPOSIT,TOTAL_CONSULT,TOTAL_AUDIT,TOTAL_LAWYER,TOTAL_OTHER,FILE_DESC,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,STATUS,TIME,TOTAL_FOOD,ASSESSMENT_DATE,END_TOTAL_ASSETS,END_NET_ASSETS,TOTAL_MANAGE_PAY,TOTAL_CONSULT_PAY,TOTAL_DEPOSIT_PAY,TOTAL_OUTSOURCE,TOTAL_OUTSOURCE_PAY,TOTAL_ACHIEVEMENT,TOTAL_ACHIEVEMENT_PAY,TOTAL_BONUS,TOTAL_PROFIT,TOTAL_RESIDUE,TOTAL_AVAILABLE_FUNDS)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+			#{item.id,jdbcType=VARCHAR},
+			#{item.costFile,jdbcType=VARCHAR},
+			#{item.remark,jdbcType=VARCHAR},
+			#{item.fundId,jdbcType=VARCHAR},
+			#{item.year,jdbcType=VARCHAR},
+			#{item.quarter,jdbcType=VARCHAR},
+			#{item.totalAssets,jdbcType=NUMERIC},
+			#{item.totalManage,jdbcType=NUMERIC},
+			#{item.totalDeposit,jdbcType=NUMERIC},
+			#{item.totalConsult,jdbcType=NUMERIC},
+			#{item.totalAudit,jdbcType=NUMERIC},
+			#{item.totalLawyer,jdbcType=NUMERIC},
+			#{item.totalOther,jdbcType=NUMERIC},
+			#{item.fileDesc,jdbcType=VARCHAR},
+			#{item.createBy,jdbcType=VARCHAR},
+			#{item.createDt,jdbcType=TIMESTAMP},
+			#{item.updateBy,jdbcType=VARCHAR},
+			#{item.updateDt,jdbcType=TIMESTAMP},
+			#{item.status,jdbcType=VARCHAR},
+			#{item.time,jdbcType=TIMESTAMP},
+			#{item.totalFood,jdbcType=NUMERIC},
+			#{item.assessmentDate,jdbcType=TIMESTAMP},
+			#{item.endTotalAssets,jdbcType=NUMERIC},
+			#{item.endNetAssets,jdbcType=NUMERIC},
+			#{item.totalManagePay,jdbcType=NUMERIC},
+			#{item.totalConsultPay,jdbcType=NUMERIC},
+			#{item.totalDepositPay,jdbcType=NUMERIC},
+			#{item.totalOutsource,jdbcType=NUMERIC},
+			#{item.totalOutsourcePay,jdbcType=NUMERIC},
+			#{item.totalAchievement,jdbcType=NUMERIC},
+			#{item.totalAchievementPay,jdbcType=NUMERIC},
+			#{item.totalBonus,jdbcType=NUMERIC},
+			#{item.totalProfit,jdbcType=NUMERIC},
+			#{item.totalResidue,jdbcType=NUMERIC},
+			#{item.totalAvailableFunds,jdbcType=NUMERIC}
+			from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  EI.BD_T_FUND_COST_INFO WHERE ID = #{id,jdbcType=VARCHAR}
+	</delete>
+
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.BdTFundCostInfoModel">
+		DELETE FROM BD_T_FUND_COST_INFO
+		<where>
+			<if test="id != null and id != ''" >
+				ID = #{id,jdbcType=VARCHAR}
+			</if>
+			<if test="costFile != null and costFile != ''" >
+				AND COST_FILE = #{costFile,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="year != null and year != ''" >
+				AND YEAR = #{year,jdbcType=VARCHAR}
+			</if>
+			<if test="quarter != null and quarter != ''" >
+				AND QUARTER = #{quarter,jdbcType=VARCHAR}
+			</if>
+			<if test="totalAssets != null and totalAssets != ''" >
+				AND TOTAL_ASSETS = #{totalAssets,jdbcType=NUMERIC}
+			</if>
+			<if test="totalManage != null and totalManage != ''" >
+				AND TOTAL_MANAGE = #{totalManage,jdbcType=NUMERIC}
+			</if>
+			<if test="totalDeposit != null and totalDeposit != ''" >
+				AND TOTAL_DEPOSIT = #{totalDeposit,jdbcType=NUMERIC}
+			</if>
+			<if test="totalConsult != null and totalConsult != ''" >
+				AND TOTAL_CONSULT = #{totalConsult,jdbcType=NUMERIC}
+			</if>
+			<if test="totalAudit != null and totalAudit != ''" >
+				AND TOTAL_AUDIT = #{totalAudit,jdbcType=NUMERIC}
+			</if>
+			<if test="totalLawyer != null and totalLawyer != ''" >
+				AND TOTAL_LAWYER = #{totalLawyer,jdbcType=NUMERIC}
+			</if>
+			<if test="totalOther != null and totalOther != ''" >
+				AND TOTAL_OTHER = #{totalOther,jdbcType=NUMERIC}
+			</if>
+			<if test="fileDesc != null and fileDesc != ''" >
+				AND FILE_DESC = #{fileDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="time != null" >
+				AND TIME = #{time,jdbcType=VARCHAR}
+			</if>
+			<if test="totalFood != null and totalFood != ''" >
+				AND TOTAL_FOOD = #{totalFood,jdbcType=NUMERIC}
+			</if>
+			<if test="assessmentDate != null" >
+				AND ASSESSMENT_DATE = #{assessmentDate,jdbcType=VARCHAR}
+			</if>
+			<if test="endTotalAssets != null and endTotalAssets != ''" >
+				AND END_TOTAL_ASSETS = #{endTotalAssets,jdbcType=NUMERIC}
+			</if>
+			<if test="endNetAssets != null and endNetAssets != ''" >
+				AND END_NET_ASSETS = #{endNetAssets,jdbcType=NUMERIC}
+			</if>
+			<if test="totalManagePay != null and totalManagePay != ''" >
+				AND TOTAL_MANAGE_PAY = #{totalManagePay,jdbcType=NUMERIC}
+			</if>
+			<if test="totalConsultPay != null and totalConsultPay != ''" >
+				AND TOTAL_CONSULT_PAY = #{totalConsultPay,jdbcType=NUMERIC}
+			</if>
+			<if test="totalDepositPay != null and totalDepositPay != ''" >
+				AND TOTAL_DEPOSIT_PAY = #{totalDepositPay,jdbcType=NUMERIC}
+			</if>
+			<if test="totalOutsource != null and totalOutsource != ''" >
+				AND TOTAL_OUTSOURCE = #{totalOutsource,jdbcType=NUMERIC}
+			</if>
+			<if test="totalOutsourcePay != null and totalOutsourcePay != ''" >
+				AND TOTAL_OUTSOURCE_PAY = #{totalOutsourcePay,jdbcType=NUMERIC}
+			</if>
+			<if test="totalAchievement != null and totalAchievement != ''" >
+				AND TOTAL_ACHIEVEMENT = #{totalAchievement,jdbcType=NUMERIC}
+			</if>
+			<if test="totalAchievementPay != null and totalAchievementPay != ''" >
+				AND TOTAL_ACHIEVEMENT_PAY = #{totalAchievementPay,jdbcType=NUMERIC}
+			</if>
+			<if test="totalBonus != null and totalBonus != ''" >
+				AND TOTAL_BONUS = #{totalBonus,jdbcType=NUMERIC}
+			</if>
+			<if test="totalProfit != null and totalProfit != ''" >
+				AND TOTAL_PROFIT = #{totalProfit,jdbcType=NUMERIC}
+			</if>
+			<if test="totalResidue != null and totalResidue != ''" >
+				AND TOTAL_RESIDUE = #{totalResidue,jdbcType=NUMERIC}
+			</if>
+			<if test="totalAvailableFunds != null and totalAvailableFunds != ''" >
+				AND TOTAL_AVAILABLE_FUNDS = #{totalAvailableFunds,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</delete>
+
+
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  EI.BD_T_FUND_COST_INFO WHERE ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.BdTFundCostInfoModel">
+		UPDATE BD_T_FUND_COST_INFO
+		<set>
+			<if test="id != null and id != ''" >
+				ID = #{id,jdbcType=VARCHAR},
+			</if>
+			<if test="costFile != null and costFile != ''" >
+				COST_FILE = #{costFile,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null and remark != ''" >
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				FUND_ID = #{fundId,jdbcType=VARCHAR},
+			</if>
+			<if test="year != null and year != ''" >
+				YEAR = #{year,jdbcType=VARCHAR},
+			</if>
+			<if test="quarter != null and quarter != ''" >
+				QUARTER = #{quarter,jdbcType=VARCHAR},
+			</if>
+			<if test="totalAssets != null and totalAssets != ''" >
+				TOTAL_ASSETS = #{totalAssets,jdbcType=NUMERIC},
+			</if>
+			<if test="totalManage != null " >
+				TOTAL_MANAGE = #{totalManage,jdbcType=NUMERIC},
+			</if>
+			<if test="totalDeposit != null " >
+				TOTAL_DEPOSIT = #{totalDeposit,jdbcType=NUMERIC},
+			</if>
+			<if test="totalConsult != null " >
+				TOTAL_CONSULT = #{totalConsult,jdbcType=NUMERIC},
+			</if>
+			<if test="totalAudit != null " >
+				TOTAL_AUDIT = #{totalAudit,jdbcType=NUMERIC},
+			</if>
+			<if test="totalLawyer != null " >
+				TOTAL_LAWYER = #{totalLawyer,jdbcType=NUMERIC},
+			</if>
+			<if test="totalOther != null " >
+				TOTAL_OTHER = #{totalOther,jdbcType=NUMERIC},
+			</if>
+			<if test="fileDesc != null and fileDesc != ''" >
+				FILE_DESC = #{fileDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="time != null" >
+				TIME = #{time,jdbcType=TIMESTAMP},
+			</if>
+			<if test="totalFood != null " >
+				TOTAL_FOOD = #{totalFood,jdbcType=NUMERIC},
+			</if>
+			<if test="assessmentDate != null" >
+				ASSESSMENT_DATE = #{assessmentDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endTotalAssets != null " >
+				END_TOTAL_ASSETS = #{endTotalAssets,jdbcType=NUMERIC},
+			</if>
+			<if test="endNetAssets != null " >
+				END_NET_ASSETS = #{endNetAssets,jdbcType=NUMERIC},
+			</if>
+			<if test="totalManagePay != null " >
+				TOTAL_MANAGE_PAY = #{totalManagePay,jdbcType=NUMERIC},
+			</if>
+			<if test="totalConsultPay != null " >
+				TOTAL_CONSULT_PAY = #{totalConsultPay,jdbcType=NUMERIC},
+			</if>
+			<if test="totalDepositPay != null " >
+				TOTAL_DEPOSIT_PAY = #{totalDepositPay,jdbcType=NUMERIC},
+			</if>
+			<if test="totalOutsource != null " >
+				TOTAL_OUTSOURCE = #{totalOutsource,jdbcType=NUMERIC},
+			</if>
+			<if test="totalOutsourcePay != null " >
+				TOTAL_OUTSOURCE_PAY = #{totalOutsourcePay,jdbcType=NUMERIC},
+			</if>
+			<if test="totalAchievement != null " >
+				TOTAL_ACHIEVEMENT = #{totalAchievement,jdbcType=NUMERIC},
+			</if>
+			<if test="totalAchievementPay != null " >
+				TOTAL_ACHIEVEMENT_PAY = #{totalAchievementPay,jdbcType=NUMERIC},
+			</if>
+			<if test="totalBonus != null " >
+				TOTAL_BONUS = #{totalBonus,jdbcType=NUMERIC},
+			</if>
+			<if test="totalProfit != null " >
+				TOTAL_PROFIT = #{totalProfit,jdbcType=NUMERIC},
+			</if>
+			<if test="totalResidue != null " >
+				TOTAL_RESIDUE = #{totalResidue,jdbcType=NUMERIC},
+			</if>
+			<if test="totalAvailableFunds != null " >
+				TOTAL_AVAILABLE_FUNDS = #{totalAvailableFunds,jdbcType=NUMERIC},
+			</if>
+		</set>
+		WHERE ID = #{id,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="BdTFundCostInfoResult">
+		SELECT * FROM EI.BD_T_FUND_COST_INFO WHERE ID = #{id,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.BdTFundCostInfoModel" resultMap="BdTFundCostInfoResult">
+		SELECT * FROM BD_T_FUND_COST_INFO
+		<where>
+			<if test="id != null and id != ''" >
+				ID = #{id,jdbcType=VARCHAR}
+			</if>
+			<if test="costFile != null and costFile != ''" >
+				AND COST_FILE = #{costFile,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="year != null and year != ''" >
+				AND YEAR = #{year,jdbcType=VARCHAR}
+			</if>
+			<if test="quarter != null and quarter != ''" >
+				AND QUARTER = #{quarter,jdbcType=VARCHAR}
+			</if>
+			<if test="totalAssets != null and totalAssets != ''" >
+				AND TOTAL_ASSETS = #{totalAssets,jdbcType=NUMERIC}
+			</if>
+			<if test="totalManage != null and totalManage != ''" >
+				AND TOTAL_MANAGE = #{totalManage,jdbcType=NUMERIC}
+			</if>
+			<if test="totalDeposit != null and totalDeposit != ''" >
+				AND TOTAL_DEPOSIT = #{totalDeposit,jdbcType=NUMERIC}
+			</if>
+			<if test="totalConsult != null and totalConsult != ''" >
+				AND TOTAL_CONSULT = #{totalConsult,jdbcType=NUMERIC}
+			</if>
+			<if test="totalAudit != null and totalAudit != ''" >
+				AND TOTAL_AUDIT = #{totalAudit,jdbcType=NUMERIC}
+			</if>
+			<if test="totalLawyer != null and totalLawyer != ''" >
+				AND TOTAL_LAWYER = #{totalLawyer,jdbcType=NUMERIC}
+			</if>
+			<if test="totalOther != null and totalOther != ''" >
+				AND TOTAL_OTHER = #{totalOther,jdbcType=NUMERIC}
+			</if>
+			<if test="fileDesc != null and fileDesc != ''" >
+				AND FILE_DESC = #{fileDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="time != null" >
+				AND TIME = #{time,jdbcType=VARCHAR}
+			</if>
+			<if test="totalFood != null and totalFood != ''" >
+				AND TOTAL_FOOD = #{totalFood,jdbcType=NUMERIC}
+			</if>
+			<if test="assessmentDate != null" >
+				AND ASSESSMENT_DATE = #{assessmentDate,jdbcType=VARCHAR}
+			</if>
+			<if test="endTotalAssets != null and endTotalAssets != ''" >
+				AND END_TOTAL_ASSETS = #{endTotalAssets,jdbcType=NUMERIC}
+			</if>
+			<if test="endNetAssets != null and endNetAssets != ''" >
+				AND END_NET_ASSETS = #{endNetAssets,jdbcType=NUMERIC}
+			</if>
+			<if test="totalManagePay != null and totalManagePay != ''" >
+				AND TOTAL_MANAGE_PAY = #{totalManagePay,jdbcType=NUMERIC}
+			</if>
+			<if test="totalConsultPay != null and totalConsultPay != ''" >
+				AND TOTAL_CONSULT_PAY = #{totalConsultPay,jdbcType=NUMERIC}
+			</if>
+			<if test="totalDepositPay != null and totalDepositPay != ''" >
+				AND TOTAL_DEPOSIT_PAY = #{totalDepositPay,jdbcType=NUMERIC}
+			</if>
+			<if test="totalOutsource != null and totalOutsource != ''" >
+				AND TOTAL_OUTSOURCE = #{totalOutsource,jdbcType=NUMERIC}
+			</if>
+			<if test="totalOutsourcePay != null and totalOutsourcePay != ''" >
+				AND TOTAL_OUTSOURCE_PAY = #{totalOutsourcePay,jdbcType=NUMERIC}
+			</if>
+			<if test="totalAchievement != null and totalAchievement != ''" >
+				AND TOTAL_ACHIEVEMENT = #{totalAchievement,jdbcType=NUMERIC}
+			</if>
+			<if test="totalAchievementPay != null and totalAchievementPay != ''" >
+				AND TOTAL_ACHIEVEMENT_PAY = #{totalAchievementPay,jdbcType=NUMERIC}
+			</if>
+			<if test="totalBonus != null and totalBonus != ''" >
+				AND TOTAL_BONUS = #{totalBonus,jdbcType=NUMERIC}
+			</if>
+			<if test="totalProfit != null and totalProfit != ''" >
+				AND TOTAL_PROFIT = #{totalProfit,jdbcType=NUMERIC}
+			</if>
+			<if test="totalResidue != null and totalResidue != ''" >
+				AND TOTAL_RESIDUE = #{totalResidue,jdbcType=NUMERIC}
+			</if>
+			<if test="totalAvailableFunds != null and totalAvailableFunds != ''" >
+				AND TOTAL_AVAILABLE_FUNDS = #{totalAvailableFunds,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM EI.BD_T_FUND_COST_INFO
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+		order by CREATE_DT desc
+	</sql>
+
+	<select id="selectListPage" resultMap="BdTFundCostInfoResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.BdTFundCostInfoModel">
+		SELECT COUNT(*) FROM BD_T_FUND_COST_INFO
+		<where>
+			<if test="id != null and id != ''" >
+				ID = #{id,jdbcType=VARCHAR}
+			</if>
+			<if test="costFile != null and costFile != ''" >
+				AND COST_FILE = #{costFile,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="year != null and year != ''" >
+				AND YEAR = #{year,jdbcType=VARCHAR}
+			</if>
+			<if test="quarter != null and quarter != ''" >
+				AND QUARTER = #{quarter,jdbcType=VARCHAR}
+			</if>
+			<if test="totalAssets != null and totalAssets != ''" >
+				AND TOTAL_ASSETS = #{totalAssets,jdbcType=NUMERIC}
+			</if>
+			<if test="totalManage != null and totalManage != ''" >
+				AND TOTAL_MANAGE = #{totalManage,jdbcType=NUMERIC}
+			</if>
+			<if test="totalDeposit != null and totalDeposit != ''" >
+				AND TOTAL_DEPOSIT = #{totalDeposit,jdbcType=NUMERIC}
+			</if>
+			<if test="totalConsult != null and totalConsult != ''" >
+				AND TOTAL_CONSULT = #{totalConsult,jdbcType=NUMERIC}
+			</if>
+			<if test="totalAudit != null and totalAudit != ''" >
+				AND TOTAL_AUDIT = #{totalAudit,jdbcType=NUMERIC}
+			</if>
+			<if test="totalLawyer != null and totalLawyer != ''" >
+				AND TOTAL_LAWYER = #{totalLawyer,jdbcType=NUMERIC}
+			</if>
+			<if test="totalOther != null and totalOther != ''" >
+				AND TOTAL_OTHER = #{totalOther,jdbcType=NUMERIC}
+			</if>
+			<if test="fileDesc != null and fileDesc != ''" >
+				AND FILE_DESC = #{fileDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="time != null" >
+				AND TIME = #{time,jdbcType=VARCHAR}
+			</if>
+			<if test="totalFood != null and totalFood != ''" >
+				AND TOTAL_FOOD = #{totalFood,jdbcType=NUMERIC}
+			</if>
+			<if test="assessmentDate != null" >
+				AND ASSESSMENT_DATE = #{assessmentDate,jdbcType=VARCHAR}
+			</if>
+			<if test="endTotalAssets != null and endTotalAssets != ''" >
+				AND END_TOTAL_ASSETS = #{endTotalAssets,jdbcType=NUMERIC}
+			</if>
+			<if test="endNetAssets != null and endNetAssets != ''" >
+				AND END_NET_ASSETS = #{endNetAssets,jdbcType=NUMERIC}
+			</if>
+			<if test="totalManagePay != null and totalManagePay != ''" >
+				AND TOTAL_MANAGE_PAY = #{totalManagePay,jdbcType=NUMERIC}
+			</if>
+			<if test="totalConsultPay != null and totalConsultPay != ''" >
+				AND TOTAL_CONSULT_PAY = #{totalConsultPay,jdbcType=NUMERIC}
+			</if>
+			<if test="totalDepositPay != null and totalDepositPay != ''" >
+				AND TOTAL_DEPOSIT_PAY = #{totalDepositPay,jdbcType=NUMERIC}
+			</if>
+			<if test="totalOutsource != null and totalOutsource != ''" >
+				AND TOTAL_OUTSOURCE = #{totalOutsource,jdbcType=NUMERIC}
+			</if>
+			<if test="totalOutsourcePay != null and totalOutsourcePay != ''" >
+				AND TOTAL_OUTSOURCE_PAY = #{totalOutsourcePay,jdbcType=NUMERIC}
+			</if>
+			<if test="totalAchievement != null and totalAchievement != ''" >
+				AND TOTAL_ACHIEVEMENT = #{totalAchievement,jdbcType=NUMERIC}
+			</if>
+			<if test="totalAchievementPay != null and totalAchievementPay != ''" >
+				AND TOTAL_ACHIEVEMENT_PAY = #{totalAchievementPay,jdbcType=NUMERIC}
+			</if>
+			<if test="totalBonus != null and totalBonus != ''" >
+				AND TOTAL_BONUS = #{totalBonus,jdbcType=NUMERIC}
+			</if>
+			<if test="totalProfit != null and totalProfit != ''" >
+				AND TOTAL_PROFIT = #{totalProfit,jdbcType=NUMERIC}
+			</if>
+			<if test="totalResidue != null and totalResidue != ''" >
+				AND TOTAL_RESIDUE = #{totalResidue,jdbcType=NUMERIC}
+			</if>
+			<if test="totalAvailableFunds != null and totalAvailableFunds != ''" >
+				AND TOTAL_AVAILABLE_FUNDS = #{totalAvailableFunds,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.BdTFundCostInfoModel" resultMap="BdTFundCostInfoResult">
+		SELECT * FROM BD_T_FUND_COST_INFO
+		<where>
+			<if test="id != null and id != ''" >
+				ID = #{id,jdbcType=VARCHAR}
+			</if>
+			<if test="costFile != null and costFile != ''" >
+				AND COST_FILE = #{costFile,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="year != null and year != ''" >
+				AND YEAR = #{year,jdbcType=VARCHAR}
+			</if>
+			<if test="quarter != null and quarter != ''" >
+				AND QUARTER = #{quarter,jdbcType=VARCHAR}
+			</if>
+			<if test="totalAssets != null and totalAssets != ''" >
+				AND TOTAL_ASSETS = #{totalAssets,jdbcType=NUMERIC}
+			</if>
+			<if test="totalManage != null and totalManage != ''" >
+				AND TOTAL_MANAGE = #{totalManage,jdbcType=NUMERIC}
+			</if>
+			<if test="totalDeposit != null and totalDeposit != ''" >
+				AND TOTAL_DEPOSIT = #{totalDeposit,jdbcType=NUMERIC}
+			</if>
+			<if test="totalConsult != null and totalConsult != ''" >
+				AND TOTAL_CONSULT = #{totalConsult,jdbcType=NUMERIC}
+			</if>
+			<if test="totalAudit != null and totalAudit != ''" >
+				AND TOTAL_AUDIT = #{totalAudit,jdbcType=NUMERIC}
+			</if>
+			<if test="totalLawyer != null and totalLawyer != ''" >
+				AND TOTAL_LAWYER = #{totalLawyer,jdbcType=NUMERIC}
+			</if>
+			<if test="totalOther != null and totalOther != ''" >
+				AND TOTAL_OTHER = #{totalOther,jdbcType=NUMERIC}
+			</if>
+			<if test="fileDesc != null and fileDesc != ''" >
+				AND FILE_DESC = #{fileDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="time != null" >
+				AND TIME = #{time,jdbcType=VARCHAR}
+			</if>
+			<if test="totalFood != null and totalFood != ''" >
+				AND TOTAL_FOOD = #{totalFood,jdbcType=NUMERIC}
+			</if>
+			<if test="assessmentDate != null" >
+				AND ASSESSMENT_DATE = #{assessmentDate,jdbcType=VARCHAR}
+			</if>
+			<if test="endTotalAssets != null and endTotalAssets != ''" >
+				AND END_TOTAL_ASSETS = #{endTotalAssets,jdbcType=NUMERIC}
+			</if>
+			<if test="endNetAssets != null and endNetAssets != ''" >
+				AND END_NET_ASSETS = #{endNetAssets,jdbcType=NUMERIC}
+			</if>
+			<if test="totalManagePay != null and totalManagePay != ''" >
+				AND TOTAL_MANAGE_PAY = #{totalManagePay,jdbcType=NUMERIC}
+			</if>
+			<if test="totalConsultPay != null and totalConsultPay != ''" >
+				AND TOTAL_CONSULT_PAY = #{totalConsultPay,jdbcType=NUMERIC}
+			</if>
+			<if test="totalDepositPay != null and totalDepositPay != ''" >
+				AND TOTAL_DEPOSIT_PAY = #{totalDepositPay,jdbcType=NUMERIC}
+			</if>
+			<if test="totalOutsource != null and totalOutsource != ''" >
+				AND TOTAL_OUTSOURCE = #{totalOutsource,jdbcType=NUMERIC}
+			</if>
+			<if test="totalOutsourcePay != null and totalOutsourcePay != ''" >
+				AND TOTAL_OUTSOURCE_PAY = #{totalOutsourcePay,jdbcType=NUMERIC}
+			</if>
+			<if test="totalAchievement != null and totalAchievement != ''" >
+				AND TOTAL_ACHIEVEMENT = #{totalAchievement,jdbcType=NUMERIC}
+			</if>
+			<if test="totalAchievementPay != null and totalAchievementPay != ''" >
+				AND TOTAL_ACHIEVEMENT_PAY = #{totalAchievementPay,jdbcType=NUMERIC}
+			</if>
+			<if test="totalBonus != null and totalBonus != ''" >
+				AND TOTAL_BONUS = #{totalBonus,jdbcType=NUMERIC}
+			</if>
+			<if test="totalProfit != null and totalProfit != ''" >
+				AND TOTAL_PROFIT = #{totalProfit,jdbcType=NUMERIC}
+			</if>
+			<if test="totalResidue != null and totalResidue != ''" >
+				AND TOTAL_RESIDUE = #{totalResidue,jdbcType=NUMERIC}
+			</if>
+			<if test="totalAvailableFunds != null and totalAvailableFunds != ''" >
+				AND TOTAL_AVAILABLE_FUNDS = #{totalAvailableFunds,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</select>
+
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="BdTFundCostInfoResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+	<update id="updateBatch" parameterType="List">
+		update  EI.BD_T_FUND_COST_INFO set
+		STATUS='9'
+        WHERE id in
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+
+	</update>
+
+	<update id="updatePkId" parameterType="com.ppmg.ei.model.BdTFundCostInfoModel">
+		UPDATE BD_T_FUND_COST_INFO
+		<set>
+			<if test="id != null and id != ''" >
+				ID = #{id,jdbcType=VARCHAR},
+			</if>
+			<if test="costFile != null and costFile != ''" >
+				COST_FILE = #{costFile,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null and remark != ''" >
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				FUND_ID = #{fundId,jdbcType=VARCHAR},
+			</if>
+			<if test="year != null and year != ''" >
+				YEAR = #{year,jdbcType=VARCHAR},
+			</if>
+				QUARTER = #{quarter,jdbcType=VARCHAR},
+			<if test="totalAssets != null and totalAssets != ''" >
+				TOTAL_ASSETS = #{totalAssets,jdbcType=NUMERIC},
+			</if>
+			<if test="totalManage != null " >
+				TOTAL_MANAGE = #{totalManage,jdbcType=NUMERIC},
+			</if>
+			<if test="totalDeposit != null " >
+				TOTAL_DEPOSIT = #{totalDeposit,jdbcType=NUMERIC},
+			</if>
+			<if test="totalConsult != null " >
+				TOTAL_CONSULT = #{totalConsult,jdbcType=NUMERIC},
+			</if>
+			<if test="totalAudit != null " >
+				TOTAL_AUDIT = #{totalAudit,jdbcType=NUMERIC},
+			</if>
+			<if test="totalLawyer != null " >
+				TOTAL_LAWYER = #{totalLawyer,jdbcType=NUMERIC},
+			</if>
+			<if test="totalOther != null " >
+				TOTAL_OTHER = #{totalOther,jdbcType=NUMERIC},
+			</if>
+			<if test="fileDesc != null and fileDesc != ''" >
+				FILE_DESC = #{fileDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="time != null" >
+				TIME = #{time,jdbcType=TIMESTAMP},
+			</if>
+			<if test="totalFood != null " >
+				TOTAL_FOOD = #{totalFood,jdbcType=NUMERIC},
+			</if>
+			<if test="assessmentDate != null" >
+				ASSESSMENT_DATE = #{assessmentDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endTotalAssets != null " >
+				END_TOTAL_ASSETS = #{endTotalAssets,jdbcType=NUMERIC},
+			</if>
+			<if test="endNetAssets != null " >
+				END_NET_ASSETS = #{endNetAssets,jdbcType=NUMERIC},
+			</if>
+			<if test="totalManagePay != null " >
+				TOTAL_MANAGE_PAY = #{totalManagePay,jdbcType=NUMERIC},
+			</if>
+			<if test="totalConsultPay != null " >
+				TOTAL_CONSULT_PAY = #{totalConsultPay,jdbcType=NUMERIC},
+			</if>
+			<if test="totalDepositPay != null " >
+				TOTAL_DEPOSIT_PAY = #{totalDepositPay,jdbcType=NUMERIC},
+			</if>
+			<if test="totalOutsource != null " >
+				TOTAL_OUTSOURCE = #{totalOutsource,jdbcType=NUMERIC},
+			</if>
+			<if test="totalOutsourcePay != null " >
+				TOTAL_OUTSOURCE_PAY = #{totalOutsourcePay,jdbcType=NUMERIC},
+			</if>
+			<if test="totalAchievement != null " >
+				TOTAL_ACHIEVEMENT = #{totalAchievement,jdbcType=NUMERIC},
+			</if>
+			<if test="totalAchievementPay != null " >
+				TOTAL_ACHIEVEMENT_PAY = #{totalAchievementPay,jdbcType=NUMERIC},
+			</if>
+			<if test="totalBonus != null " >
+				TOTAL_BONUS = #{totalBonus,jdbcType=NUMERIC},
+			</if>
+			<if test="totalProfit != null " >
+				TOTAL_PROFIT = #{totalProfit,jdbcType=NUMERIC},
+			</if>
+				TOTAL_RESIDUE = #{totalResidue,jdbcType=NUMERIC},
+				TOTAL_AVAILABLE_FUNDS = #{totalAvailableFunds,jdbcType=NUMERIC}
+
+		</set>
+		WHERE ID = #{id,jdbcType=VARCHAR}
+	</update>
+
+
+	<select id="getYearList" parameterType="com.ppmg.ei.model.BdTFundCostInfoModel" resultMap="BdTFundCostInfoResult">
+		select * from ei.BD_T_FUND_COST_INFO
+		where year=#{year}
+		and fund_id=#{fundId}
+		and status!='9'
+		and QUARTER is null
+
+	</select>
+
+</mapper>

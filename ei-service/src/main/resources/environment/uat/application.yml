@@ -1,0 +1,22 @@
+spring:
+  profiles:
+    active:
+      - uat
+
+logging:
+  config: classpath:log4j2-spring.yml
+
+server:
+  context-path: /ei-service
+  port: 9072
+
+mybatis:
+  mapper-locations:
+    - classpath*:mybatis/*.xml
+  configuration:
+    call-setters-on-nulls: true
+
+pagehelper:
+  helperDialect: oracle
+  reasonable: true
+  params: count=countSql

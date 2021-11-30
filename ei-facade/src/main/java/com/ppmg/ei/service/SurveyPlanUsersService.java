@@ -1,0 +1,11 @@
+package com.ppmg.ei.service;
+
+import com.founder.ssm.core.service.BaseService;
+
+import com.ppmg.ei.model.SurveyPlanUsersModel;
+
+public interface SurveyPlanUsersService extends BaseService<SurveyPlanUsersModel>  {
+
+   String selectByPlanUserName(String planId);
+
+}

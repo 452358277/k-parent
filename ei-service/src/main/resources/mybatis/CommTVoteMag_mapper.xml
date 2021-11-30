@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CommTVoteMag">
+	<resultMap id="CommTVoteMagResult2" type="com.ppmg.ei.model.CommTVoteMagModel" extends="CommTVoteMagResult">
+		<result column="DECISION_NAME" property="decisionName" jdbcType="VARCHAR" />
+	</resultMap>
+	<!-- start autocreate -->
+
+	<resultMap id="CommTVoteMagResult" type="com.ppmg.ei.model.CommTVoteMagModel">
+		<result column="VOTE_ID" property="voteId" jdbcType="VARCHAR" />
+		<result column="VOTE_SUBJECT" property="voteSubject" jdbcType="VARCHAR" />
+		<result column="VOTE_DESC" property="voteDesc" jdbcType="VARCHAR" />
+		<result column="REL_PROJ" property="relProj" jdbcType="VARCHAR" />
+		<result column="SUBJ_TYPE" property="subjType" jdbcType="VARCHAR" />
+		<result column="REL_MRP" property="relMrp" jdbcType="VARCHAR" />
+		<result column="VOTE_RESULT" property="voteResult" jdbcType="VARCHAR" />
+		<result column="PROCESS_INST_ID" property="processInstId" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="DECISION_ID" property="decisionId" jdbcType="VARCHAR" />
+		<result column="DECISION_DT" property="decisionDt" jdbcType="TIMESTAMP" />
+		<result column="DECISION_RESULT" property="decisionResult" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="COLLECT_OPINION" property="collectOpinion" jdbcType="VARCHAR" />
+		<result column="DECISION_OPINION" property="decisionOpinion" jdbcType="VARCHAR" />
+		<result column="PROJ_TYPE" property="projType" jdbcType="VARCHAR" />
+		<result column="GROUP_ID" property="groupId" jdbcType="NUMERIC" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.CommTVoteMagModel">
+		INSERT INTO COMM_T_VOTE_MAG (VOTE_ID,VOTE_SUBJECT,VOTE_DESC,REL_PROJ,SUBJ_TYPE,REL_MRP,VOTE_RESULT,PROCESS_INST_ID,STATUS,DECISION_ID,DECISION_DT,DECISION_RESULT,REMARK,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,COLLECT_OPINION,DECISION_OPINION,PROJ_TYPE,GROUP_ID) values(#{voteId,jdbcType=VARCHAR},#{voteSubject,jdbcType=VARCHAR},#{voteDesc,jdbcType=VARCHAR},#{relProj,jdbcType=VARCHAR},#{subjType,jdbcType=VARCHAR},#{relMrp,jdbcType=VARCHAR},#{voteResult,jdbcType=VARCHAR},#{processInstId,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{decisionId,jdbcType=VARCHAR},#{decisionDt,jdbcType=TIMESTAMP},#{decisionResult,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{collectOpinion,jdbcType=VARCHAR},#{decisionOpinion,jdbcType=VARCHAR},#{projType,jdbcType=VARCHAR},#{groupId,jdbcType=NUMERIC})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO COMM_T_VOTE_MAG (VOTE_ID,VOTE_SUBJECT,VOTE_DESC,REL_PROJ,SUBJ_TYPE,REL_MRP,VOTE_RESULT,PROCESS_INST_ID,STATUS,DECISION_ID,DECISION_DT,DECISION_RESULT,REMARK,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,COLLECT_OPINION,DECISION_OPINION,PROJ_TYPE,GROUP_ID)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.voteId,jdbcType=VARCHAR},
+				#{item.voteSubject,jdbcType=VARCHAR},
+				#{item.voteDesc,jdbcType=VARCHAR},
+				#{item.relProj,jdbcType=VARCHAR},
+				#{item.subjType,jdbcType=VARCHAR},
+				#{item.relMrp,jdbcType=VARCHAR},
+				#{item.voteResult,jdbcType=VARCHAR},
+				#{item.processInstId,jdbcType=VARCHAR},
+				#{item.status,jdbcType=VARCHAR},
+				#{item.decisionId,jdbcType=VARCHAR},
+				#{item.decisionDt,jdbcType=TIMESTAMP},
+				#{item.decisionResult,jdbcType=VARCHAR},
+				#{item.remark,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+				#{item.collectOpinion,jdbcType=VARCHAR},
+				#{item.decisionOpinion,jdbcType=VARCHAR},
+				#{item.projType,jdbcType=VARCHAR},
+				#{item.groupId,jdbcType=NUMERIC}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  COMM_T_VOTE_MAG WHERE VOTE_ID = #{voteId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.CommTVoteMagModel">
+		DELETE FROM COMM_T_VOTE_MAG
+		<where>
+			<if test="voteId != null and voteId != ''" >
+				VOTE_ID = #{voteId,jdbcType=VARCHAR}
+			</if>
+			<if test="voteSubject != null and voteSubject != ''" >
+				AND VOTE_SUBJECT = #{voteSubject,jdbcType=VARCHAR}
+			</if>
+			<if test="voteDesc != null and voteDesc != ''" >
+				AND VOTE_DESC = #{voteDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="relProj != null and relProj != ''" >
+				AND REL_PROJ = #{relProj,jdbcType=VARCHAR}
+			</if>
+			<if test="subjType != null and subjType != ''" >
+				AND SUBJ_TYPE = #{subjType,jdbcType=VARCHAR}
+			</if>
+			<if test="relMrp != null and relMrp != ''" >
+				AND REL_MRP = #{relMrp,jdbcType=VARCHAR}
+			</if>
+			<if test="voteResult != null and voteResult != ''" >
+				AND VOTE_RESULT = #{voteResult,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="decisionId != null and decisionId != ''" >
+				AND DECISION_ID = #{decisionId,jdbcType=VARCHAR}
+			</if>
+			<if test="decisionDt != null" >
+				AND DECISION_DT = #{decisionDt,jdbcType=VARCHAR}
+			</if>
+			<if test="decisionResult != null and decisionResult != ''" >
+				AND DECISION_RESULT = #{decisionResult,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="collectOpinion != null and collectOpinion != ''" >
+				AND COLLECT_OPINION = #{collectOpinion,jdbcType=VARCHAR}
+			</if>
+			<if test="decisionOpinion != null and decisionOpinion != ''" >
+				AND DECISION_OPINION = #{decisionOpinion,jdbcType=VARCHAR}
+			</if>
+			<if test="projType != null and projType != ''" >
+				AND PROJ_TYPE = #{projType,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  COMM_T_VOTE_MAG WHERE VOTE_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.CommTVoteMagModel">
+		UPDATE COMM_T_VOTE_MAG 
+		<set>
+			<if test="voteId != null and voteId != ''" >
+				VOTE_ID = #{voteId,jdbcType=VARCHAR},
+			</if>
+			<if test="voteSubject != null and voteSubject != ''" >
+				VOTE_SUBJECT = #{voteSubject,jdbcType=VARCHAR},
+			</if>
+			<if test="voteDesc != null and voteDesc != ''" >
+				VOTE_DESC = #{voteDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="relProj != null and relProj != ''" >
+				REL_PROJ = #{relProj,jdbcType=VARCHAR},
+			</if>
+			<if test="subjType != null and subjType != ''" >
+				SUBJ_TYPE = #{subjType,jdbcType=VARCHAR},
+			</if>
+			<if test="relMrp != null and relMrp != ''" >
+				REL_MRP = #{relMrp,jdbcType=VARCHAR},
+			</if>
+			<if test="voteResult != null and voteResult != ''" >
+				VOTE_RESULT = #{voteResult,jdbcType=VARCHAR},
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="decisionId != null and decisionId != ''" >
+				DECISION_ID = #{decisionId,jdbcType=VARCHAR},
+			</if>
+			<if test="decisionDt != null" >
+				DECISION_DT = #{decisionDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="decisionResult != null and decisionResult != ''" >
+				DECISION_RESULT = #{decisionResult,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null and remark != ''" >
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="collectOpinion != null and collectOpinion != ''" >
+				COLLECT_OPINION = #{collectOpinion,jdbcType=VARCHAR},
+			</if>
+			<if test="decisionOpinion != null and decisionOpinion != ''" >
+				DECISION_OPINION = #{decisionOpinion,jdbcType=VARCHAR},
+			</if>
+			<if test="projType != null and projType != ''" >
+				PROJ_TYPE = #{projType,jdbcType=VARCHAR},
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				GROUP_ID = #{groupId,jdbcType=NUMERIC},
+			</if>
+		</set>
+		WHERE VOTE_ID = #{voteId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="CommTVoteMagResult">
+		SELECT * FROM COMM_T_VOTE_MAG WHERE VOTE_ID = #{voteId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.CommTVoteMagModel" resultMap="CommTVoteMagResult">
+		SELECT * FROM COMM_T_VOTE_MAG
+		<where>
+			<if test="voteId != null and voteId != ''" >
+				VOTE_ID = #{voteId,jdbcType=VARCHAR}
+			</if>
+			<if test="voteSubject != null and voteSubject != ''" >
+				AND VOTE_SUBJECT = #{voteSubject,jdbcType=VARCHAR}
+			</if>
+			<if test="voteDesc != null and voteDesc != ''" >
+				AND VOTE_DESC = #{voteDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="relProj != null and relProj != ''" >
+				AND REL_PROJ = #{relProj,jdbcType=VARCHAR}
+			</if>
+			<if test="subjType != null and subjType != ''" >
+				AND SUBJ_TYPE = #{subjType,jdbcType=VARCHAR}
+			</if>
+			<if test="relMrp != null and relMrp != ''" >
+				AND REL_MRP = #{relMrp,jdbcType=VARCHAR}
+			</if>
+			<if test="voteResult != null and voteResult != ''" >
+				AND VOTE_RESULT = #{voteResult,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="decisionId != null and decisionId != ''" >
+				AND DECISION_ID = #{decisionId,jdbcType=VARCHAR}
+			</if>
+			<if test="decisionDt != null" >
+				AND DECISION_DT = #{decisionDt,jdbcType=VARCHAR}
+			</if>
+			<if test="decisionResult != null and decisionResult != ''" >
+				AND DECISION_RESULT = #{decisionResult,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="collectOpinion != null and collectOpinion != ''" >
+				AND COLLECT_OPINION = #{collectOpinion,jdbcType=VARCHAR}
+			</if>
+			<if test="decisionOpinion != null and decisionOpinion != ''" >
+				AND DECISION_OPINION = #{decisionOpinion,jdbcType=VARCHAR}
+			</if>
+			<if test="projType != null and projType != ''" >
+				AND PROJ_TYPE = #{projType,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM COMM_T_VOTE_MAG
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="CommTVoteMagResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+		<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.CommTVoteMagModel">
+		SELECT COUNT(*) FROM COMM_T_VOTE_MAG
+		<where>
+			<if test="voteId != null and voteId != ''" >
+				VOTE_ID = #{voteId,jdbcType=VARCHAR}
+			</if>
+			<if test="voteSubject != null and voteSubject != ''" >
+				AND VOTE_SUBJECT = #{voteSubject,jdbcType=VARCHAR}
+			</if>
+			<if test="voteDesc != null and voteDesc != ''" >
+				AND VOTE_DESC = #{voteDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="relProj != null and relProj != ''" >
+				AND REL_PROJ = #{relProj,jdbcType=VARCHAR}
+			</if>
+			<if test="subjType != null and subjType != ''" >
+				AND SUBJ_TYPE = #{subjType,jdbcType=VARCHAR}
+			</if>
+			<if test="relMrp != null and relMrp != ''" >
+				AND REL_MRP = #{relMrp,jdbcType=VARCHAR}
+			</if>
+			<if test="voteResult != null and voteResult != ''" >
+				AND VOTE_RESULT = #{voteResult,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="decisionId != null and decisionId != ''" >
+				AND DECISION_ID = #{decisionId,jdbcType=VARCHAR}
+			</if>
+			<if test="decisionDt != null" >
+				AND DECISION_DT = #{decisionDt,jdbcType=VARCHAR}
+			</if>
+			<if test="decisionResult != null and decisionResult != ''" >
+				AND DECISION_RESULT = #{decisionResult,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="collectOpinion != null and collectOpinion != ''" >
+				AND COLLECT_OPINION = #{collectOpinion,jdbcType=VARCHAR}
+			</if>
+			<if test="decisionOpinion != null and decisionOpinion != ''" >
+				AND DECISION_OPINION = #{decisionOpinion,jdbcType=VARCHAR}
+			</if>
+			<if test="projType != null and projType != ''" >
+				AND PROJ_TYPE = #{projType,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.CommTVoteMagModel" resultMap="CommTVoteMagResult">
+		SELECT * FROM COMM_T_VOTE_MAG
+		<where>
+			<if test="voteId != null and voteId != ''" >
+				VOTE_ID = #{voteId,jdbcType=VARCHAR}
+			</if>
+			<if test="voteSubject != null and voteSubject != ''" >
+				AND VOTE_SUBJECT = #{voteSubject,jdbcType=VARCHAR}
+			</if>
+			<if test="voteDesc != null and voteDesc != ''" >
+				AND VOTE_DESC = #{voteDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="relProj != null and relProj != ''" >
+				AND REL_PROJ = #{relProj,jdbcType=VARCHAR}
+			</if>
+			<if test="subjType != null and subjType != ''" >
+				AND SUBJ_TYPE = #{subjType,jdbcType=VARCHAR}
+			</if>
+			<if test="relMrp != null and relMrp != ''" >
+				AND REL_MRP = #{relMrp,jdbcType=VARCHAR}
+			</if>
+			<if test="voteResult != null and voteResult != ''" >
+				AND VOTE_RESULT = #{voteResult,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="decisionId != null and decisionId != ''" >
+				AND DECISION_ID = #{decisionId,jdbcType=VARCHAR}
+			</if>
+			<if test="decisionDt != null" >
+				AND DECISION_DT = #{decisionDt,jdbcType=VARCHAR}
+			</if>
+			<if test="decisionResult != null and decisionResult != ''" >
+				AND DECISION_RESULT = #{decisionResult,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="collectOpinion != null and collectOpinion != ''" >
+				AND COLLECT_OPINION = #{collectOpinion,jdbcType=VARCHAR}
+			</if>
+			<if test="decisionOpinion != null and decisionOpinion != ''" >
+				AND DECISION_OPINION = #{decisionOpinion,jdbcType=VARCHAR}
+			</if>
+			<if test="projType != null and projType != ''" >
+				AND PROJ_TYPE = #{projType,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="CommTVoteMagResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+	<!-- 根据项目ID获取项目立项决议结果列表 -->
+	<select id="getProjAppVoteMagInfoByProjId" parameterType="java.lang.String" resultMap="CommTVoteMagResult2">
+		SELECT T1.VOTE_RESULT,T1.COLLECT_OPINION,U1.NAME DECISION_NAME,T1.DECISION_DT,T1.DECISION_RESULT 
+		FROM COMM_T_VOTE_MAG T1 
+		  LEFT JOIN BASE.APP_USER U1 ON U1.ID = T1.DECISION_ID
+		  LEFT JOIN TZ_T_PROJ_APP_INFO P ON T1.PROCESS_INST_ID = P.PROCESS_INST_ID
+		 WHERE P.PROJ_ID=#{PROJ_ID}
+	</select>
+	<!-- 根据项目ID获取项目立项决议结果列表 -->
+	<select id="getProjDecisionVoteMagInfoByProjId" parameterType="java.lang.String" resultMap="CommTVoteMagResult2">
+		SELECT T1.VOTE_RESULT,T1.COLLECT_OPINION,U1.NAME DECISION_NAME,T1.DECISION_DT,T1.DECISION_RESULT 
+		FROM COMM_T_VOTE_MAG T1 
+		  LEFT JOIN BASE.APP_USER U1 ON U1.ID = T1.DECISION_ID
+		  LEFT JOIN TZ_T_PROJ_INFO P ON T1.PROCESS_INST_ID = P.PROCESS_INST_ID
+		 WHERE P.PROJ_ID=#{PROJ_ID}
+	</select>
+</mapper>

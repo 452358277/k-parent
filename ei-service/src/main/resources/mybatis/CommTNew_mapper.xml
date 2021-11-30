@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CommTNew">
+	<!-- start autocreate -->
+
+	<resultMap id="CommTNewResult" type="com.ppmg.ei.model.CommTNewModel">
+		<result column="ID" property="id" jdbcType="VARCHAR" />
+		<result column="PARENT_ID" property="parentId" jdbcType="VARCHAR" />
+		<result column="NEW_NAME" property="newName" jdbcType="VARCHAR" />
+		<result column="NEW_LEVEL" property="newLevel" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="ORDER_NO" property="orderNo" jdbcType="NUMERIC" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.CommTNewModel">
+		INSERT INTO BASE.COMM_T_NEW (ID,PARENT_ID,NEW_NAME,NEW_LEVEL,STATUS,ORDER_NO,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT) values(#{id,jdbcType=VARCHAR},#{parentId,jdbcType=VARCHAR},#{newName,jdbcType=VARCHAR},#{newLevel,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{orderNo,jdbcType=NUMERIC},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO BASE.COMM_T_NEW (ID,PARENT_ID,NEW_NAME,NEW_LEVEL,STATUS,ORDER_NO,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.id,jdbcType=VARCHAR},
+				#{item.parentId,jdbcType=VARCHAR},
+				#{item.newName,jdbcType=VARCHAR},
+				#{item.newLevel,jdbcType=VARCHAR},
+				#{item.status,jdbcType=VARCHAR},
+				#{item.orderNo,jdbcType=NUMERIC},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  BASE.COMM_T_NEW WHERE ID = #{id,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.CommTNewModel">
+		DELETE FROM BASE.COMM_T_NEW
+		<where>
+			<if test="id != null and id != ''" >
+				ID = #{id,jdbcType=VARCHAR}
+			</if>
+			<if test="parentId != null and parentId != ''" >
+				AND PARENT_ID = #{parentId,jdbcType=VARCHAR}
+			</if>
+			<if test="newName != null and newName != ''" >
+				AND NEW_NAME = #{newName,jdbcType=VARCHAR}
+			</if>
+			<if test="newLevel != null and newLevel != ''" >
+				AND NEW_LEVEL = #{newLevel,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="orderNo != null and orderNo != ''" >
+				AND ORDER_NO = #{orderNo,jdbcType=NUMERIC}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  BASE.COMM_T_NEW WHERE ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.CommTNewModel">
+		UPDATE BASE.COMM_T_NEW 
+		<set>
+			<if test="id != null and id != ''" >
+				ID = #{id,jdbcType=VARCHAR},
+			</if>
+			<if test="parentId != null and parentId != ''" >
+				PARENT_ID = #{parentId,jdbcType=VARCHAR},
+			</if>
+			<if test="newName != null and newName != ''" >
+				NEW_NAME = #{newName,jdbcType=VARCHAR},
+			</if>
+			<if test="newLevel != null and newLevel != ''" >
+				NEW_LEVEL = #{newLevel,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="orderNo != null and orderNo != ''" >
+				ORDER_NO = #{orderNo,jdbcType=NUMERIC},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		WHERE ID = #{id,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="CommTNewResult">
+		SELECT * FROM BASE.COMM_T_NEW WHERE ID = #{id,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.CommTNewModel" resultMap="CommTNewResult">
+		SELECT * FROM BASE.COMM_T_NEW
+		<where>
+			<if test="id != null and id != ''" >
+				ID = #{id,jdbcType=VARCHAR}
+			</if>
+			<if test="parentId != null and parentId != ''" >
+				AND PARENT_ID = #{parentId,jdbcType=VARCHAR}
+			</if>
+			<if test="newName != null and newName != ''" >
+				AND NEW_NAME = #{newName,jdbcType=VARCHAR}
+			</if>
+			<if test="newLevel != null and newLevel != ''" >
+				AND NEW_LEVEL = #{newLevel,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="orderNo != null and orderNo != ''" >
+				AND ORDER_NO = #{orderNo,jdbcType=NUMERIC}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM BASE.COMM_T_NEW
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="CommTNewResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.CommTNewModel">
+		SELECT COUNT(*) FROM BASE.COMM_T_NEW
+		<where>
+			<if test="id != null and id != ''" >
+				ID = #{id,jdbcType=VARCHAR}
+			</if>
+			<if test="parentId != null and parentId != ''" >
+				AND PARENT_ID = #{parentId,jdbcType=VARCHAR}
+			</if>
+			<if test="newName != null and newName != ''" >
+				AND NEW_NAME = #{newName,jdbcType=VARCHAR}
+			</if>
+			<if test="newLevel != null and newLevel != ''" >
+				AND NEW_LEVEL = #{newLevel,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="orderNo != null and orderNo != ''" >
+				AND ORDER_NO = #{orderNo,jdbcType=NUMERIC}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.CommTNewModel" resultMap="CommTNewResult">
+		SELECT * FROM BASE.COMM_T_NEW
+		<where>
+			<if test="id != null and id != ''" >
+				ID = #{id,jdbcType=VARCHAR}
+			</if>
+			<if test="parentId != null and parentId != ''" >
+				AND PARENT_ID = #{parentId,jdbcType=VARCHAR}
+			</if>
+			<if test="newName != null and newName != ''" >
+				AND NEW_NAME = #{newName,jdbcType=VARCHAR}
+			</if>
+			<if test="newLevel != null and newLevel != ''" >
+				AND NEW_LEVEL = #{newLevel,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="orderNo != null and orderNo != ''" >
+				AND ORDER_NO = #{orderNo,jdbcType=NUMERIC}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="CommTNewResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+
+	<select id="selectListById" parameterType="java.lang.String" resultMap="CommTNewResult">
+		select DISTINCT cc.* from BASE.COMM_T_NEW cc inner join (
+		   select bb.NEW_ID from BASE.COMM_T_GICS_NEW_RELATE bb where GICS_ID in (
+		         select id from BASE.COMM_T_GICS a
+				  start with a.ID =#{id,jdbcType=VARCHAR}
+				   connect by prior a.ID = a.PARENT_ID))dd on cc.ID=dd.NEW_ID
+
+	</select>
+	<!-- end autocreate -->
+</mapper>

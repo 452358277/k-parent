@@ -1,0 +1,823 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="performance">
+
+    <resultMap id="PerfResultAll" type="com.ppmg.ei.model.PerformanceModel" extends="PerfResult">
+        <collection property="perfOneNormModel" ofType="com.ppmg.ei.model.PerfOneNormModel">
+            <result column="O_NORM_ID" property="oNormId" jdbcType="VARCHAR" />
+            <result column="OE_PER_ID" property="pPerId" jdbcType="VARCHAR" />
+            <result column="O_ONE_NAME" property="oOneName" jdbcType="VARCHAR" />
+            <result column="O_ONE_SCORE" property="oOneScore" jdbcType="NUMERIC" />
+            <result column="IS_DELETE" property="isDelete" jdbcType="VARCHAR" />
+        </collection>
+        <collection property="perfSecondNormModel" ofType="com.ppmg.ei.model.PerfSecondNormModel">
+            <result column="S_NORM_ID" property="sNormId" jdbcType="VARCHAR" />
+            <result column="OP_O_NORM_ID" property="oNormId" jdbcType="VARCHAR" />
+            <result column="S_TWO_NAME" property="sTwoName" jdbcType="VARCHAR" />
+            <result column="S_TWO_SCORE" property="sTwoScore" jdbcType="NUMERIC" />
+            <result column="IS_DELETE" property="isDelete" jdbcType="VARCHAR" />
+        </collection>
+        <collection property="perfThreeNormModel" ofType="com.ppmg.ei.model.PerfThreeNormModel">
+            <result column="T_NORM_ID" property="tNormId" jdbcType="VARCHAR" />
+            <result column="Z_S_NORM_ID" property="sNormId" jdbcType="VARCHAR" />
+            <result column="T_THREE_NAME" property="tThreeName" jdbcType="VARCHAR" />
+            <result column="T_THREE_SCORE" property="tThreeScore" jdbcType="NUMERIC" />
+            <result column="T_SUGGEST" property="tSuggest" jdbcType="VARCHAR" />
+            <result column="T_EXPLAIN" property="tExplain" jdbcType="VARCHAR" />
+            <result column="IS_DELETE" property="isDelete" jdbcType="VARCHAR" />
+        </collection>
+
+        <!--分数详情-->
+        <collection property="perfScoreModelDetails" ofType="com.ppmg.ei.model.PerfScoreModelDetails">
+            <result column="PSD_ID" property="psdId" jdbcType="VARCHAR" />
+            <result column="PS_ID" property="psId" jdbcType="VARCHAR" />
+            <result column="PSD_ONESELF_SCORE" property="psdOneselfScore" jdbcType="NUMERIC" />
+            <result column="PSD_AUDIT_SCORE" property="psdAuditScore" jdbcType="NUMERIC" />
+            <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+            <result column="CREATE_DT" property="createDt" jdbcType="DATE" />
+            <result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+            <result column="UPDATE_DT" property="updateDt" jdbcType="DATE" />
+        </collection>
+    </resultMap>
+
+    <!--嵌套-->
+    <resultMap id="PerfResultAllTwo" type="com.ppmg.ei.model.PerformanceModel" extends="PerfResult">
+        <collection property="perfOneNormModel" ofType="com.ppmg.ei.model.PerfOneNormModel">
+            <result column="O_NORM_ID" property="oNormId" jdbcType="VARCHAR" />
+            <result column="OE_PER_ID" property="pPerId" jdbcType="VARCHAR" />
+            <result column="O_ONE_NAME" property="oOneName" jdbcType="VARCHAR" />
+            <result column="O_ONE_SCORE" property="oOneScore" jdbcType="NUMERIC" />
+            <result column="IS_DELETE" property="isDelete" jdbcType="VARCHAR" />
+            <collection property="perfSecondNormModel" ofType="com.ppmg.ei.model.PerfSecondNormModel">
+                <result column="S_NORM_ID" property="sNormId" jdbcType="VARCHAR" />
+                <result column="OP_O_NORM_ID" property="oNormId" jdbcType="VARCHAR" />
+                <result column="S_TWO_NAME" property="sTwoName" jdbcType="VARCHAR" />
+                <result column="S_TWO_SCORE" property="sTwoScore" jdbcType="NUMERIC" />
+                <result column="IS_DELETE" property="isDelete" jdbcType="VARCHAR" />
+                <collection property="perfThreeNormModel" ofType="com.ppmg.ei.model.PerfThreeNormModel">
+                    <result column="T_NORM_ID" property="tNormId" jdbcType="VARCHAR" />
+                    <result column="Z_S_NORM_ID" property="sNormId" jdbcType="VARCHAR" />
+                    <result column="T_THREE_NAME" property="tThreeName" jdbcType="VARCHAR" />
+                    <result column="T_THREE_SCORE" property="tThreeScore" jdbcType="NUMERIC" />
+                    <result column="T_SUGGEST" property="tSuggest" jdbcType="VARCHAR" />
+                    <result column="T_EXPLAIN" property="tExplain" jdbcType="VARCHAR" />
+                    <result column="IS_DELETE" property="isDelete" jdbcType="VARCHAR" />
+                    <result column="PSD_ONESELF_SCORE" property="psdOneselfScore" jdbcType="NUMERIC" />
+                    <result column="PSD_AUDIT_SCORE" property="psdAuditScore" jdbcType="NUMERIC" />
+                    <result column="PSD_T_NORM_ID" property="psdTNormId" jdbcType="VARCHAR" />
+                    <result column="PSD_PS_ID" property="psdPsId" jdbcType="VARCHAR" />
+                    <result column="PSD_ID" property="psdId" jdbcType="VARCHAR" />
+                    <result column="CL_FILE" property="clFile" jdbcType="VARCHAR" />
+                    <result column="CL_FILE_ONESELF" property="clFileOneself" jdbcType="VARCHAR" />
+                </collection>
+            </collection>
+        </collection>
+    </resultMap>
+    <!--PERF_MANAGE,主表-->
+    <resultMap id="PerfResult" type="com.ppmg.ei.model.PerformanceModel">
+        <result column="P_PER_ID" property="pPerID" jdbcType="VARCHAR" />
+        <result column="P_NAME" property="pName" jdbcType="VARCHAR" />
+        <result column="P_YEAR" property="pYear" jdbcType="VARCHAR" />
+        <result column="P_ASSESS_STARTTIME" property="pAssessStartTime" jdbcType="DATE" />
+        <result column="P_ASSESS_ENDTTIME" property="pAssessEndTime" jdbcType="DATE" />
+        <result column="P_STATUS" property="pStatus" jdbcType="VARCHAR" />
+        <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+        <result column="CREATE_DT" property="createDt" jdbcType="DATE" />
+        <result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+        <result column="UPDATE_DT" property="updateDt" jdbcType="DATE" />
+        <result column="FUND_COUNT" property="fundCount" jdbcType="VARCHAR" />
+        <result column="TOU_START_TIME" property="touStartTime" jdbcType="TIMESTAMP" />
+        <result column="TOU_END_TIME" property="touEndTime" jdbcType="TIMESTAMP" />
+
+        <!--判断自评数量-->
+        <result column="PS_ONESELF_YESNO" property="psOneselfYesno" jdbcType="VARCHAR" />
+    </resultMap>
+    <!--一级指标-->
+    <resultMap id="PerfOneNormModelResult" type="com.ppmg.ei.model.PerfOneNormModel">
+        <result column="O_NORM_ID" property="oNormId" jdbcType="VARCHAR" />
+        <result column="P_PER_ID" property="pPerId" jdbcType="VARCHAR" />
+        <result column="O_ONE_NAME" property="oOneName" jdbcType="VARCHAR" />
+        <result column="O_ONE_SCORE" property="oOneScore" jdbcType="NUMERIC" />
+        <result column="IS_DELETE" property="isDelete" jdbcType="VARCHAR" />
+        <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+        <result column="CREATE_DT" property="createDt" jdbcType="DATE" />
+        <result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+        <result column="UPDATE_DT" property="updateDt" jdbcType="DATE" />
+    </resultMap>
+    <!--二级指标映射-->
+    <resultMap id="PerfSecondNormModelResult" type="com.ppmg.ei.model.PerfSecondNormModel">
+        <result column="S_NORM_ID" property="sNormId" jdbcType="VARCHAR" />
+        <result column="O_NORM_ID" property="oNormId" jdbcType="VARCHAR" />
+        <result column="S_TWO_NAME" property="sTwoName" jdbcType="VARCHAR" />
+        <result column="S_TWO_SCORE" property="sTwoScore" jdbcType="NUMERIC" />
+        <result column="IS_DELETE" property="isDelete" jdbcType="VARCHAR" />
+        <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+        <result column="CREATE_DT" property="createDt" jdbcType="DATE" />
+        <result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+        <result column="UPDATE_DT" property="updateDt" jdbcType="DATE" />
+
+        <result column="THREE_COUNT" property="threeCount" jdbcType="VARCHAR" />
+    </resultMap>
+    <!--三级指标映射-->
+    <resultMap id="perfThreeNormModelRestlt" type="com.ppmg.ei.model.PerfThreeNormModel">
+        <result column="T_NORM_ID" property="tNormId" jdbcType="VARCHAR" />
+        <result column="S_NORM_ID" property="sNormId" jdbcType="VARCHAR" />
+        <result column="T_THREE_NAME" property="tThreeName" jdbcType="VARCHAR" />
+        <result column="T_THREE_SCORE" property="tThreeScore" jdbcType="NUMERIC" />
+        <result column="T_SUGGEST" property="tSuggest" jdbcType="VARCHAR" />
+        <result column="T_EXPLAIN" property="tExplain" jdbcType="VARCHAR" />
+        <result column="IS_DELETE" property="isDelete" jdbcType="VARCHAR" />
+        <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+        <result column="CREATE_DT" property="createDt" jdbcType="DATE" />
+        <result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+        <result column="UPDATE_DT" property="updateDt" jdbcType="DATE" />
+    </resultMap>
+    <!--分数表映射-->
+    <resultMap id="perfScoreModelRestlt" type="com.ppmg.ei.model.PerfScoreModel">
+        <result column="PS_ID" property="psId" jdbcType="VARCHAR" />
+        <result column="P_PER_ID" property="pPerId" jdbcType="VARCHAR" />
+        <result column="FUND_ID" property="fundId" jdbcType="VARCHAR" />
+        <result column="PS_ONESELF_SCORE" property="psOneselfScore" jdbcType="NUMERIC" />
+        <result column="PS_AUDIT_SCORE" property="psAuditScore" jdbcType="VARCHAR" />
+        <result column="PS_ONESELF_YESNO" property="psOneselfYesno" jdbcType="VARCHAR" />
+        <result column="PS_ASSESS_YESNO" property="psAssessYesno" jdbcType="VARCHAR" />
+        <result column="PS_ATTACHMENT" property="psAttachment" jdbcType="VARCHAR" />
+        <result column="IS_DELETE" property="isDelete" jdbcType="VARCHAR" />
+        <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+        <result column="CREATE_DT" property="createDt" jdbcType="DATE" />
+        <result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+        <result column="UPDATE_DT" property="updateDt" jdbcType="DATE" />
+
+        <result column="FUND_NAME" property="fundName" jdbcType="VARCHAR" />
+        <result column="P_YEAR" property="pYear" jdbcType="VARCHAR" />
+        <result column="FUND_SRC" property="fundSrc" jdbcType="VARCHAR" />
+        <result column="THIS_START_TIME" property="thisStartTime" jdbcType="TIMESTAMP" />
+        <result column="THIS_END_TIME" property="thisEndTime" jdbcType="TIMESTAMP" />
+        <result column="FUND_START_TIME" property="fundStartTime" jdbcType="TIMESTAMP"/>
+        <result column="FUND_END_TIME" property="fundEndTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <resultMap id="perfScoreModelDetailsResult" type="com.ppmg.ei.model.PerfScoreModelDetails">
+            <result column="PSD_ID" property="psdId" jdbcType="VARCHAR" />
+            <result column="PS_ID" property="psId" jdbcType="VARCHAR" />
+            <result column="PSD_ONESELF_SCORE" property="psdOneselfScore" jdbcType="NUMERIC" />
+            <result column="PSD_AUDIT_SCORE" property="psdAuditScore" jdbcType="NUMERIC" />
+            <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+            <result column="CREATE_DT" property="createDt" jdbcType="DATE" />
+            <result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+            <result column="UPDATE_DT" property="updateDt" jdbcType="DATE" />
+    </resultMap>
+    <select id="selectById" parameterType="String" resultMap="PerfResult">
+		SELECT * FROM PERF_MANAGE WHERE P_PER_ID = #{pPerID,jdbcType=VARCHAR}
+	</select>
+    <!--分页查询主表，绩效列表-->
+    <sql id="searchSql">
+        SELECT * from PERF_MANAGE a
+     <where>
+         <include refid="searchCondition.searchClause" />
+     </where>
+        order by a.create_dt desc
+ </sql>
+
+ <select id="selectListPage" resultMap="PerfResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+     <include refid="searchSql" />
+ </select>
+ <!--根据id查询主表-->
+    <select id="selectByPerManageId" parameterType="String" resultMap="PerfResult">
+		SELECT * FROM PERF_MANAGE WHERE P_PER_ID = #{id,jdbcType=VARCHAR}
+	</select>
+    <select id="selectByPerManageIdYear" parameterType="String" resultMap="PerfResult">
+		SELECT * FROM PERF_MANAGE WHERE P_YEAR = #{year,jdbcType=VARCHAR}
+	</select>
+    <!--查询绩效列表详情-->
+    <select id="selectPerfDetailSer" parameterType="String" resultMap="PerfResultAllTwo">
+        SELECT T.*,
+        oe.o_norm_id,
+        oe.p_per_id AS  OE_PER_ID,
+        oe.o_one_name,
+        oe.o_one_score,
+        oe.is_delete,
+        op.s_norm_id,
+        op.o_norm_id as OP_O_NORM_ID,
+        op.s_two_name,
+        op.s_two_score,
+        z.t_norm_id,
+        z.s_norm_id as Z_S_NORM_ID,
+        z.t_three_name,
+        z.t_three_score,
+        z.t_explain,
+        z.t_suggest
+        FROM PERF_MANAGE T
+        LEFT JOIN PERF_ONE_NORM OE
+        ON T.P_PER_ID = OE.P_PER_ID
+        LEFT JOIN PERF_SECOND_NORM OP
+        ON OE.O_NORM_ID = OP.O_NORM_ID
+        LEFT JOIN PERF_THREE_NORM Z
+        ON OP.S_NORM_ID  = Z.S_NORM_ID
+        where T.P_PER_ID = #{id,jdbcType=VARCHAR}
+        order by oe.o_norm_id,op.s_norm_id,z.t_norm_id asc
+    <!--order by Z.t_norm_id asc-->
+    </select>
+    <!--插入：PERF_MANAGE主表-->
+    <insert id="insert" parameterType="com.ppmg.ei.model.PerformanceModel">
+		INSERT INTO PERF_MANAGE (P_PER_ID,P_NAME,P_YEAR,P_ASSESS_STARTTIME,P_ASSESS_ENDTTIME
+		,P_STATUS,CREATE_BY,UPDATE_BY,FUND_COUNT)
+		values(#{pPerID,jdbcType=VARCHAR},#{pName,jdbcType=VARCHAR},#{pYear,jdbcType=VARCHAR}
+		,#{pAssessStartTime,jdbcType=DATE},#{pAssessEndTime,jdbcType=DATE}
+		,#{pStatus,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{updateBy,jdbcType=VARCHAR},#{fundCount,jdbcType=VARCHAR}
+		)
+	</insert>
+    <!--插入：PERF_MANAGE主表-->
+    <insert id="insertPerfManageList" parameterType="java.util.List">
+		INSERT INTO PERF_MANAGE (P_PER_ID,P_NAME,P_YEAR,P_ASSESS_STARTTIME,P_ASSESS_ENDTTIME
+		,P_STATUS,CREATE_BY,UPDATE_BY,FUND_COUNT)
+        <foreach collection="list" item="item" index="index" separator="union all">
+		    (select
+                #{item.pPerID,jdbcType=VARCHAR}
+                ,#{item.pName,jdbcType=VARCHAR}
+                ,#{item.pYear,jdbcType=VARCHAR}
+                ,#{item.pAssessStartTime,jdbcType=DATE}
+                ,#{item.pAssessEndTime,jdbcType=DATE}
+                ,#{item.pStatus,jdbcType=VARCHAR}
+                ,#{item.createBy,jdbcType=VARCHAR}
+                ,#{item.updateBy,jdbcType=VARCHAR}
+                ,#{item.fundCount,jdbcType=VARCHAR}
+            from dual)
+        </foreach>
+	</insert>
+    <!--更新主表-->
+    <update id="updatePK" parameterType="com.ppmg.ei.model.PerformanceModel">
+        UPDATE PERF_MANAGE
+        <set>
+            <if test="pName != null and pName != ''" >
+                P_NAME = #{pName,jdbcType=VARCHAR},
+            </if>
+            <if test="pYear != null and pYear != ''" >
+                P_YEAR = #{pYear,jdbcType=VARCHAR},
+            </if>
+            <if test="pAssessStartTime != null" >
+                P_ASSESS_STARTTIME = #{pAssessStartTime,jdbcType=DATE},
+            </if>
+            <if test="pAssessEndTime != null" >
+                P_ASSESS_ENDTTIME = #{pAssessEndTime,jdbcType=DATE},
+            </if>
+            <if test="pStatus != null and pStatus != ''" >
+                P_STATUS = #{pStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="fundCount != null and fundCount != ''" >
+                FUND_COUNT = #{fundCount,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null and createBy != ''" >
+                CREATE_BY = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateBy != null and updateBy != ''" >
+                UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE P_PER_ID = #{pPerID,jdbcType=VARCHAR}
+    </update>
+    <!--删除：PERF_MANAGE主表-->
+    <delete id="deletePerAllBatch" parameterType="String">
+		DELETE FROM  PERF_MANAGE WHERE P_PER_ID = #{id,jdbcType=VARCHAR}
+	</delete>
+    <!--###########一级指标###########-->
+    <!--查询一级列表-->
+    <select id="PerfOneNormModelId" parameterType="String" resultMap="PerfOneNormModelResult">
+        SELECT * FROM PERF_ONE_NORM T
+        where T.P_PER_ID = #{pPerId,jdbcType=VARCHAR}
+    </select>
+    <!--查询一级详情-->
+    <select id="selectPerfOneNormDetails" parameterType="String" resultMap="PerfOneNormModelResult">
+        SELECT * FROM PERF_ONE_NORM T
+        where T.O_NORM_ID = #{oNormId,jdbcType=VARCHAR}
+    </select>
+    <!--插入一级列表-->
+    <insert id="insertOneNorm" parameterType="java.util.List">
+        INSERT INTO PERF_ONE_NORM (O_NORM_ID,P_PER_ID,O_ONE_NAME,O_ONE_SCORE
+        ,IS_DELETE,CREATE_BY,UPDATE_BY)
+        <foreach collection="list" item="item" index="index" separator="union all">
+            (select
+                #{item.oNormId,jdbcType=VARCHAR},
+                #{item.pPerId,jdbcType=VARCHAR},
+                #{item.oOneName,jdbcType=VARCHAR},
+                #{item.oOneScore,jdbcType=NUMERIC},
+                #{item.isDelete,jdbcType=INTEGER},
+                #{item.createBy,jdbcType=VARCHAR},
+                #{item.updateBy,jdbcType=VARCHAR}
+            from dual)
+        </foreach>
+	</insert>
+    <!--更新一级-->
+    <update id="updatePerOneNorm" parameterType="com.ppmg.ei.model.PerfOneNormModel">
+        UPDATE PERF_ONE_NORM
+        <set>
+            <if test="pPerId != null and pPerId != ''" >
+                P_PER_ID = #{pPerId,jdbcType=VARCHAR},
+            </if>
+            <if test="oOneName != null and oOneName != ''" >
+                O_ONE_NAME = #{oOneName,jdbcType=VARCHAR},
+            </if>
+            <if test="oOneScore != null and oOneScore != ''" >
+                O_ONE_SCORE = #{oOneScore,jdbcType=NUMERIC},
+            </if>
+            <if test="isDelete != null and isDelete != ''" >
+                IS_DELETE = #{isDelete,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null and createBy != ''" >
+                CREATE_BY = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateBy != null and updateBy != ''" >
+                UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE O_NORM_ID = #{oNormId,jdbcType=VARCHAR}
+    </update>
+
+    <!--O_NORM_ID删除：一级指标-->
+    <delete id="deleteOneNormOnormId" parameterType="java.lang.String">
+        delete from PERF_ONE_NORM where O_NORM_ID in
+        <foreach collection="array" item="arr" index="no" open="("
+                 separator="," close=")">
+            #{arr}
+        </foreach>
+    </delete>
+    <!--P_PER_ID删除：一级指标-->
+    <delete id="deleteOneNormBatch" parameterType="String">
+		DELETE FROM  PERF_ONE_NORM WHERE P_PER_ID = #{id,jdbcType=VARCHAR}
+	</delete>
+
+    <!--######################################二级指标################################-->
+    <!--查询二级列表-->
+    <select id="PerfSecondNormModelId" parameterType="String" resultMap="PerfSecondNormModelResult">
+        <!--SELECT * FROM PERF_SECOND_NORM T
+        where T.O_NORM_ID = #{oNormId,jdbcType=VARCHAR}-->
+        select s.s_norm_id,max(s.s_two_name) as S_TWO_NAME
+        ,max(s.s_two_score) as S_TWO_SCORE
+        ,count(t.t_norm_id)as THREE_COUNT  FROM PERF_SECOND_NORM S
+        left join PERF_THREE_NORM T on S.s_norm_id = T.s_norm_id
+        where s.o_norm_id = #{oNormId,jdbcType=VARCHAR} group by s.s_norm_id
+    </select>
+    <!--查询二级详情-->
+    <select id="selectPerfSecondDetails" parameterType="String" resultMap="PerfSecondNormModelResult">
+        SELECT * FROM PERF_SECOND_NORM T
+        where T.S_NORM_ID = #{sNormId,jdbcType=VARCHAR}
+    </select>
+    <!--插入：PERF_SECOND_NORM:二级指标表-->
+    <insert id="insertSecondNorm" parameterType="java.util.List">
+		INSERT INTO PERF_SECOND_NORM (S_NORM_ID,O_NORM_ID,S_TWO_NAME
+		    ,S_TWO_SCORE,IS_DELETE,CREATE_BY,UPDATE_BY)
+        <foreach collection="list" item="item" index="index" separator="union all">
+            (select
+                #{item.sNormId,jdbcType=VARCHAR},
+                #{item.oNormId,jdbcType=VARCHAR},
+                #{item.sTwoName,jdbcType=VARCHAR},
+                #{item.sTwoScore,jdbcType=NUMERIC},
+                #{item.isDelete,jdbcType=VARCHAR},
+                #{item.createBy,jdbcType=VARCHAR},
+                #{item.updateBy,jdbcType=VARCHAR}
+            from dual)
+        </foreach>
+	</insert>
+    <!--更新二级-->
+    <update id="updatePerSecondNorm" parameterType="com.ppmg.ei.model.PerfSecondNormModel">
+        UPDATE PERF_SECOND_NORM
+        <set>
+            <if test="oNormId != null and oNormId != ''" >
+                O_NORM_ID = #{oNormId,jdbcType=VARCHAR},
+            </if>
+            <if test="sTwoName != null and sTwoName != ''" >
+                S_TWO_NAME = #{sTwoName,jdbcType=VARCHAR},
+            </if>
+            <if test="sTwoScore != null and sTwoScore != ''" >
+                S_TWO_SCORE = #{sTwoScore,jdbcType=NUMERIC},
+            </if>
+            <if test="isDelete != null and isDelete != ''" >
+                IS_DELETE = #{isDelete,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null and createBy != ''" >
+                CREATE_BY = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateBy != null and updateBy != ''" >
+                UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE S_NORM_ID = #{sNormId,jdbcType=VARCHAR}
+    </update>
+    <!--sNormId删除：二级指标-->
+    <delete id="deleteSecondNormSnormId" parameterType="java.lang.String">
+        DELETE FROM  PERF_SECOND_NORM WHERE S_NORM_ID IN
+        <foreach collection="array" item="arr" open="(" separator="," close=")">
+            #{arr}
+        </foreach>
+    </delete>
+    <!--O_NORM_ID删除：二级指标-->
+    <delete id="deleteSecondNormBatch" parameterType="java.util.List">
+        DELETE FROM  PERF_SECOND_NORM WHERE O_NORM_ID IN
+        <foreach collection="list" item="arr" open="(" separator="," close=")">
+            #{arr}
+        </foreach>
+    </delete>
+    <delete id="deleteSecondNorm" parameterType="String">
+		DELETE FROM  PERF_SECOND_NORM WHERE O_NORM_ID = #{pPerId,jdbcType=VARCHAR}
+	</delete>
+
+    <!--######################################三级指标################################-->
+    <!--查询三级列表-->
+    <select id="PerfThreeNormModelId" parameterType="String" resultMap="perfThreeNormModelRestlt">
+        SELECT * FROM PERF_THREE_NORM T
+        where T.S_NORM_ID = #{sNormId,jdbcType=VARCHAR}
+    </select>
+    <!--查询三级详情-->
+    <select id="selectPerfThreeNormDetails" parameterType="String" resultMap="perfThreeNormModelRestlt">
+        SELECT * FROM PERF_THREE_NORM T
+        where T.T_NORM_ID = #{tNormId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectPerfThreeNormModelCount" parameterType="String" resultType="Integer">
+        SELECT COUNT(T_NORM_ID) FROM PERF_THREE_NORM T
+        where T.S_NORM_ID #{S_NORM_ID,jdbcType=VARCHAR}
+    </select>
+    <!--插入：PERF_THREE_NORM:三级指标表-->
+    <insert id="insertThreeNorm" parameterType="java.util.List">
+		INSERT INTO PERF_THREE_NORM (T_NORM_ID,S_NORM_ID,T_THREE_NAME,T_THREE_SCORE,T_SUGGEST
+		,T_EXPLAIN,IS_DELETE,CREATE_BY,UPDATE_BY)
+        <foreach collection="list" item="item" index="index" separator="union all">
+		    (select
+                #{item.tNormId,jdbcType=VARCHAR},
+                #{item.sNormId,jdbcType=VARCHAR},
+                #{item.tThreeName,jdbcType=VARCHAR},
+                #{item.tThreeScore,jdbcType=NUMERIC},
+                #{item.tSuggest,jdbcType=VARCHAR},
+                #{item.tExplain,jdbcType=VARCHAR},
+                #{item.isDelete,jdbcType=VARCHAR},
+                #{item.createBy,jdbcType=VARCHAR},
+                #{item.updateBy,jdbcType=VARCHAR}
+		    from dual)
+        </foreach>
+	</insert>
+    <!--更新三级-->
+    <update id="updatePerThreeNorm" parameterType="com.ppmg.ei.model.PerfThreeNormModel">
+        UPDATE PERF_THREE_NORM
+        <set>
+            <if test="sNormId != null and sNormId != ''" >
+                S_NORM_ID = #{sNormId,jdbcType=VARCHAR},
+            </if>
+            <if test="tThreeName != null and tThreeName != ''" >
+                T_THREE_NAME = #{tThreeName,jdbcType=VARCHAR},
+            </if>
+            <if test="tThreeScore != null and tThreeScore != ''" >
+                T_THREE_SCORE = #{tThreeScore,jdbcType=NUMERIC},
+            </if>
+            <if test="tSuggest != null and tSuggest != ''" >
+                T_SUGGEST = #{tSuggest,jdbcType=VARCHAR},
+            </if>
+            <if test="tExplain != null and tExplain != ''" >
+                T_EXPLAIN = #{tExplain,jdbcType=VARCHAR},
+            </if>
+            <if test="isDelete != null and isDelete != ''" >
+                IS_DELETE = #{isDelete,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null and createBy != ''" >
+                CREATE_BY = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateBy != null and updateBy != ''" >
+                UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE T_NORM_ID = #{tNormId,jdbcType=VARCHAR}
+    </update>
+    <!--删除：三级指标-->
+    <delete id="deleteThreeNormTnormId" parameterType="java.lang.String">
+        DELETE FROM  PERF_THREE_NORM WHERE T_NORM_ID IN
+        <foreach collection="array" item="arr" open="(" separator="," close=")">
+            #{arr}
+        </foreach>
+    </delete>
+    <!--删除：三级指标-->
+    <delete id="deleteThreeNormBatch" parameterType="java.util.List">
+        DELETE FROM  PERF_THREE_NORM WHERE S_NORM_ID IN
+        <foreach collection="list" item="arrThree" open="(" separator="," close=")">
+            #{arrThree}
+        </foreach>
+    </delete>
+
+
+    <!--#############↓↓↓↓↓↓↓↓↓###############审核，自评##############↓↓↓↓↓↓↓↓################-->
+    <resultMap id="selectFundListResult" type="com.ppmg.ei.model.PerfManageFundModel">
+        <result column="FUND_ID" property="fundId" jdbcType="VARCHAR" />
+        <result column="FUND_NAME" property="fundName" jdbcType="VARCHAR" />
+        <result column="THIS_START_TIME" property="thisStartTime" jdbcType="TIMESTAMP" />
+        <result column="THIS_END_TIME" property="thisEndTime" jdbcType="TIMESTAMP" />
+        <result column="TOU_START_TIME" property="touStartTime" jdbcType="TIMESTAMP" />
+        <result column="TOU_END_TIME" property="touEndTime" jdbcType="TIMESTAMP" />
+        <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <!-- 废除：查询过滤的基金-->
+    <sql id="searchSqlProjSix">
+       SELECT FUND_ID FROM BD_T_FUND_INFO b where
+        b.fund_src ='1'          <!--fund_src:基金来源(0母基金，1二级基金，2三级基金，4SPV基金,5四级基金)-->
+        and b.group_id ='1'     <!--group_id='1',省政府基金-->
+        and b.status != '2'     <!--2:删除 -->
+	</sql>
+
+    <select id="selectFundListCount" resultMap="selectFundListResult">
+        <include refid="searchSqlProjSix" />
+    </select>
+
+    <!--查询审核，自评管理列表（方块矩阵），/selectPerfManagementList-->
+    <sql id="searchSql_check">
+        SELECT * FROM
+        (SELECT pm.p_per_id,
+        MAX(pm.p_name)            AS p_name,
+        MAX(pm.p_year)            AS p_year,
+        MAX(pm.p_assess_starttime)AS p_assess_starttime,
+        MAX(pm.P_ASSESS_ENDTTIME)  AS P_ASSESS_ENDTTIME,
+        MAX(pm.p_status)          AS p_status,
+        COUNT(ps.ps_oneself_yesno)       AS ps_status_count
+        FROM PERF_MANAGE pm
+        LEFT JOIN
+        (SELECT * FROM perf_score WHERE ps_oneself_yesno = 1 ) ps
+        ON pm.p_per_id = ps.p_per_id
+        GROUP BY pm.p_per_id)
+        <where>
+            <include refid="searchCondition.searchClause" />
+        </where>
+    </sql>
+    <select id="selectListPage1" resultMap="PerfResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+        <include refid="searchSql_check" />
+    </select>
+
+    <!--审核列表分页查询-->
+    <sql id="searchSql_audit">
+        SELECT * FROM
+            (SELECT b.fund_src,b.fund_id,b.fund_name,b.this_start_time,b.this_end_time,b.FUND_START_TIME,b.FUND_END_TIME,
+            p.ps_id,p.ps_oneself_score,p.ps_audit_score,p.ps_oneself_yesno,p.ps_assess_yesno,p.p_year
+            FROM
+            (
+                select k.*,g.this_start_time,g.this_end_time,g.FUND_START_TIME,g.FUND_END_TIME from BD_T_FUND_INFO k
+                left join PERF_MANAGE_FUND g on k.fund_id = g.fund_id where p_per_id = ${paramMap.P_PER_ID}
+            ) b
+            left join
+            (SELECT ps.fund_id,pm.p_year,ps.ps_id,ps.ps_oneself_score,ps.ps_audit_score,ps.ps_oneself_yesno,ps.ps_assess_yesno
+            FROM PERF_MANAGE pm left join perf_score ps on pm.p_per_id = ps.p_per_id
+            where pm.p_per_id = ${paramMap.P_PER_ID}) p
+            on b.fund_id = p.fund_id where
+            b.fund_src ='1'         <!--fund_src:基金来源(0母基金，1二级基金，2三级基金，4SPV基金,5四级基金) -->
+            and group_id ='1'       <!--group_id='1',省政府基金 -->
+            and b.status != '2'     <!--2:删除 -->
+            and b.fund_sts not in ('10','11')   <!--10	已终止，11	已注销 -->
+            )
+        <where>
+            <include refid="searchCondition.searchClause" />
+        </where>
+    </sql>
+    <select id="selectListPage_audit" resultMap="perfScoreModelRestlt" parameterType="com.founder.ssm.core.common.SearchCondition">
+        <include refid="searchSql_audit" />
+    </select>
+
+    <!--自评列表分页查询-->
+    <sql id="searchSql_SelfAssessment">
+        SELECT * FROM
+            (SELECT b.fund_src,b.fund_id,b.fund_name,b.this_start_time,b.this_end_time,b.FUND_START_TIME,b.FUND_END_TIME,
+            p.ps_id,p.ps_oneself_score,p.ps_audit_score,p.ps_oneself_yesno,p.ps_assess_yesno,p.p_year
+            FROM
+            (
+                select k.*,g.this_start_time,g.this_end_time,g.FUND_START_TIME,g.FUND_END_TIME from BD_T_FUND_INFO k
+                left join PERF_MANAGE_FUND g on k.fund_id = g.fund_id where p_per_id = ${paramMap.P_PER_ID}
+            ) b
+            left join
+            (SELECT ps.fund_id,pm.p_year,ps.ps_id,ps.ps_oneself_score,ps.ps_audit_score,ps.ps_oneself_yesno,ps.ps_assess_yesno
+            FROM PERF_MANAGE pm left join perf_score ps on pm.p_per_id = ps.p_per_id
+            where pm.p_per_id = ${paramMap.P_PER_ID}) p
+            on b.fund_id = p.fund_id where
+            b.fund_src ='1'         <!--fund_src:基金来源(0母基金，1二级基金，2三级基金，4SPV基金,5四级基金) -->
+            and group_id ='1'       <!--group_id='1',省政府基金 -->
+            and b.status != '2'     <!--2:删除 -->
+            and b.fund_sts not in ('10','11')   <!--10	已终止，11	已注销 -->
+            and b.fund_id
+            in (select fund_id from BD_T_FUND_USER_RELATE where user_id = ${paramMap.USER_ID})
+            )
+        <where>
+            <include refid="searchCondition.searchClause" />
+        </where>
+    </sql>
+    <select id="selectListPage_SelfAssessment" resultMap="perfScoreModelRestlt" parameterType="com.founder.ssm.core.common.SearchCondition">
+        <include refid="searchSql_SelfAssessment" />
+    </select>
+
+    <!--基金评分详情-->
+    <sql id="searchSqlDetail">
+        SELECT * FROM
+        (SELECT  T.*,
+        oe.o_norm_id,
+        oe.p_per_id AS  OE_PER_ID,
+        oe.o_one_name,
+        oe.o_one_score,
+        oe.is_delete,
+        op.s_norm_id,
+        op.o_norm_id as OP_O_NORM_ID,
+        op.s_two_name,
+        op.s_two_score,
+        z.t_norm_id,
+        z.s_norm_id as Z_S_NORM_ID,
+        z.t_three_name,
+        z.t_three_score,
+        z.t_explain,
+        z.t_suggest,
+        p.t_norm_id as PSD_T_NORM_ID,
+        p.psd_audit_score,
+        p.psd_oneself_score,
+        p.ps_id as PSD_PS_ID,
+        p.PSD_ID,
+        P.CL_FILE,
+        P.CL_FILE_ONESELF,
+        p1.fund_id
+        FROM PERF_MANAGE T
+        LEFT JOIN PERF_ONE_NORM OE
+        ON T.P_PER_ID = OE.P_PER_ID
+        LEFT JOIN PERF_SECOND_NORM OP
+        ON OE.O_NORM_ID = OP.O_NORM_ID
+        LEFT JOIN PERF_THREE_NORM Z
+        ON OP.S_NORM_ID  = Z.S_NORM_ID
+        left join PERF_SCORE_DETAILS p
+        on z.t_norm_id = p.t_norm_id
+        left join PERF_SCORE p1
+        on p1.ps_id = p.ps_id
+        WHERE T.P_PER_ID = ${paramMap.P_PER_ID} and p1.fund_id = ${paramMap.FUND_ID} order by Z.t_norm_id asc)
+
+        <where>
+            <include refid="searchCondition.searchClause" />
+        </where>
+    </sql>
+    <select id="selectPerfFundDetailOne" resultMap="PerfResultAllTwo" parameterType="com.founder.ssm.core.common.SearchCondition">
+        <include refid="searchSqlDetail" />
+    </select>
+
+    <!--插入分数表-->
+    <insert id="insertPerfScores" parameterType="java.util.List">
+        INSERT INTO PERF_SCORE (PS_ID,P_PER_ID,FUND_ID,PS_ONESELF_SCORE,PS_AUDIT_SCORE
+        ,PS_ONESELF_YESNO,PS_ATTACHMENT,PS_ASSESS_YESNO,IS_DELETE,CREATE_BY,UPDATE_BY)
+        <foreach collection="list" item="item" index="index" separator="union all">
+            (select
+                #{item.psId,jdbcType=VARCHAR}
+                ,#{item.pPerId,jdbcType=VARCHAR}
+                ,#{item.fundId,jdbcType=VARCHAR}
+                ,#{item.psOneselfScore,jdbcType=NUMERIC}
+                ,#{item.psAuditScore,jdbcType=NUMERIC}
+                ,#{item.psOneselfYesno,jdbcType=VARCHAR}
+                ,#{item.psAttachment,jdbcType=VARCHAR}
+                ,#{item.psAssessYesno,jdbcType=VARCHAR}
+                ,#{item.isDelete,jdbcType=VARCHAR}
+                ,#{item.createBy,jdbcType=VARCHAR}
+                ,#{item.updateBy,jdbcType=VARCHAR}
+            from dual)
+        </foreach>
+    </insert>
+    <!--更新分数表-->
+    <update id="updatePerfScores" parameterType="com.ppmg.ei.model.PerfScoreModel">
+        UPDATE PERF_SCORE
+        <set>
+            <if test="pPerId != null and pPerId != ''" >
+                P_PER_ID = #{pPerId,jdbcType=VARCHAR},
+            </if>
+            <if test="fundId != null and fundId != ''" >
+                FUND_ID = #{fundId,jdbcType=VARCHAR},
+            </if>
+            <if test="psOneselfScore != null " >
+                PS_ONESELF_SCORE = #{psOneselfScore,jdbcType=NUMERIC},
+            </if>
+            <if test="psAuditScore != null " >
+                PS_AUDIT_SCORE = #{psAuditScore,jdbcType=NUMERIC},
+            </if>
+            <if test="psOneselfYesno != null and psOneselfYesno != ''" >
+                PS_ONESELF_YESNO = #{psOneselfYesno,jdbcType=VARCHAR},
+            </if>
+            <if test="psAttachment != null and psAttachment != ''" >
+                PS_ATTACHMENT = #{psAttachment,jdbcType=VARCHAR},
+            </if>
+            <if test="psAssessYesno != null and psAssessYesno != ''" >
+                PS_ASSESS_YESNO = #{psAssessYesno,jdbcType=VARCHAR},
+            </if>
+            <if test="isDelete != null and isDelete != ''" >
+                IS_DELETE = #{isDelete,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null and createBy != ''" >
+                CREATE_BY = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateBy != null and updateBy != ''" >
+                UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE PS_ID = #{psId,jdbcType=VARCHAR}
+    </update>
+    <!--查询分数详情表-->
+    <select id="searchPointList" parameterType="String" resultMap="perfScoreModelDetailsResult">
+        SELECT * FROM PERF_SCORE_DETAILS where ps_id = #{psId,jdbcType=VARCHAR} order by psd_id asc
+    </select>
+    <!--插入自评分详情数-->
+    <insert id="insertPointList" parameterType="java.util.List">
+        INSERT INTO PERF_SCORE_DETAILS (PSD_ID,PS_ID,PSD_ONESELF_SCORE,PSD_AUDIT_SCORE,CREATE_BY,UPDATE_BY,T_NORM_ID,CL_FILE,CL_FILE_ONESELF)
+        <foreach collection="list" item="item" index="index" separator="union all">
+            (select
+                #{item.psdId,jdbcType=VARCHAR}
+                ,#{item.psId,jdbcType=VARCHAR}
+                ,#{item.psdOneselfScore,jdbcType=NUMERIC}
+                ,#{item.psdAuditScore,jdbcType=NUMERIC}
+                ,#{item.createBy,jdbcType=VARCHAR}
+                ,#{item.updateBy,jdbcType=VARCHAR}
+                ,#{item.tNormId,jdbcType=VARCHAR}
+                ,#{item.clFile,jdbcType=VARCHAR}
+                ,#{item.clFileOneself,jdbcType=VARCHAR}
+            from dual)
+        </foreach>
+    </insert>
+    <!--更新分数详情表-->
+    <update id="updatePointList" parameterType="com.ppmg.ei.model.PerfScoreModelDetails">
+            UPDATE PERF_SCORE_DETAILS
+            <set>
+                <if test="psdId != null and psdId != ''" >
+                    PSD_ID = #{psdId,jdbcType=VARCHAR},
+                </if>
+                <if test="psId != null and psId != ''" >
+                    PS_ID = #{psId,jdbcType=VARCHAR},
+                </if>
+                <if test="psdOneselfScore != null " >
+                    PSD_ONESELF_SCORE = #{psdOneselfScore,jdbcType=NUMERIC},
+                </if>
+                <if test="psdAuditScore != null " >
+                    PSD_AUDIT_SCORE = #{psdAuditScore,jdbcType=NUMERIC},
+                </if>
+                <if test="createBy != null and createBy != ''" >
+                    CREATE_BY = #{createBy,jdbcType=VARCHAR},
+                </if>
+                <if test="updateBy != null and updateBy != ''" >
+                    UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+                </if>
+                <if test="clFile != null and clFile != ''" >
+                    CL_FILE = #{clFile,jdbcType=VARCHAR},
+                </if>
+                <if test="clFileOneself != null and clFileOneself != ''" >
+                    CL_FILE_ONESELF = #{clFileOneself,jdbcType=VARCHAR},
+                </if>
+            </set>
+            WHERE PSD_ID = #{psdId,jdbcType=VARCHAR}
+    </update>
+    <!--主-->
+    <select id="getPerfManageIdSeq" parameterType="java.lang.String" resultType="String">
+		select ${value}.nextval SEQVALUE from dual
+	</select>
+    <!--一級指標-->
+    <select id="getPerfOneNormIdSeq" parameterType="java.lang.String" resultType="String">
+		select ${value}.nextval SEQVALUE from dual
+	</select>
+    <!--二級指標-->
+    <select id="getperfSecondNormIdSeq" parameterType="java.lang.String" resultType="String">
+		select ${value}.nextval SEQVALUE from dual
+	</select>
+
+    <!--三級指標-->
+    <select id="getSeqNextVal_Perf" parameterType="java.lang.String" resultType="String">
+		select ${value}.nextval SEQVALUE from dual
+	</select>
+
+    <!--查询绩效列表详情-->
+    <select id="selectPerformanceExportList" parameterType="com.ppmg.ei.model.PerformanceModel"
+            resultType="com.ppmg.ei.model.PerformanceExportModel">
+        SELECT p1.fund_id,
+        bf.fund_name,
+        t.p_per_id,
+        t.p_name,
+        oe.o_one_name,
+        oe.o_one_score,
+        op.s_two_name,
+        op.s_two_score,
+        z.t_three_name,
+        z.t_three_score,
+        z.t_explain,
+        z.t_suggest,
+        p.psd_audit_score,
+        p.psd_oneself_score
+        FROM PERF_MANAGE T
+        LEFT JOIN PERF_ONE_NORM OE
+        ON T.P_PER_ID = OE.P_PER_ID
+        LEFT JOIN PERF_SECOND_NORM OP
+        ON OE.O_NORM_ID = OP.O_NORM_ID
+        LEFT JOIN PERF_THREE_NORM Z
+        ON OP.S_NORM_ID = Z.S_NORM_ID
+        LEFT JOIN PERF_SCORE_DETAILS p
+        ON z.t_norm_id = p.t_norm_id
+        LEFT JOIN PERF_SCORE p1
+        ON p1.ps_id = p.ps_id
+        left join BD_T_FUND_INFO bf
+        on p1.fund_id = bf.fund_id
+        where
+        <if test="pPerID!= null and pPerID != ''">
+            T.p_per_id = #{pPerID,jdbcType=VARCHAR}
+        </if>
+        <!--<if test="fundId!= null and fundId != ''">
+            AND bf.FUND_ID = #{fundId,jdbcType=VARCHAR}
+        </if>-->
+        order by Z.t_norm_id asc
+    </select>
+
+</mapper>

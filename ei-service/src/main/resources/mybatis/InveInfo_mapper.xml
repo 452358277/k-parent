@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="InveInfo">
+    <!-- start autocreate -->
+
+    <resultMap id="InveInfoResult" type="com.ppmg.ei.model.InveInfoModel">
+        <result column="INVESTOR_ID" property="investorId" jdbcType="VARCHAR"/>
+        <result column="INVESTOR_NAME" property="investorName" jdbcType="VARCHAR"/>
+        <result column="INVESTOR_TYPE" property="investorType" jdbcType="VARCHAR"/>
+        <result column="SUB_TYPE" property="subType" jdbcType="VARCHAR"/>
+        <result column="GENDER" property="gender" jdbcType="VARCHAR"/>
+        <result column="NATIONALITY" property="nationality" jdbcType="VARCHAR"/>
+        <result column="COMPANY" property="company" jdbcType="VARCHAR"/>
+        <result column="POSITION" property="position" jdbcType="VARCHAR"/>
+        <result column="ID_NO" property="idNo" jdbcType="VARCHAR"/>
+        <result column="REG_NAME" property="regName" jdbcType="VARCHAR"/>
+        <result column="REG_ADD" property="regAdd" jdbcType="VARCHAR"/>
+        <result column="REG_DATE" property="regDate" jdbcType="TIMESTAMP"/>
+        <result column="REG_CAPITAL" property="regCapital" jdbcType="NUMERIC"/>
+        <result column="REG_CURRENCY" property="regCurrency" jdbcType="VARCHAR"/>
+        <result column="OFFICE_ADD" property="officeAdd" jdbcType="VARCHAR"/>
+        <result column="OFFICE_TEL" property="officeTel" jdbcType="VARCHAR"/>
+        <result column="CONTACT" property="contact" jdbcType="VARCHAR"/>
+        <result column="PHONE_NO" property="phoneNo" jdbcType="VARCHAR"/>
+        <result column="EMAIL" property="email" jdbcType="VARCHAR"/>
+        <result column="INVE_PHASE" property="invePhase" jdbcType="VARCHAR"/>
+        <result column="AREA" property="area" jdbcType="VARCHAR"/>
+        <result column="WATCH_INDUSTRY" property="watchIndustry" jdbcType="VARCHAR"/>
+        <result column="CUST_MAG" property="custMag" jdbcType="VARCHAR"/>
+        <result column="ACCOUNT_BANK" property="accountBank" jdbcType="VARCHAR"/>
+        <result column="ACCOUNT_NO" property="accountNo" jdbcType="VARCHAR"/>
+        <result column="STATUS" property="status" jdbcType="VARCHAR"/>
+        <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR"/>
+        <result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP"/>
+        <result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR"/>
+        <result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP"/>
+        <result column="GROUP_ID" property="groupId" jdbcType="NUMERIC"/>
+        <result column="ENTE_ID" property="enteId" jdbcType="VARCHAR"/>
+        <result column="ENTE_NATURE" property="enteNature" jdbcType="VARCHAR"/>
+        <result column="INVESTMENT_ATTRIBUTES" property="investmentAttributes" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="InveInfoResultList" type="com.ppmg.ei.model.InveInfoModel" extends="InveInfoResult">
+        <result column="SUMMARY" property="summary" jdbcType="CLOB" javaType="java.lang.String"/>
+        <result column="REMARK" property="remark" jdbcType="CLOB" javaType="java.lang.String"/>
+    </resultMap>
+    <!--查询投资人，及其简介-->
+    <select id="selectInveInfoResume" parameterType="String" resultMap="InveInfoResultList">
+		SELECT
+		  a1.*,
+		  a2.summary,
+		  a2.remark
+		FROM BD_T_INVE_INFO a1
+		LEFT JOIN BD_T_INVE_RESUME a2
+		ON a1.investor_id = a2.investor_id
+		WHERE a1.investor_id = #{investorId,jdbcType=VARCHAR}
+	</select>
+
+    <insert id="insert" parameterType="com.ppmg.ei.model.InveInfoModel">
+		INSERT INTO BD_T_INVE_INFO (INVESTOR_ID,INVESTOR_NAME,INVESTOR_TYPE,SUB_TYPE,GENDER,NATIONALITY,COMPANY,POSITION,ID_NO,REG_NAME,REG_ADD,REG_DATE,REG_CAPITAL,REG_CURRENCY,OFFICE_ADD,OFFICE_TEL,CONTACT,PHONE_NO,EMAIL,INVE_PHASE,AREA,WATCH_INDUSTRY,CUST_MAG,ACCOUNT_BANK,ACCOUNT_NO,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,GROUP_ID,ENTE_ID,ENTE_NATURE,INVESTMENT_ATTRIBUTES) values(#{investorId,jdbcType=VARCHAR},#{investorName,jdbcType=VARCHAR},#{investorType,jdbcType=VARCHAR},#{subType,jdbcType=VARCHAR},#{gender,jdbcType=VARCHAR},#{nationality,jdbcType=VARCHAR},#{company,jdbcType=VARCHAR},#{position,jdbcType=VARCHAR},#{idNo,jdbcType=VARCHAR},#{regName,jdbcType=VARCHAR},#{regAdd,jdbcType=VARCHAR},#{regDate,jdbcType=TIMESTAMP},#{regCapital,jdbcType=NUMERIC},#{regCurrency,jdbcType=VARCHAR},#{officeAdd,jdbcType=VARCHAR},#{officeTel,jdbcType=VARCHAR},#{contact,jdbcType=VARCHAR},#{phoneNo,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},#{invePhase,jdbcType=VARCHAR},#{area,jdbcType=VARCHAR},#{watchIndustry,jdbcType=VARCHAR},#{custMag,jdbcType=VARCHAR},#{accountBank,jdbcType=VARCHAR},#{accountNo,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{groupId,jdbcType=NUMERIC},#{enteId,jdbcType=VARCHAR},#{enteNature,jdbcType=VARCHAR},#{investmentAttributes,jdbcType=VARCHAR})
+	</insert>
+
+    <insert id="insertBatch" parameterType="List">
+        INSERT INTO BD_T_INVE_INFO
+        (INVESTOR_ID,INVESTOR_NAME,INVESTOR_TYPE,SUB_TYPE,GENDER,NATIONALITY,COMPANY,POSITION,ID_NO,REG_NAME,REG_ADD,REG_DATE,REG_CAPITAL,REG_CURRENCY,OFFICE_ADD,OFFICE_TEL,CONTACT,PHONE_NO,EMAIL,INVE_PHASE,AREA,WATCH_INDUSTRY,CUST_MAG,ACCOUNT_BANK,ACCOUNT_NO,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,GROUP_ID,ENTE_ID,ENTE_NATURE,INVESTMENT_ATTRIBUTES)
+        <foreach collection="list" item="item" index="index" separator="union all">
+            ( select
+            #{item.investorId,jdbcType=VARCHAR},
+            #{item.investorName,jdbcType=VARCHAR},
+            #{item.investorType,jdbcType=VARCHAR},
+            #{item.subType,jdbcType=VARCHAR},
+            #{item.gender,jdbcType=VARCHAR},
+            #{item.nationality,jdbcType=VARCHAR},
+            #{item.company,jdbcType=VARCHAR},
+            #{item.position,jdbcType=VARCHAR},
+            #{item.idNo,jdbcType=VARCHAR},
+            #{item.regName,jdbcType=VARCHAR},
+            #{item.regAdd,jdbcType=VARCHAR},
+            #{item.regDate,jdbcType=TIMESTAMP},
+            #{item.regCapital,jdbcType=NUMERIC},
+            #{item.regCurrency,jdbcType=VARCHAR},
+            #{item.officeAdd,jdbcType=VARCHAR},
+            #{item.officeTel,jdbcType=VARCHAR},
+            #{item.contact,jdbcType=VARCHAR},
+            #{item.phoneNo,jdbcType=VARCHAR},
+            #{item.email,jdbcType=VARCHAR},
+            #{item.invePhase,jdbcType=VARCHAR},
+            #{item.area,jdbcType=VARCHAR},
+            #{item.watchIndustry,jdbcType=VARCHAR},
+            #{item.custMag,jdbcType=VARCHAR},
+            #{item.accountBank,jdbcType=VARCHAR},
+            #{item.accountNo,jdbcType=VARCHAR},
+            #{item.status,jdbcType=VARCHAR},
+            #{item.createBy,jdbcType=VARCHAR},
+            #{item.createDt,jdbcType=TIMESTAMP},
+            #{item.updateBy,jdbcType=VARCHAR},
+            #{item.updateDt,jdbcType=TIMESTAMP},
+            #{item.groupId,jdbcType=NUMERIC},
+            #{item.enteId,jdbcType=VARCHAR},
+            #{item.enteNature,jdbcType=VARCHAR},
+            #{item.investmentAttributes,jdbcType=VARCHAR}
+            from dual)
+        </foreach>
+    </insert>
+
+    <delete id="deleteById" parameterType="String">
+		DELETE FROM  BD_T_INVE_INFO WHERE INVESTOR_ID = #{investorId,jdbcType=VARCHAR}
+	</delete>
+
+    <delete id="deletePK" parameterType="com.ppmg.ei.model.InveInfoModel">
+        DELETE FROM BD_T_INVE_INFO
+        <where>
+            <if test="investorId != null and investorId != ''">
+                INVESTOR_ID = #{investorId,jdbcType=VARCHAR}
+            </if>
+            <if test="investorName != null and investorName != ''">
+                AND INVESTOR_NAME = #{investorName,jdbcType=VARCHAR}
+            </if>
+            <if test="investorType != null and investorType != ''">
+                AND INVESTOR_TYPE = #{investorType,jdbcType=VARCHAR}
+            </if>
+            <if test="subType != null and subType != ''">
+                AND SUB_TYPE = #{subType,jdbcType=VARCHAR}
+            </if>
+            <if test="gender != null and gender != ''">
+                AND GENDER = #{gender,jdbcType=VARCHAR}
+            </if>
+            <if test="nationality != null and nationality != ''">
+                AND NATIONALITY = #{nationality,jdbcType=VARCHAR}
+            </if>
+            <if test="company != null and company != ''">
+                AND COMPANY = #{company,jdbcType=VARCHAR}
+            </if>
+            <if test="position != null and position != ''">
+                AND POSITION = #{position,jdbcType=VARCHAR}
+            </if>
+            <if test="idNo != null and idNo != ''">
+                AND ID_NO = #{idNo,jdbcType=VARCHAR}
+            </if>
+            <if test="regName != null and regName != ''">
+                AND REG_NAME = #{regName,jdbcType=VARCHAR}
+            </if>
+            <if test="regAdd != null and regAdd != ''">
+                AND REG_ADD = #{regAdd,jdbcType=VARCHAR}
+            </if>
+            <if test="regDate != null">
+                AND REG_DATE = #{regDate,jdbcType=VARCHAR}
+            </if>
+            <if test="regCapital != null and regCapital != ''">
+                AND REG_CAPITAL = #{regCapital,jdbcType=NUMERIC}
+            </if>
+            <if test="regCurrency != null and regCurrency != ''">
+                AND REG_CURRENCY = #{regCurrency,jdbcType=VARCHAR}
+            </if>
+            <if test="officeAdd != null and officeAdd != ''">
+                AND OFFICE_ADD = #{officeAdd,jdbcType=VARCHAR}
+            </if>
+            <if test="officeTel != null and officeTel != ''">
+                AND OFFICE_TEL = #{officeTel,jdbcType=VARCHAR}
+            </if>
+            <if test="contact != null and contact != ''">
+                AND CONTACT = #{contact,jdbcType=VARCHAR}
+            </if>
+            <if test="phoneNo != null and phoneNo != ''">
+                AND PHONE_NO = #{phoneNo,jdbcType=VARCHAR}
+            </if>
+            <if test="email != null and email != ''">
+                AND EMAIL = #{email,jdbcType=VARCHAR}
+            </if>
+            <if test="invePhase != null and invePhase != ''">
+                AND INVE_PHASE = #{invePhase,jdbcType=VARCHAR}
+            </if>
+            <if test="area != null and area != ''">
+                AND AREA = #{area,jdbcType=VARCHAR}
+            </if>
+            <if test="watchIndustry != null and watchIndustry != ''">
+                AND WATCH_INDUSTRY = #{watchIndustry,jdbcType=VARCHAR}
+            </if>
+            <if test="custMag != null and custMag != ''">
+                AND CUST_MAG = #{custMag,jdbcType=VARCHAR}
+            </if>
+            <if test="accountBank != null and accountBank != ''">
+                AND ACCOUNT_BANK = #{accountBank,jdbcType=VARCHAR}
+            </if>
+            <if test="accountNo != null and accountNo != ''">
+                AND ACCOUNT_NO = #{accountNo,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null and status != ''">
+                AND STATUS = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="createBy != null and createBy != ''">
+                AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+            </if>
+            <if test="createDt != null">
+                AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updateDt != null">
+                AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+            </if>
+            <if test="groupId != null and groupId != ''">
+                AND GROUP_ID = #{groupId,jdbcType=NUMERIC}
+            </if>
+            <if test="enteId != null and enteId != ''">
+                AND ENTE_ID = #{enteId,jdbcType=VARCHAR}
+            </if>
+            <if test="enteNature != null and enteNature != ''">
+                AND ENTE_NATURE = #{enteNature,jdbcType=VARCHAR}
+            </if>
+            <if test="investmentAttributes != null and investmentAttributes != ''">
+                AND INVESTMENT_ATTRIBUTES = #{investmentAttributes,jdbcType=VARCHAR}
+            </if>
+
+        </where>
+    </delete>
+
+    <delete id="deleteBatch" parameterType="List">
+        DELETE FROM BD_T_INVE_INFO WHERE INVESTOR_ID IN
+        <foreach collection="array" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <update id="updatePK" parameterType="com.ppmg.ei.model.InveInfoModel">
+        UPDATE BD_T_INVE_INFO
+        <set>
+            <if test="investorId != null and investorId != ''">
+                INVESTOR_ID = #{investorId,jdbcType=VARCHAR},
+            </if>
+            <if test="investorName != null and investorName != ''">
+                INVESTOR_NAME = #{investorName,jdbcType=VARCHAR},
+            </if>
+            <if test="investorType != null and investorType != ''">
+                INVESTOR_TYPE = #{investorType,jdbcType=VARCHAR},
+            </if>
+            <if test="subType != null and subType != ''">
+                SUB_TYPE = #{subType,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null and gender != ''">
+                GENDER = #{gender,jdbcType=VARCHAR},
+            </if>
+            <if test="nationality != null and nationality != ''">
+                NATIONALITY = #{nationality,jdbcType=VARCHAR},
+            </if>
+            <if test="company != null and company != ''">
+                COMPANY = #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="position != null and position != ''">
+                POSITION = #{position,jdbcType=VARCHAR},
+            </if>
+            <if test="idNo != null and idNo != ''">
+                ID_NO = #{idNo,jdbcType=VARCHAR},
+            </if>
+            <if test="regName != null and regName != ''">
+                REG_NAME = #{regName,jdbcType=VARCHAR},
+            </if>
+            <if test="regAdd != null and regAdd != ''">
+                REG_ADD = #{regAdd,jdbcType=VARCHAR},
+            </if>
+            <if test="regDate != null">
+                REG_DATE = #{regDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="regCapital != null and regCapital != ''">
+                REG_CAPITAL = #{regCapital,jdbcType=NUMERIC},
+            </if>
+            <if test="regCurrency != null and regCurrency != ''">
+                REG_CURRENCY = #{regCurrency,jdbcType=VARCHAR},
+            </if>
+            <if test="officeAdd != null and officeAdd != ''">
+                OFFICE_ADD = #{officeAdd,jdbcType=VARCHAR},
+            </if>
+            <if test="officeTel != null and officeTel != ''">
+                OFFICE_TEL = #{officeTel,jdbcType=VARCHAR},
+            </if>
+            <if test="contact != null and contact != ''">
+                CONTACT = #{contact,jdbcType=VARCHAR},
+            </if>
+            <if test="phoneNo != null and phoneNo != ''">
+                PHONE_NO = #{phoneNo,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null and email != ''">
+                EMAIL = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="invePhase != null and invePhase != ''">
+                INVE_PHASE = #{invePhase,jdbcType=VARCHAR},
+            </if>
+            <if test="area != null and area != ''">
+                AREA = #{area,jdbcType=VARCHAR},
+            </if>
+            <if test="watchIndustry != null and watchIndustry != ''">
+                WATCH_INDUSTRY = #{watchIndustry,jdbcType=VARCHAR},
+            </if>
+            <if test="custMag != null and custMag != ''">
+                CUST_MAG = #{custMag,jdbcType=VARCHAR},
+            </if>
+            <if test="accountBank != null and accountBank != ''">
+                ACCOUNT_BANK = #{accountBank,jdbcType=VARCHAR},
+            </if>
+            <if test="accountNo != null and accountNo != ''">
+                ACCOUNT_NO = #{accountNo,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null and status != ''">
+                STATUS = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null and createBy != ''">
+                CREATE_BY = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createDt != null">
+                CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDt != null">
+                UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="groupId != null and groupId != ''">
+                GROUP_ID = #{groupId,jdbcType=NUMERIC},
+            </if>
+            <if test="enteId != null and enteId != ''">
+                ENTE_ID = #{enteId,jdbcType=VARCHAR},
+            </if>
+            <if test="enteNature != null and enteNature != ''">
+                ENTE_NATURE = #{enteNature,jdbcType=VARCHAR},
+            </if>
+            <if test="investmentAttributes != null and investmentAttributes != ''">
+                INVESTMENT_ATTRIBUTES = #{investmentAttributes,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE INVESTOR_ID = #{investorId,jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectById" parameterType="String" resultMap="InveInfoResult">
+		SELECT * FROM BD_T_INVE_INFO WHERE INVESTOR_ID = #{investorId,jdbcType=VARCHAR}
+	</select>
+
+    <select id="selectBy" parameterType="com.ppmg.ei.model.InveInfoModel" resultMap="InveInfoResult">
+        SELECT * FROM BD_T_INVE_INFO
+        <where>
+            <if test="investorId != null and investorId != ''">
+                INVESTOR_ID = #{investorId,jdbcType=VARCHAR}
+            </if>
+            <if test="investorName != null and investorName != ''">
+                AND INVESTOR_NAME = #{investorName,jdbcType=VARCHAR}
+            </if>
+            <if test="investorType != null and investorType != ''">
+                AND INVESTOR_TYPE = #{investorType,jdbcType=VARCHAR}
+            </if>
+            <if test="subType != null and subType != ''">
+                AND SUB_TYPE = #{subType,jdbcType=VARCHAR}
+            </if>
+            <if test="gender != null and gender != ''">
+                AND GENDER = #{gender,jdbcType=VARCHAR}
+            </if>
+            <if test="nationality != null and nationality != ''">
+                AND NATIONALITY = #{nationality,jdbcType=VARCHAR}
+            </if>
+            <if test="company != null and company != ''">
+                AND COMPANY = #{company,jdbcType=VARCHAR}
+            </if>
+            <if test="position != null and position != ''">
+                AND POSITION = #{position,jdbcType=VARCHAR}
+            </if>
+            <if test="idNo != null and idNo != ''">
+                AND ID_NO = #{idNo,jdbcType=VARCHAR}
+            </if>
+            <if test="regName != null and regName != ''">
+                AND REG_NAME = #{regName,jdbcType=VARCHAR}
+            </if>
+            <if test="regAdd != null and regAdd != ''">
+                AND REG_ADD = #{regAdd,jdbcType=VARCHAR}
+            </if>
+            <if test="regDate != null">
+                AND REG_DATE = #{regDate,jdbcType=VARCHAR}
+            </if>
+            <if test="regCapital != null and regCapital != ''">
+                AND REG_CAPITAL = #{regCapital,jdbcType=NUMERIC}
+            </if>
+            <if test="regCurrency != null and regCurrency != ''">
+                AND REG_CURRENCY = #{regCurrency,jdbcType=VARCHAR}
+            </if>
+            <if test="officeAdd != null and officeAdd != ''">
+                AND OFFICE_ADD = #{officeAdd,jdbcType=VARCHAR}
+            </if>
+            <if test="officeTel != null and officeTel != ''">
+                AND OFFICE_TEL = #{officeTel,jdbcType=VARCHAR}
+            </if>
+            <if test="contact != null and contact != ''">
+                AND CONTACT = #{contact,jdbcType=VARCHAR}
+            </if>
+            <if test="phoneNo != null and phoneNo != ''">
+                AND PHONE_NO = #{phoneNo,jdbcType=VARCHAR}
+            </if>
+            <if test="email != null and email != ''">
+                AND EMAIL = #{email,jdbcType=VARCHAR}
+            </if>
+            <if test="invePhase != null and invePhase != ''">
+                AND INVE_PHASE = #{invePhase,jdbcType=VARCHAR}
+            </if>
+            <if test="area != null and area != ''">
+                AND AREA = #{area,jdbcType=VARCHAR}
+            </if>
+            <if test="watchIndustry != null and watchIndustry != ''">
+                AND WATCH_INDUSTRY = #{watchIndustry,jdbcType=VARCHAR}
+            </if>
+            <if test="custMag != null and custMag != ''">
+                AND CUST_MAG = #{custMag,jdbcType=VARCHAR}
+            </if>
+            <if test="accountBank != null and accountBank != ''">
+                AND ACCOUNT_BANK = #{accountBank,jdbcType=VARCHAR}
+            </if>
+            <if test="accountNo != null and accountNo != ''">
+                AND ACCOUNT_NO = #{accountNo,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null and status != ''">
+                AND STATUS = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="createBy != null and createBy != ''">
+                AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+            </if>
+            <if test="createDt != null">
+                AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updateDt != null">
+                AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+            </if>
+            <if test="groupId != null and groupId != ''">
+                AND GROUP_ID = #{groupId,jdbcType=NUMERIC}
+            </if>
+            <if test="enteId != null and enteId != ''">
+                AND ENTE_ID = #{enteId,jdbcType=VARCHAR}
+            </if>
+            <if test="enteNature != null and enteNature != ''">
+                AND ENTE_NATURE = #{enteNature,jdbcType=VARCHAR}
+            </if>
+            <if test="investmentAttributes != null and investmentAttributes != ''">
+                AND INVESTMENT_ATTRIBUTES = #{investmentAttributes,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <sql id="searchSql">
+        SELECT * FROM BD_T_INVE_INFO
+        <where>
+            <if test='paramMap.keyWord != null and paramMap.keyWord != ""'>
+                and INVESTOR_NAME like ${paramMap.keyWord}
+            </if>
+            <include refid="searchCondition.searchClause"/>
+        </where>
+        ORDER BY UPDATE_DT DESC
+    </sql>
+
+    <select id="selectListPage" resultMap="InveInfoResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+        <include refid="searchSql"/>
+    </select>
+
+    <select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+        SELECT COUNT(*) FROM (
+        <include refid="searchSql"/>
+        ) t
+    </select>
+
+    <select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.InveInfoModel">
+        SELECT COUNT(*) FROM BD_T_INVE_INFO
+        <where>
+            <if test="investorId != null and investorId != ''">
+                INVESTOR_ID = #{investorId,jdbcType=VARCHAR}
+            </if>
+            <if test="investorName != null and investorName != ''">
+                AND INVESTOR_NAME = #{investorName,jdbcType=VARCHAR}
+            </if>
+            <if test="investorType != null and investorType != ''">
+                AND INVESTOR_TYPE = #{investorType,jdbcType=VARCHAR}
+            </if>
+            <if test="subType != null and subType != ''">
+                AND SUB_TYPE = #{subType,jdbcType=VARCHAR}
+            </if>
+            <if test="gender != null and gender != ''">
+                AND GENDER = #{gender,jdbcType=VARCHAR}
+            </if>
+            <if test="nationality != null and nationality != ''">
+                AND NATIONALITY = #{nationality,jdbcType=VARCHAR}
+            </if>
+            <if test="company != null and company != ''">
+                AND COMPANY = #{company,jdbcType=VARCHAR}
+            </if>
+            <if test="position != null and position != ''">
+                AND POSITION = #{position,jdbcType=VARCHAR}
+            </if>
+            <if test="idNo != null and idNo != ''">
+                AND ID_NO = #{idNo,jdbcType=VARCHAR}
+            </if>
+            <if test="regName != null and regName != ''">
+                AND REG_NAME = #{regName,jdbcType=VARCHAR}
+            </if>
+            <if test="regAdd != null and regAdd != ''">
+                AND REG_ADD = #{regAdd,jdbcType=VARCHAR}
+            </if>
+            <if test="regDate != null">
+                AND REG_DATE = #{regDate,jdbcType=VARCHAR}
+            </if>
+            <if test="regCapital != null and regCapital != ''">
+                AND REG_CAPITAL = #{regCapital,jdbcType=NUMERIC}
+            </if>
+            <if test="regCurrency != null and regCurrency != ''">
+                AND REG_CURRENCY = #{regCurrency,jdbcType=VARCHAR}
+            </if>
+            <if test="officeAdd != null and officeAdd != ''">
+                AND OFFICE_ADD = #{officeAdd,jdbcType=VARCHAR}
+            </if>
+            <if test="officeTel != null and officeTel != ''">
+                AND OFFICE_TEL = #{officeTel,jdbcType=VARCHAR}
+            </if>
+            <if test="contact != null and contact != ''">
+                AND CONTACT = #{contact,jdbcType=VARCHAR}
+            </if>
+            <if test="phoneNo != null and phoneNo != ''">
+                AND PHONE_NO = #{phoneNo,jdbcType=VARCHAR}
+            </if>
+            <if test="email != null and email != ''">
+                AND EMAIL = #{email,jdbcType=VARCHAR}
+            </if>
+            <if test="invePhase != null and invePhase != ''">
+                AND INVE_PHASE = #{invePhase,jdbcType=VARCHAR}
+            </if>
+            <if test="area != null and area != ''">
+                AND AREA = #{area,jdbcType=VARCHAR}
+            </if>
+            <if test="watchIndustry != null and watchIndustry != ''">
+                AND WATCH_INDUSTRY = #{watchIndustry,jdbcType=VARCHAR}
+            </if>
+            <if test="custMag != null and custMag != ''">
+                AND CUST_MAG = #{custMag,jdbcType=VARCHAR}
+            </if>
+            <if test="accountBank != null and accountBank != ''">
+                AND ACCOUNT_BANK = #{accountBank,jdbcType=VARCHAR}
+            </if>
+            <if test="accountNo != null and accountNo != ''">
+                AND ACCOUNT_NO = #{accountNo,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null and status != ''">
+                AND STATUS = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="createBy != null and createBy != ''">
+                AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+            </if>
+            <if test="createDt != null">
+                AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updateDt != null">
+                AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+            </if>
+            <if test="groupId != null and groupId != ''">
+                AND GROUP_ID = #{groupId,jdbcType=NUMERIC}
+            </if>
+            <if test="enteId != null and enteId != ''">
+                AND ENTE_ID = #{enteId,jdbcType=VARCHAR}
+            </if>
+            <if test="enteNature != null and enteNature != ''">
+                AND ENTE_NATURE = #{enteNature,jdbcType=VARCHAR}
+            </if>
+            <if test="investmentAttributes != null and investmentAttributes != ''">
+                AND INVESTMENT_ATTRIBUTES = #{investmentAttributes,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectList" parameterType="com.ppmg.ei.model.InveInfoModel" resultMap="InveInfoResult">
+        SELECT * FROM BD_T_INVE_INFO
+        <where>
+            <if test="investorId != null and investorId != ''">
+                INVESTOR_ID = #{investorId,jdbcType=VARCHAR}
+            </if>
+            <if test="investorName != null and investorName != ''">
+                AND INVESTOR_NAME = #{investorName,jdbcType=VARCHAR}
+            </if>
+            <if test="investorType != null and investorType != ''">
+                AND INVESTOR_TYPE = #{investorType,jdbcType=VARCHAR}
+            </if>
+            <if test="subType != null and subType != ''">
+                AND SUB_TYPE = #{subType,jdbcType=VARCHAR}
+            </if>
+            <if test="gender != null and gender != ''">
+                AND GENDER = #{gender,jdbcType=VARCHAR}
+            </if>
+            <if test="nationality != null and nationality != ''">
+                AND NATIONALITY = #{nationality,jdbcType=VARCHAR}
+            </if>
+            <if test="company != null and company != ''">
+                AND COMPANY = #{company,jdbcType=VARCHAR}
+            </if>
+            <if test="position != null and position != ''">
+                AND POSITION = #{position,jdbcType=VARCHAR}
+            </if>
+            <if test="idNo != null and idNo != ''">
+                AND ID_NO = #{idNo,jdbcType=VARCHAR}
+            </if>
+            <if test="regName != null and regName != ''">
+                AND REG_NAME = #{regName,jdbcType=VARCHAR}
+            </if>
+            <if test="regAdd != null and regAdd != ''">
+                AND REG_ADD = #{regAdd,jdbcType=VARCHAR}
+            </if>
+            <if test="regDate != null">
+                AND REG_DATE = #{regDate,jdbcType=VARCHAR}
+            </if>
+            <if test="regCapital != null and regCapital != ''">
+                AND REG_CAPITAL = #{regCapital,jdbcType=NUMERIC}
+            </if>
+            <if test="regCurrency != null and regCurrency != ''">
+                AND REG_CURRENCY = #{regCurrency,jdbcType=VARCHAR}
+            </if>
+            <if test="officeAdd != null and officeAdd != ''">
+                AND OFFICE_ADD = #{officeAdd,jdbcType=VARCHAR}
+            </if>
+            <if test="officeTel != null and officeTel != ''">
+                AND OFFICE_TEL = #{officeTel,jdbcType=VARCHAR}
+            </if>
+            <if test="contact != null and contact != ''">
+                AND CONTACT = #{contact,jdbcType=VARCHAR}
+            </if>
+            <if test="phoneNo != null and phoneNo != ''">
+                AND PHONE_NO = #{phoneNo,jdbcType=VARCHAR}
+            </if>
+            <if test="email != null and email != ''">
+                AND EMAIL = #{email,jdbcType=VARCHAR}
+            </if>
+            <if test="invePhase != null and invePhase != ''">
+                AND INVE_PHASE = #{invePhase,jdbcType=VARCHAR}
+            </if>
+            <if test="area != null and area != ''">
+                AND AREA = #{area,jdbcType=VARCHAR}
+            </if>
+            <if test="watchIndustry != null and watchIndustry != ''">
+                AND WATCH_INDUSTRY = #{watchIndustry,jdbcType=VARCHAR}
+            </if>
+            <if test="custMag != null and custMag != ''">
+                AND CUST_MAG = #{custMag,jdbcType=VARCHAR}
+            </if>
+            <if test="accountBank != null and accountBank != ''">
+                AND ACCOUNT_BANK = #{accountBank,jdbcType=VARCHAR}
+            </if>
+            <if test="accountNo != null and accountNo != ''">
+                AND ACCOUNT_NO = #{accountNo,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null and status != ''">
+                AND STATUS = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="createBy != null and createBy != ''">
+                AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+            </if>
+            <if test="createDt != null">
+                AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updateDt != null">
+                AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+            </if>
+            <if test="groupId != null and groupId != ''">
+                AND GROUP_ID = #{groupId,jdbcType=NUMERIC}
+            </if>
+            <if test="enteId != null and enteId != ''">
+                AND ENTE_ID = #{enteId,jdbcType=VARCHAR}
+            </if>
+            <if test="enteNature != null and enteNature != ''">
+                AND ENTE_NATURE = #{enteNature,jdbcType=VARCHAR}
+            </if>
+            <if test="investmentAttributes != null and investmentAttributes != ''">
+                AND INVESTMENT_ATTRIBUTES = #{investmentAttributes,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectSql2Obj" parameterType="java.lang.String" resultMap="InveInfoResult">
+		${value}
+	</select>
+    <select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+    <update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+    <select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+
+    <select id="selectListByMcName" parameterType="com.ppmg.ei.model.InveInfoModel" resultMap="InveInfoResult">
+        select * from EI.BD_T_INVE_INFO WHERE 1=1
+        <if test="investorName != null and investorName != ''">
+            AND INVESTOR_NAME like '%${investorName}%'
+        </if>
+
+    </select>
+    <!-- end autocreate -->
+</mapper>

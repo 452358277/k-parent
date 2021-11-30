@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="EnteBasicInfo">
+	<!-- start autocreate -->
+
+	<resultMap id="EnteBasicInfoResult" type="com.ppmg.ei.model.EnteBasicInfoModel">
+		<result column="PK_ID" property="pkId" jdbcType="VARCHAR" />
+		<result column="ENTE_ID" property="enteId" jdbcType="VARCHAR" />
+		<result column="INVE_EMPLOYMENT" property="inveEmployment" jdbcType="VARCHAR" />
+		<result column="EMPLOYMENT" property="employment" jdbcType="VARCHAR" />
+		<result column="EMPOWER_PATENT" property="empowerPatent" jdbcType="VARCHAR" />
+		<result column="NO_EMPOWER_PATENT" property="noEmpowerPatent" jdbcType="VARCHAR" />
+		<result column="LAST_TAX_AMOUNT" property="lastTaxAmount" jdbcType="VARCHAR" />
+		<result column="LAST_ESTIMATE_TAX_AMOUNT" property="lastEstimateTaxAmount" jdbcType="VARCHAR" />
+		<result column="YEAR_TAX_AMOUNT" property="yearTaxAmount" jdbcType="VARCHAR" />
+		<result column="YEAR" property="year" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="ente_file" property="enteFile" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="FILLING_DATE" property="fillingDate" jdbcType="TIMESTAMP" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.EnteBasicInfoModel">
+		INSERT INTO EI_ENTE_BASIC_INFO (PK_ID,ENTE_ID,INVE_EMPLOYMENT,EMPLOYMENT,EMPOWER_PATENT,NO_EMPOWER_PATENT,LAST_TAX_AMOUNT,LAST_ESTIMATE_TAX_AMOUNT,YEAR_TAX_AMOUNT,YEAR,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,ente_file,REMARK,FILLING_DATE,STATUS) values(#{pkId,jdbcType=VARCHAR},#{enteId,jdbcType=VARCHAR},#{inveEmployment,jdbcType=VARCHAR},#{employment,jdbcType=VARCHAR},#{empowerPatent,jdbcType=VARCHAR},#{noEmpowerPatent,jdbcType=VARCHAR},#{lastTaxAmount,jdbcType=VARCHAR},#{lastEstimateTaxAmount,jdbcType=VARCHAR},#{yearTaxAmount,jdbcType=VARCHAR},#{year,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{enteFile,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},#{fillingDate,jdbcType=TIMESTAMP},#{status,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO EI_ENTE_BASIC_INFO (PK_ID,ENTE_ID,INVE_EMPLOYMENT,EMPLOYMENT,EMPOWER_PATENT,NO_EMPOWER_PATENT,LAST_TAX_AMOUNT,LAST_ESTIMATE_TAX_AMOUNT,YEAR_TAX_AMOUNT,YEAR,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,ente_file,REMARK,FILLING_DATE,STATUS)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.pkId,jdbcType=VARCHAR},
+				#{item.enteId,jdbcType=VARCHAR},
+				#{item.inveEmployment,jdbcType=VARCHAR},
+				#{item.employment,jdbcType=VARCHAR},
+				#{item.empowerPatent,jdbcType=VARCHAR},
+				#{item.noEmpowerPatent,jdbcType=VARCHAR},
+				#{item.lastTaxAmount,jdbcType=VARCHAR},
+				#{item.lastEstimateTaxAmount,jdbcType=VARCHAR},
+				#{item.yearTaxAmount,jdbcType=VARCHAR},
+				#{item.year,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+				#{item.enteFile,jdbcType=VARCHAR},
+				#{item.remark,jdbcType=VARCHAR},
+				#{item.fillingDate,jdbcType=TIMESTAMP},
+			   #{item.status,jdbcType=VARCHAR}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  EI_ENTE_BASIC_INFO WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.EnteBasicInfoModel">
+		DELETE FROM EI_ENTE_BASIC_INFO
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="enteId != null and enteId != ''" >
+				AND ENTE_ID = #{enteId,jdbcType=VARCHAR}
+			</if>
+			<if test="inveEmployment != null and inveEmployment != ''" >
+				AND INVE_EMPLOYMENT = #{inveEmployment,jdbcType=VARCHAR}
+			</if>
+			<if test="employment != null and employment != ''" >
+				AND EMPLOYMENT = #{employment,jdbcType=VARCHAR}
+			</if>
+			<if test="empowerPatent != null and empowerPatent != ''" >
+				AND EMPOWER_PATENT = #{empowerPatent,jdbcType=VARCHAR}
+			</if>
+			<if test="noEmpowerPatent != null and noEmpowerPatent != ''" >
+				AND NO_EMPOWER_PATENT = #{noEmpowerPatent,jdbcType=VARCHAR}
+			</if>
+			<if test="lastTaxAmount != null and lastTaxAmount != ''" >
+				AND LAST_TAX_AMOUNT = #{lastTaxAmount,jdbcType=VARCHAR}
+			</if>
+			<if test="lastEstimateTaxAmount != null and lastEstimateTaxAmount != ''" >
+				AND LAST_ESTIMATE_TAX_AMOUNT = #{lastEstimateTaxAmount,jdbcType=VARCHAR}
+			</if>
+			<if test="yearTaxAmount != null and yearTaxAmount != ''" >
+				AND YEAR_TAX_AMOUNT = #{yearTaxAmount,jdbcType=VARCHAR}
+			</if>
+			<if test="year != null and year != ''" >
+				AND YEAR = #{year,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="enteFile != null and enteFile != ''" >
+				AND ente_file = #{enteFile,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="fillingDate != null" >
+				AND FILLING_DATE = #{fillingDate,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  EI_ENTE_BASIC_INFO WHERE PK_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.EnteBasicInfoModel">
+		UPDATE EI_ENTE_BASIC_INFO 
+		<set>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR},
+			</if>
+			<if test="enteId != null and enteId != ''" >
+				ENTE_ID = #{enteId,jdbcType=VARCHAR},
+			</if>
+			<if test="inveEmployment != null and inveEmployment != ''" >
+				INVE_EMPLOYMENT = #{inveEmployment,jdbcType=VARCHAR},
+			</if>
+			<if test="employment != null and employment != ''" >
+				EMPLOYMENT = #{employment,jdbcType=VARCHAR},
+			</if>
+			<if test="empowerPatent != null and empowerPatent != ''" >
+				EMPOWER_PATENT = #{empowerPatent,jdbcType=VARCHAR},
+			</if>
+			<if test="noEmpowerPatent != null and noEmpowerPatent != ''" >
+				NO_EMPOWER_PATENT = #{noEmpowerPatent,jdbcType=VARCHAR},
+			</if>
+			<if test="lastTaxAmount != null and lastTaxAmount != ''" >
+				LAST_TAX_AMOUNT = #{lastTaxAmount,jdbcType=VARCHAR},
+			</if>
+			<if test="lastEstimateTaxAmount != null and lastEstimateTaxAmount != ''" >
+				LAST_ESTIMATE_TAX_AMOUNT = #{lastEstimateTaxAmount,jdbcType=VARCHAR},
+			</if>
+			<if test="yearTaxAmount != null and yearTaxAmount != ''" >
+				YEAR_TAX_AMOUNT = #{yearTaxAmount,jdbcType=VARCHAR},
+			</if>
+			<if test="year != null and year != ''" >
+				YEAR = #{year,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="enteFile != null and enteFile != ''" >
+				ente_file = #{enteFile,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null and remark != ''" >
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="fillingDate != null" >
+				FILLING_DATE = #{fillingDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="EnteBasicInfoResult">
+		SELECT * FROM EI_ENTE_BASIC_INFO WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.EnteBasicInfoModel" resultMap="EnteBasicInfoResult">
+		SELECT * FROM EI_ENTE_BASIC_INFO
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="enteId != null and enteId != ''" >
+				AND ENTE_ID = #{enteId,jdbcType=VARCHAR}
+			</if>
+			<if test="inveEmployment != null and inveEmployment != ''" >
+				AND INVE_EMPLOYMENT = #{inveEmployment,jdbcType=VARCHAR}
+			</if>
+			<if test="employment != null and employment != ''" >
+				AND EMPLOYMENT = #{employment,jdbcType=VARCHAR}
+			</if>
+			<if test="empowerPatent != null and empowerPatent != ''" >
+				AND EMPOWER_PATENT = #{empowerPatent,jdbcType=VARCHAR}
+			</if>
+			<if test="noEmpowerPatent != null and noEmpowerPatent != ''" >
+				AND NO_EMPOWER_PATENT = #{noEmpowerPatent,jdbcType=VARCHAR}
+			</if>
+			<if test="lastTaxAmount != null and lastTaxAmount != ''" >
+				AND LAST_TAX_AMOUNT = #{lastTaxAmount,jdbcType=VARCHAR}
+			</if>
+			<if test="lastEstimateTaxAmount != null and lastEstimateTaxAmount != ''" >
+				AND LAST_ESTIMATE_TAX_AMOUNT = #{lastEstimateTaxAmount,jdbcType=VARCHAR}
+			</if>
+			<if test="yearTaxAmount != null and yearTaxAmount != ''" >
+				AND YEAR_TAX_AMOUNT = #{yearTaxAmount,jdbcType=VARCHAR}
+			</if>
+			<if test="year != null and year != ''" >
+				AND YEAR = #{year,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="enteFile != null and enteFile != ''" >
+				AND ente_file = #{enteFile,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND remark = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="fillingDate != null" >
+				AND FILLING_DATE = #{fillingDate,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM EI_ENTE_BASIC_INFO
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="EnteBasicInfoResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.EnteBasicInfoModel">
+		SELECT COUNT(*) FROM EI_ENTE_BASIC_INFO
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="enteId != null and enteId != ''" >
+				AND ENTE_ID = #{enteId,jdbcType=VARCHAR}
+			</if>
+			<if test="inveEmployment != null and inveEmployment != ''" >
+				AND INVE_EMPLOYMENT = #{inveEmployment,jdbcType=VARCHAR}
+			</if>
+			<if test="employment != null and employment != ''" >
+				AND EMPLOYMENT = #{employment,jdbcType=VARCHAR}
+			</if>
+			<if test="empowerPatent != null and empowerPatent != ''" >
+				AND EMPOWER_PATENT = #{empowerPatent,jdbcType=VARCHAR}
+			</if>
+			<if test="noEmpowerPatent != null and noEmpowerPatent != ''" >
+				AND NO_EMPOWER_PATENT = #{noEmpowerPatent,jdbcType=VARCHAR}
+			</if>
+			<if test="lastTaxAmount != null and lastTaxAmount != ''" >
+				AND LAST_TAX_AMOUNT = #{lastTaxAmount,jdbcType=VARCHAR}
+			</if>
+			<if test="lastEstimateTaxAmount != null and lastEstimateTaxAmount != ''" >
+				AND LAST_ESTIMATE_TAX_AMOUNT = #{lastEstimateTaxAmount,jdbcType=VARCHAR}
+			</if>
+			<if test="yearTaxAmount != null and yearTaxAmount != ''" >
+				AND YEAR_TAX_AMOUNT = #{yearTaxAmount,jdbcType=VARCHAR}
+			</if>
+			<if test="year != null and year != ''" >
+				AND YEAR = #{year,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="enteFile != null and enteFile != ''" >
+				AND ente_file = #{enteFile,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="fillingDate != null" >
+				AND FILLING_DATE = #{fillingDate,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.EnteBasicInfoModel" resultMap="EnteBasicInfoResult">
+		SELECT * FROM EI_ENTE_BASIC_INFO
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="enteId != null and enteId != ''" >
+				AND ENTE_ID = #{enteId,jdbcType=VARCHAR}
+			</if>
+			<if test="inveEmployment != null and inveEmployment != ''" >
+				AND INVE_EMPLOYMENT = #{inveEmployment,jdbcType=VARCHAR}
+			</if>
+			<if test="employment != null and employment != ''" >
+				AND EMPLOYMENT = #{employment,jdbcType=VARCHAR}
+			</if>
+			<if test="empowerPatent != null and empowerPatent != ''" >
+				AND EMPOWER_PATENT = #{empowerPatent,jdbcType=VARCHAR}
+			</if>
+			<if test="noEmpowerPatent != null and noEmpowerPatent != ''" >
+				AND NO_EMPOWER_PATENT = #{noEmpowerPatent,jdbcType=VARCHAR}
+			</if>
+			<if test="lastTaxAmount != null and lastTaxAmount != ''" >
+				AND LAST_TAX_AMOUNT = #{lastTaxAmount,jdbcType=VARCHAR}
+			</if>
+			<if test="lastEstimateTaxAmount != null and lastEstimateTaxAmount != ''" >
+				AND LAST_ESTIMATE_TAX_AMOUNT = #{lastEstimateTaxAmount,jdbcType=VARCHAR}
+			</if>
+			<if test="yearTaxAmount != null and yearTaxAmount != ''" >
+				AND YEAR_TAX_AMOUNT = #{yearTaxAmount,jdbcType=VARCHAR}
+			</if>
+			<if test="year != null and year != ''" >
+				AND YEAR = #{year,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="enteFile != null and enteFile != ''" >
+				AND ente_file = #{enteFile,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND remark = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="fillingDate != null" >
+				AND FILLING_DATE = #{fillingDate,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND status = #{status,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="EnteBasicInfoResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+
+	<select id="getAdd" parameterType="java.lang.String" resultType="String">
+       select loc_id  from base.COMM_T_LOCATION where loc_name=#{locName,jdbcType=VARCHAR}
+	</select>
+</mapper>

@@ -1,0 +1,1694 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BdTFundAtta">
+    <resultMap id="BdTFundAttaResult2" type="com.ppmg.ei.model.BdTFundAttaModel" extends="BdTFundAttaResult">
+        <result column="IS_FILE" property="isFile" jdbcType="VARCHAR"/>
+        <result column="FILE_ID" property="fileId" jdbcType="VARCHAR"/>
+        <result column="FILE_SOURCE" property="fileSource" jdbcType="VARCHAR"/>
+        <result column="ATTA_FILE_NAME" property="attaFileName" jdbcType="VARCHAR"/>
+        <result column="ATTA_FILE_URL" property="attaFileUrl" jdbcType="VARCHAR"/>
+        <result column="FILE_TYPE" property="fileType" jdbcType="VARCHAR"/>
+        <result column="EDITABLE" property="editable" jdbcType="VARCHAR"/>
+        <result column="CREATE_NAME" property="createName" jdbcType="VARCHAR"/>
+        <result column="KEYS" property="keys" jdbcType="VARCHAR"/>
+    </resultMap>
+    <!-- start autocreate -->
+
+    <resultMap id="BdTFundAttaResult" type="com.ppmg.ei.model.BdTFundAttaModel">
+        <result column="ATTA_ID" property="attaId" jdbcType="VARCHAR"/>
+        <result column="FUND_ID" property="fundId" jdbcType="VARCHAR"/>
+        <result column="ATTA_TYPE" property="attaType" jdbcType="VARCHAR"/>
+        <result column="ATTA_FILE" property="attaFile" jdbcType="VARCHAR"/>
+        <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR"/>
+        <result column="CREATE_DT" property="uplodeDate" jdbcType="TIMESTAMP"/>
+        <result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR"/>
+        <result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP"/>
+        <result column="STATUS" property="status" jdbcType="VARCHAR"/>
+        <result column="ITEM_ID" property="itemId" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.ppmg.ei.model.BdTFundAttaModel">
+		INSERT INTO BD_T_FUND_ATTA (ATTA_ID,FUND_ID,ATTA_TYPE,ATTA_FILE,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,STATUS,ITEM_ID)
+		values(#{attaId,jdbcType=VARCHAR},#{fundId,jdbcType=VARCHAR},#{attaType,jdbcType=VARCHAR},
+		#{attaFile,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},
+		#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{status,jdbcType=VARCHAR},#{itemId,jdbcType=VARCHAR})
+	</insert>
+
+    <insert id="insertBatch" parameterType="List">
+        INSERT INTO BD_T_FUND_ATTA (ATTA_ID,FUND_ID,ATTA_TYPE,ATTA_FILE,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,STATUS)
+        <foreach collection="list" item="item" index="index" separator="union all">
+            ( select
+            #{item.attaId,jdbcType=VARCHAR},
+            #{item.fundId,jdbcType=VARCHAR},
+            #{item.attaType,jdbcType=VARCHAR},
+            #{item.attaFile,jdbcType=VARCHAR},
+            #{item.createBy,jdbcType=VARCHAR},
+            #{item.createDt,jdbcType=TIMESTAMP},
+            #{item.updateBy,jdbcType=VARCHAR},
+            #{item.updateDt,jdbcType=TIMESTAMP},
+            #{item.status,jdbcType=VARCHAR}
+            from dual)
+        </foreach>
+    </insert>
+
+    <delete id="deleteById" parameterType="String">
+		DELETE FROM  BD_T_FUND_ATTA WHERE ATTA_ID = #{attaId,jdbcType=VARCHAR}
+	</delete>
+
+    <delete id="deletePK" parameterType="com.ppmg.ei.model.BdTFundAttaModel">
+        DELETE FROM BD_T_FUND_ATTA
+        <where>
+            <if test="attaId != null and attaId != ''">
+                ATTA_ID = #{attaId,jdbcType=VARCHAR}
+            </if>
+            <if test="fundId != null and fundId != ''">
+                AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+            </if>
+            <if test="attaType != null and attaType != ''">
+                AND ATTA_TYPE = #{attaType,jdbcType=VARCHAR}
+            </if>
+            <if test="attaFile != null and attaFile != ''">
+                AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+            </if>
+            <if test="createBy != null and createBy != ''">
+                AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+            </if>
+            <if test="createDt != null">
+                AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updateDt != null">
+                AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null and status != ''">
+                AND STATUS = #{status,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </delete>
+
+    <delete id="deleteBatch" parameterType="List">
+        DELETE FROM BD_T_FUND_ATTA WHERE ATTA_ID IN
+        <foreach collection="array" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <update id="updatePK" parameterType="com.ppmg.ei.model.BdTFundAttaModel">
+        UPDATE BD_T_FUND_ATTA
+        <set>
+            <if test="attaId != null and attaId != ''">
+                ATTA_ID = #{attaId,jdbcType=VARCHAR},
+            </if>
+            <if test="fundId != null and fundId != ''">
+                FUND_ID = #{fundId,jdbcType=VARCHAR},
+            </if>
+            <if test="attaType != null and attaType != ''">
+                ATTA_TYPE = #{attaType,jdbcType=VARCHAR},
+            </if>
+            <if test="attaFile != null and attaFile != ''">
+                ATTA_FILE = #{attaFile,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null and createBy != ''">
+                CREATE_BY = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createDt != null">
+                CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDt != null">
+                UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null and status != ''">
+                STATUS = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="itemId != null and itemId != ''">
+                ITEM_ID = #{itemId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE ATTA_ID = #{attaId,jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectById" parameterType="String" resultMap="BdTFundAttaResult">
+		SELECT * FROM BD_T_FUND_ATTA WHERE ATTA_ID = #{attaId,jdbcType=VARCHAR}
+	</select>
+
+    <select id="selectBy" parameterType="com.ppmg.ei.model.BdTFundAttaModel" resultMap="BdTFundAttaResult">
+        SELECT * FROM BD_T_FUND_ATTA
+        <where>
+            <if test="attaId != null and attaId != ''">
+                ATTA_ID = #{attaId,jdbcType=VARCHAR}
+            </if>
+            <if test="fundId != null and fundId != ''">
+                AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+            </if>
+            <if test="attaType != null and attaType != ''">
+                AND ATTA_TYPE = #{attaType,jdbcType=VARCHAR}
+            </if>
+            <if test="attaFile != null and attaFile != ''">
+                AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+            </if>
+            <if test="createBy != null and createBy != ''">
+                AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+            </if>
+            <if test="createDt != null">
+                AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updateDt != null">
+                AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null and status != ''">
+                AND STATUS = #{status,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <sql id="searchSql">
+        SELECT *
+        FROM (SELECT T.FUND_ID,T.ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        T.ATTA_TYPE,
+        U.NAME CREATE_NAME,
+        T.CREATE_DT,
+        '0' IS_FILE,
+        '/eiweb/uploadServlet?method=getExistFile'||chr(38)||'sessionKey='||A.File_Id||
+        chr(38)||'fileName='||A.FILE_NAME||chr(38)||'fieldToken='||A.FIELD_TOKEN||chr(38)||'fileOldName='||A.FILE_OLD_NAME||chr(38)||'isNew=Y'
+        ATTA_FILE_URL,
+        T.STATUS,
+        T.ITEM_ID NODE_ID,
+        '0' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM BD_T_FUND_ATTA T
+        LEFT JOIN BASE.APP_USER U
+        ON T.CREATE_BY = U.ID
+        LEFT JOIN EI_T_ATTACHMENT A
+        ON T.ATTA_FILE = A.FIELD_TOKEN
+
+        UNION ALL
+
+        select AT.PROJECT_OR_FUND_ID FUND_ID,
+        AT.ITEM_ID ATTA_ID,
+        AT.ITEM_NAME ATTA_FILE_NAME,
+        'dic' FILE_TYPE,
+        '' ATTA_TYPE,
+        U.NAME CREATE_NAME,
+        AT.CREATE_DT,
+        '1' IS_FILE,
+        '' ATTA_FILE_URL,
+        AT.STATUS,
+        AT.PARENT_ID NODE_ID,
+        '1' EDITABLE,
+        '' FILE_ID,
+        '' FILE_SOURCE
+        from BD_T_ATTA_ITEM AT
+        LEFT JOIN BASE.APP_USER U
+        ON AT.CREATE_BY = U.ID)
+        <where>
+            <include refid="searchCondition.searchClause"/>
+        </where>
+        <if test="paramMap.KEYWORD != null">
+            AND (CREATE_NAME LIKE ${paramMap.KEYWORD} OR ATTA_FILE_NAME LIKE ${paramMap.KEYWORD})
+        </if>
+        AND STATUS !='9'
+        ORDER BY IS_FILE, CREATE_DT DESC
+
+    </sql>
+
+    <sql id="searchSql_subFund">
+        SELECT *
+        FROM (
+        SELECT P.PROJ_ID FUND_ID,A.FILE_ID ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '商业计划书' ATTA_TYPE,
+        P.CREATE_BY,
+        U.NAME CREATE_NAME,
+        P.CREATE_DT,
+        '0' IS_FILE,
+        '/eiweb/uploadServlet?method=getExistFile'||chr(38)||'sessionKey='||A.File_Id||
+        chr(38)||'fileName='||A.FILE_NAME||chr(38)||'fieldToken='||A.FIELD_TOKEN||chr(38)||'fileOldName='||A.FILE_OLD_NAME||chr(38)||'isNew=Y'
+        ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM TZ_T_PROJ_INFO P
+        LEFT JOIN BD_T_ATTA_ITEM AI ON P.PROJ_ID=AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='商业计划书'
+        LEFT JOIN BASE.APP_USER U
+        ON P.CREATE_BY = U.ID
+        LEFT JOIN EI_T_ATTACHMENT A
+        ON P.BIZ_PLAN_ATT = A.FIELD_TOKEN
+
+        UNION ALL
+
+        SELECT P.PROJ_ID FUND_ID,A.FILE_ID ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '立项报告' ATTA_TYPE,
+        P.CREATE_BY,
+        U.NAME CREATE_NAME,
+        P.CREATE_DT,
+        '0' IS_FILE,
+        '/eiweb/uploadServlet?method=getExistFile'||chr(38)||'sessionKey='||A.File_Id||
+        chr(38)||'fileName='||A.FILE_NAME||chr(38)||'fieldToken='||A.FIELD_TOKEN||chr(38)||'fileOldName='||A.FILE_OLD_NAME||chr(38)||'isNew=Y'
+        ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM TZ_T_PROJ_INFO P
+        LEFT JOIN BD_T_ATTA_ITEM AI ON P.PROJ_ID=AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='立项报告'
+        LEFT JOIN BASE.APP_USER U
+        ON P.CREATE_BY = U.ID
+        LEFT JOIN EI_T_ATTACHMENT A
+        ON P.PROJ_REPORT_ATT = A.FIELD_TOKEN
+
+        UNION ALL
+
+        SELECT P.PROJ_ID FUND_ID,A.FILE_ID ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '其他' ATTA_TYPE,
+        P.CREATE_BY,
+        U.NAME CREATE_NAME,
+        P.CREATE_DT,
+        '0' IS_FILE,
+        '/eiweb/uploadServlet?method=getExistFile'||chr(38)||'sessionKey='||A.File_Id||
+        chr(38)||'fileName='||A.FILE_NAME||chr(38)||'fieldToken='||A.FIELD_TOKEN||chr(38)||'fileOldName='||A.FILE_OLD_NAME||chr(38)||'isNew=Y'
+        ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM TZ_T_PROJ_INFO P
+        LEFT JOIN BD_T_ATTA_ITEM AI ON P.PROJ_ID=AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='其他'
+        LEFT JOIN BASE.APP_USER U
+        ON P.CREATE_BY = U.ID
+        LEFT JOIN EI_T_ATTACHMENT A
+        ON P.OTHER_ATT = A.FIELD_TOKEN
+
+        UNION ALL
+
+        SELECT P.PROJ_ID FUND_ID,A.FILE_ID ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '决策材料' ATTA_TYPE,
+        P.CREATE_BY,
+        U.NAME CREATE_NAME,
+        P.CREATE_DT,
+        '0' IS_FILE,
+        '/eiweb/uploadServlet?method=getExistFile'||chr(38)||'sessionKey='||A.File_Id||
+        chr(38)||'fileName='||A.FILE_NAME||chr(38)||'fieldToken='||A.FIELD_TOKEN||chr(38)||'fileOldName='||A.FILE_OLD_NAME||chr(38)||'isNew=Y'
+        ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM TZ_T_PROJ_INFO P
+        LEFT JOIN BD_T_ATTA_ITEM AI ON P.PROJ_ID=AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='项目决策'
+        LEFT JOIN BASE.APP_USER U
+        ON P.CREATE_BY = U.ID
+        LEFT JOIN EI_T_ATTACHMENT A
+        ON P.REMARK_ATT = A.FIELD_TOKEN
+
+        UNION ALL
+
+        SELECT C.PROJ_ID FUND_ID,A.FILE_ID ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '合同签署' ATTA_TYPE,
+        C.CREATE_BY,
+        U.NAME CREATE_NAME,
+        C.CREATE_DT,
+        '0' IS_FILE,
+        '/eiweb/uploadServlet?method=getExistFile'||chr(38)||'sessionKey='||A.File_Id||
+        chr(38)||'fileName='||A.FILE_NAME||chr(38)||'fieldToken='||A.FIELD_TOKEN||chr(38)||'fileOldName='||A.FILE_OLD_NAME||chr(38)||'isNew=Y'
+        ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM TZ_T_PROJ_CONTRACT_FILE C
+        LEFT JOIN BD_T_ATTA_ITEM AI ON C.PROJ_ID=AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='合同签署'
+        LEFT JOIN BASE.APP_USER U
+        ON C.CREATE_BY = U.ID
+        LEFT JOIN EI_T_ATTACHMENT A
+        ON C.CONTRACT_FILE = A.FIELD_TOKEN
+
+        UNION ALL
+
+        SELECT XJL.PROJECT_OR_FUND_ID FUND_ID,A.FILE_ID ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '出资材料' ATTA_TYPE,
+        XJL.CREATE_BY,
+        U.NAME CREATE_NAME,
+        XJL.CREATE_DT,
+        '0' IS_FILE,
+        '/eiweb/uploadServlet?method=getExistFile'||chr(38)||'sessionKey='||A.File_Id||
+        chr(38)||'fileName='||A.FILE_NAME||chr(38)||'fieldToken='||A.FIELD_TOKEN||chr(38)||'fileOldName='||A.FILE_OLD_NAME||chr(38)||'isNew=Y'
+        ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM XJL_T_PAYMENT_REQUEST XJL
+        LEFT JOIN BD_T_ATTA_ITEM AI ON XJL.PROJECT_OR_FUND_ID=AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='项目出资'
+        LEFT JOIN BASE.APP_USER U
+        ON XJL.CREATE_BY = U.ID
+        LEFT JOIN EI_T_ATTACHMENT A
+        ON XJL.MONEY_DESC_ATT = A.FIELD_TOKEN
+
+        UNION ALL
+
+        SELECT Q.PROJ_ID FUND_ID,A.FILE_ID ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '退出材料' ATTA_TYPE,
+        Q.CREATE_BY,
+        U.NAME CREATE_NAME,
+        Q.CREATE_DT,
+        '0' IS_FILE,
+        '/eiweb/uploadServlet?method=getExistFile'||chr(38)||'sessionKey='||A.File_Id||
+        chr(38)||'fileName='||A.FILE_NAME||chr(38)||'fieldToken='||A.FIELD_TOKEN||chr(38)||'fileOldName='||A.FILE_OLD_NAME||chr(38)||'isNew=Y'
+        ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM TZ_T_FP_QUIT_ASSESS Q
+        LEFT JOIN BD_T_ATTA_ITEM AI ON Q.PROJ_ID=AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='项目退出'
+        LEFT JOIN BASE.APP_USER U
+        ON Q.CREATE_BY = U.ID
+        LEFT JOIN EI_T_ATTACHMENT A
+        ON Q.ATTA_FILE = A.FIELD_TOKEN
+
+        UNION ALL
+
+        SELECT T.FUND_ID,T.ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        AT.ITEM_NAME ATTA_TYPE,
+        T.CREATE_BY,
+        U.NAME CREATE_NAME,
+        T.CREATE_DT,
+        '0' IS_FILE,
+        '/eiweb/uploadServlet?method=getExistFile'||chr(38)||'sessionKey='||A.File_Id||
+        chr(38)||'fileName='||A.FILE_NAME||chr(38)||'fieldToken='||A.FIELD_TOKEN||chr(38)||'fileOldName='||A.FILE_OLD_NAME||chr(38)||'isNew=Y'
+        ATTA_FILE_URL,
+        T.STATUS,
+        T.ITEM_ID NODE_ID,
+        '0' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM BD_T_FUND_ATTA T
+        LEFT JOIN BD_T_ATTA_ITEM AT ON T.ITEM_ID=AT.ITEM_ID
+        LEFT JOIN BASE.APP_USER U
+        ON T.CREATE_BY = U.ID
+        LEFT JOIN EI_T_ATTACHMENT A
+        ON T.ATTA_FILE = A.FIELD_TOKEN
+
+        UNION ALL
+
+        select AT.PROJECT_OR_FUND_ID FUND_ID,
+        AT.ITEM_ID ATTA_ID,
+        AT.ITEM_NAME ATTA_FILE_NAME,
+        'dic' FILE_TYPE,
+        '' ATTA_TYPE,
+        AT.CREATE_BY,
+        U.NAME CREATE_NAME,
+        AT.CREATE_DT,
+        '1' IS_FILE,
+        '' ATTA_FILE_URL,
+        AT.STATUS,
+        AT.PARENT_ID NODE_ID,
+        '1' EDITABLE,
+        '' FILE_ID,
+        '' FILE_SOURCE
+        from BD_T_ATTA_ITEM AT
+        LEFT JOIN BASE.APP_USER U
+        ON AT.CREATE_BY = U.ID)
+        <where>
+            <include refid="searchCondition.searchClause"/>
+        </where>
+        <if test="paramMap.KEYWORD != null">
+            AND (CREATE_NAME LIKE ${paramMap.KEYWORD} OR ATTA_FILE_NAME LIKE ${paramMap.KEYWORD})
+        </if>
+        AND ATTA_ID IS NOT NULL
+        AND STATUS !='9'
+        ORDER BY IS_FILE, CREATE_DT DESC
+
+    </sql>
+
+    <sql id="searchSql_platForm">
+        SELECT *
+        FROM (
+        SELECT P.PK_ID FUND_ID,to_char(A.FILE_ID) ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '经营计划' ATTA_TYPE,
+        P.CREATE_BY,
+        U.NAME CREATE_NAME,
+        T.CREATE_DT,
+        '0' IS_FILE,
+        '/biapp/uploadServlet?method=getExistFile'||chr(38)||'sessionKey='||A.File_Id||
+        chr(38)||'fileName='||A.FILE_NAME||chr(38)||'fieldToken='||A.FIELD_TOKEN||chr(38)||'fileOldName='||A.FILE_OLD_NAME||chr(38)||'isNew=Y'
+        ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        TO_CHAR(A.FILE_ID) FILE_ID,
+        'OA' FILE_SOURCE
+        FROM BI.JYJH_QUOTA_CONF_INFO T
+        LEFT JOIN BASE.COMM_T_CODE C ON C.PARENT_ID='266' and T.belong_id=C.code_value
+        LEFT JOIN PT_T_PLATFORM_INFO P ON C.CODE_NAME=P.PLAT_CODE
+        LEFT JOIN BD_T_ATTA_ITEM AI ON P.PK_ID=AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='经营计划'
+        LEFT JOIN BASE.APP_USER U
+        ON T.CREATE_BY = U.ID
+        LEFT JOIN OA.FOUNDER_FILE_INFO A ON T.ATT1=A.FIELD_TOKEN
+
+        UNION ALL
+
+        SELECT P.PK_ID FUND_ID,to_char(A.FILE_ID) ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '经营计划' ATTA_TYPE,
+        P.CREATE_BY,
+        U.NAME CREATE_NAME,
+        T.CREATE_DT,
+        '0' IS_FILE,
+        '/biapp/uploadServlet?method=getExistFile'||chr(38)||'sessionKey='||A.File_Id||
+        chr(38)||'fileName='||A.FILE_NAME||chr(38)||'fieldToken='||A.FIELD_TOKEN||chr(38)||'fileOldName='||A.FILE_OLD_NAME||chr(38)||'isNew=Y'
+        ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        TO_CHAR(A.FILE_ID) FILE_ID,
+        'OA' FILE_SOURCE
+        FROM BI.JYJH_QUOTA_CONF_INFO T
+        LEFT JOIN BASE.COMM_T_CODE C ON C.PARENT_ID='266' and T.belong_id=C.code_value
+        LEFT JOIN PT_T_PLATFORM_INFO P ON C.CODE_NAME=P.PLAT_CODE
+        LEFT JOIN BD_T_ATTA_ITEM AI ON P.PK_ID=AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='经营计划'
+        LEFT JOIN BASE.APP_USER U
+        ON T.CREATE_BY = U.ID
+        LEFT JOIN OA.FOUNDER_FILE_INFO A ON T.ATT2=A.FIELD_TOKEN
+
+        UNION ALL
+
+        SELECT P.PK_ID FUND_ID,to_char(A.FILE_ID) ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '经营计划' ATTA_TYPE,
+        P.CREATE_BY,
+        U.NAME CREATE_NAME,
+        T.CREATE_DT,
+        '0' IS_FILE,
+        '/biapp/uploadServlet?method=getExistFile'||chr(38)||'sessionKey='||A.File_Id||
+        chr(38)||'fileName='||A.FILE_NAME||chr(38)||'fieldToken='||A.FIELD_TOKEN||chr(38)||'fileOldName='||A.FILE_OLD_NAME||chr(38)||'isNew=Y'
+        ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        TO_CHAR(A.FILE_ID) FILE_ID,
+        'OA' FILE_SOURCE
+        FROM BI.JYJH_QUOTA_CONF_INFO T
+        LEFT JOIN BASE.COMM_T_CODE C ON C.PARENT_ID='266' and T.belong_id=C.code_value
+        LEFT JOIN PT_T_PLATFORM_INFO P ON C.CODE_NAME=P.PLAT_CODE
+        LEFT JOIN BD_T_ATTA_ITEM AI ON P.PK_ID=AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='经营计划'
+        LEFT JOIN BASE.APP_USER U
+        ON T.CREATE_BY = U.ID
+        LEFT JOIN OA.FOUNDER_FILE_INFO A ON T.ATT3=A.FIELD_TOKEN
+
+        UNION ALL
+
+        SELECT P.PK_ID FUND_ID,to_char(A.FILE_ID) ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '经营计划' ATTA_TYPE,
+        P.CREATE_BY,
+        U.NAME CREATE_NAME,
+        T.CREATE_DT,
+        '0' IS_FILE,
+        '/biapp/uploadServlet?method=getExistFile'||chr(38)||'sessionKey='||A.File_Id||
+        chr(38)||'fileName='||A.FILE_NAME||chr(38)||'fieldToken='||A.FIELD_TOKEN||chr(38)||'fileOldName='||A.FILE_OLD_NAME||chr(38)||'isNew=Y'
+        ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        TO_CHAR(A.FILE_ID) FILE_ID,
+        'OA' FILE_SOURCE
+        FROM BI.JYJH_QUOTA_CONF_INFO T
+        LEFT JOIN BASE.COMM_T_CODE C ON C.PARENT_ID='266' and T.belong_id=C.code_value
+        LEFT JOIN PT_T_PLATFORM_INFO P ON C.CODE_NAME=P.PLAT_CODE
+        LEFT JOIN BD_T_ATTA_ITEM AI ON P.PK_ID=AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='经营计划'
+        LEFT JOIN BASE.APP_USER U
+        ON T.CREATE_BY = U.ID
+        LEFT JOIN OA.FOUNDER_FILE_INFO A ON T.ATT4=A.FIELD_TOKEN
+
+        UNION ALL
+
+        SELECT PL.PK_ID FUND_ID,A.FILE_ID ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '三会事项' ATTA_TYPE,
+        P.CREATE_BY,
+        U.NAME CREATE_NAME,
+        A.CREATE_DT,
+        '0' IS_FILE,
+        '/eiweb/uploadServlet?method=getExistFile'||chr(38)||'sessionKey='||A.File_Id||
+        chr(38)||'fileName='||A.FILE_NAME||chr(38)||'fieldToken='||A.FIELD_TOKEN||chr(38)||'fileOldName='||A.FILE_OLD_NAME||chr(38)||'isNew=Y'
+        ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM OTHER_THREE_MEETING P
+        LEFT JOIN BASE.COMM_T_CODE C ON C.PARENT_ID='266' and P.GROUP_ID=C.code_value
+        LEFT JOIN BD_T_ATTA_ITEM AI ON C.CODE_NAME=AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='三会事项'
+        LEFT JOIN PT_T_PLATFORM_INFO PL ON C.CODE_NAME=PL.PLAT_CODE
+        LEFT JOIN BASE.APP_USER U
+        ON P.CREATE_BY = U.ID
+        LEFT JOIN EI_T_ATTACHMENT A
+        ON P.ATTA_FILE = A.FIELD_TOKEN
+
+        UNION ALL
+
+        SELECT I.PROJECT_OR_FUND_ID FUND_ID,TO_CHAR(A.FILE_ID) ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '合同签署' ATTA_TYPE,
+        TO_CHAR(AI.APPLICANT_ID) CREATE_BY,
+        TO_CHAR(AI.APPLICANT_NAME) CREATE_NAME,
+        A.CREATE_DT,
+        '0' IS_FILE,
+        '/oaweb/uploadServlet?method=getExistFile'||chr(38)||'sessionKey='||A.File_Id||
+        chr(38)||'fileName='||A.FILE_NAME||chr(38)||'fieldToken='||A.FIELD_TOKEN||chr(38)||'fileOldName='||A.FILE_OLD_NAME||chr(38)||'isNew=Y'
+        ATTA_FILE_URL,
+        '0' STATUS,
+        I.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        TO_CHAR(A.FILE_ID) FILE_ID,
+        'OA' FILE_SOURCE
+        FROM OA.FOUNDER_OA_APPLY_CONTRACT P
+        LEFT JOIN OA.FOUNDER_OA_APPLY_INFO AI ON P.APPLY_NO=AI.APPLY_NO
+        LEFT JOIN BD_T_ATTA_ITEM I ON I.ITEM_NAME='合同签署'
+        LEFT JOIN OA.FOUNDER_FILE_INFO A
+        ON P.ATTACHMENT = A.FIELD_TOKEN
+        where (ORG_CONTRACT_FLAG = 0 or ORG_CONTRACT_FLAG is null)
+        and AI.APPLICANT_ID='1057'
+
+        UNION ALL
+
+        SELECT PL.PK_ID FUND_ID,A.FILE_ID ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '投资决策' ATTA_TYPE,
+        P.CREATE_BY,
+        U.NAME CREATE_NAME,
+        AI.CREATE_DT,
+        '0' IS_FILE,
+        '/eiweb/uploadServlet?method=getExistFile'||chr(38)||'sessionKey='||A.File_Id||
+        chr(38)||'fileName='||A.FILE_NAME||chr(38)||'fieldToken='||A.FIELD_TOKEN||chr(38)||'fileOldName='||A.FILE_OLD_NAME||chr(38)||'isNew=Y'
+        ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM TZ_T_PROJ_APP_INFO_OTH P
+        LEFT JOIN BASE.COMM_T_CODE C ON C.PARENT_ID='266' and P.GROUP_ID=C.code_value
+        LEFT JOIN PT_T_PLATFORM_INFO PL ON C.CODE_NAME=PL.PLAT_CODE
+        LEFT JOIN BD_T_ATTA_ITEM AI ON PL.PK_ID=AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='投资决策'
+        LEFT JOIN BASE.APP_USER U
+        ON P.CREATE_BY = U.ID
+        LEFT JOIN EI_T_ATTACHMENT A
+        ON P.ATTA_FILE = A.FIELD_TOKEN
+
+        UNION ALL
+
+
+        SELECT T.FUND_ID,T.ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        T.ATTA_TYPE,
+        T.CREATE_BY,
+        U.NAME CREATE_NAME,
+        T.CREATE_DT,
+        '0' IS_FILE,
+        '/eiweb/uploadServlet?method=getExistFile'||chr(38)||'sessionKey='||A.File_Id||
+        chr(38)||'fileName='||A.FILE_NAME||chr(38)||'fieldToken='||A.FIELD_TOKEN||chr(38)||'fileOldName='||A.FILE_OLD_NAME||chr(38)||'isNew=Y'
+        ATTA_FILE_URL,
+        T.STATUS,
+        T.ITEM_ID NODE_ID,
+        '0' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM BD_T_FUND_ATTA T
+        LEFT JOIN BASE.APP_USER U
+        ON T.CREATE_BY = U.ID
+        LEFT JOIN EI_T_ATTACHMENT A
+        ON T.ATTA_FILE = A.FIELD_TOKEN
+
+        UNION ALL
+
+        select AT.PROJECT_OR_FUND_ID FUND_ID,
+        AT.ITEM_ID ATTA_ID,
+        AT.ITEM_NAME ATTA_FILE_NAME,
+        'dic' FILE_TYPE,
+        '' ATTA_TYPE,
+        AT.CREATE_BY,
+        U.NAME CREATE_NAME,
+        AT.CREATE_DT,
+        '1' IS_FILE,
+        '' ATTA_FILE_URL,
+        AT.STATUS,
+        AT.PARENT_ID NODE_ID,
+        '1' EDITABLE,
+        '' FILE_ID,
+        '' FILE_SOURCE
+        from BD_T_ATTA_ITEM AT
+        LEFT JOIN BASE.APP_USER U
+        ON AT.CREATE_BY = U.ID)
+        <where>
+            <include refid="searchCondition.searchClause"/>
+        </where>
+        <if test="paramMap.KEYWORD != null">
+            AND (CREATE_NAME LIKE ${paramMap.KEYWORD} OR ATTA_FILE_NAME LIKE ${paramMap.KEYWORD})
+        </if>
+        AND ATTA_ID IS NOT NULL
+        AND STATUS !='9'
+        ORDER BY IS_FILE, CREATE_DT DESC
+
+    </sql>
+
+    <select id="selectListPage" resultMap="BdTFundAttaResult2"
+            parameterType="com.founder.ssm.core.common.SearchCondition">
+        <if test="paramMap.itemType == 1">
+            <include refid="searchSql"/>
+        </if>
+        <if test="paramMap.itemType == 2">
+            <include refid="searchSql"/>
+        </if>
+        <if test="paramMap.itemType == 3">
+            <include refid="searchSql_subFund"/>
+        </if>
+        <if test="paramMap.itemType == 4">
+            <include refid="searchSql_platForm"/>
+        </if>
+    </select>
+
+    <select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+        SELECT COUNT(*) FROM (
+        <if test="paramMap.itemType == 1">
+            <include refid="searchSql"/>
+        </if>
+        <if test="paramMap.itemType == 2">
+            <include refid="searchSql"/>
+        </if>
+        <if test="paramMap.itemType == 3">
+            <include refid="searchSql_subFund"/>
+        </if>
+        <if test="paramMap.itemType == 4">
+            <include refid="searchSql_platForm"/>
+        </if>
+        ) t
+    </select>
+
+    <select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.BdTFundAttaModel">
+        SELECT COUNT(*) FROM BD_T_FUND_ATTA
+        <where>
+            <if test="attaId != null and attaId != ''">
+                ATTA_ID = #{attaId,jdbcType=VARCHAR}
+            </if>
+            <if test="fundId != null and fundId != ''">
+                AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+            </if>
+            <if test="attaType != null and attaType != ''">
+                AND ATTA_TYPE = #{attaType,jdbcType=VARCHAR}
+            </if>
+            <if test="attaFile != null and attaFile != ''">
+                AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+            </if>
+            <if test="createBy != null and createBy != ''">
+                AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+            </if>
+            <if test="createDt != null">
+                AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updateDt != null">
+                AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null and status != ''">
+                AND STATUS = #{status,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectList" parameterType="com.ppmg.ei.model.BdTFundAttaModel" resultMap="BdTFundAttaResult">
+        SELECT * FROM BD_T_FUND_ATTA
+        <where>
+            <if test="attaId != null and attaId != ''">
+                ATTA_ID = #{attaId,jdbcType=VARCHAR}
+            </if>
+            <if test="fundId != null and fundId != ''">
+                AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+            </if>
+            <if test="attaType != null and attaType != ''">
+                AND ATTA_TYPE = #{attaType,jdbcType=VARCHAR}
+            </if>
+            <if test="attaFile != null and attaFile != ''">
+                AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+            </if>
+            <if test="createBy != null and createBy != ''">
+                AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+            </if>
+            <if test="createDt != null">
+                AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updateDt != null">
+                AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null and status != ''">
+                AND STATUS = #{status,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectSql2Obj" parameterType="java.lang.String" resultMap="BdTFundAttaResult">
+		${value}
+	</select>
+    <select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+    <update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+    <select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+    <!-- end autocreate -->
+
+    <!--=======================20200403================新增=文件库查询==================20200403===============-->
+    <!--基金：母基金管理-->
+    <sql id="searchSql_All_Mother">
+        SELECT * FROM (
+        SELECT
+        C.FUND_NAME AS KEYS,
+        C.FUND_ID,
+        A.FILE_ID ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '基本信息' ATTA_TYPE,
+        U.ID CREATE_BY,
+        A.CREATE_BY CREATE_NAME,
+        A.CREATE_DT,
+        '0' IS_FILE,
+        '/ei-web/attachController/download?fileId='||A.File_Id ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM BD_T_FUND_INFO C
+        LEFT JOIN BD_T_ATTA_ITEM AI ON C.FUND_ID = AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='基本信息'
+        LEFT JOIN BASE.FP_ATTACHMENT A
+        ON c.DESC_FILE = A.FIELD_TOKEN            <!--基金基本信息附件-->
+        LEFT JOIN BASE.APP_USER U
+        ON C.FUND_ID = U.ID
+
+        UNION ALL
+
+        SELECT
+        C.FUND_DESC AS KEYS,
+        C.fund_id,
+        A.FILE_ID ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '历史沿革及增值服务' ATTA_TYPE,
+        U.ID CREATE_BY,
+        A.CREATE_BY CREATE_NAME,
+        A.CREATE_DT,
+        '0' IS_FILE,
+        '/ei-web/attachController/download?fileId='||A.File_Id ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM BD_T_FUND_DESC_INFO C
+        LEFT JOIN BD_T_ATTA_ITEM AI ON C.fund_ID = AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='历史沿革及增值服务'
+        LEFT JOIN BASE.FP_ATTACHMENT A
+        ON c.FUND_DESC_FILE = A.FIELD_TOKEN            <!--历史沿革，基金介绍附件-->
+        OR c.VA_SERVICE_FILE = A.FIELD_TOKEN           <!--增值服务，增值服务附件-->
+        LEFT JOIN BASE.APP_USER U
+        ON C.FUND_ID = U.ID
+
+        UNION ALL
+
+        SELECT
+        C.RPT_TITLE AS KEYS,
+        C.FUND_ID,
+        A.FILE_ID ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '定期报告' ATTA_TYPE,
+        U.ID CREATE_BY,
+        A.CREATE_BY CREATE_NAME,
+        A.CREATE_DT,
+        '0' IS_FILE,
+        '/ei-web/attachController/download?fileId='||A.File_Id ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM (select * from BD_T_FUND_ANALYSIS_REPORT K where K.status ! = '1') C
+        LEFT JOIN BD_T_ATTA_ITEM AI ON C.FUND_ID = AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='定期报告'
+        LEFT JOIN BASE.FP_ATTACHMENT A
+        ON c.RPT_FILE = A.FIELD_TOKEN            <!--报告附件文件-->
+        LEFT JOIN BASE.APP_USER U
+        ON C.FUND_ID = U.ID
+
+        UNION ALL
+
+        select KEYS,FUND_ID,ATTA_ID,ATTA_FILE_NAME,FILE_TYPE,ATTA_TYPE,CREATE_BY,CREATE_NAME,CREATE_DT,
+        IS_FILE,ATTA_FILE_URL,STATUS,NODE_ID,EDITABLE,FILE_ID,FILE_SOURCE
+        from (
+        select * from(select a.*,row_number() over(partition by a.FILE_ID order by a.FILE_ID) su from (
+        SELECT
+        C.ATTA_ID AS KEYS,
+        C.FUND_ID,
+        C.ATTA_FILE ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        C.ATTA_TYPE,
+        U.ID CREATE_BY,
+        A.CREATE_BY CREATE_NAME,
+        A.CREATE_DT,
+        '0' IS_FILE,
+        '/ei-web/attachController/download?fileId='||A.File_Id ATTA_FILE_URL,
+        '0' STATUS,
+        C.ITEM_ID NODE_ID,
+        '0' EDITABLE,                              <!--0：可删除-->
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM BD_T_FUND_ATTA C
+        LEFT JOIN BASE.FP_ATTACHMENT A
+        ON c.ATTA_FILE = A.FIELD_TOKEN            <!--新增的附件-->
+        LEFT JOIN BASE.APP_USER U
+        ON A.CREATE_BY = U.Name
+        ) a
+        )where su=1
+        )
+        )
+        <where>
+            <include refid="searchCondition.searchClause"/>
+        </where>
+        <if test="paramMap.KEYWORD != null">
+            AND (CREATE_NAME LIKE ${paramMap.KEYWORD} OR ATTA_FILE_NAME LIKE ${paramMap.KEYWORD})
+        </if>
+        AND ATTA_ID IS NOT NULL
+        ORDER BY IS_FILE, CREATE_DT DESC
+    </sql>
+
+    <!--基金：代管基金管理-->
+    <sql id="searchSql_All_Escrow">
+        SELECT * FROM (
+        SELECT
+        C.FUND_NAME AS KEYS,
+        C.FUND_ID,
+        A.FILE_ID ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '基本信息' ATTA_TYPE,
+        U.ID CREATE_BY,
+        A.CREATE_BY CREATE_NAME,
+        A.CREATE_DT,
+        '0' IS_FILE,
+        '/ei-web/attachController/download?fileId='||A.File_Id ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM BD_T_FUND_INFO C
+        LEFT JOIN BD_T_ATTA_ITEM AI ON C.FUND_ID = AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='基本信息'
+        LEFT JOIN BASE.FP_ATTACHMENT A
+        ON c.DESC_FILE = A.FIELD_TOKEN            <!--基金基本信息附件-->
+        LEFT JOIN BASE.APP_USER U               <!--没有用-->
+        ON C.FUND_ID = U.ID
+
+        UNION ALL
+
+        SELECT
+        C.FUND_DESC AS KEYS,
+        C.fund_id,
+        A.FILE_ID ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '历史沿革及增值服务' ATTA_TYPE,
+        U.ID CREATE_BY,
+        A.CREATE_BY CREATE_NAME,
+        A.CREATE_DT,
+        '0' IS_FILE,
+        '/ei-web/attachController/download?fileId='||A.File_Id ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM BD_T_FUND_DESC_INFO C
+        LEFT JOIN BD_T_ATTA_ITEM AI ON C.fund_ID = AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='历史沿革及增值服务'
+        LEFT JOIN BASE.FP_ATTACHMENT A
+        ON c.FUND_DESC_FILE = A.FIELD_TOKEN            <!--历史沿革，基金介绍附件-->
+        OR c.VA_SERVICE_FILE = A.FIELD_TOKEN           <!--增值服务，增值服务附件-->
+        LEFT JOIN BASE.APP_USER U
+        ON C.FUND_ID = U.ID
+
+        UNION ALL
+
+        SELECT
+        C.RPT_TITLE AS KEYS,
+        C.FUND_ID,
+        A.FILE_ID ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '定期报告' ATTA_TYPE,
+        U.ID CREATE_BY,
+        A.CREATE_BY CREATE_NAME,
+        A.CREATE_DT,
+        '0' IS_FILE,
+        '/ei-web/attachController/download?fileId='||A.File_Id ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM (select * from BD_T_FUND_ANALYSIS_REPORT K where K.status ! = '1') C
+        LEFT JOIN BD_T_ATTA_ITEM AI ON C.FUND_ID = AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='定期报告'
+        LEFT JOIN BASE.FP_ATTACHMENT A
+        ON c.RPT_FILE = A.FIELD_TOKEN            <!--报告附件文件-->
+        LEFT JOIN BASE.APP_USER U
+        ON C.FUND_ID = U.ID
+
+        UNION ALL
+
+        select KEYS,FUND_ID,ATTA_ID,ATTA_FILE_NAME,FILE_TYPE,ATTA_TYPE,CREATE_BY,CREATE_NAME,CREATE_DT,
+        IS_FILE,ATTA_FILE_URL,STATUS,NODE_ID,EDITABLE,FILE_ID,FILE_SOURCE
+        from (
+        select * from(select a.*,row_number() over(partition by a.FILE_ID order by a.FILE_ID) su from (
+        SELECT
+        C.ATTA_ID AS KEYS,
+        C.FUND_ID,
+        C.ATTA_FILE ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        C.ATTA_TYPE,
+        U.ID CREATE_BY,
+        A.CREATE_BY CREATE_NAME,
+        A.CREATE_DT,
+        '0' IS_FILE,
+        '/ei-web/attachController/download?fileId='||A.File_Id ATTA_FILE_URL,
+        '0' STATUS,
+        C.ITEM_ID NODE_ID,
+        '0' EDITABLE,                              <!--0：可删除-->
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM BD_T_FUND_ATTA C
+        LEFT JOIN BASE.FP_ATTACHMENT A
+        ON c.ATTA_FILE = A.FIELD_TOKEN            <!--新增的附件-->
+        LEFT JOIN BASE.APP_USER U
+        ON A.CREATE_BY = U.Name
+        ) a
+        )where su=1
+        )
+        )
+        <where>
+            <include refid="searchCondition.searchClause"/>
+        </where>
+        <if test="paramMap.KEYWORD != null">
+            AND (CREATE_NAME LIKE ${paramMap.KEYWORD} OR ATTA_FILE_NAME LIKE ${paramMap.KEYWORD})
+        </if>
+        AND ATTA_ID IS NOT NULL
+        ORDER BY IS_FILE, CREATE_DT DESC
+    </sql>
+
+    <!--省政府基金：母基金管理-->
+    <sql id="searchSql_All_Sheng_Mother">
+        SELECT * FROM (
+        SELECT
+        C.RPT_TITLE AS KEYS,
+        C.FUND_ID,
+        A.FILE_ID ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '管理报告' ATTA_TYPE,
+        U.ID CREATE_BY,
+        A.CREATE_BY CREATE_NAME,
+        A.CREATE_DT,
+        '0' IS_FILE,
+        '/ei-web/attachController/download?fileId='||A.File_Id ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM (select * from BD_T_FUND_ANALYSIS_REPORT K where K.status ! = '1') C
+        LEFT JOIN BD_T_ATTA_ITEM AI ON C.FUND_ID = AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='管理报告'
+        LEFT JOIN BASE.FP_ATTACHMENT A
+        ON c.RPT_FILE = A.FIELD_TOKEN            <!--报告附件文件-->
+        LEFT JOIN BASE.APP_USER U
+        ON C.FUND_ID = U.ID
+
+        UNION ALL
+
+        select KEYS,FUND_ID,ATTA_ID,ATTA_FILE_NAME,FILE_TYPE,ATTA_TYPE,CREATE_BY,CREATE_NAME,CREATE_DT,
+        IS_FILE,ATTA_FILE_URL,STATUS,NODE_ID,EDITABLE,FILE_ID,FILE_SOURCE
+        from (
+        select * from(select a.*,row_number() over(partition by a.FILE_ID order by a.FILE_ID) su from (
+        SELECT
+        C.ATTA_ID AS KEYS,
+        C.FUND_ID,
+        C.ATTA_FILE ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        C.ATTA_TYPE,
+        U.ID CREATE_BY,
+        A.CREATE_BY CREATE_NAME,
+        A.CREATE_DT,
+        '0' IS_FILE,
+        '/ei-web/attachController/download?fileId='||A.File_Id ATTA_FILE_URL,
+        '0' STATUS,
+        C.ITEM_ID NODE_ID,
+        '0' EDITABLE,                              <!--0：可删除-->
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM BD_T_FUND_ATTA C
+        LEFT JOIN BASE.FP_ATTACHMENT A
+        ON c.ATTA_FILE = A.FIELD_TOKEN            <!--新增的附件-->
+        LEFT JOIN BASE.APP_USER U
+        ON A.CREATE_BY = U.Name
+        ) a
+        )where su=1
+        )
+        )
+        <where>
+            <include refid="searchCondition.searchClause"/>
+        </where>
+        <if test="paramMap.KEYWORD != null">
+            AND (CREATE_NAME LIKE ${paramMap.KEYWORD} OR ATTA_FILE_NAME LIKE ${paramMap.KEYWORD})
+        </if>
+        AND ATTA_ID IS NOT NULL
+        ORDER BY IS_FILE, CREATE_DT DESC
+    </sql>
+
+    <!--基金-->
+    <sql id="searchSql_All_Fund">
+        SELECT * FROM (
+        SELECT
+        C.PROJ_NAME AS KEYS,
+        C.PROJ_ID FUND_ID,
+        A.FILE_ID ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '基金立项' ATTA_TYPE,
+        U.ID CREATE_BY,
+        A.CREATE_BY CREATE_NAME,
+        A.CREATE_DT,
+        '0' IS_FILE,
+        '/ei-web/attachController/download?fileId='||A.File_Id ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM TZ_T_PROJ_INFO C
+        LEFT JOIN bd_t_fund_info BFI
+        ON c.proj_object = BFI.FUND_ID
+        LEFT JOIN TZ_T_PROJ_APP_INFO_SNAPSHOT APP
+        on c.proj_id = APP.proj_id
+        LEFT JOIN BD_T_ATTA_ITEM AI ON C.PROJ_ID = AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='基金立项'
+        LEFT JOIN BASE.FP_ATTACHMENT A
+        ON C.inve_file = A.FIELD_TOKEN 			<!--基金立项附件-->
+        OR BFI.desc_file = A.FIELD_TOKEN		<!--基金立项基本信息附件-->
+        LEFT JOIN BASE.APP_USER U
+        ON C.PROJ_ID = U.ID
+
+        UNION ALL
+
+        SELECT
+        C.INVE_ROLE AS KEYS,
+        C.PROJ_ID FUND_ID,
+        A.FILE_ID ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '投资决策' ATTA_TYPE,
+        U.ID CREATE_BY,
+        A.CREATE_BY CREATE_NAME,
+        A.CREATE_DT,
+        '0' IS_FILE,
+        '/ei-web/attachController/download?fileId='||A.File_Id ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM TZ_T_PROJ_APP_INFO_SNAPSHOT_D C
+        LEFT JOIN BD_T_ATTA_ITEM AI ON C.PROJ_ID=AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='投资决策'
+        LEFT JOIN BASE.FP_ATTACHMENT A
+        ON C.INVE_REASON_ATT = A.FIELD_TOKEN 	<!--投基金=退出决策附件-->
+        LEFT JOIN BASE.APP_USER U
+        ON C.PROJ_ID = U.ID
+
+        UNION ALL
+
+        SELECT
+        C.FILE_TITLE AS KEYS,
+        C.PROJ_ID FUND_ID,
+        A.FILE_ID ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '合同签署' ATTA_TYPE,
+        U.ID CREATE_BY,
+        A.CREATE_BY CREATE_NAME,
+        A.CREATE_DT,
+        '0' IS_FILE,
+        '/ei-web/attachController/download?fileId='||A.File_Id ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM (select * from TZ_T_PROJ_CONTRACT_FILE where nvl(SIGN_QUIT,1) != 0 and status != '9' ) C
+        LEFT JOIN BD_T_ATTA_ITEM AI ON C.PROJ_ID=AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='合同签署'
+        LEFT JOIN BASE.FP_ATTACHMENT A
+        ON C.CONTRACT_FILE = A.FIELD_TOKEN 		<!--合同附件-->
+        OR C.final_file = A.FIELD_TOKEN         <!--最终合同附件-->
+        LEFT JOIN BASE.APP_USER U
+        ON C.PROJ_ID = U.ID
+
+        UNION ALL
+
+        SELECT
+        C.PQ_ID AS KEYS,
+        C.PROJECT_OR_FUND_ID FUND_ID,
+        A.FILE_ID ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '基金出资' ATTA_TYPE,
+        U.ID CREATE_BY,
+        A.CREATE_BY CREATE_NAME,
+        A.CREATE_DT,
+        '0' IS_FILE,
+        '/ei-web/attachController/download?fileId='||A.File_Id ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM XJL_T_PAYMENT_REQUEST C
+        LEFT JOIN BD_T_ATTA_ITEM AI ON C.PROJECT_OR_FUND_ID=AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='基金出资'
+        LEFT JOIN BASE.FP_ATTACHMENT A
+        ON C.DESC_FILE = A.FIELD_TOKEN 		    <!--出资附件-->
+        LEFT JOIN BASE.APP_USER U
+        ON C.PROJECT_OR_FUND_ID = U.ID
+
+        UNION ALL
+
+        <!--退出决策-->
+        SELECT
+        C.APP_ID AS KEYS,
+        C.PROJ_ID FUND_ID,
+        A.FILE_ID ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '基金退出' ATTA_TYPE,
+        U.ID CREATE_BY,
+        A.CREATE_BY CREATE_NAME,
+        A.CREATE_DT,
+        '0' IS_FILE,
+        '/ei-web/attachController/download?fileId='||A.File_Id ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM TZ_T_FUND_QUIT_APPL C
+        LEFT JOIN BD_T_ATTA_ITEM AI ON C.PROJ_ID=AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='基金退出'
+        LEFT JOIN BASE.FP_ATTACHMENT A
+        ON C.ATTA_FILE = A.FIELD_TOKEN 		    <!--附件-->
+        LEFT JOIN BASE.APP_USER U
+        ON C.PROJ_ID = U.ID
+
+        UNION ALL
+
+        <!--退出合同-->
+        SELECT
+        C.FILE_TITLE AS KEYS,
+        C.PROJ_ID FUND_ID,
+        A.FILE_ID ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '基金退出' ATTA_TYPE,
+        U.ID CREATE_BY,
+        A.CREATE_BY CREATE_NAME,
+        A.CREATE_DT,
+        '0' IS_FILE,
+        '/ei-web/attachController/download?fileId='||A.File_Id ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM (select * from TZ_T_PROJ_CONTRACT_FILE where SIGN_QUIT = '0') C
+        LEFT JOIN BD_T_ATTA_ITEM AI ON C.PROJ_ID=AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='基金退出'
+        LEFT JOIN BASE.FP_ATTACHMENT A
+        ON C.CONTRACT_FILE = A.FIELD_TOKEN 		    <!--附件-->
+        OR C.FINAL_FILE = A.FIELD_TOKEN         <!--最终合同附件-->
+        LEFT JOIN BASE.APP_USER U
+        ON C.PROJ_ID = U.ID
+
+        UNION ALL
+
+        <!--回收资金结算-->
+        SELECT
+        C.SETTLE_ID AS KEYS,
+        C.PROJ_ID FUND_ID,
+        A.FILE_ID ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '基金退出' ATTA_TYPE,
+        U.ID CREATE_BY,
+        A.CREATE_BY CREATE_NAME,
+        A.CREATE_DT,
+        '0' IS_FILE,
+        '/ei-web/attachController/download?fileId='||A.File_Id ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM TZ_T_PROJ_BACK_MONEY_SETTLE C
+        LEFT JOIN BD_T_ATTA_ITEM AI ON C.PROJ_ID = AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='基金退出'
+        LEFT JOIN BASE.FP_ATTACHMENT A
+        ON C.ATTA_FILE = A.FIELD_TOKEN 		    <!--附件-->
+        LEFT JOIN BASE.APP_USER U
+        ON C.PROJ_ID = U.ID
+
+        UNION ALL
+
+        select KEYS,FUND_ID,ATTA_ID,ATTA_FILE_NAME,FILE_TYPE,ATTA_TYPE,CREATE_BY,CREATE_NAME,CREATE_DT,
+        IS_FILE,ATTA_FILE_URL,STATUS,NODE_ID,EDITABLE,FILE_ID,FILE_SOURCE from (
+        select * from(select a.*,row_number() over(partition by a.FILE_ID order by a.FILE_ID) su from (
+        SELECT
+        C.ATTA_ID AS KEYS,
+        C.FUND_ID,
+        C.ATTA_FILE ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        C.ATTA_TYPE,
+        U.ID CREATE_BY,
+        A.CREATE_BY CREATE_NAME,
+        A.CREATE_DT,
+        '0' IS_FILE,
+        '/ei-web/attachController/download?fileId='||A.File_Id ATTA_FILE_URL,
+        '0' STATUS,
+        C.ITEM_ID NODE_ID,
+        '0' EDITABLE,                              <!--0：可删除-->
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM BD_T_FUND_ATTA C
+        LEFT JOIN BASE.FP_ATTACHMENT A
+        ON c.ATTA_FILE = A.FIELD_TOKEN            <!--新增的附件-->
+        LEFT JOIN BASE.APP_USER U
+        ON A.CREATE_BY = U.Name
+        ) a
+        )where su=1
+        )
+        )
+        <where>
+            <include refid="searchCondition.searchClause" />
+        </where>
+        <if test="paramMap.KEYWORD != null" >
+            AND (CREATE_NAME LIKE ${paramMap.KEYWORD} OR ATTA_FILE_NAME LIKE ${paramMap.KEYWORD})
+        </if>
+        AND ATTA_ID IS NOT NULL
+        AND STATUS !='9'
+        ORDER BY IS_FILE, CREATE_DT DESC
+    </sql>
+
+    <!--项目-->
+    <sql id="searchSql_All_projList">
+        SELECT * FROM (
+        SELECT
+        C.PROJ_NAME AS KEYS,
+        C.PROJ_ID FUND_ID,
+        A.FILE_ID ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '项目立项' ATTA_TYPE,
+        U.ID CREATE_BY,
+        A.CREATE_BY CREATE_NAME,
+        A.CREATE_DT,
+        '0' IS_FILE,
+        '/ei-web/attachController/download?fileId='||A.File_Id ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM TZ_T_PROJ_INFO C
+        LEFT JOIN TZ_T_PROJ_APP_INFO_SNAPSHOT APP
+        on c.proj_id = APP.proj_id
+        LEFT JOIN BD_T_ATTA_ITEM AI ON C.PROJ_ID = AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='项目立项'
+        LEFT JOIN BASE.FP_ATTACHMENT A
+        ON to_char(substr(c.file_desc,1,1000)) = A.FIELD_TOKEN 			<!--项目立项基本信息附件 clob 转 String-->
+        OR APP.MEETINGRECORD_ATTA = A.FIELD_TOKEN	<!--项目立项会议内容流程中上传-->
+        OR APP.FOCUS_INFO_ATT = A.FIELD_TOKEN	<!--项目立项=重点关注文件附件-->
+        OR APP.ANOTHER_FILE = A.FIELD_TOKEN		<!--项目立项=其它材料附件-->
+        LEFT JOIN BASE.APP_USER U
+        ON C.PROJ_ID = U.ID
+
+        UNION ALL
+
+        SELECT
+        C.INVE_ROLE AS KEYS,
+        C.PROJ_ID FUND_ID,
+        A.FILE_ID ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '项目决策' ATTA_TYPE,
+        U.ID CREATE_BY,
+        A.CREATE_BY CREATE_NAME,
+        A.CREATE_DT,
+        '0' IS_FILE,
+        '/ei-web/attachController/download?fileId='||A.File_Id ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM TZ_T_PROJ_APP_INFO_SNAPSHOT_D C
+        LEFT JOIN BD_T_ATTA_ITEM AI ON C.PROJ_ID=AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='项目决策'
+        LEFT JOIN BASE.FP_ATTACHMENT A
+        ON C.FOCUS_INFO_ATT = A.FIELD_TOKEN	    <!--项目=决策=重点关注文件附件-->
+        OR C.ANOTHER_FILE = A.FIELD_TOKEN	    <!--项目=决策=其它材料附件-->
+        LEFT JOIN BASE.APP_USER U
+        ON C.PROJ_ID = U.ID
+
+        UNION ALL
+
+        SELECT
+        C.FILE_TITLE AS KEYS,
+        C.PROJ_ID FUND_ID,
+        A.FILE_ID ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '合同签署' ATTA_TYPE,
+        U.ID CREATE_BY,
+        A.CREATE_BY CREATE_NAME,
+        A.CREATE_DT,
+        '0' IS_FILE,
+        '/ei-web/attachController/download?fileId='||A.File_Id ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM (select * from TZ_T_PROJ_CONTRACT_FILE where nvl(SIGN_QUIT,1) != 0 and status != '9' ) C
+        LEFT JOIN BD_T_ATTA_ITEM AI ON C.PROJ_ID=AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='合同签署'
+        LEFT JOIN BASE.FP_ATTACHMENT A
+        ON C.CONTRACT_FILE = A.FIELD_TOKEN 		<!--合同附件-->
+        OR C.final_File = A.FIELD_TOKEN 		    <!--附件,流程中-->
+        LEFT JOIN BASE.APP_USER U
+        ON C.PROJ_ID = U.ID
+
+        UNION ALL
+
+        SELECT
+        C.PQ_ID AS KEYS,
+        C.PROJECT_OR_FUND_ID FUND_ID,
+        A.FILE_ID ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '项目出资' ATTA_TYPE,
+        U.ID CREATE_BY,
+        A.CREATE_BY CREATE_NAME,
+        A.CREATE_DT,
+        '0' IS_FILE,
+        '/ei-web/attachController/download?fileId='||A.File_Id ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM XJL_T_PAYMENT_REQUEST C
+        LEFT JOIN BD_T_ATTA_ITEM AI ON C.PROJECT_OR_FUND_ID=AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='项目出资'
+        LEFT JOIN BASE.FP_ATTACHMENT A
+        ON C.DESC_FILE = A.FIELD_TOKEN 		    <!--出资附件-->
+        LEFT JOIN BASE.APP_USER U
+        ON C.PROJECT_OR_FUND_ID = U.ID
+
+        UNION ALL
+
+        SELECT
+        C.MEETING_TITLE AS KEYS,
+        C.CARRIER FUND_ID,
+        A.FILE_ID ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '投后管理' ATTA_TYPE,
+        U.ID CREATE_BY,
+        A.CREATE_BY CREATE_NAME,
+        A.CREATE_DT,
+        '0' IS_FILE,
+        '/ei-web/attachController/download?fileId='||A.File_Id ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM TZ_T_FP_THREEMEETING_INFO C
+        LEFT JOIN BD_T_ATTA_ITEM AI ON C.CARRIER=AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='投后管理'
+        LEFT JOIN BASE.FP_ATTACHMENT A
+        ON C.ATTA_FILE = A.FIELD_TOKEN 		    <!--附件-->
+        LEFT JOIN BASE.APP_USER U
+        ON C.CARRIER = U.ID
+
+        UNION ALL
+
+        <!--退出立项-->
+        SELECT
+        C.QUIT_NAME AS KEYS,
+        C.PROJ_ID FUND_ID,
+        A.FILE_ID ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '项目退出' ATTA_TYPE,
+        U.ID CREATE_BY,
+        A.CREATE_BY CREATE_NAME,
+        A.CREATE_DT,
+        '0' IS_FILE,
+        '/ei-web/attachController/download?fileId='||A.File_Id ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM TZ_T_PROJ_APP_INFO_QUIT C
+        LEFT JOIN BD_T_ATTA_ITEM AI ON C.PROJ_ID=AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='项目退出'
+        LEFT JOIN BASE.FP_ATTACHMENT A
+        ON C.QUIT_FILE = A.FIELD_TOKEN 		    <!--附件-->
+        LEFT JOIN BASE.APP_USER U
+        ON C.PROJ_ID = U.ID
+
+        UNION ALL
+
+        <!--退出决策-->
+        SELECT
+        C.APP_ID AS KEYS,
+        C.PROJ_ID FUND_ID,
+        A.FILE_ID ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '项目退出' ATTA_TYPE,
+        U.ID CREATE_BY,
+        A.CREATE_BY CREATE_NAME,
+        A.CREATE_DT,
+        '0' IS_FILE,
+        '/ei-web/attachController/download?fileId='||A.File_Id ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM TZ_T_FUND_QUIT_APPL C
+        LEFT JOIN BD_T_ATTA_ITEM AI ON C.PROJ_ID=AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='项目退出'
+        LEFT JOIN BASE.FP_ATTACHMENT A
+        ON C.ATTA_FILE = A.FIELD_TOKEN 		    <!--附件-->
+        OR C.quit_Atta = A.FIELD_TOKEN 		    <!--附件评估结果流程上传-->
+        LEFT JOIN BASE.APP_USER U
+        ON C.PROJ_ID = U.ID
+
+        UNION ALL
+
+        <!--退出合同-->
+        SELECT
+        C.FILE_ID AS KEYS,
+        C.PROJ_ID FUND_ID,
+        A.FILE_ID ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '项目退出' ATTA_TYPE,
+        U.ID CREATE_BY,
+        A.CREATE_BY CREATE_NAME,
+        A.CREATE_DT,
+        '0' IS_FILE,
+        '/ei-web/attachController/download?fileId='||A.File_Id ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM (select * from TZ_T_PROJ_CONTRACT_FILE where SIGN_QUIT = '0') C
+        LEFT JOIN BD_T_ATTA_ITEM AI ON C.PROJ_ID=AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='项目退出'
+        LEFT JOIN BASE.FP_ATTACHMENT A
+        ON C.CONTRACT_FILE = A.FIELD_TOKEN 		    <!--附件-->
+        OR C.final_File = A.FIELD_TOKEN 		   <!--附件,流程中-->
+        LEFT JOIN BASE.APP_USER U
+        ON C.PROJ_ID = U.ID
+
+        UNION ALL
+
+        <!--项目退出收款-->
+        SELECT
+        C.RECEIPT_ID AS KEYS,
+        C.PROJ_ID FUND_ID,
+        A.FILE_ID ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        '项目退出' ATTA_TYPE,
+        U.ID CREATE_BY,
+        A.CREATE_BY CREATE_NAME,
+        A.CREATE_DT,
+        '0' IS_FILE,
+        '/ei-web/attachController/download?fileId='||A.File_Id ATTA_FILE_URL,
+        '0' STATUS,
+        AI.ITEM_ID NODE_ID,
+        '1' EDITABLE,
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM TZ_T_PROJ_RECEIPT_QUIT C
+        LEFT JOIN BD_T_ATTA_ITEM AI ON C.PROJ_ID=AI.PROJECT_OR_FUND_ID AND AI.ITEM_NAME='项目退出'
+        LEFT JOIN BASE.FP_ATTACHMENT A
+        ON C.QUIT_FILE = A.FIELD_TOKEN 		    <!--附件-->
+        LEFT JOIN BASE.APP_USER U
+        ON C.PROJ_ID = U.ID
+
+        UNION ALL
+
+        select KEYS,FUND_ID,ATTA_ID,ATTA_FILE_NAME,FILE_TYPE,ATTA_TYPE,CREATE_BY,CREATE_NAME,CREATE_DT,
+        IS_FILE,ATTA_FILE_URL,STATUS,NODE_ID,EDITABLE,FILE_ID,FILE_SOURCE from (
+        select * from(select a.*,row_number() over(partition by a.FILE_ID order by a.FILE_ID) su from (
+        SELECT
+        C.ATTA_ID AS KEYS,
+        C.FUND_ID,
+        C.ATTA_FILE ATTA_ID,
+        A.FILE_OLD_NAME ATTA_FILE_NAME,
+        A.FILE_TYPE,
+        C.ATTA_TYPE,
+        U.ID CREATE_BY,
+        A.CREATE_BY CREATE_NAME,
+        A.CREATE_DT,
+        '0' IS_FILE,
+        '/ei-web/attachController/download?fileId='||A.File_Id ATTA_FILE_URL,
+        '0' STATUS,
+        C.ITEM_ID NODE_ID,
+        '0' EDITABLE,                              <!--0：可删除-->
+        A.FILE_ID,
+        'EI' FILE_SOURCE
+        FROM BD_T_FUND_ATTA C
+        LEFT JOIN BASE.FP_ATTACHMENT A
+        ON c.ATTA_FILE = A.FIELD_TOKEN            <!--新增的附件-->
+        LEFT JOIN BASE.APP_USER U
+        ON A.CREATE_BY = U.Name
+        ) a
+        )where su=1
+        )
+        )
+        <where>
+            <include refid="searchCondition.searchClause" />
+        </where>
+        <if test="paramMap.KEYWORD != null" >
+            AND (CREATE_NAME LIKE ${paramMap.KEYWORD} OR ATTA_FILE_NAME LIKE ${paramMap.KEYWORD})
+        </if>
+        AND ATTA_ID IS NOT NULL
+        AND STATUS !='9'
+        ORDER BY IS_FILE, CREATE_DT DESC
+    </sql>
+
+    <!--
+    //itemType:11:基金平台母基金；12：基金平台代管基金；13：省政府平台母基金
+    ITEM_TYPE=1关联项目表的项目id（PROJ_TYPE=1的项目：项目投管），
+	ITEM_TYPE=3关联项目表的项目id（PROJ_TYPE=2的项目：基金投管），
+	ITEM_TYPE=2关联基金表的基金id，暂时没有
+
+    -->
+    <select id="selectListPageNT" resultMap="BdTFundAttaResult2"
+            parameterType="com.founder.ssm.core.common.SearchCondition">
+        <if test="paramMap.itemType == 11">
+            <if test="paramMap.itemName == '' || paramMap.itemName == null">
+                <include refid="searchSql_All_Mother"/>
+            </if>
+        </if>
+        <if test="paramMap.itemType == 10">
+            <if test="paramMap.itemName == '' || paramMap.itemName == null">
+                <include refid="searchSql_All_Mother"/>
+            </if>
+        </if>
+        <if test="paramMap.itemType == 12">
+            <if test="paramMap.itemName == '' || paramMap.itemName == null">
+                <include refid="searchSql_All_Escrow"/>
+            </if>
+        </if>
+        <if test="paramMap.itemType == 13">
+            <if test="paramMap.itemName == '' || paramMap.itemName == null">
+                <include refid="searchSql_All_Sheng_Mother"/>
+            </if>
+        </if>
+        <if test="paramMap.itemType == 3" >
+            <if test="paramMap.itemName == '' || paramMap.itemName == null" >
+                <include refid="searchSql_All_Fund" />
+            </if>
+        </if>
+        <if test="paramMap.itemType == 1" >
+            <if test="paramMap.itemName == '' || paramMap.itemName == null" >
+                <include refid="searchSql_All_projList" />
+            </if>
+        </if>
+
+    </select>
+
+</mapper>

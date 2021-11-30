@@ -1,0 +1,36 @@
+spring:
+  profiles:
+    active:
+    - prod
+    
+  thymeleaf:
+    cache: false
+  mvc:  
+    favicon:  
+      enabled: true
+    date-format: yyyy-MM-dd HH:mm:ss
+  main:
+    banner-mode: "off"
+  jmx: 
+    default-domain: ei-web
+  http:
+    multipart:
+      maxFileSize: 100MB
+      maxRequestSize: 100MB
+
+logging:
+  config: classpath:log4j2-spring.yml
+
+server:
+  context-path: /ei-web
+  port: 8072
+  session:
+    timeout: 60
+
+  
+mybatis:
+  mapper-locations:
+  - classpath*:mybatis/*.xml
+  
+uim: 
+  appId: 1001

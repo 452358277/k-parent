@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="StaffList">
+	<!-- start autocreate -->
+
+	<resultMap id="StaffListResult" type="com.ppmg.ei.model.StaffListModel">
+		<result column="PK_ID" property="pkId" jdbcType="VARCHAR" />
+		<result column="PROJ_ID" property="projId" jdbcType="VARCHAR" />
+		<result column="OBJECT_ID" property="objectId" jdbcType="VARCHAR" />
+		<result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+		<result column="IS_DIRECTOR" property="isDirector" jdbcType="VARCHAR" />
+		<result column="IS_SUPERVISOR" property="isSupervisor" jdbcType="VARCHAR" />
+		<result column="IS_TOP_MANAGE" property="isTopManage" jdbcType="VARCHAR" />
+		<result column="IS_ADVISORY" property="isAdvisory" jdbcType="VARCHAR" />
+		<result column="IS_OBSERVER" property="isObserver" jdbcType="VARCHAR" />
+		<result column="IS_IC" property="isIc" jdbcType="VARCHAR" />
+		<result column="JOB_START_DATE" property="jobStartDate" jdbcType="TIMESTAMP" />
+		<result column="JOB_END_DATE" property="jobEndDate" jdbcType="TIMESTAMP" />
+		<result column="IS_REWARD" property="isReward" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+		<result column="PROJ_GUID" property="projGuid" jdbcType="VARCHAR" />
+		<result column="USER_TYPE" property="userType" jdbcType="VARCHAR" />
+		<result column="ASSIGN_ID" property="assignId" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.StaffListModel">
+		INSERT INTO TZ_T_YH_STAFF_LIST (PK_ID,PROJ_ID,OBJECT_ID,USER_ID,IS_DIRECTOR,IS_SUPERVISOR,IS_TOP_MANAGE,IS_ADVISORY,IS_OBSERVER,IS_IC,JOB_START_DATE,JOB_END_DATE,IS_REWARD,STATUS,REMARK,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,USER_NAME,PROJ_GUID,USER_TYPE,ASSIGN_ID) values(#{pkId,jdbcType=VARCHAR},#{projId,jdbcType=VARCHAR},#{objectId,jdbcType=VARCHAR},#{userId,jdbcType=VARCHAR},#{isDirector,jdbcType=VARCHAR},#{isSupervisor,jdbcType=VARCHAR},#{isTopManage,jdbcType=VARCHAR},#{isAdvisory,jdbcType=VARCHAR},#{isObserver,jdbcType=VARCHAR},#{isIc,jdbcType=VARCHAR},#{jobStartDate,jdbcType=TIMESTAMP},#{jobEndDate,jdbcType=TIMESTAMP},#{isReward,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{userName,jdbcType=VARCHAR},#{projGuid,jdbcType=VARCHAR},#{userType,jdbcType=VARCHAR},#{assignId,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO TZ_T_YH_STAFF_LIST (PK_ID,PROJ_ID,OBJECT_ID,USER_ID,IS_DIRECTOR,IS_SUPERVISOR,IS_TOP_MANAGE,IS_ADVISORY,IS_OBSERVER,IS_IC,JOB_START_DATE,JOB_END_DATE,IS_REWARD,STATUS,REMARK,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,USER_NAME,PROJ_GUID,USER_TYPE,ASSIGN_ID)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.pkId,jdbcType=VARCHAR},
+				#{item.projId,jdbcType=VARCHAR},
+				#{item.objectId,jdbcType=VARCHAR},
+				#{item.userId,jdbcType=VARCHAR},
+				#{item.isDirector,jdbcType=VARCHAR},
+				#{item.isSupervisor,jdbcType=VARCHAR},
+				#{item.isTopManage,jdbcType=VARCHAR},
+				#{item.isAdvisory,jdbcType=VARCHAR},
+				#{item.isObserver,jdbcType=VARCHAR},
+				#{item.isIc,jdbcType=VARCHAR},
+				#{item.jobStartDate,jdbcType=TIMESTAMP},
+				#{item.jobEndDate,jdbcType=TIMESTAMP},
+				#{item.isReward,jdbcType=VARCHAR},
+				#{item.status,jdbcType=VARCHAR},
+				#{item.remark,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+				#{item.userName,jdbcType=VARCHAR},
+				#{item.projGuid,jdbcType=VARCHAR},
+				#{item.userType,jdbcType=VARCHAR},
+				#{item.assignId,jdbcType=VARCHAR}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  TZ_T_YH_STAFF_LIST WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.StaffListModel">
+		DELETE FROM TZ_T_YH_STAFF_LIST
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="objectId != null and objectId != ''" >
+				AND OBJECT_ID = #{objectId,jdbcType=VARCHAR}
+			</if>
+			<if test="userId != null and userId != ''" >
+				AND USER_ID = #{userId,jdbcType=VARCHAR}
+			</if>
+			<if test="isDirector != null and isDirector != ''" >
+				AND IS_DIRECTOR = #{isDirector,jdbcType=VARCHAR}
+			</if>
+			<if test="isSupervisor != null and isSupervisor != ''" >
+				AND IS_SUPERVISOR = #{isSupervisor,jdbcType=VARCHAR}
+			</if>
+			<if test="isTopManage != null and isTopManage != ''" >
+				AND IS_TOP_MANAGE = #{isTopManage,jdbcType=VARCHAR}
+			</if>
+			<if test="isAdvisory != null and isAdvisory != ''" >
+				AND IS_ADVISORY = #{isAdvisory,jdbcType=VARCHAR}
+			</if>
+			<if test="isObserver != null and isObserver != ''" >
+				AND IS_OBSERVER = #{isObserver,jdbcType=VARCHAR}
+			</if>
+			<if test="isIc != null and isIc != ''" >
+				AND IS_IC = #{isIc,jdbcType=VARCHAR}
+			</if>
+			<if test="jobStartDate != null" >
+				AND JOB_START_DATE = #{jobStartDate,jdbcType=VARCHAR}
+			</if>
+			<if test="jobEndDate != null" >
+				AND JOB_END_DATE = #{jobEndDate,jdbcType=VARCHAR}
+			</if>
+			<if test="isReward != null and isReward != ''" >
+				AND IS_REWARD = #{isReward,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="userName != null and userName != ''" >
+				AND USER_NAME = #{userName,jdbcType=VARCHAR}
+			</if>
+			<if test="projGuid != null and projGuid != ''" >
+				AND PROJ_GUID = #{projGuid,jdbcType=VARCHAR}
+			</if>
+			<if test="userType != null and userType != ''" >
+				AND USER_TYPE = #{userType,jdbcType=VARCHAR}
+			</if>
+			<if test="assignId != null and assignId != ''" >
+				AND ASSIGN_ID = #{assignId,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  TZ_T_YH_STAFF_LIST WHERE PK_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.StaffListModel">
+		UPDATE TZ_T_YH_STAFF_LIST 
+		<set>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR},
+			</if>
+			<if test="projId != null and projId != ''" >
+				PROJ_ID = #{projId,jdbcType=VARCHAR},
+			</if>
+			<if test="objectId != null and objectId != ''" >
+				OBJECT_ID = #{objectId,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null and userId != ''" >
+				USER_ID = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="isDirector != null and isDirector != ''" >
+				IS_DIRECTOR = #{isDirector,jdbcType=VARCHAR},
+			</if>
+			<if test="isSupervisor != null and isSupervisor != ''" >
+				IS_SUPERVISOR = #{isSupervisor,jdbcType=VARCHAR},
+			</if>
+			<if test="isTopManage != null and isTopManage != ''" >
+				IS_TOP_MANAGE = #{isTopManage,jdbcType=VARCHAR},
+			</if>
+			<if test="isAdvisory != null and isAdvisory != ''" >
+				IS_ADVISORY = #{isAdvisory,jdbcType=VARCHAR},
+			</if>
+			<if test="isObserver != null and isObserver != ''" >
+				IS_OBSERVER = #{isObserver,jdbcType=VARCHAR},
+			</if>
+			<if test="isIc != null and isIc != ''" >
+				IS_IC = #{isIc,jdbcType=VARCHAR},
+			</if>
+			<if test="jobStartDate != null" >
+				JOB_START_DATE = #{jobStartDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="jobEndDate != null" >
+				JOB_END_DATE = #{jobEndDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isReward != null and isReward != ''" >
+				IS_REWARD = #{isReward,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null and remark != ''" >
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="userName != null and userName != ''" >
+				USER_NAME = #{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="projGuid != null and projGuid != ''" >
+				PROJ_GUID = #{projGuid,jdbcType=VARCHAR},
+			</if>
+			<if test="userType != null and userType != ''" >
+				USER_TYPE = #{userType,jdbcType=VARCHAR},
+			</if>
+			<if test="assignId != null and assignId != ''" >
+				ASSIGN_ID = #{assignId,jdbcType=VARCHAR},
+			</if>
+		</set>
+		WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="StaffListResult">
+		SELECT * FROM TZ_T_YH_STAFF_LIST WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.StaffListModel" resultMap="StaffListResult">
+		SELECT * FROM TZ_T_YH_STAFF_LIST
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="objectId != null and objectId != ''" >
+				AND OBJECT_ID = #{objectId,jdbcType=VARCHAR}
+			</if>
+			<if test="userId != null and userId != ''" >
+				AND USER_ID = #{userId,jdbcType=VARCHAR}
+			</if>
+			<if test="isDirector != null and isDirector != ''" >
+				AND IS_DIRECTOR = #{isDirector,jdbcType=VARCHAR}
+			</if>
+			<if test="isSupervisor != null and isSupervisor != ''" >
+				AND IS_SUPERVISOR = #{isSupervisor,jdbcType=VARCHAR}
+			</if>
+			<if test="isTopManage != null and isTopManage != ''" >
+				AND IS_TOP_MANAGE = #{isTopManage,jdbcType=VARCHAR}
+			</if>
+			<if test="isAdvisory != null and isAdvisory != ''" >
+				AND IS_ADVISORY = #{isAdvisory,jdbcType=VARCHAR}
+			</if>
+			<if test="isObserver != null and isObserver != ''" >
+				AND IS_OBSERVER = #{isObserver,jdbcType=VARCHAR}
+			</if>
+			<if test="isIc != null and isIc != ''" >
+				AND IS_IC = #{isIc,jdbcType=VARCHAR}
+			</if>
+			<if test="jobStartDate != null" >
+				AND JOB_START_DATE = #{jobStartDate,jdbcType=VARCHAR}
+			</if>
+			<if test="jobEndDate != null" >
+				AND JOB_END_DATE = #{jobEndDate,jdbcType=VARCHAR}
+			</if>
+			<if test="isReward != null and isReward != ''" >
+				AND IS_REWARD = #{isReward,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="userName != null and userName != ''" >
+				AND USER_NAME = #{userName,jdbcType=VARCHAR}
+			</if>
+			<if test="projGuid != null and projGuid != ''" >
+				AND PROJ_GUID = #{projGuid,jdbcType=VARCHAR}
+			</if>
+			<if test="userType != null and userType != ''" >
+				AND USER_TYPE = #{userType,jdbcType=VARCHAR}
+			</if>
+			<if test="assignId != null and assignId != ''" >
+				AND ASSIGN_ID = #{assignId,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM TZ_T_YH_STAFF_LIST
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+		ORDER BY UPDATE_DT DESC
+	</sql>
+
+	<select id="selectListPage" resultMap="StaffListResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.StaffListModel">
+		SELECT COUNT(*) FROM TZ_T_YH_STAFF_LIST
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="objectId != null and objectId != ''" >
+				AND OBJECT_ID = #{objectId,jdbcType=VARCHAR}
+			</if>
+			<if test="userId != null and userId != ''" >
+				AND USER_ID = #{userId,jdbcType=VARCHAR}
+			</if>
+			<if test="isDirector != null and isDirector != ''" >
+				AND IS_DIRECTOR = #{isDirector,jdbcType=VARCHAR}
+			</if>
+			<if test="isSupervisor != null and isSupervisor != ''" >
+				AND IS_SUPERVISOR = #{isSupervisor,jdbcType=VARCHAR}
+			</if>
+			<if test="isTopManage != null and isTopManage != ''" >
+				AND IS_TOP_MANAGE = #{isTopManage,jdbcType=VARCHAR}
+			</if>
+			<if test="isAdvisory != null and isAdvisory != ''" >
+				AND IS_ADVISORY = #{isAdvisory,jdbcType=VARCHAR}
+			</if>
+			<if test="isObserver != null and isObserver != ''" >
+				AND IS_OBSERVER = #{isObserver,jdbcType=VARCHAR}
+			</if>
+			<if test="isIc != null and isIc != ''" >
+				AND IS_IC = #{isIc,jdbcType=VARCHAR}
+			</if>
+			<if test="jobStartDate != null" >
+				AND JOB_START_DATE = #{jobStartDate,jdbcType=VARCHAR}
+			</if>
+			<if test="jobEndDate != null" >
+				AND JOB_END_DATE = #{jobEndDate,jdbcType=VARCHAR}
+			</if>
+			<if test="isReward != null and isReward != ''" >
+				AND IS_REWARD = #{isReward,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="userName != null and userName != ''" >
+				AND USER_NAME = #{userName,jdbcType=VARCHAR}
+			</if>
+			<if test="projGuid != null and projGuid != ''" >
+				AND PROJ_GUID = #{projGuid,jdbcType=VARCHAR}
+			</if>
+			<if test="userType != null and userType != ''" >
+				AND USER_TYPE = #{userType,jdbcType=VARCHAR}
+			</if>
+			<if test="assignId != null and assignId != ''" >
+				AND ASSIGN_ID = #{assignId,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.StaffListModel" resultMap="StaffListResult">
+		SELECT * FROM TZ_T_YH_STAFF_LIST
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="objectId != null and objectId != ''" >
+				AND OBJECT_ID = #{objectId,jdbcType=VARCHAR}
+			</if>
+			<if test="userId != null and userId != ''" >
+				AND USER_ID = #{userId,jdbcType=VARCHAR}
+			</if>
+			<if test="isDirector != null and isDirector != ''" >
+				AND IS_DIRECTOR = #{isDirector,jdbcType=VARCHAR}
+			</if>
+			<if test="isSupervisor != null and isSupervisor != ''" >
+				AND IS_SUPERVISOR = #{isSupervisor,jdbcType=VARCHAR}
+			</if>
+			<if test="isTopManage != null and isTopManage != ''" >
+				AND IS_TOP_MANAGE = #{isTopManage,jdbcType=VARCHAR}
+			</if>
+			<if test="isAdvisory != null and isAdvisory != ''" >
+				AND IS_ADVISORY = #{isAdvisory,jdbcType=VARCHAR}
+			</if>
+			<if test="isObserver != null and isObserver != ''" >
+				AND IS_OBSERVER = #{isObserver,jdbcType=VARCHAR}
+			</if>
+			<if test="isIc != null and isIc != ''" >
+				AND IS_IC = #{isIc,jdbcType=VARCHAR}
+			</if>
+			<if test="jobStartDate != null" >
+				AND JOB_START_DATE = #{jobStartDate,jdbcType=VARCHAR}
+			</if>
+			<if test="jobEndDate != null" >
+				AND JOB_END_DATE = #{jobEndDate,jdbcType=VARCHAR}
+			</if>
+			<if test="isReward != null and isReward != ''" >
+				AND IS_REWARD = #{isReward,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="userName != null and userName != ''" >
+				AND USER_NAME = #{userName,jdbcType=VARCHAR}
+			</if>
+			<if test="projGuid != null and projGuid != ''" >
+				AND PROJ_GUID = #{projGuid,jdbcType=VARCHAR}
+			</if>
+			<if test="userType != null and userType != ''" >
+				AND USER_TYPE = #{userType,jdbcType=VARCHAR}
+			</if>
+			<if test="assignId != null and assignId != ''" >
+				AND ASSIGN_ID = #{assignId,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="StaffListResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+	<!--4:审批通过，7：审批终止；9：删除-->
+	<select id="selectListByUid" parameterType="com.ppmg.ei.model.StaffListModel"  resultMap="StaffListResult">
+          select *  FROM TZ_T_YH_STAFF_LIST
+          where status!=4 and status!= 9 and status!= 7 and  USER_ID=#{userId}
+	</select>
+
+	<update id="updateBystaffList" parameterType="com.ppmg.ei.model.StaffListModel">
+		UPDATE TZ_T_YH_STAFF_LIST SET
+		<if test="updateBy != null and updateBy != ''" >
+			 UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+		</if>
+		<if test="updateDt != null" >
+			 UPDATE_DT = #{updateDt,jdbcType=VARCHAR},
+		</if>
+		status = #{status,jdbcType=VARCHAR}
+		where  ASSIGN_ID = #{assignId,jdbcType=VARCHAR}
+	</update>
+</mapper>

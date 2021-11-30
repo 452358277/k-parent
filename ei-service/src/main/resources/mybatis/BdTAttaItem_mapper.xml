@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BdTAttaItem">
+	<resultMap id="BdTAttaItemResult2" type="com.ppmg.ei.model.BdTAttaItemModel" extends="BdTAttaItemResult">
+		<result column="ISLEAF" property="isLeaf" jdbcType="VARCHAR" />
+	</resultMap>
+	<!-- start autocreate -->
+
+	<resultMap id="BdTAttaItemResult" type="com.ppmg.ei.model.BdTAttaItemModel">
+		<result column="ITEM_ID" property="itemId" jdbcType="VARCHAR" />
+		<result column="ITEM_NAME" property="itemName" jdbcType="VARCHAR" />
+		<result column="PROJECT_OR_FUND_ID" property="projectOrFundId" jdbcType="VARCHAR" />
+		<result column="PARENT_ID" property="parentId" jdbcType="VARCHAR" />
+		<result column="ITEM_TYPE" property="itemType" jdbcType="VARCHAR" />
+		<result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+		<result column="EDITABLE" property="editable" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.BdTAttaItemModel">
+		INSERT INTO BD_T_ATTA_ITEM (ITEM_ID,ITEM_NAME,PROJECT_OR_FUND_ID,PARENT_ID,ITEM_TYPE,DESCRIPTION,EDITABLE,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT) values(#{itemId,jdbcType=VARCHAR},#{itemName,jdbcType=VARCHAR},#{projectOrFundId,jdbcType=VARCHAR},#{parentId,jdbcType=VARCHAR},#{itemType,jdbcType=VARCHAR},#{description,jdbcType=VARCHAR},#{editable,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO BD_T_ATTA_ITEM (ITEM_ID,ITEM_NAME,PROJECT_OR_FUND_ID,PARENT_ID,ITEM_TYPE,DESCRIPTION,EDITABLE,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.itemId,jdbcType=VARCHAR},
+				#{item.itemName,jdbcType=VARCHAR},
+				#{item.projectOrFundId,jdbcType=VARCHAR},
+				#{item.parentId,jdbcType=VARCHAR},
+				#{item.itemType,jdbcType=VARCHAR},
+				#{item.description,jdbcType=VARCHAR},
+				#{item.editable,jdbcType=VARCHAR},
+				#{item.status,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  BD_T_ATTA_ITEM WHERE ITEM_ID = #{itemId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.BdTAttaItemModel">
+		DELETE FROM BD_T_ATTA_ITEM
+		<where>
+			<if test="itemId != null and itemId != ''" >
+				ITEM_ID = #{itemId,jdbcType=VARCHAR}
+			</if>
+			<if test="itemName != null and itemName != ''" >
+				AND ITEM_NAME = #{itemName,jdbcType=VARCHAR}
+			</if>
+			<if test="projectOrFundId != null and projectOrFundId != ''" >
+				AND PROJECT_OR_FUND_ID = #{projectOrFundId,jdbcType=VARCHAR}
+			</if>
+			<if test="parentId != null and parentId != ''" >
+				AND PARENT_ID = #{parentId,jdbcType=VARCHAR}
+			</if>
+			<if test="itemType != null and itemType != ''" >
+				AND ITEM_TYPE = #{itemType,jdbcType=VARCHAR}
+			</if>
+			<if test="description != null and description != ''" >
+				AND DESCRIPTION = #{description,jdbcType=VARCHAR}
+			</if>
+			<if test="editable != null and editable != ''" >
+				AND EDITABLE = #{editable,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  BD_T_ATTA_ITEM WHERE ITEM_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.BdTAttaItemModel">
+		UPDATE BD_T_ATTA_ITEM 
+		<set>
+			<if test="itemId != null and itemId != ''" >
+				ITEM_ID = #{itemId,jdbcType=VARCHAR},
+			</if>
+			<if test="itemName != null and itemName != ''" >
+				ITEM_NAME = #{itemName,jdbcType=VARCHAR},
+			</if>
+			<if test="projectOrFundId != null and projectOrFundId != ''" >
+				PROJECT_OR_FUND_ID = #{projectOrFundId,jdbcType=VARCHAR},
+			</if>
+			<if test="parentId != null and parentId != ''" >
+				PARENT_ID = #{parentId,jdbcType=VARCHAR},
+			</if>
+			<if test="itemType != null and itemType != ''" >
+				ITEM_TYPE = #{itemType,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null and description != ''" >
+				DESCRIPTION = #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="editable != null and editable != ''" >
+				EDITABLE = #{editable,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		WHERE ITEM_ID = #{itemId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="BdTAttaItemResult">
+		SELECT * FROM BD_T_ATTA_ITEM WHERE ITEM_ID = #{itemId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.BdTAttaItemModel" resultMap="BdTAttaItemResult">
+		SELECT * FROM BD_T_ATTA_ITEM
+		<where>
+			<if test="itemId != null and itemId != ''" >
+				ITEM_ID = #{itemId,jdbcType=VARCHAR}
+			</if>
+			<if test="itemName != null and itemName != ''" >
+				AND ITEM_NAME = #{itemName,jdbcType=VARCHAR}
+			</if>
+			<if test="projectOrFundId != null and projectOrFundId != ''" >
+				AND PROJECT_OR_FUND_ID = #{projectOrFundId,jdbcType=VARCHAR}
+			</if>
+			<if test="parentId != null and parentId != ''" >
+				AND PARENT_ID = #{parentId,jdbcType=VARCHAR}
+			</if>
+			<if test="itemType != null and itemType != ''" >
+				AND ITEM_TYPE = #{itemType,jdbcType=VARCHAR}
+			</if>
+			<if test="description != null and description != ''" >
+				AND DESCRIPTION = #{description,jdbcType=VARCHAR}
+			</if>
+			<if test="editable != null and editable != ''" >
+				AND EDITABLE = #{editable,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM BD_T_ATTA_ITEM
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="BdTAttaItemResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.BdTAttaItemModel">
+		SELECT COUNT(*) FROM BD_T_ATTA_ITEM
+		<where>
+			<if test="itemId != null and itemId != ''" >
+				ITEM_ID = #{itemId,jdbcType=VARCHAR}
+			</if>
+			<if test="itemName != null and itemName != ''" >
+				AND ITEM_NAME = #{itemName,jdbcType=VARCHAR}
+			</if>
+			<if test="projectOrFundId != null and projectOrFundId != ''" >
+				AND PROJECT_OR_FUND_ID = #{projectOrFundId,jdbcType=VARCHAR}
+			</if>
+			<if test="parentId != null and parentId != ''" >
+				AND PARENT_ID = #{parentId,jdbcType=VARCHAR}
+			</if>
+			<if test="itemType != null and itemType != ''" >
+				AND ITEM_TYPE = #{itemType,jdbcType=VARCHAR}
+			</if>
+			<if test="description != null and description != ''" >
+				AND DESCRIPTION = #{description,jdbcType=VARCHAR}
+			</if>
+			<if test="editable != null and editable != ''" >
+				AND EDITABLE = #{editable,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.BdTAttaItemModel" resultMap="BdTAttaItemResult">
+		SELECT * FROM BD_T_ATTA_ITEM
+		<where>
+			<if test="itemId != null and itemId != ''" >
+				ITEM_ID = #{itemId,jdbcType=VARCHAR}
+			</if>
+			<if test="itemName != null and itemName != ''" >
+				AND ITEM_NAME = #{itemName,jdbcType=VARCHAR}
+			</if>
+			<if test="projectOrFundId != null and projectOrFundId != ''" >
+				AND PROJECT_OR_FUND_ID = #{projectOrFundId,jdbcType=VARCHAR}
+			</if>
+			<if test="parentId != null and parentId != ''" >
+				AND PARENT_ID = #{parentId,jdbcType=VARCHAR}
+			</if>
+			<if test="itemType != null and itemType != ''" >
+				AND ITEM_TYPE = #{itemType,jdbcType=VARCHAR}
+			</if>
+			<if test="description != null and description != ''" >
+				AND DESCRIPTION = #{description,jdbcType=VARCHAR}
+			</if>
+			<if test="editable != null and editable != ''" >
+				AND EDITABLE = #{editable,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="BdTAttaItemResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+	
+	<!-- 获取主键 -->
+	<select id="getAttaItemId" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT SEQ_BD_T_ATTA_ITEM.NEXTVAL FROM DUAL
+	</select>
+
+	<!-- 根据基金ID获取附件分类列表 -->
+	<select id="getAttaItemListByFundId" parameterType="java.util.Map" resultMap="BdTAttaItemResult">
+		select connect_by_isleaf ISLEAF,t.* from BD_T_ATTA_ITEM t 
+	    where STATUS = '0' and ITEM_TYPE = #{itemType} and PROJECT_OR_FUND_ID = #{projOrFundId}
+	    start with t.parent_id='0' connect by prior t.item_id = t.parent_id
+	    order by to_number(t.item_id)
+	</select>
+
+	<!--=================2020403==============新增===============2020403====================-->
+	<delete id="delectEiTAttachment" parameterType="String">
+		DELETE FROM  BD_T_ATTA_ITEM WHERE PROJECT_OR_FUND_ID = #{projId,jdbcType=VARCHAR}
+	</delete>
+
+	<select id="selectListAttaItem" parameterType="String" resultMap="BdTAttaItemResult">
+		SELECT * FROM BD_T_ATTA_ITEM WHERE PROJECT_OR_FUND_ID = #{projId,jdbcType=VARCHAR}
+	</select>
+
+</mapper>

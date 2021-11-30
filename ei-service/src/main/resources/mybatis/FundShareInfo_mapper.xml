@@ -1,0 +1,991 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FundShareInfo">
+	<!-- 基本信息 -->
+	<resultMap id="FundShareInfoResult2" type="com.ppmg.ei.model.FundShareInfoModel" extends="FundShareInfoResult">
+		<result column="INVE_AMOUNT_DISPLAY" property="inveAmountDisplay" jdbcType="NUMERIC" />
+		<result column="INVE_CURRENCY_DISPLAY" property="totalFinancialDisplay" jdbcType="VARCHAR" />
+		<result column="INVESTOR_NAME" property="investorName" jdbcType="NUMERIC" />
+		<result column="GB" property="GB" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<!-- start autocreate -->
+
+	<resultMap id="FundShareInfoResult" type="com.ppmg.ei.model.FundShareInfoModel">
+		<result column="PK_ID" property="pkId" jdbcType="VARCHAR" />
+		<result column="FUND_ID" property="fundId" jdbcType="VARCHAR" />
+		<result column="INVESTOR_ID" property="investorId" jdbcType="VARCHAR" />
+		<result column="INVE_ROLE" property="inveRole" jdbcType="VARCHAR" />
+		<result column="INVE_AMOUNT" property="inveAmount" jdbcType="NUMERIC" />
+		<result column="INVE_CURRENCY" property="inveCurrency" jdbcType="VARCHAR" />
+		<result column="TOTAL_FINANCIAL" property="totalFinancial" jdbcType="NUMERIC" />
+		<result column="TOTAL_FIN_CURRENCY" property="totalFinCurrency" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="CLOSE_ROUND" property="closeRound" jdbcType="NUMERIC" />
+		<result column="ENTE_ID" property="enteId" jdbcType="VARCHAR" />
+		<result column="CAPITAL_SOURCE" property="capitalSource" jdbcType="VARCHAR" />
+		<result column="INVE_TYPE" property="inveType" jdbcType="VARCHAR" />
+		<result column="RAISE_AMOUNT" property="raiseAmount" jdbcType="NUMERIC" />
+		<result column="IS_FINANCING_PLATFORM" property="isFinancingPlatform" jdbcType="VARCHAR" />
+		<result column="INVE_PROPERTY" property="inveProperty" jdbcType="VARCHAR" />
+		<result column="INVESTOR_NAME" property="investorName" jdbcType="VARCHAR" />
+		<result column="INVESTOR_TYPE" property="investorType" jdbcType="VARCHAR" />
+		<result column="RMB_INVE_AMOUNT" property="rmbInveAmount" jdbcType="NUMERIC" />
+		<result column="RMB_INTENDED_AMOUNT" property="rmbIntendedAmount" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="FundShareInfoResultNew" type="com.ppmg.ei.model.FundShareInfoModel">
+		<result column="PK_ID" property="pkId" jdbcType="VARCHAR" />
+		<result column="FUND_ID" property="fundId" jdbcType="VARCHAR" />
+		<result column="INVESTOR_ID" property="investorId" jdbcType="VARCHAR" />
+		<result column="INVE_ROLE" property="inveRole" jdbcType="VARCHAR" />
+		<result column="INVE_AMOUNT" property="inveAmount" jdbcType="NUMERIC" />
+		<result column="INVE_CURRENCY" property="inveCurrency" jdbcType="VARCHAR" />
+		<result column="TOTAL_FINANCIAL" property="totalFinancial" jdbcType="NUMERIC" />
+		<result column="TOTAL_FIN_CURRENCY" property="totalFinCurrency" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="CLOSE_ROUND" property="closeRound" jdbcType="NUMERIC" />
+		<result column="ENTE_ID" property="enteId" jdbcType="VARCHAR" />
+		<result column="INVE_TYPE" property="inveType" jdbcType="VARCHAR" />
+		<result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+		<result column="INVESTOR_COMPANY_NAME" property="investorCompanyName" jdbcType="VARCHAR" />
+		<result column="GB" property="GB" jdbcType="VARCHAR" />
+		<result column="RMB_INVE_AMOUNT" property="rmbInveAmount" jdbcType="NUMERIC" />
+		<result column="INVESTOR_PERSON_NAME" property="investorPersonName" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="FundInfoResult11" type="com.ppmg.ei.model.FundShareInfoModel" extends="FundShareInfoResult">
+		<association property="inveInfoModel" javaType="com.ppmg.ei.model.InveInfoModel" column="INVESTOR_ID">
+			<result column="INVESTOR_NAME" property="investorName" jdbcType="VARCHAR" />
+		</association>
+		<association property="fundInfoModel" javaType="com.ppmg.ei.model.FundInfoModel" column="FUND_ID">
+			<result column="FUND_NAME" property="fundName" jdbcType="VARCHAR" />
+		</association>
+	</resultMap>
+	<resultMap id="FundShareInfoResult111" type="com.ppmg.ei.model.FundShareInfoModel" extends="FundShareInfoResult">
+		<association property="fundShareItem" javaType="com.ppmg.ei.model.FundShareItemModel" column="INVESTOR_ID">
+			<result column="ITEM_ID" property="itemId" jdbcType="VARCHAR" />
+			<result column="PK_ID" property="pkId" jdbcType="VARCHAR" />
+			<result column="INVE_DT" property="inveDt" jdbcType="TIMESTAMP" />
+			<result column="INVE_AMOUNT" property="inveAmount" jdbcType="NUMERIC" />
+			<result column="CLOSE_ROUND" property="closeRound" jdbcType="NUMERIC" />
+			<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+			<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+			<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+			<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+			<result column="STATUS" property="status" jdbcType="VARCHAR" />
+			<result column="INVE_CURRENCY" property="inveCurrency" jdbcType="VARCHAR" />
+			<result column="DUES_AMOUNT" property="duesAmount" jdbcType="NUMERIC" />
+			<result column="PAYMENT_AMOUNT" property="paymentAmount" jdbcType="NUMERIC" />
+			<result column="ARRIVE_DATE" property="arriveDate" jdbcType="TIMESTAMP" />
+			<result column="TOTAL_FINANCIAL" property="totalFinancial" jdbcType="NUMERIC" />
+			<result column="DESC_FILE" property="descFile" jdbcType="VARCHAR" />
+			<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+			<result column="TOTAL_CLOSE_ROUND" property="totalCloseRound" jdbcType="NUMERIC" />
+			<result column="PROCESS_INST_ID" property="processInstId" jdbcType="VARCHAR" />
+		</association>
+
+	</resultMap>
+
+	<resultMap id="FundShareInfoResult33" type="com.ppmg.ei.model.FundShareInfoModel">
+		<result column="PK_ID" property="pkId" jdbcType="VARCHAR" />
+		<result column="FUND_ID" property="fundId" jdbcType="VARCHAR" />
+		<result column="INVESTOR_ID" property="investorId" jdbcType="VARCHAR" />
+		<result column="INVE_ROLE" property="inveRole" jdbcType="VARCHAR" />
+		<result column="INVE_AMOUNT" property="inveAmount" jdbcType="NUMERIC" />
+		<result column="INVE_CURRENCY" property="inveCurrency" jdbcType="VARCHAR" />
+		<result column="TOTAL_FINANCIAL" property="totalFinancial" jdbcType="NUMERIC" />
+		<result column="TOTAL_FIN_CURRENCY" property="totalFinCurrency" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="CLOSE_ROUND" property="closeRound" jdbcType="NUMERIC" />
+		<result column="ENTE_ID" property="enteId" jdbcType="VARCHAR" />
+		<result column="CAPITAL_SOURCE" property="capitalSource" jdbcType="VARCHAR" />
+		<result column="INVE_TYPE" property="inveType" jdbcType="VARCHAR" />
+		<result column="RAISE_AMOUNT" property="raiseAmount" jdbcType="NUMERIC" />
+		<result column="IS_FINANCING_PLATFORM" property="isFinancingPlatform" jdbcType="VARCHAR" />
+		<result column="INVE_PROPERTY" property="inveProperty" jdbcType="VARCHAR" />
+		<result column="INVESTOR_NAME" property="investorName" jdbcType="VARCHAR" />
+		<result column="INVESTOR_TYPE" property="investorType" jdbcType="VARCHAR" />
+		<result column="RMB_INVE_AMOUNT" property="rmbInveAmount" jdbcType="NUMERIC" />
+		<result column="GB" property="GB" jdbcType="VARCHAR" />
+		<result column="RMB_INTENDED_AMOUNT" property="rmbIntendedAmount" jdbcType="VARCHAR" />
+		<result column="SUM_TOTAL_FINANCIAL" property="sumTotalFinancial" jdbcType="VARCHAR" />
+		<result column="FINANCIALPROCESS" property="financialProcess" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.FundShareInfoModel">
+		INSERT INTO RZ_T_FUND_SHARE_INFO (PK_ID,FUND_ID,INVESTOR_ID,INVE_ROLE,INVE_AMOUNT,INVE_CURRENCY,TOTAL_FINANCIAL,TOTAL_FIN_CURRENCY,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,CLOSE_ROUND,ENTE_ID,CAPITAL_SOURCE,INVE_TYPE,RAISE_AMOUNT,IS_FINANCING_PLATFORM,INVE_PROPERTY,INVESTOR_NAME,INVESTOR_TYPE,RMB_INVE_AMOUNT,RMB_INTENDED_AMOUNT) values(#{pkId,jdbcType=VARCHAR},#{fundId,jdbcType=VARCHAR},#{investorId,jdbcType=VARCHAR},#{inveRole,jdbcType=VARCHAR},#{inveAmount,jdbcType=NUMERIC},#{inveCurrency,jdbcType=VARCHAR},#{totalFinancial,jdbcType=NUMERIC},#{totalFinCurrency,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{closeRound,jdbcType=NUMERIC},#{enteId,jdbcType=VARCHAR},#{capitalSource,jdbcType=VARCHAR},#{inveType,jdbcType=VARCHAR},#{raiseAmount,jdbcType=NUMERIC},#{isFinancingPlatform,jdbcType=VARCHAR}	,#{inveProperty,jdbcType=VARCHAR},#{investorName,jdbcType=VARCHAR},#{investorType,jdbcType=VARCHAR},#{rmbInveAmount,jdbcType=NUMERIC},#{rmbIntendedAmount,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO RZ_T_FUND_SHARE_INFO (PK_ID,FUND_ID,INVESTOR_ID,INVE_ROLE,INVE_AMOUNT,INVE_CURRENCY,TOTAL_FINANCIAL,TOTAL_FIN_CURRENCY,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,CLOSE_ROUND,ENTE_ID,CAPITAL_SOURCE,INVE_TYPE,RAISE_AMOUNT,IS_FINANCING_PLATFORM,INVE_PROPERTY,INVESTOR_NAME,INVESTOR_TYPE,RMB_INVE_AMOUNT)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.pkId,jdbcType=VARCHAR},
+				#{item.fundId,jdbcType=VARCHAR},
+				#{item.investorId,jdbcType=VARCHAR},
+				#{item.inveRole,jdbcType=VARCHAR},
+				#{item.inveAmount,jdbcType=NUMERIC},
+				#{item.inveCurrency,jdbcType=VARCHAR},
+				#{item.totalFinancial,jdbcType=NUMERIC},
+				#{item.totalFinCurrency,jdbcType=VARCHAR},
+				#{item.status,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+				#{item.closeRound,jdbcType=NUMERIC},
+				#{item.enteId,jdbcType=VARCHAR},
+				#{item.capitalSource,jdbcType=VARCHAR},
+				#{item.inveType,jdbcType=VARCHAR},
+				#{item.raiseAmount,jdbcType=NUMERIC},
+			    #{item.isFinancingPlatform,jdbcType=VARCHAR},
+			    #{item.inveProperty,jdbcType=VARCHAR},
+			    #{item.investorName,jdbcType=VARCHAR},
+			    #{item.investorType,jdbcType=VARCHAR},
+			    #{item.rmbInveAmount,jdbcType=NUMERIC}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  RZ_T_FUND_SHARE_INFO WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.FundShareInfoModel">
+		DELETE FROM RZ_T_FUND_SHARE_INFO
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="investorId != null and investorId != ''" >
+				AND INVESTOR_ID = #{investorId,jdbcType=VARCHAR}
+			</if>
+			<if test="inveRole != null and inveRole != ''" >
+				AND INVE_ROLE = #{inveRole,jdbcType=VARCHAR}
+			</if>
+			<if test="inveAmount != null and inveAmount != ''" >
+				AND INVE_AMOUNT = #{inveAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="inveCurrency != null and inveCurrency != ''" >
+				AND INVE_CURRENCY = #{inveCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="totalFinancial != null and totalFinancial != ''" >
+				AND TOTAL_FINANCIAL = #{totalFinancial,jdbcType=NUMERIC}
+			</if>
+			<if test="totalFinCurrency != null and totalFinCurrency != ''" >
+				AND TOTAL_FIN_CURRENCY = #{totalFinCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="closeRound != null and closeRound != ''" >
+				AND CLOSE_ROUND = #{closeRound,jdbcType=NUMERIC}
+			</if>
+			<if test="enteId != null and enteId != ''" >
+				AND ENTE_ID = #{enteId,jdbcType=VARCHAR}
+			</if>
+			<if test="capitalSource != null and capitalSource != ''" >
+				AND CAPITAL_SOURCE = #{capitalSource,jdbcType=VARCHAR}
+			</if>
+			<if test="inveType != null and inveType != ''" >
+				AND INVE_TYPE = #{inveType,jdbcType=VARCHAR}
+			</if>
+			<if test="raiseAmount != null and raiseAmount != ''" >
+				AND RAISE_AMOUNT = #{raiseAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="isFinancingPlatform != null and isFinancingPlatform != ''" >
+				AND IS_FINANCING_PLATFORM = #{isFinancingPlatform,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  RZ_T_FUND_SHARE_INFO WHERE PK_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.FundShareInfoModel">
+		UPDATE RZ_T_FUND_SHARE_INFO 
+		<set>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR},
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				FUND_ID = #{fundId,jdbcType=VARCHAR},
+			</if>
+			<if test="investorId != null and investorId != ''" >
+				INVESTOR_ID = #{investorId,jdbcType=VARCHAR},
+			</if>
+			<if test="inveRole != null and inveRole != ''" >
+				INVE_ROLE = #{inveRole,jdbcType=VARCHAR},
+			</if>
+			<if test="inveAmount != null" >
+				INVE_AMOUNT = #{inveAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="inveCurrency != null and inveCurrency != ''" >
+				INVE_CURRENCY = #{inveCurrency,jdbcType=VARCHAR},
+			</if>
+			<if test="totalFinancial != null and totalFinancial != ''" >
+				TOTAL_FINANCIAL = #{totalFinancial,jdbcType=NUMERIC},
+			</if>
+			<if test="totalFinCurrency != null and totalFinCurrency != ''" >
+				TOTAL_FIN_CURRENCY = #{totalFinCurrency,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="closeRound != null and closeRound != ''" >
+				CLOSE_ROUND = #{closeRound,jdbcType=NUMERIC},
+			</if>
+			<if test="enteId != null and enteId != ''" >
+				ENTE_ID = #{enteId,jdbcType=VARCHAR},
+			</if>
+			<if test="capitalSource != null and capitalSource != ''" >
+				CAPITAL_SOURCE = #{capitalSource,jdbcType=VARCHAR},
+			</if>
+			<if test="inveType != null and inveType != ''" >
+				INVE_TYPE = #{inveType,jdbcType=VARCHAR},
+			</if>
+			<if test="raiseAmount != null" >
+				RAISE_AMOUNT = #{raiseAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="isFinancingPlatform != null and isFinancingPlatform != ''" >
+				 IS_FINANCING_PLATFORM = #{isFinancingPlatform,jdbcType=VARCHAR},
+			</if>
+			<if test="inveProperty != null and inveProperty != ''" >
+				INVE_PROPERTY = #{inveProperty,jdbcType=VARCHAR},
+			</if>
+			<if test="investorName != null and investorName != ''" >
+				INVESTOR_NAME = #{investorName,jdbcType=VARCHAR},
+			</if>
+			<if test="investorType != null and investorType != ''" >
+				INVESTOR_TYPE = #{investorType,jdbcType=VARCHAR},
+			</if>
+			<if test="rmbInveAmount != null" >
+				RMB_INVE_AMOUNT = #{rmbInveAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="rmbIntendedAmount != null and rmbIntendedAmount != ''" >
+				RMB_INTENDED_AMOUNT = #{rmbIntendedAmount,jdbcType=VARCHAR},
+			</if>
+		</set>
+		WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="FundShareInfoResult">
+		SELECT * FROM RZ_T_FUND_SHARE_INFO WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.FundShareInfoModel" resultMap="FundShareInfoResult">
+		SELECT * FROM RZ_T_FUND_SHARE_INFO
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="investorId != null and investorId != ''" >
+				AND INVESTOR_ID = #{investorId,jdbcType=VARCHAR}
+			</if>
+			<if test="inveRole != null and inveRole != ''" >
+				AND INVE_ROLE = #{inveRole,jdbcType=VARCHAR}
+			</if>
+			<if test="inveAmount != null and inveAmount != ''" >
+				AND INVE_AMOUNT = #{inveAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="inveCurrency != null and inveCurrency != ''" >
+				AND INVE_CURRENCY = #{inveCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="totalFinancial != null and totalFinancial != ''" >
+				AND TOTAL_FINANCIAL = #{totalFinancial,jdbcType=NUMERIC}
+			</if>
+			<if test="totalFinCurrency != null and totalFinCurrency != ''" >
+				AND TOTAL_FIN_CURRENCY = #{totalFinCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="closeRound != null and closeRound != ''" >
+				AND CLOSE_ROUND = #{closeRound,jdbcType=NUMERIC}
+			</if>
+			<if test="enteId != null and enteId != ''" >
+				AND ENTE_ID = #{enteId,jdbcType=VARCHAR}
+			</if>
+			<if test="capitalSource != null and capitalSource != ''" >
+				AND CAPITAL_SOURCE = #{capitalSource,jdbcType=VARCHAR}
+			</if>
+			<if test="inveType != null and inveType != ''" >
+				AND INVE_TYPE = #{inveType,jdbcType=VARCHAR}
+			</if>
+			<if test="raiseAmount != null and raiseAmount != ''" >
+				AND RAISE_AMOUNT = #{raiseAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="isFinancingPlatform != null and isFinancingPlatform != ''" >
+				AND IS_FINANCING_PLATFORM = #{isFinancingPlatform,jdbcType=VARCHAR}
+			</if>
+			<if test="inveProperty != null and inveProperty != ''" >
+				AND INVE_PROPERTY = #{inveProperty,jdbcType=VARCHAR}
+			</if>
+			<if test="investorName != null and investorName != ''" >
+				AND INVESTOR_NAME = #{investorName,jdbcType=VARCHAR}
+			</if>
+			<if test="investorType != null and investorType != ''" >
+				AND INVESTOR_TYPE = #{investorType,jdbcType=VARCHAR}
+			</if>
+			<if test="rmbInveAmount != null and rmbInveAmount != ''" >
+				AND RMB_INVE_AMOUNT = #{rmbInveAmount,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT T.*,
+			T.INVE_AMOUNT / 10000 || ' 万元 人民币' as INVE_AMOUNT_DISPLAY,
+			T.TOTAL_FINANCIAL / 10000 || ' 万元 人民币' as INVE_CURRENCY_DISPLAY,
+			I.INVESTOR_NAME,
+			(CASE T.INVE_ROLE
+			WHEN '3' THEN
+			'2'
+			ELSE
+			I.INVESTOR_TYPE
+			END) AS INVESTOR_TYPE,
+
+			CASE
+			WHEN nvl(T.INVE_AMOUNT, 0) = 0 THEN
+			0
+			ELSE
+			ROUND((T.TOTAL_FINANCIAL / T.INVE_AMOUNT) * 100, 2)
+			END FINANCIALPROCESS,
+			ROUND(T.INVE_AMOUNT /
+			(SELECT SUM(T1.INVE_AMOUNT)
+			FROM RZ_T_FUND_SHARE_INFO T1
+			LEFT JOIN BD_T_INVE_INFO I
+			ON T1.INVESTOR_ID = I.INVESTOR_ID
+			WHERE T1.STATUS = '0'
+			AND T1.FUND_ID = T.FUND_ID
+			and FUND_ID = ${paramMap.FUND_ID}
+			and CLOSE_ROUND = (SELECT MAX(T0.CLOSE_ROUND)
+			FROM RZ_T_FUND_SHARE_INFO T0
+			WHERE T0.FUND_ID = ${paramMap.FUND_ID}
+			AND T0.STATUS = '0')
+
+			) * 100,
+			2) || '%' as GB,
+			(SELECT SUM(T2.INVE_AMOUNT)
+			FROM RZ_T_FUND_SHARE_INFO T2
+			WHERE 1 = 1
+			AND T2.STATUS = '0'
+			and FUND_ID = ${paramMap.FUND_ID}
+			and CLOSE_ROUND = (SELECT MAX(T0.CLOSE_ROUND)
+			FROM RZ_T_FUND_SHARE_INFO T0
+			WHERE T0.FUND_ID = ${paramMap.FUND_ID}
+			AND T0.STATUS = '0')
+
+			) AS SUM_INVE_AMOUNT
+			FROM RZ_T_FUND_SHARE_INFO T
+			LEFT JOIN BD_T_INVE_INFO I
+			ON T.INVESTOR_ID = I.INVESTOR_ID
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+		and FUND_ID = ${paramMap.FUND_ID}
+		and CLOSE_ROUND = (SELECT MAX(T0.CLOSE_ROUND)
+		FROM RZ_T_FUND_SHARE_INFO T0
+		WHERE T0.FUND_ID = ${paramMap.FUND_ID}
+		AND T0.STATUS = '0')
+	</sql>
+
+	<select id="selectListPage" resultMap="FundShareInfoResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+<sql id="searchSql1">
+		SELECT DISTINCT c.INVESTOR_NAME,d.FUND_NAME,a.* FROM
+		RZ_T_FUND_SHARE_INFO a
+		left join  BD_T_INVE_INFO c on a.INVESTOR_ID=c.INVESTOR_ID
+		left join BD_T_FUND_INFO d on d.FUND_ID=a.FUND_ID
+	<where>
+		c.status='0'and a.status='0' and d.status='1'
+		<if test="searchBean.fundId!=null and searchBean.fundId != ''">
+			AND a.FUND_ID= #{searchBean.fundId,jdbcType=VARCHAR}
+		</if>
+		<if test="searchBean.investorName != null and searchBean.investorName != ''" >
+			AND c.INVESTOR_NAME like #{searchBean.investorName}
+		</if>
+		<include refid="searchCondition.searchClause" />
+	</where>
+</sql>
+	<select id="selectFundShareInfoPage" resultMap="FundInfoResult11" parameterType="com.founder.ssm.core.common.SearchCondition">
+		<include refid="searchSql1" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.FundShareInfoModel">
+		SELECT COUNT(*) FROM RZ_T_FUND_SHARE_INFO
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="investorId != null and investorId != ''" >
+				AND INVESTOR_ID = #{investorId,jdbcType=VARCHAR}
+			</if>
+			<if test="inveRole != null and inveRole != ''" >
+				AND INVE_ROLE = #{inveRole,jdbcType=VARCHAR}
+			</if>
+			<if test="inveAmount != null and inveAmount != ''" >
+				AND INVE_AMOUNT = #{inveAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="inveCurrency != null and inveCurrency != ''" >
+				AND INVE_CURRENCY = #{inveCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="totalFinancial != null and totalFinancial != ''" >
+				AND TOTAL_FINANCIAL = #{totalFinancial,jdbcType=NUMERIC}
+			</if>
+			<if test="totalFinCurrency != null and totalFinCurrency != ''" >
+				AND TOTAL_FIN_CURRENCY = #{totalFinCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="closeRound != null and closeRound != ''" >
+				AND CLOSE_ROUND = #{closeRound,jdbcType=NUMERIC}
+			</if>
+			<if test="enteId != null and enteId != ''" >
+				AND ENTE_ID = #{enteId,jdbcType=VARCHAR}
+			</if>
+			<if test="capitalSource != null and capitalSource != ''" >
+				AND CAPITAL_SOURCE = #{capitalSource,jdbcType=VARCHAR}
+			</if>
+			<if test="inveType != null and inveType != ''" >
+				AND INVE_TYPE = #{inveType,jdbcType=VARCHAR}
+			</if>
+			<if test="raiseAmount != null and raiseAmount != ''" >
+				AND RAISE_AMOUNT = #{raiseAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="isFinancingPlatform != null and isFinancingPlatform != ''" >
+				AND IS_FINANCING_PLATFORM = #{isFinancingPlatform,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.FundShareInfoModel" resultMap="FundShareInfoResult2">
+		SELECT
+		S.PK_ID,
+		S.FUND_ID,
+		S.INVESTOR_ID,
+		S.INVE_ROLE,
+		S.INVE_AMOUNT,
+		S.INVE_CURRENCY,
+		S.TOTAL_FINANCIAL,
+		S.TOTAL_FIN_CURRENCY,
+		S.STATUS,
+		S.CREATE_BY,
+		S.CREATE_DT,
+		S.UPDATE_BY,
+		S.UPDATE_DT,
+		S.CLOSE_ROUND,
+		S.ENTE_ID,
+		S.CAPITAL_SOURCE,
+		S.INVE_TYPE,
+		S.RAISE_AMOUNT,
+		S.IS_FINANCING_PLATFORM,
+		S.INVE_PROPERTY,
+		S.INVESTOR_TYPE,
+		S.RMB_INVE_AMOUNT,
+		S.RMB_INTENDED_AMOUNT,
+		I.INVESTOR_NAME
+	    FROM RZ_T_FUND_SHARE_INFO S
+		LEFT JOIN BD_T_INVE_INFO I
+		ON S.INVESTOR_ID = I.INVESTOR_ID
+		<where>
+			<![CDATA[and nvl(S.STATUS,'0')<1]]>
+
+			<if test="pkId != null and pkId != ''" >
+				AND PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND S.FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="investorId != null and investorId != ''" >
+				AND INVESTOR_ID = #{investorId,jdbcType=VARCHAR}
+			</if>
+			<if test="inveRole != null and inveRole != ''" >
+				AND INVE_ROLE = #{inveRole,jdbcType=VARCHAR}
+			</if>
+			<if test="inveAmount != null and inveAmount != ''" >
+				AND INVE_AMOUNT = #{inveAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="inveCurrency != null and inveCurrency != ''" >
+				AND INVE_CURRENCY = #{inveCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="totalFinancial != null and totalFinancial != ''" >
+				AND TOTAL_FINANCIAL = #{totalFinancial,jdbcType=NUMERIC}
+			</if>
+			<if test="totalFinCurrency != null and totalFinCurrency != ''" >
+				AND TOTAL_FIN_CURRENCY = #{totalFinCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="closeRound != null and closeRound != ''" >
+				AND CLOSE_ROUND = #{closeRound,jdbcType=NUMERIC}
+			</if>
+			<if test="enteId != null and enteId != ''" >
+				AND S.ENTE_ID = #{enteId,jdbcType=VARCHAR}
+			</if>
+			<if test="capitalSource != null and capitalSource != ''" >
+				AND CAPITAL_SOURCE = #{capitalSource,jdbcType=VARCHAR}
+			</if>
+			<if test="inveType != null and inveType != ''" >
+				AND INVE_TYPE = #{inveType,jdbcType=VARCHAR}
+			</if>
+			<if test="raiseAmount != null and raiseAmount != ''" >
+				AND RAISE_AMOUNT = #{raiseAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="isFinancingPlatform != null and isFinancingPlatform != ''" >
+				AND IS_FINANCING_PLATFORM = #{isFinancingPlatform,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="FundShareInfoResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<select id="selectFundSharePage" resultType="java.util.HashMap" parameterType="com.founder.ssm.core.common.SearchCondition">
+       select aa.*,(inveAmount-bjjAoney)as shAnount from(
+       SELECT 	a.REG_NAME as regName,sum(b.INVE_AMOUNT) as inveAmount ,sum(c.PAYMENT_AMOUNT) as paymentAmount,sum(decode(g.ENTE_ID,'0',b.INVE_AMOUNT,'0'))as bjjAoney
+			from EI.RZ_T_FUND_SHARE_INFO b
+			inner join EI.BD_T_FUND_INFO a on a.FUND_ID = b.FUND_ID
+			left join EI.RZ_T_FUND_SHARE_ITEM c on  b.PK_ID = c.PK_ID
+			left join EI.BD_T_INVE_INFO g  on   b.INVESTOR_ID = g.INVESTOR_ID
+			WHERE b.STATUS='0' and c.STATUS='0'and g.STATUS='0'
+			group by a.REG_NAME
+	    )aa
+	</select>
+	<select id="selectByItemListPage" resultMap="FundShareInfoResult111" parameterType="com.founder.ssm.core.common.SearchCondition">
+        select B.* from
+		EI.RZ_T_FUND_SHARE_INFO A
+		left join EI.RZ_T_FUND_SHARE_ITEM B  on  A.PK_ID = B.PK_ID
+		<where>
+		 <include refid="searchCondition.searchClause" />
+		</where>
+	</select>
+
+	<select id="selectListByEntId" parameterType="com.ppmg.ei.model.FundShareInfoModel" resultMap="FundShareInfoResult">
+		select * from RZ_T_FUND_SHARE_INFO
+		where  fund_id=#{fundId,jdbcType=VARCHAR}
+		and <![CDATA[nvl(ENTE_ID,'0.1')>0]]>
+	</select>
+    <select id="getSumPayAmount" parameterType="com.ppmg.ei.model.FundShareInfoModel" resultType="Double">
+        select sum(PAYMENT_AMOUNT)from
+        RZ_T_FUND_SHARE_ITEM
+        where pk_id in(
+        select PK_ID from RZ_T_FUND_SHARE_INFO
+        where fund_id=#{fundId} and INVESTOR_ID=#{investorId}
+        )
+        and status!='9'
+        <if test="itemId!=null and itemId!=''">
+            AND itemId  <![CDATA[<=#{itemId}]]>
+        </if>
+    </select>
+
+	<!--*********************以下============代管基金管理===出资信息=============以下********************************************-->
+
+	<resultMap id="FundShareInfoResultAllCZ" type="com.ppmg.ei.model.FundShareInfoModel">
+		<result column="PK_ID" property="pkId" jdbcType="VARCHAR" />
+		<result column="FUND_ID" property="fundId" jdbcType="VARCHAR" />
+		<result column="INVESTOR_ID" property="investorId" jdbcType="VARCHAR" />
+		<result column="INVE_ROLE" property="inveRole" jdbcType="VARCHAR" />
+		<result column="INVE_AMOUNT" property="inveAmount" jdbcType="NUMERIC" />
+		<result column="INVE_CURRENCY" property="inveCurrency" jdbcType="VARCHAR" />
+		<result column="TOTAL_FINANCIAL" property="totalFinancial" jdbcType="NUMERIC" />
+		<result column="TOTAL_FIN_CURRENCY" property="totalFinCurrency" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="CLOSE_ROUND" property="closeRound" jdbcType="NUMERIC" />
+		<result column="ENTE_ID" property="enteId" jdbcType="VARCHAR" />
+		<result column="CAPITAL_SOURCE" property="capitalSource" jdbcType="VARCHAR" />
+		<result column="INVE_TYPE" property="inveType" jdbcType="VARCHAR" />
+		<result column="RAISE_AMOUNT" property="raiseAmount" jdbcType="NUMERIC" />
+		<result column="IS_FINANCING_PLATFORM" property="isFinancingPlatform" jdbcType="VARCHAR" />
+		<result column="INVE_NATURE" property="inveNature" jdbcType="VARCHAR" />
+		<result column="RMB_INTENDED_AMOUNT" property="rmbIntendedAmount" jdbcType="NUMERIC" />
+	</resultMap>
+	<!--分页查询出资信息列表-->
+	<sql id="searchSqlCZ">
+		SELECT * FROM RZ_T_FUND_SHARE_INFO
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPageFundShareInfoListCZ" resultMap="FundShareInfoResultAllCZ" parameterType="com.founder.ssm.core.common.SearchCondition">
+		<include refid="searchSqlCZ" />
+	</select>
+
+	<!--出资信息,增加-->
+	<insert id="insertFundShareInfoCZ" parameterType="List">
+		INSERT INTO RZ_T_FUND_SHARE_INFO (PK_ID,FUND_ID,INVESTOR_ID,INVE_ROLE,INVE_AMOUNT,INVE_CURRENCY
+		,TOTAL_FINANCIAL,TOTAL_FIN_CURRENCY,STATUS,CREATE_BY,UPDATE_BY,CLOSE_ROUND
+		,ENTE_ID,CAPITAL_SOURCE,INVE_TYPE,RAISE_AMOUNT,IS_FINANCING_PLATFORM,INVE_NATURE,RMB_INTENDED_AMOUNT)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+			#{item.pkId,jdbcType=VARCHAR},
+			#{item.fundId,jdbcType=VARCHAR},
+			#{item.investorId,jdbcType=VARCHAR},
+			#{item.inveRole,jdbcType=VARCHAR},
+			#{item.inveAmount,jdbcType=NUMERIC},
+			#{item.inveCurrency,jdbcType=VARCHAR},
+			#{item.totalFinancial,jdbcType=NUMERIC},
+			#{item.totalFinCurrency,jdbcType=VARCHAR},
+			#{item.status,jdbcType=VARCHAR},
+			#{item.createBy,jdbcType=VARCHAR},
+			#{item.updateBy,jdbcType=VARCHAR},
+			#{item.closeRound,jdbcType=NUMERIC},
+			#{item.enteId,jdbcType=VARCHAR},
+			#{item.capitalSource,jdbcType=VARCHAR},
+			#{item.inveType,jdbcType=VARCHAR},
+			#{item.raiseAmount,jdbcType=NUMERIC},
+			#{item.isFinancingPlatform,jdbcType=VARCHAR},
+			#{item.inveNature,jdbcType=VARCHAR},
+			#{item.rmbIntendedAmount,jdbcType=VARCHAR}
+			from dual)
+		</foreach>
+	</insert>
+	<!--主键，序列-->
+	<select id="getSeqFundShareInfoKey" parameterType="java.lang.String" resultType="String">
+		select ${value}.nextval SEQVALUE from dual
+	</select>
+	<!--2.出资信息,更新-->
+	<update id="updateFundShareInfoCZ" parameterType="com.ppmg.ei.model.FundShareInfoModel">
+		UPDATE RZ_T_FUND_SHARE_INFO
+		<set>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR},
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				FUND_ID = #{fundId,jdbcType=VARCHAR},
+			</if>
+			<if test="investorId != null and investorId != ''" >
+				INVESTOR_ID = #{investorId,jdbcType=VARCHAR},
+			</if>
+			<if test="inveRole != null and inveRole != ''" >
+				INVE_ROLE = #{inveRole,jdbcType=VARCHAR},
+			</if>
+			<if test="inveAmount != null and inveAmount != ''" >
+				INVE_AMOUNT = #{inveAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="inveCurrency != null and inveCurrency != ''" >
+				INVE_CURRENCY = #{inveCurrency,jdbcType=VARCHAR},
+			</if>
+			<if test="totalFinancial != null and totalFinancial != ''" >
+				TOTAL_FINANCIAL = #{totalFinancial,jdbcType=NUMERIC},
+			</if>
+			<if test="totalFinCurrency != null and totalFinCurrency != ''" >
+				TOTAL_FIN_CURRENCY = #{totalFinCurrency,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="closeRound != null and closeRound != ''" >
+				CLOSE_ROUND = #{closeRound,jdbcType=NUMERIC},
+			</if>
+			<if test="enteId != null and enteId != ''" >
+				ENTE_ID = #{enteId,jdbcType=VARCHAR},
+			</if>
+			<if test="capitalSource != null and capitalSource != ''" >
+				CAPITAL_SOURCE = #{capitalSource,jdbcType=VARCHAR},
+			</if>
+			<if test="inveType != null and inveType != ''" >
+				INVE_TYPE = #{inveType,jdbcType=VARCHAR},
+			</if>
+			<if test="raiseAmount != null and raiseAmount != ''" >
+				RAISE_AMOUNT = #{raiseAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="isFinancingPlatform != null and isFinancingPlatform != ''" >
+				IS_FINANCING_PLATFORM = #{isFinancingPlatform,jdbcType=VARCHAR},
+			</if>
+			<if test="inveNature != null and inveNature != ''" >
+				INVE_NATURE = #{inveNature,jdbcType=VARCHAR},
+			</if>
+			<if test="rmbIntendedAmount != null and rmbIntendedAmount != ''" >
+				RMB_INTENDED_AMOUNT = #{rmbIntendedAmount,jdbcType=VARCHAR},
+			</if>
+		</set>
+		WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</update>
+
+	<!--出资信息查询详情-->
+	<select id="selectByIdDetailsCZ" parameterType="String" resultMap ="FundShareInfoDetailesCZ">
+		<!--SELECT * FROM RZ_T_FUND_SHARE_INFO i
+		left join XJL_T_FUND_LEDGER_MAG m on
+		i.FUND_ID = m.PK_ID where i.PK_ID = #{pkId,jdbcType=VARCHAR}
+		-->
+		SELECT * FROM RZ_T_FUND_SHARE_INFO i where i.PK_ID = #{pkId,jdbcType=VARCHAR}
+	</select>
+	<resultMap id="FundShareInfoDetailesCZ" type="com.ppmg.ei.model.FundShareInfoModel" extends="FundShareInfoResultAllCZ">
+		<collection property="fundLedgerMagModel" ofType="com.ppmg.ei.model.FundLedgerMagModel">
+			<result column="LEDGER_ID" property="ledgerId" jdbcType="VARCHAR" />
+			<result column="PAYMENT_ORDER" property="paymentOrder" jdbcType="VARCHAR" />
+			<result column="FUND_ID" property="fundId" jdbcType="VARCHAR" />
+			<result column="REL_PLAN_ID" property="relPlanId" jdbcType="VARCHAR" />
+			<result column="LEDGER_TYPE" property="ledgerType" jdbcType="VARCHAR" />
+			<result column="LEDGER_OBJECT" property="ledgerObject" jdbcType="VARCHAR" />
+			<result column="OBJECT_ID" property="objectId" jdbcType="VARCHAR" />
+			<result column="OBJECT_NAME" property="objectName" jdbcType="VARCHAR" />
+			<result column="ID_NO" property="idNo" jdbcType="VARCHAR" />
+			<result column="CONTACT" property="contact" jdbcType="VARCHAR" />
+			<result column="CONTACT_NO" property="contactNo" jdbcType="VARCHAR" />
+			<result column="ACCOUNT_BANK" property="accountBank" jdbcType="VARCHAR" />
+			<result column="ACCOUNT_NO" property="accountNo" jdbcType="VARCHAR" />
+			<result column="PAY_WAY" property="payWay" jdbcType="VARCHAR" />
+			<result column="QUIT_WAY" property="quitWay" jdbcType="VARCHAR" />
+			<result column="OCCUR_DT" property="occurDt" jdbcType="TIMESTAMP" />
+			<result column="OCCUR_AMOUNT" property="occurAmount" jdbcType="NUMERIC" />
+			<result column="OCCUR_CURR" property="occurCurr" jdbcType="VARCHAR" />
+			<result column="RMB_INVE_AMOUNT" property="rmbInveAmount" jdbcType="NUMERIC" />
+			<result column="SHARES_RATE" property="sharesRate" jdbcType="NUMERIC" />
+			<result column="AMOUNT_ADD" property="amountAdd" jdbcType="NUMERIC" />
+			<result column="STATUS" property="status" jdbcType="VARCHAR" />
+			<result column="LATER_PLAN" property="laterPlan" jdbcType="VARCHAR" />
+			<result column="LEDGER_ACCOUNT" property="ledgerAccount" jdbcType="VARCHAR" />
+			<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+			<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+			<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+			<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+			<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+			<result column="LEDGER_TYPE_BK" property="ledgerTypeBk" jdbcType="VARCHAR" />
+			<result column="RMB_INVE_AMOUNT_BK" property="rmbInveAmountBk" jdbcType="NUMERIC" />
+			<result column="IS_EFFECTIVE" property="isEffective" jdbcType="VARCHAR" />
+		</collection>
+	</resultMap>
+
+	<!--分页查询与本公司基金关系列表-->
+	<sql id="searchSqlCZGX">
+		SELECT
+		a6.pk_id,
+		a6.investor_id,
+		a6.fund_id,
+		a6.inve_amount,
+		a6.gb,
+		a6.total_financial,
+		a1.fund_name
+		FROM RZ_T_FUND_SHARE_INFO a6 left join BD_T_FUND_INFO a1 on a1.fund_id = a6.fund_id
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPageWhitCompanyRelationCZ" resultMap="WhitCompanyRelationCZ" parameterType="com.founder.ssm.core.common.SearchCondition">
+		<include refid="searchSqlCZGX" />
+	</select>
+
+	<resultMap id="WhitCompanyRelationCZ" type="com.ppmg.ei.model.FundShareInfoModel" extends="FundShareInfoResultAllCZ">
+		<result column="FUND_NAME" property="fundName" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="selectInveAmountSum" resultType="Double" parameterType="String">
+		SELECT sum(INVE_AMOUNT) FROM rz_t_fund_share_info where fund_id = #{fundId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="getFundShareList" resultMap="FundShareInfoResult33" parameterType="com.founder.ssm.core.common.SearchCondition">
+		select a.*,
+		CASE WHEN nvl(a.RMB_INVE_AMOUNT,0)=0 THEN 0
+		ELSE
+		ROUND((a.SUM_TOTAL_FINANCIAL / a.RMB_INVE_AMOUNT) * 100, 2)
+		END
+		FINANCIALPROCESS
+		from (SELECT T.*,
+		 ROUND(T.RMB_INVE_AMOUNT/(
+           SELECT SUM(T1.RMB_INVE_AMOUNT)  FROM RZ_T_FUND_SHARE_INFO T1
+           LEFT JOIN BD_T_INVE_INFO I ON T1.INVESTOR_ID = I.INVESTOR_ID
+           WHERE T1.STATUS = '0' AND T1.FUND_ID=T.FUND_ID
+		    group by T1.FUND_ID
+          )*100, 4
+					)as GB,
+		(select sum(RMB_INVE_AMOUNT) from XJL_T_LEDGER_MAG aa  where  aa.ledger_Type='1' and
+		aa.PROJ_ID=#{paramMap.projId} AND aa.OBJECT_ID=T.INVESTOR_ID group by OBJECT_ID,PROJ_ID) AS SUM_TOTAL_FINANCIAL
+		FROM RZ_T_FUND_SHARE_INFO T
+		LEFT JOIN BD_T_INVE_INFO I ON T.INVESTOR_ID=I.INVESTOR_ID
+		)a
+		<where>
+			a.STATUS='0'
+			<include refid="searchCondition.searchClause" />
+		</where>
+        order by a.CREATE_DT desc
+
+	</select>
+
+	<select id="selectListByList" parameterType="com.ppmg.ei.model.FundShareInfoModel" resultMap="FundShareInfoResult">
+       select * from RZ_T_FUND_SHARE_INFO
+		<where>
+			<![CDATA[and nvl(STATUS,'0')<1]]>
+			<if test="pkId != null and pkId != ''" >
+				AND PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="investorId != null and investorId != ''" >
+				AND INVESTOR_ID = #{investorId,jdbcType=VARCHAR}
+			</if>
+			<if test="inveRole != null and inveRole != ''" >
+				AND INVE_ROLE = #{inveRole,jdbcType=VARCHAR}
+			</if>
+			<if test="inveAmount != null and inveAmount != ''" >
+				AND INVE_AMOUNT = #{inveAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="inveCurrency != null and inveCurrency != ''" >
+				AND INVE_CURRENCY = #{inveCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="totalFinancial != null and totalFinancial != ''" >
+				AND TOTAL_FINANCIAL = #{totalFinancial,jdbcType=NUMERIC}
+			</if>
+			<if test="totalFinCurrency != null and totalFinCurrency != ''" >
+				AND TOTAL_FIN_CURRENCY = #{totalFinCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="closeRound != null and closeRound != ''" >
+				AND CLOSE_ROUND = #{closeRound,jdbcType=NUMERIC}
+			</if>
+			<if test="enteId != null and enteId != ''" >
+				AND ENTE_ID = #{enteId,jdbcType=VARCHAR}
+			</if>
+			<if test="capitalSource != null and capitalSource != ''" >
+				AND CAPITAL_SOURCE = #{capitalSource,jdbcType=VARCHAR}
+			</if>
+			<if test="inveType != null and inveType != ''" >
+				AND INVE_TYPE = #{inveType,jdbcType=VARCHAR}
+			</if>
+			<if test="raiseAmount != null and raiseAmount != ''" >
+				AND RAISE_AMOUNT = #{raiseAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="isFinancingPlatform != null and isFinancingPlatform != ''" >
+				AND IS_FINANCING_PLATFORM = #{isFinancingPlatform,jdbcType=VARCHAR}
+			</if>
+		</where>
+
+
+	</select>
+
+</mapper>

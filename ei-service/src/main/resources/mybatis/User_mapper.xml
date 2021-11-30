@@ -1,0 +1,1066 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="User">
+	<!-- start autocreate -->
+
+	<resultMap id="UserResult" type="com.ppmg.ei.model.UserModel">
+		<result column="ID" property="id" jdbcType="NUMERIC" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+		<result column="GUID" property="guid" jdbcType="CHAR" />
+		<result column="CREATEDDATE" property="createddate" jdbcType="TIMESTAMP" />
+		<result column="MODIFIEDDATE" property="modifieddate" jdbcType="TIMESTAMP" />
+		<result column="READONLY" property="readonly" jdbcType="CHAR" />
+		<result column="NODELETE" property="nodelete" jdbcType="CHAR" />
+		<result column="LOGINNAME" property="loginname" jdbcType="VARCHAR" />
+		<result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+		<result column="EMAIL" property="email" jdbcType="VARCHAR" />
+		<result column="LEVELID" property="levelid" jdbcType="NUMERIC" />
+		<result column="DUTYLEVELID" property="dutylevelid" jdbcType="NUMERIC" />
+		<result column="DISABLED" property="disabled" jdbcType="CHAR" />
+		<result column="NODISABLE" property="nodisable" jdbcType="CHAR" />
+		<result column="LASTLOGIN" property="lastlogin" jdbcType="TIMESTAMP" />
+		<result column="LAST_VISITED_PAGE" property="lastVisitedPage" jdbcType="NUMERIC" />
+		<result column="SORTORDER" property="sortorder" jdbcType="NUMERIC" />
+		<result column="PRIORITY" property="priority" jdbcType="NUMERIC" />
+		<result column="NTACCOUT" property="ntaccout" jdbcType="VARCHAR" />
+		<result column="RECORDTYPE" property="recordtype" jdbcType="NUMERIC" />
+		<result column="PHONE" property="phone" jdbcType="VARCHAR" />
+		<result column="MOBILEPHONE" property="mobilephone" jdbcType="VARCHAR" />
+		<result column="LENDCOPIES" property="lendcopies" jdbcType="NUMERIC" />
+		<result column="RECORDNUMPERPAGE" property="recordnumperpage" jdbcType="NUMERIC" />
+		<result column="FRAMEPERPAGE" property="frameperpage" jdbcType="NUMERIC" />
+		<result column="VERIFIED" property="verified" jdbcType="NUMERIC" />
+		<result column="ISABSENT" property="isabsent" jdbcType="NUMERIC" />
+		<result column="SUBSTITUTE" property="substitute" jdbcType="NUMERIC" />
+		<result column="SEXY" property="sexy" jdbcType="NUMERIC" />
+		<result column="USERTYPE" property="usertype" jdbcType="NUMERIC" />
+		<result column="GROUPCODE" property="groupcode" jdbcType="VARCHAR" />
+		<result column="PTYPE" property="ptype" jdbcType="NUMERIC" />
+		<result column="SALARY" property="salary" jdbcType="NUMERIC" />
+		<result column="ORGCODE" property="orgcode" jdbcType="VARCHAR" />
+		<result column="GROUPLEVEL" property="grouplevel" jdbcType="NUMERIC" />
+		<result column="IDCARDNO" property="idcardno" jdbcType="VARCHAR" />
+		<result column="LABEL" property="label" jdbcType="VARCHAR" />
+		<result column="DUTY" property="duty" jdbcType="VARCHAR" />
+		<result column="PL" property="pl" jdbcType="VARCHAR" />
+		<result column="DISPLAYNAME" property="displayname" jdbcType="VARCHAR" />
+		<result column="IF_FIRST_LOGIN" property="ifFirstLogin" jdbcType="CHAR" />
+		<result column="ID_TYPE" property="idType" jdbcType="VARCHAR" />
+		<result column="QQ" property="qq" jdbcType="VARCHAR" />
+		<result column="IFMODIFYPASSWORD" property="ifmodifypassword" jdbcType="CHAR" />
+		<result column="FAX" property="fax" jdbcType="VARCHAR" />
+		<result column="JOB_ID" property="jobId" jdbcType="VARCHAR" />
+		<result column="BIRTHDAY" property="birthday" jdbcType="TIMESTAMP" />
+		<result column="ID_NO" property="idNo" jdbcType="VARCHAR" />
+		<result column="ORGID" property="orgid" jdbcType="NUMERIC" />
+		<result column="DEPTID" property="deptid" jdbcType="NUMERIC" />
+		<result column="HOUSEPHONE" property="housephone" jdbcType="VARCHAR" />
+		<result column="CORNETNO" property="cornetno" jdbcType="VARCHAR" />
+		<result column="EXCHANGE_PASSWORD" property="exchangePassword" jdbcType="VARCHAR" />
+		<result column="IS_SYNCHRONIZE" property="isSynchronize" jdbcType="VARCHAR" />
+		<result column="POST_ID" property="postId" jdbcType="VARCHAR" />
+		<result column="IS_DELETE" property="isDelete" jdbcType="NUMERIC" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.UserModel">
+		INSERT INTO BASE.APP_USER (ID,NAME,DESCRIPTION,GUID,CREATEDDATE,MODIFIEDDATE,READONLY,NODELETE,LOGINNAME,PASSWORD,EMAIL,LEVELID,DUTYLEVELID,DISABLED,NODISABLE,LASTLOGIN,LAST_VISITED_PAGE,SORTORDER,PRIORITY,NTACCOUT,RECORDTYPE,PHONE,MOBILEPHONE,LENDCOPIES,RECORDNUMPERPAGE,FRAMEPERPAGE,VERIFIED,ISABSENT,SUBSTITUTE,SEXY,USERTYPE,GROUPCODE,PTYPE,SALARY,ORGCODE,GROUPLEVEL,IDCARDNO,LABEL,DUTY,PL,DISPLAYNAME,IF_FIRST_LOGIN,ID_TYPE,QQ,IFMODIFYPASSWORD,FAX,JOB_ID,BIRTHDAY,ID_NO,ORGID,DEPTID,HOUSEPHONE,CORNETNO,EXCHANGE_PASSWORD,IS_SYNCHRONIZE,POST_ID,IS_DELETE) values(#{id,jdbcType=NUMERIC},#{name,jdbcType=VARCHAR},#{description,jdbcType=VARCHAR},#{guid,jdbcType=CHAR},#{createddate,jdbcType=TIMESTAMP},#{modifieddate,jdbcType=TIMESTAMP},#{readonly,jdbcType=CHAR},#{nodelete,jdbcType=CHAR},#{loginname,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},#{levelid,jdbcType=NUMERIC},#{dutylevelid,jdbcType=NUMERIC},#{disabled,jdbcType=CHAR},#{nodisable,jdbcType=CHAR},#{lastlogin,jdbcType=TIMESTAMP},#{lastVisitedPage,jdbcType=NUMERIC},#{sortorder,jdbcType=NUMERIC},#{priority,jdbcType=NUMERIC},#{ntaccout,jdbcType=VARCHAR},#{recordtype,jdbcType=NUMERIC},#{phone,jdbcType=VARCHAR},#{mobilephone,jdbcType=VARCHAR},#{lendcopies,jdbcType=NUMERIC},#{recordnumperpage,jdbcType=NUMERIC},#{frameperpage,jdbcType=NUMERIC},#{verified,jdbcType=NUMERIC},#{isabsent,jdbcType=NUMERIC},#{substitute,jdbcType=NUMERIC},#{sexy,jdbcType=NUMERIC},#{usertype,jdbcType=NUMERIC},#{groupcode,jdbcType=VARCHAR},#{ptype,jdbcType=NUMERIC},#{salary,jdbcType=NUMERIC},#{orgcode,jdbcType=VARCHAR},#{grouplevel,jdbcType=NUMERIC},#{idcardno,jdbcType=VARCHAR},#{label,jdbcType=VARCHAR},#{duty,jdbcType=VARCHAR},#{pl,jdbcType=VARCHAR},#{displayname,jdbcType=VARCHAR},#{ifFirstLogin,jdbcType=CHAR},#{idType,jdbcType=VARCHAR},#{qq,jdbcType=VARCHAR},#{ifmodifypassword,jdbcType=CHAR},#{fax,jdbcType=VARCHAR},#{jobId,jdbcType=VARCHAR},#{birthday,jdbcType=TIMESTAMP},#{idNo,jdbcType=VARCHAR},#{orgid,jdbcType=NUMERIC},#{deptid,jdbcType=NUMERIC},#{housephone,jdbcType=VARCHAR},#{cornetno,jdbcType=VARCHAR},#{exchangePassword,jdbcType=VARCHAR},#{isSynchronize,jdbcType=VARCHAR},#{postId,jdbcType=VARCHAR},#{isDelete,jdbcType=NUMERIC})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO BASE.APP_USER (ID,NAME,DESCRIPTION,GUID,CREATEDDATE,MODIFIEDDATE,READONLY,NODELETE,LOGINNAME,PASSWORD,EMAIL,LEVELID,DUTYLEVELID,DISABLED,NODISABLE,LASTLOGIN,LAST_VISITED_PAGE,SORTORDER,PRIORITY,NTACCOUT,RECORDTYPE,PHONE,MOBILEPHONE,LENDCOPIES,RECORDNUMPERPAGE,FRAMEPERPAGE,VERIFIED,ISABSENT,SUBSTITUTE,SEXY,USERTYPE,GROUPCODE,PTYPE,SALARY,ORGCODE,GROUPLEVEL,IDCARDNO,LABEL,DUTY,PL,DISPLAYNAME,IF_FIRST_LOGIN,ID_TYPE,QQ,IFMODIFYPASSWORD,FAX,JOB_ID,BIRTHDAY,ID_NO,ORGID,DEPTID,HOUSEPHONE,CORNETNO,EXCHANGE_PASSWORD,IS_SYNCHRONIZE,POST_ID,IS_DELETE)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.id,jdbcType=NUMERIC},
+				#{item.name,jdbcType=VARCHAR},
+				#{item.description,jdbcType=VARCHAR},
+				#{item.guid,jdbcType=CHAR},
+				#{item.createddate,jdbcType=TIMESTAMP},
+				#{item.modifieddate,jdbcType=TIMESTAMP},
+				#{item.readonly,jdbcType=CHAR},
+				#{item.nodelete,jdbcType=CHAR},
+				#{item.loginname,jdbcType=VARCHAR},
+				#{item.password,jdbcType=VARCHAR},
+				#{item.email,jdbcType=VARCHAR},
+				#{item.levelid,jdbcType=NUMERIC},
+				#{item.dutylevelid,jdbcType=NUMERIC},
+				#{item.disabled,jdbcType=CHAR},
+				#{item.nodisable,jdbcType=CHAR},
+				#{item.lastlogin,jdbcType=TIMESTAMP},
+				#{item.lastVisitedPage,jdbcType=NUMERIC},
+				#{item.sortorder,jdbcType=NUMERIC},
+				#{item.priority,jdbcType=NUMERIC},
+				#{item.ntaccout,jdbcType=VARCHAR},
+				#{item.recordtype,jdbcType=NUMERIC},
+				#{item.phone,jdbcType=VARCHAR},
+				#{item.mobilephone,jdbcType=VARCHAR},
+				#{item.lendcopies,jdbcType=NUMERIC},
+				#{item.recordnumperpage,jdbcType=NUMERIC},
+				#{item.frameperpage,jdbcType=NUMERIC},
+				#{item.verified,jdbcType=NUMERIC},
+				#{item.isabsent,jdbcType=NUMERIC},
+				#{item.substitute,jdbcType=NUMERIC},
+				#{item.sexy,jdbcType=NUMERIC},
+				#{item.usertype,jdbcType=NUMERIC},
+				#{item.groupcode,jdbcType=VARCHAR},
+				#{item.ptype,jdbcType=NUMERIC},
+				#{item.salary,jdbcType=NUMERIC},
+				#{item.orgcode,jdbcType=VARCHAR},
+				#{item.grouplevel,jdbcType=NUMERIC},
+				#{item.idcardno,jdbcType=VARCHAR},
+				#{item.label,jdbcType=VARCHAR},
+				#{item.duty,jdbcType=VARCHAR},
+				#{item.pl,jdbcType=VARCHAR},
+				#{item.displayname,jdbcType=VARCHAR},
+				#{item.ifFirstLogin,jdbcType=CHAR},
+				#{item.idType,jdbcType=VARCHAR},
+				#{item.qq,jdbcType=VARCHAR},
+				#{item.ifmodifypassword,jdbcType=CHAR},
+				#{item.fax,jdbcType=VARCHAR},
+				#{item.jobId,jdbcType=VARCHAR},
+				#{item.birthday,jdbcType=TIMESTAMP},
+				#{item.idNo,jdbcType=VARCHAR},
+				#{item.orgid,jdbcType=NUMERIC},
+				#{item.deptid,jdbcType=NUMERIC},
+				#{item.housephone,jdbcType=VARCHAR},
+				#{item.cornetno,jdbcType=VARCHAR},
+				#{item.exchangePassword,jdbcType=VARCHAR},
+				#{item.isSynchronize,jdbcType=VARCHAR},
+				#{item.postId,jdbcType=VARCHAR},
+				#{item.isDelete,jdbcType=NUMERIC}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  BASE.APP_USER WHERE ID = #{id,jdbcType=NUMERIC}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.UserModel">
+		DELETE FROM BASE.APP_USER
+		<where>
+			<if test="id != null and id != ''" >
+				ID = #{id,jdbcType=NUMERIC}
+			</if>
+			<if test="name != null and name != ''" >
+				AND NAME = #{name,jdbcType=VARCHAR}
+			</if>
+			<if test="description != null and description != ''" >
+				AND DESCRIPTION = #{description,jdbcType=VARCHAR}
+			</if>
+			<if test="guid != null and guid != ''" >
+				AND GUID = #{guid,jdbcType=CHAR}
+			</if>
+			<if test="createddate != null" >
+				AND CREATEDDATE = #{createddate,jdbcType=VARCHAR}
+			</if>
+			<if test="modifieddate != null" >
+				AND MODIFIEDDATE = #{modifieddate,jdbcType=VARCHAR}
+			</if>
+			<if test="readonly != null and readonly != ''" >
+				AND READONLY = #{readonly,jdbcType=CHAR}
+			</if>
+			<if test="nodelete != null and nodelete != ''" >
+				AND NODELETE = #{nodelete,jdbcType=CHAR}
+			</if>
+			<if test="loginname != null and loginname != ''" >
+				AND LOGINNAME = #{loginname,jdbcType=VARCHAR}
+			</if>
+			<if test="password != null and password != ''" >
+				AND PASSWORD = #{password,jdbcType=VARCHAR}
+			</if>
+			<if test="email != null and email != ''" >
+				AND EMAIL = #{email,jdbcType=VARCHAR}
+			</if>
+			<if test="levelid != null and levelid != ''" >
+				AND LEVELID = #{levelid,jdbcType=NUMERIC}
+			</if>
+			<if test="dutylevelid != null and dutylevelid != ''" >
+				AND DUTYLEVELID = #{dutylevelid,jdbcType=NUMERIC}
+			</if>
+			<if test="disabled != null and disabled != ''" >
+				AND DISABLED = #{disabled,jdbcType=CHAR}
+			</if>
+			<if test="nodisable != null and nodisable != ''" >
+				AND NODISABLE = #{nodisable,jdbcType=CHAR}
+			</if>
+			<if test="lastlogin != null" >
+				AND LASTLOGIN = #{lastlogin,jdbcType=VARCHAR}
+			</if>
+			<if test="lastVisitedPage != null and lastVisitedPage != ''" >
+				AND LAST_VISITED_PAGE = #{lastVisitedPage,jdbcType=NUMERIC}
+			</if>
+			<if test="sortorder != null and sortorder != ''" >
+				AND SORTORDER = #{sortorder,jdbcType=NUMERIC}
+			</if>
+			<if test="priority != null and priority != ''" >
+				AND PRIORITY = #{priority,jdbcType=NUMERIC}
+			</if>
+			<if test="ntaccout != null and ntaccout != ''" >
+				AND NTACCOUT = #{ntaccout,jdbcType=VARCHAR}
+			</if>
+			<if test="recordtype != null and recordtype != ''" >
+				AND RECORDTYPE = #{recordtype,jdbcType=NUMERIC}
+			</if>
+			<if test="phone != null and phone != ''" >
+				AND PHONE = #{phone,jdbcType=VARCHAR}
+			</if>
+			<if test="mobilephone != null and mobilephone != ''" >
+				AND MOBILEPHONE = #{mobilephone,jdbcType=VARCHAR}
+			</if>
+			<if test="lendcopies != null and lendcopies != ''" >
+				AND LENDCOPIES = #{lendcopies,jdbcType=NUMERIC}
+			</if>
+			<if test="recordnumperpage != null and recordnumperpage != ''" >
+				AND RECORDNUMPERPAGE = #{recordnumperpage,jdbcType=NUMERIC}
+			</if>
+			<if test="frameperpage != null and frameperpage != ''" >
+				AND FRAMEPERPAGE = #{frameperpage,jdbcType=NUMERIC}
+			</if>
+			<if test="verified != null and verified != ''" >
+				AND VERIFIED = #{verified,jdbcType=NUMERIC}
+			</if>
+			<if test="isabsent != null and isabsent != ''" >
+				AND ISABSENT = #{isabsent,jdbcType=NUMERIC}
+			</if>
+			<if test="substitute != null and substitute != ''" >
+				AND SUBSTITUTE = #{substitute,jdbcType=NUMERIC}
+			</if>
+			<if test="sexy != null and sexy != ''" >
+				AND SEXY = #{sexy,jdbcType=NUMERIC}
+			</if>
+			<if test="usertype != null and usertype != ''" >
+				AND USERTYPE = #{usertype,jdbcType=NUMERIC}
+			</if>
+			<if test="groupcode != null and groupcode != ''" >
+				AND GROUPCODE = #{groupcode,jdbcType=VARCHAR}
+			</if>
+			<if test="ptype != null and ptype != ''" >
+				AND PTYPE = #{ptype,jdbcType=NUMERIC}
+			</if>
+			<if test="salary != null and salary != ''" >
+				AND SALARY = #{salary,jdbcType=NUMERIC}
+			</if>
+			<if test="orgcode != null and orgcode != ''" >
+				AND ORGCODE = #{orgcode,jdbcType=VARCHAR}
+			</if>
+			<if test="grouplevel != null and grouplevel != ''" >
+				AND GROUPLEVEL = #{grouplevel,jdbcType=NUMERIC}
+			</if>
+			<if test="idcardno != null and idcardno != ''" >
+				AND IDCARDNO = #{idcardno,jdbcType=VARCHAR}
+			</if>
+			<if test="label != null and label != ''" >
+				AND LABEL = #{label,jdbcType=VARCHAR}
+			</if>
+			<if test="duty != null and duty != ''" >
+				AND DUTY = #{duty,jdbcType=VARCHAR}
+			</if>
+			<if test="pl != null and pl != ''" >
+				AND PL = #{pl,jdbcType=VARCHAR}
+			</if>
+			<if test="displayname != null and displayname != ''" >
+				AND DISPLAYNAME = #{displayname,jdbcType=VARCHAR}
+			</if>
+			<if test="ifFirstLogin != null and ifFirstLogin != ''" >
+				AND IF_FIRST_LOGIN = #{ifFirstLogin,jdbcType=CHAR}
+			</if>
+			<if test="idType != null and idType != ''" >
+				AND ID_TYPE = #{idType,jdbcType=VARCHAR}
+			</if>
+			<if test="qq != null and qq != ''" >
+				AND QQ = #{qq,jdbcType=VARCHAR}
+			</if>
+			<if test="ifmodifypassword != null and ifmodifypassword != ''" >
+				AND IFMODIFYPASSWORD = #{ifmodifypassword,jdbcType=CHAR}
+			</if>
+			<if test="fax != null and fax != ''" >
+				AND FAX = #{fax,jdbcType=VARCHAR}
+			</if>
+			<if test="jobId != null and jobId != ''" >
+				AND JOB_ID = #{jobId,jdbcType=VARCHAR}
+			</if>
+			<if test="birthday != null" >
+				AND BIRTHDAY = #{birthday,jdbcType=VARCHAR}
+			</if>
+			<if test="idNo != null and idNo != ''" >
+				AND ID_NO = #{idNo,jdbcType=VARCHAR}
+			</if>
+			<if test="orgid != null and orgid != ''" >
+				AND ORGID = #{orgid,jdbcType=NUMERIC}
+			</if>
+			<if test="deptid != null and deptid != ''" >
+				AND DEPTID = #{deptid,jdbcType=NUMERIC}
+			</if>
+			<if test="housephone != null and housephone != ''" >
+				AND HOUSEPHONE = #{housephone,jdbcType=VARCHAR}
+			</if>
+			<if test="cornetno != null and cornetno != ''" >
+				AND CORNETNO = #{cornetno,jdbcType=VARCHAR}
+			</if>
+			<if test="exchangePassword != null and exchangePassword != ''" >
+				AND EXCHANGE_PASSWORD = #{exchangePassword,jdbcType=VARCHAR}
+			</if>
+			<if test="isSynchronize != null and isSynchronize != ''" >
+				AND IS_SYNCHRONIZE = #{isSynchronize,jdbcType=VARCHAR}
+			</if>
+			<if test="postId != null and postId != ''" >
+				AND POST_ID = #{postId,jdbcType=VARCHAR}
+			</if>
+			<if test="isDelete != null and isDelete != ''" >
+				AND IS_DELETE = #{isDelete,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  BASE.APP_USER WHERE ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.UserModel">
+		UPDATE BASE.APP_USER 
+		<set>
+			<if test="id != null and id != ''" >
+				ID = #{id,jdbcType=NUMERIC},
+			</if>
+			<if test="name != null and name != ''" >
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null and description != ''" >
+				DESCRIPTION = #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="guid != null and guid != ''" >
+				GUID = #{guid,jdbcType=CHAR},
+			</if>
+			<if test="createddate != null" >
+				CREATEDDATE = #{createddate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifieddate != null" >
+				MODIFIEDDATE = #{modifieddate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="readonly != null and readonly != ''" >
+				READONLY = #{readonly,jdbcType=CHAR},
+			</if>
+			<if test="nodelete != null and nodelete != ''" >
+				NODELETE = #{nodelete,jdbcType=CHAR},
+			</if>
+			<if test="loginname != null and loginname != ''" >
+				LOGINNAME = #{loginname,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null and password != ''" >
+				PASSWORD = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null and email != ''" >
+				EMAIL = #{email,jdbcType=VARCHAR},
+			</if>
+			<if test="levelid != null and levelid != ''" >
+				LEVELID = #{levelid,jdbcType=NUMERIC},
+			</if>
+			<if test="dutylevelid != null and dutylevelid != ''" >
+				DUTYLEVELID = #{dutylevelid,jdbcType=NUMERIC},
+			</if>
+			<if test="disabled != null and disabled != ''" >
+				DISABLED = #{disabled,jdbcType=CHAR},
+			</if>
+			<if test="nodisable != null and nodisable != ''" >
+				NODISABLE = #{nodisable,jdbcType=CHAR},
+			</if>
+			<if test="lastlogin != null" >
+				LASTLOGIN = #{lastlogin,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastVisitedPage != null and lastVisitedPage != ''" >
+				LAST_VISITED_PAGE = #{lastVisitedPage,jdbcType=NUMERIC},
+			</if>
+			<if test="sortorder != null and sortorder != ''" >
+				SORTORDER = #{sortorder,jdbcType=NUMERIC},
+			</if>
+			<if test="priority != null and priority != ''" >
+				PRIORITY = #{priority,jdbcType=NUMERIC},
+			</if>
+			<if test="ntaccout != null and ntaccout != ''" >
+				NTACCOUT = #{ntaccout,jdbcType=VARCHAR},
+			</if>
+			<if test="recordtype != null and recordtype != ''" >
+				RECORDTYPE = #{recordtype,jdbcType=NUMERIC},
+			</if>
+			<if test="phone != null and phone != ''" >
+				PHONE = #{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="mobilephone != null and mobilephone != ''" >
+				MOBILEPHONE = #{mobilephone,jdbcType=VARCHAR},
+			</if>
+			<if test="lendcopies != null and lendcopies != ''" >
+				LENDCOPIES = #{lendcopies,jdbcType=NUMERIC},
+			</if>
+			<if test="recordnumperpage != null and recordnumperpage != ''" >
+				RECORDNUMPERPAGE = #{recordnumperpage,jdbcType=NUMERIC},
+			</if>
+			<if test="frameperpage != null and frameperpage != ''" >
+				FRAMEPERPAGE = #{frameperpage,jdbcType=NUMERIC},
+			</if>
+			<if test="verified != null and verified != ''" >
+				VERIFIED = #{verified,jdbcType=NUMERIC},
+			</if>
+			<if test="isabsent != null and isabsent != ''" >
+				ISABSENT = #{isabsent,jdbcType=NUMERIC},
+			</if>
+			<if test="substitute != null and substitute != ''" >
+				SUBSTITUTE = #{substitute,jdbcType=NUMERIC},
+			</if>
+			<if test="sexy != null and sexy != ''" >
+				SEXY = #{sexy,jdbcType=NUMERIC},
+			</if>
+			<if test="usertype != null and usertype != ''" >
+				USERTYPE = #{usertype,jdbcType=NUMERIC},
+			</if>
+			<if test="groupcode != null and groupcode != ''" >
+				GROUPCODE = #{groupcode,jdbcType=VARCHAR},
+			</if>
+			<if test="ptype != null and ptype != ''" >
+				PTYPE = #{ptype,jdbcType=NUMERIC},
+			</if>
+			<if test="salary != null and salary != ''" >
+				SALARY = #{salary,jdbcType=NUMERIC},
+			</if>
+			<if test="orgcode != null and orgcode != ''" >
+				ORGCODE = #{orgcode,jdbcType=VARCHAR},
+			</if>
+			<if test="grouplevel != null and grouplevel != ''" >
+				GROUPLEVEL = #{grouplevel,jdbcType=NUMERIC},
+			</if>
+			<if test="idcardno != null and idcardno != ''" >
+				IDCARDNO = #{idcardno,jdbcType=VARCHAR},
+			</if>
+			<if test="label != null and label != ''" >
+				LABEL = #{label,jdbcType=VARCHAR},
+			</if>
+			<if test="duty != null and duty != ''" >
+				DUTY = #{duty,jdbcType=VARCHAR},
+			</if>
+			<if test="pl != null and pl != ''" >
+				PL = #{pl,jdbcType=VARCHAR},
+			</if>
+			<if test="displayname != null and displayname != ''" >
+				DISPLAYNAME = #{displayname,jdbcType=VARCHAR},
+			</if>
+			<if test="ifFirstLogin != null and ifFirstLogin != ''" >
+				IF_FIRST_LOGIN = #{ifFirstLogin,jdbcType=CHAR},
+			</if>
+			<if test="idType != null and idType != ''" >
+				ID_TYPE = #{idType,jdbcType=VARCHAR},
+			</if>
+			<if test="qq != null and qq != ''" >
+				QQ = #{qq,jdbcType=VARCHAR},
+			</if>
+			<if test="ifmodifypassword != null and ifmodifypassword != ''" >
+				IFMODIFYPASSWORD = #{ifmodifypassword,jdbcType=CHAR},
+			</if>
+			<if test="fax != null and fax != ''" >
+				FAX = #{fax,jdbcType=VARCHAR},
+			</if>
+			<if test="jobId != null and jobId != ''" >
+				JOB_ID = #{jobId,jdbcType=VARCHAR},
+			</if>
+			<if test="birthday != null" >
+				BIRTHDAY = #{birthday,jdbcType=TIMESTAMP},
+			</if>
+			<if test="idNo != null and idNo != ''" >
+				ID_NO = #{idNo,jdbcType=VARCHAR},
+			</if>
+			<if test="orgid != null and orgid != ''" >
+				ORGID = #{orgid,jdbcType=NUMERIC},
+			</if>
+			<if test="deptid != null and deptid != ''" >
+				DEPTID = #{deptid,jdbcType=NUMERIC},
+			</if>
+			<if test="housephone != null and housephone != ''" >
+				HOUSEPHONE = #{housephone,jdbcType=VARCHAR},
+			</if>
+			<if test="cornetno != null and cornetno != ''" >
+				CORNETNO = #{cornetno,jdbcType=VARCHAR},
+			</if>
+			<if test="exchangePassword != null and exchangePassword != ''" >
+				EXCHANGE_PASSWORD = #{exchangePassword,jdbcType=VARCHAR},
+			</if>
+			<if test="isSynchronize != null and isSynchronize != ''" >
+				IS_SYNCHRONIZE = #{isSynchronize,jdbcType=VARCHAR},
+			</if>
+			<if test="postId != null and postId != ''" >
+				POST_ID = #{postId,jdbcType=VARCHAR},
+			</if>
+			<if test="isDelete != null and isDelete != ''" >
+				IS_DELETE = #{isDelete,jdbcType=NUMERIC},
+			</if>
+		</set>
+		WHERE ID = #{id,jdbcType=NUMERIC}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="UserResult">
+		SELECT * FROM BASE.APP_USER WHERE ID = #{id,jdbcType=NUMERIC}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.UserModel" resultMap="UserResult">
+		SELECT * FROM BASE.APP_USER
+		<where>
+			<if test="id != null and id != ''" >
+				ID = #{id,jdbcType=NUMERIC}
+			</if>
+			<if test="name != null and name != ''" >
+				AND NAME = #{name,jdbcType=VARCHAR}
+			</if>
+			<if test="description != null and description != ''" >
+				AND DESCRIPTION = #{description,jdbcType=VARCHAR}
+			</if>
+			<if test="guid != null and guid != ''" >
+				AND GUID = #{guid,jdbcType=CHAR}
+			</if>
+			<if test="createddate != null" >
+				AND CREATEDDATE = #{createddate,jdbcType=VARCHAR}
+			</if>
+			<if test="modifieddate != null" >
+				AND MODIFIEDDATE = #{modifieddate,jdbcType=VARCHAR}
+			</if>
+			<if test="readonly != null and readonly != ''" >
+				AND READONLY = #{readonly,jdbcType=CHAR}
+			</if>
+			<if test="nodelete != null and nodelete != ''" >
+				AND NODELETE = #{nodelete,jdbcType=CHAR}
+			</if>
+			<if test="loginname != null and loginname != ''" >
+				AND LOGINNAME = #{loginname,jdbcType=VARCHAR}
+			</if>
+			<if test="password != null and password != ''" >
+				AND PASSWORD = #{password,jdbcType=VARCHAR}
+			</if>
+			<if test="email != null and email != ''" >
+				AND EMAIL = #{email,jdbcType=VARCHAR}
+			</if>
+			<if test="levelid != null and levelid != ''" >
+				AND LEVELID = #{levelid,jdbcType=NUMERIC}
+			</if>
+			<if test="dutylevelid != null and dutylevelid != ''" >
+				AND DUTYLEVELID = #{dutylevelid,jdbcType=NUMERIC}
+			</if>
+			<if test="disabled != null and disabled != ''" >
+				AND DISABLED = #{disabled,jdbcType=CHAR}
+			</if>
+			<if test="nodisable != null and nodisable != ''" >
+				AND NODISABLE = #{nodisable,jdbcType=CHAR}
+			</if>
+			<if test="lastlogin != null" >
+				AND LASTLOGIN = #{lastlogin,jdbcType=VARCHAR}
+			</if>
+			<if test="lastVisitedPage != null and lastVisitedPage != ''" >
+				AND LAST_VISITED_PAGE = #{lastVisitedPage,jdbcType=NUMERIC}
+			</if>
+			<if test="sortorder != null and sortorder != ''" >
+				AND SORTORDER = #{sortorder,jdbcType=NUMERIC}
+			</if>
+			<if test="priority != null and priority != ''" >
+				AND PRIORITY = #{priority,jdbcType=NUMERIC}
+			</if>
+			<if test="ntaccout != null and ntaccout != ''" >
+				AND NTACCOUT = #{ntaccout,jdbcType=VARCHAR}
+			</if>
+			<if test="recordtype != null and recordtype != ''" >
+				AND RECORDTYPE = #{recordtype,jdbcType=NUMERIC}
+			</if>
+			<if test="phone != null and phone != ''" >
+				AND PHONE = #{phone,jdbcType=VARCHAR}
+			</if>
+			<if test="mobilephone != null and mobilephone != ''" >
+				AND MOBILEPHONE = #{mobilephone,jdbcType=VARCHAR}
+			</if>
+			<if test="lendcopies != null and lendcopies != ''" >
+				AND LENDCOPIES = #{lendcopies,jdbcType=NUMERIC}
+			</if>
+			<if test="recordnumperpage != null and recordnumperpage != ''" >
+				AND RECORDNUMPERPAGE = #{recordnumperpage,jdbcType=NUMERIC}
+			</if>
+			<if test="frameperpage != null and frameperpage != ''" >
+				AND FRAMEPERPAGE = #{frameperpage,jdbcType=NUMERIC}
+			</if>
+			<if test="verified != null and verified != ''" >
+				AND VERIFIED = #{verified,jdbcType=NUMERIC}
+			</if>
+			<if test="isabsent != null and isabsent != ''" >
+				AND ISABSENT = #{isabsent,jdbcType=NUMERIC}
+			</if>
+			<if test="substitute != null and substitute != ''" >
+				AND SUBSTITUTE = #{substitute,jdbcType=NUMERIC}
+			</if>
+			<if test="sexy != null and sexy != ''" >
+				AND SEXY = #{sexy,jdbcType=NUMERIC}
+			</if>
+			<if test="usertype != null and usertype != ''" >
+				AND USERTYPE = #{usertype,jdbcType=NUMERIC}
+			</if>
+			<if test="groupcode != null and groupcode != ''" >
+				AND GROUPCODE = #{groupcode,jdbcType=VARCHAR}
+			</if>
+			<if test="ptype != null and ptype != ''" >
+				AND PTYPE = #{ptype,jdbcType=NUMERIC}
+			</if>
+			<if test="salary != null and salary != ''" >
+				AND SALARY = #{salary,jdbcType=NUMERIC}
+			</if>
+			<if test="orgcode != null and orgcode != ''" >
+				AND ORGCODE = #{orgcode,jdbcType=VARCHAR}
+			</if>
+			<if test="grouplevel != null and grouplevel != ''" >
+				AND GROUPLEVEL = #{grouplevel,jdbcType=NUMERIC}
+			</if>
+			<if test="idcardno != null and idcardno != ''" >
+				AND IDCARDNO = #{idcardno,jdbcType=VARCHAR}
+			</if>
+			<if test="label != null and label != ''" >
+				AND LABEL = #{label,jdbcType=VARCHAR}
+			</if>
+			<if test="duty != null and duty != ''" >
+				AND DUTY = #{duty,jdbcType=VARCHAR}
+			</if>
+			<if test="pl != null and pl != ''" >
+				AND PL = #{pl,jdbcType=VARCHAR}
+			</if>
+			<if test="displayname != null and displayname != ''" >
+				AND DISPLAYNAME = #{displayname,jdbcType=VARCHAR}
+			</if>
+			<if test="ifFirstLogin != null and ifFirstLogin != ''" >
+				AND IF_FIRST_LOGIN = #{ifFirstLogin,jdbcType=CHAR}
+			</if>
+			<if test="idType != null and idType != ''" >
+				AND ID_TYPE = #{idType,jdbcType=VARCHAR}
+			</if>
+			<if test="qq != null and qq != ''" >
+				AND QQ = #{qq,jdbcType=VARCHAR}
+			</if>
+			<if test="ifmodifypassword != null and ifmodifypassword != ''" >
+				AND IFMODIFYPASSWORD = #{ifmodifypassword,jdbcType=CHAR}
+			</if>
+			<if test="fax != null and fax != ''" >
+				AND FAX = #{fax,jdbcType=VARCHAR}
+			</if>
+			<if test="jobId != null and jobId != ''" >
+				AND JOB_ID = #{jobId,jdbcType=VARCHAR}
+			</if>
+			<if test="birthday != null" >
+				AND BIRTHDAY = #{birthday,jdbcType=VARCHAR}
+			</if>
+			<if test="idNo != null and idNo != ''" >
+				AND ID_NO = #{idNo,jdbcType=VARCHAR}
+			</if>
+			<if test="orgid != null and orgid != ''" >
+				AND ORGID = #{orgid,jdbcType=NUMERIC}
+			</if>
+			<if test="deptid != null and deptid != ''" >
+				AND DEPTID = #{deptid,jdbcType=NUMERIC}
+			</if>
+			<if test="housephone != null and housephone != ''" >
+				AND HOUSEPHONE = #{housephone,jdbcType=VARCHAR}
+			</if>
+			<if test="cornetno != null and cornetno != ''" >
+				AND CORNETNO = #{cornetno,jdbcType=VARCHAR}
+			</if>
+			<if test="exchangePassword != null and exchangePassword != ''" >
+				AND EXCHANGE_PASSWORD = #{exchangePassword,jdbcType=VARCHAR}
+			</if>
+			<if test="isSynchronize != null and isSynchronize != ''" >
+				AND IS_SYNCHRONIZE = #{isSynchronize,jdbcType=VARCHAR}
+			</if>
+			<if test="postId != null and postId != ''" >
+				AND POST_ID = #{postId,jdbcType=VARCHAR}
+			</if>
+			<if test="isDelete != null and isDelete != ''" >
+				AND IS_DELETE = #{isDelete,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM BASE.APP_USER
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="UserResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.UserModel">
+		SELECT COUNT(*) FROM BASE.APP_USER
+		<where>
+			<if test="id != null and id != ''" >
+				ID = #{id,jdbcType=NUMERIC}
+			</if>
+			<if test="name != null and name != ''" >
+				AND NAME = #{name,jdbcType=VARCHAR}
+			</if>
+			<if test="description != null and description != ''" >
+				AND DESCRIPTION = #{description,jdbcType=VARCHAR}
+			</if>
+			<if test="guid != null and guid != ''" >
+				AND GUID = #{guid,jdbcType=CHAR}
+			</if>
+			<if test="createddate != null" >
+				AND CREATEDDATE = #{createddate,jdbcType=VARCHAR}
+			</if>
+			<if test="modifieddate != null" >
+				AND MODIFIEDDATE = #{modifieddate,jdbcType=VARCHAR}
+			</if>
+			<if test="readonly != null and readonly != ''" >
+				AND READONLY = #{readonly,jdbcType=CHAR}
+			</if>
+			<if test="nodelete != null and nodelete != ''" >
+				AND NODELETE = #{nodelete,jdbcType=CHAR}
+			</if>
+			<if test="loginname != null and loginname != ''" >
+				AND LOGINNAME = #{loginname,jdbcType=VARCHAR}
+			</if>
+			<if test="password != null and password != ''" >
+				AND PASSWORD = #{password,jdbcType=VARCHAR}
+			</if>
+			<if test="email != null and email != ''" >
+				AND EMAIL = #{email,jdbcType=VARCHAR}
+			</if>
+			<if test="levelid != null and levelid != ''" >
+				AND LEVELID = #{levelid,jdbcType=NUMERIC}
+			</if>
+			<if test="dutylevelid != null and dutylevelid != ''" >
+				AND DUTYLEVELID = #{dutylevelid,jdbcType=NUMERIC}
+			</if>
+			<if test="disabled != null and disabled != ''" >
+				AND DISABLED = #{disabled,jdbcType=CHAR}
+			</if>
+			<if test="nodisable != null and nodisable != ''" >
+				AND NODISABLE = #{nodisable,jdbcType=CHAR}
+			</if>
+			<if test="lastlogin != null" >
+				AND LASTLOGIN = #{lastlogin,jdbcType=VARCHAR}
+			</if>
+			<if test="lastVisitedPage != null and lastVisitedPage != ''" >
+				AND LAST_VISITED_PAGE = #{lastVisitedPage,jdbcType=NUMERIC}
+			</if>
+			<if test="sortorder != null and sortorder != ''" >
+				AND SORTORDER = #{sortorder,jdbcType=NUMERIC}
+			</if>
+			<if test="priority != null and priority != ''" >
+				AND PRIORITY = #{priority,jdbcType=NUMERIC}
+			</if>
+			<if test="ntaccout != null and ntaccout != ''" >
+				AND NTACCOUT = #{ntaccout,jdbcType=VARCHAR}
+			</if>
+			<if test="recordtype != null and recordtype != ''" >
+				AND RECORDTYPE = #{recordtype,jdbcType=NUMERIC}
+			</if>
+			<if test="phone != null and phone != ''" >
+				AND PHONE = #{phone,jdbcType=VARCHAR}
+			</if>
+			<if test="mobilephone != null and mobilephone != ''" >
+				AND MOBILEPHONE = #{mobilephone,jdbcType=VARCHAR}
+			</if>
+			<if test="lendcopies != null and lendcopies != ''" >
+				AND LENDCOPIES = #{lendcopies,jdbcType=NUMERIC}
+			</if>
+			<if test="recordnumperpage != null and recordnumperpage != ''" >
+				AND RECORDNUMPERPAGE = #{recordnumperpage,jdbcType=NUMERIC}
+			</if>
+			<if test="frameperpage != null and frameperpage != ''" >
+				AND FRAMEPERPAGE = #{frameperpage,jdbcType=NUMERIC}
+			</if>
+			<if test="verified != null and verified != ''" >
+				AND VERIFIED = #{verified,jdbcType=NUMERIC}
+			</if>
+			<if test="isabsent != null and isabsent != ''" >
+				AND ISABSENT = #{isabsent,jdbcType=NUMERIC}
+			</if>
+			<if test="substitute != null and substitute != ''" >
+				AND SUBSTITUTE = #{substitute,jdbcType=NUMERIC}
+			</if>
+			<if test="sexy != null and sexy != ''" >
+				AND SEXY = #{sexy,jdbcType=NUMERIC}
+			</if>
+			<if test="usertype != null and usertype != ''" >
+				AND USERTYPE = #{usertype,jdbcType=NUMERIC}
+			</if>
+			<if test="groupcode != null and groupcode != ''" >
+				AND GROUPCODE = #{groupcode,jdbcType=VARCHAR}
+			</if>
+			<if test="ptype != null and ptype != ''" >
+				AND PTYPE = #{ptype,jdbcType=NUMERIC}
+			</if>
+			<if test="salary != null and salary != ''" >
+				AND SALARY = #{salary,jdbcType=NUMERIC}
+			</if>
+			<if test="orgcode != null and orgcode != ''" >
+				AND ORGCODE = #{orgcode,jdbcType=VARCHAR}
+			</if>
+			<if test="grouplevel != null and grouplevel != ''" >
+				AND GROUPLEVEL = #{grouplevel,jdbcType=NUMERIC}
+			</if>
+			<if test="idcardno != null and idcardno != ''" >
+				AND IDCARDNO = #{idcardno,jdbcType=VARCHAR}
+			</if>
+			<if test="label != null and label != ''" >
+				AND LABEL = #{label,jdbcType=VARCHAR}
+			</if>
+			<if test="duty != null and duty != ''" >
+				AND DUTY = #{duty,jdbcType=VARCHAR}
+			</if>
+			<if test="pl != null and pl != ''" >
+				AND PL = #{pl,jdbcType=VARCHAR}
+			</if>
+			<if test="displayname != null and displayname != ''" >
+				AND DISPLAYNAME = #{displayname,jdbcType=VARCHAR}
+			</if>
+			<if test="ifFirstLogin != null and ifFirstLogin != ''" >
+				AND IF_FIRST_LOGIN = #{ifFirstLogin,jdbcType=CHAR}
+			</if>
+			<if test="idType != null and idType != ''" >
+				AND ID_TYPE = #{idType,jdbcType=VARCHAR}
+			</if>
+			<if test="qq != null and qq != ''" >
+				AND QQ = #{qq,jdbcType=VARCHAR}
+			</if>
+			<if test="ifmodifypassword != null and ifmodifypassword != ''" >
+				AND IFMODIFYPASSWORD = #{ifmodifypassword,jdbcType=CHAR}
+			</if>
+			<if test="fax != null and fax != ''" >
+				AND FAX = #{fax,jdbcType=VARCHAR}
+			</if>
+			<if test="jobId != null and jobId != ''" >
+				AND JOB_ID = #{jobId,jdbcType=VARCHAR}
+			</if>
+			<if test="birthday != null" >
+				AND BIRTHDAY = #{birthday,jdbcType=VARCHAR}
+			</if>
+			<if test="idNo != null and idNo != ''" >
+				AND ID_NO = #{idNo,jdbcType=VARCHAR}
+			</if>
+			<if test="orgid != null and orgid != ''" >
+				AND ORGID = #{orgid,jdbcType=NUMERIC}
+			</if>
+			<if test="deptid != null and deptid != ''" >
+				AND DEPTID = #{deptid,jdbcType=NUMERIC}
+			</if>
+			<if test="housephone != null and housephone != ''" >
+				AND HOUSEPHONE = #{housephone,jdbcType=VARCHAR}
+			</if>
+			<if test="cornetno != null and cornetno != ''" >
+				AND CORNETNO = #{cornetno,jdbcType=VARCHAR}
+			</if>
+			<if test="exchangePassword != null and exchangePassword != ''" >
+				AND EXCHANGE_PASSWORD = #{exchangePassword,jdbcType=VARCHAR}
+			</if>
+			<if test="isSynchronize != null and isSynchronize != ''" >
+				AND IS_SYNCHRONIZE = #{isSynchronize,jdbcType=VARCHAR}
+			</if>
+			<if test="postId != null and postId != ''" >
+				AND POST_ID = #{postId,jdbcType=VARCHAR}
+			</if>
+			<if test="isDelete != null and isDelete != ''" >
+				AND IS_DELETE = #{isDelete,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.UserModel" resultMap="UserResult">
+		SELECT * FROM BASE.APP_USER
+		<where>
+			<if test="id != null and id != ''" >
+				ID = #{id,jdbcType=NUMERIC}
+			</if>
+			<if test="name != null and name != ''" >
+				AND NAME = #{name,jdbcType=VARCHAR}
+			</if>
+			<if test="description != null and description != ''" >
+				AND DESCRIPTION = #{description,jdbcType=VARCHAR}
+			</if>
+			<if test="guid != null and guid != ''" >
+				AND GUID = #{guid,jdbcType=CHAR}
+			</if>
+			<if test="createddate != null" >
+				AND CREATEDDATE = #{createddate,jdbcType=VARCHAR}
+			</if>
+			<if test="modifieddate != null" >
+				AND MODIFIEDDATE = #{modifieddate,jdbcType=VARCHAR}
+			</if>
+			<if test="readonly != null and readonly != ''" >
+				AND READONLY = #{readonly,jdbcType=CHAR}
+			</if>
+			<if test="nodelete != null and nodelete != ''" >
+				AND NODELETE = #{nodelete,jdbcType=CHAR}
+			</if>
+			<if test="loginname != null and loginname != ''" >
+				AND LOGINNAME = #{loginname,jdbcType=VARCHAR}
+			</if>
+			<if test="password != null and password != ''" >
+				AND PASSWORD = #{password,jdbcType=VARCHAR}
+			</if>
+			<if test="email != null and email != ''" >
+				AND EMAIL = #{email,jdbcType=VARCHAR}
+			</if>
+			<if test="levelid != null and levelid != ''" >
+				AND LEVELID = #{levelid,jdbcType=NUMERIC}
+			</if>
+			<if test="dutylevelid != null and dutylevelid != ''" >
+				AND DUTYLEVELID = #{dutylevelid,jdbcType=NUMERIC}
+			</if>
+			<if test="disabled != null and disabled != ''" >
+				AND DISABLED = #{disabled,jdbcType=CHAR}
+			</if>
+			<if test="nodisable != null and nodisable != ''" >
+				AND NODISABLE = #{nodisable,jdbcType=CHAR}
+			</if>
+			<if test="lastlogin != null" >
+				AND LASTLOGIN = #{lastlogin,jdbcType=VARCHAR}
+			</if>
+			<if test="lastVisitedPage != null and lastVisitedPage != ''" >
+				AND LAST_VISITED_PAGE = #{lastVisitedPage,jdbcType=NUMERIC}
+			</if>
+			<if test="sortorder != null and sortorder != ''" >
+				AND SORTORDER = #{sortorder,jdbcType=NUMERIC}
+			</if>
+			<if test="priority != null and priority != ''" >
+				AND PRIORITY = #{priority,jdbcType=NUMERIC}
+			</if>
+			<if test="ntaccout != null and ntaccout != ''" >
+				AND NTACCOUT = #{ntaccout,jdbcType=VARCHAR}
+			</if>
+			<if test="recordtype != null and recordtype != ''" >
+				AND RECORDTYPE = #{recordtype,jdbcType=NUMERIC}
+			</if>
+			<if test="phone != null and phone != ''" >
+				AND PHONE = #{phone,jdbcType=VARCHAR}
+			</if>
+			<if test="mobilephone != null and mobilephone != ''" >
+				AND MOBILEPHONE = #{mobilephone,jdbcType=VARCHAR}
+			</if>
+			<if test="lendcopies != null and lendcopies != ''" >
+				AND LENDCOPIES = #{lendcopies,jdbcType=NUMERIC}
+			</if>
+			<if test="recordnumperpage != null and recordnumperpage != ''" >
+				AND RECORDNUMPERPAGE = #{recordnumperpage,jdbcType=NUMERIC}
+			</if>
+			<if test="frameperpage != null and frameperpage != ''" >
+				AND FRAMEPERPAGE = #{frameperpage,jdbcType=NUMERIC}
+			</if>
+			<if test="verified != null and verified != ''" >
+				AND VERIFIED = #{verified,jdbcType=NUMERIC}
+			</if>
+			<if test="isabsent != null and isabsent != ''" >
+				AND ISABSENT = #{isabsent,jdbcType=NUMERIC}
+			</if>
+			<if test="substitute != null and substitute != ''" >
+				AND SUBSTITUTE = #{substitute,jdbcType=NUMERIC}
+			</if>
+			<if test="sexy != null and sexy != ''" >
+				AND SEXY = #{sexy,jdbcType=NUMERIC}
+			</if>
+			<if test="usertype != null and usertype != ''" >
+				AND USERTYPE = #{usertype,jdbcType=NUMERIC}
+			</if>
+			<if test="groupcode != null and groupcode != ''" >
+				AND GROUPCODE = #{groupcode,jdbcType=VARCHAR}
+			</if>
+			<if test="ptype != null and ptype != ''" >
+				AND PTYPE = #{ptype,jdbcType=NUMERIC}
+			</if>
+			<if test="salary != null and salary != ''" >
+				AND SALARY = #{salary,jdbcType=NUMERIC}
+			</if>
+			<if test="orgcode != null and orgcode != ''" >
+				AND ORGCODE = #{orgcode,jdbcType=VARCHAR}
+			</if>
+			<if test="grouplevel != null and grouplevel != ''" >
+				AND GROUPLEVEL = #{grouplevel,jdbcType=NUMERIC}
+			</if>
+			<if test="idcardno != null and idcardno != ''" >
+				AND IDCARDNO = #{idcardno,jdbcType=VARCHAR}
+			</if>
+			<if test="label != null and label != ''" >
+				AND LABEL = #{label,jdbcType=VARCHAR}
+			</if>
+			<if test="duty != null and duty != ''" >
+				AND DUTY = #{duty,jdbcType=VARCHAR}
+			</if>
+			<if test="pl != null and pl != ''" >
+				AND PL = #{pl,jdbcType=VARCHAR}
+			</if>
+			<if test="displayname != null and displayname != ''" >
+				AND DISPLAYNAME = #{displayname,jdbcType=VARCHAR}
+			</if>
+			<if test="ifFirstLogin != null and ifFirstLogin != ''" >
+				AND IF_FIRST_LOGIN = #{ifFirstLogin,jdbcType=CHAR}
+			</if>
+			<if test="idType != null and idType != ''" >
+				AND ID_TYPE = #{idType,jdbcType=VARCHAR}
+			</if>
+			<if test="qq != null and qq != ''" >
+				AND QQ = #{qq,jdbcType=VARCHAR}
+			</if>
+			<if test="ifmodifypassword != null and ifmodifypassword != ''" >
+				AND IFMODIFYPASSWORD = #{ifmodifypassword,jdbcType=CHAR}
+			</if>
+			<if test="fax != null and fax != ''" >
+				AND FAX = #{fax,jdbcType=VARCHAR}
+			</if>
+			<if test="jobId != null and jobId != ''" >
+				AND JOB_ID = #{jobId,jdbcType=VARCHAR}
+			</if>
+			<if test="birthday != null" >
+				AND BIRTHDAY = #{birthday,jdbcType=VARCHAR}
+			</if>
+			<if test="idNo != null and idNo != ''" >
+				AND ID_NO = #{idNo,jdbcType=VARCHAR}
+			</if>
+			<if test="orgid != null and orgid != ''" >
+				AND ORGID = #{orgid,jdbcType=NUMERIC}
+			</if>
+			<if test="deptid != null and deptid != ''" >
+				AND DEPTID = #{deptid,jdbcType=NUMERIC}
+			</if>
+			<if test="housephone != null and housephone != ''" >
+				AND HOUSEPHONE = #{housephone,jdbcType=VARCHAR}
+			</if>
+			<if test="cornetno != null and cornetno != ''" >
+				AND CORNETNO = #{cornetno,jdbcType=VARCHAR}
+			</if>
+			<if test="exchangePassword != null and exchangePassword != ''" >
+				AND EXCHANGE_PASSWORD = #{exchangePassword,jdbcType=VARCHAR}
+			</if>
+			<if test="isSynchronize != null and isSynchronize != ''" >
+				AND IS_SYNCHRONIZE = #{isSynchronize,jdbcType=VARCHAR}
+			</if>
+			<if test="postId != null and postId != ''" >
+				AND POST_ID = #{postId,jdbcType=VARCHAR}
+			</if>
+			<if test="isDelete != null and isDelete != ''" >
+				AND IS_DELETE = #{isDelete,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="UserResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+</mapper>

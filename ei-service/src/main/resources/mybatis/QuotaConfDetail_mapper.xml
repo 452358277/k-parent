@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="QuotaConfDetail">
+	<resultMap id="QuotaConfDetailResult2" type="com.ppmg.ei.model.QuotaConfDetailModel" extends="QuotaConfDetailResult">
+        <result column="NEW_RATE" property="newRate" jdbcType="VARCHAR" />
+		<association property="quotaInfoModel" resultMap="QuotaInfo.QuotaInfoResult" column="QUOTA_ID"></association>
+	</resultMap>
+	<!-- start autocreate -->
+
+	<resultMap id="QuotaConfDetailResult" type="com.ppmg.ei.model.QuotaConfDetailModel">
+		<result column="DETAIL_ID" property="detailId" jdbcType="VARCHAR" />
+		<result column="CONF_ID" property="confId" jdbcType="VARCHAR" />
+		<result column="QUOTA_ID" property="quotaId" jdbcType="VARCHAR" />
+		<result column="PLAN_VAL" property="planVal" jdbcType="NUMERIC" />
+		<result column="RESULT_Q1" property="resultQ1" jdbcType="NUMERIC" />
+		<result column="RESULT_Q2" property="resultQ2" jdbcType="NUMERIC" />
+		<result column="RESULT_Q3" property="resultQ3" jdbcType="NUMERIC" />
+		<result column="RESULT_Q4" property="resultQ4" jdbcType="NUMERIC" />
+		<result column="ORDER_NUM" property="orderNum" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.QuotaConfDetailModel">
+		INSERT INTO BI.JYJH_QUOTA_CONF_DETAIL (DETAIL_ID,CONF_ID,QUOTA_ID,PLAN_VAL,RESULT_Q1,RESULT_Q2,RESULT_Q3,RESULT_Q4,ORDER_NUM,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT) values(#{detailId,jdbcType=VARCHAR},#{confId,jdbcType=VARCHAR},#{quotaId,jdbcType=VARCHAR},#{planVal,jdbcType=NUMERIC},#{resultQ1,jdbcType=NUMERIC},#{resultQ2,jdbcType=NUMERIC},#{resultQ3,jdbcType=NUMERIC},#{resultQ4,jdbcType=NUMERIC},#{orderNum,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO BI.JYJH_QUOTA_CONF_DETAIL (DETAIL_ID,CONF_ID,QUOTA_ID,PLAN_VAL,RESULT_Q1,RESULT_Q2,RESULT_Q3,RESULT_Q4,ORDER_NUM,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.detailId,jdbcType=VARCHAR},
+				#{item.confId,jdbcType=VARCHAR},
+				#{item.quotaId,jdbcType=VARCHAR},
+				#{item.planVal,jdbcType=NUMERIC},
+				#{item.resultQ1,jdbcType=NUMERIC},
+				#{item.resultQ2,jdbcType=NUMERIC},
+				#{item.resultQ3,jdbcType=NUMERIC},
+				#{item.resultQ4,jdbcType=NUMERIC},
+				#{item.orderNum,jdbcType=VARCHAR},
+				#{item.status,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  BI.JYJH_QUOTA_CONF_DETAIL WHERE DETAIL_ID = #{detailId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.QuotaConfDetailModel">
+		DELETE FROM BI.JYJH_QUOTA_CONF_DETAIL
+		<where>
+			<if test="detailId != null and detailId != ''" >
+				DETAIL_ID = #{detailId,jdbcType=VARCHAR}
+			</if>
+			<if test="confId != null and confId != ''" >
+				AND CONF_ID = #{confId,jdbcType=VARCHAR}
+			</if>
+			<if test="quotaId != null and quotaId != ''" >
+				AND QUOTA_ID = #{quotaId,jdbcType=VARCHAR}
+			</if>
+			<if test="planVal != null and planVal != ''" >
+				AND PLAN_VAL = #{planVal,jdbcType=NUMERIC}
+			</if>
+			<if test="resultQ1 != null and resultQ1 != ''" >
+				AND RESULT_Q1 = #{resultQ1,jdbcType=NUMERIC}
+			</if>
+			<if test="resultQ2 != null and resultQ2 != ''" >
+				AND RESULT_Q2 = #{resultQ2,jdbcType=NUMERIC}
+			</if>
+			<if test="resultQ3 != null and resultQ3 != ''" >
+				AND RESULT_Q3 = #{resultQ3,jdbcType=NUMERIC}
+			</if>
+			<if test="resultQ4 != null and resultQ4 != ''" >
+				AND RESULT_Q4 = #{resultQ4,jdbcType=NUMERIC}
+			</if>
+			<if test="orderNum != null and orderNum != ''" >
+				AND ORDER_NUM = #{orderNum,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  BI.JYJH_QUOTA_CONF_DETAIL WHERE DETAIL_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.QuotaConfDetailModel">
+		UPDATE BI.JYJH_QUOTA_CONF_DETAIL 
+		<set>
+			<if test="detailId != null and detailId != ''" >
+				DETAIL_ID = #{detailId,jdbcType=VARCHAR},
+			</if>
+			<if test="confId != null and confId != ''" >
+				CONF_ID = #{confId,jdbcType=VARCHAR},
+			</if>
+			<if test="quotaId != null and quotaId != ''" >
+				QUOTA_ID = #{quotaId,jdbcType=VARCHAR},
+			</if>
+			<if test="planVal != null and planVal != ''" >
+				PLAN_VAL = #{planVal,jdbcType=NUMERIC},
+			</if>
+			<if test="resultQ1 != null and resultQ1 != ''" >
+				RESULT_Q1 = #{resultQ1,jdbcType=NUMERIC},
+			</if>
+			<if test="resultQ2 != null and resultQ2 != ''" >
+				RESULT_Q2 = #{resultQ2,jdbcType=NUMERIC},
+			</if>
+			<if test="resultQ3 != null and resultQ3 != ''" >
+				RESULT_Q3 = #{resultQ3,jdbcType=NUMERIC},
+			</if>
+			<if test="resultQ4 != null and resultQ4 != ''" >
+				RESULT_Q4 = #{resultQ4,jdbcType=NUMERIC},
+			</if>
+			<if test="orderNum != null and orderNum != ''" >
+				ORDER_NUM = #{orderNum,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		WHERE DETAIL_ID = #{detailId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="QuotaConfDetailResult">
+		SELECT * FROM BI.JYJH_QUOTA_CONF_DETAIL WHERE DETAIL_ID = #{detailId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.QuotaConfDetailModel" resultMap="QuotaConfDetailResult">
+		SELECT * FROM BI.JYJH_QUOTA_CONF_DETAIL
+		<where>
+			<if test="detailId != null and detailId != ''" >
+				DETAIL_ID = #{detailId,jdbcType=VARCHAR}
+			</if>
+			<if test="confId != null and confId != ''" >
+				AND CONF_ID = #{confId,jdbcType=VARCHAR}
+			</if>
+			<if test="quotaId != null and quotaId != ''" >
+				AND QUOTA_ID = #{quotaId,jdbcType=VARCHAR}
+			</if>
+			<if test="planVal != null and planVal != ''" >
+				AND PLAN_VAL = #{planVal,jdbcType=NUMERIC}
+			</if>
+			<if test="resultQ1 != null and resultQ1 != ''" >
+				AND RESULT_Q1 = #{resultQ1,jdbcType=NUMERIC}
+			</if>
+			<if test="resultQ2 != null and resultQ2 != ''" >
+				AND RESULT_Q2 = #{resultQ2,jdbcType=NUMERIC}
+			</if>
+			<if test="resultQ3 != null and resultQ3 != ''" >
+				AND RESULT_Q3 = #{resultQ3,jdbcType=NUMERIC}
+			</if>
+			<if test="resultQ4 != null and resultQ4 != ''" >
+				AND RESULT_Q4 = #{resultQ4,jdbcType=NUMERIC}
+			</if>
+			<if test="orderNum != null and orderNum != ''" >
+				AND ORDER_NUM = #{orderNum,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM BI.JYJH_QUOTA_CONF_DETAIL
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="QuotaConfDetailResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.QuotaConfDetailModel">
+		SELECT COUNT(*) FROM BI.JYJH_QUOTA_CONF_DETAIL
+		<where>
+			<if test="detailId != null and detailId != ''" >
+				DETAIL_ID = #{detailId,jdbcType=VARCHAR}
+			</if>
+			<if test="confId != null and confId != ''" >
+				AND CONF_ID = #{confId,jdbcType=VARCHAR}
+			</if>
+			<if test="quotaId != null and quotaId != ''" >
+				AND QUOTA_ID = #{quotaId,jdbcType=VARCHAR}
+			</if>
+			<if test="planVal != null and planVal != ''" >
+				AND PLAN_VAL = #{planVal,jdbcType=NUMERIC}
+			</if>
+			<if test="resultQ1 != null and resultQ1 != ''" >
+				AND RESULT_Q1 = #{resultQ1,jdbcType=NUMERIC}
+			</if>
+			<if test="resultQ2 != null and resultQ2 != ''" >
+				AND RESULT_Q2 = #{resultQ2,jdbcType=NUMERIC}
+			</if>
+			<if test="resultQ3 != null and resultQ3 != ''" >
+				AND RESULT_Q3 = #{resultQ3,jdbcType=NUMERIC}
+			</if>
+			<if test="resultQ4 != null and resultQ4 != ''" >
+				AND RESULT_Q4 = #{resultQ4,jdbcType=NUMERIC}
+			</if>
+			<if test="orderNum != null and orderNum != ''" >
+				AND ORDER_NUM = #{orderNum,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.QuotaConfDetailModel" resultMap="QuotaConfDetailResult">
+		SELECT * FROM BI.JYJH_QUOTA_CONF_DETAIL
+		<where>
+			<if test="detailId != null and detailId != ''" >
+				DETAIL_ID = #{detailId,jdbcType=VARCHAR}
+			</if>
+			<if test="confId != null and confId != ''" >
+				AND CONF_ID = #{confId,jdbcType=VARCHAR}
+			</if>
+			<if test="quotaId != null and quotaId != ''" >
+				AND QUOTA_ID = #{quotaId,jdbcType=VARCHAR}
+			</if>
+			<if test="planVal != null and planVal != ''" >
+				AND PLAN_VAL = #{planVal,jdbcType=NUMERIC}
+			</if>
+			<if test="resultQ1 != null and resultQ1 != ''" >
+				AND RESULT_Q1 = #{resultQ1,jdbcType=NUMERIC}
+			</if>
+			<if test="resultQ2 != null and resultQ2 != ''" >
+				AND RESULT_Q2 = #{resultQ2,jdbcType=NUMERIC}
+			</if>
+			<if test="resultQ3 != null and resultQ3 != ''" >
+				AND RESULT_Q3 = #{resultQ3,jdbcType=NUMERIC}
+			</if>
+			<if test="resultQ4 != null and resultQ4 != ''" >
+				AND RESULT_Q4 = #{resultQ4,jdbcType=NUMERIC}
+			</if>
+			<if test="orderNum != null and orderNum != ''" >
+				AND ORDER_NUM = #{orderNum,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="QuotaConfDetailResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+	<!-- 获取获取经营计划执行情况详细信息 -->
+	<select id="getQuotaConfDetailByConfId" parameterType="java.lang.String" resultMap="QuotaConfDetailResult2">
+		SELECT t.*,m.QUOTA_NAME,m.QUOTA_UNIT,
+           case QC.NEW_QUARTER
+             when '1' then round(t.result_q1/t.plan_val*100, 2)
+             when '2' then round(t.result_q2/t.plan_val*100, 2)
+             when '3' then round(t.result_q3/t.plan_val*100, 2)
+             when '4' then round(t.result_q4/t.plan_val*100, 2)
+           end ||'%'as NEW_RATE
+		  FROM BI.JYJH_QUOTA_CONF_DETAIL t
+		  LEFT JOIN BI.JYJH_QUOTA_INFO m ON t.QUOTA_ID = m.PK_ID
+          LEFT JOIN BI.JYJH_QUOTA_CONF_INFO QC ON T.CONF_ID=QC.PK_ID
+		  WHERE t.STATUS = '0'
+		  and  t.CONF_ID = #{CONF_ID}
+		  ORDER BY t.ORDER_NUM ASC,t.CREATE_DT ASC
+	</select>
+</mapper>

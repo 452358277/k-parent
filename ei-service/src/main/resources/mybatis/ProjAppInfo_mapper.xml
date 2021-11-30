@@ -1,0 +1,1225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProjAppInfo">
+	<!-- start autocreate -->
+
+	<resultMap id="ProjAppInfoResult" type="com.ppmg.ei.model.ProjAppInfoModel">
+		<result column="PROJ_ID" property="projId" jdbcType="VARCHAR" />
+		<result column="PROCESS_INST_ID" property="processInstId" jdbcType="VARCHAR" />
+		<result column="FINA_ROUNDS" property="finaRounds" jdbcType="VARCHAR" />
+		<result column="FINA_TIMES" property="finaTimes" jdbcType="VARCHAR" />
+		<result column="FINA_AMOUNT" property="finaAmount" jdbcType="NUMERIC" />
+		<result column="FINA_CURRENCY" property="finaCurrency" jdbcType="VARCHAR" />
+		<result column="INVE_ROLE" property="inveRole" jdbcType="VARCHAR" />
+		<result column="INVE_TYPE" property="inveType" jdbcType="VARCHAR" />
+		<result column="INVE_ROUNDS" property="inveRounds" jdbcType="VARCHAR" />
+		<result column="PRE_MONEY" property="preMoney" jdbcType="NUMERIC" />
+		<result column="PRE_CURRENCY" property="preCurrency" jdbcType="VARCHAR" />
+		<result column="POST_MONEY" property="postMoney" jdbcType="NUMERIC" />
+		<result column="POST_CURRENCY" property="postCurrency" jdbcType="VARCHAR" />
+		<result column="INTENDED_AMOUNT" property="intendedAmount" jdbcType="NUMERIC" />
+		<result column="INTENDED_CURRENCY" property="intendedCurrency" jdbcType="VARCHAR" />
+		<result column="INVE_SHARE" property="inveShare" jdbcType="NUMERIC" />
+		<result column="PER_SHARE" property="perShare" jdbcType="NUMERIC" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="PROJ_GUID" property="projGuid" jdbcType="VARCHAR" />
+		<result column="RMB_INTENDED_AMOUNT" property="rmbIntendedAmount" jdbcType="NUMERIC" />
+		<result column="FOCUS_INFO" property="focusInfo" jdbcType="CLOB" javaType="java.lang.String" />
+		<result column="INVE_REASON" property="inveReason" jdbcType="CLOB" javaType="java.lang.String" />
+		<result column="MAJOR_MATTER" property="majorMatter" jdbcType="CLOB" javaType="java.lang.String" />
+		<result column="REMARK" property="remark" jdbcType="CLOB" javaType="java.lang.String" />
+		<result column="FOCUS_INFO_ATT" property="focusInfoAtt" jdbcType="VARCHAR" />
+		<result column="INVE_REASON_ATT" property="inveReasonAtt" jdbcType="VARCHAR" />
+		<result column="MAJOR_MATTER_ATT" property="majorMatterAtt" jdbcType="VARCHAR" />
+		<result column="REMARK_ATT" property="remarkAtt" jdbcType="VARCHAR" />
+		<result column="FEED_BACK" property="feedBack" jdbcType="VARCHAR" />
+		<result column="IS_DECISION_PASS" property="isDecisionPass" jdbcType="VARCHAR" />
+		<result column="DECISION_DATE" property="decisionDate" jdbcType="TIMESTAMP" />
+		<result column="ACTUAL_AMOUNT" property="actualAmount" jdbcType="NUMERIC" />
+		<result column="DECISION_FILE" property="decisionFile" jdbcType="VARCHAR" />
+		<result column="INVE_CURRENT_AMOUNT" property="inveCurrentAmount" jdbcType="NUMERIC" />
+		<result column="INVE_RAISE_AMOUNT" property="inveRaiseAmount" jdbcType="NUMERIC" />
+		<result column="APPLY_AMOUNT" property="applyAmount" jdbcType="NUMERIC" />
+		<result column="IS_COO" property="isCoo" jdbcType="VARCHAR" />
+		<result column="INVE_DT" property="inveDt" jdbcType="TIMESTAMP" />
+		<result column="POST_CURRENCY" property="postCurrency" jdbcType="VARCHAR" />
+		<result column="POST_MONEY" property="postMoney" jdbcType="NUMERIC" />
+
+
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.ProjAppInfoModel">
+		INSERT INTO TZ_T_PROJ_APP_INFO (PROJ_ID,PROCESS_INST_ID,FINA_ROUNDS,FINA_TIMES,FINA_AMOUNT,FINA_CURRENCY,INVE_ROLE,INVE_TYPE,INVE_ROUNDS,PRE_MONEY,PRE_CURRENCY,POST_MONEY,POST_CURRENCY,INTENDED_AMOUNT,INTENDED_CURRENCY,INVE_SHARE,PER_SHARE,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,PROJ_GUID,RMB_INTENDED_AMOUNT,FOCUS_INFO,INVE_REASON,MAJOR_MATTER,REMARK,FOCUS_INFO_ATT,INVE_REASON_ATT,MAJOR_MATTER_ATT,REMARK_ATT,FEED_BACK,IS_DECISION_PASS,DECISION_DATE,ACTUAL_AMOUNT,DECISION_FILE,INVE_CURRENT_AMOUNT,INVE_RAISE_AMOUNT,APPLY_AMOUNT,IS_COO,INVE_DT) values(#{projId,jdbcType=VARCHAR},#{processInstId,jdbcType=VARCHAR},#{finaRounds,jdbcType=VARCHAR},#{finaTimes,jdbcType=VARCHAR},#{finaAmount,jdbcType=NUMERIC},#{finaCurrency,jdbcType=VARCHAR},#{inveRole,jdbcType=VARCHAR},#{inveType,jdbcType=VARCHAR},#{inveRounds,jdbcType=VARCHAR},#{preMoney,jdbcType=NUMERIC},#{preCurrency,jdbcType=VARCHAR},#{postMoney,jdbcType=NUMERIC},#{postCurrency,jdbcType=VARCHAR},#{intendedAmount,jdbcType=NUMERIC},#{intendedCurrency,jdbcType=VARCHAR},#{inveShare,jdbcType=NUMERIC},#{perShare,jdbcType=NUMERIC},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{projGuid,jdbcType=VARCHAR},#{rmbIntendedAmount,jdbcType=NUMERIC},#{focusInfo,jdbcType=VARCHAR},#{inveReason,jdbcType=VARCHAR},#{majorMatter,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},#{focusInfoAtt,jdbcType=VARCHAR},#{inveReasonAtt,jdbcType=VARCHAR},#{majorMatterAtt,jdbcType=VARCHAR},#{remarkAtt,jdbcType=VARCHAR},#{feedBack,jdbcType=VARCHAR},#{isDecisionPass,jdbcType=VARCHAR},#{decisionDate,jdbcType=TIMESTAMP},#{actualAmount,jdbcType=NUMERIC},#{decisionFile,jdbcType=VARCHAR},#{inveCurrentAmount,jdbcType=NUMERIC},#{inveRaiseAmount,jdbcType=NUMERIC},#{applyAmount,jdbcType=NUMERIC},#{isCoo,jdbcType=VARCHAR},#{inveDt,jdbcType=TIMESTAMP})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO TZ_T_PROJ_APP_INFO (PROJ_ID,PROCESS_INST_ID,FINA_ROUNDS,FINA_TIMES,FINA_AMOUNT,FINA_CURRENCY,INVE_ROLE,INVE_TYPE,INVE_ROUNDS,PRE_MONEY,PRE_CURRENCY,POST_MONEY,POST_CURRENCY,INTENDED_AMOUNT,INTENDED_CURRENCY,INVE_SHARE,PER_SHARE,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,PROJ_GUID,RMB_INTENDED_AMOUNT,FOCUS_INFO,INVE_REASON,MAJOR_MATTER,REMARK,FOCUS_INFO_ATT,INVE_REASON_ATT,MAJOR_MATTER_ATT,REMARK_ATT,FEED_BACK,IS_DECISION_PASS,DECISION_DATE,ACTUAL_AMOUNT,DECISION_FILE,INVE_CURRENT_AMOUNT,INVE_RAISE_AMOUNT,APPLY_AMOUNT,IS_COO)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.projId,jdbcType=VARCHAR},
+				#{item.processInstId,jdbcType=VARCHAR},
+				#{item.finaRounds,jdbcType=VARCHAR},
+				#{item.finaTimes,jdbcType=VARCHAR},
+				#{item.finaAmount,jdbcType=NUMERIC},
+				#{item.finaCurrency,jdbcType=VARCHAR},
+				#{item.inveRole,jdbcType=VARCHAR},
+				#{item.inveType,jdbcType=VARCHAR},
+				#{item.inveRounds,jdbcType=VARCHAR},
+				#{item.preMoney,jdbcType=NUMERIC},
+				#{item.preCurrency,jdbcType=VARCHAR},
+				#{item.postMoney,jdbcType=NUMERIC},
+				#{item.postCurrency,jdbcType=VARCHAR},
+				#{item.intendedAmount,jdbcType=NUMERIC},
+				#{item.intendedCurrency,jdbcType=VARCHAR},
+				#{item.inveShare,jdbcType=NUMERIC},
+				#{item.perShare,jdbcType=NUMERIC},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+				#{item.projGuid,jdbcType=VARCHAR},
+				#{item.rmbIntendedAmount,jdbcType=NUMERIC},
+				#{item.focusInfo,jdbcType=VARCHAR},
+				#{item.inveReason,jdbcType=VARCHAR},
+				#{item.majorMatter,jdbcType=VARCHAR},
+				#{item.remark,jdbcType=VARCHAR},
+				#{item.focusInfoAtt,jdbcType=VARCHAR},
+				#{item.inveReasonAtt,jdbcType=VARCHAR},
+				#{item.majorMatterAtt,jdbcType=VARCHAR},
+				#{item.remarkAtt,jdbcType=VARCHAR},
+				#{item.feedBack,jdbcType=VARCHAR},
+			    #{item.isDecisionPass,jdbcType=VARCHAR},
+			    #{item.decisionDate,jdbcType=TIMESTAMP},
+			    #{item.actualAmount,jdbcType=NUMERIC},
+			    #{item.decisionFile,jdbcType=VARCHAR},
+			    #{item.inveCurrentAmount,jdbcType=NUMERIC},
+			    #{item.inveRaiseAmount,jdbcType=NUMERIC},
+			    #{item.applyAmount,jdbcType=NUMERIC},
+			    #{item.isCoo,jdbcType=VARCHAR},
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  TZ_T_PROJ_APP_INFO WHERE PROJ_ID = #{projId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.ProjAppInfoModel">
+		DELETE FROM TZ_T_PROJ_APP_INFO
+		<where>
+			<if test="projId != null and projId != ''" >
+				PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="finaRounds != null and finaRounds != ''" >
+				AND FINA_ROUNDS = #{finaRounds,jdbcType=VARCHAR}
+			</if>
+			<if test="finaTimes != null and finaTimes != ''" >
+				AND FINA_TIMES = #{finaTimes,jdbcType=VARCHAR}
+			</if>
+			<if test="finaAmount != null and finaAmount != ''" >
+				AND FINA_AMOUNT = #{finaAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="finaCurrency != null and finaCurrency != ''" >
+				AND FINA_CURRENCY = #{finaCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="inveRole != null and inveRole != ''" >
+				AND INVE_ROLE = #{inveRole,jdbcType=VARCHAR}
+			</if>
+			<if test="inveType != null and inveType != ''" >
+				AND INVE_TYPE = #{inveType,jdbcType=VARCHAR}
+			</if>
+			<if test="inveRounds != null and inveRounds != ''" >
+				AND INVE_ROUNDS = #{inveRounds,jdbcType=VARCHAR}
+			</if>
+			<if test="preMoney != null and preMoney != ''" >
+				AND PRE_MONEY = #{preMoney,jdbcType=NUMERIC}
+			</if>
+			<if test="preCurrency != null and preCurrency != ''" >
+				AND PRE_CURRENCY = #{preCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="postMoney != null and postMoney != ''" >
+				AND POST_MONEY = #{postMoney,jdbcType=NUMERIC}
+			</if>
+			<if test="postCurrency != null and postCurrency != ''" >
+				AND POST_CURRENCY = #{postCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="intendedAmount != null and intendedAmount != ''" >
+				AND INTENDED_AMOUNT = #{intendedAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="intendedCurrency != null and intendedCurrency != ''" >
+				AND INTENDED_CURRENCY = #{intendedCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="inveShare != null and inveShare != ''" >
+				AND INVE_SHARE = #{inveShare,jdbcType=NUMERIC}
+			</if>
+			<if test="perShare != null and perShare != ''" >
+				AND PER_SHARE = #{perShare,jdbcType=NUMERIC}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="projGuid != null and projGuid != ''" >
+				AND PROJ_GUID = #{projGuid,jdbcType=VARCHAR}
+			</if>
+			<if test="rmbIntendedAmount != null and rmbIntendedAmount != ''" >
+				AND RMB_INTENDED_AMOUNT = #{rmbIntendedAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="focusInfo != null and focusInfo != ''" >
+				AND FOCUS_INFO = #{focusInfo,jdbcType=VARCHAR}
+			</if>
+			<if test="inveReason != null and inveReason != ''" >
+				AND INVE_REASON = #{inveReason,jdbcType=VARCHAR}
+			</if>
+			<if test="majorMatter != null and majorMatter != ''" >
+				AND MAJOR_MATTER = #{majorMatter,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="focusInfoAtt != null and focusInfoAtt != ''" >
+				AND FOCUS_INFO_ATT = #{focusInfoAtt,jdbcType=VARCHAR}
+			</if>
+			<if test="inveReasonAtt != null and inveReasonAtt != ''" >
+				AND INVE_REASON_ATT = #{inveReasonAtt,jdbcType=VARCHAR}
+			</if>
+			<if test="majorMatterAtt != null and majorMatterAtt != ''" >
+				AND MAJOR_MATTER_ATT = #{majorMatterAtt,jdbcType=VARCHAR}
+			</if>
+			<if test="remarkAtt != null and remarkAtt != ''" >
+				AND REMARK_ATT = #{remarkAtt,jdbcType=VARCHAR}
+			</if>
+			<if test="feedBack != null and feedBack != ''" >
+				AND FEED_BACK = #{feedBack,jdbcType=VARCHAR}
+			</if>
+			<if test="isDecisionPass != null and isDecisionPass != ''" >
+				AND IS_DECISION_PASS = #{isDecisionPass,jdbcType=VARCHAR}
+			</if>
+			<if test="decisionDate != null " >
+				AND DECISION_DATE = #{decisionDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="actualAmount != null and actualAmount != ''" >
+				AND ACTUAL_AMOUNT = #{actualAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="decisionFile != null and decisionFile != ''" >
+				AND DECISION_FILE = #{decisionFile,jdbcType=VARCHAR}
+			</if>
+			<if test="inveCurrentAmount != null " >
+				AND INVE_CURRENT_AMOUNT = #{inveCurrentAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="inveRaiseAmount != null " >
+				AND INVE_RAISE_AMOUNT = #{inveRaiseAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="applyAmount != null" >
+				AND APPLY_AMOUNT = #{applyAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="isCoo != null and isCoo != ''" >
+				AND IS_COO = #{isCoo,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  TZ_T_PROJ_APP_INFO WHERE PROJ_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.ProjAppInfoModel">
+		UPDATE TZ_T_PROJ_APP_INFO 
+		<set>
+			<if test="projId != null and projId != ''" >
+				PROJ_ID = #{projId,jdbcType=VARCHAR},
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR},
+			</if>
+			<if test="finaRounds != null and finaRounds != ''" >
+				FINA_ROUNDS = #{finaRounds,jdbcType=VARCHAR},
+			</if>
+			<if test="finaTimes != null and finaTimes != ''" >
+				FINA_TIMES = #{finaTimes,jdbcType=VARCHAR},
+			</if>
+			<if test="finaAmount != null " >
+				FINA_AMOUNT = #{finaAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="finaCurrency != null and finaCurrency != ''" >
+				FINA_CURRENCY = #{finaCurrency,jdbcType=VARCHAR},
+			</if>
+			<if test="inveRole != null and inveRole != ''" >
+				INVE_ROLE = #{inveRole,jdbcType=VARCHAR},
+			</if>
+			<if test="inveType != null and inveType != ''" >
+				INVE_TYPE = #{inveType,jdbcType=VARCHAR},
+			</if>
+			<if test="inveRounds != null and inveRounds != ''" >
+				INVE_ROUNDS = #{inveRounds,jdbcType=VARCHAR},
+			</if>
+			<if test="preMoney != null " >
+				PRE_MONEY = #{preMoney,jdbcType=NUMERIC},
+			</if>
+			<if test="preCurrency != null and preCurrency != ''" >
+				PRE_CURRENCY = #{preCurrency,jdbcType=VARCHAR},
+			</if>
+			<if test="postMoney != null " >
+				POST_MONEY = #{postMoney,jdbcType=NUMERIC},
+			</if>
+			<if test="postCurrency != null and postCurrency != ''" >
+				POST_CURRENCY = #{postCurrency,jdbcType=VARCHAR},
+			</if>
+			<if test="intendedAmount != null" >
+				INTENDED_AMOUNT = #{intendedAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="intendedCurrency != null and intendedCurrency != ''" >
+				INTENDED_CURRENCY = #{intendedCurrency,jdbcType=VARCHAR},
+			</if>
+			<if test="inveShare != null " >
+				INVE_SHARE = #{inveShare,jdbcType=NUMERIC},
+			</if>
+			<if test="perShare != null" >
+				PER_SHARE = #{perShare,jdbcType=NUMERIC},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="projGuid != null and projGuid != ''" >
+				PROJ_GUID = #{projGuid,jdbcType=VARCHAR},
+			</if>
+			<if test="rmbIntendedAmount != null " >
+				RMB_INTENDED_AMOUNT = #{rmbIntendedAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="focusInfo != null and focusInfo != ''" >
+				FOCUS_INFO = #{focusInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="inveReason != null and inveReason != ''" >
+				INVE_REASON = #{inveReason,jdbcType=VARCHAR},
+			</if>
+			<if test="majorMatter != null and majorMatter != ''" >
+				MAJOR_MATTER = #{majorMatter,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null and remark != ''" >
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="focusInfoAtt != null and focusInfoAtt != ''" >
+				FOCUS_INFO_ATT = #{focusInfoAtt,jdbcType=VARCHAR},
+			</if>
+			<if test="inveReasonAtt != null and inveReasonAtt != ''" >
+				INVE_REASON_ATT = #{inveReasonAtt,jdbcType=VARCHAR},
+			</if>
+			<if test="majorMatterAtt != null and majorMatterAtt != ''" >
+				MAJOR_MATTER_ATT = #{majorMatterAtt,jdbcType=VARCHAR},
+			</if>
+			<if test="remarkAtt != null and remarkAtt != ''" >
+				REMARK_ATT = #{remarkAtt,jdbcType=VARCHAR},
+			</if>
+			<if test="feedBack != null and feedBack != ''" >
+				FEED_BACK = #{feedBack,jdbcType=VARCHAR},
+			</if>
+			<if test="isDecisionPass != null and isDecisionPass != ''" >
+				 IS_DECISION_PASS = #{isDecisionPass,jdbcType=VARCHAR},
+			</if>
+			<if test="decisionDate != null " >
+				 DECISION_DATE = #{decisionDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="actualAmount != null " >
+				 ACTUAL_AMOUNT = #{actualAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="decisionFile != null and decisionFile != ''" >
+				 DECISION_FILE = #{decisionFile,jdbcType=VARCHAR},
+			</if>
+			<if test="inveCurrentAmount != null " >
+				 INVE_CURRENT_AMOUNT = #{inveCurrentAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="inveRaiseAmount != null " >
+				 INVE_RAISE_AMOUNT = #{inveRaiseAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="applyAmount != null" >
+				 APPLY_AMOUNT = #{applyAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="isCoo != null and isCoo != ''" >
+				 IS_COO = #{isCoo,jdbcType=VARCHAR},
+			</if>
+			<if test="inveDt != null" >
+				INVE_DT = #{inveDt,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		WHERE PROJ_ID = #{projId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="ProjAppInfoResult">
+		SELECT * FROM TZ_T_PROJ_APP_INFO
+		WHERE PROJ_ID = #{projId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.ProjAppInfoModel" resultMap="ProjAppInfoResult">
+		SELECT * FROM TZ_T_PROJ_APP_INFO
+		<where>
+			<if test="projId != null and projId != ''" >
+				PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="finaRounds != null and finaRounds != ''" >
+				AND FINA_ROUNDS = #{finaRounds,jdbcType=VARCHAR}
+			</if>
+			<if test="finaTimes != null and finaTimes != ''" >
+				AND FINA_TIMES = #{finaTimes,jdbcType=VARCHAR}
+			</if>
+			<if test="finaAmount != null and finaAmount != ''" >
+				AND FINA_AMOUNT = #{finaAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="finaCurrency != null and finaCurrency != ''" >
+				AND FINA_CURRENCY = #{finaCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="inveRole != null and inveRole != ''" >
+				AND INVE_ROLE = #{inveRole,jdbcType=VARCHAR}
+			</if>
+			<if test="inveType != null and inveType != ''" >
+				AND INVE_TYPE = #{inveType,jdbcType=VARCHAR}
+			</if>
+			<if test="inveRounds != null and inveRounds != ''" >
+				AND INVE_ROUNDS = #{inveRounds,jdbcType=VARCHAR}
+			</if>
+			<if test="preMoney != null and preMoney != ''" >
+				AND PRE_MONEY = #{preMoney,jdbcType=NUMERIC}
+			</if>
+			<if test="preCurrency != null and preCurrency != ''" >
+				AND PRE_CURRENCY = #{preCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="postMoney != null and postMoney != ''" >
+				AND POST_MONEY = #{postMoney,jdbcType=NUMERIC}
+			</if>
+			<if test="postCurrency != null and postCurrency != ''" >
+				AND POST_CURRENCY = #{postCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="intendedAmount != null and intendedAmount != ''" >
+				AND INTENDED_AMOUNT = #{intendedAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="intendedCurrency != null and intendedCurrency != ''" >
+				AND INTENDED_CURRENCY = #{intendedCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="inveShare != null and inveShare != ''" >
+				AND INVE_SHARE = #{inveShare,jdbcType=NUMERIC}
+			</if>
+			<if test="perShare != null and perShare != ''" >
+				AND PER_SHARE = #{perShare,jdbcType=NUMERIC}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="projGuid != null and projGuid != ''" >
+				AND PROJ_GUID = #{projGuid,jdbcType=VARCHAR}
+			</if>
+			<if test="rmbIntendedAmount != null and rmbIntendedAmount != ''" >
+				AND RMB_INTENDED_AMOUNT = #{rmbIntendedAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="focusInfo != null and focusInfo != ''" >
+				AND FOCUS_INFO = #{focusInfo,jdbcType=VARCHAR}
+			</if>
+			<if test="inveReason != null and inveReason != ''" >
+				AND INVE_REASON = #{inveReason,jdbcType=VARCHAR}
+			</if>
+			<if test="majorMatter != null and majorMatter != ''" >
+				AND MAJOR_MATTER = #{majorMatter,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="focusInfoAtt != null and focusInfoAtt != ''" >
+				AND FOCUS_INFO_ATT = #{focusInfoAtt,jdbcType=VARCHAR}
+			</if>
+			<if test="inveReasonAtt != null and inveReasonAtt != ''" >
+				AND INVE_REASON_ATT = #{inveReasonAtt,jdbcType=VARCHAR}
+			</if>
+			<if test="majorMatterAtt != null and majorMatterAtt != ''" >
+				AND MAJOR_MATTER_ATT = #{majorMatterAtt,jdbcType=VARCHAR}
+			</if>
+			<if test="remarkAtt != null and remarkAtt != ''" >
+				AND REMARK_ATT = #{remarkAtt,jdbcType=VARCHAR}
+			</if>
+			<if test="feedBack != null and feedBack != ''" >
+				AND FEED_BACK = #{feedBack,jdbcType=VARCHAR}
+			</if>
+			<if test="isDecisionPass != null and isDecisionPass != ''" >
+				 AND IS_DECISION_PASS = #{isDecisionPass,jdbcType=VARCHAR}
+			</if>
+			<if test="decisionDate != null " >
+				 AND DECISION_DATE = #{decisionDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="actualAmount != null and actualAmount != ''" >
+				AND ACTUAL_AMOUNT = #{actualAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="decisionFile != null and decisionFile != ''" >
+				AND DECISION_FILE = #{decisionFile,jdbcType=NUMERIC}
+			</if>
+			<if test="inveCurrentAmount != null and inveCurrentAmount != ''" >
+				AND INVE_CURRENT_AMOUNT = #{inveCurrentAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="inveRaiseAmount != null and inveRaiseAmount != ''" >
+				AND INVE_RAISE_AMOUNT = #{inveRaiseAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="applyAmount != null" >
+				AND APPLY_AMOUNT = #{applyAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="isCoo != null and isCoo != ''" >
+				AND IS_COO = #{isCoo,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM TZ_T_PROJ_APP_INFO
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="ProjAppInfoResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+		<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.ProjAppInfoModel">
+		SELECT COUNT(*) FROM TZ_T_PROJ_APP_INFO
+		<where>
+			<if test="projId != null and projId != ''" >
+				PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="finaRounds != null and finaRounds != ''" >
+				AND FINA_ROUNDS = #{finaRounds,jdbcType=VARCHAR}
+			</if>
+			<if test="finaTimes != null and finaTimes != ''" >
+				AND FINA_TIMES = #{finaTimes,jdbcType=VARCHAR}
+			</if>
+			<if test="finaAmount != null and finaAmount != ''" >
+				AND FINA_AMOUNT = #{finaAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="finaCurrency != null and finaCurrency != ''" >
+				AND FINA_CURRENCY = #{finaCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="inveRole != null and inveRole != ''" >
+				AND INVE_ROLE = #{inveRole,jdbcType=VARCHAR}
+			</if>
+			<if test="inveType != null and inveType != ''" >
+				AND INVE_TYPE = #{inveType,jdbcType=VARCHAR}
+			</if>
+			<if test="inveRounds != null and inveRounds != ''" >
+				AND INVE_ROUNDS = #{inveRounds,jdbcType=VARCHAR}
+			</if>
+			<if test="preMoney != null and preMoney != ''" >
+				AND PRE_MONEY = #{preMoney,jdbcType=NUMERIC}
+			</if>
+			<if test="preCurrency != null and preCurrency != ''" >
+				AND PRE_CURRENCY = #{preCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="postMoney != null and postMoney != ''" >
+				AND POST_MONEY = #{postMoney,jdbcType=NUMERIC}
+			</if>
+			<if test="postCurrency != null and postCurrency != ''" >
+				AND POST_CURRENCY = #{postCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="intendedAmount != null and intendedAmount != ''" >
+				AND INTENDED_AMOUNT = #{intendedAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="intendedCurrency != null and intendedCurrency != ''" >
+				AND INTENDED_CURRENCY = #{intendedCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="inveShare != null and inveShare != ''" >
+				AND INVE_SHARE = #{inveShare,jdbcType=NUMERIC}
+			</if>
+			<if test="perShare != null and perShare != ''" >
+				AND PER_SHARE = #{perShare,jdbcType=NUMERIC}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="projGuid != null and projGuid != ''" >
+				AND PROJ_GUID = #{projGuid,jdbcType=VARCHAR}
+			</if>
+			<if test="rmbIntendedAmount != null and rmbIntendedAmount != ''" >
+				AND RMB_INTENDED_AMOUNT = #{rmbIntendedAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="focusInfo != null and focusInfo != ''" >
+				AND FOCUS_INFO = #{focusInfo,jdbcType=VARCHAR}
+			</if>
+			<if test="inveReason != null and inveReason != ''" >
+				AND INVE_REASON = #{inveReason,jdbcType=VARCHAR}
+			</if>
+			<if test="majorMatter != null and majorMatter != ''" >
+				AND MAJOR_MATTER = #{majorMatter,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="focusInfoAtt != null and focusInfoAtt != ''" >
+				AND FOCUS_INFO_ATT = #{focusInfoAtt,jdbcType=VARCHAR}
+			</if>
+			<if test="inveReasonAtt != null and inveReasonAtt != ''" >
+				AND INVE_REASON_ATT = #{inveReasonAtt,jdbcType=VARCHAR}
+			</if>
+			<if test="majorMatterAtt != null and majorMatterAtt != ''" >
+				AND MAJOR_MATTER_ATT = #{majorMatterAtt,jdbcType=VARCHAR}
+			</if>
+			<if test="remarkAtt != null and remarkAtt != ''" >
+				AND REMARK_ATT = #{remarkAtt,jdbcType=VARCHAR}
+			</if>
+			<if test="feedBack != null and feedBack != ''" >
+				AND FEED_BACK = #{feedBack,jdbcType=VARCHAR}
+			</if>
+			<if test="isDecisionPass != null and isDecisionPass != ''" >
+				AND IS_DECISION_PASS = #{isDecisionPass,jdbcType=VARCHAR}
+			</if>
+			<if test="decisionDate != null " >
+				AND DECISION_DATE = #{decisionDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="actualAmount != null and actualAmount != ''" >
+				AND ACTUAL_AMOUNT = #{actualAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="decisionFile != null and decisionFile != ''" >
+				AND DECISION_FILE = #{decisionFile,jdbcType=NUMERIC}
+			</if>
+			<if test="inveCurrentAmount != null and inveCurrentAmount != ''" >
+				AND INVE_CURRENT_AMOUNT = #{inveCurrentAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="inveRaiseAmount != null and inveRaiseAmount != ''" >
+				AND INVE_RAISE_AMOUNT = #{inveRaiseAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="applyAmount != null" >
+				AND APPLY_AMOUNT = #{applyAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="isCoo != null and isCoo != ''" >
+				AND IS_COO = #{isCoo,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.ProjAppInfoModel" resultMap="ProjAppInfoResult">
+		SELECT * FROM TZ_T_PROJ_APP_INFO
+		<where>
+			<if test="projId != null and projId != ''" >
+				PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="finaRounds != null and finaRounds != ''" >
+				AND FINA_ROUNDS = #{finaRounds,jdbcType=VARCHAR}
+			</if>
+			<if test="finaTimes != null and finaTimes != ''" >
+				AND FINA_TIMES = #{finaTimes,jdbcType=VARCHAR}
+			</if>
+			<if test="finaAmount != null and finaAmount != ''" >
+				AND FINA_AMOUNT = #{finaAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="finaCurrency != null and finaCurrency != ''" >
+				AND FINA_CURRENCY = #{finaCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="inveRole != null and inveRole != ''" >
+				AND INVE_ROLE = #{inveRole,jdbcType=VARCHAR}
+			</if>
+			<if test="inveType != null and inveType != ''" >
+				AND INVE_TYPE = #{inveType,jdbcType=VARCHAR}
+			</if>
+			<if test="inveRounds != null and inveRounds != ''" >
+				AND INVE_ROUNDS = #{inveRounds,jdbcType=VARCHAR}
+			</if>
+			<if test="preMoney != null and preMoney != ''" >
+				AND PRE_MONEY = #{preMoney,jdbcType=NUMERIC}
+			</if>
+			<if test="preCurrency != null and preCurrency != ''" >
+				AND PRE_CURRENCY = #{preCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="postMoney != null and postMoney != ''" >
+				AND POST_MONEY = #{postMoney,jdbcType=NUMERIC}
+			</if>
+			<if test="postCurrency != null and postCurrency != ''" >
+				AND POST_CURRENCY = #{postCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="intendedAmount != null and intendedAmount != ''" >
+				AND INTENDED_AMOUNT = #{intendedAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="intendedCurrency != null and intendedCurrency != ''" >
+				AND INTENDED_CURRENCY = #{intendedCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="inveShare != null and inveShare != ''" >
+				AND INVE_SHARE = #{inveShare,jdbcType=NUMERIC}
+			</if>
+			<if test="perShare != null and perShare != ''" >
+				AND PER_SHARE = #{perShare,jdbcType=NUMERIC}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="projGuid != null and projGuid != ''" >
+				AND PROJ_GUID = #{projGuid,jdbcType=VARCHAR}
+			</if>
+			<if test="rmbIntendedAmount != null and rmbIntendedAmount != ''" >
+				AND RMB_INTENDED_AMOUNT = #{rmbIntendedAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="focusInfo != null and focusInfo != ''" >
+				AND FOCUS_INFO = #{focusInfo,jdbcType=VARCHAR}
+			</if>
+			<if test="inveReason != null and inveReason != ''" >
+				AND INVE_REASON = #{inveReason,jdbcType=VARCHAR}
+			</if>
+			<if test="majorMatter != null and majorMatter != ''" >
+				AND MAJOR_MATTER = #{majorMatter,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="focusInfoAtt != null and focusInfoAtt != ''" >
+				AND FOCUS_INFO_ATT = #{focusInfoAtt,jdbcType=VARCHAR}
+			</if>
+			<if test="inveReasonAtt != null and inveReasonAtt != ''" >
+				AND INVE_REASON_ATT = #{inveReasonAtt,jdbcType=VARCHAR}
+			</if>
+			<if test="majorMatterAtt != null and majorMatterAtt != ''" >
+				AND MAJOR_MATTER_ATT = #{majorMatterAtt,jdbcType=VARCHAR}
+			</if>
+			<if test="remarkAtt != null and remarkAtt != ''" >
+				AND REMARK_ATT = #{remarkAtt,jdbcType=VARCHAR}
+			</if>
+			<if test="feedBack != null and feedBack != ''" >
+				AND FEED_BACK = #{feedBack,jdbcType=VARCHAR}
+			</if>
+			<if test="isDecisionPass != null and isDecisionPass != ''" >
+				AND IS_DECISION_PASS = #{isDecisionPass,jdbcType=VARCHAR}
+			</if>
+			<if test="decisionDate != null " >
+				AND DECISION_DATE = #{decisionDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="actualAmount != null and actualAmount != ''" >
+				AND ACTUAL_AMOUNT = #{actualAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="decisionFile != null and decisionFile != ''" >
+				AND DECISION_FILE = #{decisionFile,jdbcType=NUMERIC}
+			</if>
+			<if test="inveCurrentAmount != null and inveCurrentAmount != ''" >
+				AND INVE_CURRENT_AMOUNT = #{inveCurrentAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="inveRaiseAmount != null and inveRaiseAmount != ''" >
+				AND INVE_RAISE_AMOUNT = #{inveRaiseAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="applyAmount != null" >
+				AND APPLY_AMOUNT = #{applyAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="isCoo != null and isCoo != ''" >
+				AND IS_COO = #{isCoo,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="ProjAppInfoResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+	<!--新加  ##################基金投管，基金立项###############################-->
+	<resultMap id="ProjInfoAllResult" type="com.ppmg.ei.model.ProjAppInfoMemberModel">
+		<result column="PROJ_ID" property="projId" jdbcType="VARCHAR" />
+		<result column="PROJ_NO" property="projNo" jdbcType="VARCHAR" />
+		<result column="PROJ_NAME" property="projName" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="SRC_DESC" property="srcDesc" jdbcType="VARCHAR" />
+
+		<result column="CURRENT_CURRENCY" property="currentCurrency" jdbcType="VARCHAR" />
+		<result column="CURRENT_AMOUNT" property="currentAmount" jdbcType="NUMERIC" />
+		<result column="INVE_CURRENT_AMOUNT" property="inveCurrentAmount" jdbcType="NUMERIC" />
+		<result column="APPLY_AMOUNT" property="applyAmount" jdbcType="NUMERIC" />
+
+		<result column="PROJ_SRC" property="projSrc" jdbcType="VARCHAR" />
+		<result column="PROJ_OVERVIEW" property="projOverview" jdbcType="VARCHAR" />
+		<result column="MAJOR_MATTER" property="majorMatter" jdbcType="VARCHAR" />
+		<result column="INVE_REASON" property="inveReason" jdbcType="VARCHAR" />
+		<result column="FOCUS_INFO" property="focusInfo" jdbcType="VARCHAR" />
+		<result column="FILE_DESC" property="fileDesc" jdbcType="VARCHAR" />
+		<result column="INVE_FILE" property="inveFile" jdbcType="VARCHAR" />
+		<result column="INVE_ID" property="inveId" jdbcType="VARCHAR" />
+		<collection property="projMemberModel" ofType="com.ppmg.ei.model.ProjMemberModel">
+			<result column="PK_ID" property="pkId" jdbcType="VARCHAR" />
+			<result column="PROJ_IDS" property="projId" jdbcType="VARCHAR" />
+			<result column="MEMBER_ID" property="memberId" jdbcType="VARCHAR" />
+			<result column="MEMBER_NAME" property="memberName" jdbcType="VARCHAR" />
+			<result column="IS_PM" property="isPm" jdbcType="VARCHAR" />
+			<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+			<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+			<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+			<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+			<result column="PROJ_GUID" property="projGuid" jdbcType="VARCHAR" />
+			<result column="APPROVE_STATUS" property="approveStatus" jdbcType="VARCHAR" />
+			<result column="IS_GROUP" property="isGroup" jdbcType="VARCHAR" />
+		</collection>
+	</resultMap>
+
+	<sql id="searchAllSql">
+		select * from (SELECT
+		a.proj_Id,
+		a.src_desc,
+		a.proj_no,
+		a.proj_name,
+		a.proj_src,
+		a.proj_overview,
+		a.status,
+		b.major_matter,
+		b.inve_reason,
+		b.focus_info,
+		b.apply_amount,
+		b.inve_current_amount,
+		d.file_desc,
+		d.inve_file,
+		d.inve_id,
+		e.current_amount,
+		e.current_currency,
+		c.PK_ID,
+		c.PROJ_ID as PROJ_IDS,
+		c.MEMBER_ID,
+		c.MEMBER_NAME,
+		c.IS_PM,
+		c.PROJ_GUID,
+		c.APPROVE_STATUS,
+		c.IS_GROUP
+		FROM TZ_T_PROJ_INFO a
+		LEFT JOIN TZ_T_PROJ_APP_INFO b
+		ON a.PROJ_ID = b.PROJ_ID
+		LEFT JOIN TZ_T_PROJ_MEMBER c
+		ON a.PROJ_ID = c.proj_id
+		left join TZ_T_PROJ_INFO d
+		on a.PROJ_ID = d.proj_id
+		left join BD_T_FUND_INFO e
+		on a.inve_id = e.fund_id where a.proj_id=${paramMap.PROJ_ID})
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectallListPageMapper" resultMap="ProjInfoAllResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+		<include refid="searchAllSql" />
+	</select>
+	<!--查询TZ_T_PROJ_APP_INFO-->
+	<select id="getgetTzProjAppInfoMapper" parameterType="String" resultMap="ProjAppInfoResult">
+        SELECT * from TZ_T_PROJ_APP_INFO c where c.proj_id = #{projId,jdbcType=VARCHAR}
+    </select>
+	<!--查询立项详情-->
+	<select id="getOneDetailsMapper" parameterType="String" resultMap="ProjInfoAllResult">
+        SELECT
+        	a.proj_Id,
+        	a.src_desc,
+			a.proj_no,
+			a.proj_name,
+			a.proj_src,
+			a.proj_overview,
+			b.major_matter,
+			b.inve_reason,
+			b.focus_info,
+			b.apply_amount,
+			b.inve_current_amount,
+			d.file_desc,
+			d.inve_file,
+			d.inve_id,
+			e.current_amount,
+			e.current_currency,
+			c.PK_ID,
+			c.PROJ_ID as PROJ_IDS,
+			c.MEMBER_ID,
+			c.MEMBER_NAME,
+			c.IS_PM,
+			c.PROJ_GUID,
+			c.APPROVE_STATUS,
+			c.IS_GROUP
+			FROM TZ_T_PROJ_INFO a
+			LEFT JOIN TZ_T_PROJ_APP_INFO b
+			ON a.PROJ_ID = b.PROJ_ID
+			LEFT JOIN TZ_T_PROJ_MEMBER c
+			ON a.PROJ_ID = c.proj_id
+			left join TZ_T_PROJ_INFO d
+			on a.PROJ_ID = d.proj_id
+			left join BD_T_FUND_INFO e
+			on a.inve_id = e.fund_id where a.proj_id = #{projId,jdbcType=VARCHAR}
+    </select>
+	<delete id="deleteAppInfoMapper" parameterType="String">
+		DELETE FROM  TZ_T_PROJ_APP_INFO WHERE proj_id = #{projId,jdbcType=VARCHAR}
+	</delete>
+	<delete id="deleteMemberMapper" parameterType="String">
+		DELETE FROM  TZ_T_PROJ_MEMBER WHERE proj_id = #{projId,jdbcType=VARCHAR}
+	</delete>
+
+	<!--新增TZ_T_PROJ_APP_INFO-->
+	<insert id="projAppInfoMapper" parameterType="List">
+		INSERT INTO TZ_T_PROJ_APP_INFO (PROJ_ID,MAJOR_MATTER,INVE_REASON,FOCUS_INFO,CREATE_BY,UPDATE_BY,INVE_CURRENT_AMOUNT,APPLY_AMOUNT)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			(select
+			#{item.projId,jdbcType=VARCHAR},
+			#{item.majorMatter,jdbcType=VARCHAR},
+			#{item.inveReason,jdbcType=VARCHAR},
+			#{item.focusInfo,jdbcType=VARCHAR},
+			#{item.createBy,jdbcType=VARCHAR},
+			#{item.updateBy,jdbcType=VARCHAR},
+			#{item.inveCurrentAmount,jdbcType=VARCHAR},
+			#{item.applyAmount,jdbcType=VARCHAR}
+			from dual)
+		</foreach>
+	</insert>
+	<update id="updateAppInfoMapper" parameterType="com.ppmg.ei.model.ProjAppInfoModel">
+		UPDATE TZ_T_PROJ_APP_INFO
+		<set>
+			<if test="projId != null and projId != ''" >
+				PROJ_ID = #{projId,jdbcType=VARCHAR},
+			</if>
+			<if test="majorMatter != null and majorMatter != ''" >
+				MAJOR_MATTER = #{majorMatter,jdbcType=VARCHAR},
+			</if>
+			<if test="inveReason != null and inveReason != ''" >
+				INVE_REASON = #{inveReason,jdbcType=VARCHAR},
+			</if>
+			<if test="focusInfo != null and focusInfo != ''" >
+				FOCUS_INFO = #{focusInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=VARCHAR},
+			</if>
+			<if test="inveCurrentAmount != null and inveCurrentAmount != ''" >
+				INVE_CURRENT_AMOUNT = #{inveCurrentAmount,jdbcType=VARCHAR},
+			</if>
+			<if test="applyAmount != null and applyAmount != ''" >
+				APPLY_AMOUNT = #{applyAmount,jdbcType=VARCHAR},
+			</if>
+
+		</set>
+		WHERE PROJ_ID = #{projId,jdbcType=VARCHAR}
+	</update>
+
+	<!--##################项目投管，基金立项###############################-->
+	<resultMap id="ProjAppInfoResultProject" type="com.ppmg.ei.model.ProjAppInfoMemberModel">
+		<result column="PROJ_ID" property="projId" jdbcType="VARCHAR" />
+		<result column="PROCESS_INST_ID" property="processInstId" jdbcType="VARCHAR" />
+		<result column="FINA_ROUNDS" property="finaRounds" jdbcType="VARCHAR" />
+		<result column="FINA_TIMES" property="finaTimes" jdbcType="VARCHAR" />
+		<result column="FINA_AMOUNT" property="finaAmount" jdbcType="NUMERIC" />
+		<result column="FINA_CURRENCY" property="finaCurrency" jdbcType="VARCHAR" />
+		<result column="INVE_ROLE" property="inveRole" jdbcType="VARCHAR" />
+		<result column="INVE_TYPE" property="inveType" jdbcType="VARCHAR" />
+		<result column="INVE_ROUNDS" property="inveRounds" jdbcType="VARCHAR" />
+		<result column="PRE_MONEY" property="preMoney" jdbcType="NUMERIC" />
+		<result column="PRE_CURRENCY" property="preCurrency" jdbcType="VARCHAR" />
+		<result column="POST_MONEY" property="postMoney" jdbcType="NUMERIC" />
+		<result column="POST_CURRENCY" property="postCurrency" jdbcType="VARCHAR" />
+		<result column="INTENDED_AMOUNT" property="intendedAmount" jdbcType="NUMERIC" />
+		<result column="INTENDED_CURRENCY" property="intendedCurrency" jdbcType="VARCHAR" />
+		<result column="INVE_SHARE" property="inveShare" jdbcType="NUMERIC" />
+		<result column="PER_SHARE" property="perShare" jdbcType="NUMERIC" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="PROJ_GUID" property="projGuid" jdbcType="VARCHAR" />
+		<result column="RMB_INTENDED_AMOUNT" property="rmbIntendedAmount" jdbcType="NUMERIC" />
+		<result column="FOCUS_INFO" property="focusInfo" jdbcType="CLOB" javaType="java.lang.String" />
+		<result column="INVE_REASON" property="inveReason" jdbcType="CLOB" javaType="java.lang.String" />
+		<result column="MAJOR_MATTER" property="majorMatter" jdbcType="CLOB" javaType="java.lang.String" />
+		<result column="REMARK" property="remark" jdbcType="CLOB" javaType="java.lang.String" />
+		<result column="FOCUS_INFO_ATT" property="focusInfoAtt" jdbcType="VARCHAR" />
+		<result column="INVE_REASON_ATT" property="inveReasonAtt" jdbcType="VARCHAR" />
+		<result column="MAJOR_MATTER_ATT" property="majorMatterAtt" jdbcType="VARCHAR" />
+		<result column="REMARK_ATT" property="remarkAtt" jdbcType="VARCHAR" />
+		<result column="FEED_BACK" property="feedBack" jdbcType="VARCHAR" />
+		<result column="ISMEETINGRECORD" property="ismeetingrecord" jdbcType="VARCHAR" />
+		<result column="MEETINGRECORD_ATTA" property="meetingrecordAtta" jdbcType="VARCHAR" />
+		<result column="DECISION_ATTA" property="decisionAtta" jdbcType="VARCHAR" />
+		<result column="BUSINESS_PLAN_FILE" property="businessPlanFile" jdbcType="VARCHAR" />
+		<result column="PROJECT_REPORT_FILE" property="projectReportFile" jdbcType="VARCHAR" />
+		<result column="SUMMARY_INTERVIEWS_FILE" property="summaryInterviewsFile" jdbcType="VARCHAR" />
+		<result column="ANOTHER_FILE" property="anotherFile" jdbcType="VARCHAR" />
+		<result column="DECISION_FILE" property="decisionFile" jdbcType="VARCHAR" />
+		<result column="ACTUAL_AMOUNT" property="actualAmount" jdbcType="NUMERIC" />
+		<result column="IS_DECISION_PASS" property="isDecisionPass" jdbcType="VARCHAR" />
+		<result column="DECISION_DATE" property="decisionDate" jdbcType="TIMESTAMP" />
+		<result column="INVE_CURRENT_AMOUNT" property="inveCurrentAmount" jdbcType="NUMERIC" />
+		<result column="INVE_RAISE_AMOUNT" property="inveRaiseAmount" jdbcType="NUMERIC" />
+		<result column="APPLY_AMOUNT" property="applyAmount" jdbcType="NUMERIC" />
+	</resultMap>
+	<!--查询基金立项-->
+	<select id="selectByIdProjectMapper" parameterType="String" resultMap="ProjAppInfoResultProject">
+		SELECT * FROM TZ_T_PROJ_APP_INFO WHERE PROJ_ID = #{projId,jdbcType=VARCHAR}
+	</select>
+	<!--插入-->
+	<insert id="insertBatchProjectMapper" parameterType="List">
+		INSERT INTO TZ_T_PROJ_APP_INFO (PROJ_ID,PROCESS_INST_ID,FINA_ROUNDS,FINA_TIMES,FINA_AMOUNT,FINA_CURRENCY,INVE_ROLE,INVE_TYPE,INVE_ROUNDS,PRE_MONEY,PRE_CURRENCY,POST_MONEY,POST_CURRENCY,INTENDED_AMOUNT,INTENDED_CURRENCY,INVE_SHARE,PER_SHARE,CREATE_BY,UPDATE_BY,PROJ_GUID,RMB_INTENDED_AMOUNT,FOCUS_INFO,INVE_REASON,MAJOR_MATTER,REMARK,FOCUS_INFO_ATT,INVE_REASON_ATT,MAJOR_MATTER_ATT,REMARK_ATT,FEED_BACK,ISMEETINGRECORD,MEETINGRECORD_ATTA,DECISION_ATTA,BUSINESS_PLAN_FILE,PROJECT_REPORT_FILE,SUMMARY_INTERVIEWS_FILE,ANOTHER_FILE,DECISION_FILE,ACTUAL_AMOUNT,IS_DECISION_PASS,DECISION_DATE,INVE_CURRENT_AMOUNT,INVE_RAISE_AMOUNT,APPLY_AMOUNT)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+			#{item.projId,jdbcType=VARCHAR},
+			#{item.processInstId,jdbcType=VARCHAR},
+			#{item.finaRounds,jdbcType=VARCHAR},
+			#{item.finaTimes,jdbcType=VARCHAR},
+			#{item.finaAmount,jdbcType=NUMERIC},
+			#{item.finaCurrency,jdbcType=VARCHAR},
+			#{item.inveRole,jdbcType=VARCHAR},
+			#{item.inveType,jdbcType=VARCHAR},
+			#{item.inveRounds,jdbcType=VARCHAR},
+			#{item.preMoney,jdbcType=NUMERIC},
+			#{item.preCurrency,jdbcType=VARCHAR},
+			#{item.postMoney,jdbcType=NUMERIC},
+			#{item.postCurrency,jdbcType=VARCHAR},
+			#{item.intendedAmount,jdbcType=NUMERIC},
+			#{item.intendedCurrency,jdbcType=VARCHAR},
+			#{item.inveShare,jdbcType=NUMERIC},
+			#{item.perShare,jdbcType=NUMERIC},
+			#{item.createBy,jdbcType=VARCHAR},
+			#{item.updateBy,jdbcType=VARCHAR},
+			#{item.projGuid,jdbcType=VARCHAR},
+			#{item.rmbIntendedAmount,jdbcType=NUMERIC},
+			#{item.focusInfo,jdbcType=VARCHAR},
+			#{item.inveReason,jdbcType=VARCHAR},
+			#{item.majorMatter,jdbcType=VARCHAR},
+			#{item.remark,jdbcType=VARCHAR},
+			#{item.focusInfoAtt,jdbcType=VARCHAR},
+			#{item.inveReasonAtt,jdbcType=VARCHAR},
+			#{item.majorMatterAtt,jdbcType=VARCHAR},
+			#{item.remarkAtt,jdbcType=VARCHAR},
+			#{item.feedBack,jdbcType=VARCHAR},
+			#{item.ismeetingrecord,jdbcType=VARCHAR},
+			#{item.meetingrecordAtta,jdbcType=VARCHAR},
+			#{item.decisionAtta,jdbcType=VARCHAR},
+			#{item.businessPlanFile,jdbcType=VARCHAR},
+			#{item.projectReportFile,jdbcType=VARCHAR},
+			#{item.summaryInterviewsFile,jdbcType=VARCHAR},
+			#{item.anotherFile,jdbcType=VARCHAR},
+			#{item.decisionFile,jdbcType=VARCHAR},
+			#{item.actualAmount,jdbcType=NUMERIC},
+			#{item.isDecisionPass,jdbcType=VARCHAR},
+			#{item.decisionDate,jdbcType=TIMESTAMP},
+			#{item.inveCurrentAmount,jdbcType=NUMERIC},
+			#{item.inveRaiseAmount,jdbcType=NUMERIC},
+			#{item.applyAmount,jdbcType=NUMERIC}
+			from dual)
+		</foreach>
+	</insert>
+	<!--更新-->
+	<update id="updatePKProjectMapper" parameterType="com.ppmg.ei.model.ProjAppInfoMemberModel">
+		UPDATE TZ_T_PROJ_APP_INFO
+		<set>
+			<if test="projId != null and projId != ''" >
+				PROJ_ID = #{projId,jdbcType=VARCHAR},
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR},
+			</if>
+			<if test="finaRounds != null and finaRounds != ''" >
+				FINA_ROUNDS = #{finaRounds,jdbcType=VARCHAR},
+			</if>
+			<if test="finaTimes != null and finaTimes != ''" >
+				FINA_TIMES = #{finaTimes,jdbcType=VARCHAR},
+			</if>
+			<if test="finaAmount != null and finaAmount != ''" >
+				FINA_AMOUNT = #{finaAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="finaCurrency != null and finaCurrency != ''" >
+				FINA_CURRENCY = #{finaCurrency,jdbcType=VARCHAR},
+			</if>
+			<if test="inveRole != null and inveRole != ''" >
+				INVE_ROLE = #{inveRole,jdbcType=VARCHAR},
+			</if>
+			<if test="inveType != null and inveType != ''" >
+				INVE_TYPE = #{inveType,jdbcType=VARCHAR},
+			</if>
+			<if test="inveRounds != null and inveRounds != ''" >
+				INVE_ROUNDS = #{inveRounds,jdbcType=VARCHAR},
+			</if>
+			<if test="preMoney != null and preMoney != ''" >
+				PRE_MONEY = #{preMoney,jdbcType=NUMERIC},
+			</if>
+			<if test="preCurrency != null and preCurrency != ''" >
+				PRE_CURRENCY = #{preCurrency,jdbcType=VARCHAR},
+			</if>
+			<if test="postMoney != null and postMoney != ''" >
+				POST_MONEY = #{postMoney,jdbcType=NUMERIC},
+			</if>
+			<if test="postCurrency != null and postCurrency != ''" >
+				POST_CURRENCY = #{postCurrency,jdbcType=VARCHAR},
+			</if>
+			<if test="intendedAmount != null and intendedAmount != ''" >
+				INTENDED_AMOUNT = #{intendedAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="intendedCurrency != null and intendedCurrency != ''" >
+				INTENDED_CURRENCY = #{intendedCurrency,jdbcType=VARCHAR},
+			</if>
+			<if test="inveShare != null and inveShare != ''" >
+				INVE_SHARE = #{inveShare,jdbcType=NUMERIC},
+			</if>
+			<if test="perShare != null and perShare != ''" >
+				PER_SHARE = #{perShare,jdbcType=NUMERIC},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="projGuid != null and projGuid != ''" >
+				PROJ_GUID = #{projGuid,jdbcType=VARCHAR},
+			</if>
+			<if test="rmbIntendedAmount != null and rmbIntendedAmount != ''" >
+				RMB_INTENDED_AMOUNT = #{rmbIntendedAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="focusInfo != null and focusInfo != ''" >
+				FOCUS_INFO = #{focusInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="inveReason != null and inveReason != ''" >
+				INVE_REASON = #{inveReason,jdbcType=VARCHAR},
+			</if>
+			<if test="majorMatter != null and majorMatter != ''" >
+				MAJOR_MATTER = #{majorMatter,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null and remark != ''" >
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="focusInfoAtt != null and focusInfoAtt != ''" >
+				FOCUS_INFO_ATT = #{focusInfoAtt,jdbcType=VARCHAR},
+			</if>
+			<if test="inveReasonAtt != null and inveReasonAtt != ''" >
+				INVE_REASON_ATT = #{inveReasonAtt,jdbcType=VARCHAR},
+			</if>
+			<if test="majorMatterAtt != null and majorMatterAtt != ''" >
+				MAJOR_MATTER_ATT = #{majorMatterAtt,jdbcType=VARCHAR},
+			</if>
+			<if test="remarkAtt != null and remarkAtt != ''" >
+				REMARK_ATT = #{remarkAtt,jdbcType=VARCHAR},
+			</if>
+			<if test="feedBack != null and feedBack != ''" >
+				FEED_BACK = #{feedBack,jdbcType=VARCHAR},
+			</if>
+			<if test="ismeetingrecord != null and ismeetingrecord != ''" >
+				ISMEETINGRECORD = #{ismeetingrecord,jdbcType=VARCHAR},
+			</if>
+			<if test="meetingrecordAtta != null and meetingrecordAtta != ''" >
+				MEETINGRECORD_ATTA = #{meetingrecordAtta,jdbcType=VARCHAR},
+			</if>
+			<if test="decisionAtta != null and decisionAtta != ''" >
+				DECISION_ATTA = #{decisionAtta,jdbcType=VARCHAR},
+			</if>
+			<if test="businessPlanFile != null and businessPlanFile != ''" >
+				BUSINESS_PLAN_FILE = #{businessPlanFile,jdbcType=VARCHAR},
+			</if>
+			<if test="projectReportFile != null and projectReportFile != ''" >
+				PROJECT_REPORT_FILE = #{projectReportFile,jdbcType=VARCHAR},
+			</if>
+			<if test="summaryInterviewsFile != null and summaryInterviewsFile != ''" >
+				SUMMARY_INTERVIEWS_FILE = #{summaryInterviewsFile,jdbcType=VARCHAR},
+			</if>
+			<if test="anotherFile != null and anotherFile != ''" >
+				ANOTHER_FILE = #{anotherFile,jdbcType=VARCHAR},
+			</if>
+			<if test="decisionFile != null and decisionFile != ''" >
+				DECISION_FILE = #{decisionFile,jdbcType=VARCHAR},
+			</if>
+			<if test="actualAmount != null and actualAmount != ''" >
+				ACTUAL_AMOUNT = #{actualAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="isDecisionPass != null and isDecisionPass != ''" >
+				IS_DECISION_PASS = #{isDecisionPass,jdbcType=VARCHAR},
+			</if>
+			<if test="decisionDate != null" >
+				DECISION_DATE = #{decisionDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="inveCurrentAmount != null and inveCurrentAmount != ''" >
+				INVE_CURRENT_AMOUNT = #{inveCurrentAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="inveRaiseAmount != null and inveRaiseAmount != ''" >
+				INVE_RAISE_AMOUNT = #{inveRaiseAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="applyAmount != null and applyAmount != ''" >
+				APPLY_AMOUNT = #{applyAmount,jdbcType=NUMERIC},
+			</if>
+		</set>
+		WHERE PROJ_ID = #{projId,jdbcType=VARCHAR}
+	</update>
+	<!--根据PROJ_ID删除-->
+	<delete id="deleteByIdProjectMapper" parameterType="String">
+		DELETE FROM  TZ_T_PROJ_APP_INFO WHERE PROJ_ID = #{projId,jdbcType=VARCHAR}
+	</delete>
+
+	<select id="selectByEiNjId" parameterType="String"  resultType="Map" >
+       select * from EINJ.TZ_T_PROJ_APP_INFO WHERE PROJ_ID=#{projId}
+	</select>
+
+</mapper>

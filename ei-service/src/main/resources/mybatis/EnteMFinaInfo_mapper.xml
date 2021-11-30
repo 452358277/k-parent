@@ -1,0 +1,947 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="EnteMFinaInfo">
+	<!-- start autocreate -->
+
+	<resultMap id="EnteMFinaInfoResult" type="com.ppmg.ei.model.EnteMFinaInfoModel">
+		<result column="PK_ID" property="pkId" jdbcType="VARCHAR" />
+		<result column="OCCUR_MONTH" property="occurMonth" jdbcType="VARCHAR" />
+		<result column="ENTERPRISE_ID" property="enterpriseId" jdbcType="VARCHAR" />
+		<result column="CURRENCY_TYPE" property="currencyType" jdbcType="VARCHAR" />
+		<result column="TOTAL_COMP_PACKAGE" property="totalCompPackage" jdbcType="NUMERIC" />
+		<result column="FINA_STATEMENTS" property="finaStatements" jdbcType="VARCHAR" />
+		<result column="FIXED_ASSETS_NET_VALUE" property="fixedAssetsNetValue" jdbcType="NUMERIC" />
+		<result column="INTA_ASSETS_NET_VALUE" property="intaAssetsNetValue" jdbcType="NUMERIC" />
+		<result column="MONEY_FUNDS" property="moneyFunds" jdbcType="NUMERIC" />
+		<result column="TOTAL_ASSETS" property="totalAssets" jdbcType="NUMERIC" />
+		<result column="ACCOUNTS_RECEIVABLE" property="accountsReceivable" jdbcType="NUMERIC" />
+		<result column="OTHER_RECEIVABLES" property="otherReceivables" jdbcType="NUMERIC" />
+		<result column="DEPOSIT" property="deposit" jdbcType="NUMERIC" />
+		<result column="CURRENT_ASSETS" property="currentAssets" jdbcType="NUMERIC" />
+		<result column="SHORT_TERM_BORROWING" property="shortTermBorrowing" jdbcType="NUMERIC" />
+		<result column="LONG_TERM_BORROWING" property="longTermBorrowing" jdbcType="NUMERIC" />
+		<result column="CURRENT_LIABILITIES" property="currentLiabilities" jdbcType="NUMERIC" />
+		<result column="TOTAL_LIABILITIES" property="totalLiabilities" jdbcType="NUMERIC" />
+		<result column="SHARE_CAPITAL" property="shareCapital" jdbcType="NUMERIC" />
+		<result column="OWNER_EQUITY" property="ownerEquity" jdbcType="NUMERIC" />
+		<result column="MAIN_BIZ_INCOME" property="mainBizIncome" jdbcType="NUMERIC" />
+		<result column="MAIN_BIZ_COST" property="mainBizCost" jdbcType="NUMERIC" />
+		<result column="TOTAL_REVENUE" property="totalRevenue" jdbcType="NUMERIC" />
+		<result column="GROSS_MARGIN" property="grossMargin" jdbcType="NUMERIC" />
+		<result column="MAG_FEE" property="magFee" jdbcType="NUMERIC" />
+		<result column="RD_EXPENSE" property="rdExpense" jdbcType="NUMERIC" />
+		<result column="CURRENT_PROFIT" property="currentProfit" jdbcType="NUMERIC" />
+		<result column="CURRENT_NET_PROFIT" property="currentNetProfit" jdbcType="NUMERIC" />
+		<result column="AUDIT_REPORT" property="auditReport" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="YEAR_INCOME" property="yearIncome" jdbcType="NUMERIC" />
+		<result column="PROJ_GUID" property="projGuid" jdbcType="VARCHAR" />
+		<result column="CONFIRM" property="confirm" jdbcType="VARCHAR" />
+		<result column="MAIN_BIZ_INCOME_Y" property="mainBizIncomeY" jdbcType="NUMERIC" />
+		<result column="MAIN_BIZ_COST_Y" property="mainBizCostY" jdbcType="NUMERIC" />
+		<result column="TOTAL_REVENUE_Y" property="totalRevenueY" jdbcType="NUMERIC" />
+		<result column="GROSS_MARGIN_Y" property="grossMarginY" jdbcType="NUMERIC" />
+		<result column="MAG_FEE_Y" property="magFeeY" jdbcType="NUMERIC" />
+		<result column="RD_EXPENSE_Y" property="rdExpenseY" jdbcType="NUMERIC" />
+		<result column="CURRENT_PROFIT_Y" property="currentProfitY" jdbcType="NUMERIC" />
+		<result column="CURRENT_NET_PROFIT_Y" property="currentNetProfitY" jdbcType="NUMERIC" />
+		<result column="FINADATA" property="finadata" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="INVEST_ID" property="investId" jdbcType="VARCHAR" />
+		<result column="HANDLE_ID" property="handleId" jdbcType="VARCHAR" />
+		<result column="PAY_FEE" property="payFee" jdbcType="NUMERIC" />
+		<result column="PAY_FEE_Y" property="payFeeY" jdbcType="NUMERIC" />
+		<result column="TOTAL_COMP_PACKAGE_Y" property="totalCompPackageY" jdbcType="NUMERIC" />
+		<result column="FINANCE_FILE" property="financeFile" jdbcType="VARCHAR" />
+
+	</resultMap>
+	<insert id="insert" parameterType="com.ppmg.ei.model.EnteMFinaInfoModel">
+		INSERT INTO BD_T_ENTE_M_FINA_INFO (PK_ID,OCCUR_MONTH,ENTERPRISE_ID,CURRENCY_TYPE,TOTAL_COMP_PACKAGE,FINA_STATEMENTS,FIXED_ASSETS_NET_VALUE,INTA_ASSETS_NET_VALUE,MONEY_FUNDS,TOTAL_ASSETS,ACCOUNTS_RECEIVABLE,OTHER_RECEIVABLES,DEPOSIT,CURRENT_ASSETS,SHORT_TERM_BORROWING,LONG_TERM_BORROWING,CURRENT_LIABILITIES,TOTAL_LIABILITIES,SHARE_CAPITAL,OWNER_EQUITY,MAIN_BIZ_INCOME,MAIN_BIZ_COST,TOTAL_REVENUE,GROSS_MARGIN,MAG_FEE,RD_EXPENSE,CURRENT_PROFIT,CURRENT_NET_PROFIT,AUDIT_REPORT,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,YEAR_INCOME,PROJ_GUID,CONFIRM,MAIN_BIZ_INCOME_Y,MAIN_BIZ_COST_Y,TOTAL_REVENUE_Y,GROSS_MARGIN_Y,MAG_FEE_Y,RD_EXPENSE_Y,CURRENT_PROFIT_Y,CURRENT_NET_PROFIT_Y,FINADATA,REMARK,INVEST_ID,HANDLE_ID,PAY_FEE,PAY_FEE_Y,TOTAL_COMP_PACKAGE_Y,FINANCE_FILE) values(#{pkId,jdbcType=VARCHAR},#{occurMonth,jdbcType=VARCHAR},#{enterpriseId,jdbcType=VARCHAR},#{currencyType,jdbcType=VARCHAR},#{totalCompPackage,jdbcType=NUMERIC},#{finaStatements,jdbcType=VARCHAR},#{fixedAssetsNetValue,jdbcType=NUMERIC},#{intaAssetsNetValue,jdbcType=NUMERIC},#{moneyFunds,jdbcType=NUMERIC},#{totalAssets,jdbcType=NUMERIC},#{accountsReceivable,jdbcType=NUMERIC},#{otherReceivables,jdbcType=NUMERIC},#{deposit,jdbcType=NUMERIC},#{currentAssets,jdbcType=NUMERIC},#{shortTermBorrowing,jdbcType=NUMERIC},#{longTermBorrowing,jdbcType=NUMERIC},#{currentLiabilities,jdbcType=NUMERIC},#{totalLiabilities,jdbcType=NUMERIC},#{shareCapital,jdbcType=NUMERIC},#{ownerEquity,jdbcType=NUMERIC},#{mainBizIncome,jdbcType=NUMERIC},#{mainBizCost,jdbcType=NUMERIC},#{totalRevenue,jdbcType=NUMERIC},#{grossMargin,jdbcType=NUMERIC},#{magFee,jdbcType=NUMERIC},#{rdExpense,jdbcType=NUMERIC},#{currentProfit,jdbcType=NUMERIC},#{currentNetProfit,jdbcType=NUMERIC},#{auditReport,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{yearIncome,jdbcType=NUMERIC},#{projGuid,jdbcType=VARCHAR},#{confirm,jdbcType=VARCHAR},#{mainBizIncomeY,jdbcType=NUMERIC},#{mainBizCostY,jdbcType=NUMERIC},#{totalRevenueY,jdbcType=NUMERIC},#{grossMarginY,jdbcType=NUMERIC},#{magFeeY,jdbcType=NUMERIC},#{rdExpenseY,jdbcType=NUMERIC},#{currentProfitY,jdbcType=NUMERIC},#{currentNetProfitY,jdbcType=NUMERIC},#{finadata,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},#{investId,jdbcType=VARCHAR},#{handleId,jdbcType=VARCHAR},#{payFee,jdbcType=NUMERIC},#{payFeeY,jdbcType=NUMERIC},#{totalCompPackageY,jdbcType=NUMERIC},#{financeFile,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO BD_T_ENTE_M_FINA_INFO (PK_ID,OCCUR_MONTH,ENTERPRISE_ID,CURRENCY_TYPE,TOTAL_COMP_PACKAGE,FINA_STATEMENTS,FIXED_ASSETS_NET_VALUE,INTA_ASSETS_NET_VALUE,MONEY_FUNDS,TOTAL_ASSETS,ACCOUNTS_RECEIVABLE,OTHER_RECEIVABLES,DEPOSIT,CURRENT_ASSETS,SHORT_TERM_BORROWING,LONG_TERM_BORROWING,CURRENT_LIABILITIES,TOTAL_LIABILITIES,SHARE_CAPITAL,OWNER_EQUITY,MAIN_BIZ_INCOME,MAIN_BIZ_COST,TOTAL_REVENUE,GROSS_MARGIN,MAG_FEE,RD_EXPENSE,CURRENT_PROFIT,CURRENT_NET_PROFIT,AUDIT_REPORT,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,YEAR_INCOME,PROJ_GUID,CONFIRM,MAIN_BIZ_INCOME_Y,MAIN_BIZ_COST_Y,TOTAL_REVENUE_Y,GROSS_MARGIN_Y,MAG_FEE_Y,RD_EXPENSE_Y,CURRENT_PROFIT_Y,CURRENT_NET_PROFIT_Y,FINADATA,REMARK,INVEST_ID,HANDLE_ID)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.pkId,jdbcType=VARCHAR},
+				#{item.occurMonth,jdbcType=VARCHAR},
+				#{item.enterpriseId,jdbcType=VARCHAR},
+				#{item.currencyType,jdbcType=VARCHAR},
+				#{item.totalCompPackage,jdbcType=NUMERIC},
+				#{item.finaStatements,jdbcType=VARCHAR},
+				#{item.fixedAssetsNetValue,jdbcType=NUMERIC},
+				#{item.intaAssetsNetValue,jdbcType=NUMERIC},
+				#{item.moneyFunds,jdbcType=NUMERIC},
+				#{item.totalAssets,jdbcType=NUMERIC},
+				#{item.accountsReceivable,jdbcType=NUMERIC},
+				#{item.otherReceivables,jdbcType=NUMERIC},
+				#{item.deposit,jdbcType=NUMERIC},
+				#{item.currentAssets,jdbcType=NUMERIC},
+				#{item.shortTermBorrowing,jdbcType=NUMERIC},
+				#{item.longTermBorrowing,jdbcType=NUMERIC},
+				#{item.currentLiabilities,jdbcType=NUMERIC},
+				#{item.totalLiabilities,jdbcType=NUMERIC},
+				#{item.shareCapital,jdbcType=NUMERIC},
+				#{item.ownerEquity,jdbcType=NUMERIC},
+				#{item.mainBizIncome,jdbcType=NUMERIC},
+				#{item.mainBizCost,jdbcType=NUMERIC},
+				#{item.totalRevenue,jdbcType=NUMERIC},
+				#{item.grossMargin,jdbcType=NUMERIC},
+				#{item.magFee,jdbcType=NUMERIC},
+				#{item.rdExpense,jdbcType=NUMERIC},
+				#{item.currentProfit,jdbcType=NUMERIC},
+				#{item.currentNetProfit,jdbcType=NUMERIC},
+				#{item.auditReport,jdbcType=VARCHAR},
+				#{item.status,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+				#{item.yearIncome,jdbcType=NUMERIC},
+				#{item.projGuid,jdbcType=VARCHAR},
+				#{item.confirm,jdbcType=VARCHAR},
+				#{item.mainBizIncomeY,jdbcType=NUMERIC},
+				#{item.mainBizCostY,jdbcType=NUMERIC},
+				#{item.totalRevenueY,jdbcType=NUMERIC},
+				#{item.grossMarginY,jdbcType=NUMERIC},
+				#{item.magFeeY,jdbcType=NUMERIC},
+				#{item.rdExpenseY,jdbcType=NUMERIC},
+				#{item.currentProfitY,jdbcType=NUMERIC},
+				#{item.currentNetProfitY,jdbcType=NUMERIC},
+				#{item.finadata,jdbcType=VARCHAR},
+				#{item.remark,jdbcType=VARCHAR},
+				#{item.investId,jdbcType=VARCHAR},
+				#{item.handleId,jdbcType=VARCHAR}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  BD_T_ENTE_M_FINA_INFO WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.EnteMFinaInfoModel">
+		DELETE FROM BD_T_ENTE_M_FINA_INFO
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="occurMonth != null and occurMonth != ''" >
+				AND OCCUR_MONTH = #{occurMonth,jdbcType=VARCHAR}
+			</if>
+			<if test="enterpriseId != null and enterpriseId != ''" >
+				AND ENTERPRISE_ID = #{enterpriseId,jdbcType=VARCHAR}
+			</if>
+			<if test="currencyType != null and currencyType != ''" >
+				AND CURRENCY_TYPE = #{currencyType,jdbcType=VARCHAR}
+			</if>
+			<if test="totalCompPackage != null and totalCompPackage != ''" >
+				AND TOTAL_COMP_PACKAGE = #{totalCompPackage,jdbcType=NUMERIC}
+			</if>
+			<if test="finaStatements != null and finaStatements != ''" >
+				AND FINA_STATEMENTS = #{finaStatements,jdbcType=VARCHAR}
+			</if>
+			<if test="fixedAssetsNetValue != null and fixedAssetsNetValue != ''" >
+				AND FIXED_ASSETS_NET_VALUE = #{fixedAssetsNetValue,jdbcType=NUMERIC}
+			</if>
+			<if test="intaAssetsNetValue != null and intaAssetsNetValue != ''" >
+				AND INTA_ASSETS_NET_VALUE = #{intaAssetsNetValue,jdbcType=NUMERIC}
+			</if>
+			<if test="moneyFunds != null and moneyFunds != ''" >
+				AND MONEY_FUNDS = #{moneyFunds,jdbcType=NUMERIC}
+			</if>
+			<if test="totalAssets != null and totalAssets != ''" >
+				AND TOTAL_ASSETS = #{totalAssets,jdbcType=NUMERIC}
+			</if>
+			<if test="accountsReceivable != null and accountsReceivable != ''" >
+				AND ACCOUNTS_RECEIVABLE = #{accountsReceivable,jdbcType=NUMERIC}
+			</if>
+			<if test="otherReceivables != null and otherReceivables != ''" >
+				AND OTHER_RECEIVABLES = #{otherReceivables,jdbcType=NUMERIC}
+			</if>
+			<if test="deposit != null and deposit != ''" >
+				AND DEPOSIT = #{deposit,jdbcType=NUMERIC}
+			</if>
+			<if test="currentAssets != null and currentAssets != ''" >
+				AND CURRENT_ASSETS = #{currentAssets,jdbcType=NUMERIC}
+			</if>
+			<if test="shortTermBorrowing != null and shortTermBorrowing != ''" >
+				AND SHORT_TERM_BORROWING = #{shortTermBorrowing,jdbcType=NUMERIC}
+			</if>
+			<if test="longTermBorrowing != null and longTermBorrowing != ''" >
+				AND LONG_TERM_BORROWING = #{longTermBorrowing,jdbcType=NUMERIC}
+			</if>
+			<if test="currentLiabilities != null and currentLiabilities != ''" >
+				AND CURRENT_LIABILITIES = #{currentLiabilities,jdbcType=NUMERIC}
+			</if>
+			<if test="totalLiabilities != null and totalLiabilities != ''" >
+				AND TOTAL_LIABILITIES = #{totalLiabilities,jdbcType=NUMERIC}
+			</if>
+			<if test="shareCapital != null and shareCapital != ''" >
+				AND SHARE_CAPITAL = #{shareCapital,jdbcType=NUMERIC}
+			</if>
+			<if test="ownerEquity != null and ownerEquity != ''" >
+				AND OWNER_EQUITY = #{ownerEquity,jdbcType=NUMERIC}
+			</if>
+			<if test="mainBizIncome != null and mainBizIncome != ''" >
+				AND MAIN_BIZ_INCOME = #{mainBizIncome,jdbcType=NUMERIC}
+			</if>
+			<if test="mainBizCost != null and mainBizCost != ''" >
+				AND MAIN_BIZ_COST = #{mainBizCost,jdbcType=NUMERIC}
+			</if>
+			<if test="totalRevenue != null and totalRevenue != ''" >
+				AND TOTAL_REVENUE = #{totalRevenue,jdbcType=NUMERIC}
+			</if>
+			<if test="grossMargin != null and grossMargin != ''" >
+				AND GROSS_MARGIN = #{grossMargin,jdbcType=NUMERIC}
+			</if>
+			<if test="magFee != null and magFee != ''" >
+				AND MAG_FEE = #{magFee,jdbcType=NUMERIC}
+			</if>
+			<if test="rdExpense != null and rdExpense != ''" >
+				AND RD_EXPENSE = #{rdExpense,jdbcType=NUMERIC}
+			</if>
+			<if test="currentProfit != null and currentProfit != ''" >
+				AND CURRENT_PROFIT = #{currentProfit,jdbcType=NUMERIC}
+			</if>
+			<if test="currentNetProfit != null and currentNetProfit != ''" >
+				AND CURRENT_NET_PROFIT = #{currentNetProfit,jdbcType=NUMERIC}
+			</if>
+			<if test="auditReport != null and auditReport != ''" >
+				AND AUDIT_REPORT = #{auditReport,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="yearIncome != null and yearIncome != ''" >
+				AND YEAR_INCOME = #{yearIncome,jdbcType=NUMERIC}
+			</if>
+			<if test="projGuid != null and projGuid != ''" >
+				AND PROJ_GUID = #{projGuid,jdbcType=VARCHAR}
+			</if>
+			<if test="confirm != null and confirm != ''" >
+				AND CONFIRM = #{confirm,jdbcType=VARCHAR}
+			</if>
+			<if test="mainBizIncomeY != null and mainBizIncomeY != ''" >
+				AND MAIN_BIZ_INCOME_Y = #{mainBizIncomeY,jdbcType=NUMERIC}
+			</if>
+			<if test="mainBizCostY != null and mainBizCostY != ''" >
+				AND MAIN_BIZ_COST_Y = #{mainBizCostY,jdbcType=NUMERIC}
+			</if>
+			<if test="totalRevenueY != null and totalRevenueY != ''" >
+				AND TOTAL_REVENUE_Y = #{totalRevenueY,jdbcType=NUMERIC}
+			</if>
+			<if test="grossMarginY != null and grossMarginY != ''" >
+				AND GROSS_MARGIN_Y = #{grossMarginY,jdbcType=NUMERIC}
+			</if>
+			<if test="magFeeY != null and magFeeY != ''" >
+				AND MAG_FEE_Y = #{magFeeY,jdbcType=NUMERIC}
+			</if>
+			<if test="rdExpenseY != null and rdExpenseY != ''" >
+				AND RD_EXPENSE_Y = #{rdExpenseY,jdbcType=NUMERIC}
+			</if>
+			<if test="currentProfitY != null and currentProfitY != ''" >
+				AND CURRENT_PROFIT_Y = #{currentProfitY,jdbcType=NUMERIC}
+			</if>
+			<if test="currentNetProfitY != null and currentNetProfitY != ''" >
+				AND CURRENT_NET_PROFIT_Y = #{currentNetProfitY,jdbcType=NUMERIC}
+			</if>
+			<if test="finadata != null and finadata != ''" >
+				AND FINADATA = #{finadata,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="investId != null and investId != ''" >
+				AND INVEST_ID = #{investId,jdbcType=VARCHAR}
+			</if>
+			<if test="handleId != null and handleId != ''" >
+				AND HANDLE_ID = #{handleId,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  BD_T_ENTE_M_FINA_INFO WHERE PK_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.EnteMFinaInfoModel">
+		UPDATE BD_T_ENTE_M_FINA_INFO 
+		<set>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR},
+			</if>
+			<if test="occurMonth != null and occurMonth != ''" >
+				OCCUR_MONTH = #{occurMonth,jdbcType=VARCHAR},
+			</if>
+			<if test="enterpriseId != null and enterpriseId != ''" >
+				ENTERPRISE_ID = #{enterpriseId,jdbcType=VARCHAR},
+			</if>
+			<if test="currencyType != null and currencyType != ''" >
+				CURRENCY_TYPE = #{currencyType,jdbcType=VARCHAR},
+			</if>
+			<if test="totalCompPackage != null and totalCompPackage != ''" >
+				TOTAL_COMP_PACKAGE = #{totalCompPackage,jdbcType=NUMERIC},
+			</if>
+			<if test="finaStatements != null and finaStatements != ''" >
+				FINA_STATEMENTS = #{finaStatements,jdbcType=VARCHAR},
+			</if>
+			<if test="fixedAssetsNetValue != null and fixedAssetsNetValue != ''" >
+				FIXED_ASSETS_NET_VALUE = #{fixedAssetsNetValue,jdbcType=NUMERIC},
+			</if>
+			<if test="intaAssetsNetValue != null and intaAssetsNetValue != ''" >
+				INTA_ASSETS_NET_VALUE = #{intaAssetsNetValue,jdbcType=NUMERIC},
+			</if>
+			<if test="moneyFunds != null and moneyFunds != ''" >
+				MONEY_FUNDS = #{moneyFunds,jdbcType=NUMERIC},
+			</if>
+			<if test="totalAssets != null and totalAssets != ''" >
+				TOTAL_ASSETS = #{totalAssets,jdbcType=NUMERIC},
+			</if>
+			<if test="accountsReceivable != null and accountsReceivable != ''" >
+				ACCOUNTS_RECEIVABLE = #{accountsReceivable,jdbcType=NUMERIC},
+			</if>
+			<if test="otherReceivables != null and otherReceivables != ''" >
+				OTHER_RECEIVABLES = #{otherReceivables,jdbcType=NUMERIC},
+			</if>
+			<if test="deposit != null and deposit != ''" >
+				DEPOSIT = #{deposit,jdbcType=NUMERIC},
+			</if>
+			<if test="currentAssets != null and currentAssets != ''" >
+				CURRENT_ASSETS = #{currentAssets,jdbcType=NUMERIC},
+			</if>
+			<if test="shortTermBorrowing != null and shortTermBorrowing != ''" >
+				SHORT_TERM_BORROWING = #{shortTermBorrowing,jdbcType=NUMERIC},
+			</if>
+			<if test="longTermBorrowing != null and longTermBorrowing != ''" >
+				LONG_TERM_BORROWING = #{longTermBorrowing,jdbcType=NUMERIC},
+			</if>
+			<if test="currentLiabilities != null and currentLiabilities != ''" >
+				CURRENT_LIABILITIES = #{currentLiabilities,jdbcType=NUMERIC},
+			</if>
+			<if test="totalLiabilities != null and totalLiabilities != ''" >
+				TOTAL_LIABILITIES = #{totalLiabilities,jdbcType=NUMERIC},
+			</if>
+			<if test="shareCapital != null and shareCapital != ''" >
+				SHARE_CAPITAL = #{shareCapital,jdbcType=NUMERIC},
+			</if>
+			<if test="ownerEquity != null and ownerEquity != ''" >
+				OWNER_EQUITY = #{ownerEquity,jdbcType=NUMERIC},
+			</if>
+			<if test="mainBizIncome != null and mainBizIncome != ''" >
+				MAIN_BIZ_INCOME = #{mainBizIncome,jdbcType=NUMERIC},
+			</if>
+			<if test="mainBizCost != null and mainBizCost != ''" >
+				MAIN_BIZ_COST = #{mainBizCost,jdbcType=NUMERIC},
+			</if>
+			<if test="totalRevenue != null and totalRevenue != ''" >
+				TOTAL_REVENUE = #{totalRevenue,jdbcType=NUMERIC},
+			</if>
+			<if test="grossMargin != null and grossMargin != ''" >
+				GROSS_MARGIN = #{grossMargin,jdbcType=NUMERIC},
+			</if>
+			<if test="magFee != null and magFee != ''" >
+				MAG_FEE = #{magFee,jdbcType=NUMERIC},
+			</if>
+			<if test="rdExpense != null and rdExpense != ''" >
+				RD_EXPENSE = #{rdExpense,jdbcType=NUMERIC},
+			</if>
+			<if test="currentProfit != null and currentProfit != ''" >
+				CURRENT_PROFIT = #{currentProfit,jdbcType=NUMERIC},
+			</if>
+			<if test="currentNetProfit != null and currentNetProfit != ''" >
+				CURRENT_NET_PROFIT = #{currentNetProfit,jdbcType=NUMERIC},
+			</if>
+			<if test="auditReport != null and auditReport != ''" >
+				AUDIT_REPORT = #{auditReport,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="yearIncome != null and yearIncome != ''" >
+				YEAR_INCOME = #{yearIncome,jdbcType=NUMERIC},
+			</if>
+			<if test="projGuid != null and projGuid != ''" >
+				PROJ_GUID = #{projGuid,jdbcType=VARCHAR},
+			</if>
+			<if test="confirm != null and confirm != ''" >
+				CONFIRM = #{confirm,jdbcType=VARCHAR},
+			</if>
+			<if test="mainBizIncomeY != null and mainBizIncomeY != ''" >
+				MAIN_BIZ_INCOME_Y = #{mainBizIncomeY,jdbcType=NUMERIC},
+			</if>
+			<if test="mainBizCostY != null and mainBizCostY != ''" >
+				MAIN_BIZ_COST_Y = #{mainBizCostY,jdbcType=NUMERIC},
+			</if>
+			<if test="totalRevenueY != null and totalRevenueY != ''" >
+				TOTAL_REVENUE_Y = #{totalRevenueY,jdbcType=NUMERIC},
+			</if>
+			<if test="grossMarginY != null and grossMarginY != ''" >
+				GROSS_MARGIN_Y = #{grossMarginY,jdbcType=NUMERIC},
+			</if>
+			<if test="magFeeY != null and magFeeY != ''" >
+				MAG_FEE_Y = #{magFeeY,jdbcType=NUMERIC},
+			</if>
+			<if test="rdExpenseY != null and rdExpenseY != ''" >
+				RD_EXPENSE_Y = #{rdExpenseY,jdbcType=NUMERIC},
+			</if>
+			<if test="currentProfitY != null and currentProfitY != ''" >
+				CURRENT_PROFIT_Y = #{currentProfitY,jdbcType=NUMERIC},
+			</if>
+			<if test="currentNetProfitY != null and currentNetProfitY != ''" >
+				CURRENT_NET_PROFIT_Y = #{currentNetProfitY,jdbcType=NUMERIC},
+			</if>
+			<if test="finadata != null and finadata != ''" >
+				FINADATA = #{finadata,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null and remark != ''" >
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="investId != null and investId != ''" >
+				INVEST_ID = #{investId,jdbcType=VARCHAR},
+			</if>
+			<if test="handleId != null and handleId != ''" >
+				HANDLE_ID = #{handleId,jdbcType=VARCHAR},
+			</if>
+			<if test="payFee != null and payFee != ''" >
+				PAY_FEE = #{payFee,jdbcType=NUMERIC},
+			</if>
+			<if test="payFeeY != null and payFeeY != ''" >
+				PAY_FEE_Y = #{payFeeY,jdbcType=NUMERIC},
+			</if>
+			<if test="totalCompPackageY != null and totalCompPackageY != ''" >
+				TOTAL_COMP_PACKAGE_Y = #{totalCompPackageY,jdbcType=NUMERIC},
+			</if>
+			<if test="financeFile != null and financeFile != ''" >
+				FINANCE_FILE = #{financeFile,jdbcType=VARCHAR},
+			</if>
+		</set>
+		WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="EnteMFinaInfoResult">
+		SELECT * FROM BD_T_ENTE_M_FINA_INFO WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.EnteMFinaInfoModel" resultMap="EnteMFinaInfoResult">
+		SELECT * FROM BD_T_ENTE_M_FINA_INFO
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="occurMonth != null and occurMonth != ''" >
+				AND OCCUR_MONTH = #{occurMonth,jdbcType=VARCHAR}
+			</if>
+			<if test="enterpriseId != null and enterpriseId != ''" >
+				AND ENTERPRISE_ID = #{enterpriseId,jdbcType=VARCHAR}
+			</if>
+			<if test="currencyType != null and currencyType != ''" >
+				AND CURRENCY_TYPE = #{currencyType,jdbcType=VARCHAR}
+			</if>
+			<if test="totalCompPackage != null and totalCompPackage != ''" >
+				AND TOTAL_COMP_PACKAGE = #{totalCompPackage,jdbcType=NUMERIC}
+			</if>
+			<if test="finaStatements != null and finaStatements != ''" >
+				AND FINA_STATEMENTS = #{finaStatements,jdbcType=VARCHAR}
+			</if>
+			<if test="fixedAssetsNetValue != null and fixedAssetsNetValue != ''" >
+				AND FIXED_ASSETS_NET_VALUE = #{fixedAssetsNetValue,jdbcType=NUMERIC}
+			</if>
+			<if test="intaAssetsNetValue != null and intaAssetsNetValue != ''" >
+				AND INTA_ASSETS_NET_VALUE = #{intaAssetsNetValue,jdbcType=NUMERIC}
+			</if>
+			<if test="moneyFunds != null and moneyFunds != ''" >
+				AND MONEY_FUNDS = #{moneyFunds,jdbcType=NUMERIC}
+			</if>
+			<if test="totalAssets != null and totalAssets != ''" >
+				AND TOTAL_ASSETS = #{totalAssets,jdbcType=NUMERIC}
+			</if>
+			<if test="accountsReceivable != null and accountsReceivable != ''" >
+				AND ACCOUNTS_RECEIVABLE = #{accountsReceivable,jdbcType=NUMERIC}
+			</if>
+			<if test="otherReceivables != null and otherReceivables != ''" >
+				AND OTHER_RECEIVABLES = #{otherReceivables,jdbcType=NUMERIC}
+			</if>
+			<if test="deposit != null and deposit != ''" >
+				AND DEPOSIT = #{deposit,jdbcType=NUMERIC}
+			</if>
+			<if test="currentAssets != null and currentAssets != ''" >
+				AND CURRENT_ASSETS = #{currentAssets,jdbcType=NUMERIC}
+			</if>
+			<if test="shortTermBorrowing != null and shortTermBorrowing != ''" >
+				AND SHORT_TERM_BORROWING = #{shortTermBorrowing,jdbcType=NUMERIC}
+			</if>
+			<if test="longTermBorrowing != null and longTermBorrowing != ''" >
+				AND LONG_TERM_BORROWING = #{longTermBorrowing,jdbcType=NUMERIC}
+			</if>
+			<if test="currentLiabilities != null and currentLiabilities != ''" >
+				AND CURRENT_LIABILITIES = #{currentLiabilities,jdbcType=NUMERIC}
+			</if>
+			<if test="totalLiabilities != null and totalLiabilities != ''" >
+				AND TOTAL_LIABILITIES = #{totalLiabilities,jdbcType=NUMERIC}
+			</if>
+			<if test="shareCapital != null and shareCapital != ''" >
+				AND SHARE_CAPITAL = #{shareCapital,jdbcType=NUMERIC}
+			</if>
+			<if test="ownerEquity != null and ownerEquity != ''" >
+				AND OWNER_EQUITY = #{ownerEquity,jdbcType=NUMERIC}
+			</if>
+			<if test="mainBizIncome != null and mainBizIncome != ''" >
+				AND MAIN_BIZ_INCOME = #{mainBizIncome,jdbcType=NUMERIC}
+			</if>
+			<if test="mainBizCost != null and mainBizCost != ''" >
+				AND MAIN_BIZ_COST = #{mainBizCost,jdbcType=NUMERIC}
+			</if>
+			<if test="totalRevenue != null and totalRevenue != ''" >
+				AND TOTAL_REVENUE = #{totalRevenue,jdbcType=NUMERIC}
+			</if>
+			<if test="grossMargin != null and grossMargin != ''" >
+				AND GROSS_MARGIN = #{grossMargin,jdbcType=NUMERIC}
+			</if>
+			<if test="magFee != null and magFee != ''" >
+				AND MAG_FEE = #{magFee,jdbcType=NUMERIC}
+			</if>
+			<if test="rdExpense != null and rdExpense != ''" >
+				AND RD_EXPENSE = #{rdExpense,jdbcType=NUMERIC}
+			</if>
+			<if test="currentProfit != null and currentProfit != ''" >
+				AND CURRENT_PROFIT = #{currentProfit,jdbcType=NUMERIC}
+			</if>
+			<if test="currentNetProfit != null and currentNetProfit != ''" >
+				AND CURRENT_NET_PROFIT = #{currentNetProfit,jdbcType=NUMERIC}
+			</if>
+			<if test="auditReport != null and auditReport != ''" >
+				AND AUDIT_REPORT = #{auditReport,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="yearIncome != null and yearIncome != ''" >
+				AND YEAR_INCOME = #{yearIncome,jdbcType=NUMERIC}
+			</if>
+			<if test="projGuid != null and projGuid != ''" >
+				AND PROJ_GUID = #{projGuid,jdbcType=VARCHAR}
+			</if>
+			<if test="confirm != null and confirm != ''" >
+				AND CONFIRM = #{confirm,jdbcType=VARCHAR}
+			</if>
+			<if test="mainBizIncomeY != null and mainBizIncomeY != ''" >
+				AND MAIN_BIZ_INCOME_Y = #{mainBizIncomeY,jdbcType=NUMERIC}
+			</if>
+			<if test="mainBizCostY != null and mainBizCostY != ''" >
+				AND MAIN_BIZ_COST_Y = #{mainBizCostY,jdbcType=NUMERIC}
+			</if>
+			<if test="totalRevenueY != null and totalRevenueY != ''" >
+				AND TOTAL_REVENUE_Y = #{totalRevenueY,jdbcType=NUMERIC}
+			</if>
+			<if test="grossMarginY != null and grossMarginY != ''" >
+				AND GROSS_MARGIN_Y = #{grossMarginY,jdbcType=NUMERIC}
+			</if>
+			<if test="magFeeY != null and magFeeY != ''" >
+				AND MAG_FEE_Y = #{magFeeY,jdbcType=NUMERIC}
+			</if>
+			<if test="rdExpenseY != null and rdExpenseY != ''" >
+				AND RD_EXPENSE_Y = #{rdExpenseY,jdbcType=NUMERIC}
+			</if>
+			<if test="currentProfitY != null and currentProfitY != ''" >
+				AND CURRENT_PROFIT_Y = #{currentProfitY,jdbcType=NUMERIC}
+			</if>
+			<if test="currentNetProfitY != null and currentNetProfitY != ''" >
+				AND CURRENT_NET_PROFIT_Y = #{currentNetProfitY,jdbcType=NUMERIC}
+			</if>
+			<if test="finadata != null and finadata != ''" >
+				AND FINADATA = #{finadata,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="investId != null and investId != ''" >
+				AND INVEST_ID = #{investId,jdbcType=VARCHAR}
+			</if>
+			<if test="handleId != null and handleId != ''" >
+				AND HANDLE_ID = #{handleId,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM BD_T_ENTE_M_FINA_INFO
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+		ORDER BY OCCUR_MONTH DESC,CREATE_DT DESC
+	</sql>
+
+	<select id="selectListPage" resultMap="EnteMFinaInfoResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.EnteMFinaInfoModel">
+		SELECT COUNT(*) FROM BD_T_ENTE_M_FINA_INFO
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="occurMonth != null and occurMonth != ''" >
+				AND OCCUR_MONTH = #{occurMonth,jdbcType=VARCHAR}
+			</if>
+			<if test="enterpriseId != null and enterpriseId != ''" >
+				AND ENTERPRISE_ID = #{enterpriseId,jdbcType=VARCHAR}
+			</if>
+			<if test="currencyType != null and currencyType != ''" >
+				AND CURRENCY_TYPE = #{currencyType,jdbcType=VARCHAR}
+			</if>
+			<if test="totalCompPackage != null and totalCompPackage != ''" >
+				AND TOTAL_COMP_PACKAGE = #{totalCompPackage,jdbcType=NUMERIC}
+			</if>
+			<if test="finaStatements != null and finaStatements != ''" >
+				AND FINA_STATEMENTS = #{finaStatements,jdbcType=VARCHAR}
+			</if>
+			<if test="fixedAssetsNetValue != null and fixedAssetsNetValue != ''" >
+				AND FIXED_ASSETS_NET_VALUE = #{fixedAssetsNetValue,jdbcType=NUMERIC}
+			</if>
+			<if test="intaAssetsNetValue != null and intaAssetsNetValue != ''" >
+				AND INTA_ASSETS_NET_VALUE = #{intaAssetsNetValue,jdbcType=NUMERIC}
+			</if>
+			<if test="moneyFunds != null and moneyFunds != ''" >
+				AND MONEY_FUNDS = #{moneyFunds,jdbcType=NUMERIC}
+			</if>
+			<if test="totalAssets != null and totalAssets != ''" >
+				AND TOTAL_ASSETS = #{totalAssets,jdbcType=NUMERIC}
+			</if>
+			<if test="accountsReceivable != null and accountsReceivable != ''" >
+				AND ACCOUNTS_RECEIVABLE = #{accountsReceivable,jdbcType=NUMERIC}
+			</if>
+			<if test="otherReceivables != null and otherReceivables != ''" >
+				AND OTHER_RECEIVABLES = #{otherReceivables,jdbcType=NUMERIC}
+			</if>
+			<if test="deposit != null and deposit != ''" >
+				AND DEPOSIT = #{deposit,jdbcType=NUMERIC}
+			</if>
+			<if test="currentAssets != null and currentAssets != ''" >
+				AND CURRENT_ASSETS = #{currentAssets,jdbcType=NUMERIC}
+			</if>
+			<if test="shortTermBorrowing != null and shortTermBorrowing != ''" >
+				AND SHORT_TERM_BORROWING = #{shortTermBorrowing,jdbcType=NUMERIC}
+			</if>
+			<if test="longTermBorrowing != null and longTermBorrowing != ''" >
+				AND LONG_TERM_BORROWING = #{longTermBorrowing,jdbcType=NUMERIC}
+			</if>
+			<if test="currentLiabilities != null and currentLiabilities != ''" >
+				AND CURRENT_LIABILITIES = #{currentLiabilities,jdbcType=NUMERIC}
+			</if>
+			<if test="totalLiabilities != null and totalLiabilities != ''" >
+				AND TOTAL_LIABILITIES = #{totalLiabilities,jdbcType=NUMERIC}
+			</if>
+			<if test="shareCapital != null and shareCapital != ''" >
+				AND SHARE_CAPITAL = #{shareCapital,jdbcType=NUMERIC}
+			</if>
+			<if test="ownerEquity != null and ownerEquity != ''" >
+				AND OWNER_EQUITY = #{ownerEquity,jdbcType=NUMERIC}
+			</if>
+			<if test="mainBizIncome != null and mainBizIncome != ''" >
+				AND MAIN_BIZ_INCOME = #{mainBizIncome,jdbcType=NUMERIC}
+			</if>
+			<if test="mainBizCost != null and mainBizCost != ''" >
+				AND MAIN_BIZ_COST = #{mainBizCost,jdbcType=NUMERIC}
+			</if>
+			<if test="totalRevenue != null and totalRevenue != ''" >
+				AND TOTAL_REVENUE = #{totalRevenue,jdbcType=NUMERIC}
+			</if>
+			<if test="grossMargin != null and grossMargin != ''" >
+				AND GROSS_MARGIN = #{grossMargin,jdbcType=NUMERIC}
+			</if>
+			<if test="magFee != null and magFee != ''" >
+				AND MAG_FEE = #{magFee,jdbcType=NUMERIC}
+			</if>
+			<if test="rdExpense != null and rdExpense != ''" >
+				AND RD_EXPENSE = #{rdExpense,jdbcType=NUMERIC}
+			</if>
+			<if test="currentProfit != null and currentProfit != ''" >
+				AND CURRENT_PROFIT = #{currentProfit,jdbcType=NUMERIC}
+			</if>
+			<if test="currentNetProfit != null and currentNetProfit != ''" >
+				AND CURRENT_NET_PROFIT = #{currentNetProfit,jdbcType=NUMERIC}
+			</if>
+			<if test="auditReport != null and auditReport != ''" >
+				AND AUDIT_REPORT = #{auditReport,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="yearIncome != null and yearIncome != ''" >
+				AND YEAR_INCOME = #{yearIncome,jdbcType=NUMERIC}
+			</if>
+			<if test="projGuid != null and projGuid != ''" >
+				AND PROJ_GUID = #{projGuid,jdbcType=VARCHAR}
+			</if>
+			<if test="confirm != null and confirm != ''" >
+				AND CONFIRM = #{confirm,jdbcType=VARCHAR}
+			</if>
+			<if test="mainBizIncomeY != null and mainBizIncomeY != ''" >
+				AND MAIN_BIZ_INCOME_Y = #{mainBizIncomeY,jdbcType=NUMERIC}
+			</if>
+			<if test="mainBizCostY != null and mainBizCostY != ''" >
+				AND MAIN_BIZ_COST_Y = #{mainBizCostY,jdbcType=NUMERIC}
+			</if>
+			<if test="totalRevenueY != null and totalRevenueY != ''" >
+				AND TOTAL_REVENUE_Y = #{totalRevenueY,jdbcType=NUMERIC}
+			</if>
+			<if test="grossMarginY != null and grossMarginY != ''" >
+				AND GROSS_MARGIN_Y = #{grossMarginY,jdbcType=NUMERIC}
+			</if>
+			<if test="magFeeY != null and magFeeY != ''" >
+				AND MAG_FEE_Y = #{magFeeY,jdbcType=NUMERIC}
+			</if>
+			<if test="rdExpenseY != null and rdExpenseY != ''" >
+				AND RD_EXPENSE_Y = #{rdExpenseY,jdbcType=NUMERIC}
+			</if>
+			<if test="currentProfitY != null and currentProfitY != ''" >
+				AND CURRENT_PROFIT_Y = #{currentProfitY,jdbcType=NUMERIC}
+			</if>
+			<if test="currentNetProfitY != null and currentNetProfitY != ''" >
+				AND CURRENT_NET_PROFIT_Y = #{currentNetProfitY,jdbcType=NUMERIC}
+			</if>
+			<if test="finadata != null and finadata != ''" >
+				AND FINADATA = #{finadata,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="investId != null and investId != ''" >
+				AND INVEST_ID = #{investId,jdbcType=VARCHAR}
+			</if>
+			<if test="handleId != null and handleId != ''" >
+				AND HANDLE_ID = #{handleId,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.EnteMFinaInfoModel" resultMap="EnteMFinaInfoResult">
+		SELECT * FROM BD_T_ENTE_M_FINA_INFO
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="occurMonth != null and occurMonth != ''" >
+				AND OCCUR_MONTH = #{occurMonth,jdbcType=VARCHAR}
+			</if>
+			<if test="enterpriseId != null and enterpriseId != ''" >
+				AND ENTERPRISE_ID = #{enterpriseId,jdbcType=VARCHAR}
+			</if>
+			<if test="currencyType != null and currencyType != ''" >
+				AND CURRENCY_TYPE = #{currencyType,jdbcType=VARCHAR}
+			</if>
+			<if test="totalCompPackage != null and totalCompPackage != ''" >
+				AND TOTAL_COMP_PACKAGE = #{totalCompPackage,jdbcType=NUMERIC}
+			</if>
+			<if test="finaStatements != null and finaStatements != ''" >
+				AND FINA_STATEMENTS = #{finaStatements,jdbcType=VARCHAR}
+			</if>
+			<if test="fixedAssetsNetValue != null and fixedAssetsNetValue != ''" >
+				AND FIXED_ASSETS_NET_VALUE = #{fixedAssetsNetValue,jdbcType=NUMERIC}
+			</if>
+			<if test="intaAssetsNetValue != null and intaAssetsNetValue != ''" >
+				AND INTA_ASSETS_NET_VALUE = #{intaAssetsNetValue,jdbcType=NUMERIC}
+			</if>
+			<if test="moneyFunds != null and moneyFunds != ''" >
+				AND MONEY_FUNDS = #{moneyFunds,jdbcType=NUMERIC}
+			</if>
+			<if test="totalAssets != null and totalAssets != ''" >
+				AND TOTAL_ASSETS = #{totalAssets,jdbcType=NUMERIC}
+			</if>
+			<if test="accountsReceivable != null and accountsReceivable != ''" >
+				AND ACCOUNTS_RECEIVABLE = #{accountsReceivable,jdbcType=NUMERIC}
+			</if>
+			<if test="otherReceivables != null and otherReceivables != ''" >
+				AND OTHER_RECEIVABLES = #{otherReceivables,jdbcType=NUMERIC}
+			</if>
+			<if test="deposit != null and deposit != ''" >
+				AND DEPOSIT = #{deposit,jdbcType=NUMERIC}
+			</if>
+			<if test="currentAssets != null and currentAssets != ''" >
+				AND CURRENT_ASSETS = #{currentAssets,jdbcType=NUMERIC}
+			</if>
+			<if test="shortTermBorrowing != null and shortTermBorrowing != ''" >
+				AND SHORT_TERM_BORROWING = #{shortTermBorrowing,jdbcType=NUMERIC}
+			</if>
+			<if test="longTermBorrowing != null and longTermBorrowing != ''" >
+				AND LONG_TERM_BORROWING = #{longTermBorrowing,jdbcType=NUMERIC}
+			</if>
+			<if test="currentLiabilities != null and currentLiabilities != ''" >
+				AND CURRENT_LIABILITIES = #{currentLiabilities,jdbcType=NUMERIC}
+			</if>
+			<if test="totalLiabilities != null and totalLiabilities != ''" >
+				AND TOTAL_LIABILITIES = #{totalLiabilities,jdbcType=NUMERIC}
+			</if>
+			<if test="shareCapital != null and shareCapital != ''" >
+				AND SHARE_CAPITAL = #{shareCapital,jdbcType=NUMERIC}
+			</if>
+			<if test="ownerEquity != null and ownerEquity != ''" >
+				AND OWNER_EQUITY = #{ownerEquity,jdbcType=NUMERIC}
+			</if>
+			<if test="mainBizIncome != null and mainBizIncome != ''" >
+				AND MAIN_BIZ_INCOME = #{mainBizIncome,jdbcType=NUMERIC}
+			</if>
+			<if test="mainBizCost != null and mainBizCost != ''" >
+				AND MAIN_BIZ_COST = #{mainBizCost,jdbcType=NUMERIC}
+			</if>
+			<if test="totalRevenue != null and totalRevenue != ''" >
+				AND TOTAL_REVENUE = #{totalRevenue,jdbcType=NUMERIC}
+			</if>
+			<if test="grossMargin != null and grossMargin != ''" >
+				AND GROSS_MARGIN = #{grossMargin,jdbcType=NUMERIC}
+			</if>
+			<if test="magFee != null and magFee != ''" >
+				AND MAG_FEE = #{magFee,jdbcType=NUMERIC}
+			</if>
+			<if test="rdExpense != null and rdExpense != ''" >
+				AND RD_EXPENSE = #{rdExpense,jdbcType=NUMERIC}
+			</if>
+			<if test="currentProfit != null and currentProfit != ''" >
+				AND CURRENT_PROFIT = #{currentProfit,jdbcType=NUMERIC}
+			</if>
+			<if test="currentNetProfit != null and currentNetProfit != ''" >
+				AND CURRENT_NET_PROFIT = #{currentNetProfit,jdbcType=NUMERIC}
+			</if>
+			<if test="auditReport != null and auditReport != ''" >
+				AND AUDIT_REPORT = #{auditReport,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="yearIncome != null and yearIncome != ''" >
+				AND YEAR_INCOME = #{yearIncome,jdbcType=NUMERIC}
+			</if>
+			<if test="projGuid != null and projGuid != ''" >
+				AND PROJ_GUID = #{projGuid,jdbcType=VARCHAR}
+			</if>
+			<if test="confirm != null and confirm != ''" >
+				AND CONFIRM = #{confirm,jdbcType=VARCHAR}
+			</if>
+			<if test="mainBizIncomeY != null and mainBizIncomeY != ''" >
+				AND MAIN_BIZ_INCOME_Y = #{mainBizIncomeY,jdbcType=NUMERIC}
+			</if>
+			<if test="mainBizCostY != null and mainBizCostY != ''" >
+				AND MAIN_BIZ_COST_Y = #{mainBizCostY,jdbcType=NUMERIC}
+			</if>
+			<if test="totalRevenueY != null and totalRevenueY != ''" >
+				AND TOTAL_REVENUE_Y = #{totalRevenueY,jdbcType=NUMERIC}
+			</if>
+			<if test="grossMarginY != null and grossMarginY != ''" >
+				AND GROSS_MARGIN_Y = #{grossMarginY,jdbcType=NUMERIC}
+			</if>
+			<if test="magFeeY != null and magFeeY != ''" >
+				AND MAG_FEE_Y = #{magFeeY,jdbcType=NUMERIC}
+			</if>
+			<if test="rdExpenseY != null and rdExpenseY != ''" >
+				AND RD_EXPENSE_Y = #{rdExpenseY,jdbcType=NUMERIC}
+			</if>
+			<if test="currentProfitY != null and currentProfitY != ''" >
+				AND CURRENT_PROFIT_Y = #{currentProfitY,jdbcType=NUMERIC}
+			</if>
+			<if test="currentNetProfitY != null and currentNetProfitY != ''" >
+				AND CURRENT_NET_PROFIT_Y = #{currentNetProfitY,jdbcType=NUMERIC}
+			</if>
+			<if test="finadata != null and finadata != ''" >
+				AND FINADATA = #{finadata,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="investId != null and investId != ''" >
+				AND INVEST_ID = #{investId,jdbcType=VARCHAR}
+			</if>
+			<if test="handleId != null and handleId != ''" >
+				AND HANDLE_ID = #{handleId,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="EnteMFinaInfoResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+</mapper>

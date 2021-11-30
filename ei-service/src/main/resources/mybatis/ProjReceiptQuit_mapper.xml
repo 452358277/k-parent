@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProjReceiptQuit">
+	<!-- start autocreate -->
+
+	<resultMap id="ProjReceiptQuitResult" type="com.ppmg.ei.model.ProjReceiptQuitModel">
+		<result column="RECEIPT_ID" property="receiptId" jdbcType="VARCHAR" />
+		<result column="PROJ_ID" property="projId" jdbcType="VARCHAR" />
+		<result column="FILE_ID" property="fileId" jdbcType="VARCHAR" />
+		<result column="BACK_MONEY" property="backMoney" jdbcType="NUMERIC" />
+		<result column="RECEIPT_NAME" property="receiptName" jdbcType="VARCHAR" />
+		<result column="RECEIPT_NUMBER" property="receiptNumber" jdbcType="NUMERIC" />
+		<result column="RECEIPT_BANK" property="receiptBank" jdbcType="VARCHAR" />
+		<result column="PAY_NAME" property="payName" jdbcType="VARCHAR" />
+		<result column="PAY_NUMBER" property="payNumber" jdbcType="NUMERIC" />
+		<result column="PAY_BANK" property="payBank" jdbcType="VARCHAR" />
+		<result column="QUIT_FILE" property="quitFile" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="PROCESS_INST_ID" property="processInstId" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.ProjReceiptQuitModel">
+		INSERT INTO TZ_T_PROJ_RECEIPT_QUIT (RECEIPT_ID,PROJ_ID,FILE_ID,BACK_MONEY,RECEIPT_NAME,RECEIPT_NUMBER,RECEIPT_BANK,PAY_NAME,PAY_NUMBER,PAY_BANK,QUIT_FILE,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,PROCESS_INST_ID)
+		values(#{receiptId,jdbcType=VARCHAR},#{projId,jdbcType=VARCHAR},#{fileId,jdbcType=VARCHAR},#{backMoney,jdbcType=NUMERIC},#{receiptName,jdbcType=VARCHAR},#{receiptNumber,jdbcType=NUMERIC},#{receiptBank,jdbcType=VARCHAR},
+		#{payName,jdbcType=VARCHAR},#{payNumber,jdbcType=NUMERIC},#{payBank,jdbcType=VARCHAR},#{quitFile,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},
+		#{updateDt,jdbcType=TIMESTAMP},#{processInstId,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO TZ_T_PROJ_RECEIPT_QUIT (RECEIPT_ID,PROJ_ID,FILE_ID,BACK_MONEY,RECEIPT_NAME,RECEIPT_NUMBER,RECEIPT_BANK,PAY_NAME,PAY_NUMBER,PAY_BANK,QUIT_FILE,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,PROCESS_INST_ID)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.receiptId,jdbcType=VARCHAR},
+				#{item.projId,jdbcType=VARCHAR},
+				#{item.fileId,jdbcType=VARCHAR},
+				#{item.backMoney,jdbcType=NUMERIC},
+				#{item.receiptName,jdbcType=VARCHAR},
+				#{item.receiptNumber,jdbcType=NUMERIC},
+				#{item.receiptBank,jdbcType=VARCHAR},
+				#{item.payName,jdbcType=VARCHAR},
+				#{item.payNumber,jdbcType=NUMERIC},
+				#{item.payBank,jdbcType=VARCHAR},
+				#{item.quitFile,jdbcType=VARCHAR},
+				#{item.status,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+				#{item.processInstId,jdbcType=VARCHAR}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  TZ_T_PROJ_RECEIPT_QUIT WHERE RECEIPT_ID = #{receiptId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.ProjReceiptQuitModel">
+		DELETE FROM TZ_T_PROJ_RECEIPT_QUIT
+		<where>
+			<if test="receiptId != null and receiptId != ''" >
+				RECEIPT_ID = #{receiptId,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="fileId != null and fileId != ''" >
+				AND FILE_ID = #{fileId,jdbcType=VARCHAR}
+			</if>
+			<if test="backMoney != null and backMoney != ''" >
+				AND BACK_MONEY = #{backMoney,jdbcType=NUMERIC}
+			</if>
+			<if test="receiptName != null and receiptName != ''" >
+				AND RECEIPT_NAME = #{receiptName,jdbcType=VARCHAR}
+			</if>
+			<if test="receiptNumber != null and receiptNumber != ''" >
+				AND RECEIPT_NUMBER = #{receiptNumber,jdbcType=NUMERIC}
+			</if>
+			<if test="receiptBank != null and receiptBank != ''" >
+				AND RECEIPT_BANK = #{receiptBank,jdbcType=VARCHAR}
+			</if>
+			<if test="payName != null and payName != ''" >
+				AND PAY_NAME = #{payName,jdbcType=VARCHAR}
+			</if>
+			<if test="payNumber != null and payNumber != ''" >
+				AND PAY_NUMBER = #{payNumber,jdbcType=NUMERIC}
+			</if>
+			<if test="payBank != null and payBank != ''" >
+				AND PAY_BANK = #{payBank,jdbcType=VARCHAR}
+			</if>
+			<if test="quitFile != null and quitFile != ''" >
+				AND QUIT_FILE = #{quitFile,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  TZ_T_PROJ_RECEIPT_QUIT WHERE RECEIPT_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.ProjReceiptQuitModel">
+		UPDATE TZ_T_PROJ_RECEIPT_QUIT 
+		<set>
+			<if test="receiptId != null and receiptId != ''" >
+				RECEIPT_ID = #{receiptId,jdbcType=VARCHAR},
+			</if>
+			<if test="projId != null and projId != ''" >
+				PROJ_ID = #{projId,jdbcType=VARCHAR},
+			</if>
+			<if test="fileId != null and fileId != ''" >
+				FILE_ID = #{fileId,jdbcType=VARCHAR},
+			</if>
+			<if test="backMoney != null and backMoney != ''" >
+				BACK_MONEY = #{backMoney,jdbcType=NUMERIC},
+			</if>
+			<if test="receiptName != null and receiptName != ''" >
+				RECEIPT_NAME = #{receiptName,jdbcType=VARCHAR},
+			</if>
+			<if test="receiptNumber != null and receiptNumber != ''" >
+				RECEIPT_NUMBER = #{receiptNumber,jdbcType=NUMERIC},
+			</if>
+			<if test="receiptBank != null and receiptBank != ''" >
+				RECEIPT_BANK = #{receiptBank,jdbcType=VARCHAR},
+			</if>
+			<if test="payName != null and payName != ''" >
+				PAY_NAME = #{payName,jdbcType=VARCHAR},
+			</if>
+			<if test="payNumber != null and payNumber != ''" >
+				PAY_NUMBER = #{payNumber,jdbcType=NUMERIC},
+			</if>
+			<if test="payBank != null and payBank != ''" >
+				PAY_BANK = #{payBank,jdbcType=VARCHAR},
+			</if>
+			<if test="quitFile != null and quitFile != ''" >
+				QUIT_FILE = #{quitFile,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR},
+			</if>
+		</set>
+		WHERE RECEIPT_ID = #{receiptId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="ProjReceiptQuitResult">
+		SELECT * FROM TZ_T_PROJ_RECEIPT_QUIT WHERE RECEIPT_ID = #{receiptId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.ProjReceiptQuitModel" resultMap="ProjReceiptQuitResult">
+		SELECT * FROM TZ_T_PROJ_RECEIPT_QUIT
+		<where>
+			<if test="receiptId != null and receiptId != ''" >
+				RECEIPT_ID = #{receiptId,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="fileId != null and fileId != ''" >
+				AND FILE_ID = #{fileId,jdbcType=VARCHAR}
+			</if>
+			<if test="backMoney != null and backMoney != ''" >
+				AND BACK_MONEY = #{backMoney,jdbcType=NUMERIC}
+			</if>
+			<if test="receiptName != null and receiptName != ''" >
+				AND RECEIPT_NAME = #{receiptName,jdbcType=VARCHAR}
+			</if>
+			<if test="receiptNumber != null and receiptNumber != ''" >
+				AND RECEIPT_NUMBER = #{receiptNumber,jdbcType=NUMERIC}
+			</if>
+			<if test="receiptBank != null and receiptBank != ''" >
+				AND RECEIPT_BANK = #{receiptBank,jdbcType=VARCHAR}
+			</if>
+			<if test="payName != null and payName != ''" >
+				AND PAY_NAME = #{payName,jdbcType=VARCHAR}
+			</if>
+			<if test="payNumber != null and payNumber != ''" >
+				AND PAY_NUMBER = #{payNumber,jdbcType=NUMERIC}
+			</if>
+			<if test="payBank != null and payBank != ''" >
+				AND PAY_BANK = #{payBank,jdbcType=VARCHAR}
+			</if>
+			<if test="quitFile != null and quitFile != ''" >
+				AND QUIT_FILE = #{quitFile,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM TZ_T_PROJ_RECEIPT_QUIT
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+		ORDER BY update_dt DESC
+	</sql>
+
+	<select id="selectListPage" resultMap="ProjReceiptQuitResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.ProjReceiptQuitModel">
+		SELECT COUNT(*) FROM TZ_T_PROJ_RECEIPT_QUIT
+		<where>
+			<if test="receiptId != null and receiptId != ''" >
+				RECEIPT_ID = #{receiptId,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="fileId != null and fileId != ''" >
+				AND FILE_ID = #{fileId,jdbcType=VARCHAR}
+			</if>
+			<if test="backMoney != null and backMoney != ''" >
+				AND BACK_MONEY = #{backMoney,jdbcType=NUMERIC}
+			</if>
+			<if test="receiptName != null and receiptName != ''" >
+				AND RECEIPT_NAME = #{receiptName,jdbcType=VARCHAR}
+			</if>
+			<if test="receiptNumber != null and receiptNumber != ''" >
+				AND RECEIPT_NUMBER = #{receiptNumber,jdbcType=NUMERIC}
+			</if>
+			<if test="receiptBank != null and receiptBank != ''" >
+				AND RECEIPT_BANK = #{receiptBank,jdbcType=VARCHAR}
+			</if>
+			<if test="payName != null and payName != ''" >
+				AND PAY_NAME = #{payName,jdbcType=VARCHAR}
+			</if>
+			<if test="payNumber != null and payNumber != ''" >
+				AND PAY_NUMBER = #{payNumber,jdbcType=NUMERIC}
+			</if>
+			<if test="payBank != null and payBank != ''" >
+				AND PAY_BANK = #{payBank,jdbcType=VARCHAR}
+			</if>
+			<if test="quitFile != null and quitFile != ''" >
+				AND QUIT_FILE = #{quitFile,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.ProjReceiptQuitModel" resultMap="ProjReceiptQuitResult">
+		SELECT * FROM TZ_T_PROJ_RECEIPT_QUIT
+		<where>
+			<if test="receiptId != null and receiptId != ''" >
+				RECEIPT_ID = #{receiptId,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="fileId != null and fileId != ''" >
+				AND FILE_ID = #{fileId,jdbcType=VARCHAR}
+			</if>
+			<if test="backMoney != null and backMoney != ''" >
+				AND BACK_MONEY = #{backMoney,jdbcType=NUMERIC}
+			</if>
+			<if test="receiptName != null and receiptName != ''" >
+				AND RECEIPT_NAME = #{receiptName,jdbcType=VARCHAR}
+			</if>
+			<if test="receiptNumber != null and receiptNumber != ''" >
+				AND RECEIPT_NUMBER = #{receiptNumber,jdbcType=NUMERIC}
+			</if>
+			<if test="receiptBank != null and receiptBank != ''" >
+				AND RECEIPT_BANK = #{receiptBank,jdbcType=VARCHAR}
+			</if>
+			<if test="payName != null and payName != ''" >
+				AND PAY_NAME = #{payName,jdbcType=VARCHAR}
+			</if>
+			<if test="payNumber != null and payNumber != ''" >
+				AND PAY_NUMBER = #{payNumber,jdbcType=NUMERIC}
+			</if>
+			<if test="payBank != null and payBank != ''" >
+				AND PAY_BANK = #{payBank,jdbcType=VARCHAR}
+			</if>
+			<if test="quitFile != null and quitFile != ''" >
+				AND QUIT_FILE = #{quitFile,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="ProjReceiptQuitResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+
+	<select id="getSumAmount" parameterType="java.lang.String" resultType="Double">
+
+    select sum(BACK_MONEY) from TZ_T_PROJ_RECEIPT_QUIT where status='2'
+     and proj_id=#{projId}
+	</select>
+</mapper>

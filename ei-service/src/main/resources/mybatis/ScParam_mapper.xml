@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ScParam">
+	<resultMap id="ScParamResult2" type="com.ppmg.ei.model.ScParamModel" extends="ScParamResult">
+		<result column="STATUS_NAME" property="statusName" jdbcType="VARCHAR" />
+	</resultMap>
+	<!-- start autocreate -->
+
+	<resultMap id="ScParamResult" type="com.ppmg.ei.model.ScParamModel">
+		<result column="PARAM_ID" property="paramId" jdbcType="VARCHAR" />
+		<result column="CUS_ID" property="cusId" jdbcType="VARCHAR" />
+		<result column="CUS_NAME" property="cusName" jdbcType="VARCHAR" />
+		<result column="SYS_TYPE" property="sysType" jdbcType="VARCHAR" />
+		<result column="CUS_TYPE" property="cusType" jdbcType="VARCHAR" />
+		<result column="CUS_LEVEL" property="cusLevel" jdbcType="VARCHAR" />
+		<result column="CONFIRM_DT" property="confirmDt" jdbcType="TIMESTAMP" />
+		<result column="INMONEY_Y" property="inmoneyY" jdbcType="NUMERIC" />
+		<result column="INDUSTRY" property="industry" jdbcType="VARCHAR" />
+		<result column="IS_TEC" property="isTec" jdbcType="VARCHAR" />
+		<result column="IS_ESTATE" property="isEstate" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="PROCESS_INST_ID" property="processInstId" jdbcType="VARCHAR" />
+		<result column="CARD_IDS" property="cardIds" jdbcType="VARCHAR" />
+		<result column="FINAL_SCORE" property="finalScore" jdbcType="NUMERIC" />
+		<result column="APPLY_USER1" property="applyUser1" jdbcType="VARCHAR" />
+		<result column="APPLY_USER2" property="applyUser2" jdbcType="VARCHAR" />
+		<result column="APPLY_USER3" property="applyUser3" jdbcType="VARCHAR" />
+		<result column="IS_ACTIVE" property="isActive" jdbcType="VARCHAR" />
+		<result column="PROJ_ID" property="projId" jdbcType="VARCHAR" />
+		<result column="PROJ_NAME" property="projName" jdbcType="VARCHAR" />
+		<result column="EVALUATE_YEAR" property="evaluateYear" jdbcType="VARCHAR" />
+		<result column="EVALUATE_Q" property="evaluateQ" jdbcType="VARCHAR" />
+		<result column="PROJ_ID_TOGETHER" property="projIdTogether" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.ScParamModel">
+		INSERT INTO SC.SC_PARAM (PARAM_ID,CUS_ID,CUS_NAME,SYS_TYPE,CUS_TYPE,CUS_LEVEL,CONFIRM_DT,INMONEY_Y,INDUSTRY,IS_TEC,IS_ESTATE,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,PROCESS_INST_ID,CARD_IDS,FINAL_SCORE,APPLY_USER1,APPLY_USER2,APPLY_USER3,IS_ACTIVE,PROJ_ID,PROJ_NAME,EVALUATE_YEAR,EVALUATE_Q,PROJ_ID_TOGETHER) values(#{paramId,jdbcType=VARCHAR},#{cusId,jdbcType=VARCHAR},#{cusName,jdbcType=VARCHAR},#{sysType,jdbcType=VARCHAR},#{cusType,jdbcType=VARCHAR},#{cusLevel,jdbcType=VARCHAR},#{confirmDt,jdbcType=TIMESTAMP},#{inmoneyY,jdbcType=NUMERIC},#{industry,jdbcType=VARCHAR},#{isTec,jdbcType=VARCHAR},#{isEstate,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{processInstId,jdbcType=VARCHAR},#{cardIds,jdbcType=VARCHAR},#{finalScore,jdbcType=NUMERIC},#{applyUser1,jdbcType=VARCHAR},#{applyUser2,jdbcType=VARCHAR},#{applyUser3,jdbcType=VARCHAR},#{isActive,jdbcType=VARCHAR},#{projId,jdbcType=VARCHAR},#{projName,jdbcType=VARCHAR},#{evaluateYear,jdbcType=VARCHAR},#{evaluateQ,jdbcType=VARCHAR},#{projIdTogether,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO SC.SC_PARAM (PARAM_ID,CUS_ID,CUS_NAME,SYS_TYPE,CUS_TYPE,CUS_LEVEL,CONFIRM_DT,INMONEY_Y,INDUSTRY,IS_TEC,IS_ESTATE,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,PROCESS_INST_ID,CARD_IDS,FINAL_SCORE,APPLY_USER1,APPLY_USER2,APPLY_USER3,IS_ACTIVE,PROJ_ID,PROJ_NAME,EVALUATE_YEAR,EVALUATE_Q,PROJ_ID_TOGETHER)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.paramId,jdbcType=VARCHAR},
+				#{item.cusId,jdbcType=VARCHAR},
+				#{item.cusName,jdbcType=VARCHAR},
+				#{item.sysType,jdbcType=VARCHAR},
+				#{item.cusType,jdbcType=VARCHAR},
+				#{item.cusLevel,jdbcType=VARCHAR},
+				#{item.confirmDt,jdbcType=TIMESTAMP},
+				#{item.inmoneyY,jdbcType=NUMERIC},
+				#{item.industry,jdbcType=VARCHAR},
+				#{item.isTec,jdbcType=VARCHAR},
+				#{item.isEstate,jdbcType=VARCHAR},
+				#{item.status,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+				#{item.processInstId,jdbcType=VARCHAR},
+				#{item.cardIds,jdbcType=VARCHAR},
+				#{item.finalScore,jdbcType=NUMERIC},
+				#{item.applyUser1,jdbcType=VARCHAR},
+				#{item.applyUser2,jdbcType=VARCHAR},
+				#{item.applyUser3,jdbcType=VARCHAR},
+				#{item.isActive,jdbcType=VARCHAR},
+				#{item.projId,jdbcType=VARCHAR},
+				#{item.projName,jdbcType=VARCHAR},
+				#{item.evaluateYear,jdbcType=VARCHAR},
+				#{item.evaluateQ,jdbcType=VARCHAR},
+				#{item.projIdTogether,jdbcType=VARCHAR}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  SC.SC_PARAM WHERE PARAM_ID = #{paramId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.ScParamModel">
+		DELETE FROM SC.SC_PARAM
+		<where>
+			<if test="paramId != null and paramId != ''" >
+				PARAM_ID = #{paramId,jdbcType=VARCHAR}
+			</if>
+			<if test="cusId != null and cusId != ''" >
+				AND CUS_ID = #{cusId,jdbcType=VARCHAR}
+			</if>
+			<if test="cusName != null and cusName != ''" >
+				AND CUS_NAME = #{cusName,jdbcType=VARCHAR}
+			</if>
+			<if test="sysType != null and sysType != ''" >
+				AND SYS_TYPE = #{sysType,jdbcType=VARCHAR}
+			</if>
+			<if test="cusType != null and cusType != ''" >
+				AND CUS_TYPE = #{cusType,jdbcType=VARCHAR}
+			</if>
+			<if test="cusLevel != null and cusLevel != ''" >
+				AND CUS_LEVEL = #{cusLevel,jdbcType=VARCHAR}
+			</if>
+			<if test="confirmDt != null" >
+				AND CONFIRM_DT = #{confirmDt,jdbcType=VARCHAR}
+			</if>
+			<if test="inmoneyY != null and inmoneyY != ''" >
+				AND INMONEY_Y = #{inmoneyY,jdbcType=NUMERIC}
+			</if>
+			<if test="industry != null and industry != ''" >
+				AND INDUSTRY = #{industry,jdbcType=VARCHAR}
+			</if>
+			<if test="isTec != null and isTec != ''" >
+				AND IS_TEC = #{isTec,jdbcType=VARCHAR}
+			</if>
+			<if test="isEstate != null and isEstate != ''" >
+				AND IS_ESTATE = #{isEstate,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="cardIds != null and cardIds != ''" >
+				AND CARD_IDS = #{cardIds,jdbcType=VARCHAR}
+			</if>
+			<if test="finalScore != null and finalScore != ''" >
+				AND FINAL_SCORE = #{finalScore,jdbcType=NUMERIC}
+			</if>
+			<if test="applyUser1 != null and applyUser1 != ''" >
+				AND APPLY_USER1 = #{applyUser1,jdbcType=VARCHAR}
+			</if>
+			<if test="applyUser2 != null and applyUser2 != ''" >
+				AND APPLY_USER2 = #{applyUser2,jdbcType=VARCHAR}
+			</if>
+			<if test="applyUser3 != null and applyUser3 != ''" >
+				AND APPLY_USER3 = #{applyUser3,jdbcType=VARCHAR}
+			</if>
+			<if test="isActive != null and isActive != ''" >
+				AND IS_ACTIVE = #{isActive,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="projName != null and projName != ''" >
+				AND PROJ_NAME = #{projName,jdbcType=VARCHAR}
+			</if>
+			<if test="evaluateYear != null and evaluateYear != ''" >
+				AND EVALUATE_YEAR = #{evaluateYear,jdbcType=VARCHAR}
+			</if>
+			<if test="evaluateQ != null and evaluateQ != ''" >
+				AND EVALUATE_Q = #{evaluateQ,jdbcType=VARCHAR}
+			</if>
+			<if test="projIdTogether != null and projIdTogether != ''" >
+				AND PROJ_ID_TOGETHER = #{projIdTogether,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  SC.SC_PARAM WHERE PARAM_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.ScParamModel">
+		UPDATE SC.SC_PARAM 
+		<set>
+			<if test="paramId != null and paramId != ''" >
+				PARAM_ID = #{paramId,jdbcType=VARCHAR},
+			</if>
+			<if test="cusId != null and cusId != ''" >
+				CUS_ID = #{cusId,jdbcType=VARCHAR},
+			</if>
+			<if test="cusName != null and cusName != ''" >
+				CUS_NAME = #{cusName,jdbcType=VARCHAR},
+			</if>
+			<if test="sysType != null and sysType != ''" >
+				SYS_TYPE = #{sysType,jdbcType=VARCHAR},
+			</if>
+			<if test="cusType != null and cusType != ''" >
+				CUS_TYPE = #{cusType,jdbcType=VARCHAR},
+			</if>
+			<if test="cusLevel != null and cusLevel != ''" >
+				CUS_LEVEL = #{cusLevel,jdbcType=VARCHAR},
+			</if>
+			<if test="confirmDt != null" >
+				CONFIRM_DT = #{confirmDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="inmoneyY != null and inmoneyY != ''" >
+				INMONEY_Y = #{inmoneyY,jdbcType=NUMERIC},
+			</if>
+			<if test="industry != null and industry != ''" >
+				INDUSTRY = #{industry,jdbcType=VARCHAR},
+			</if>
+			<if test="isTec != null and isTec != ''" >
+				IS_TEC = #{isTec,jdbcType=VARCHAR},
+			</if>
+			<if test="isEstate != null and isEstate != ''" >
+				IS_ESTATE = #{isEstate,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR},
+			</if>
+			<if test="cardIds != null and cardIds != ''" >
+				CARD_IDS = #{cardIds,jdbcType=VARCHAR},
+			</if>
+			<if test="finalScore != null and finalScore != ''" >
+				FINAL_SCORE = #{finalScore,jdbcType=NUMERIC},
+			</if>
+			<if test="applyUser1 != null and applyUser1 != ''" >
+				APPLY_USER1 = #{applyUser1,jdbcType=VARCHAR},
+			</if>
+			<if test="applyUser2 != null and applyUser2 != ''" >
+				APPLY_USER2 = #{applyUser2,jdbcType=VARCHAR},
+			</if>
+			<if test="applyUser3 != null and applyUser3 != ''" >
+				APPLY_USER3 = #{applyUser3,jdbcType=VARCHAR},
+			</if>
+			<if test="isActive != null and isActive != ''" >
+				IS_ACTIVE = #{isActive,jdbcType=VARCHAR},
+			</if>
+			<if test="projId != null and projId != ''" >
+				PROJ_ID = #{projId,jdbcType=VARCHAR},
+			</if>
+			<if test="projName != null and projName != ''" >
+				PROJ_NAME = #{projName,jdbcType=VARCHAR},
+			</if>
+			<if test="evaluateYear != null and evaluateYear != ''" >
+				EVALUATE_YEAR = #{evaluateYear,jdbcType=VARCHAR},
+			</if>
+			<if test="evaluateQ != null and evaluateQ != ''" >
+				EVALUATE_Q = #{evaluateQ,jdbcType=VARCHAR},
+			</if>
+			<if test="projIdTogether != null and projIdTogether != ''" >
+				PROJ_ID_TOGETHER = #{projIdTogether,jdbcType=VARCHAR},
+			</if>
+		</set>
+		WHERE PARAM_ID = #{paramId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="ScParamResult">
+		SELECT * FROM SC.SC_PARAM WHERE PARAM_ID = #{paramId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.ScParamModel" resultMap="ScParamResult">
+		SELECT * FROM SC.SC_PARAM
+		<where>
+			<if test="paramId != null and paramId != ''" >
+				PARAM_ID = #{paramId,jdbcType=VARCHAR}
+			</if>
+			<if test="cusId != null and cusId != ''" >
+				AND CUS_ID = #{cusId,jdbcType=VARCHAR}
+			</if>
+			<if test="cusName != null and cusName != ''" >
+				AND CUS_NAME = #{cusName,jdbcType=VARCHAR}
+			</if>
+			<if test="sysType != null and sysType != ''" >
+				AND SYS_TYPE = #{sysType,jdbcType=VARCHAR}
+			</if>
+			<if test="cusType != null and cusType != ''" >
+				AND CUS_TYPE = #{cusType,jdbcType=VARCHAR}
+			</if>
+			<if test="cusLevel != null and cusLevel != ''" >
+				AND CUS_LEVEL = #{cusLevel,jdbcType=VARCHAR}
+			</if>
+			<if test="confirmDt != null" >
+				AND CONFIRM_DT = #{confirmDt,jdbcType=VARCHAR}
+			</if>
+			<if test="inmoneyY != null and inmoneyY != ''" >
+				AND INMONEY_Y = #{inmoneyY,jdbcType=NUMERIC}
+			</if>
+			<if test="industry != null and industry != ''" >
+				AND INDUSTRY = #{industry,jdbcType=VARCHAR}
+			</if>
+			<if test="isTec != null and isTec != ''" >
+				AND IS_TEC = #{isTec,jdbcType=VARCHAR}
+			</if>
+			<if test="isEstate != null and isEstate != ''" >
+				AND IS_ESTATE = #{isEstate,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="cardIds != null and cardIds != ''" >
+				AND CARD_IDS = #{cardIds,jdbcType=VARCHAR}
+			</if>
+			<if test="finalScore != null and finalScore != ''" >
+				AND FINAL_SCORE = #{finalScore,jdbcType=NUMERIC}
+			</if>
+			<if test="applyUser1 != null and applyUser1 != ''" >
+				AND APPLY_USER1 = #{applyUser1,jdbcType=VARCHAR}
+			</if>
+			<if test="applyUser2 != null and applyUser2 != ''" >
+				AND APPLY_USER2 = #{applyUser2,jdbcType=VARCHAR}
+			</if>
+			<if test="applyUser3 != null and applyUser3 != ''" >
+				AND APPLY_USER3 = #{applyUser3,jdbcType=VARCHAR}
+			</if>
+			<if test="isActive != null and isActive != ''" >
+				AND IS_ACTIVE = #{isActive,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="projName != null and projName != ''" >
+				AND PROJ_NAME = #{projName,jdbcType=VARCHAR}
+			</if>
+			<if test="evaluateYear != null and evaluateYear != ''" >
+				AND EVALUATE_YEAR = #{evaluateYear,jdbcType=VARCHAR}
+			</if>
+			<if test="evaluateQ != null and evaluateQ != ''" >
+				AND EVALUATE_Q = #{evaluateQ,jdbcType=VARCHAR}
+			</if>
+			<if test="projIdTogether != null and projIdTogether != ''" >
+				AND PROJ_ID_TOGETHER = #{projIdTogether,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT P.PARAM_ID,P.CUS_NAME,P.STATUS,P.PROCESS_INST_ID,C1.CODE_NAME CUS_TYPE,C2.CODE_NAME STATUS_NAME,
+			C3.CODE_NAME CUS_LEVEL,P.CONFIRM_DT  FROM SC.SC_PARAM P
+		LEFT JOIN SC.SC_COMM_T_CODE C1 ON P.CUS_TYPE=C1.CODE_VALUE AND C1.PARENT_ID='3001'
+		LEFT JOIN SC.SC_COMM_T_CODE C2 ON P.STATUS=C2.CODE_VALUE AND C2.PARENT_ID='700'
+		LEFT JOIN SC.SC_COMM_T_CODE C3 ON P.CUS_LEVEL=C3.CODE_VALUE AND C3.PARENT_ID='702'
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+		AND (PROJ_ID=#{paramMap.PROJ_ID} OR instr(PROJ_ID_TOGETHER,#{paramMap.PROJ_ID})>0)
+		ORDER BY P.CREATE_DT DESC
+	</sql>
+
+	<select id="selectListPage" resultMap="ScParamResult2" parameterType="com.founder.ssm.core.common.SearchCondition">
+		<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.ScParamModel">
+		SELECT COUNT(*) FROM SC.SC_PARAM
+		<where>
+			<if test="paramId != null and paramId != ''" >
+				PARAM_ID = #{paramId,jdbcType=VARCHAR}
+			</if>
+			<if test="cusId != null and cusId != ''" >
+				AND CUS_ID = #{cusId,jdbcType=VARCHAR}
+			</if>
+			<if test="cusName != null and cusName != ''" >
+				AND CUS_NAME = #{cusName,jdbcType=VARCHAR}
+			</if>
+			<if test="sysType != null and sysType != ''" >
+				AND SYS_TYPE = #{sysType,jdbcType=VARCHAR}
+			</if>
+			<if test="cusType != null and cusType != ''" >
+				AND CUS_TYPE = #{cusType,jdbcType=VARCHAR}
+			</if>
+			<if test="cusLevel != null and cusLevel != ''" >
+				AND CUS_LEVEL = #{cusLevel,jdbcType=VARCHAR}
+			</if>
+			<if test="confirmDt != null" >
+				AND CONFIRM_DT = #{confirmDt,jdbcType=VARCHAR}
+			</if>
+			<if test="inmoneyY != null and inmoneyY != ''" >
+				AND INMONEY_Y = #{inmoneyY,jdbcType=NUMERIC}
+			</if>
+			<if test="industry != null and industry != ''" >
+				AND INDUSTRY = #{industry,jdbcType=VARCHAR}
+			</if>
+			<if test="isTec != null and isTec != ''" >
+				AND IS_TEC = #{isTec,jdbcType=VARCHAR}
+			</if>
+			<if test="isEstate != null and isEstate != ''" >
+				AND IS_ESTATE = #{isEstate,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="cardIds != null and cardIds != ''" >
+				AND CARD_IDS = #{cardIds,jdbcType=VARCHAR}
+			</if>
+			<if test="finalScore != null and finalScore != ''" >
+				AND FINAL_SCORE = #{finalScore,jdbcType=NUMERIC}
+			</if>
+			<if test="applyUser1 != null and applyUser1 != ''" >
+				AND APPLY_USER1 = #{applyUser1,jdbcType=VARCHAR}
+			</if>
+			<if test="applyUser2 != null and applyUser2 != ''" >
+				AND APPLY_USER2 = #{applyUser2,jdbcType=VARCHAR}
+			</if>
+			<if test="applyUser3 != null and applyUser3 != ''" >
+				AND APPLY_USER3 = #{applyUser3,jdbcType=VARCHAR}
+			</if>
+			<if test="isActive != null and isActive != ''" >
+				AND IS_ACTIVE = #{isActive,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="projName != null and projName != ''" >
+				AND PROJ_NAME = #{projName,jdbcType=VARCHAR}
+			</if>
+			<if test="evaluateYear != null and evaluateYear != ''" >
+				AND EVALUATE_YEAR = #{evaluateYear,jdbcType=VARCHAR}
+			</if>
+			<if test="evaluateQ != null and evaluateQ != ''" >
+				AND EVALUATE_Q = #{evaluateQ,jdbcType=VARCHAR}
+			</if>
+			<if test="projIdTogether != null and projIdTogether != ''" >
+				AND PROJ_ID_TOGETHER = #{projIdTogether,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.ScParamModel" resultMap="ScParamResult">
+		SELECT * FROM SC.SC_PARAM
+		<where>
+			<if test="paramId != null and paramId != ''" >
+				PARAM_ID = #{paramId,jdbcType=VARCHAR}
+			</if>
+			<if test="cusId != null and cusId != ''" >
+				AND CUS_ID = #{cusId,jdbcType=VARCHAR}
+			</if>
+			<if test="cusName != null and cusName != ''" >
+				AND CUS_NAME = #{cusName,jdbcType=VARCHAR}
+			</if>
+			<if test="sysType != null and sysType != ''" >
+				AND SYS_TYPE = #{sysType,jdbcType=VARCHAR}
+			</if>
+			<if test="cusType != null and cusType != ''" >
+				AND CUS_TYPE = #{cusType,jdbcType=VARCHAR}
+			</if>
+			<if test="cusLevel != null and cusLevel != ''" >
+				AND CUS_LEVEL = #{cusLevel,jdbcType=VARCHAR}
+			</if>
+			<if test="confirmDt != null" >
+				AND CONFIRM_DT = #{confirmDt,jdbcType=VARCHAR}
+			</if>
+			<if test="inmoneyY != null and inmoneyY != ''" >
+				AND INMONEY_Y = #{inmoneyY,jdbcType=NUMERIC}
+			</if>
+			<if test="industry != null and industry != ''" >
+				AND INDUSTRY = #{industry,jdbcType=VARCHAR}
+			</if>
+			<if test="isTec != null and isTec != ''" >
+				AND IS_TEC = #{isTec,jdbcType=VARCHAR}
+			</if>
+			<if test="isEstate != null and isEstate != ''" >
+				AND IS_ESTATE = #{isEstate,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="cardIds != null and cardIds != ''" >
+				AND CARD_IDS = #{cardIds,jdbcType=VARCHAR}
+			</if>
+			<if test="finalScore != null and finalScore != ''" >
+				AND FINAL_SCORE = #{finalScore,jdbcType=NUMERIC}
+			</if>
+			<if test="applyUser1 != null and applyUser1 != ''" >
+				AND APPLY_USER1 = #{applyUser1,jdbcType=VARCHAR}
+			</if>
+			<if test="applyUser2 != null and applyUser2 != ''" >
+				AND APPLY_USER2 = #{applyUser2,jdbcType=VARCHAR}
+			</if>
+			<if test="applyUser3 != null and applyUser3 != ''" >
+				AND APPLY_USER3 = #{applyUser3,jdbcType=VARCHAR}
+			</if>
+			<if test="isActive != null and isActive != ''" >
+				AND IS_ACTIVE = #{isActive,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="projName != null and projName != ''" >
+				AND PROJ_NAME = #{projName,jdbcType=VARCHAR}
+			</if>
+			<if test="evaluateYear != null and evaluateYear != ''" >
+				AND EVALUATE_YEAR = #{evaluateYear,jdbcType=VARCHAR}
+			</if>
+			<if test="evaluateQ != null and evaluateQ != ''" >
+				AND EVALUATE_Q = #{evaluateQ,jdbcType=VARCHAR}
+			</if>
+			<if test="projIdTogether != null and projIdTogether != ''" >
+				AND PROJ_ID_TOGETHER = #{projIdTogether,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="ScParamResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+</mapper>

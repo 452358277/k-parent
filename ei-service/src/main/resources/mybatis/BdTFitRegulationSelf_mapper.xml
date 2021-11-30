@@ -1,0 +1,847 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BdTFitRegulationSelf">
+	<!-- start autocreate -->
+
+	<resultMap id="BdTFitRegulationSelfResult" type="com.ppmg.ei.model.BdTFitRegulationSelfModel">
+		<result column="PROJ_ID" property="projId" jdbcType="VARCHAR" />
+		<result column="FUND_ID" property="fundId" jdbcType="VARCHAR" />
+		<result column="CUR_TMONEY" property="curTmoney" jdbcType="NUMERIC" />
+		<result column="ALL_TMONEY" property="allTmoney" jdbcType="NUMERIC" />
+		<result column="CUR_TMONEY_PER" property="curTmoneyPer" jdbcType="NUMERIC" />
+		<result column="ALL_TMONEY_PER" property="allTmoneyPer" jdbcType="NUMERIC" />
+		<result column="FUN_TO_PRO" property="funToPro" jdbcType="NUMERIC" />
+		<result column="IS_SHOLDER" property="isSholder" jdbcType="VARCHAR" />
+		<result column="INDUSTRY" property="industry" jdbcType="VARCHAR" />
+		<result column="IS_MFIELD" property="isMfield" jdbcType="VARCHAR" />
+		<result column="NMAIN_TMONEY" property="nmainTmoney" jdbcType="NUMERIC" />
+		<result column="NMAIN_TMONEY_PER" property="nmainTmoneyPer" jdbcType="NUMERIC" />
+		<result column="IS_JS" property="isJs" jdbcType="VARCHAR" />
+		<result column="IS_TWELVE" property="isTwelve" jdbcType="VARCHAR" />
+		<result column="TMONEY_ONE" property="tmoneyOne" jdbcType="NUMERIC" />
+		<result column="TMONEY_ONE_PER" property="tmoneyOnePer" jdbcType="NUMERIC" />
+		<result column="TMONEY_TTF" property="tmoneyTtf" jdbcType="NUMERIC" />
+		<result column="TMONEY_TTF_PER" property="tmoneyTtfPer" jdbcType="NUMERIC" />
+		<result column="OUTJS_TMONEY" property="outjsTmoney" jdbcType="NUMERIC" />
+		<result column="OUTJS_TMONEY_PER" property="outjsTmoneyPer" jdbcType="NUMERIC" />
+		<result column="IS_CORR" property="isCorr" jdbcType="VARCHAR" />
+		<result column="CORR_EXPLAIN" property="corrExplain" jdbcType="VARCHAR" />
+		<result column="IS_ALLOW" property="isAllow" jdbcType="VARCHAR" />
+		<result column="WHICH_CLASS" property="whichClass" jdbcType="VARCHAR" />
+		<result column="IS_NLIST" property="isNlist" jdbcType="VARCHAR" />
+		<result column="IS_THIRTEEN" property="isThirteen" jdbcType="VARCHAR" />
+		<result column="ANY_NLIST" property="anyNlist" jdbcType="VARCHAR" />
+		<result column="EXPLAIN" property="explain" jdbcType="VARCHAR" />
+		<result column="SELF_CONCLUSION" property="selfConclusion" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="REGULATION_FILE" property="regulationFile" jdbcType="VARCHAR" />
+		<result column="SEC_TMONEY_PER" property="secTmoneyPer" jdbcType="NUMERIC" />
+		<result column="THR_TMONEY_PER" property="thrTmoneyPer" jdbcType="NUMERIC" />
+		<result column="PROCESS_INST_ID" property="processInstId" jdbcType="VARCHAR" />
+		<result column="FLOW_STATUS" property="flowStatus" jdbcType="VARCHAR" />
+		<result column="CONFIRM_LETTER_FILE" property="confirmLetterFile" jdbcType="VARCHAR" />
+		<result column="SUM_FILE_SIGN_AMOUNT" property="sumFileSignAmount" jdbcType="NUMERIC" />
+		<result column="SUM_XJL_ACTUAL_PAY_AMOUNT" property="sumXjlActualPayAmount" jdbcType="NUMERIC" />
+	</resultMap>
+	<resultMap id="BdTFitRegulationSelfResult1" type="com.ppmg.ei.model.BdTFitRegulationSelfModel" extends="BdTFitRegulationSelfResult">
+		<association property="projInfoModel" javaType="com.ppmg.ei.model.ProjInfoModel" column="PROJ_ID">
+			<result column="PROJ_STATUS" property="projStatus" jdbcType="VARCHAR" />
+			<result column="PROJ_NAME" property="projName" jdbcType="VARCHAR" />
+			<result column="INVE_ID" property="inveId" jdbcType="VARCHAR" />
+		</association>
+		<association property="projAppInfoModel" javaType="com.ppmg.ei.model.ProjAppInfoModel" column="PROJ_ID">
+			<result column="INTENDED_AMOUNT" property="intendedAmount" jdbcType="NUMERIC" />
+			<result column="IS_DECISION_PASS" property="isDecisionPass" jdbcType="VARCHAR" />
+		</association>
+		<association property="fundInfoModel" javaType="com.ppmg.ei.model.FundInfoModel" column="fundId">
+			<result column="IS_FIT" property="isFit" jdbcType="NUMERIC" />
+		</association>
+
+	</resultMap>
+
+	<resultMap id="BdTFitRegulationSelfResult2" type="com.ppmg.ei.model.BdTFitRegulationSelfModel" extends="BdTFitRegulationSelfResult">
+		<association property="projInfoModel" javaType="com.ppmg.ei.model.ProjInfoModel" column="PROJ_ID">
+			<result column="PROJ_STATUS" property="projStatus" jdbcType="VARCHAR" />
+			<result column="PROJ_NAME" property="projName" jdbcType="VARCHAR" />
+			<result column="PROJ_NO" property="projNo" jdbcType="VARCHAR" />
+			<result column="PROJID" property="projId" jdbcType="VARCHAR" />
+			<result column="INDUSTRY_NAME" property="industryName" jdbcType="VARCHAR" />
+		</association>
+
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.BdTFitRegulationSelfModel">
+		INSERT INTO BD_T_FIT_REGULATION_SELF (PROJ_ID,FUND_ID,CUR_TMONEY,ALL_TMONEY,CUR_TMONEY_PER,ALL_TMONEY_PER,FUN_TO_PRO,IS_SHOLDER,INDUSTRY,IS_MFIELD,NMAIN_TMONEY,NMAIN_TMONEY_PER,IS_JS,IS_TWELVE,TMONEY_ONE,TMONEY_ONE_PER,TMONEY_TTF,TMONEY_TTF_PER,OUTJS_TMONEY,OUTJS_TMONEY_PER,IS_CORR,CORR_EXPLAIN,IS_ALLOW,WHICH_CLASS,IS_NLIST,IS_THIRTEEN,ANY_NLIST,EXPLAIN,SELF_CONCLUSION,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,STATUS,REGULATION_FILE,SEC_TMONEY_PER ,THR_TMONEY_PER,PROCESS_INST_ID,FLOW_STATUS,CONFIRM_LETTER_FILE) values(#{projId,jdbcType=VARCHAR},#{fundId,jdbcType=VARCHAR},#{curTmoney,jdbcType=NUMERIC},#{allTmoney,jdbcType=NUMERIC},#{curTmoneyPer,jdbcType=NUMERIC},#{allTmoneyPer,jdbcType=NUMERIC},#{funToPro,jdbcType=NUMERIC},#{isSholder,jdbcType=VARCHAR},#{industry,jdbcType=VARCHAR},#{isMfield,jdbcType=VARCHAR},#{nmainTmoney,jdbcType=NUMERIC},#{nmainTmoneyPer,jdbcType=NUMERIC},#{isJs,jdbcType=VARCHAR},#{isTwelve,jdbcType=VARCHAR},#{tmoneyOne,jdbcType=NUMERIC},#{tmoneyOnePer,jdbcType=NUMERIC},#{tmoneyTtf,jdbcType=NUMERIC},#{tmoneyTtfPer,jdbcType=NUMERIC},#{outjsTmoney,jdbcType=NUMERIC},#{outjsTmoneyPer,jdbcType=NUMERIC},#{isCorr,jdbcType=VARCHAR},#{corrExplain,jdbcType=VARCHAR},#{isAllow,jdbcType=VARCHAR},#{whichClass,jdbcType=VARCHAR},#{isNlist,jdbcType=VARCHAR},#{isThirteen,jdbcType=VARCHAR},#{anyNlist,jdbcType=VARCHAR},#{explain,jdbcType=VARCHAR},#{selfConclusion,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{status,jdbcType=VARCHAR},#{regulationFile,jdbcType=VARCHAR},#{secTmoneyPer,jdbcType=NUMERIC},#{thrTmoneyPer,jdbcType=NUMERIC},#{processInstId,jdbcType=VARCHAR},#{flowStatus,jdbcType=VARCHAR},#{confirmLetterFile,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO BD_T_FIT_REGULATION_SELF (PROJ_ID,FUND_ID,CUR_TMONEY,ALL_TMONEY,CUR_TMONEY_PER,ALL_TMONEY_PER,FUN_TO_PRO,IS_SHOLDER,INDUSTRY,IS_MFIELD,NMAIN_TMONEY,NMAIN_TMONEY_PER,IS_JS,IS_TWELVE,TMONEY_ONE,TMONEY_ONE_PER,TMONEY_TTF,TMONEY_TTF_PER,OUTJS_TMONEY,OUTJS_TMONEY_PER,IS_CORR,CORR_EXPLAIN,IS_ALLOW,WHICH_CLASS,IS_NLIST,IS_THIRTEEN,ANY_NLIST,EXPLAIN,SELF_CONCLUSION,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,STATUS,REGULATION_FILE,SEC_TMONEY_PER ,THR_TMONEY_PER,PROCESS_INST_ID,FLOW_STATUS)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.projId,jdbcType=VARCHAR},
+				#{item.fundId,jdbcType=VARCHAR},
+				#{item.curTmoney,jdbcType=NUMERIC},
+				#{item.allTmoney,jdbcType=NUMERIC},
+				#{item.curTmoneyPer,jdbcType=NUMERIC},
+				#{item.allTmoneyPer,jdbcType=NUMERIC},
+				#{item.funToPro,jdbcType=NUMERIC},
+				#{item.isSholder,jdbcType=VARCHAR},
+				#{item.industry,jdbcType=VARCHAR},
+				#{item.isMfield,jdbcType=VARCHAR},
+				#{item.nmainTmoney,jdbcType=NUMERIC},
+				#{item.nmainTmoneyPer,jdbcType=NUMERIC},
+				#{item.isJs,jdbcType=VARCHAR},
+				#{item.isTwelve,jdbcType=VARCHAR},
+				#{item.tmoneyOne,jdbcType=NUMERIC},
+				#{item.tmoneyOnePer,jdbcType=NUMERIC},
+				#{item.tmoneyTtf,jdbcType=NUMERIC},
+				#{item.tmoneyTtfPer,jdbcType=NUMERIC},
+				#{item.outjsTmoney,jdbcType=NUMERIC},
+				#{item.outjsTmoneyPer,jdbcType=NUMERIC},
+				#{item.isCorr,jdbcType=VARCHAR},
+				#{item.corrExplain,jdbcType=VARCHAR},
+				#{item.isAllow,jdbcType=VARCHAR},
+				#{item.whichClass,jdbcType=VARCHAR},
+				#{item.isNlist,jdbcType=VARCHAR},
+				#{item.isThirteen,jdbcType=VARCHAR},
+				#{item.anyNlist,jdbcType=VARCHAR},
+				#{item.explain,jdbcType=VARCHAR},
+				#{item.selfConclusion,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+			    #{item.status,jdbcType=VARCHAR},
+			    #{item.regulationFile,jdbcType=VARCHAR},
+			    #{item.secTmoneyPer,jdbcType=NUMERIC},
+			    #{item.thrTmoneyPer,jdbcType=NUMERIC},
+			    #{item.processInstId,jdbcType=VARCHAR},
+			    #{item.flowStatus,jdbcType=VARCHAR}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  BD_T_FIT_REGULATION_SELF WHERE PROJ_ID = #{projId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.BdTFitRegulationSelfModel">
+		DELETE FROM BD_T_FIT_REGULATION_SELF
+		<where>
+			<if test="projId != null and projId != ''" >
+				PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="curTmoney != null and curTmoney != ''" >
+				AND CUR_TMONEY = #{curTmoney,jdbcType=NUMERIC}
+			</if>
+			<if test="allTmoney != null and allTmoney != ''" >
+				AND ALL_TMONEY = #{allTmoney,jdbcType=NUMERIC}
+			</if>
+			<if test="curTmoneyPer != null and curTmoneyPer != ''" >
+				AND CUR_TMONEY_PER = #{curTmoneyPer,jdbcType=NUMERIC}
+			</if>
+			<if test="allTmoneyPer != null and allTmoneyPer != ''" >
+				AND ALL_TMONEY_PER = #{allTmoneyPer,jdbcType=NUMERIC}
+			</if>
+			<if test="funToPro != null and funToPro != ''" >
+				AND FUN_TO_PRO = #{funToPro,jdbcType=NUMERIC}
+			</if>
+			<if test="isSholder != null and isSholder != ''" >
+				AND IS_SHOLDER = #{isSholder,jdbcType=VARCHAR}
+			</if>
+			<if test="industry != null and industry != ''" >
+				AND INDUSTRY = #{industry,jdbcType=VARCHAR}
+			</if>
+			<if test="isMfield != null and isMfield != ''" >
+				AND IS_MFIELD = #{isMfield,jdbcType=VARCHAR}
+			</if>
+			<if test="nmainTmoney != null and nmainTmoney != ''" >
+				AND NMAIN_TMONEY = #{nmainTmoney,jdbcType=NUMERIC}
+			</if>
+			<if test="nmainTmoneyPer != null and nmainTmoneyPer != ''" >
+				AND NMAIN_TMONEY_PER = #{nmainTmoneyPer,jdbcType=NUMERIC}
+			</if>
+			<if test="isJs != null and isJs != ''" >
+				AND IS_JS = #{isJs,jdbcType=VARCHAR}
+			</if>
+			<if test="isTwelve != null and isTwelve != ''" >
+				AND IS_TWELVE = #{isTwelve,jdbcType=VARCHAR}
+			</if>
+			<if test="tmoneyOne != null and tmoneyOne != ''" >
+				AND TMONEY_ONE = #{tmoneyOne,jdbcType=NUMERIC}
+			</if>
+			<if test="tmoneyOnePer != null and tmoneyOnePer != ''" >
+				AND TMONEY_ONE_PER = #{tmoneyOnePer,jdbcType=NUMERIC}
+			</if>
+			<if test="tmoneyTtf != null and tmoneyTtf != ''" >
+				AND TMONEY_TTF = #{tmoneyTtf,jdbcType=NUMERIC}
+			</if>
+			<if test="tmoneyTtfPer != null and tmoneyTtfPer != ''" >
+				AND TMONEY_TTF_PER = #{tmoneyTtfPer,jdbcType=NUMERIC}
+			</if>
+			<if test="outjsTmoney != null and outjsTmoney != ''" >
+				AND OUTJS_TMONEY = #{outjsTmoney,jdbcType=NUMERIC}
+			</if>
+			<if test="outjsTmoneyPer != null and outjsTmoneyPer != ''" >
+				AND OUTJS_TMONEY_PER = #{outjsTmoneyPer,jdbcType=NUMERIC}
+			</if>
+			<if test="isCorr != null and isCorr != ''" >
+				AND IS_CORR = #{isCorr,jdbcType=VARCHAR}
+			</if>
+			<if test="corrExplain != null and corrExplain != ''" >
+				AND CORR_EXPLAIN = #{corrExplain,jdbcType=VARCHAR}
+			</if>
+			<if test="isAllow != null and isAllow != ''" >
+				AND IS_ALLOW = #{isAllow,jdbcType=VARCHAR}
+			</if>
+			<if test="whichClass != null and whichClass != ''" >
+				AND WHICH_CLASS = #{whichClass,jdbcType=VARCHAR}
+			</if>
+			<if test="isNlist != null and isNlist != ''" >
+				AND IS_NLIST = #{isNlist,jdbcType=VARCHAR}
+			</if>
+			<if test="isThirteen != null and isThirteen != ''" >
+				AND IS_THIRTEEN = #{isThirteen,jdbcType=VARCHAR}
+			</if>
+			<if test="anyNlist != null and anyNlist != ''" >
+				AND ANY_NLIST = #{anyNlist,jdbcType=VARCHAR}
+			</if>
+			<if test="explain != null and explain != ''" >
+				AND EXPLAIN = #{explain,jdbcType=VARCHAR}
+			</if>
+			<if test="selfConclusion != null and selfConclusion != ''" >
+				AND SELF_CONCLUSION = #{selfConclusion,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="regulationFile != null and regulationFile != ''" >
+				AND REGULATION_FILE = #{regulationFile,jdbcType=VARCHAR}
+			</if>
+			<if test="secTmoneyPer != null " >
+				AND SEC_TMONEY_PER = #{secTmoneyPer,jdbcType=NUMERIC}
+			</if>
+			<if test="thrTmoneyPer != null " >
+				AND THR_TMONEY_PER = #{thrTmoneyPer,jdbcType=NUMERIC}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="flowStatus != null and flowStatus != ''" >
+				AND FLOW_STATUS = #{flowStatus,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  BD_T_FIT_REGULATION_SELF WHERE PROJ_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.BdTFitRegulationSelfModel">
+		UPDATE BD_T_FIT_REGULATION_SELF 
+		<set>
+			<if test="projId != null and projId != ''" >
+				PROJ_ID = #{projId,jdbcType=VARCHAR},
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				FUND_ID = #{fundId,jdbcType=VARCHAR},
+			</if>
+			<if test="curTmoney != null " >
+				CUR_TMONEY = #{curTmoney,jdbcType=NUMERIC},
+			</if>
+			<if test="allTmoney != null " >
+				ALL_TMONEY = #{allTmoney,jdbcType=NUMERIC},
+			</if>
+			<if test="curTmoneyPer != null " >
+				CUR_TMONEY_PER = #{curTmoneyPer,jdbcType=NUMERIC},
+			</if>
+			<if test="allTmoneyPer != null " >
+				ALL_TMONEY_PER = #{allTmoneyPer,jdbcType=NUMERIC},
+			</if>
+			<if test="funToPro != null " >
+				FUN_TO_PRO = #{funToPro,jdbcType=NUMERIC},
+			</if>
+			<if test="isSholder != null and isSholder != ''" >
+				IS_SHOLDER = #{isSholder,jdbcType=VARCHAR},
+			</if>
+			<if test="industry != null and industry != ''" >
+				INDUSTRY = #{industry,jdbcType=VARCHAR},
+			</if>
+			<if test="isMfield != null and isMfield != ''" >
+				IS_MFIELD = #{isMfield,jdbcType=VARCHAR},
+			</if>
+			<if test="nmainTmoney != null" >
+				NMAIN_TMONEY = #{nmainTmoney,jdbcType=NUMERIC},
+			</if>
+			<if test="nmainTmoneyPer != null " >
+				NMAIN_TMONEY_PER = #{nmainTmoneyPer,jdbcType=NUMERIC},
+			</if>
+			<if test="isJs != null and isJs != ''" >
+				IS_JS = #{isJs,jdbcType=VARCHAR},
+			</if>
+			<if test="isTwelve != null and isTwelve != ''" >
+				IS_TWELVE = #{isTwelve,jdbcType=VARCHAR},
+			</if>
+			<if test="tmoneyOne != null " >
+				TMONEY_ONE = #{tmoneyOne,jdbcType=NUMERIC},
+			</if>
+			<if test="tmoneyOnePer != null " >
+				TMONEY_ONE_PER = #{tmoneyOnePer,jdbcType=NUMERIC},
+			</if>
+			<if test="tmoneyTtf != null " >
+				TMONEY_TTF = #{tmoneyTtf,jdbcType=NUMERIC},
+			</if>
+			<if test="tmoneyTtfPer != null " >
+				TMONEY_TTF_PER = #{tmoneyTtfPer,jdbcType=NUMERIC},
+			</if>
+			<if test="outjsTmoney != null " >
+				OUTJS_TMONEY = #{outjsTmoney,jdbcType=NUMERIC},
+			</if>
+			<if test="outjsTmoneyPer != null " >
+				OUTJS_TMONEY_PER = #{outjsTmoneyPer,jdbcType=NUMERIC},
+			</if>
+			<if test="isCorr != null and isCorr != ''" >
+				IS_CORR = #{isCorr,jdbcType=VARCHAR},
+			</if>
+			<if test="corrExplain != null and corrExplain != ''" >
+				CORR_EXPLAIN = #{corrExplain,jdbcType=VARCHAR},
+			</if>
+			<if test="isAllow != null and isAllow != ''" >
+				IS_ALLOW = #{isAllow,jdbcType=VARCHAR},
+			</if>
+			<if test="whichClass != null and whichClass != ''" >
+				WHICH_CLASS = #{whichClass,jdbcType=VARCHAR},
+			</if>
+			<if test="isNlist != null and isNlist != ''" >
+				IS_NLIST = #{isNlist,jdbcType=VARCHAR},
+			</if>
+			<if test="isThirteen != null and isThirteen != ''" >
+				IS_THIRTEEN = #{isThirteen,jdbcType=VARCHAR},
+			</if>
+			<if test="anyNlist != null and anyNlist != ''" >
+				ANY_NLIST = #{anyNlist,jdbcType=VARCHAR},
+			</if>
+			<if test="explain != null and explain != ''" >
+				EXPLAIN = #{explain,jdbcType=VARCHAR},
+			</if>
+			<if test="selfConclusion != null and selfConclusion != ''" >
+				SELF_CONCLUSION = #{selfConclusion,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="regulationFile != null and regulationFile != ''" >
+				 REGULATION_FILE = #{regulationFile,jdbcType=VARCHAR},
+			</if>
+			<if test="secTmoneyPer != null " >
+				 SEC_TMONEY_PER = #{secTmoneyPer,jdbcType=NUMERIC},
+			</if>
+			<if test="thrTmoneyPer != null " >
+				 THR_TMONEY_PER = #{thrTmoneyPer,jdbcType=NUMERIC},
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				 PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR},
+			</if>
+			<if test="flowStatus != null and flowStatus != ''" >
+				 FLOW_STATUS = #{flowStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="confirmLetterFile != null and confirmLetterFile != ''" >
+				CONFIRM_LETTER_FILE = #{confirmLetterFile,jdbcType=VARCHAR},
+			</if>
+		</set>
+		WHERE PROJ_ID = #{projId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="BdTFitRegulationSelfResult">
+		SELECT * FROM BD_T_FIT_REGULATION_SELF WHERE PROJ_ID = #{projId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.BdTFitRegulationSelfModel" resultMap="BdTFitRegulationSelfResult">
+		SELECT * FROM BD_T_FIT_REGULATION_SELF
+		<where>
+			<if test="projId != null and projId != ''" >
+				PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="curTmoney != null and curTmoney != ''" >
+				AND CUR_TMONEY = #{curTmoney,jdbcType=NUMERIC}
+			</if>
+			<if test="allTmoney != null and allTmoney != ''" >
+				AND ALL_TMONEY = #{allTmoney,jdbcType=NUMERIC}
+			</if>
+			<if test="curTmoneyPer != null and curTmoneyPer != ''" >
+				AND CUR_TMONEY_PER = #{curTmoneyPer,jdbcType=NUMERIC}
+			</if>
+			<if test="allTmoneyPer != null " >
+				AND ALL_TMONEY_PER = #{allTmoneyPer,jdbcType=NUMERIC}
+			</if>
+			<if test="funToPro != null " >
+				AND FUN_TO_PRO = #{funToPro,jdbcType=NUMERIC}
+			</if>
+			<if test="isSholder != null and isSholder != ''" >
+				AND IS_SHOLDER = #{isSholder,jdbcType=VARCHAR}
+			</if>
+			<if test="industry != null and industry != ''" >
+				AND INDUSTRY = #{industry,jdbcType=VARCHAR}
+			</if>
+			<if test="isMfield != null and isMfield != ''" >
+				AND IS_MFIELD = #{isMfield,jdbcType=VARCHAR}
+			</if>
+			<if test="nmainTmoney != null and nmainTmoney != ''" >
+				AND NMAIN_TMONEY = #{nmainTmoney,jdbcType=NUMERIC}
+			</if>
+			<if test="nmainTmoneyPer != null and nmainTmoneyPer != ''" >
+				AND NMAIN_TMONEY_PER = #{nmainTmoneyPer,jdbcType=NUMERIC}
+			</if>
+			<if test="isJs != null and isJs != ''" >
+				AND IS_JS = #{isJs,jdbcType=VARCHAR}
+			</if>
+			<if test="isTwelve != null and isTwelve != ''" >
+				AND IS_TWELVE = #{isTwelve,jdbcType=VARCHAR}
+			</if>
+			<if test="tmoneyOne != null and tmoneyOne != ''" >
+				AND TMONEY_ONE = #{tmoneyOne,jdbcType=NUMERIC}
+			</if>
+			<if test="tmoneyOnePer != null and tmoneyOnePer != ''" >
+				AND TMONEY_ONE_PER = #{tmoneyOnePer,jdbcType=NUMERIC}
+			</if>
+			<if test="tmoneyTtf != null and tmoneyTtf != ''" >
+				AND TMONEY_TTF = #{tmoneyTtf,jdbcType=NUMERIC}
+			</if>
+			<if test="tmoneyTtfPer != null and tmoneyTtfPer != ''" >
+				AND TMONEY_TTF_PER = #{tmoneyTtfPer,jdbcType=NUMERIC}
+			</if>
+			<if test="outjsTmoney != null and outjsTmoney != ''" >
+				AND OUTJS_TMONEY = #{outjsTmoney,jdbcType=NUMERIC}
+			</if>
+			<if test="outjsTmoneyPer != null and outjsTmoneyPer != ''" >
+				AND OUTJS_TMONEY_PER = #{outjsTmoneyPer,jdbcType=NUMERIC}
+			</if>
+			<if test="isCorr != null and isCorr != ''" >
+				AND IS_CORR = #{isCorr,jdbcType=VARCHAR}
+			</if>
+			<if test="corrExplain != null and corrExplain != ''" >
+				AND CORR_EXPLAIN = #{corrExplain,jdbcType=VARCHAR}
+			</if>
+			<if test="isAllow != null and isAllow != ''" >
+				AND IS_ALLOW = #{isAllow,jdbcType=VARCHAR}
+			</if>
+			<if test="whichClass != null and whichClass != ''" >
+				AND WHICH_CLASS = #{whichClass,jdbcType=VARCHAR}
+			</if>
+			<if test="isNlist != null and isNlist != ''" >
+				AND IS_NLIST = #{isNlist,jdbcType=VARCHAR}
+			</if>
+			<if test="isThirteen != null and isThirteen != ''" >
+				AND IS_THIRTEEN = #{isThirteen,jdbcType=VARCHAR}
+			</if>
+			<if test="anyNlist != null and anyNlist != ''" >
+				AND ANY_NLIST = #{anyNlist,jdbcType=VARCHAR}
+			</if>
+			<if test="explain != null and explain != ''" >
+				AND EXPLAIN = #{explain,jdbcType=VARCHAR}
+			</if>
+			<if test="selfConclusion != null and selfConclusion != ''" >
+				AND SELF_CONCLUSION = #{selfConclusion,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="regulationFile != null and regulationFile != ''" >
+				AND REGULATION_FILE = #{regulationFile,jdbcType=VARCHAR}
+			</if>
+			<if test="secTmoneyPer != null " >
+				AND SEC_TMONEY_PER = #{secTmoneyPer,jdbcType=NUMERIC}
+			</if>
+			<if test="thrTmoneyPer != null " >
+				AND THR_TMONEY_PER = #{thrTmoneyPer,jdbcType=NUMERIC}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="flowStatus != null and flowStatus != ''" >
+				AND FLOW_STATUS = #{flowStatus,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+	<sql id="searchSql">
+		SELECT * FROM BD_T_FIT_REGULATION_SELF
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="BdTFitRegulationSelfResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+	<select id="selectRegulationPage" resultMap="BdTFitRegulationSelfResult2" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT a.*,cc.PROJ_NO,cc.PROJ_NAME,cc.PROJ_ID as PROJID ,cc.INDUSTRY_NAME FROM BD_T_FIT_REGULATION_SELF a left join  TZ_T_PROJ_INFO cc
+		on a.PROJ_ID=cc.PROJ_ID
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</select>
+
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.BdTFitRegulationSelfModel">
+		SELECT COUNT(*) FROM BD_T_FIT_REGULATION_SELF
+		<where>
+			<if test="projId != null and projId != ''" >
+				PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="curTmoney != null and curTmoney != ''" >
+				AND CUR_TMONEY = #{curTmoney,jdbcType=NUMERIC}
+			</if>
+			<if test="allTmoney != null and allTmoney != ''" >
+				AND ALL_TMONEY = #{allTmoney,jdbcType=NUMERIC}
+			</if>
+			<if test="curTmoneyPer != null and curTmoneyPer != ''" >
+				AND CUR_TMONEY_PER = #{curTmoneyPer,jdbcType=NUMERIC}
+			</if>
+			<if test="allTmoneyPer != null and allTmoneyPer != ''" >
+				AND ALL_TMONEY_PER = #{allTmoneyPer,jdbcType=NUMERIC}
+			</if>
+			<if test="funToPro != null and funToPro != ''" >
+				AND FUN_TO_PRO = #{funToPro,jdbcType=NUMERIC}
+			</if>
+			<if test="isSholder != null and isSholder != ''" >
+				AND IS_SHOLDER = #{isSholder,jdbcType=VARCHAR}
+			</if>
+			<if test="industry != null and industry != ''" >
+				AND INDUSTRY = #{industry,jdbcType=VARCHAR}
+			</if>
+			<if test="isMfield != null and isMfield != ''" >
+				AND IS_MFIELD = #{isMfield,jdbcType=VARCHAR}
+			</if>
+			<if test="nmainTmoney != null and nmainTmoney != ''" >
+				AND NMAIN_TMONEY = #{nmainTmoney,jdbcType=NUMERIC}
+			</if>
+			<if test="nmainTmoneyPer != null and nmainTmoneyPer != ''" >
+				AND NMAIN_TMONEY_PER = #{nmainTmoneyPer,jdbcType=NUMERIC}
+			</if>
+			<if test="isJs != null and isJs != ''" >
+				AND IS_JS = #{isJs,jdbcType=VARCHAR}
+			</if>
+			<if test="isTwelve != null and isTwelve != ''" >
+				AND IS_TWELVE = #{isTwelve,jdbcType=VARCHAR}
+			</if>
+			<if test="tmoneyOne != null and tmoneyOne != ''" >
+				AND TMONEY_ONE = #{tmoneyOne,jdbcType=NUMERIC}
+			</if>
+			<if test="tmoneyOnePer != null and tmoneyOnePer != ''" >
+				AND TMONEY_ONE_PER = #{tmoneyOnePer,jdbcType=NUMERIC}
+			</if>
+			<if test="tmoneyTtf != null and tmoneyTtf != ''" >
+				AND TMONEY_TTF = #{tmoneyTtf,jdbcType=NUMERIC}
+			</if>
+			<if test="tmoneyTtfPer != null and tmoneyTtfPer != ''" >
+				AND TMONEY_TTF_PER = #{tmoneyTtfPer,jdbcType=NUMERIC}
+			</if>
+			<if test="outjsTmoney != null and outjsTmoney != ''" >
+				AND OUTJS_TMONEY = #{outjsTmoney,jdbcType=NUMERIC}
+			</if>
+			<if test="outjsTmoneyPer != null and outjsTmoneyPer != ''" >
+				AND OUTJS_TMONEY_PER = #{outjsTmoneyPer,jdbcType=NUMERIC}
+			</if>
+			<if test="isCorr != null and isCorr != ''" >
+				AND IS_CORR = #{isCorr,jdbcType=VARCHAR}
+			</if>
+			<if test="corrExplain != null and corrExplain != ''" >
+				AND CORR_EXPLAIN = #{corrExplain,jdbcType=VARCHAR}
+			</if>
+			<if test="isAllow != null and isAllow != ''" >
+				AND IS_ALLOW = #{isAllow,jdbcType=VARCHAR}
+			</if>
+			<if test="whichClass != null and whichClass != ''" >
+				AND WHICH_CLASS = #{whichClass,jdbcType=VARCHAR}
+			</if>
+			<if test="isNlist != null and isNlist != ''" >
+				AND IS_NLIST = #{isNlist,jdbcType=VARCHAR}
+			</if>
+			<if test="isThirteen != null and isThirteen != ''" >
+				AND IS_THIRTEEN = #{isThirteen,jdbcType=VARCHAR}
+			</if>
+			<if test="anyNlist != null and anyNlist != ''" >
+				AND ANY_NLIST = #{anyNlist,jdbcType=VARCHAR}
+			</if>
+			<if test="explain != null and explain != ''" >
+				AND EXPLAIN = #{explain,jdbcType=VARCHAR}
+			</if>
+			<if test="selfConclusion != null and selfConclusion != ''" >
+				AND SELF_CONCLUSION = #{selfConclusion,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="regulationFile != null and regulationFile != ''" >
+				AND REGULATION_FILE = #{regulationFile,jdbcType=VARCHAR}
+			</if>
+			<if test="secTmoneyPer != null " >
+				AND SEC_TMONEY_PER = #{secTmoneyPer,jdbcType=NUMERIC}
+			</if>
+			<if test="thrTmoneyPer != null " >
+				AND THR_TMONEY_PER = #{thrTmoneyPer,jdbcType=NUMERIC}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="flowStatus != null and flowStatus != ''" >
+				AND FLOW_STATUS = #{flowStatus,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.BdTFitRegulationSelfModel" resultMap="BdTFitRegulationSelfResult">
+		SELECT * FROM BD_T_FIT_REGULATION_SELF
+		<where>
+			<if test="projId != null and projId != ''" >
+				PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="curTmoney != null and curTmoney != ''" >
+				AND CUR_TMONEY = #{curTmoney,jdbcType=NUMERIC}
+			</if>
+			<if test="allTmoney != null and allTmoney != ''" >
+				AND ALL_TMONEY = #{allTmoney,jdbcType=NUMERIC}
+			</if>
+			<if test="curTmoneyPer != null and curTmoneyPer != ''" >
+				AND CUR_TMONEY_PER = #{curTmoneyPer,jdbcType=NUMERIC}
+			</if>
+			<if test="allTmoneyPer != null and allTmoneyPer != ''" >
+				AND ALL_TMONEY_PER = #{allTmoneyPer,jdbcType=NUMERIC}
+			</if>
+			<if test="funToPro != null and funToPro != ''" >
+				AND FUN_TO_PRO = #{funToPro,jdbcType=NUMERIC}
+			</if>
+			<if test="isSholder != null and isSholder != ''" >
+				AND IS_SHOLDER = #{isSholder,jdbcType=VARCHAR}
+			</if>
+			<if test="industry != null and industry != ''" >
+				AND INDUSTRY = #{industry,jdbcType=VARCHAR}
+			</if>
+			<if test="isMfield != null and isMfield != ''" >
+				AND IS_MFIELD = #{isMfield,jdbcType=VARCHAR}
+			</if>
+			<if test="nmainTmoney != null and nmainTmoney != ''" >
+				AND NMAIN_TMONEY = #{nmainTmoney,jdbcType=NUMERIC}
+			</if>
+			<if test="nmainTmoneyPer != null and nmainTmoneyPer != ''" >
+				AND NMAIN_TMONEY_PER = #{nmainTmoneyPer,jdbcType=NUMERIC}
+			</if>
+			<if test="isJs != null and isJs != ''" >
+				AND IS_JS = #{isJs,jdbcType=VARCHAR}
+			</if>
+			<if test="isTwelve != null and isTwelve != ''" >
+				AND IS_TWELVE = #{isTwelve,jdbcType=VARCHAR}
+			</if>
+			<if test="tmoneyOne != null and tmoneyOne != ''" >
+				AND TMONEY_ONE = #{tmoneyOne,jdbcType=NUMERIC}
+			</if>
+			<if test="tmoneyOnePer != null and tmoneyOnePer != ''" >
+				AND TMONEY_ONE_PER = #{tmoneyOnePer,jdbcType=NUMERIC}
+			</if>
+			<if test="tmoneyTtf != null and tmoneyTtf != ''" >
+				AND TMONEY_TTF = #{tmoneyTtf,jdbcType=NUMERIC}
+			</if>
+			<if test="tmoneyTtfPer != null and tmoneyTtfPer != ''" >
+				AND TMONEY_TTF_PER = #{tmoneyTtfPer,jdbcType=NUMERIC}
+			</if>
+			<if test="outjsTmoney != null and outjsTmoney != ''" >
+				AND OUTJS_TMONEY = #{outjsTmoney,jdbcType=NUMERIC}
+			</if>
+			<if test="outjsTmoneyPer != null and outjsTmoneyPer != ''" >
+				AND OUTJS_TMONEY_PER = #{outjsTmoneyPer,jdbcType=NUMERIC}
+			</if>
+			<if test="isCorr != null and isCorr != ''" >
+				AND IS_CORR = #{isCorr,jdbcType=VARCHAR}
+			</if>
+			<if test="corrExplain != null and corrExplain != ''" >
+				AND CORR_EXPLAIN = #{corrExplain,jdbcType=VARCHAR}
+			</if>
+			<if test="isAllow != null and isAllow != ''" >
+				AND IS_ALLOW = #{isAllow,jdbcType=VARCHAR}
+			</if>
+			<if test="whichClass != null and whichClass != ''" >
+				AND WHICH_CLASS = #{whichClass,jdbcType=VARCHAR}
+			</if>
+			<if test="isNlist != null and isNlist != ''" >
+				AND IS_NLIST = #{isNlist,jdbcType=VARCHAR}
+			</if>
+			<if test="isThirteen != null and isThirteen != ''" >
+				AND IS_THIRTEEN = #{isThirteen,jdbcType=VARCHAR}
+			</if>
+			<if test="anyNlist != null and anyNlist != ''" >
+				AND ANY_NLIST = #{anyNlist,jdbcType=VARCHAR}
+			</if>
+
+			<if test="explain != null and explain != ''" >
+				AND EXPLAIN = #{explain,jdbcType=VARCHAR}
+			</if>
+			<if test="selfConclusion != null and selfConclusion != ''" >
+				AND SELF_CONCLUSION = #{selfConclusion,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="regulationFile != null and regulationFile != ''" >
+				AND REGULATION_FILE = #{regulationFile,jdbcType=VARCHAR}
+			</if>
+			<if test="secTmoneyPer != null " >
+				AND SEC_TMONEY_PER = #{secTmoneyPer,jdbcType=NUMERIC}
+			</if>
+			<if test="thrTmoneyPer != null " >
+				AND THR_TMONEY_PER = #{thrTmoneyPer,jdbcType=NUMERIC}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="flowStatus != null and flowStatus != ''" >
+				AND FLOW_STATUS = #{flowStatus,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="BdTFitRegulationSelfResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+
+	<select id="selectSum" parameterType="java.lang.String" resultType="Map">
+	select
+	sum(CUR_TMONEY)AS curTmoney,
+	sum(FUN_TO_PRO)AS funToPro,
+	sum(decode(IS_JS,'1',CUR_TMONEY))as jscurtmoney,
+	sum(decode(IS_TWELVE,'1',CUR_TMONEY))as twelveMoney,
+	sum(decode(IS_MFIELD,'1',CUR_TMONEY))as mfieldMoney
+	from EI.BD_T_FIT_REGULATION_SELF
+	</select>
+
+
+	<select id="selectListBybdTFit" parameterType="com.ppmg.ei.bean.ProjInfoSearchBean" resultMap="BdTFitRegulationSelfResult1">
+		select a.*,c.INVE_ID,c.PROJ_STATUS,c.PROJ_NAME,b.INTENDED_AMOUNT,b.IS_DECISION_PASS
+		,d.IS_FIT,(SELECT nvl(sum(SIGN_AMOUNT),0) from
+		EI.TZ_T_PROJ_CONTRACT_FILE
+		where 1=1 and status!='9' and PROJ_ID=c.proj_id) as SUM_FILE_SIGN_AMOUNT,
+		(select nvl(sum(ACTUAL_PAY_AMOUNT),0) from XJL_T_PAYMENT_REQUEST where status!='9' and  PROJECT_OR_FUND_ID=c.proj_id)as SUM_XJL_ACTUAL_PAY_AMOUNT
+		from
+		TZ_T_PROJ_INFO c
+		inner join BD_T_FIT_REGULATION_SELF a on a.PROJ_ID=c.PROJ_ID
+		inner join TZ_T_PROJ_APP_INFO b on c.PROJ_ID=b.PROJ_ID
+		inner join BD_T_FUND_INFO d on c.INVE_ID=d.FUND_ID
+		and a.STATUS='1' and c.STATUS='1' and  c.PROJ_TYPE in(1,2,4)
+		<if test="projName != null and projName != ''" >
+			AND c.PROJ_NAME like #{projName}
+		</if>
+		<if test="isDecisionPass != null " >
+			AND b.IS_DECISION_PASS in
+			<foreach item="item" index="index" collection="isDecisionPass" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+        <if test="projTypeS != null " >
+            AND c.PROJ_TYPE in
+            <foreach item="item" index="index" collection="projTypeS" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+		<if test="isFit != null " >
+			AND d.IS_FIT in
+			<foreach item="item" index="index" collection="isFit" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+
+	</select>
+	<!-- end autocreate -->
+</mapper>

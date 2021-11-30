@@ -1,0 +1,936 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FundProGovernment">
+
+    <resultMap id="FundProGovernmentResult" type="com.ppmg.ei.model.FundProGovernmentModel">
+        <result column="IS_JS" property="isJs" jdbcType="VARCHAR" /> <!--区域-->
+        <result column="PLAT_PROP" property="platProp" jdbcType="VARCHAR" /> <!--基金类型-->
+        <result column="FUND_STRUCT" property="fundStruct" jdbcType="VARCHAR" /> <!--基金形式-->
+        <result column="LABEL_ID" property="labelId" jdbcType="VARCHAR" /> <!--企业标签-->
+        <result column="FUND_GENRE" property="fundGenre" jdbcType="VARCHAR" /> <!--基金属性,专项子基金，市场化子基金-->
+        <result column="LEFT_COUNT" property="leftCount" jdbcType="NUMERIC" /> <!--项目个数-->
+        <result column="LEFT_AMOUNT" property="leftAmount" jdbcType="NUMERIC" /> <!--投资金额-->
+        <result column="QUIT_COUNT" property="quitCount" jdbcType="NUMERIC" /> <!--退出个数-->
+        <result column="QUIT_AMOUNT" property="quitAmount" jdbcType="NUMERIC" /> <!--回收金额-->
+    </resultMap>
+    <!--全局属性：合规性审查不通过，投决不通过的不统计-->
+    <!--1.區域-->
+    <sql id="searchSqlis_js">
+        SELECT * FROM (
+            SELECT d.is_js                                                                    <!--区域-->
+            FROM TZ_T_proj_info a
+            LEFT JOIN BD_T_FIT_REGULATION_SELF d
+            ON a.proj_id = d.proj_id
+            left join (select * from XJL_T_PAYMENT_REQUEST where status != '9') k
+            on a.proj_id = k.PROJECT_OR_FUND_ID
+            LEFT JOIN (select * from bd_t_fund_info where status != '2') c
+            ON a.inve_id = c.fund_id
+            WHERE d.is_js  IS NOT NULL
+            GROUP BY d.is_js
+            ORDER BY d.is_js ASC)q1
+        LEFT JOIN
+            (SELECT d.is_js,                                                                    <!--区域-->
+            COUNT(DECODE(d.is_js, '0', a.proj_id, '1', a.proj_id))               AS left_count,<!--项目个数-->
+            SUM(DECODE(d.is_js, '0', k.ACTUAL_PAY_AMOUNT, '1', k.ACTUAL_PAY_AMOUNT)) AS left_amount <!--投资金额-->
+            FROM TZ_T_proj_info a
+            LEFT JOIN BD_T_FIT_REGULATION_SELF d
+            ON a.proj_id = d.proj_id
+            left join (select * from XJL_T_PAYMENT_REQUEST where status != '9') k
+            on a.proj_id = k.PROJECT_OR_FUND_ID
+            LEFT JOIN (select * from bd_t_fund_info where status != '2') c
+            ON a.inve_id = c.fund_id
+            WHERE d.is_js  IS NOT NULL
+            AND a.proj_type = '1' <!--直投项目-->
+            AND a.proj_status not in ('1','9','10','11','4','6')  <!--(不等于：1：储备项目,9：已退出,10：已中止,11：已注销,4:合规审查未通过;6:投决未通过)-->
+            AND a.status !='2'   <!--(不等于：2:终止)-->
+            AND c.group_id = '1' <!--此处要改成group_id=1;省政府基金；别忘了-->
+            GROUP BY d.is_js
+            ORDER BY d.is_js ASC
+            ) k on q1.is_js = k.is_js
+        LEFT JOIN
+            (SELECT d.is_js as is_js_quit,
+            COUNT(DECODE(d.is_js, '0', a.proj_status , '1', a.proj_status)) AS quit_count,  <!-- 退出个数-->
+            SUM(DECODE(d.is_js, '0', e.REVENUE, '1', e.REVENUE )) AS quit_amount <!--回收金额-->
+            FROM TZ_T_proj_info a
+            LEFT JOIN BD_T_FIT_REGULATION_SELF d
+            ON a.proj_id = d.proj_id
+            LEFT JOIN (select * from TZ_T_PROJ_QUIT_APPL where status != '9') e
+            ON a.proj_id = e.IA_ID
+            LEFT JOIN (select * from bd_t_fund_info where status != '2') c
+            ON a.inve_id = c.fund_id
+            WHERE d.is_js    IS NOT NULL
+            AND a.proj_status ='9'   <!--已退出-->
+            AND a.proj_type = '1'    <!--直投项目-->
+            AND c.group_id   = '1'  <!--此处要改成group_id=1;省政府基金；别忘了-->
+            GROUP BY d.is_js
+            ORDER BY d.is_js ASC
+            ) g ON q1.is_js = g.is_js_quit
+        order by q1.is_js asc
+        <where>
+            <include refid="searchCondition.searchClause" />
+        </where>
+    </sql>
+
+    <select id="selectListPage" resultMap="FundProGovernmentResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+        <include refid="searchSqlis_js" />
+    </select>
+
+    <!--//基金类型-->
+    <!--1	区域基金；2	国家基金；3	产业基金-->
+    <sql id="searchSqlfundType">
+        SELECT * FROM (
+            SELECT c.plat_prop      <!--基金类型-->
+            FROM TZ_T_proj_info a
+            LEFT JOIN (select * from bd_t_fund_info where status != '2') c
+            ON a.inve_id = c.fund_id
+            WHERE c.plat_prop IS NOT NULL
+            GROUP BY c.plat_prop
+            ORDER BY c.plat_prop ASC
+            )q1
+        LEFT JOIN
+            (SELECT c.plat_prop,       <!--基金类型-->
+            COUNT(DECODE(c.plat_prop, '1', a.proj_id,'2', a.proj_id,'3', a.proj_id))                       AS left_count,   <!--项目个数-->
+            SUM(DECODE(c.plat_prop, '1', k.ACTUAL_PAY_AMOUNT,'2', k.ACTUAL_PAY_AMOUNT,'3', k.ACTUAL_PAY_AMOUNT)) AS left_amount <!--投资金额-->
+            FROM TZ_T_proj_info a
+            LEFT JOIN (select * from bd_t_fund_info where status != '2') c
+            ON a.inve_id = c.fund_id
+            left join (select * from XJL_T_PAYMENT_REQUEST where status != '9') k
+            on a.proj_id = k.PROJECT_OR_FUND_ID
+            WHERE c.plat_prop IS NOT NULL
+            AND c.group_id    = '1' <!--需要改成c.group_id='1'省政府基金,别忘记-->
+            AND a.proj_type    = '1' <!--直投项目-->
+            AND a.proj_status not in ('1','9','10','11','4','6')   <!--(不等于：1：储备项目,9：已退出,10：已中止,11：已注销,4:合规审查未通过;6:投决未通过)-->
+            AND a.status !='2'   <!--(不等于：2:终止)-->
+            GROUP BY c.plat_prop
+            ORDER BY c.plat_prop ASC
+            )k ON q1.plat_prop = k.plat_prop
+        LEFT JOIN
+            (SELECT c.plat_prop as plat_prop_quit,
+            COUNT(DECODE(c.plat_prop, '1', a.proj_status ,'2', a.proj_status,'3', a.proj_status))                                            AS quit_count,  <!-- 退出个数-->
+            SUM(DECODE(c.plat_prop, '1', e.REVENUE,'2', e.REVENUE,'3', e.REVENUE )) AS quit_amount <!--回收金额-->
+            FROM TZ_T_proj_info a
+            LEFT JOIN (select * from bd_t_fund_info where status != '2') c
+            ON a.inve_id = c.fund_id
+            LEFT JOIN (select * from TZ_T_PROJ_QUIT_APPL where status != '9') e
+            ON a.proj_id = e.IA_ID
+            WHERE c.plat_prop IS NOT NULL
+            AND c.group_id    = '1'  <!--需要改成c.group_id='1'：省政府基金,别忘记-->
+            AND a.proj_status  ='9'  <!--已退出-->
+            AND a.proj_type    = '1' <!--直投项目-->
+            GROUP BY c.plat_prop
+            ORDER BY c.plat_prop ASC
+            )g ON q1.plat_prop = g.plat_prop_quit
+        ORDER BY q1.plat_prop ASC
+        <where>
+            <include refid="searchCondition.searchClause" />
+        </where>
+    </sql>
+
+    <select id="selectListPageFundType" resultMap="FundProGovernmentResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+        <include refid="searchSqlfundType" />
+    </select>
+
+    <!--//基金形式 decode(条件,值1,返回值1,值2,返回值2,...值n,返回值n,缺省值)-->
+    <!--1	合伙制；2	公司制；3	契约制-->
+    <sql id="searchSqlfundFrom">
+        SELECT * FROM (
+            SELECT c.fund_struct         <!--基金形式-->
+            FROM TZ_T_proj_info a
+            LEFT JOIN (select * from bd_t_fund_info where status != '2') c
+            ON a.inve_id = c.fund_id
+            WHERE c.fund_struct IS NOT NULL
+            GROUP BY c.fund_struct
+            ORDER BY c.fund_struct ASC
+            )q1
+        LEFT JOIN
+            (SELECT c.fund_struct ,     <!--基金形式-->
+            COUNT(DECODE(c.fund_struct, '1', a.proj_id,'2', a.proj_id,'3', a.proj_id))                       AS left_count,   <!--项目个数-->
+            SUM(DECODE(c.fund_struct, '1', k.ACTUAL_PAY_AMOUNT,'2', k.ACTUAL_PAY_AMOUNT,'3', k.ACTUAL_PAY_AMOUNT)) AS left_amount <!--投资金额-->
+            FROM TZ_T_proj_info a
+            LEFT JOIN (select * from bd_t_fund_info where status != '2') c
+            ON a.inve_id = c.fund_id
+            left join (select * from XJL_T_PAYMENT_REQUEST where status != '9') k
+            on a.proj_id = k.PROJECT_OR_FUND_ID
+            WHERE c.fund_struct IS NOT NULL
+            AND c.group_id      = '1' <!--需要改成c.group_id='1',省政府基金；别忘记-->
+            AND a.proj_type      = '1' <!--直投项目-->
+            AND a.proj_status not in ('1','9','10','11','4','6')   <!--(不等于：1：储备项目,9：已退出,10：已中止,11：已注销,4:合规审查未通过;6:投决未通过)-->
+            AND a.status !='2'   <!--(不等于：2:终止)-->
+            GROUP BY c.fund_struct
+            ORDER BY c.fund_struct ASC
+            )k ON q1.fund_struct = k.fund_struct
+        LEFT JOIN
+            (SELECT c.fund_struct                                                                                                                AS fund_struct_quit, <!--基金形式-->
+            COUNT(DECODE(c.fund_struct, '1', a.proj_status ,'2', a.proj_status,'3', a.proj_status))                                            AS quit_count,  <!-- 退出个数-->
+            SUM(DECODE(c.fund_struct, '1', e.REVENUE,'2', e.REVENUE,'3', e.REVENUE )) AS quit_amount <!--回收金额-->
+            FROM TZ_T_proj_info a
+            LEFT JOIN (select * from bd_t_fund_info where status != '2') c
+            ON a.inve_id = c.fund_id
+            LEFT JOIN (select * from TZ_T_PROJ_QUIT_APPL where status != '9') e
+            ON a.proj_id = e.IA_ID
+            WHERE c.fund_struct IS NOT NULL
+            AND c.group_id      = '1'  <!--需要改成c.group_id='1',省政府基金；别忘记-->
+            AND a.proj_status    ='9'  <!--已退出-->
+            AND a.proj_type      = '1' <!--直投项目-->
+            GROUP BY c.fund_struct
+            ORDER BY c.fund_struct ASC
+            )g ON q1.fund_struct=g.fund_struct_quit
+        ORDER BY q1.fund_struct
+        <where>
+            <include refid="searchCondition.searchClause" />
+        </where>
+    </sql>
+
+    <select id="selectListPagefundFrom" resultMap="FundProGovernmentResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+        <include refid="searchSqlfundFrom" />
+    </select>
+
+    <!--企业标签
+    1：高新技术企业；2：一带一路；3：中小企业；4：战略新兴-->
+    <sql id="searchSqlEnterpriseLabel">
+        SELECT * FROM (
+            SELECT f.LABEL_ID         <!--企业标签-->
+            FROM TZ_T_proj_info a
+            LEFT JOIN BASE.COMM_T_ENT_LABEL f
+            ON a.proj_object  = f.ENT_ID
+            WHERE f.LABEL_ID IS NOT NULL
+            GROUP BY f.LABEL_ID
+            ORDER BY f.LABEL_ID ASC
+            )q1
+        LEFT JOIN
+            (SELECT f.LABEL_ID,       <!--企业标签-->
+            COUNT(DECODE(f.LABEL_ID, '1', a.proj_id,'2', a.proj_id,'3', a.proj_id,'4', a.proj_id))                       AS left_count, <!--项目个数-->
+            SUM(DECODE(f.LABEL_ID, '1', k.ACTUAL_PAY_AMOUNT,'2', k.ACTUAL_PAY_AMOUNT,'3', k.ACTUAL_PAY_AMOUNT,'4', k.ACTUAL_PAY_AMOUNT)) AS left_amount      <!--投资金额-->
+            FROM TZ_T_proj_info a
+            LEFT JOIN BASE.COMM_T_ENT_LABEL f
+            ON a.proj_object  = f.ENT_ID
+            left join (select * from XJL_T_PAYMENT_REQUEST where status != '9') k
+            on a.proj_id = k.PROJECT_OR_FUND_ID
+            LEFT JOIN (select * from bd_t_fund_info where status != '2') c
+            ON a.inve_id = c.fund_id
+            WHERE f.LABEL_ID IS NOT NULL
+            AND a.proj_type   = '1' <!--直投项目-->
+            AND a.proj_status not in ('1','9','10','11','4','6')   <!--(不等于：1：储备项目,9：已退出,10：已中止,11：已注销,4:合规审查未通过;6:投决未通过)-->
+            AND a.status !='2'   <!--(不等于：2:终止)-->
+            AND c.group_id = '1' <!--需要改成c.group_id='1',省政府基金；别忘记-->
+            GROUP BY f.LABEL_ID
+            ORDER BY f.LABEL_ID ASC
+            )k on q1.LABEL_ID = k.LABEL_ID
+        LEFT JOIN
+            (SELECT f.LABEL_ID                                                                                      AS label_id_quit,    <!--基金类型-->
+            COUNT(DECODE(f.LABEL_ID, '1', a.proj_status ,'2', a.proj_status,'3', a.proj_status,'4', a.proj_status)) AS quit_count,  <!-- 退出个数-->
+            SUM(DECODE(f.LABEL_ID, '1', e.REVENUE,'2', e.REVENUE,'3', e.REVENUE,'4', e.REVENUE)) AS quit_amount <!--回收金额-->
+            FROM TZ_T_proj_info a
+            LEFT JOIN BASE.COMM_T_ENT_LABEL f
+            ON a.proj_object  = f.ENT_ID
+            LEFT JOIN (select * from TZ_T_PROJ_QUIT_APPL where status != '9') e
+            ON a.proj_id = e.IA_ID
+            LEFT JOIN (select * from bd_t_fund_info where status != '2') c
+            ON a.inve_id = c.fund_id
+            WHERE f.LABEL_ID IS NOT NULL
+            AND a.proj_status ='9'  <!--已退出-->
+            AND a.proj_type   = '1' <!--直投项目-->
+            AND c.group_id = '1'    <!--需要改成c.group_id='1',省政府基金；别忘记-->
+            GROUP BY f.LABEL_ID
+            ORDER BY f.LABEL_ID ASC
+            )g ON q1.LABEL_ID = g.label_id_quit
+        ORDER BY q1.LABEL_ID ASC
+        <where>
+            <include refid="searchCondition.searchClause" />
+        </where>
+    </sql>
+
+    <select id="selectListPageEnterpriseLabel" resultMap="FundProGovernmentResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+        <include refid="searchSqlEnterpriseLabel" />
+    </select>
+
+    <!--基金属性,1：专项子基金:2：市场化子基金；3：其他-->
+    <sql id="searchSqlFundGenre">
+        select * from (
+            SELECT c.FUND_GENRE           <!--基金属性-->
+            FROM TZ_T_proj_info a
+            LEFT JOIN (select * from bd_t_fund_info where status != '2') c
+            ON a.inve_id = c.fund_id
+            WHERE c.FUND_GENRE IS NOT NULL
+            GROUP BY c.FUND_GENRE
+            ORDER BY c.FUND_GENRE ASC
+            )q1
+        LEFT JOIN
+            (SELECT c.FUND_GENRE ,        <!--基金属性-->
+            COUNT(DECODE(c.FUND_GENRE, '1', a.proj_id,'2', a.proj_id,'3', a.proj_id)) AS left_count, <!--项目个数-->
+            SUM(DECODE(c.FUND_GENRE, '1', k.ACTUAL_PAY_AMOUNT,'2', k.ACTUAL_PAY_AMOUNT,'3', k.ACTUAL_PAY_AMOUNT)) AS left_amount <!--投资金额-->
+            FROM TZ_T_proj_info a
+            LEFT JOIN (select * from bd_t_fund_info where status != '2') c
+            ON a.inve_id = c.fund_id
+            left join (select * from XJL_T_PAYMENT_REQUEST where status != '9') k
+            on a.proj_id = k.PROJECT_OR_FUND_ID
+            WHERE c.FUND_GENRE IS NOT NULL
+            AND c.group_id      = '1' <!--需要改成c.group_id='1',省政府基金；别忘记-->
+            AND a.proj_type      = '1' <!--直投项目-->
+            AND a.proj_status not in ('1','9','10','11','4','6')   <!--(不等于：1：储备项目,9：已退出,10：已中止,11：已注销,4:合规审查未通过;6:投决未通过)-->
+            AND a.status !='2'   <!--(不等于：2:终止)-->
+            GROUP BY c.FUND_GENRE
+            ORDER BY c.FUND_GENRE ASC
+            )k on q1.FUND_GENRE = k.FUND_GENRE
+        LEFT JOIN
+            (SELECT c.FUND_GENRE  AS FUND_GENRE_QUIT,                                                               <!--基金属性-->
+            COUNT(DECODE(c.FUND_GENRE, '1', a.proj_status ,'2', a.proj_status,'3', a.proj_status)) AS quit_count,  <!-- 退出个数-->
+            SUM(DECODE(c.FUND_GENRE, '1', e.REVENUE,'2', e.REVENUE,'3', e.REVENUE))   AS quit_amount <!--回收金额-->
+            FROM TZ_T_proj_info a
+            LEFT JOIN (select * from bd_t_fund_info where status != '2') c
+            ON a.inve_id = c.fund_id
+            LEFT JOIN (select * from TZ_T_PROJ_QUIT_APPL where status != '9') e
+            ON a.proj_id = e.IA_ID
+            WHERE c.FUND_GENRE IS NOT NULL
+            AND a.proj_status    ='9'  <!--已退出-->
+            AND c.group_id      = '1'  <!--需要改成c.group_id='1',省政府基金；别忘记-->
+            AND a.proj_type      = '1' <!--直投项目-->
+            GROUP BY c.FUND_GENRE
+            ORDER BY c.FUND_GENRE ASC
+            )g ON q1.FUND_GENRE = g.FUND_GENRE_QUIT
+            ORDER BY q1.FUND_GENRE
+        <where>
+            <include refid="searchCondition.searchClause" />
+        </where>
+    </sql>
+
+    <select id="selectListPageFundGenre" resultMap="FundProGovernmentResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+        <include refid="searchSqlFundGenre" />
+    </select>
+
+    <!--=以下======================分险预警报表=====================以下-->
+    <resultMap id="FundProGovernmentReportResult" type="com.ppmg.ei.model.FundProGovernmentReportModel">
+        <!--dt1-->
+        <result column="ROWNUM" property="rownum" jdbcType="NUMERIC" /> <!---->
+        <result column="ROWNUMS" property="rownums" jdbcType="NUMERIC" /> <!---->
+        <result column="FUND_ID" property="fundId" jdbcType="VARCHAR" /> <!--BD_T_FUND_INFO；主键id-->
+        <result column="MOTHER_FUND_NAME" property="motherFundName" jdbcType="VARCHAR" /> <!--BD_T_FUND_INFO；MOTHER_FUND_NAME；子基金首投的母基金名称-->
+        <result column="FUND_NAME" property="fundName" jdbcType="VARCHAR" /> <!--基金名称-->
+        <result column="SETUP_DT" property="setupDt" jdbcType="DATE" /> <!--成立日期-->
+        <result column="PROJ_ID" property="projId" jdbcType="VARCHAR" /> <!---->
+        <result column="SUM_OCCUR_AMOUNT1" property="sumOccurAmount1" jdbcType="NUMERIC" /> <!--XJL_T_FP_LEDGER_MAG；LEDGER_TYPE='6'-->
+        <result column="SUM_OCCUR_AMOUNT2" property="sumOccurAmount2" jdbcType="NUMERIC" /> <!--XJL_T_FP_LEDGER_MAG；LEDGER_TYPE='7'-->
+        <result column="EXIT_DT" property="exitDt" jdbcType="DATE" /> <!--XJL_T_FP_LEDGER_MAG；发生时间-->
+        <!--dt2-->
+        <result column="OS_ID" property="osId" jdbcType="VARCHAR" /> <!--TZ_T_PROJ_OWNERSHIP_INFO；主键id-->
+        <result column="SUM_PLAN_AMOUNT" property="sumPlanAmount" jdbcType="NUMERIC" /> <!--TZ_T_PROJ_SHARE_INFO；PLAN_AMOUNT；承诺出资额-->
+        <result column="SUM_PAID_AMOUNT" property="sumPaidAmount" jdbcType="NUMERIC" /> <!--TZ_T_PROJ_SHARE_INFO；PAID_AMOUNT；累计出资总额-->
+        <!--dt3；GF_T_FUND_FINANCE-->
+        <result column="FINANCE_ID" property="financeId" jdbcType="VARCHAR" /> <!--GF_T_FUND_FINANCE;逐渐id-->
+        <result column="SUM_MANAGE_FEE" property="sumManageFee" jdbcType="NUMERIC" /> <!--GF_T_FUND_FINANCE；MANAGE_FEE；本季度管理费-->
+        <result column="SUM_COLLOCATION_FEE" property="sumCollocationFee" jdbcType="NUMERIC" /> <!--GF_T_FUND_FINANCE；COLLOCATION_FEE；本季度资金托管费用-->
+        <result column="SUM_OTHER_FEE" property="sumOtherFee" jdbcType="NUMERIC" /> <!--GF_T_FUND_FINANCE；OTHER_FEE；本季度其他费用-->
+        <result column="SUM_INTEREST_INCOME" property="sumInterestIncome" jdbcType="NUMERIC" /> <!--GF_T_FUND_FINANCE；INTEREST_INCOME；本季度利息收入-->
+        <result column="SUM_INVEST_INCOME" property="sumInvestIncome" jdbcType="NUMERIC" /> <!--GF_T_FUND_FINANCE；INVEST_INCOME；本季度投资收益-->
+        <result column="SUM_OTHER_INCOME" property="sumOtherIncome" jdbcType="NUMERIC" /> <!--GF_T_FUND_FINANCE；OTHER_INCOME；本季度其他收益-->
+        <result column="SUM_SURPLUS" property="sumSurplus" jdbcType="NUMERIC" /> <!--GF_T_FUND_FINANCE；SURPLUS；本季度结余-->
+        <!--dt4-->
+        <result column="OS_ID_DT4" property="osIdDt4" jdbcType="VARCHAR" /> <!--TZ_T_PROJ_OWNERSHIP_INFO;os_id;股权结构信息主键-->
+        <result column="INVESTOR_PRO" property="investorPro" jdbcType="VARCHAR" /> <!--TZ_T_PROJ_SHARE_INFO;investor_pro;股东属性-->
+        <result column="SUM_PLAN_AMOUNT_DT4" property="sumPlanAmountDt4" jdbcType="NUMERIC" /> <!--TZ_T_PROJ_SHARE_INFO;plan_amount;承诺出资额-->
+
+        <result column="SUM_PLAN_AMOUNTDT4_ZYCZ" property="sumPlanAmountDt4zycz" jdbcType="NUMERIC" />
+        <result column="SUM_PLAN_AMOUNTDT4_GJJJ" property="sumPlanAmountDt4gjjj" jdbcType="NUMERIC" />
+        <result column="SUM_PLAN_AMOUNTDT4_SJCZ" property="sumPlanAmountDt4sjcz" jdbcType="NUMERIC" />
+        <result column="SUM_PLAN_AMOUNTDT4_SJJJ" property="sumPlanAmountDt4sjjj" jdbcType="NUMERIC" />
+        <result column="SUM_PLAN_AMOUNTDT4_SXCZ" property="sumPlanAmountDt4sxcz" jdbcType="NUMERIC" />
+        <result column="SUM_PLAN_AMOUNTDT4_GYQY" property="sumPlanAmountDt4gyqy" jdbcType="NUMERIC" />
+        <result column="SUM_PLAN_AMOUNTDT4_GYJRJG" property="sumPlanAmountDt4gyjrjg" jdbcType="NUMERIC" />
+        <result column="SUM_PLAN_AMOUNTDT4_MYQY" property="sumPlanAmountDt4myqy" jdbcType="NUMERIC" />
+        <result column="SUM_PLAN_AMOUNTDT4_ZRR" property="sumPlanAmountDt4zrr" jdbcType="NUMERIC" />
+
+        <result column="SUM_PLAN_AMOUNTDT4_ZYCZ2" property="sumPlanAmountDt4zycz2" jdbcType="NUMERIC" />
+        <result column="SUM_PLAN_AMOUNTDT4_GJJJ2" property="sumPlanAmountDt4gjjj2" jdbcType="NUMERIC" />
+        <result column="SUM_PLAN_AMOUNTDT4_SJCZ2" property="sumPlanAmountDt4sjcz2" jdbcType="NUMERIC" />
+        <result column="SUM_PLAN_AMOUNTDT4_SJJJ2" property="sumPlanAmountDt4sjjj2" jdbcType="NUMERIC" />
+        <result column="SUM_PLAN_AMOUNTDT4_SXCZ2" property="sumPlanAmountDt4sxcz2" jdbcType="NUMERIC" />
+        <result column="SUM_PLAN_AMOUNTDT4_GYQY2" property="sumPlanAmountDt4gyqy2" jdbcType="NUMERIC" />
+        <result column="SUM_PLAN_AMOUNTDT4_GYJRJG2" property="sumPlanAmountDt4gyjrjg2" jdbcType="NUMERIC" />
+        <result column="SUM_PLAN_AMOUNTDT4_MYQY2" property="sumPlanAmountDt4myqy2" jdbcType="NUMERIC" />
+        <result column="SUM_PLAN_AMOUNTDT4_ZRR2" property="sumPlanAmountDt4zrr2" jdbcType="NUMERIC" />
+        <!--dt5；TZ_T_PROJ_APP_INFO-->
+        <result column="SUM_INTENDED_AMOUNT" property="sumIntendedAmount" jdbcType="NUMERIC" /> <!--TZ_T_PROJ_APP_INFO;INTENDED_AMOUNT:拟投资金额-->
+        <!--dt6；XJL_T_FP_LEDGER_MAG-->
+        <result column="SUM_OCCUR_AMOUNT" property="sumOccurAmount" jdbcType="NUMERIC" /> <!--XJL_T_FP_LEDGER_MAG:OCCUR_AMOUNT:发生金额-->
+        <!--dt7-->
+        <!--dt8-->
+        <result column="INVE_ID" property="inveId" jdbcType="VARCHAR" /> <!--TZ_T_PROJ_INFO;inve_id-->
+        <result column="PROJ_NUM" property="projNum" jdbcType="VARCHAR" /> <!--TZ_T_PROJ_INFO;proj_id-->
+        <result column="PROJ_INVEST" property="projInvest" jdbcType="VARCHAR" /> <!--TZ_T_PROJ_APP_INFO;sum(t2.intended_amount) as proj_invest;拟投资金额-->
+        <!--dt9-->
+        <result column="MOTHER_FUND_ID" property="motherFundId" jdbcType="VARCHAR" /> <!--BD_T_FUND_INFO;mother_fund_id;子基金首投的母基金（子基金才会用到）-->
+        <result column="PROJ_NUM_DT9" property="projNumDt9" jdbcType="VARCHAR" /> <!--TZ_T_PROJ_INFO;count(t2.proj_id) as proj_num ;-->
+        <!--dt10-->
+        <result column="PROJ_INVEST_DT10" property="projInvestDt10" jdbcType="VARCHAR" /> <!--TZ_T_PROJ_APP_INFO;sum(intended_amount) as proj_invest_dt10-->
+        <!--dt11-->
+        <result column="EXIT_DT_DT11" property="exitDtDt11" jdbcType="DATE" /> <!--XJL_T_FP_LEDGER_MAG;occur_dt;发生时间-->
+        <result column="PROJ_ID_DT11" property="projIdDt11" jdbcType="VARCHAR" /> <!--XJL_T_FP_LEDGER_MAG;-->
+        <result column="EXIT_TYPE" property="exitType" jdbcType="VARCHAR" /> <!--BASENJ.COMM_T_CODE;-->
+
+        <association property="fundProGovernmentGQRJModel" javaType="com.ppmg.ei.model.FundProGovernmentGQRJModel">
+            <result column="SUM_PLAN_AMOUNTDT4_ZYCZ" property="sumPlanAmountDt4zycz" jdbcType="NUMERIC" />
+            <result column="SUM_PLAN_AMOUNTDT4_GJJJ" property="sumPlanAmountDt4gjjj" jdbcType="NUMERIC" />
+            <result column="SUM_PLAN_AMOUNTDT4_SJCZ" property="sumPlanAmountDt4sjcz" jdbcType="NUMERIC" />
+            <result column="SUM_PLAN_AMOUNTDT4_SJJJ" property="sumPlanAmountDt4sjjj" jdbcType="NUMERIC" />
+            <result column="SUM_PLAN_AMOUNTDT4_SXCZ" property="sumPlanAmountDt4sxcz" jdbcType="NUMERIC" />
+            <result column="SUM_PLAN_AMOUNTDT4_GYQY" property="sumPlanAmountDt4gyqy" jdbcType="NUMERIC" />
+            <result column="SUM_PLAN_AMOUNTDT4_GYJRJG" property="sumPlanAmountDt4gyjrjg" jdbcType="NUMERIC" />
+            <result column="SUM_PLAN_AMOUNTDT4_MYQY" property="sumPlanAmountDt4myqy" jdbcType="NUMERIC" />
+            <result column="SUM_PLAN_AMOUNTDT4_ZRR" property="sumPlanAmountDt4zrr" jdbcType="NUMERIC" />
+        </association>
+        <association property="fundProGovernmentGQSJModel" javaType="com.ppmg.ei.model.FundProGovernmentGQSJModel">
+            <result column="SUM_PLAN_AMOUNTDT4_ZYCZ2" property="sumPlanAmountDt4zycz2" jdbcType="NUMERIC" />
+            <result column="SUM_PLAN_AMOUNTDT4_GJJJ2" property="sumPlanAmountDt4gjjj2" jdbcType="NUMERIC" />
+            <result column="SUM_PLAN_AMOUNTDT4_SJCZ2" property="sumPlanAmountDt4sjcz2" jdbcType="NUMERIC" />
+            <result column="SUM_PLAN_AMOUNTDT4_SJJJ2" property="sumPlanAmountDt4sjjj2" jdbcType="NUMERIC" />
+            <result column="SUM_PLAN_AMOUNTDT4_SXCZ2" property="sumPlanAmountDt4sxcz2" jdbcType="NUMERIC" />
+            <result column="SUM_PLAN_AMOUNTDT4_GYQY2" property="sumPlanAmountDt4gyqy2" jdbcType="NUMERIC" />
+            <result column="SUM_PLAN_AMOUNTDT4_GYJRJG2" property="sumPlanAmountDt4gyjrjg2" jdbcType="NUMERIC" />
+            <result column="SUM_PLAN_AMOUNTDT4_MYQY2" property="sumPlanAmountDt4myqy2" jdbcType="NUMERIC" />
+            <result column="SUM_PLAN_AMOUNTDT4_ZRR2" property="sumPlanAmountDt4zrr2" jdbcType="NUMERIC" />
+        </association>
+
+    </resultMap>
+
+
+    <sql id="searchSqlReport">
+        select ROWNUM,ak.* from (
+            SELECT * FROM (
+            SELECT t1.parent_id,t1.fund_id,T1.MOTHER_FUND_NAME,T1.FUND_NAME,T1.SETUP_DT,p.proj_id,
+            (SELECT NVL(SUM(t.OCCUR_AMOUNT),0) FROM EINJ.XJL_T_FP_LEDGER_MAG t WHERE t.LEDGER_TYPE='6' AND t.proj_id =p.proj_id ) AS SUM_OCCUR_AMOUNT1,
+            (SELECT NVL(SUM(t.OCCUR_AMOUNT),0) FROM EINJ.XJL_T_FP_LEDGER_MAG t WHERE t.LEDGER_TYPE='7' AND t.proj_id =p.proj_id ) AS SUM_OCCUR_AMOUNT2,
+            (SELECT MAX(t.occur_dt) FROM EINJ.XJL_T_FP_LEDGER_MAG t WHERE t.LEDGER_TYPE IN ('6','7') AND t.proj_id = p.proj_id ) AS EXIT_DT
+            FROM EINJ.BD_T_FUND_INFO T1 INNER JOIN EINJ.TZ_T_PROJ_INFO P ON P.INVE_ID  = T1.MOTHER_FUND_ID AND P.PROJ_OBJECT = T1.FUND_ID AND P.PROJ_STATUS NOT IN ('7','8','9')
+            WHERE t1.SUB_PLAT_PROP = '4' AND t1.FUND_STS NOT   IN ('7','8','9') AND t1.mother_fund_id IN
+            (SELECT t2.fund_id FROM EINJ.BD_T_FUND_INFO t2 WHERE (t2.fund_id = '11276' OR t2.parent_id = '11276') AND t2.sub_plat_prop = '2'
+            UNION ALL SELECT t3.fund_id FROM EINJ.BD_T_FUND_INFO t3 WHERE t3.SUB_PLAT_PROP = '5' AND t3.mother_fund_id IN
+            (SELECT t4.fund_id FROM EINJ.BD_T_FUND_INFO t4  WHERE (t4.fund_id = '11276' OR t4.parent_id = '11276') AND t4.sub_plat_prop = '2'
+            UNION ALL SELECT t5.fund_id FROM EINJ.BD_T_FUND_INFO t5 WHERE t5.SUB_PLAT_PROP = '4' AND t5.mother_fund_id
+            IN (SELECT t6.fund_id FROM EINJ.BD_T_FUND_INFO t6 WHERE (t6.fund_id = '11276' OR t6.parent_id = '11276') AND t6.sub_plat_prop = '2' )
+            )
+            )
+            <if test="paramMap.FUND_NAME != null and paramMap.FUND_NAME != ''" >
+                AND T1.FUND_NAME LIKE '%' || #{paramMap.FUND_NAME} || '%'
+            </if>
+            <if test="paramMap.MOTHER_FUND_NAME != null and paramMap.MOTHER_FUND_NAME != ''" >
+                AND T1.MOTHER_FUND_NAME LIKE '%' || #{paramMap.MOTHER_FUND_NAME} || '%'
+            </if>
+            order by T1.MOTHER_FUND_NAME
+            )dt1
+            left join (
+            select t1.fund_id as fund_id_dt2,
+            t1.os_id, nvl(sum(t2.plan_amount),0) sum_plan_amount, nvl(sum(t2.paid_amount),0) sum_paid_amount from EINJ.TZ_T_PROJ_OWNERSHIP_INFO t1
+            inner join EINJ.TZ_T_PROJ_SHARE_INFO t2 on t2.os_id=t1.os_id
+            where t1.status!='9' and  t1.create_dt = (select max(t3.create_dt) from EINJ.TZ_T_PROJ_OWNERSHIP_INFO t3 where t3.fund_id=t1.fund_id and t3.status!='9') group by t1.fund_id,t1.os_id
+            )dt2 on dt1.fund_id = dt2.fund_id_dt2
+            left join (
+            select t1.fund_id as fund_id_dt3,
+            t1.finance_id,nvl(t1.total_manage_fee,0) as sum_manage_fee, nvl(t1.total_collocation_fee,0) as sum_collocation_fee,
+            nvl(t1.total_other_fee,0) as sum_other_fee, nvl(t1.total_interest_income,0) as sum_interest_income, nvl(t1.total_invest_income,0) as sum_invest_income,
+            nvl(t1.total_other_income,0) as sum_other_income, nvl(t1.total_surplus,0) as sum_surplus
+            from EINJ.GF_T_FUND_FINANCE t1 where (t1.year||t1.quarter) = (select max(t2.year||t2.quarter) from EINJ.GF_T_FUND_FINANCE t2 where t2.fund_id = t1.fund_id )
+            )dt3 on dt1.fund_id = dt3.fund_id_dt3
+            left join (
+            select t1.fund_id as fund_id_dt4,
+            nvl(sum(DECODE(t2.investor_pro,'1',t2.plan_amount)),0) as SUM_PLAN_AMOUNTDT4_ZYCZ,
+            nvl(sum(DECODE(t2.investor_pro,'2',t2.plan_amount)),0) as SUM_PLAN_AMOUNTDT4_GJJJ,
+            nvl(sum(DECODE(t2.investor_pro,'3',t2.plan_amount)),0) as SUM_PLAN_AMOUNTDT4_SJCZ,
+            nvl(sum(DECODE(t2.investor_pro,'4',t2.plan_amount)),0) as SUM_PLAN_AMOUNTDT4_SJJJ,
+            nvl(sum(DECODE(t2.investor_pro,'5',t2.plan_amount)),0) as SUM_PLAN_AMOUNTDT4_SXCZ,
+            nvl(sum(DECODE(t2.investor_pro,'6',t2.plan_amount)),0) as SUM_PLAN_AMOUNTDT4_GYQY,
+            nvl(sum(DECODE(t2.investor_pro,'7',t2.plan_amount)),0) as SUM_PLAN_AMOUNTDT4_GYJRJG,
+            nvl(sum(DECODE(t2.investor_pro,'8',t2.plan_amount)),0) as SUM_PLAN_AMOUNTDT4_MYQY,
+            nvl(sum(DECODE(t2.investor_pro,'9',t2.plan_amount)),0) as SUM_PLAN_AMOUNTDT4_ZRR,
+
+            nvl(sum(DECODE(t2.investor_pro,'1',t2.paid_amount)),0) as SUM_PLAN_AMOUNTDT4_ZYCZ2,
+            nvl(sum(DECODE(t2.investor_pro,'2',t2.paid_amount)),0) as SUM_PLAN_AMOUNTDT4_GJJJ2,
+            nvl(sum(DECODE(t2.investor_pro,'3',t2.paid_amount)),0) as SUM_PLAN_AMOUNTDT4_SJCZ2,
+            nvl(sum(DECODE(t2.investor_pro,'4',t2.paid_amount)),0) as SUM_PLAN_AMOUNTDT4_SJJJ2,
+            nvl(sum(DECODE(t2.investor_pro,'5',t2.paid_amount)),0) as SUM_PLAN_AMOUNTDT4_SXCZ2,
+            nvl(sum(DECODE(t2.investor_pro,'6',t2.paid_amount)),0) as SUM_PLAN_AMOUNTDT4_GYQY2,
+            nvl(sum(DECODE(t2.investor_pro,'7',t2.paid_amount)),0) as SUM_PLAN_AMOUNTDT4_GYJRJG2,
+            nvl(sum(DECODE(t2.investor_pro,'8',t2.paid_amount)),0) as SUM_PLAN_AMOUNTDT4_MYQY2,
+            nvl(sum(DECODE(t2.investor_pro,'9',t2.paid_amount)),0) as SUM_PLAN_AMOUNTDT4_ZRR2
+            from EINJ.TZ_T_PROJ_OWNERSHIP_INFO t1 inner join EINJ.TZ_T_PROJ_SHARE_INFO t2 on t2.os_id=t1.os_id
+            where t1.create_dt = (select max(t3.create_dt) from EINJ.TZ_T_PROJ_OWNERSHIP_INFO t3
+            where t3.fund_id=t1.fund_id and t3.status!='9')
+            group by t1.fund_id
+            ) dt4 on dt1.fund_id = fund_id_dt4
+            left join (
+            select t1.fund_id as fund_id_dt5,
+            nvl(sum(t3.intended_amount),0) as sum_intended_amount from EINJ.bd_t_fund_info t1
+            inner join EINJ.tz_t_proj_info t2 on t2.proj_type = '2' and t2.proj_object = t1.fund_id and t2.inve_id = t1.mother_fund_id and t2.proj_status != '7'
+            inner join EINJ.tz_t_proj_app_info t3 on t3.proj_id = t2.proj_id
+            where t1.fund_sts != '8' and t1.sub_plat_prop in ('4','5') group by t1.fund_id
+            )dt5 on dt1.fund_id = dt5.fund_id_dt5
+            left join (
+            select t1.fund_id as fund_id_dt6,
+            nvl(sum(t3.occur_amount),0) as sum_occur_amount from EINJ.bd_t_fund_info t1
+            inner join EINJ.tz_t_proj_info t2 on t2.proj_type = '2' and t2.proj_object = t1.fund_id and t2.inve_id = t1.mother_fund_id and t2.proj_status != '7'
+            inner join EINJ.XJL_T_FP_LEDGER_MAG t3 on t3.proj_id = t2.proj_id and t3.ledger_type = '1' and t3.status = '0'
+            where t1.fund_sts != '8' and t1.sub_plat_prop in ('4','5') group by t1.fund_id
+            )dt6 on dt1.fund_id = dt6.fund_id_dt6
+            left join (
+            select t1.inve_id,
+            count(t1.proj_id) as proj_num,sum(t2.intended_amount) as proj_invest
+            from EINJ.TZ_T_PROJ_INFO t1 left join EINJ.TZ_T_PROJ_APP_INFO t2 on t2.proj_id = t1.proj_id where t1.proj_status != '7' and t1.proj_type = '1' group by t1.inve_id
+            )dt8 on dt1.fund_id = dt8.inve_id
+            left join (
+            select t1.mother_fund_id,count(t2.proj_id) as proj_num_dt9
+            from EINJ.BD_T_FUND_INFO t1
+            inner join EINJ.TZ_T_PROJ_INFO t2 on t2.inve_id = t1.fund_id and t2.proj_type = '1' and t2.proj_status != '7'
+            inner join EINJ.BD_T_FUND_INFO t4 on t4.fund_id = t1.mother_fund_id and t4.sub_plat_prop = '4'where t1.sub_plat_prop = '5' and  t1.fund_sts != '8'
+            group by t1.mother_fund_id
+            )dt9 on dt1.fund_id = dt9.mother_fund_id
+            left join (
+            select t1.fund_id as fund_id_dt10,
+            sum(t4.intended_amount) as proj_invest_dt10
+            from EINJ.BD_T_FUND_INFO t1 inner join EINJ.TZ_T_PROJ_INFO t2 on t2.inve_id = t1.fund_id and t2.proj_type = '2' and t2.proj_status not in ('7','8','9')
+            inner join EINJ.BD_T_FUND_INFO t3 on t3.fund_id = t2.proj_object and t3.sub_plat_prop = '5'
+            left join EINJ.TZ_T_PROJ_APP_INFO t4 on t4.proj_id = t2.proj_id where t1.sub_plat_prop = '4' and t1.fund_sts != '8'
+            group by t1.fund_id
+            )dt10 on dt1.fund_id = dt10.fund_id_dt10
+            left join (
+            SELECT distinct t.occur_dt as EXIT_DT_DT11,t.proj_id as proj_id_dt11 ,c5.CODE_NAME AS EXIT_TYPE from EINJ.XJL_T_FP_LEDGER_MAG t
+            LEFT join BASENJ.COMM_T_CODE C5 ON C5.CODE_VALUE = T.EXIT_TYPE AND C5.PARENT_ID='217' where t.LEDGER_TYPE in ('6','7')
+            )dt11 on dt11.proj_id_dt11 = dt1.proj_id and dt11.EXIT_DT_DT11 = dt1.EXIT_DT
+        )ak
+        <where>
+            <include refid="searchCondition.searchClause" />
+        </where>
+    </sql>
+
+    <select id="selectListPageReport" resultMap="FundProGovernmentReportResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+        <include refid="searchSqlReport" />
+    </select>
+
+
+    <sql id="searchSqlReport2">
+        select ROWNUM,ak.* from (
+            SELECT * FROM (
+            SELECT T1.MOTHER_FUND_NAME,T1.FUND_NAME,T1.SETUP_DT,t1.fund_id,p.proj_id,
+            (SELECT NVL(SUM(t.OCCUR_AMOUNT),0)FROM EINJ.XJL_T_FP_LEDGER_MAG t WHERE t.LEDGER_TYPE='6' AND t.proj_id =p.proj_id) AS SUM_OCCUR_AMOUNT1,
+            (SELECT NVL(SUM(t.OCCUR_AMOUNT),0)FROM EINJ.XJL_T_FP_LEDGER_MAG t WHERE t.LEDGER_TYPE='7' AND t.proj_id =p.proj_id) AS SUM_OCCUR_AMOUNT2,
+            (SELECT MAX(t.occur_dt) FROM EINJ.XJL_T_FP_LEDGER_MAG t WHERE t.LEDGER_TYPE IN ('6','7') AND t.proj_id =p.proj_id ) AS EXIT_DT
+            FROM EINJ.BD_T_FUND_INFO T1 INNER JOIN EINJ.TZ_T_PROJ_INFO P
+            ON P.INVE_ID           = T1.MOTHER_FUND_ID
+            AND P.PROJ_OBJECT      = T1.FUND_ID
+            AND P.PROJ_STATUS NOT IN ('7','8','9')
+            WHERE t1.SUB_PLAT_PROP = '4'
+            AND t1.FUND_STS NOT   IN ('7','8','9')
+            AND t1.mother_fund_id IN
+            (SELECT t2.fund_id FROM EINJ.BD_T_FUND_INFO t2 WHERE (t2.fund_id = '11265' OR t2.parent_id  = '11265')
+            AND t2.sub_plat_prop = '2'
+            UNION ALL SELECT t3.fund_id FROM EINJ.BD_T_FUND_INFO t3 WHERE t3.SUB_PLAT_PROP = '5'
+            AND t3.mother_fund_id IN
+            (SELECT t4.fund_id FROM EINJ.BD_T_FUND_INFO t4 WHERE (t4.fund_id = '11265' OR t4.parent_id = '11265') AND t4.sub_plat_prop = '2'UNION ALL
+            SELECT t5.fund_id FROM EINJ.BD_T_FUND_INFO t5 WHERE t5.SUB_PLAT_PROP = '4' AND t5.mother_fund_id IN
+            (SELECT t6.fund_id FROM EINJ.BD_T_FUND_INFO t6 WHERE (t6.fund_id = '11265' OR t6.parent_id = '11265') AND t6.sub_plat_prop = '2')
+            )
+            )
+            <if test="paramMap.FUND_NAME != null and paramMap.FUND_NAME != ''" >
+                AND T1.FUND_NAME LIKE '%' || #{paramMap.FUND_NAME} || '%'
+            </if>
+            <if test="paramMap.MOTHER_FUND_NAME != null and paramMap.MOTHER_FUND_NAME != ''" >
+                AND T1.MOTHER_FUND_NAME LIKE '%' || #{paramMap.MOTHER_FUND_NAME} || '%'
+            </if>
+            ORDER BY T1.MOTHER_FUND_NAME
+            )dt1
+            left join (
+            select t1.fund_id as fund_id_dt2,
+            t1.os_id, nvl(sum(t2.plan_amount),0) sum_plan_amount, nvl(sum(t2.paid_amount),0) sum_paid_amount from EINJ.TZ_T_PROJ_OWNERSHIP_INFO t1
+            inner join EINJ.TZ_T_PROJ_SHARE_INFO t2 on t2.os_id=t1.os_id
+            where t1.status!='9' and  t1.create_dt = (select max(t3.create_dt) from EINJ.TZ_T_PROJ_OWNERSHIP_INFO t3 where t3.fund_id=t1.fund_id and t3.status!='9') group by t1.fund_id,t1.os_id
+            )dt2 on dt1.fund_id = dt2.fund_id_dt2
+            left join (
+            select t1.fund_id as fund_id_dt3,
+            t1.finance_id,nvl(t1.total_manage_fee,0) as sum_manage_fee, nvl(t1.total_collocation_fee,0) as sum_collocation_fee,
+            nvl(t1.total_other_fee,0) as sum_other_fee, nvl(t1.total_interest_income,0) as sum_interest_income, nvl(t1.total_invest_income,0) as sum_invest_income,
+            nvl(t1.total_other_income,0) as sum_other_income, nvl(t1.total_surplus,0) as sum_surplus
+            from EINJ.GF_T_FUND_FINANCE t1 where (t1.year||t1.quarter) = (select max(t2.year||t2.quarter) from EINJ.GF_T_FUND_FINANCE t2 where t2.fund_id = t1.fund_id )
+            )dt3 on dt1.fund_id = dt3.fund_id_dt3
+            left join (
+            select t1.fund_id as fund_id_dt4,
+            nvl(sum(DECODE(t2.investor_pro,'1',t2.plan_amount)),0) as SUM_PLAN_AMOUNTDT4_ZYCZ,
+            nvl(sum(DECODE(t2.investor_pro,'2',t2.plan_amount)),0) as SUM_PLAN_AMOUNTDT4_GJJJ,
+            nvl(sum(DECODE(t2.investor_pro,'3',t2.plan_amount)),0) as SUM_PLAN_AMOUNTDT4_SJCZ,
+            nvl(sum(DECODE(t2.investor_pro,'4',t2.plan_amount)),0) as SUM_PLAN_AMOUNTDT4_SJJJ,
+            nvl(sum(DECODE(t2.investor_pro,'5',t2.plan_amount)),0) as SUM_PLAN_AMOUNTDT4_SXCZ,
+            nvl(sum(DECODE(t2.investor_pro,'6',t2.plan_amount)),0) as SUM_PLAN_AMOUNTDT4_GYQY,
+            nvl(sum(DECODE(t2.investor_pro,'7',t2.plan_amount)),0) as SUM_PLAN_AMOUNTDT4_GYJRJG,
+            nvl(sum(DECODE(t2.investor_pro,'8',t2.plan_amount)),0) as SUM_PLAN_AMOUNTDT4_MYQY,
+            nvl(sum(DECODE(t2.investor_pro,'9',t2.plan_amount)),0) as SUM_PLAN_AMOUNTDT4_ZRR,
+
+            nvl(sum(DECODE(t2.investor_pro,'1',t2.paid_amount)),0) as SUM_PLAN_AMOUNTDT4_ZYCZ2,
+            nvl(sum(DECODE(t2.investor_pro,'2',t2.paid_amount)),0) as SUM_PLAN_AMOUNTDT4_GJJJ2,
+            nvl(sum(DECODE(t2.investor_pro,'3',t2.paid_amount)),0) as SUM_PLAN_AMOUNTDT4_SJCZ2,
+            nvl(sum(DECODE(t2.investor_pro,'4',t2.paid_amount)),0) as SUM_PLAN_AMOUNTDT4_SJJJ2,
+            nvl(sum(DECODE(t2.investor_pro,'5',t2.paid_amount)),0) as SUM_PLAN_AMOUNTDT4_SXCZ2,
+            nvl(sum(DECODE(t2.investor_pro,'6',t2.paid_amount)),0) as SUM_PLAN_AMOUNTDT4_GYQY2,
+            nvl(sum(DECODE(t2.investor_pro,'7',t2.paid_amount)),0) as SUM_PLAN_AMOUNTDT4_GYJRJG2,
+            nvl(sum(DECODE(t2.investor_pro,'8',t2.paid_amount)),0) as SUM_PLAN_AMOUNTDT4_MYQY2,
+            nvl(sum(DECODE(t2.investor_pro,'9',t2.paid_amount)),0) as SUM_PLAN_AMOUNTDT4_ZRR2
+            from EINJ.TZ_T_PROJ_OWNERSHIP_INFO t1 inner join EINJ.TZ_T_PROJ_SHARE_INFO t2 on t2.os_id=t1.os_id
+            where t1.create_dt = (select max(t3.create_dt) from EINJ.TZ_T_PROJ_OWNERSHIP_INFO t3
+            where t3.fund_id=t1.fund_id and t3.status!='9')
+            group by t1.fund_id
+
+            ) dt4 on dt1.fund_id = fund_id_dt4
+            left join (
+            select t1.fund_id as fund_id_dt5,
+            nvl(sum(t3.intended_amount),0) as sum_intended_amount from EINJ.bd_t_fund_info t1
+            inner join EINJ.tz_t_proj_info t2 on t2.proj_type = '2' and t2.proj_object = t1.fund_id and t2.inve_id = t1.mother_fund_id and t2.proj_status != '7'
+            inner join EINJ.tz_t_proj_app_info t3 on t3.proj_id = t2.proj_id
+            where t1.fund_sts != '8' and t1.sub_plat_prop in ('4','5') group by t1.fund_id
+            )dt5 on dt1.fund_id = dt5.fund_id_dt5
+            left join (
+            select t1.fund_id as fund_id_dt6,
+            nvl(sum(t3.occur_amount),0) as sum_occur_amount from EINJ.bd_t_fund_info t1
+            inner join EINJ.tz_t_proj_info t2 on t2.proj_type = '2' and t2.proj_object = t1.fund_id and t2.inve_id = t1.mother_fund_id and t2.proj_status != '7'
+            inner join EINJ.XJL_T_FP_LEDGER_MAG t3 on t3.proj_id = t2.proj_id and t3.ledger_type = '1' and t3.status = '0'
+            where t1.fund_sts != '8' and t1.sub_plat_prop in ('4','5') group by t1.fund_id
+            )dt6 on dt1.fund_id = dt6.fund_id_dt6
+            left join (
+            select t1.inve_id,
+            count(t1.proj_id) as proj_num,sum(t2.intended_amount) as proj_invest
+            from EINJ.TZ_T_PROJ_INFO t1 left join EINJ.TZ_T_PROJ_APP_INFO t2 on t2.proj_id = t1.proj_id where t1.proj_status != '7' and t1.proj_type = '1' group by t1.inve_id
+            )dt8 on dt1.fund_id = dt8.inve_id
+            left join (
+            select t1.mother_fund_id,count(t2.proj_id) as proj_num_dt9
+            from EINJ.BD_T_FUND_INFO t1
+            inner join EINJ.TZ_T_PROJ_INFO t2 on t2.inve_id = t1.fund_id and t2.proj_type = '1' and t2.proj_status != '7'
+            inner join EINJ.BD_T_FUND_INFO t4 on t4.fund_id = t1.mother_fund_id and t4.sub_plat_prop = '4'where t1.sub_plat_prop = '5' and  t1.fund_sts != '8'
+            group by t1.mother_fund_id
+            )dt9 on dt1.fund_id = dt9.mother_fund_id
+            left join (
+            select t1.fund_id as fund_id_dt10,
+            sum(t4.intended_amount) as proj_invest_dt10
+            from EINJ.BD_T_FUND_INFO t1 inner join EINJ.TZ_T_PROJ_INFO t2 on t2.inve_id = t1.fund_id and t2.proj_type = '2' and t2.proj_status not in ('7','8','9')
+            inner join EINJ.BD_T_FUND_INFO t3 on t3.fund_id = t2.proj_object and t3.sub_plat_prop = '5'
+            left join EINJ.TZ_T_PROJ_APP_INFO t4 on t4.proj_id = t2.proj_id where t1.sub_plat_prop = '4' and t1.fund_sts != '8'
+            group by t1.fund_id
+            )dt10 on dt1.fund_id = dt10.fund_id_dt10
+            left join (
+            SELECT distinct t.occur_dt as EXIT_DT_DT11,t.proj_id as proj_id_dt11 ,c5.CODE_NAME AS EXIT_TYPE from EINJ.XJL_T_FP_LEDGER_MAG t
+            LEFT join BASENJ.COMM_T_CODE C5 ON C5.CODE_VALUE = T.EXIT_TYPE AND C5.PARENT_ID='217' where t.LEDGER_TYPE in ('6','7')
+            )dt11 on dt11.proj_id_dt11 = dt1.proj_id and dt11.EXIT_DT_DT11 = dt1.EXIT_DT
+        )ak
+        <where>
+            <include refid="searchCondition.searchClause" />
+        </where>
+    </sql>
+
+    <select id="selectListPageReport2" resultMap="FundProGovernmentReportResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+        <include refid="searchSqlReport2" />
+    </select>
+
+    <!--===========================================投资企业项目明细==========================================================================-->
+
+    <resultMap id="FundProGovernmentReport2Result" type="com.ppmg.ei.model.FundProGovernmentReportTModel">
+        <!--dt1-->
+        <result column="proj_id" property="projId" jdbcType="VARCHAR" /> <!---->
+        <result column="inve_id" property="inveId" jdbcType="VARCHAR" />
+        <result column="inve_name" property="inveName" jdbcType="VARCHAR" />
+        <result column="enterprise_id" property="enterpriseId" jdbcType="VARCHAR" />
+        <result column="ch_name" property="chName" jdbcType="VARCHAR" />
+        <result column="setup_dt" property="setupDt" jdbcType="DATE" /> <!---->
+        <result column="reg_add" property="regAdd" jdbcType="VARCHAR" /> <!--注册地-->
+        <result column="reg_amount" property="regAmount" jdbcType="NUMERIC" /> <!--注册资本-->
+        <result column="industry" property="industry" jdbcType="VARCHAR" /> <!--BASENJ.COMM_T_CODE-->
+        <result column="is_director_cnt" property="isDirectorCnt" jdbcType="VARCHAR" /> <!---->
+        <result column="is_supervisor_cnt" property="isSupervisorCnt" jdbcType="VARCHAR" /> <!---->
+        <result column="phase" property="phase" jdbcType="VARCHAR" /> <!---->
+        <result column="is_province" property="isProvince" jdbcType="VARCHAR" /> <!---->
+        <result column="invest_date" property="investDate" jdbcType="DATE" /> <!---->
+        <result column="pre_invest_year" property="preInvestYear" jdbcType="VARCHAR" /> <!---->
+        <result column="now_year" property="nowYear" jdbcType="VARCHAR" /> <!---->
+        <result column="EXIT_DT" property="exitDt" jdbcType="DATE" /> <!---->
+        <result column="SUM_OCCUR_AMOUNT1" property="sumOccurAmount1" jdbcType="VARCHAR" /> <!---->
+        <result column="SUM_OCCUR_AMOUNT2" property="sumOccurAmount2" jdbcType="VARCHAR" /> <!---->
+
+        <!--dt2-->
+        <result column="invest_date_dt2" property="investDateDt2" jdbcType="VARCHAR" /> <!---->
+        <result column="pre_invest_year_dt2" property="preInvestYearDt2" jdbcType="VARCHAR" /> <!---->
+        <result column="now_year_dt2" property="nowYearDt2" jdbcType="VARCHAR" /> <!---->
+        <!--dt3-->
+        <result column="ENTE_ID" property="enteId" jdbcType="VARCHAR" />
+        <result column="IS_PRE_INVEST" property="isPreInvest" jdbcType="VARCHAR" />
+        <result column="STAFF_NUM" property="staffNum" jdbcType="NUMERIC" />
+        <result column="RD_STAFF_NUM" property="rdStaffNum" jdbcType="NUMERIC" />
+        <result column="TOTAL_ASSETS" property="totalAssets" jdbcType="NUMERIC" />
+        <result column="TOTAL_LIABILITIES" property="totalLiabilities" jdbcType="NUMERIC" />
+        <result column="OWNER_EQUITY" property="ownerEquity" jdbcType="NUMERIC" />
+        <result column="TOTAL_INCOME" property="totalIncome" jdbcType="NUMERIC" />
+        <result column="TOTAL_PROFIT" property="totalProfit" jdbcType="NUMERIC" />
+        <result column="NET_PROFIT" property="netProfit" jdbcType="NUMERIC" />
+        <result column="RD_FEE" property="rdFee" jdbcType="NUMERIC" />
+        <result column="PAY_FEE" property="payFee" jdbcType="NUMERIC" />
+
+        <!--dt4-->
+        <result column="intended_amount" property="intendedAmount" jdbcType="VARCHAR" /> <!---->
+        <result column="per_share" property="perShare" jdbcType="NUMERIC" /> <!--占股比（%）-->
+        <result column="inve_rounds" property="inveRounds" jdbcType="VARCHAR" /> <!--投资轮次-->
+        <result column="pre_money" property="preMoney" jdbcType="NUMERIC" />
+        <!--dt5；-->
+        <result column="EXIT_DT_DT5" property="exitDtDt5" jdbcType="DATE" /> <!---->
+        <result column="EXIT_TYPE" property="exitType" jdbcType="VARCHAR" />
+        <!--dt6；-->
+        <result column="fund_id" property="fundId" jdbcType="VARCHAR" />
+        <result column="total_plan_amountv" property="totalPlanAmountv" jdbcType="NUMERIC" />
+        <!--dt7-->
+        <result column="ENTE_ID7" property="enteId7" jdbcType="VARCHAR" />
+        <result column="IS_PRE_INVEST7" property="isPreInvest7" jdbcType="VARCHAR" />
+        <result column="STAFF_NUM7" property="staffNum7" jdbcType="NUMERIC" />
+        <result column="RD_STAFF_NUM7" property="rdStaffNum7" jdbcType="NUMERIC" />
+        <result column="TOTAL_ASSETS7" property="totalAssets7" jdbcType="NUMERIC" />
+        <result column="TOTAL_LIABILITIES7" property="totalLiabilities7" jdbcType="NUMERIC" />
+        <result column="OWNER_EQUITY7" property="ownerEquity7" jdbcType="NUMERIC" />
+        <result column="TOTAL_INCOME7" property="totalIncome7" jdbcType="NUMERIC" />
+        <result column="TOTAL_PROFIT7" property="totalProfit7" jdbcType="NUMERIC" />
+        <result column="NET_PROFIT7" property="netProfit7" jdbcType="NUMERIC" />
+        <result column="RD_FEE7" property="rdFee7" jdbcType="NUMERIC" />
+        <result column="PAY_FEE7" property="payFee7" jdbcType="NUMERIC" />
+
+    </resultMap>
+
+    <sql id="searchSqlFundTZ">
+        select ROWNUM,ak.* from (
+            SELECT * FROM (
+            select t1.proj_id,t1.inve_id,t1.inve_name,
+            t2.enterprise_id,t2.ch_name,t2.setup_dt,t2.reg_add,t2.reg_amount,
+            t3.code_name as industry,
+            t4.code_name as is_director_cnt,
+            t5.code_name as is_supervisor_cnt,
+            t6.code_name as phase,
+            t7.code_name as is_province,
+            t8.now_year,
+            (SELECT NVL(sum(t.OCCUR_AMOUNT),0) from EINJ.XJL_T_EP_LEDGER_MAG t where t.LEDGER_TYPE='6' and t.proj_id=t1.proj_id ) AS SUM_OCCUR_AMOUNT1,
+            (SELECT NVL(sum(t.OCCUR_AMOUNT),0) from EINJ.XJL_T_EP_LEDGER_MAG t where t.LEDGER_TYPE='7' and t.proj_id=t1.proj_id ) AS SUM_OCCUR_AMOUNT2,
+            (SELECT max(t.occur_dt) from EINJ.XJL_T_EP_LEDGER_MAG t where t.LEDGER_TYPE in ('6','7') and t.proj_id=t1.proj_id ) AS EXIT_DT
+            from EINJ.TZ_T_PROJ_INFO t1
+            inner join EINJ.BD_T_ENTE_INFO t2 on t2.enterprise_id = t1.proj_object
+            left  join BASENJ.COMM_T_CODE t3 on t3.code_value = t2.industry and t3.parent_id = '9004'
+            left  join BASENJ.COMM_T_CODE t4 on t4.code_value = t2.is_director_cnt and t4.parent_id = '102'
+            left  join BASENJ.COMM_T_CODE t5 on t5.code_value = t2.is_supervisor_cnt and t5.parent_id = '102'
+            left  join BASENJ.COMM_T_CODE t6 on t6.code_value = t2.phase and t6.parent_id = '9014'
+            left  join BASENJ.COMM_T_CODE t7 on t7.code_value = t2.is_province and t7.parent_id = '102'
+            left  join (
+            select b.proj_id, b.invest_date, to_char(add_months(invest_date,-12),'yyyy') as pre_invest_year, to_char(sysdate,'yyyy') as now_year
+            from ( select a.proj_id,min(a.occur_dt) as invest_date  from EINJ.XJL_T_EP_LEDGER_MAG a  where a.ledger_type = '1'  group by a.proj_id ) b
+            ) t8  on t8.proj_id = t1.proj_id where t1.proj_status != '7' and  t1.proj_type = '1'  and t1.inve_id in
+            ( select c1.fund_id from EINJ.BD_T_FUND_INFO c1 where c1.sub_plat_prop = '2' and (c1.fund_id = '11276' or c1.parent_id = '11276')
+            union all select c2.fund_id from EINJ.BD_T_FUND_INFO c2 where c2.sub_plat_prop in ('4','5') and c2.mother_fund_id
+            in (
+            select c3.fund_id from EINJ.BD_T_FUND_INFO c3 where c3.sub_plat_prop = '2' and (c3.fund_id = '11276' or c3.parent_id = '11276')
+            union all
+            select c4.fund_id from EINJ.BD_T_FUND_INFO c4 where c4.sub_plat_prop in ('4','5') and c4.mother_fund_id in (  select c5.fund_id from EINJ.BD_T_FUND_INFO c5 where c5.sub_plat_prop = '2' and (c5.fund_id = '11276' or c5.parent_id = '11276') )
+            )
+            <if test="paramMap.INVE_NAME != null and paramMap.INVE_NAME != ''" >
+                union all select c3.PROJ_OBJECT from EINJ.TZ_T_PROJ_INFO c3 where c3.PROJ_TYPE='2'
+                and c3.INVE_NAME LIKE '%' || #{paramMap.INVE_NAME} || '%'
+            </if>
+            )
+            <if test="paramMap.CH_NAME != null and paramMap.CH_NAME != ''" >
+                AND t2.CH_NAME LIKE '%' || #{paramMap.CH_NAME} || '%'
+            </if>
+            <if test="paramMap.INVE_NAME != null and paramMap.INVE_NAME != ''" >
+                AND (t1.INVE_NAME LIKE '%' || #{paramMap.INVE_NAME} || '%' or t1.INVE_ID in
+                ( select PROJ_OBJECT from EINJ.TZ_T_PROJ_INFO where PROJ_TYPE='2'
+                and INVE_NAME LIKE '%' || #{paramMap.INVE_NAME} || '%')
+                )
+            </if>
+            order by t1.inve_id
+            )dt1
+            left join (
+            select proj_id as proj_id_dt2,
+            invest_date as invest_date_dt2,
+            to_char(add_months(invest_date,-12),'yyyy') as pre_invest_year_dt2,
+            to_char(sysdate,'yyyy') as now_year_dt2
+            from (select t1.proj_id,min(t1.occur_dt) as invest_date from EINJ.XJL_T_EP_LEDGER_MAG t1 where t1.ledger_type = '1' group by t1.proj_id)
+            )dt2 on dt1.proj_id = dt2.proj_id_dt2
+            left join (
+            select
+            nvl(t1.ENTE_ID,0) as ENTE_ID,
+            nvl(t1.IS_PRE_INVEST,0)as IS_PRE_INVEST,<!--IS_PRE_INVEST:是否投资前上年度财务信息(1:上年度；0：本年度)-->
+            nvl(t1.STAFF_NUM,0)as STAFF_NUM,
+            nvl(t1.RD_STAFF_NUM,0)as RD_STAFF_NUM,
+            nvl(t1.TOTAL_ASSETS,0)as TOTAL_ASSETS,
+            nvl(t1.TOTAL_LIABILITIES,0)as TOTAL_LIABILITIES,
+            nvl(t1.OWNER_EQUITY,0)as OWNER_EQUITY,
+            nvl(t1.TOTAL_INCOME,0)as TOTAL_INCOME,
+            nvl(t1.TOTAL_PROFIT,0)as TOTAL_PROFIT,
+            nvl(t1.NET_PROFIT,0)as NET_PROFIT,
+            nvl(t1.RD_FEE,0)as RD_FEE,
+            nvl(t1.PAY_FEE,0)as PAY_FEE
+            from EINJ.GF_T_FUND_ENTE t1 where t1.status = '2'
+            )dt3 on dt3.ENTE_ID = dt1.enterprise_id and dt3.IS_PRE_INVEST='1'
+            left join (
+            select t1.proj_id as proj_id_dt4,t1.intended_amount,t1.per_share,t1.inve_rounds,t1.pre_money
+            from EINJ.TZ_T_PROJ_APP_INFO t1 inner join EINJ.TZ_T_PROJ_INFO t2 on t2.proj_id = t1.proj_id
+            and t2.proj_status != '7' and t2.proj_type = '1'
+            )dt4 on dt1.proj_id = dt4.proj_id_dt4
+            left join (
+            SELECT distinct
+            t.proj_id as proj_id_dt5,
+            t.occur_dt as EXIT_DT_DT5,
+            c5.CODE_NAME AS EXIT_TYPE
+            from EINJ.XJL_T_EP_LEDGER_MAG t LEFT join BASENJ.COMM_T_CODE C5
+            ON C5.CODE_VALUE = T.EXIT_TYPE AND C5.PARENT_ID='217' where t.LEDGER_TYPE in ('6','7')
+            )dt5 on dt1.proj_id = dt5.proj_id_dt5 and EXIT_DT_DT5 = dt1.EXIT_DT
+            left join (
+            select t1.fund_id,sum(t4.plan_amount) as total_plan_amountv from EINJ.BD_T_FUND_INFO t1
+            inner join EINJ.TZ_T_PROJ_OWNERSHIP_INFO t2 on t2.fund_id = t1.fund_id and t2.status != '9' and t2.create_dt =
+            (select max(t3.create_dt)
+            from EINJ.TZ_T_PROJ_OWNERSHIP_INFO t3 where t3.os_id = t2.os_id and t3.status != '9')
+            inner join EINJ.TZ_T_PROJ_SHARE_INFO t4 on t4.os_id = t2.os_id group by t1.fund_id
+            )dt6 on dt1.INVE_ID = dt6.fund_id
+            <if test="paramMap.YEAR != null and paramMap.YEAR != ''" >
+                left join (
+                select
+                nvl(t1.ENTE_ID,0) as ENTE_ID7,
+                nvl(t1.IS_PRE_INVEST,0) as IS_PRE_INVEST7,<!--IS_PRE_INVEST:是否投资前上年度财务信息(1:上年度；0：本年度)-->
+                nvl(t1.STAFF_NUM,0) as STAFF_NUM7,
+                nvl(t1.RD_STAFF_NUM,0) as RD_STAFF_NUM7,
+                nvl(t1.TOTAL_ASSETS,0) as TOTAL_ASSETS7,
+                nvl(t1.TOTAL_LIABILITIES,0) as TOTAL_LIABILITIES7,
+                nvl(t1.OWNER_EQUITY,0) as OWNER_EQUITY7,
+                nvl(t1.TOTAL_INCOME,0) as TOTAL_INCOME7,
+                nvl(t1.TOTAL_PROFIT,0) as TOTAL_PROFIT7,
+                nvl(t1.NET_PROFIT,0) as NET_PROFIT7,
+                nvl(t1.RD_FEE,0) as RD_FEE7,
+                nvl(t1.PAY_FEE,0) as PAY_FEE7,
+                nvl(t1.year,0) as year7
+                from EINJ.GF_T_FUND_ENTE t1 where t1.status = '2'
+                )dt7 on dt7.ENTE_ID7 = dt1.enterprise_id
+                AND dt7.IS_PRE_INVEST7 = '0'
+                AND dt7.YEAR7 = to_char(add_months(to_date(#{paramMap.YEAR},'yyyy'),-0),'yyyy')
+            </if>
+        )ak
+        <where>
+            <include refid="searchCondition.searchClause" />
+        </where>
+    </sql>
+
+    <select id="selectListPageReportSonSecond" resultMap="FundProGovernmentReport2Result" parameterType="com.founder.ssm.core.common.SearchCondition">
+        <include refid="searchSqlFundTZ" />
+    </select>
+
+    <sql id="searchSqlFundTZ2">
+        select ROWNUM,ak.* from (
+            SELECT * FROM (
+            select t1.proj_id,t1.inve_id,t1.inve_name,t2.enterprise_id,t2.ch_name,t2.setup_dt,t2.reg_add,t2.reg_amount,t3.code_name as industry,
+            t4.code_name as is_director_cnt,t5.code_name as is_supervisor_cnt,t6.code_name as phase,t7.code_name as is_province,t8.invest_date,
+            t8.pre_invest_year,t8.now_year,
+            (SELECT NVL(sum(t.OCCUR_AMOUNT),0) from EINJ.XJL_T_EP_LEDGER_MAG t where t.LEDGER_TYPE='6' and t.proj_id=t1.proj_id ) AS SUM_OCCUR_AMOUNT1,
+            (SELECT NVL(sum(t.OCCUR_AMOUNT),0) from EINJ.XJL_T_EP_LEDGER_MAG t where t.LEDGER_TYPE='7' and t.proj_id=t1.proj_id ) AS SUM_OCCUR_AMOUNT2,
+            (SELECT max(t.occur_dt) from EINJ.XJL_T_EP_LEDGER_MAG t where t.LEDGER_TYPE in ('6','7') and t.proj_id=t1.proj_id ) AS EXIT_DT
+            from EINJ.TZ_T_PROJ_INFO t1 inner join EINJ.BD_T_ENTE_INFO t2 on t2.enterprise_id = t1.proj_object left  join BASENJ.COMM_T_CODE t3 on t3.code_value = t2.industry and t3.parent_id = '9004'
+            left  join BASENJ.COMM_T_CODE t4 on t4.code_value = t2.is_director_cnt and t4.parent_id = '102'
+            left  join BASENJ.COMM_T_CODE t5 on t5.code_value = t2.is_supervisor_cnt and t5.parent_id = '102'
+            left  join BASENJ.COMM_T_CODE t6 on t6.code_value = t2.phase and t6.parent_id = '9014'
+            left  join BASENJ.COMM_T_CODE t7 on t7.code_value = t2.is_province and t7.parent_id = '102'
+            left  join ( select b.proj_id, b.invest_date,to_char(add_months(invest_date,-12),'yyyy') as pre_invest_year,to_char(sysdate,'yyyy') as now_year
+            from ( select a.proj_id,min(a.occur_dt) as invest_date from EINJ.XJL_T_EP_LEDGER_MAG a  where a.ledger_type = '1'  group by a.proj_id ) b ) t8 on t8.proj_id = t1.proj_id
+            where t1.proj_status != '7' and  t1.proj_type = '1'  and  t1.inve_id
+            in (
+            select c1.fund_id from EINJ.BD_T_FUND_INFO c1 where c1.sub_plat_prop = '2' and (c1.fund_id = '11265' or c1.parent_id = '11265')
+            union all
+            select c2.fund_id from EINJ.BD_T_FUND_INFO c2 where c2.sub_plat_prop in ('4','5') and c2.mother_fund_id
+            in (
+            select c3.fund_id from EINJ.BD_T_FUND_INFO c3 where c3.sub_plat_prop = '2' and (c3.fund_id = '11265' or c3.parent_id = '11265')
+            union all
+            select c4.fund_id from EINJ.BD_T_FUND_INFO c4 where c4.sub_plat_prop in ('4','5') and c4.mother_fund_id in (
+            select c5.fund_id from EINJ.BD_T_FUND_INFO c5 where c5.sub_plat_prop = '2' and (c5.fund_id = '11265' or c5.parent_id = '11265')
+            )
+            )
+            <if test="paramMap.INVE_NAME != null and paramMap.INVE_NAME != ''" >
+                union all select c3.PROJ_OBJECT from EINJ.TZ_T_PROJ_INFO c3 where c3.PROJ_TYPE='2'
+                and c3.INVE_NAME LIKE '%' || #{paramMap.INVE_NAME} || '%'
+            </if>
+            )
+            <if test="paramMap.CH_NAME != null and paramMap.CH_NAME != ''" >
+                AND t2.CH_NAME LIKE '%' || #{paramMap.CH_NAME} || '%'
+            </if>
+            <if test="paramMap.INVE_NAME != null and paramMap.INVE_NAME != ''" >
+                AND (t1.INVE_NAME LIKE '%' || #{paramMap.INVE_NAME} || '%' or t1.INVE_ID in
+                ( select PROJ_OBJECT from EINJ.TZ_T_PROJ_INFO where PROJ_TYPE='2'
+                and INVE_NAME LIKE '%' || #{paramMap.INVE_NAME}|| '%')
+                )
+            </if>
+            order by t1.inve_id
+            )dt1
+            left join (
+            select proj_id as proj_id_dt2,invest_date as invest_date_dt2,
+            to_char(add_months(invest_date,-12),'yyyy') as pre_invest_year_dt2,
+            to_char(sysdate,'yyyy') as now_year_dt2
+            from (select t1.proj_id,min(t1.occur_dt) as invest_date from EINJ.XJL_T_EP_LEDGER_MAG t1
+            where t1.ledger_type = '1' group by t1.proj_id)
+            )dt2 on dt1.proj_id = dt2.proj_id_dt2
+            left join (
+            select * from(
+            select a.*,row_number() over(partition by a.ENTE_ID order by ENTE_ID) su from (
+            select
+            nvl(t1.ENTE_ID,0) as ENTE_ID,
+            nvl(t1.IS_PRE_INVEST,0)as IS_PRE_INVEST,
+            nvl(t1.STAFF_NUM,0)as STAFF_NUM,
+            nvl(t1.RD_STAFF_NUM,0)as RD_STAFF_NUM,
+            nvl(t1.TOTAL_ASSETS,0)as TOTAL_ASSETS,
+            nvl(t1.TOTAL_LIABILITIES,0)as TOTAL_LIABILITIES,
+            nvl(t1.OWNER_EQUITY,0)as OWNER_EQUITY,
+            nvl(t1.TOTAL_INCOME,0)as TOTAL_INCOME,
+            nvl(t1.TOTAL_PROFIT,0)as TOTAL_PROFIT,
+            nvl(t1.NET_PROFIT,0)as NET_PROFIT,
+            nvl(t1.RD_FEE,0)as RD_FEE,
+            nvl(t1.PAY_FEE,0)as PAY_FEE
+            from EINJ.GF_T_FUND_ENTE t1 where t1.status = '2'
+            ) a
+            )where su=1
+            )dt3 on dt3.ENTE_ID = dt1.enterprise_id and dt3.IS_PRE_INVEST='1'
+            left join (
+            select t1.proj_id as proj_id_dt4,t1.intended_amount,t1.per_share,t1.inve_rounds,t1.pre_money
+            from EINJ.TZ_T_PROJ_APP_INFO t1
+            inner join EINJ.TZ_T_PROJ_INFO t2 on t2.proj_id = t1.proj_id
+            and t2.proj_status != '7' and t2.proj_type = '1'
+            )dt4 on dt1.proj_id = dt4.proj_id_dt4
+            left join (
+            SELECT t.proj_id as proj_id_dt5,t.occur_dt as EXIT_DT_DT5,c5.CODE_NAME AS EXIT_TYPE
+            from EINJ.XJL_T_EP_LEDGER_MAG t LEFT join BASENJ.COMM_T_CODE C5
+            ON C5.CODE_VALUE = T.EXIT_TYPE AND C5.PARENT_ID='217' where t.LEDGER_TYPE in ('6','7')
+            )dt5 on dt1.proj_id = dt5.proj_id_dt5 and EXIT_DT_DT5 = dt1.EXIT_DT
+            left join (
+            select t1.fund_id,sum(t4.plan_amount) as total_plan_amountv from  EINJ.BD_T_FUND_INFO t1
+            inner join EINJ.TZ_T_PROJ_OWNERSHIP_INFO t2 on t2.fund_id = t1.fund_id  and  t2.status != '9'
+            and t2.create_dt = (select max(t3.create_dt) from EINJ.TZ_T_PROJ_OWNERSHIP_INFO t3
+            where t3.os_id = t2.os_id and t3.status != '9')
+            inner join EINJ.TZ_T_PROJ_SHARE_INFO t4 on t4.os_id = t2.os_id group by t1.fund_id
+            )dt6 on dt1.INVE_ID = dt6.fund_id
+            <if test="paramMap.YEAR != null and paramMap.YEAR != ''" >
+                left join (
+                select
+                nvl(t1.ENTE_ID,0) as ENTE_ID7,
+                nvl(t1.IS_PRE_INVEST,0) as IS_PRE_INVEST7,
+                nvl(t1.STAFF_NUM,0) as STAFF_NUM7,
+                nvl(t1.RD_STAFF_NUM,0) as RD_STAFF_NUM7,
+                nvl(t1.TOTAL_ASSETS,0) as TOTAL_ASSETS7,
+                nvl(t1.TOTAL_LIABILITIES,0) as TOTAL_LIABILITIES7,
+                nvl(t1.OWNER_EQUITY,0) as OWNER_EQUITY7,
+                nvl(t1.TOTAL_INCOME,0) as TOTAL_INCOME7,
+                nvl(t1.TOTAL_PROFIT,0) as TOTAL_PROFIT7,
+                nvl(t1.NET_PROFIT,0) as NET_PROFIT7,
+                nvl(t1.RD_FEE,0) as RD_FEE7,
+                nvl(t1.PAY_FEE,0) as PAY_FEE7,
+                nvl(t1.year,0) as year7
+                from EINJ.GF_T_FUND_ENTE t1 where t1.status = '2'
+                )dt7 on dt7.ENTE_ID7 = dt1.enterprise_id and dt7.IS_PRE_INVEST7 = '0'
+                AND dt7.YEAR7 = to_char(add_months(to_date(#{paramMap.YEAR},'yyyy'),-0),'yyyy')
+            </if>
+        )ak
+        <where>
+            <include refid="searchCondition.searchClause" />
+        </where>
+    </sql>
+
+    <select id="selectListPageReportSonSecond2" resultMap="FundProGovernmentReport2Result" parameterType="com.founder.ssm.core.common.SearchCondition">
+        <include refid="searchSqlFundTZ2" />
+    </select>
+</mapper>

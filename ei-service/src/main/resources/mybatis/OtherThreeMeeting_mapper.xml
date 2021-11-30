@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="OtherThreeMeeting">
+	<!-- start autocreate -->
+
+	<resultMap id="OtherThreeMeetingResult" type="com.ppmg.ei.model.OtherThreeMeetingModel">
+		<result column="MEETING_ID" property="meetingId" jdbcType="VARCHAR" />
+		<result column="PROJ_ID" property="projId" jdbcType="VARCHAR" />
+		<result column="PROJ_NAME" property="projName" jdbcType="VARCHAR" />
+		<result column="MEETING_DATE" property="meetingDate" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="ATTA_FILE" property="attaFile" jdbcType="VARCHAR" />
+		<result column="PROCESS_INST_ID" property="processInstId" jdbcType="VARCHAR" />
+		<result column="DEPT_ID" property="deptId" jdbcType="VARCHAR" />
+		<result column="DEPT_NAME" property="deptName" jdbcType="VARCHAR" />
+		<result column="GROUP_ID" property="groupId" jdbcType="VARCHAR" />
+		<result column="GROUP_NAME" property="groupName" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="SN" property="sn" jdbcType="VARCHAR" />
+		<result column="IS_IMPORTANT" property="isImportant" jdbcType="VARCHAR" />
+		<result column="DJ_USERID" property="djUserid" jdbcType="VARCHAR" />
+		<result column="DJ_USERNAME" property="djUsername" jdbcType="VARCHAR" />
+		<result column="PROJ_FULL_NAME" property="projFullName" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.OtherThreeMeetingModel">
+		INSERT INTO OTHER_THREE_MEETING (MEETING_ID,PROJ_ID,PROJ_NAME,MEETING_DATE,REMARK,ATTA_FILE,PROCESS_INST_ID,DEPT_ID,DEPT_NAME,GROUP_ID,GROUP_NAME,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,STATUS,SN,IS_IMPORTANT,DJ_USERID,DJ_USERNAME,PROJ_FULL_NAME) values(#{meetingId,jdbcType=VARCHAR},#{projId,jdbcType=VARCHAR},#{projName,jdbcType=VARCHAR},#{meetingDate,jdbcType=TIMESTAMP},#{remark,jdbcType=VARCHAR},#{attaFile,jdbcType=VARCHAR},#{processInstId,jdbcType=VARCHAR},#{deptId,jdbcType=VARCHAR},#{deptName,jdbcType=VARCHAR},#{groupId,jdbcType=VARCHAR},#{groupName,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{status,jdbcType=VARCHAR},#{sn,jdbcType=VARCHAR},#{isImportant,jdbcType=VARCHAR},#{djUserid,jdbcType=VARCHAR},#{djUsername,jdbcType=VARCHAR},#{projFullName,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO OTHER_THREE_MEETING (MEETING_ID,PROJ_ID,PROJ_NAME,MEETING_DATE,REMARK,ATTA_FILE,PROCESS_INST_ID,DEPT_ID,DEPT_NAME,GROUP_ID,GROUP_NAME,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,STATUS,SN,IS_IMPORTANT,DJ_USERID,DJ_USERNAME,PROJ_FULL_NAME)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.meetingId,jdbcType=VARCHAR},
+				#{item.projId,jdbcType=VARCHAR},
+				#{item.projName,jdbcType=VARCHAR},
+				#{item.meetingDate,jdbcType=TIMESTAMP},
+				#{item.remark,jdbcType=VARCHAR},
+				#{item.attaFile,jdbcType=VARCHAR},
+				#{item.processInstId,jdbcType=VARCHAR},
+				#{item.deptId,jdbcType=VARCHAR},
+				#{item.deptName,jdbcType=VARCHAR},
+				#{item.groupId,jdbcType=VARCHAR},
+				#{item.groupName,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+				#{item.status,jdbcType=VARCHAR},
+				#{item.sn,jdbcType=VARCHAR},
+				#{item.isImportant,jdbcType=VARCHAR},
+				#{item.djUserid,jdbcType=VARCHAR},
+				#{item.djUsername,jdbcType=VARCHAR},
+				#{item.projFullName,jdbcType=VARCHAR}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  OTHER_THREE_MEETING WHERE MEETING_ID = #{meetingId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.OtherThreeMeetingModel">
+		DELETE FROM OTHER_THREE_MEETING
+		<where>
+			<if test="meetingId != null and meetingId != ''" >
+				MEETING_ID = #{meetingId,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="projName != null and projName != ''" >
+				AND PROJ_NAME = #{projName,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingDate != null" >
+				AND MEETING_DATE = #{meetingDate,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="deptId != null and deptId != ''" >
+				AND DEPT_ID = #{deptId,jdbcType=VARCHAR}
+			</if>
+			<if test="deptName != null and deptName != ''" >
+				AND DEPT_NAME = #{deptName,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=VARCHAR}
+			</if>
+			<if test="groupName != null and groupName != ''" >
+				AND GROUP_NAME = #{groupName,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="sn != null and sn != ''" >
+				AND SN = #{sn,jdbcType=VARCHAR}
+			</if>
+			<if test="isImportant != null and isImportant != ''" >
+				AND IS_IMPORTANT = #{isImportant,jdbcType=VARCHAR}
+			</if>
+			<if test="djUserid != null and djUserid != ''" >
+				AND DJ_USERID = #{djUserid,jdbcType=VARCHAR}
+			</if>
+			<if test="djUsername != null and djUsername != ''" >
+				AND DJ_USERNAME = #{djUsername,jdbcType=VARCHAR}
+			</if>
+			<if test="projFullName != null and projFullName != ''" >
+				AND PROJ_FULL_NAME = #{projFullName,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  OTHER_THREE_MEETING WHERE MEETING_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.OtherThreeMeetingModel">
+		UPDATE OTHER_THREE_MEETING 
+		<set>
+			<if test="meetingId != null and meetingId != ''" >
+				MEETING_ID = #{meetingId,jdbcType=VARCHAR},
+			</if>
+			<if test="projId != null and projId != ''" >
+				PROJ_ID = #{projId,jdbcType=VARCHAR},
+			</if>
+			<if test="projName != null and projName != ''" >
+				PROJ_NAME = #{projName,jdbcType=VARCHAR},
+			</if>
+			<if test="meetingDate != null" >
+				MEETING_DATE = #{meetingDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null and remark != ''" >
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				ATTA_FILE = #{attaFile,jdbcType=VARCHAR},
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR},
+			</if>
+			<if test="deptId != null and deptId != ''" >
+				DEPT_ID = #{deptId,jdbcType=VARCHAR},
+			</if>
+			<if test="deptName != null and deptName != ''" >
+				DEPT_NAME = #{deptName,jdbcType=VARCHAR},
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				GROUP_ID = #{groupId,jdbcType=VARCHAR},
+			</if>
+			<if test="groupName != null and groupName != ''" >
+				GROUP_NAME = #{groupName,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="sn != null and sn != ''" >
+				SN = #{sn,jdbcType=VARCHAR},
+			</if>
+			<if test="isImportant != null and isImportant != ''" >
+				IS_IMPORTANT = #{isImportant,jdbcType=VARCHAR},
+			</if>
+			<if test="djUserid != null and djUserid != ''" >
+				DJ_USERID = #{djUserid,jdbcType=VARCHAR},
+			</if>
+			<if test="djUsername != null and djUsername != ''" >
+				DJ_USERNAME = #{djUsername,jdbcType=VARCHAR},
+			</if>
+			<if test="projFullName != null and projFullName != ''" >
+				PROJ_FULL_NAME = #{projFullName,jdbcType=VARCHAR},
+			</if>
+		</set>
+		WHERE MEETING_ID = #{meetingId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="OtherThreeMeetingResult">
+		SELECT * FROM OTHER_THREE_MEETING WHERE MEETING_ID = #{meetingId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.OtherThreeMeetingModel" resultMap="OtherThreeMeetingResult">
+		SELECT * FROM OTHER_THREE_MEETING
+		<where>
+			<if test="meetingId != null and meetingId != ''" >
+				MEETING_ID = #{meetingId,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="projName != null and projName != ''" >
+				AND PROJ_NAME = #{projName,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingDate != null" >
+				AND MEETING_DATE = #{meetingDate,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="deptId != null and deptId != ''" >
+				AND DEPT_ID = #{deptId,jdbcType=VARCHAR}
+			</if>
+			<if test="deptName != null and deptName != ''" >
+				AND DEPT_NAME = #{deptName,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=VARCHAR}
+			</if>
+			<if test="groupName != null and groupName != ''" >
+				AND GROUP_NAME = #{groupName,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="sn != null and sn != ''" >
+				AND SN = #{sn,jdbcType=VARCHAR}
+			</if>
+			<if test="isImportant != null and isImportant != ''" >
+				AND IS_IMPORTANT = #{isImportant,jdbcType=VARCHAR}
+			</if>
+			<if test="djUserid != null and djUserid != ''" >
+				AND DJ_USERID = #{djUserid,jdbcType=VARCHAR}
+			</if>
+			<if test="djUsername != null and djUsername != ''" >
+				AND DJ_USERNAME = #{djUsername,jdbcType=VARCHAR}
+			</if>
+			<if test="projFullName != null and projFullName != ''" >
+				AND PROJ_FULL_NAME = #{projFullName,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM OTHER_THREE_MEETING T1
+		<if test="paramMap.loginUser.userId!='1200119390' and paramMap.loginUser.userId!='13209' ">
+			LEFT JOIN  ( SELECT count(1) as cnt FROM BASE.APP_USERROLE WHERE ROLEID in (select ROLEID from base.APP_ROLEPERMISSION t where t.PERMISSIONID=10107) AND APPID = 10001  and USERID=TO_CHAR(#{paramMap.loginUser.userId}) ) tt  on 1=1
+		</if>
+
+		<where>
+			STATUS != '9'
+			<if test="paramMap.loginUser.userId!='1200119390' and paramMap.loginUser.userId!='13209' ">
+				<if test="paramMap.orgIdOrDeptId != null and paramMap.orgIdOrDeptId != '' ">
+					  AND T1.group_id=#{paramMap.orgIdOrDeptId}  or T1.dept_id=#{paramMap.orgIdOrDeptId}
+				</if>
+				AND  (case when tt.cnt!=0 then t1.create_by else TO_CHAR(#{paramMap.loginUser.userId})  end)=TO_CHAR(#{paramMap.loginUser.userId})
+			</if>
+
+			<include refid="searchCondition.searchClause" />
+
+			order by T1.create_dt desc
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="OtherThreeMeetingResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.OtherThreeMeetingModel">
+		SELECT COUNT(*) FROM OTHER_THREE_MEETING
+		<where>
+			<if test="meetingId != null and meetingId != ''" >
+				MEETING_ID = #{meetingId,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="projName != null and projName != ''" >
+				AND PROJ_NAME = #{projName,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingDate != null" >
+				AND MEETING_DATE = #{meetingDate,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="deptId != null and deptId != ''" >
+				AND DEPT_ID = #{deptId,jdbcType=VARCHAR}
+			</if>
+			<if test="deptName != null and deptName != ''" >
+				AND DEPT_NAME = #{deptName,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=VARCHAR}
+			</if>
+			<if test="groupName != null and groupName != ''" >
+				AND GROUP_NAME = #{groupName,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="sn != null and sn != ''" >
+				AND SN = #{sn,jdbcType=VARCHAR}
+			</if>
+			<if test="isImportant != null and isImportant != ''" >
+				AND IS_IMPORTANT = #{isImportant,jdbcType=VARCHAR}
+			</if>
+			<if test="djUserid != null and djUserid != ''" >
+				AND DJ_USERID = #{djUserid,jdbcType=VARCHAR}
+			</if>
+			<if test="djUsername != null and djUsername != ''" >
+				AND DJ_USERNAME = #{djUsername,jdbcType=VARCHAR}
+			</if>
+			<if test="projFullName != null and projFullName != ''" >
+				AND PROJ_FULL_NAME = #{projFullName,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.OtherThreeMeetingModel" resultMap="OtherThreeMeetingResult">
+		SELECT * FROM OTHER_THREE_MEETING
+		<where>
+			<if test="meetingId != null and meetingId != ''" >
+				MEETING_ID = #{meetingId,jdbcType=VARCHAR}
+			</if>
+			<if test="projId != null and projId != ''" >
+				AND PROJ_ID = #{projId,jdbcType=VARCHAR}
+			</if>
+			<if test="projName != null and projName != ''" >
+				AND PROJ_NAME = #{projName,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingDate != null" >
+				AND MEETING_DATE = #{meetingDate,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="attaFile != null and attaFile != ''" >
+				AND ATTA_FILE = #{attaFile,jdbcType=VARCHAR}
+			</if>
+			<if test="processInstId != null and processInstId != ''" >
+				AND PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR}
+			</if>
+			<if test="deptId != null and deptId != ''" >
+				AND DEPT_ID = #{deptId,jdbcType=VARCHAR}
+			</if>
+			<if test="deptName != null and deptName != ''" >
+				AND DEPT_NAME = #{deptName,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=VARCHAR}
+			</if>
+			<if test="groupName != null and groupName != ''" >
+				AND GROUP_NAME = #{groupName,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="sn != null and sn != ''" >
+				AND SN = #{sn,jdbcType=VARCHAR}
+			</if>
+			<if test="isImportant != null and isImportant != ''" >
+				AND IS_IMPORTANT = #{isImportant,jdbcType=VARCHAR}
+			</if>
+			<if test="djUserid != null and djUserid != ''" >
+				AND DJ_USERID = #{djUserid,jdbcType=VARCHAR}
+			</if>
+			<if test="djUsername != null and djUsername != ''" >
+				AND DJ_USERNAME = #{djUsername,jdbcType=VARCHAR}
+			</if>
+			<if test="projFullName != null and projFullName != ''" >
+				AND PROJ_FULL_NAME = #{projFullName,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="OtherThreeMeetingResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+</mapper>

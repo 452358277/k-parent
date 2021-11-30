@@ -1,0 +1,195 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.14.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+
+	<groupId>com.ppmg.ei</groupId>
+	<artifactId>ei-parent</artifactId>
+	<version>1.1.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+
+		<ssm.version>1.2.3-SNAPSHOT</ssm.version>
+		<foundation.version>1.2.3-SNAPSHOT</foundation.version>
+		<ei.version>1.1.1-SNAPSHOT</ei.version>
+
+	</properties>
+
+	<profiles>
+		<profile>
+			<!-- 开发环境 -->
+			<id>dev</id>
+			<properties>
+				<environment>dev</environment><!-- 节点名字environment是自己随意取的 -->
+			</properties>
+<!--			<activation>
+				<activeByDefault>true</activeByDefault>&lt;!&ndash; 默认激活该profile节点 &ndash;&gt;
+			</activation>-->
+		</profile>
+		<profile>
+			<!-- 测试环境 -->
+			<id>test</id>
+			<properties>
+				<environment>test</environment>
+			</properties>
+		</profile>
+		<profile>
+			<!-- 客户测试环境 -->
+			<id>uat</id>
+			<properties>
+				<environment>uat</environment>
+			</properties>
+		</profile>
+		<profile>
+			<!-- 生产环境 -->
+			<id>prod</id>
+			<properties>
+				<environment>prod</environment>
+			</properties>
+		</profile>
+	</profiles>
+
+	<dependencyManagement>
+		<dependencies>
+
+			
+			<!-- mybatis begin -->
+			<dependency>
+				<groupId>com.oracle</groupId>
+				<artifactId>ojdbc8</artifactId>
+				<version>11.2.0.1.0</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>druid</artifactId>
+				<version>1.1.9</version>
+			</dependency>
+
+
+
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis</artifactId>
+				<version>3.4.6</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis-spring</artifactId>
+				<version>1.3.2</version>
+			</dependency>
+			<!-- mybatis end -->
+			
+			<!-- dubbo 所需要的jar begin -->
+			<dependency>
+				<groupId>com.alibaba.spring.boot</groupId>
+				<artifactId>dubbo-spring-boot-starter</artifactId>
+				<version>2.0.0</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.apache.zookeeper</groupId>
+				<artifactId>zookeeper</artifactId>
+				<version>3.4.10</version>
+			</dependency>
+			<dependency>
+				<groupId>com.101tec</groupId>
+				<artifactId>zkclient</artifactId>
+				<version>0.10</version>
+			</dependency>
+			<!-- dubbo 所需要的jar end -->
+
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>fastjson</artifactId>
+				<version>1.2.47</version>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-lang</groupId>
+				<artifactId>commons-lang</artifactId>
+				<version>2.6</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>3.5</version>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>2.5</version>
+			</dependency>
+
+			<dependency>
+				<groupId>dom4j</groupId>
+				<artifactId>dom4j</artifactId>
+				<version>1.6.1</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>3.1.0</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>1.18.8</version>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<finalName>ei-parent</finalName>
+
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<excludes>
+					<!-- 一个*指排除文件，不排除文件夹，两个*号指排除文件和文件夹 -->
+					<exclude>environment/dev/**</exclude>
+					<exclude>environment/test/**</exclude>
+					<exclude>environment/uat/**</exclude>
+					<exclude>environment/prod/**</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<directory>src/main/resources/environment/${environment}</directory>
+				<targetPath>${project.build.directory}/classes</targetPath>
+			</resource>
+		</resources>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<modules>
+		<module>ei-facade</module>
+		<module>ei-service</module>
+		<module>ei-web</module>
+	</modules>
+</project>

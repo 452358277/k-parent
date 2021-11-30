@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="InveResume">
+	<!-- start autocreate -->
+
+	<resultMap id="InveResumeResult" type="com.ppmg.ei.model.InveResumeModel">
+		<result column="INVESTOR_ID" property="investorId" jdbcType="VARCHAR" />
+		<result column="SUMMARY" property="summary" jdbcType="CLOB" javaType="java.lang.String" />
+		<result column="RESUME" property="resume" jdbcType="CLOB" javaType="java.lang.String" />
+		<result column="REMARK" property="remark" jdbcType="CLOB" javaType="java.lang.String" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.InveResumeModel">
+		INSERT INTO BD_T_INVE_RESUME (INVESTOR_ID,SUMMARY,RESUME,REMARK,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT) values(#{investorId,jdbcType=VARCHAR},#{summary,jdbcType=VARCHAR},#{resume,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO BD_T_INVE_RESUME (INVESTOR_ID,SUMMARY,RESUME,REMARK,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.investorId,jdbcType=VARCHAR},
+				#{item.summary,jdbcType=VARCHAR},
+				#{item.resume,jdbcType=VARCHAR},
+				#{item.remark,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  BD_T_INVE_RESUME WHERE INVESTOR_ID = #{investorId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.InveResumeModel">
+		DELETE FROM BD_T_INVE_RESUME
+		<where>
+			<if test="investorId != null and investorId != ''" >
+				INVESTOR_ID = #{investorId,jdbcType=VARCHAR}
+			</if>
+			<if test="summary != null and summary != ''" >
+				AND SUMMARY = #{summary,jdbcType=VARCHAR}
+			</if>
+			<if test="resume != null and resume != ''" >
+				AND RESUME = #{resume,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  BD_T_INVE_RESUME WHERE INVESTOR_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.InveResumeModel">
+		UPDATE BD_T_INVE_RESUME 
+		<set>
+			<if test="investorId != null and investorId != ''" >
+				INVESTOR_ID = #{investorId,jdbcType=VARCHAR},
+			</if>
+			<if test="summary != null and summary != ''" >
+				SUMMARY = #{summary,jdbcType=VARCHAR},
+			</if>
+			<if test="resume != null and resume != ''" >
+				RESUME = #{resume,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null and remark != ''" >
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		WHERE INVESTOR_ID = #{investorId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="InveResumeResult">
+		SELECT * FROM BD_T_INVE_RESUME WHERE INVESTOR_ID = #{investorId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.InveResumeModel" resultMap="InveResumeResult">
+		SELECT * FROM BD_T_INVE_RESUME
+		<where>
+			<if test="investorId != null and investorId != ''" >
+				INVESTOR_ID = #{investorId,jdbcType=VARCHAR}
+			</if>
+			<if test="summary != null and summary != ''" >
+				AND SUMMARY = #{summary,jdbcType=VARCHAR}
+			</if>
+			<if test="resume != null and resume != ''" >
+				AND RESUME = #{resume,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM BD_T_INVE_RESUME
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="InveResumeResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.InveResumeModel">
+		SELECT COUNT(*) FROM BD_T_INVE_RESUME
+		<where>
+			<if test="investorId != null and investorId != ''" >
+				INVESTOR_ID = #{investorId,jdbcType=VARCHAR}
+			</if>
+			<if test="summary != null and summary != ''" >
+				AND SUMMARY = #{summary,jdbcType=VARCHAR}
+			</if>
+			<if test="resume != null and resume != ''" >
+				AND RESUME = #{resume,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.InveResumeModel" resultMap="InveResumeResult">
+		SELECT * FROM BD_T_INVE_RESUME
+		<where>
+			<if test="investorId != null and investorId != ''" >
+				INVESTOR_ID = #{investorId,jdbcType=VARCHAR}
+			</if>
+			<if test="summary != null and summary != ''" >
+				AND SUMMARY = #{summary,jdbcType=VARCHAR}
+			</if>
+			<if test="resume != null and resume != ''" >
+				AND RESUME = #{resume,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="InveResumeResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+</mapper>

@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SurverCooorg">
+	<!-- start autocreate -->
+
+	<resultMap id="SurverCooorgResult" type="com.ppmg.ei.model.SurverCooorgModel">
+		<result column="PLANID" property="planId" jdbcType="VARCHAR" />
+		<result column="PARTNERORGAID" property="partnerorGaid" jdbcType="VARCHAR" />
+		<result column="MONEY" property="money" jdbcType="NUMERIC" />
+		<result column="CREATEBY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATEDT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATEBY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATEDT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="PERSONNEL" property="personnel" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="SurverCooorgResult1" type="com.ppmg.ei.model.SurverCooorgModel" extends="SurverCooorgResult">
+		<association property="cooOrgModel" javaType="com.ppmg.ei.model.CooOrgModel" >
+			<result column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+			<result column="ORG_NAME" property="orgName" jdbcType="VARCHAR" />
+			<result column="ORG_TYPE" property="orgType" jdbcType="VARCHAR" />
+			<result column="ORG_ADD" property="orgAdd" jdbcType="VARCHAR" />
+			<result column="PHONE_NO" property="phoneNo" jdbcType="VARCHAR" />
+			<result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+			<result column="CONTACT" property="contact" jdbcType="VARCHAR" />
+			<result column="FAX" property="fax" jdbcType="VARCHAR" />
+			<result column="ORDER_NO" property="orderNo" jdbcType="VARCHAR" />
+			<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+			<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+			<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+			<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+			<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+			<result column="CONTACT_EMAIL" property="contactEmail" jdbcType="VARCHAR" />
+			<result column="QUALIFICATION" property="qualification" jdbcType="VARCHAR" />
+			<result column="SUCC_CASE" property="succCase" jdbcType="VARCHAR" />
+			<result column="HONOR" property="honor" jdbcType="VARCHAR" />
+		</association>
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.SurverCooorgModel">
+		INSERT INTO BD_T_SURVER_COOORG (PLANID,PARTNERORGAID,MONEY,CREATEBY,CREATEDT,UPDATEBY,UPDATEDT,PERSONNEL) values(#{planId,jdbcType=VARCHAR},#{partnerorGaid,jdbcType=VARCHAR},#{money,jdbcType=NUMERIC},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{personnel,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO BD_T_SURVER_COOORG (PLANID,PARTNERORGAID,MONEY,CREATEBY,CREATEDT,UPDATEBY,UPDATEDT,PERSONNEL)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.planId,jdbcType=VARCHAR},
+				#{item.partnerorGaid,jdbcType=VARCHAR},
+				#{item.money,jdbcType=NUMERIC},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+				#{item.personnel,jdbcType=VARCHAR}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  BD_T_SURVER_COOORG WHERE PLANID = #{planId,jdbcType=VARCHAR} and PARTNERORGAID= #{partnerorGaid,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.SurverCooorgModel">
+		DELETE FROM BD_T_SURVER_COOORG
+		<where>
+			<if test="planId != null and planId != ''" >
+				PLANID = #{planId,jdbcType=VARCHAR}
+			</if>
+			<if test="partnerorGaid != null and partnerorGaid != ''" >
+				AND PARTNERORGAID = #{partnerorGaid,jdbcType=VARCHAR}
+			</if>
+			<if test="money != null and money != ''" >
+				AND MONEY = #{money,jdbcType=NUMERIC}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATEBY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATEDT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATEBY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATEDT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="personnel != null and personnel != ''" >
+				AND PERSONNEL = #{personnel,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  BD_T_SURVER_COOORG WHERE PLANID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.SurverCooorgModel">
+		UPDATE BD_T_SURVER_COOORG 
+		<set>
+			<if test="planId != null and planId != ''" >
+				PLANID = #{planId,jdbcType=VARCHAR},
+			</if>
+			<if test="partnerorGaid != null and partnerorGaid != ''" >
+				PARTNERORGAID = #{partnerorGaid,jdbcType=VARCHAR},
+			</if>
+			<if test="money != null and money != ''" >
+				MONEY = #{money,jdbcType=NUMERIC},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATEBY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATEDT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATEBY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATEDT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="personnel != null and personnel != ''" >
+				PERSONNEL = #{personnel,jdbcType=VARCHAR},
+			</if>
+		</set>
+		WHERE PLANID = #{planId,jdbcType=VARCHAR} and PARTNERORGAID= #{partnerorGaid,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="SurverCooorgResult">
+		SELECT * FROM BD_T_SURVER_COOORG WHERE PLANID = #{planId,jdbcType=VARCHAR} and PARTNERORGAID= #{partnerorGaid,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.SurverCooorgModel" resultMap="SurverCooorgResult">
+		SELECT * FROM BD_T_SURVER_COOORG
+		<where>
+			<if test="planId != null and planId != ''" >
+				PLANID = #{planId,jdbcType=VARCHAR}
+			</if>
+			<if test="partnerorGaid != null and partnerorGaid != ''" >
+				AND PARTNERORGAID = #{partnerorGaid,jdbcType=VARCHAR}
+			</if>
+			<if test="money != null and money != ''" >
+				AND MONEY = #{money,jdbcType=NUMERIC}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATEBY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATEDT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATEBY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATEDT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="personnel != null and personnel != ''" >
+				AND PERSONNEL = #{personnel,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM BD_T_SURVER_COOORG
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="SurverCooorgResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.SurverCooorgModel">
+		SELECT COUNT(*) FROM BD_T_SURVER_COOORG
+		<where>
+			<if test="planId != null and planId != ''" >
+				PLANID = #{planId,jdbcType=VARCHAR}
+			</if>
+			<if test="partnerorGaid != null and partnerorGaid != ''" >
+				AND PARTNERORGAID = #{partnerorGaid,jdbcType=VARCHAR}
+			</if>
+			<if test="money != null and money != ''" >
+				AND MONEY = #{money,jdbcType=NUMERIC}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATEBY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATEDT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATEBY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATEDT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="personnel != null and personnel != ''" >
+				AND PERSONNEL = #{personnel,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.SurverCooorgModel" resultMap="SurverCooorgResult">
+		SELECT * FROM BD_T_SURVER_COOORG
+		<where>
+			<if test="planId != null and planId != ''" >
+				PLANID = #{planId,jdbcType=VARCHAR}
+			</if>
+			<if test="partnerorGaid != null and partnerorGaid != ''" >
+				AND PARTNERORGAID = #{partnerorGaid,jdbcType=VARCHAR}
+			</if>
+			<if test="money != null and money != ''" >
+				AND MONEY = #{money,jdbcType=NUMERIC}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATEBY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATEDT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATEBY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATEDT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="personnel != null and personnel != ''" >
+				AND PERSONNEL = #{personnel,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="SurverCooorgResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+
+	<select id="selectListById" resultMap="SurverCooorgResult1" parameterType="com.ppmg.ei.model.SurverCooorgModel">
+		SELECT aa.money as money,aa.personnel,aa.PARTNERORGAID,b.* FROM  BD_T_SURVER_COOORG aa
+		left join BD_T_FUND_COO_ORG  b
+		on  aa.PARTNERORGAID=b.org_id
+		where 	PLANID = #{planId,jdbcType=VARCHAR}
+	</select>
+</mapper>

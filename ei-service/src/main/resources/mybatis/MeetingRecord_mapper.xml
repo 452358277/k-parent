@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MeetingRecord">
+	<!-- start autocreate -->
+
+	<resultMap id="MeetingRecordResult" type="com.ppmg.ei.model.MeetingRecordModel">
+		<result column="MEETING_ID" property="meetingId" jdbcType="VARCHAR" />
+		<result column="MEETING_TITLE" property="meetingTitle" jdbcType="VARCHAR" />
+		<result column="MEETING_DATE" property="meetingDate" jdbcType="TIMESTAMP" />
+		<result column="MEETING_BEGIN_TIME" property="meetingBeginTime" jdbcType="VARCHAR" />
+		<result column="MEETING_END_TIME" property="meetingEndTime" jdbcType="VARCHAR" />
+		<result column="MEETING_ROOM" property="meetingRoom" jdbcType="VARCHAR" />
+		<result column="OBJECT_ID" property="objectId" jdbcType="VARCHAR" />
+		<result column="IS_FIRST" property="isFirst" jdbcType="VARCHAR" />
+		<result column="MEETING_TYPE" property="meetingType" jdbcType="VARCHAR" />
+		<result column="MEETING_METHOD" property="meetingMethod" jdbcType="VARCHAR" />
+		<result column="MEETING_PERSON" property="meetingPerson" jdbcType="VARCHAR" />
+		<result column="ATTACHMENT" property="attachment" jdbcType="VARCHAR" />
+		<result column="DEL_FLAG" property="delFlag" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="MEETING_ROOM_NAME" property="meetingRoomName" jdbcType="VARCHAR" />
+		<result column="PROJECT_OBJECT_NAME" property="projectObjectName" jdbcType="VARCHAR" />
+		<result column="REF_OA_MEETING" property="refOaMeeting" jdbcType="VARCHAR" />
+		<result column="REF_OA_MEETING_NAME" property="refOaMeetingName" jdbcType="VARCHAR" />
+		<result column="GROUP_ID" property="groupId" jdbcType="VARCHAR" />
+		<result column="MEETING_CONTENT" property="meetingContent" jdbcType="VARCHAR" />
+		<result column="MEETING_FOCUS_MODE" property="meetingFocusMode" jdbcType="VARCHAR" />
+		<result column="MEETING_REPRESENT" property="meetingRepresent" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.MeetingRecordModel">
+		INSERT INTO BD_T_MEETING_RECORD (MEETING_ID,MEETING_TITLE,MEETING_DATE,MEETING_BEGIN_TIME,MEETING_END_TIME,MEETING_ROOM,OBJECT_ID,IS_FIRST,MEETING_TYPE,MEETING_METHOD,MEETING_PERSON,ATTACHMENT,DEL_FLAG,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,MEETING_ROOM_NAME,PROJECT_OBJECT_NAME,REF_OA_MEETING,REF_OA_MEETING_NAME,GROUP_ID,MEETING_CONTENT,MEETING_FOCUS_MODE,MEETING_REPRESENT) values(#{meetingId,jdbcType=VARCHAR},#{meetingTitle,jdbcType=VARCHAR},#{meetingDate,jdbcType=TIMESTAMP},#{meetingBeginTime,jdbcType=VARCHAR},#{meetingEndTime,jdbcType=VARCHAR},#{meetingRoom,jdbcType=VARCHAR},#{objectId,jdbcType=VARCHAR},#{isFirst,jdbcType=VARCHAR},#{meetingType,jdbcType=VARCHAR},#{meetingMethod,jdbcType=VARCHAR},#{meetingPerson,jdbcType=VARCHAR},#{attachment,jdbcType=VARCHAR},#{delFlag,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{meetingRoomName,jdbcType=VARCHAR},#{projectObjectName,jdbcType=VARCHAR},#{refOaMeeting,jdbcType=VARCHAR},#{refOaMeetingName,jdbcType=VARCHAR},#{groupId,jdbcType=VARCHAR},#{meetingContent,jdbcType=VARCHAR},#{meetingFocusMode,jdbcType=VARCHAR},#{meetingRepresent,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO BD_T_MEETING_RECORD (MEETING_ID,MEETING_TITLE,MEETING_DATE,MEETING_BEGIN_TIME,MEETING_END_TIME,MEETING_ROOM,OBJECT_ID,IS_FIRST,MEETING_TYPE,MEETING_METHOD,MEETING_PERSON,ATTACHMENT,DEL_FLAG,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,MEETING_ROOM_NAME,PROJECT_OBJECT_NAME,REF_OA_MEETING,REF_OA_MEETING_NAME,GROUP_ID,MEETING_CONTENT,MEETING_FOCUS_MODE,MEETING_REPRESENT)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.meetingId,jdbcType=VARCHAR},
+				#{item.meetingTitle,jdbcType=VARCHAR},
+				#{item.meetingDate,jdbcType=TIMESTAMP},
+				#{item.meetingBeginTime,jdbcType=VARCHAR},
+				#{item.meetingEndTime,jdbcType=VARCHAR},
+				#{item.meetingRoom,jdbcType=VARCHAR},
+				#{item.objectId,jdbcType=VARCHAR},
+				#{item.isFirst,jdbcType=VARCHAR},
+				#{item.meetingType,jdbcType=VARCHAR},
+				#{item.meetingMethod,jdbcType=VARCHAR},
+				#{item.meetingPerson,jdbcType=VARCHAR},
+				#{item.attachment,jdbcType=VARCHAR},
+				#{item.delFlag,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+				#{item.meetingRoomName,jdbcType=VARCHAR},
+				#{item.projectObjectName,jdbcType=VARCHAR},
+				#{item.refOaMeeting,jdbcType=VARCHAR},
+				#{item.refOaMeetingName,jdbcType=VARCHAR},
+				#{item.groupId,jdbcType=VARCHAR},
+				#{item.meetingContent,jdbcType=VARCHAR},
+				#{item.meetingFocusMode,jdbcType=VARCHAR},
+			    #{item.meetingRepresent,jdbcType=VARCHAR}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  BD_T_MEETING_RECORD WHERE MEETING_ID = #{meetingId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.MeetingRecordModel">
+		DELETE FROM BD_T_MEETING_RECORD
+		<where>
+			<if test="meetingId != null and meetingId != ''" >
+				MEETING_ID = #{meetingId,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingTitle != null and meetingTitle != ''" >
+				AND MEETING_TITLE = #{meetingTitle,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingDate != null" >
+				AND MEETING_DATE = #{meetingDate,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingBeginTime != null and meetingBeginTime != ''" >
+				AND MEETING_BEGIN_TIME = #{meetingBeginTime,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingEndTime != null and meetingEndTime != ''" >
+				AND MEETING_END_TIME = #{meetingEndTime,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingRoom != null and meetingRoom != ''" >
+				AND MEETING_ROOM = #{meetingRoom,jdbcType=VARCHAR}
+			</if>
+			<if test="objectId != null and objectId != ''" >
+				AND OBJECT_ID = #{objectId,jdbcType=VARCHAR}
+			</if>
+			<if test="isFirst != null and isFirst != ''" >
+				AND IS_FIRST = #{isFirst,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingType != null and meetingType != ''" >
+				AND MEETING_TYPE = #{meetingType,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingMethod != null and meetingMethod != ''" >
+				AND MEETING_METHOD = #{meetingMethod,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingPerson != null and meetingPerson != ''" >
+				AND MEETING_PERSON = #{meetingPerson,jdbcType=VARCHAR}
+			</if>
+			<if test="attachment != null and attachment != ''" >
+				AND ATTACHMENT = #{attachment,jdbcType=VARCHAR}
+			</if>
+			<if test="delFlag != null and delFlag != ''" >
+				AND DEL_FLAG = #{delFlag,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingRoomName != null and meetingRoomName != ''" >
+				AND MEETING_ROOM_NAME = #{meetingRoomName,jdbcType=VARCHAR}
+			</if>
+			<if test="projectObjectName != null and projectObjectName != ''" >
+				AND PROJECT_OBJECT_NAME = #{projectObjectName,jdbcType=VARCHAR}
+			</if>
+			<if test="refOaMeeting != null and refOaMeeting != ''" >
+				AND REF_OA_MEETING = #{refOaMeeting,jdbcType=VARCHAR}
+			</if>
+			<if test="refOaMeetingName != null and refOaMeetingName != ''" >
+				AND REF_OA_MEETING_NAME = #{refOaMeetingName,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingContent != null and meetingContent != ''" >
+				AND MEETING_CONTENT = #{meetingContent,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingFocusMode != null and meetingFocusMode != ''" >
+				AND MEETING_FOCUS_MODE = #{meetingFocusMode,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingRepresent != null and meetingRepresent != ''" >
+				AND MEETING_REPRESENT = #{meetingRepresent,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  BD_T_MEETING_RECORD WHERE MEETING_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.MeetingRecordModel">
+		UPDATE BD_T_MEETING_RECORD 
+		<set>
+			<if test="meetingId != null and meetingId != ''" >
+				MEETING_ID = #{meetingId,jdbcType=VARCHAR},
+			</if>
+			<if test="meetingTitle != null and meetingTitle != ''" >
+				MEETING_TITLE = #{meetingTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="meetingDate != null" >
+				MEETING_DATE = #{meetingDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="meetingBeginTime != null and meetingBeginTime != ''" >
+				MEETING_BEGIN_TIME = #{meetingBeginTime,jdbcType=VARCHAR},
+			</if>
+			<if test="meetingEndTime != null and meetingEndTime != ''" >
+				MEETING_END_TIME = #{meetingEndTime,jdbcType=VARCHAR},
+			</if>
+			<if test="meetingRoom != null and meetingRoom != ''" >
+				MEETING_ROOM = #{meetingRoom,jdbcType=VARCHAR},
+			</if>
+			<if test="objectId != null and objectId != ''" >
+				OBJECT_ID = #{objectId,jdbcType=VARCHAR},
+			</if>
+			<if test="isFirst != null and isFirst != ''" >
+				IS_FIRST = #{isFirst,jdbcType=VARCHAR},
+			</if>
+			<if test="meetingType != null and meetingType != ''" >
+				MEETING_TYPE = #{meetingType,jdbcType=VARCHAR},
+			</if>
+			<if test="meetingMethod != null and meetingMethod != ''" >
+				MEETING_METHOD = #{meetingMethod,jdbcType=VARCHAR},
+			</if>
+			<if test="meetingPerson != null and meetingPerson != ''" >
+				MEETING_PERSON = #{meetingPerson,jdbcType=VARCHAR},
+			</if>
+			<if test="attachment != null and attachment != ''" >
+				ATTACHMENT = #{attachment,jdbcType=VARCHAR},
+			</if>
+			<if test="delFlag != null and delFlag != ''" >
+				DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="meetingRoomName != null and meetingRoomName != ''" >
+				MEETING_ROOM_NAME = #{meetingRoomName,jdbcType=VARCHAR},
+			</if>
+			<if test="projectObjectName != null and projectObjectName != ''" >
+				PROJECT_OBJECT_NAME = #{projectObjectName,jdbcType=VARCHAR},
+			</if>
+			<if test="refOaMeeting != null and refOaMeeting != ''" >
+				REF_OA_MEETING = #{refOaMeeting,jdbcType=VARCHAR},
+			</if>
+			<if test="refOaMeetingName != null and refOaMeetingName != ''" >
+				REF_OA_MEETING_NAME = #{refOaMeetingName,jdbcType=VARCHAR},
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				GROUP_ID = #{groupId,jdbcType=VARCHAR},
+			</if>
+			<if test="meetingContent != null and meetingContent != ''" >
+				MEETING_CONTENT = #{meetingContent,jdbcType=VARCHAR},
+			</if>
+			<if test="meetingFocusMode != null and meetingFocusMode != ''" >
+				MEETING_FOCUS_MODE = #{meetingFocusMode,jdbcType=VARCHAR},
+			</if>
+			<if test="meetingRepresent != null and meetingRepresent != ''" >
+				MEETING_REPRESENT = #{meetingRepresent,jdbcType=VARCHAR}
+			</if>
+		</set>
+		WHERE MEETING_ID = #{meetingId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="MeetingRecordResult">
+		SELECT * FROM BD_T_MEETING_RECORD WHERE MEETING_ID = #{meetingId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.MeetingRecordModel" resultMap="MeetingRecordResult">
+		SELECT * FROM BD_T_MEETING_RECORD
+		<where>
+			<if test="meetingId != null and meetingId != ''" >
+				MEETING_ID = #{meetingId,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingTitle != null and meetingTitle != ''" >
+				AND MEETING_TITLE = #{meetingTitle,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingDate != null" >
+				AND MEETING_DATE = #{meetingDate,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingBeginTime != null and meetingBeginTime != ''" >
+				AND MEETING_BEGIN_TIME = #{meetingBeginTime,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingEndTime != null and meetingEndTime != ''" >
+				AND MEETING_END_TIME = #{meetingEndTime,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingRoom != null and meetingRoom != ''" >
+				AND MEETING_ROOM = #{meetingRoom,jdbcType=VARCHAR}
+			</if>
+			<if test="objectId != null and objectId != ''" >
+				AND OBJECT_ID = #{objectId,jdbcType=VARCHAR}
+			</if>
+			<if test="isFirst != null and isFirst != ''" >
+				AND IS_FIRST = #{isFirst,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingType != null and meetingType != ''" >
+				AND MEETING_TYPE = #{meetingType,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingMethod != null and meetingMethod != ''" >
+				AND MEETING_METHOD = #{meetingMethod,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingPerson != null and meetingPerson != ''" >
+				AND MEETING_PERSON = #{meetingPerson,jdbcType=VARCHAR}
+			</if>
+			<if test="attachment != null and attachment != ''" >
+				AND ATTACHMENT = #{attachment,jdbcType=VARCHAR}
+			</if>
+			<if test="delFlag != null and delFlag != ''" >
+				AND DEL_FLAG = #{delFlag,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingRoomName != null and meetingRoomName != ''" >
+				AND MEETING_ROOM_NAME = #{meetingRoomName,jdbcType=VARCHAR}
+			</if>
+			<if test="projectObjectName != null and projectObjectName != ''" >
+				AND PROJECT_OBJECT_NAME = #{projectObjectName,jdbcType=VARCHAR}
+			</if>
+			<if test="refOaMeeting != null and refOaMeeting != ''" >
+				AND REF_OA_MEETING = #{refOaMeeting,jdbcType=VARCHAR}
+			</if>
+			<if test="refOaMeetingName != null and refOaMeetingName != ''" >
+				AND REF_OA_MEETING_NAME = #{refOaMeetingName,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingContent != null and meetingContent != ''" >
+				AND MEETING_CONTENT = #{meetingContent,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingFocusMode != null and meetingFocusMode != ''" >
+				AND MEETING_FOCUS_MODE = #{meetingFocusMode,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingRepresent != null and meetingRepresent != ''" >
+				AND MEETING_REPRESENT = #{meetingRepresent,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM BD_T_MEETING_RECORD
+		<where>
+		1=1
+			<include refid="searchCondition.searchClause" />
+		</where>
+		order by CREATE_DT desc
+	</sql>
+
+	<select id="selectListPage" resultMap="MeetingRecordResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.MeetingRecordModel">
+		SELECT COUNT(*) FROM BD_T_MEETING_RECORD
+		<where>
+			<if test="meetingId != null and meetingId != ''" >
+				MEETING_ID = #{meetingId,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingTitle != null and meetingTitle != ''" >
+				AND MEETING_TITLE = #{meetingTitle,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingDate != null" >
+				AND MEETING_DATE = #{meetingDate,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingBeginTime != null and meetingBeginTime != ''" >
+				AND MEETING_BEGIN_TIME = #{meetingBeginTime,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingEndTime != null and meetingEndTime != ''" >
+				AND MEETING_END_TIME = #{meetingEndTime,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingRoom != null and meetingRoom != ''" >
+				AND MEETING_ROOM = #{meetingRoom,jdbcType=VARCHAR}
+			</if>
+			<if test="objectId != null and objectId != ''" >
+				AND OBJECT_ID = #{objectId,jdbcType=VARCHAR}
+			</if>
+			<if test="isFirst != null and isFirst != ''" >
+				AND IS_FIRST = #{isFirst,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingType != null and meetingType != ''" >
+				AND MEETING_TYPE = #{meetingType,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingMethod != null and meetingMethod != ''" >
+				AND MEETING_METHOD = #{meetingMethod,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingPerson != null and meetingPerson != ''" >
+				AND MEETING_PERSON = #{meetingPerson,jdbcType=VARCHAR}
+			</if>
+			<if test="attachment != null and attachment != ''" >
+				AND ATTACHMENT = #{attachment,jdbcType=VARCHAR}
+			</if>
+			<if test="delFlag != null and delFlag != ''" >
+				AND DEL_FLAG = #{delFlag,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingRoomName != null and meetingRoomName != ''" >
+				AND MEETING_ROOM_NAME = #{meetingRoomName,jdbcType=VARCHAR}
+			</if>
+			<if test="projectObjectName != null and projectObjectName != ''" >
+				AND PROJECT_OBJECT_NAME = #{projectObjectName,jdbcType=VARCHAR}
+			</if>
+			<if test="refOaMeeting != null and refOaMeeting != ''" >
+				AND REF_OA_MEETING = #{refOaMeeting,jdbcType=VARCHAR}
+			</if>
+			<if test="refOaMeetingName != null and refOaMeetingName != ''" >
+				AND REF_OA_MEETING_NAME = #{refOaMeetingName,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingContent != null and meetingContent != ''" >
+				AND MEETING_CONTENT = #{meetingContent,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingFocusMode != null and meetingFocusMode != ''" >
+				AND MEETING_FOCUS_MODE = #{meetingFocusMode,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingRepresent != null and meetingRepresent != ''" >
+				AND MEETING_REPRESENT = #{meetingRepresent,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.MeetingRecordModel" resultMap="MeetingRecordResult">
+		SELECT * FROM BD_T_MEETING_RECORD
+		<where>
+			<if test="meetingId != null and meetingId != ''" >
+				MEETING_ID = #{meetingId,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingTitle != null and meetingTitle != ''" >
+				AND MEETING_TITLE = #{meetingTitle,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingDate != null" >
+				AND MEETING_DATE = #{meetingDate,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingBeginTime != null and meetingBeginTime != ''" >
+				AND MEETING_BEGIN_TIME = #{meetingBeginTime,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingEndTime != null and meetingEndTime != ''" >
+				AND MEETING_END_TIME = #{meetingEndTime,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingRoom != null and meetingRoom != ''" >
+				AND MEETING_ROOM = #{meetingRoom,jdbcType=VARCHAR}
+			</if>
+			<if test="objectId != null and objectId != ''" >
+				AND OBJECT_ID = #{objectId,jdbcType=VARCHAR}
+			</if>
+			<if test="isFirst != null and isFirst != ''" >
+				AND IS_FIRST = #{isFirst,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingType != null and meetingType != ''" >
+				AND MEETING_TYPE = #{meetingType,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingMethod != null and meetingMethod != ''" >
+				AND MEETING_METHOD = #{meetingMethod,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingPerson != null and meetingPerson != ''" >
+				AND MEETING_PERSON = #{meetingPerson,jdbcType=VARCHAR}
+			</if>
+			<if test="attachment != null and attachment != ''" >
+				AND ATTACHMENT = #{attachment,jdbcType=VARCHAR}
+			</if>
+			<if test="delFlag != null and delFlag != ''" >
+				AND DEL_FLAG = #{delFlag,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingRoomName != null and meetingRoomName != ''" >
+				AND MEETING_ROOM_NAME = #{meetingRoomName,jdbcType=VARCHAR}
+			</if>
+			<if test="projectObjectName != null and projectObjectName != ''" >
+				AND PROJECT_OBJECT_NAME = #{projectObjectName,jdbcType=VARCHAR}
+			</if>
+			<if test="refOaMeeting != null and refOaMeeting != ''" >
+				AND REF_OA_MEETING = #{refOaMeeting,jdbcType=VARCHAR}
+			</if>
+			<if test="refOaMeetingName != null and refOaMeetingName != ''" >
+				AND REF_OA_MEETING_NAME = #{refOaMeetingName,jdbcType=VARCHAR}
+			</if>
+			<if test="groupId != null and groupId != ''" >
+				AND GROUP_ID = #{groupId,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingContent != null and meetingContent != ''" >
+				AND MEETING_CONTENT = #{meetingContent,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingFocusMode != null and meetingFocusMode != ''" >
+				AND MEETING_FOCUS_MODE = #{meetingFocusMode,jdbcType=VARCHAR}
+			</if>
+			<if test="meetingRepresent != null and meetingRepresent != ''" >
+				AND MEETING_REPRESENT = #{meetingRepresent,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="MeetingRecordResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+
+	<select id="selectByTimeList" parameterType="Map" resultMap="MeetingRecordResult">
+	select cc.MEETING_DATE from (select * from (
+	select b.* from BD_T_MEETING_RECORD b
+	where
+	b.OBJECT_ID=#{OBJECT_ID,jdbcType=VARCHAR}
+	and to_char(b.MEETING_DATE,'yyyy') like #{MEETING_DATE,jdbcType=VARCHAR}
+	and b.DEL_FLAG='0'
+	order by b.MEETING_DATE desc nulls last) where rownum=1
+    union all
+    select * from (select a.* from BD_T_MEETING_RECORD a
+    where a.OBJECT_ID=#{OBJECT_ID,jdbcType=VARCHAR}
+    and a.DEL_FLAG='0'
+    order by a.MEETING_DATE asc nulls last
+    ) where rownum=1) cc order by cc.MEETING_DATE desc
+	</select>
+	<!-- end autocreate -->
+</mapper>

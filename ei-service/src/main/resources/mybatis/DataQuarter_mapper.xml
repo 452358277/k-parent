@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DataQuarter">
+	<!-- start autocreate -->
+
+	<resultMap id="DataQuarterResult" type="com.ppmg.ei.model.DataQuarterModel">
+		<result column="TASK_ID" property="taskId" jdbcType="VARCHAR" />
+		<result column="YEAR" property="year" jdbcType="VARCHAR" />
+		<result column="QUARTER" property="quarter" jdbcType="VARCHAR" />
+		<result column="USER_TYPE" property="userType" jdbcType="VARCHAR" />
+		<result column="USER_TABLE_NAME" property="userTableName" jdbcType="VARCHAR" />
+		<result column="USER_BIZ_KEY" property="userBizKey" jdbcType="VARCHAR" />
+		<result column="USER_BIZ_VALUE" property="userBizValue" jdbcType="VARCHAR" />
+		<result column="TASK_NAME" property="taskName" jdbcType="VARCHAR" />
+		<result column="END_DATE" property="endDate" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="FINISH_DATE" property="finishDate" jdbcType="TIMESTAMP" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="IS_DELETE" property="isDelete" jdbcType="CHAR" />
+		<result column="SORT_ORDER" property="sortOrder" jdbcType="NUMERIC" />
+		<result column="ROW_VERSION" property="rowVersion" jdbcType="NUMERIC" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.DataQuarterModel">
+		INSERT INTO TASK_FILL_DATA_QUARTER (TASK_ID,YEAR,QUARTER,USER_TYPE,USER_TABLE_NAME,USER_BIZ_KEY,USER_BIZ_VALUE,TASK_NAME,END_DATE,STATUS,FINISH_DATE,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,IS_DELETE,SORT_ORDER,ROW_VERSION) values(#{taskId,jdbcType=VARCHAR},#{year,jdbcType=VARCHAR},#{quarter,jdbcType=VARCHAR},#{userType,jdbcType=VARCHAR},#{userTableName,jdbcType=VARCHAR},#{userBizKey,jdbcType=VARCHAR},#{userBizValue,jdbcType=VARCHAR},#{taskName,jdbcType=VARCHAR},#{endDate,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{finishDate,jdbcType=TIMESTAMP},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{isDelete,jdbcType=CHAR},#{sortOrder,jdbcType=NUMERIC},#{rowVersion,jdbcType=NUMERIC})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO TASK_FILL_DATA_QUARTER (TASK_ID,YEAR,QUARTER,USER_TYPE,USER_TABLE_NAME,USER_BIZ_KEY,USER_BIZ_VALUE,TASK_NAME,END_DATE,STATUS,FINISH_DATE,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,IS_DELETE,SORT_ORDER,ROW_VERSION)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.taskId,jdbcType=VARCHAR},
+				#{item.year,jdbcType=VARCHAR},
+				#{item.quarter,jdbcType=VARCHAR},
+				#{item.userType,jdbcType=VARCHAR},
+				#{item.userTableName,jdbcType=VARCHAR},
+				#{item.userBizKey,jdbcType=VARCHAR},
+				#{item.userBizValue,jdbcType=VARCHAR},
+				#{item.taskName,jdbcType=VARCHAR},
+				#{item.endDate,jdbcType=VARCHAR},
+				#{item.status,jdbcType=VARCHAR},
+				#{item.finishDate,jdbcType=TIMESTAMP},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+				#{item.isDelete,jdbcType=CHAR},
+				#{item.sortOrder,jdbcType=NUMERIC},
+				#{item.rowVersion,jdbcType=NUMERIC}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  TASK_FILL_DATA_QUARTER WHERE TASK_ID = #{taskId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.DataQuarterModel">
+		DELETE FROM TASK_FILL_DATA_QUARTER
+		<where>
+			<if test="taskId != null and taskId != ''" >
+				TASK_ID = #{taskId,jdbcType=VARCHAR}
+			</if>
+			<if test="year != null and year != ''" >
+				AND YEAR = #{year,jdbcType=VARCHAR}
+			</if>
+			<if test="quarter != null and quarter != ''" >
+				AND QUARTER = #{quarter,jdbcType=VARCHAR}
+			</if>
+			<if test="userType != null and userType != ''" >
+				AND USER_TYPE = #{userType,jdbcType=VARCHAR}
+			</if>
+			<if test="userTableName != null and userTableName != ''" >
+				AND USER_TABLE_NAME = #{userTableName,jdbcType=VARCHAR}
+			</if>
+			<if test="userBizKey != null and userBizKey != ''" >
+				AND USER_BIZ_KEY = #{userBizKey,jdbcType=VARCHAR}
+			</if>
+			<if test="userBizValue != null and userBizValue != ''" >
+				AND USER_BIZ_VALUE = #{userBizValue,jdbcType=VARCHAR}
+			</if>
+			<if test="taskName != null and taskName != ''" >
+				AND TASK_NAME = #{taskName,jdbcType=VARCHAR}
+			</if>
+			<if test="endDate != null and endDate != ''" >
+				AND END_DATE = #{endDate,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="finishDate != null" >
+				AND FINISH_DATE = #{finishDate,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="isDelete != null and isDelete != ''" >
+				AND IS_DELETE = #{isDelete,jdbcType=CHAR}
+			</if>
+			<if test="sortOrder != null and sortOrder != ''" >
+				AND SORT_ORDER = #{sortOrder,jdbcType=NUMERIC}
+			</if>
+			<if test="rowVersion != null and rowVersion != ''" >
+				AND ROW_VERSION = #{rowVersion,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  TASK_FILL_DATA_QUARTER WHERE TASK_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.DataQuarterModel">
+		UPDATE TASK_FILL_DATA_QUARTER 
+		<set>
+			<if test="taskId != null and taskId != ''" >
+				TASK_ID = #{taskId,jdbcType=VARCHAR},
+			</if>
+			<if test="year != null and year != ''" >
+				YEAR = #{year,jdbcType=VARCHAR},
+			</if>
+			<if test="quarter != null and quarter != ''" >
+				QUARTER = #{quarter,jdbcType=VARCHAR},
+			</if>
+			<if test="userType != null and userType != ''" >
+				USER_TYPE = #{userType,jdbcType=VARCHAR},
+			</if>
+			<if test="userTableName != null and userTableName != ''" >
+				USER_TABLE_NAME = #{userTableName,jdbcType=VARCHAR},
+			</if>
+			<if test="userBizKey != null and userBizKey != ''" >
+				USER_BIZ_KEY = #{userBizKey,jdbcType=VARCHAR},
+			</if>
+			<if test="userBizValue != null and userBizValue != ''" >
+				USER_BIZ_VALUE = #{userBizValue,jdbcType=VARCHAR},
+			</if>
+			<if test="taskName != null and taskName != ''" >
+				TASK_NAME = #{taskName,jdbcType=VARCHAR},
+			</if>
+			<if test="endDate != null and endDate != ''" >
+				END_DATE = #{endDate,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="finishDate != null" >
+				FINISH_DATE = #{finishDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isDelete != null and isDelete != ''" >
+				IS_DELETE = #{isDelete,jdbcType=CHAR},
+			</if>
+			<if test="sortOrder != null and sortOrder != ''" >
+				SORT_ORDER = #{sortOrder,jdbcType=NUMERIC},
+			</if>
+			<if test="rowVersion != null and rowVersion != ''" >
+				ROW_VERSION = #{rowVersion,jdbcType=NUMERIC},
+			</if>
+		</set>
+		WHERE TASK_ID = #{taskId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="DataQuarterResult">
+		SELECT * FROM TASK_FILL_DATA_QUARTER WHERE TASK_ID = #{taskId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.DataQuarterModel" resultMap="DataQuarterResult">
+		SELECT * FROM TASK_FILL_DATA_QUARTER
+		<where>
+			<if test="taskId != null and taskId != ''" >
+				TASK_ID = #{taskId,jdbcType=VARCHAR}
+			</if>
+			<if test="year != null and year != ''" >
+				AND YEAR = #{year,jdbcType=VARCHAR}
+			</if>
+			<if test="quarter != null and quarter != ''" >
+				AND QUARTER = #{quarter,jdbcType=VARCHAR}
+			</if>
+			<if test="userType != null and userType != ''" >
+				AND USER_TYPE = #{userType,jdbcType=VARCHAR}
+			</if>
+			<if test="userTableName != null and userTableName != ''" >
+				AND USER_TABLE_NAME = #{userTableName,jdbcType=VARCHAR}
+			</if>
+			<if test="userBizKey != null and userBizKey != ''" >
+				AND USER_BIZ_KEY = #{userBizKey,jdbcType=VARCHAR}
+			</if>
+			<if test="userBizValue != null and userBizValue != ''" >
+				AND USER_BIZ_VALUE = #{userBizValue,jdbcType=VARCHAR}
+			</if>
+			<if test="taskName != null and taskName != ''" >
+				AND TASK_NAME = #{taskName,jdbcType=VARCHAR}
+			</if>
+			<if test="endDate != null and endDate != ''" >
+				AND END_DATE = #{endDate,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="finishDate != null" >
+				AND FINISH_DATE = #{finishDate,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="isDelete != null and isDelete != ''" >
+				AND IS_DELETE = #{isDelete,jdbcType=CHAR}
+			</if>
+			<if test="sortOrder != null and sortOrder != ''" >
+				AND SORT_ORDER = #{sortOrder,jdbcType=NUMERIC}
+			</if>
+			<if test="rowVersion != null and rowVersion != ''" >
+				AND ROW_VERSION = #{rowVersion,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM TASK_FILL_DATA_QUARTER
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="DataQuarterResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.DataQuarterModel">
+		SELECT COUNT(*) FROM TASK_FILL_DATA_QUARTER
+		<where>
+			<if test="taskId != null and taskId != ''" >
+				TASK_ID = #{taskId,jdbcType=VARCHAR}
+			</if>
+			<if test="year != null and year != ''" >
+				AND YEAR = #{year,jdbcType=VARCHAR}
+			</if>
+			<if test="quarter != null and quarter != ''" >
+				AND QUARTER = #{quarter,jdbcType=VARCHAR}
+			</if>
+			<if test="userType != null and userType != ''" >
+				AND USER_TYPE = #{userType,jdbcType=VARCHAR}
+			</if>
+			<if test="userTableName != null and userTableName != ''" >
+				AND USER_TABLE_NAME = #{userTableName,jdbcType=VARCHAR}
+			</if>
+			<if test="userBizKey != null and userBizKey != ''" >
+				AND USER_BIZ_KEY = #{userBizKey,jdbcType=VARCHAR}
+			</if>
+			<if test="userBizValue != null and userBizValue != ''" >
+				AND USER_BIZ_VALUE = #{userBizValue,jdbcType=VARCHAR}
+			</if>
+			<if test="taskName != null and taskName != ''" >
+				AND TASK_NAME = #{taskName,jdbcType=VARCHAR}
+			</if>
+			<if test="endDate != null and endDate != ''" >
+				AND END_DATE = #{endDate,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="finishDate != null" >
+				AND FINISH_DATE = #{finishDate,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="isDelete != null and isDelete != ''" >
+				AND IS_DELETE = #{isDelete,jdbcType=CHAR}
+			</if>
+			<if test="sortOrder != null and sortOrder != ''" >
+				AND SORT_ORDER = #{sortOrder,jdbcType=NUMERIC}
+			</if>
+			<if test="rowVersion != null and rowVersion != ''" >
+				AND ROW_VERSION = #{rowVersion,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.DataQuarterModel" resultMap="DataQuarterResult">
+		SELECT * FROM TASK_FILL_DATA_QUARTER
+		<where>
+			<if test="taskId != null and taskId != ''" >
+				TASK_ID = #{taskId,jdbcType=VARCHAR}
+			</if>
+			<if test="year != null and year != ''" >
+				AND YEAR = #{year,jdbcType=VARCHAR}
+			</if>
+			<if test="quarter != null and quarter != ''" >
+				AND QUARTER = #{quarter,jdbcType=VARCHAR}
+			</if>
+			<if test="userType != null and userType != ''" >
+				AND USER_TYPE = #{userType,jdbcType=VARCHAR}
+			</if>
+			<if test="userTableName != null and userTableName != ''" >
+				AND USER_TABLE_NAME = #{userTableName,jdbcType=VARCHAR}
+			</if>
+			<if test="userBizKey != null and userBizKey != ''" >
+				AND USER_BIZ_KEY = #{userBizKey,jdbcType=VARCHAR}
+			</if>
+			<if test="userBizValue != null and userBizValue != ''" >
+				AND USER_BIZ_VALUE = #{userBizValue,jdbcType=VARCHAR}
+			</if>
+			<if test="taskName != null and taskName != ''" >
+				AND TASK_NAME = #{taskName,jdbcType=VARCHAR}
+			</if>
+			<if test="endDate != null and endDate != ''" >
+				AND END_DATE = #{endDate,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="finishDate != null" >
+				AND FINISH_DATE = #{finishDate,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="isDelete != null and isDelete != ''" >
+				AND IS_DELETE = #{isDelete,jdbcType=CHAR}
+			</if>
+			<if test="sortOrder != null and sortOrder != ''" >
+				AND SORT_ORDER = #{sortOrder,jdbcType=NUMERIC}
+			</if>
+			<if test="rowVersion != null and rowVersion != ''" >
+				AND ROW_VERSION = #{rowVersion,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="DataQuarterResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+
+	<select id="getDateList" parameterType="com.ppmg.ei.model.DataQuarterModel" resultMap="DataQuarterResult">
+		select a.* from TASK_FILL_DATA_QUARTER a inner join TASK_FILL_DATA_QUARTER_ITEM b
+		on a.TASK_ID=b.task_id
+		<if test="userBizValue != null and userBizValue != ''" >
+			and  b.BIZ_KEY_VALUE=#{userBizValue,jdbcType=VARCHAR}
+		</if>
+		and a.YEAR=#{year,jdbcType=VARCHAR}
+		<if test="quarter != null and quarter != ''" >
+			AND QUARTER = #{quarter,jdbcType=VARCHAR}
+		</if>
+	</select>
+</mapper>

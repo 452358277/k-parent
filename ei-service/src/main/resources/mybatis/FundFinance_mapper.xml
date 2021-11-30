@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FundFinance">
+	<!-- start autocreate -->
+
+	<resultMap id="FundFinanceResult" type="com.ppmg.ei.model.FundFinanceModel">
+		<result column="FINANCE_ID" property="financeId" jdbcType="VARCHAR" />
+		<result column="FUND_ID" property="fundId" jdbcType="VARCHAR" />
+		<result column="QUARTER" property="quarter" jdbcType="VARCHAR" />
+		<result column="MANAGE_FEE" property="manageFee" jdbcType="NUMERIC" />
+		<result column="COLLOCATION_FEE" property="collocationFee" jdbcType="NUMERIC" />
+		<result column="OTHER_FEE" property="otherFee" jdbcType="NUMERIC" />
+		<result column="INTEREST_INCOME" property="interestIncome" jdbcType="NUMERIC" />
+		<result column="INVEST_INCOME" property="investIncome" jdbcType="NUMERIC" />
+		<result column="OTHER_INCOME" property="otherIncome" jdbcType="NUMERIC" />
+		<result column="SURPLUS" property="surplus" jdbcType="NUMERIC" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="YEAR" property="year" jdbcType="VARCHAR" />
+		<result column="TOTAL_MANAGE_FEE" property="totalManageFee" jdbcType="NUMERIC" />
+		<result column="TOTAL_COLLOCATION_FEE" property="totalCollocationFee" jdbcType="NUMERIC" />
+		<result column="TOTAL_OTHER_FEE" property="totalOtherFee" jdbcType="NUMERIC" />
+		<result column="TOTAL_INTEREST_INCOME" property="totalInterestIncome" jdbcType="NUMERIC" />
+		<result column="TOTAL_INVEST_INCOME" property="totalInvestIncome" jdbcType="NUMERIC" />
+		<result column="TOTAL_OTHER_INCOME" property="totalOtherIncome" jdbcType="NUMERIC" />
+		<result column="TOTAL_SURPLUS" property="totalSurplus" jdbcType="NUMERIC" />
+        <result column="FINANCE_FILE" property="financeFile" jdbcType="VARCHAR" />
+    </resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.FundFinanceModel">
+		INSERT INTO GF_T_FUND_FINANCE (FINANCE_ID,FUND_ID,QUARTER,MANAGE_FEE,COLLOCATION_FEE,OTHER_FEE,INTEREST_INCOME,INVEST_INCOME,OTHER_INCOME,SURPLUS,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,YEAR,TOTAL_MANAGE_FEE,TOTAL_COLLOCATION_FEE,TOTAL_OTHER_FEE,TOTAL_INTEREST_INCOME,TOTAL_INVEST_INCOME,TOTAL_OTHER_INCOME,TOTAL_SURPLUS,FINANCE_FILE) values(#{financeId,jdbcType=VARCHAR},#{fundId,jdbcType=VARCHAR},#{quarter,jdbcType=VARCHAR},#{manageFee,jdbcType=NUMERIC},#{collocationFee,jdbcType=NUMERIC},#{otherFee,jdbcType=NUMERIC},#{interestIncome,jdbcType=NUMERIC},#{investIncome,jdbcType=NUMERIC},#{otherIncome,jdbcType=NUMERIC},#{surplus,jdbcType=NUMERIC},#{status,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{year,jdbcType=VARCHAR},#{totalManageFee,jdbcType=NUMERIC},#{totalCollocationFee,jdbcType=NUMERIC},#{totalOtherFee,jdbcType=NUMERIC},#{totalInterestIncome,jdbcType=NUMERIC},#{totalInvestIncome,jdbcType=NUMERIC},#{totalOtherIncome,jdbcType=NUMERIC},#{totalSurplus,jdbcType=NUMERIC},#{financeFile,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO GF_T_FUND_FINANCE (FINANCE_ID,FUND_ID,QUARTER,MANAGE_FEE,COLLOCATION_FEE,OTHER_FEE,INTEREST_INCOME,INVEST_INCOME,OTHER_INCOME,SURPLUS,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,YEAR,TOTAL_MANAGE_FEE,TOTAL_COLLOCATION_FEE,TOTAL_OTHER_FEE,TOTAL_INTEREST_INCOME,TOTAL_INVEST_INCOME,TOTAL_OTHER_INCOME,TOTAL_SURPLUS,FINANCE_FILE)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.financeId,jdbcType=VARCHAR},
+				#{item.fundId,jdbcType=VARCHAR},
+				#{item.quarter,jdbcType=VARCHAR},
+				#{item.manageFee,jdbcType=NUMERIC},
+				#{item.collocationFee,jdbcType=NUMERIC},
+				#{item.otherFee,jdbcType=NUMERIC},
+				#{item.interestIncome,jdbcType=NUMERIC},
+				#{item.investIncome,jdbcType=NUMERIC},
+				#{item.otherIncome,jdbcType=NUMERIC},
+				#{item.surplus,jdbcType=NUMERIC},
+				#{item.status,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+				#{item.year,jdbcType=VARCHAR},
+				#{item.totalManageFee,jdbcType=NUMERIC},
+				#{item.totalCollocationFee,jdbcType=NUMERIC},
+				#{item.totalOtherFee,jdbcType=NUMERIC},
+				#{item.totalInterestIncome,jdbcType=NUMERIC},
+				#{item.totalInvestIncome,jdbcType=NUMERIC},
+				#{item.totalOtherIncome,jdbcType=NUMERIC},
+				#{item.totalSurplus,jdbcType=NUMERIC},
+                #{item.financeFile,jdbcType=VARCHAR}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  GF_T_FUND_FINANCE WHERE FINANCE_ID = #{financeId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.FundFinanceModel">
+		DELETE FROM GF_T_FUND_FINANCE
+		<where>
+			<if test="financeId != null and financeId != ''" >
+				FINANCE_ID = #{financeId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="quarter != null and quarter != ''" >
+				AND QUARTER = #{quarter,jdbcType=VARCHAR}
+			</if>
+			<if test="manageFee != null and manageFee != ''" >
+				AND MANAGE_FEE = #{manageFee,jdbcType=NUMERIC}
+			</if>
+			<if test="collocationFee != null and collocationFee != ''" >
+				AND COLLOCATION_FEE = #{collocationFee,jdbcType=NUMERIC}
+			</if>
+			<if test="otherFee != null and otherFee != ''" >
+				AND OTHER_FEE = #{otherFee,jdbcType=NUMERIC}
+			</if>
+			<if test="interestIncome != null and interestIncome != ''" >
+				AND INTEREST_INCOME = #{interestIncome,jdbcType=NUMERIC}
+			</if>
+			<if test="investIncome != null and investIncome != ''" >
+				AND INVEST_INCOME = #{investIncome,jdbcType=NUMERIC}
+			</if>
+			<if test="otherIncome != null and otherIncome != ''" >
+				AND OTHER_INCOME = #{otherIncome,jdbcType=NUMERIC}
+			</if>
+			<if test="surplus != null and surplus != ''" >
+				AND SURPLUS = #{surplus,jdbcType=NUMERIC}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="year != null and year != ''" >
+				AND YEAR = #{year,jdbcType=VARCHAR}
+			</if>
+			<if test="totalManageFee != null and totalManageFee != ''" >
+				AND TOTAL_MANAGE_FEE = #{totalManageFee,jdbcType=NUMERIC}
+			</if>
+			<if test="totalCollocationFee != null and totalCollocationFee != ''" >
+				AND TOTAL_COLLOCATION_FEE = #{totalCollocationFee,jdbcType=NUMERIC}
+			</if>
+			<if test="totalOtherFee != null and totalOtherFee != ''" >
+				AND TOTAL_OTHER_FEE = #{totalOtherFee,jdbcType=NUMERIC}
+			</if>
+			<if test="totalInterestIncome != null and totalInterestIncome != ''" >
+				AND TOTAL_INTEREST_INCOME = #{totalInterestIncome,jdbcType=NUMERIC}
+			</if>
+			<if test="totalInvestIncome != null and totalInvestIncome != ''" >
+				AND TOTAL_INVEST_INCOME = #{totalInvestIncome,jdbcType=NUMERIC}
+			</if>
+			<if test="totalOtherIncome != null and totalOtherIncome != ''" >
+				AND TOTAL_OTHER_INCOME = #{totalOtherIncome,jdbcType=NUMERIC}
+			</if>
+			<if test="totalSurplus != null and totalSurplus != ''" >
+				AND TOTAL_SURPLUS = #{totalSurplus,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  GF_T_FUND_FINANCE WHERE FINANCE_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.FundFinanceModel">
+		UPDATE GF_T_FUND_FINANCE 
+		<set>
+			<if test="financeId != null and financeId != ''" >
+				FINANCE_ID = #{financeId,jdbcType=VARCHAR},
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				FUND_ID = #{fundId,jdbcType=VARCHAR},
+			</if>
+			<if test="quarter != null and quarter != ''" >
+				QUARTER = #{quarter,jdbcType=VARCHAR},
+			</if>
+			<if test="manageFee != null and manageFee != ''" >
+				MANAGE_FEE = #{manageFee,jdbcType=NUMERIC},
+			</if>
+			<if test="collocationFee != null and collocationFee != ''" >
+				COLLOCATION_FEE = #{collocationFee,jdbcType=NUMERIC},
+			</if>
+			<if test="otherFee != null and otherFee != ''" >
+				OTHER_FEE = #{otherFee,jdbcType=NUMERIC},
+			</if>
+			<if test="interestIncome != null and interestIncome != ''" >
+				INTEREST_INCOME = #{interestIncome,jdbcType=NUMERIC},
+			</if>
+			<if test="investIncome != null and investIncome != ''" >
+				INVEST_INCOME = #{investIncome,jdbcType=NUMERIC},
+			</if>
+			<if test="otherIncome != null and otherIncome != ''" >
+				OTHER_INCOME = #{otherIncome,jdbcType=NUMERIC},
+			</if>
+			<if test="surplus != null and surplus != ''" >
+				SURPLUS = #{surplus,jdbcType=NUMERIC},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="year != null and year != ''" >
+				YEAR = #{year,jdbcType=VARCHAR},
+			</if>
+			<if test="totalManageFee != null and totalManageFee != ''" >
+				TOTAL_MANAGE_FEE = #{totalManageFee,jdbcType=NUMERIC},
+			</if>
+			<if test="totalCollocationFee != null and totalCollocationFee != ''" >
+				TOTAL_COLLOCATION_FEE = #{totalCollocationFee,jdbcType=NUMERIC},
+			</if>
+			<if test="totalOtherFee != null and totalOtherFee != ''" >
+				TOTAL_OTHER_FEE = #{totalOtherFee,jdbcType=NUMERIC},
+			</if>
+			<if test="totalInterestIncome != null and totalInterestIncome != ''" >
+				TOTAL_INTEREST_INCOME = #{totalInterestIncome,jdbcType=NUMERIC},
+			</if>
+			<if test="totalInvestIncome != null and totalInvestIncome != ''" >
+				TOTAL_INVEST_INCOME = #{totalInvestIncome,jdbcType=NUMERIC},
+			</if>
+			<if test="totalOtherIncome != null and totalOtherIncome != ''" >
+				TOTAL_OTHER_INCOME = #{totalOtherIncome,jdbcType=NUMERIC},
+			</if>
+			<if test="totalSurplus != null and totalSurplus != ''" >
+				TOTAL_SURPLUS = #{totalSurplus,jdbcType=NUMERIC},
+			</if>
+            <if test="financeFile != null and financeFile != ''" >
+                FINANCE_FILE = #{financeFile,jdbcType=VARCHAR},
+            </if>
+		</set>
+		WHERE FINANCE_ID = #{financeId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="FundFinanceResult">
+		SELECT * FROM GF_T_FUND_FINANCE WHERE FINANCE_ID = #{financeId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.FundFinanceModel" resultMap="FundFinanceResult">
+		SELECT * FROM GF_T_FUND_FINANCE
+		<where>
+			<if test="financeId != null and financeId != ''" >
+				FINANCE_ID = #{financeId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="quarter != null and quarter != ''" >
+				AND QUARTER = #{quarter,jdbcType=VARCHAR}
+			</if>
+			<if test="manageFee != null and manageFee != ''" >
+				AND MANAGE_FEE = #{manageFee,jdbcType=NUMERIC}
+			</if>
+			<if test="collocationFee != null and collocationFee != ''" >
+				AND COLLOCATION_FEE = #{collocationFee,jdbcType=NUMERIC}
+			</if>
+			<if test="otherFee != null and otherFee != ''" >
+				AND OTHER_FEE = #{otherFee,jdbcType=NUMERIC}
+			</if>
+			<if test="interestIncome != null and interestIncome != ''" >
+				AND INTEREST_INCOME = #{interestIncome,jdbcType=NUMERIC}
+			</if>
+			<if test="investIncome != null and investIncome != ''" >
+				AND INVEST_INCOME = #{investIncome,jdbcType=NUMERIC}
+			</if>
+			<if test="otherIncome != null and otherIncome != ''" >
+				AND OTHER_INCOME = #{otherIncome,jdbcType=NUMERIC}
+			</if>
+			<if test="surplus != null and surplus != ''" >
+				AND SURPLUS = #{surplus,jdbcType=NUMERIC}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="year != null and year != ''" >
+				AND YEAR = #{year,jdbcType=VARCHAR}
+			</if>
+			<if test="totalManageFee != null and totalManageFee != ''" >
+				AND TOTAL_MANAGE_FEE = #{totalManageFee,jdbcType=NUMERIC}
+			</if>
+			<if test="totalCollocationFee != null and totalCollocationFee != ''" >
+				AND TOTAL_COLLOCATION_FEE = #{totalCollocationFee,jdbcType=NUMERIC}
+			</if>
+			<if test="totalOtherFee != null and totalOtherFee != ''" >
+				AND TOTAL_OTHER_FEE = #{totalOtherFee,jdbcType=NUMERIC}
+			</if>
+			<if test="totalInterestIncome != null and totalInterestIncome != ''" >
+				AND TOTAL_INTEREST_INCOME = #{totalInterestIncome,jdbcType=NUMERIC}
+			</if>
+			<if test="totalInvestIncome != null and totalInvestIncome != ''" >
+				AND TOTAL_INVEST_INCOME = #{totalInvestIncome,jdbcType=NUMERIC}
+			</if>
+			<if test="totalOtherIncome != null and totalOtherIncome != ''" >
+				AND TOTAL_OTHER_INCOME = #{totalOtherIncome,jdbcType=NUMERIC}
+			</if>
+			<if test="totalSurplus != null and totalSurplus != ''" >
+				AND TOTAL_SURPLUS = #{totalSurplus,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</select>
+
+
+
+	<select id="selectListPage" resultMap="FundFinanceResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+		<include refid="searchSql" />
+	</select>
+	<select id="selectListYearPage" resultMap="FundFinanceResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+			SELECT YEAR,sum(MANAGE_FEE)as MANAGE_FEE,sum(COLLOCATION_FEE) as COLLOCATION_FEE,sum(OTHER_FEE) as OTHER_FEE,
+			SUM(INTEREST_INCOME)as INTEREST_INCOME,SUM(INVEST_INCOME)as INVEST_INCOME,SUM(OTHER_INCOME)as OTHER_INCOME ,SUM(SURPLUS) as SURPLUS
+			   FROM GF_T_FUND_FINANCE
+			<where>
+				<include refid="searchCondition.searchClause" />
+			</where>
+			group by YEAR,FUND_ID
+			order by YEAR desc
+
+	</select>
+	<sql id="searchSql">
+		SELECT * FROM GF_T_FUND_FINANCE
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+		order by CREATE_DT desc
+	</sql>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.FundFinanceModel">
+		SELECT COUNT(*) FROM GF_T_FUND_FINANCE
+		<where>
+			<if test="financeId != null and financeId != ''" >
+				FINANCE_ID = #{financeId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="quarter != null and quarter != ''" >
+				AND QUARTER = #{quarter,jdbcType=VARCHAR}
+			</if>
+			<if test="manageFee != null and manageFee != ''" >
+				AND MANAGE_FEE = #{manageFee,jdbcType=NUMERIC}
+			</if>
+			<if test="collocationFee != null and collocationFee != ''" >
+				AND COLLOCATION_FEE = #{collocationFee,jdbcType=NUMERIC}
+			</if>
+			<if test="otherFee != null and otherFee != ''" >
+				AND OTHER_FEE = #{otherFee,jdbcType=NUMERIC}
+			</if>
+			<if test="interestIncome != null and interestIncome != ''" >
+				AND INTEREST_INCOME = #{interestIncome,jdbcType=NUMERIC}
+			</if>
+			<if test="investIncome != null and investIncome != ''" >
+				AND INVEST_INCOME = #{investIncome,jdbcType=NUMERIC}
+			</if>
+			<if test="otherIncome != null and otherIncome != ''" >
+				AND OTHER_INCOME = #{otherIncome,jdbcType=NUMERIC}
+			</if>
+			<if test="surplus != null and surplus != ''" >
+				AND SURPLUS = #{surplus,jdbcType=NUMERIC}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="year != null and year != ''" >
+				AND YEAR = #{year,jdbcType=VARCHAR}
+			</if>
+			<if test="totalManageFee != null and totalManageFee != ''" >
+				AND TOTAL_MANAGE_FEE = #{totalManageFee,jdbcType=NUMERIC}
+			</if>
+			<if test="totalCollocationFee != null and totalCollocationFee != ''" >
+				AND TOTAL_COLLOCATION_FEE = #{totalCollocationFee,jdbcType=NUMERIC}
+			</if>
+			<if test="totalOtherFee != null and totalOtherFee != ''" >
+				AND TOTAL_OTHER_FEE = #{totalOtherFee,jdbcType=NUMERIC}
+			</if>
+			<if test="totalInterestIncome != null and totalInterestIncome != ''" >
+				AND TOTAL_INTEREST_INCOME = #{totalInterestIncome,jdbcType=NUMERIC}
+			</if>
+			<if test="totalInvestIncome != null and totalInvestIncome != ''" >
+				AND TOTAL_INVEST_INCOME = #{totalInvestIncome,jdbcType=NUMERIC}
+			</if>
+			<if test="totalOtherIncome != null and totalOtherIncome != ''" >
+				AND TOTAL_OTHER_INCOME = #{totalOtherIncome,jdbcType=NUMERIC}
+			</if>
+			<if test="totalSurplus != null and totalSurplus != ''" >
+				AND TOTAL_SURPLUS = #{totalSurplus,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.FundFinanceModel" resultMap="FundFinanceResult">
+		SELECT * FROM GF_T_FUND_FINANCE
+		<where>
+			<if test="financeId != null and financeId != ''" >
+				FINANCE_ID = #{financeId,jdbcType=VARCHAR}
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				AND FUND_ID = #{fundId,jdbcType=VARCHAR}
+			</if>
+			<if test="quarter != null and quarter != ''" >
+				AND QUARTER = #{quarter,jdbcType=VARCHAR}
+			</if>
+			<if test="manageFee != null and manageFee != ''" >
+				AND MANAGE_FEE = #{manageFee,jdbcType=NUMERIC}
+			</if>
+			<if test="collocationFee != null and collocationFee != ''" >
+				AND COLLOCATION_FEE = #{collocationFee,jdbcType=NUMERIC}
+			</if>
+			<if test="otherFee != null and otherFee != ''" >
+				AND OTHER_FEE = #{otherFee,jdbcType=NUMERIC}
+			</if>
+			<if test="interestIncome != null and interestIncome != ''" >
+				AND INTEREST_INCOME = #{interestIncome,jdbcType=NUMERIC}
+			</if>
+			<if test="investIncome != null and investIncome != ''" >
+				AND INVEST_INCOME = #{investIncome,jdbcType=NUMERIC}
+			</if>
+			<if test="otherIncome != null and otherIncome != ''" >
+				AND OTHER_INCOME = #{otherIncome,jdbcType=NUMERIC}
+			</if>
+			<if test="surplus != null and surplus != ''" >
+				AND SURPLUS = #{surplus,jdbcType=NUMERIC}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="year != null and year != ''" >
+				AND YEAR = #{year,jdbcType=VARCHAR}
+			</if>
+			<if test="totalManageFee != null and totalManageFee != ''" >
+				AND TOTAL_MANAGE_FEE = #{totalManageFee,jdbcType=NUMERIC}
+			</if>
+			<if test="totalCollocationFee != null and totalCollocationFee != ''" >
+				AND TOTAL_COLLOCATION_FEE = #{totalCollocationFee,jdbcType=NUMERIC}
+			</if>
+			<if test="totalOtherFee != null and totalOtherFee != ''" >
+				AND TOTAL_OTHER_FEE = #{totalOtherFee,jdbcType=NUMERIC}
+			</if>
+			<if test="totalInterestIncome != null and totalInterestIncome != ''" >
+				AND TOTAL_INTEREST_INCOME = #{totalInterestIncome,jdbcType=NUMERIC}
+			</if>
+			<if test="totalInvestIncome != null and totalInvestIncome != ''" >
+				AND TOTAL_INVEST_INCOME = #{totalInvestIncome,jdbcType=NUMERIC}
+			</if>
+			<if test="totalOtherIncome != null and totalOtherIncome != ''" >
+				AND TOTAL_OTHER_INCOME = #{totalOtherIncome,jdbcType=NUMERIC}
+			</if>
+			<if test="totalSurplus != null and totalSurplus != ''" >
+				AND TOTAL_SURPLUS = #{totalSurplus,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="FundFinanceResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+
+
+	<update id="updateIsNull" parameterType="com.ppmg.ei.model.FundFinanceModel">
+		UPDATE GF_T_FUND_FINANCE
+		<set>
+			<if test="financeId != null and financeId != ''" >
+				FINANCE_ID = #{financeId,jdbcType=VARCHAR},
+			</if>
+			<if test="fundId != null and fundId != ''" >
+				FUND_ID = #{fundId,jdbcType=VARCHAR},
+			</if>
+			<if test="quarter != null and quarter != ''" >
+				QUARTER = #{quarter,jdbcType=VARCHAR},
+			</if>
+			<if test="manageFee != null " >
+				MANAGE_FEE = #{manageFee,jdbcType=NUMERIC},
+			</if>
+			<if test="collocationFee != null " >
+				COLLOCATION_FEE = #{collocationFee,jdbcType=NUMERIC},
+			</if>
+			<if test="otherFee != null " >
+				OTHER_FEE = #{otherFee,jdbcType=NUMERIC},
+			</if>
+				INTEREST_INCOME = #{interestIncome,jdbcType=NUMERIC},
+			<if test="investIncome != null " >
+				INVEST_INCOME = #{investIncome,jdbcType=NUMERIC},
+			</if>
+			<if test="otherIncome != null " >
+				OTHER_INCOME = #{otherIncome,jdbcType=NUMERIC},
+			</if>
+			<if test="surplus != null " >
+				SURPLUS = #{surplus,jdbcType=NUMERIC},
+			</if>
+			<if test="status != null " >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="updateBy != null " >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="year != null and year != ''" >
+				YEAR = #{year,jdbcType=VARCHAR},
+			</if>
+			<if test="totalManageFee != null " >
+				TOTAL_MANAGE_FEE = #{totalManageFee,jdbcType=NUMERIC},
+			</if>
+			<if test="totalCollocationFee != null " >
+				TOTAL_COLLOCATION_FEE = #{totalCollocationFee,jdbcType=NUMERIC},
+			</if>
+			<if test="totalOtherFee != null " >
+				TOTAL_OTHER_FEE = #{totalOtherFee,jdbcType=NUMERIC},
+			</if>
+			<if test="totalInterestIncome != null " >
+				TOTAL_INTEREST_INCOME = #{totalInterestIncome,jdbcType=NUMERIC},
+			</if>
+			<if test="totalInvestIncome != null " >
+				TOTAL_INVEST_INCOME = #{totalInvestIncome,jdbcType=NUMERIC},
+			</if>
+			<if test="totalOtherIncome != null " >
+				TOTAL_OTHER_INCOME = #{totalOtherIncome,jdbcType=NUMERIC},
+			</if>
+			<if test="totalSurplus != null " >
+				TOTAL_SURPLUS = #{totalSurplus,jdbcType=NUMERIC},
+			</if>
+			<if test="financeFile != null " >
+				FINANCE_FILE = #{financeFile,jdbcType=VARCHAR},
+			</if>
+		</set>
+		WHERE FINANCE_ID = #{financeId,jdbcType=VARCHAR}
+	</update>
+
+</mapper>

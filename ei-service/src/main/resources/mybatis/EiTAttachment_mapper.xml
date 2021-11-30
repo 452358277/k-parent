@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="EiTAttachment">
+	<!-- start autocreate -->
+
+	<resultMap id="EiTAttachmentResult" type="com.ppmg.ei.model.EiTAttachmentModel">
+		<result column="FILE_ID" property="fileId" jdbcType="VARCHAR" />
+		<result column="BIZ_TABLE_NAME" property="bizTableName" jdbcType="VARCHAR" />
+		<result column="BIZ_TABLE_PK" property="bizTablePk" jdbcType="VARCHAR" />
+		<result column="FIELD_NAME" property="fieldName" jdbcType="VARCHAR" />
+		<result column="FIELD_TOKEN" property="fieldToken" jdbcType="VARCHAR" />
+		<result column="FILE_NAME" property="fileName" jdbcType="VARCHAR" />
+		<result column="FILE_OLD_NAME" property="fileOldName" jdbcType="VARCHAR" />
+		<result column="FILE_PATH" property="filePath" jdbcType="VARCHAR" />
+		<result column="FILE_SIZE" property="fileSize" jdbcType="NUMERIC" />
+		<result column="FILE_TYPE" property="fileType" jdbcType="VARCHAR" />
+		<result column="FILE_DESC" property="fileDesc" jdbcType="VARCHAR" />
+		<result column="SERIAL_NO" property="serialNo" jdbcType="NUMERIC" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ppmg.ei.model.EiTAttachmentModel">
+		INSERT INTO EI_T_ATTACHMENT (FILE_ID,BIZ_TABLE_NAME,BIZ_TABLE_PK,FIELD_NAME,FIELD_TOKEN,FILE_NAME,FILE_OLD_NAME,FILE_PATH,FILE_SIZE,FILE_TYPE,FILE_DESC,SERIAL_NO,REMARK,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT) values(#{fileId,jdbcType=VARCHAR},#{bizTableName,jdbcType=VARCHAR},#{bizTablePk,jdbcType=VARCHAR},#{fieldName,jdbcType=VARCHAR},#{fieldToken,jdbcType=VARCHAR},#{fileName,jdbcType=VARCHAR},#{fileOldName,jdbcType=VARCHAR},#{filePath,jdbcType=VARCHAR},#{fileSize,jdbcType=NUMERIC},#{fileType,jdbcType=VARCHAR},#{fileDesc,jdbcType=VARCHAR},#{serialNo,jdbcType=NUMERIC},#{remark,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO EI_T_ATTACHMENT (FILE_ID,BIZ_TABLE_NAME,BIZ_TABLE_PK,FIELD_NAME,FIELD_TOKEN,FILE_NAME,FILE_OLD_NAME,FILE_PATH,FILE_SIZE,FILE_TYPE,FILE_DESC,SERIAL_NO,REMARK,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.fileId,jdbcType=VARCHAR},
+				#{item.bizTableName,jdbcType=VARCHAR},
+				#{item.bizTablePk,jdbcType=VARCHAR},
+				#{item.fieldName,jdbcType=VARCHAR},
+				#{item.fieldToken,jdbcType=VARCHAR},
+				#{item.fileName,jdbcType=VARCHAR},
+				#{item.fileOldName,jdbcType=VARCHAR},
+				#{item.filePath,jdbcType=VARCHAR},
+				#{item.fileSize,jdbcType=NUMERIC},
+				#{item.fileType,jdbcType=VARCHAR},
+				#{item.fileDesc,jdbcType=VARCHAR},
+				#{item.serialNo,jdbcType=NUMERIC},
+				#{item.remark,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  EI_T_ATTACHMENT WHERE FILE_ID = #{fileId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.EiTAttachmentModel">
+		DELETE FROM EI_T_ATTACHMENT
+		<where>
+			<if test="fileId != null and fileId != ''" >
+				FILE_ID = #{fileId,jdbcType=VARCHAR}
+			</if>
+			<if test="bizTableName != null and bizTableName != ''" >
+				AND BIZ_TABLE_NAME = #{bizTableName,jdbcType=VARCHAR}
+			</if>
+			<if test="bizTablePk != null and bizTablePk != ''" >
+				AND BIZ_TABLE_PK = #{bizTablePk,jdbcType=VARCHAR}
+			</if>
+			<if test="fieldName != null and fieldName != ''" >
+				AND FIELD_NAME = #{fieldName,jdbcType=VARCHAR}
+			</if>
+			<if test="fieldToken != null and fieldToken != ''" >
+				AND FIELD_TOKEN = #{fieldToken,jdbcType=VARCHAR}
+			</if>
+			<if test="fileName != null and fileName != ''" >
+				AND FILE_NAME = #{fileName,jdbcType=VARCHAR}
+			</if>
+			<if test="fileOldName != null and fileOldName != ''" >
+				AND FILE_OLD_NAME = #{fileOldName,jdbcType=VARCHAR}
+			</if>
+			<if test="filePath != null and filePath != ''" >
+				AND FILE_PATH = #{filePath,jdbcType=VARCHAR}
+			</if>
+			<if test="fileSize != null and fileSize != ''" >
+				AND FILE_SIZE = #{fileSize,jdbcType=NUMERIC}
+			</if>
+			<if test="fileType != null and fileType != ''" >
+				AND FILE_TYPE = #{fileType,jdbcType=VARCHAR}
+			</if>
+			<if test="fileDesc != null and fileDesc != ''" >
+				AND FILE_DESC = #{fileDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="serialNo != null and serialNo != ''" >
+				AND SERIAL_NO = #{serialNo,jdbcType=NUMERIC}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  EI_T_ATTACHMENT WHERE FILE_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.EiTAttachmentModel">
+		UPDATE EI_T_ATTACHMENT 
+		<set>
+			<if test="fileId != null and fileId != ''" >
+				FILE_ID = #{fileId,jdbcType=VARCHAR},
+			</if>
+			<if test="bizTableName != null and bizTableName != ''" >
+				BIZ_TABLE_NAME = #{bizTableName,jdbcType=VARCHAR},
+			</if>
+			<if test="bizTablePk != null and bizTablePk != ''" >
+				BIZ_TABLE_PK = #{bizTablePk,jdbcType=VARCHAR},
+			</if>
+			<if test="fieldName != null and fieldName != ''" >
+				FIELD_NAME = #{fieldName,jdbcType=VARCHAR},
+			</if>
+			<if test="fieldToken != null and fieldToken != ''" >
+				FIELD_TOKEN = #{fieldToken,jdbcType=VARCHAR},
+			</if>
+			<if test="fileName != null and fileName != ''" >
+				FILE_NAME = #{fileName,jdbcType=VARCHAR},
+			</if>
+			<if test="fileOldName != null and fileOldName != ''" >
+				FILE_OLD_NAME = #{fileOldName,jdbcType=VARCHAR},
+			</if>
+			<if test="filePath != null and filePath != ''" >
+				FILE_PATH = #{filePath,jdbcType=VARCHAR},
+			</if>
+			<if test="fileSize != null and fileSize != ''" >
+				FILE_SIZE = #{fileSize,jdbcType=NUMERIC},
+			</if>
+			<if test="fileType != null and fileType != ''" >
+				FILE_TYPE = #{fileType,jdbcType=VARCHAR},
+			</if>
+			<if test="fileDesc != null and fileDesc != ''" >
+				FILE_DESC = #{fileDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="serialNo != null and serialNo != ''" >
+				SERIAL_NO = #{serialNo,jdbcType=NUMERIC},
+			</if>
+			<if test="remark != null and remark != ''" >
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		WHERE FILE_ID = #{fileId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="EiTAttachmentResult">
+		SELECT * FROM EI_T_ATTACHMENT WHERE FILE_ID = #{fileId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.EiTAttachmentModel" resultMap="EiTAttachmentResult">
+		SELECT * FROM EI_T_ATTACHMENT
+		<where>
+			<if test="fileId != null and fileId != ''" >
+				FILE_ID = #{fileId,jdbcType=VARCHAR}
+			</if>
+			<if test="bizTableName != null and bizTableName != ''" >
+				AND BIZ_TABLE_NAME = #{bizTableName,jdbcType=VARCHAR}
+			</if>
+			<if test="bizTablePk != null and bizTablePk != ''" >
+				AND BIZ_TABLE_PK = #{bizTablePk,jdbcType=VARCHAR}
+			</if>
+			<if test="fieldName != null and fieldName != ''" >
+				AND FIELD_NAME = #{fieldName,jdbcType=VARCHAR}
+			</if>
+			<if test="fieldToken != null and fieldToken != ''" >
+				AND FIELD_TOKEN = #{fieldToken,jdbcType=VARCHAR}
+			</if>
+			<if test="fileName != null and fileName != ''" >
+				AND FILE_NAME = #{fileName,jdbcType=VARCHAR}
+			</if>
+			<if test="fileOldName != null and fileOldName != ''" >
+				AND FILE_OLD_NAME = #{fileOldName,jdbcType=VARCHAR}
+			</if>
+			<if test="filePath != null and filePath != ''" >
+				AND FILE_PATH = #{filePath,jdbcType=VARCHAR}
+			</if>
+			<if test="fileSize != null and fileSize != ''" >
+				AND FILE_SIZE = #{fileSize,jdbcType=NUMERIC}
+			</if>
+			<if test="fileType != null and fileType != ''" >
+				AND FILE_TYPE = #{fileType,jdbcType=VARCHAR}
+			</if>
+			<if test="fileDesc != null and fileDesc != ''" >
+				AND FILE_DESC = #{fileDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="serialNo != null and serialNo != ''" >
+				AND SERIAL_NO = #{serialNo,jdbcType=NUMERIC}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM EI_T_ATTACHMENT
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="EiTAttachmentResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+		<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.EiTAttachmentModel">
+		SELECT COUNT(*) FROM EI_T_ATTACHMENT
+		<where>
+			<if test="fileId != null and fileId != ''" >
+				FILE_ID = #{fileId,jdbcType=VARCHAR}
+			</if>
+			<if test="bizTableName != null and bizTableName != ''" >
+				AND BIZ_TABLE_NAME = #{bizTableName,jdbcType=VARCHAR}
+			</if>
+			<if test="bizTablePk != null and bizTablePk != ''" >
+				AND BIZ_TABLE_PK = #{bizTablePk,jdbcType=VARCHAR}
+			</if>
+			<if test="fieldName != null and fieldName != ''" >
+				AND FIELD_NAME = #{fieldName,jdbcType=VARCHAR}
+			</if>
+			<if test="fieldToken != null and fieldToken != ''" >
+				AND FIELD_TOKEN = #{fieldToken,jdbcType=VARCHAR}
+			</if>
+			<if test="fileName != null and fileName != ''" >
+				AND FILE_NAME = #{fileName,jdbcType=VARCHAR}
+			</if>
+			<if test="fileOldName != null and fileOldName != ''" >
+				AND FILE_OLD_NAME = #{fileOldName,jdbcType=VARCHAR}
+			</if>
+			<if test="filePath != null and filePath != ''" >
+				AND FILE_PATH = #{filePath,jdbcType=VARCHAR}
+			</if>
+			<if test="fileSize != null and fileSize != ''" >
+				AND FILE_SIZE = #{fileSize,jdbcType=NUMERIC}
+			</if>
+			<if test="fileType != null and fileType != ''" >
+				AND FILE_TYPE = #{fileType,jdbcType=VARCHAR}
+			</if>
+			<if test="fileDesc != null and fileDesc != ''" >
+				AND FILE_DESC = #{fileDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="serialNo != null and serialNo != ''" >
+				AND SERIAL_NO = #{serialNo,jdbcType=NUMERIC}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.EiTAttachmentModel" resultMap="EiTAttachmentResult">
+		SELECT * FROM EI_T_ATTACHMENT
+		<where>
+			<if test="fileId != null and fileId != ''" >
+				FILE_ID = #{fileId,jdbcType=VARCHAR}
+			</if>
+			<if test="bizTableName != null and bizTableName != ''" >
+				AND BIZ_TABLE_NAME = #{bizTableName,jdbcType=VARCHAR}
+			</if>
+			<if test="bizTablePk != null and bizTablePk != ''" >
+				AND BIZ_TABLE_PK = #{bizTablePk,jdbcType=VARCHAR}
+			</if>
+			<if test="fieldName != null and fieldName != ''" >
+				AND FIELD_NAME = #{fieldName,jdbcType=VARCHAR}
+			</if>
+			<if test="fieldToken != null and fieldToken != ''" >
+				AND FIELD_TOKEN = #{fieldToken,jdbcType=VARCHAR}
+			</if>
+			<if test="fileName != null and fileName != ''" >
+				AND FILE_NAME = #{fileName,jdbcType=VARCHAR}
+			</if>
+			<if test="fileOldName != null and fileOldName != ''" >
+				AND FILE_OLD_NAME = #{fileOldName,jdbcType=VARCHAR}
+			</if>
+			<if test="filePath != null and filePath != ''" >
+				AND FILE_PATH = #{filePath,jdbcType=VARCHAR}
+			</if>
+			<if test="fileSize != null and fileSize != ''" >
+				AND FILE_SIZE = #{fileSize,jdbcType=NUMERIC}
+			</if>
+			<if test="fileType != null and fileType != ''" >
+				AND FILE_TYPE = #{fileType,jdbcType=VARCHAR}
+			</if>
+			<if test="fileDesc != null and fileDesc != ''" >
+				AND FILE_DESC = #{fileDesc,jdbcType=VARCHAR}
+			</if>
+			<if test="serialNo != null and serialNo != ''" >
+				AND SERIAL_NO = #{serialNo,jdbcType=NUMERIC}
+			</if>
+			<if test="remark != null and remark != ''" >
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="EiTAttachmentResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+</mapper>

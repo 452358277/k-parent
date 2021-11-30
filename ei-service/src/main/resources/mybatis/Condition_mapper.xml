@@ -1,0 +1,725 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Condition">
+
+    <resultMap id="ConditionResultAll" type="com.ppmg.ei.model.ConditionModel" extends="ConditionResult">
+        <association property="conditionInfoModel" javaType="com.ppmg.ei.model.ConditionInfoModel">
+            <result column="opInfoId" property="infoId" jdbcType="VARCHAR" />
+            <result column="opConditionId" property="conditionId" jdbcType="VARCHAR" />
+            <result column="opCooSize" property="cooSize" jdbcType="NUMERIC" />
+            <result column="opTotalCooNum" property="totalCooNum" jdbcType="NUMERIC" />
+            <result column="opFitCooNum" property="fitCooNum" jdbcType="NUMERIC" />
+            <result column="opMeetingFile" property="meetingFile" jdbcType="VARCHAR" />
+            <result column="opAttaFile" property="attaFile" jdbcType="VARCHAR" />
+            <result column="opCreateBy" property="createBy" jdbcType="VARCHAR" />
+
+            <result column="opCreateDt" property="createDt" jdbcType="DATE" />
+            <result column="opUpdateBy" property="updateBy" jdbcType="VARCHAR" />
+            <result column="opUpdateDt" property="updateDt" jdbcType="DATE" />
+            <result column="opProcessInstId" property="processInstId" jdbcType="VARCHAR" />
+            <result column="opStatus" property="status" jdbcType="VARCHAR" />
+            <result column="opFundId" property="fundId" jdbcType="VARCHAR" />
+            <result column="opAttaDetail" property="attaDetail" jdbcType="VARCHAR" />
+        </association>
+        <collection property="conditionItemModel" ofType="com.ppmg.ei.model.ConditionItemModel">
+            <result column="itItemId" property="itemId" jdbcType="VARCHAR" />
+            <result column="itInfoId" property="infoId" jdbcType="VARCHAR" />
+            <result column="itFundAdminName" property="fundAdminName" jdbcType="VARCHAR" />
+            <result column="itFundAdminId" property="fundAdminId" jdbcType="VARCHAR" />
+            <result column="itFundName" property="fundName" jdbcType="VARCHAR" />
+            <result column="itFundId" property="fundId" jdbcType="VARCHAR" />
+            <result column="itCreateBy" property="createBy" jdbcType="VARCHAR" />
+            <result column="itCreateDt" property="createDt" jdbcType="DATE" />
+            <result column="itUpdateBy" property="updateBy" jdbcType="VARCHAR" />
+            <result column="itUpdateDt" property="updateDt" jdbcType="DATE" />
+            <result column="itStatus" property="status" jdbcType="VARCHAR" />
+            <result column="itIsFit" property="isFit" jdbcType="VARCHAR" />
+            <result column="itFileType" property="fileType" jdbcType="VARCHAR" />
+            <result column="itAttaDetail" property="attaDetail" jdbcType="VARCHAR" />
+            <result column="itAttaFile" property="attaFile" jdbcType="VARCHAR" />
+        </collection>
+    </resultMap>
+
+    <resultMap id="ConditionResult" type="com.ppmg.ei.model.ConditionModel">
+        <result column="CONDITION_ID" property="conditionId" jdbcType="VARCHAR" />
+        <result column="FUND_NAME" property="fundName" jdbcType="VARCHAR" />
+        <result column="FUND_SIZE" property="fundSize" jdbcType="NUMERIC" />
+        <result column="MAN_DEP" property="manDep" jdbcType="VARCHAR" />
+        <result column="REGISTRANT" property="registrant" jdbcType="VARCHAR" />
+        <result column="REG_DATE" property="regDate" jdbcType="TIMESTAMP" />
+        <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+        <result column="METHOD_FILE" property="methodFile" jdbcType="VARCHAR" />
+        <result column="CONDITION_FILE" property="conditionFile" jdbcType="VARCHAR" />
+        <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+        <result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+        <result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+        <result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+        <result column="CARRIER" property="carrier" jdbcType="VARCHAR" />
+        <result column="CARRIER_NAME" property="carrierName" jdbcType="VARCHAR" />
+        <result column="CARRIER_TYPE" property="carrierType" jdbcType="VARCHAR" />
+        <result column="PROCESS_INST_ID" property="processInstId" jdbcType="VARCHAR" />
+        <result column="STATUS" property="status" jdbcType="VARCHAR" />
+        <result column="MEETING_FILE" property="meetingFile" jdbcType="VARCHAR" />
+        <result column="FUND_ID" property="fundId" jdbcType="VARCHAR" />
+        <result column="PLAN_SIZE" property="planSize" jdbcType="NUMERIC" />
+        <result column="PLAN_NUM" property="planNum" jdbcType="NUMERIC" />
+        <result column="START_DATE" property="startDate" jdbcType="TIMESTAMP" />
+        <result column="END_DATE" property="endDate" jdbcType="TIMESTAMP" />
+        <result column="SPECIAL_FILE" property="specialFile" jdbcType="VARCHAR" />
+
+    </resultMap>
+    <resultMap id="ConditionInfoResult" type="com.ppmg.ei.model.ConditionInfoModel">
+        <result column="INFO_ID" property="infoId" jdbcType="VARCHAR" />
+        <result column="CONDITION_ID" property="conditionId" jdbcType="VARCHAR" />
+        <result column="COO_SIZE" property="cooSize" jdbcType="NUMERIC" />
+        <result column="TOTAL_COO_NUM" property="totalCooNum" jdbcType="NUMERIC" />
+        <result column="FIT_COO_NUM" property="fitCooNum" jdbcType="NUMERIC" />
+        <result column="MEETING_FILE" property="meetingFile" jdbcType="VARCHAR" />
+        <result column="ATTA_FILE" property="attaFile" jdbcType="VARCHAR" />
+        <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+        <result column="CREATE_DT" property="createDt" jdbcType="DATE" />
+        <result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+        <result column="UPDATE_DT" property="updateDt" jdbcType="DATE" />
+        <result column="PROCESS_INST_ID" property="processInstId" jdbcType="VARCHAR" />
+        <result column="STATUS" property="status" jdbcType="VARCHAR" />
+        <result column="FUND_ID" property="fundId" jdbcType="VARCHAR" />
+        <result column="ATTA_DETAIL" property="attaDetail" jdbcType="VARCHAR" />
+
+        <result column="FUND_NAME" property="fundName" jdbcType="VARCHAR" />
+        <result column="PLAN_SIZE" property="planSize" jdbcType="NUMERIC" />
+        <result column="PLAN_NUM" property="planNum" jdbcType="NUMERIC" />
+
+    </resultMap>
+    <resultMap id="conditionItemFileModelResult" type="com.ppmg.ei.model.ConditionItemModel" extends="conditionItemModelResult">
+        <collection property="conditionFileModels" ofType="com.ppmg.ei.model.ConditionFileModel">
+            <result column="F_FILE_ID" property="fileId" jdbcType="VARCHAR" />
+            <result column="F_ITEM_ID" property="itemId" jdbcType="VARCHAR" />
+            <result column="F_FILE_TYPE" property="fileType" jdbcType="VARCHAR" />
+            <result column="F_FILE_DATE" property="fileDate" jdbcType="DATE" />
+            <result column="F_FILE_DETAIL" property="fileDetail" jdbcType="VARCHAR" />
+            <result column="F_ATTA_FILE" property="attaFile" jdbcType="VARCHAR" />
+            <result column="F_CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+            <result column="F_CREATE_DT" property="createDt" jdbcType="DATE" />
+            <result column="F_UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+            <result column="F_UPDATE_DT" property="updateDt" jdbcType="DATE" />
+            <result column="F_STATUS" property="status" jdbcType="VARCHAR" />
+        </collection>
+    </resultMap>
+    <resultMap id="conditionItemResults" type="com.ppmg.ei.model.ConditionItemModel">
+            <result column="FILE_ID" property="fileId" jdbcType="VARCHAR" />
+            <result column="ITEM_ID" property="itemId" jdbcType="VARCHAR" />
+            <result column="FILE_TYPE" property="fileType" jdbcType="VARCHAR" />
+            <result column="FILE_DATE" property="fileDate" jdbcType="DATE" />
+            <result column="FILE_DETAIL" property="fileDetail" jdbcType="VARCHAR" />
+            <result column="ATTA_FILE" property="attaFile" jdbcType="VARCHAR" />
+            <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+            <result column="CREATE_DT" property="createDt" jdbcType="DATE" />
+            <result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+            <result column="UPDATE_DT" property="updateDt" jdbcType="DATE" />
+            <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    </resultMap>
+    <resultMap id="conditionFileModelsResult" type="com.ppmg.ei.model.ConditionFileModel">
+            <result column="file_id" property="fileId" jdbcType="VARCHAR" />
+            <result column="ITEM_ID" property="itemId" jdbcType="VARCHAR" />
+            <result column="FILE_TYPE" property="fileType" jdbcType="VARCHAR" />
+            <result column="FILE_DATE" property="fileDate" jdbcType="DATE" />
+            <result column="FILE_DETAIL" property="fileDetail" jdbcType="VARCHAR" />
+            <result column="ATTA_FILE" property="attaFile" jdbcType="VARCHAR" />
+            <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+            <result column="CREATE_DT" property="createDt" jdbcType="DATE" />
+            <result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+            <result column="UPDATE_DT" property="updateDt" jdbcType="DATE" />
+            <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    </resultMap>
+    <resultMap id="conditionItemModelResult" type="com.ppmg.ei.model.ConditionItemModel">
+            <result column="ITEM_ID" property="itemId" jdbcType="VARCHAR" />
+            <result column="INFO_ID" property="infoId" jdbcType="VARCHAR" />
+            <result column="FUND_ADMIN_NAME" property="fundAdminName" jdbcType="VARCHAR" />
+            <result column="FUND_ADMIN_ID" property="fundAdminId" jdbcType="VARCHAR" />
+            <result column="FUND_NAME" property="fundName" jdbcType="VARCHAR" />
+            <result column="FUND_ID" property="fundId" jdbcType="VARCHAR" />
+            <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+            <result column="CREATE_DT" property="createDt" jdbcType="DATE" />
+            <result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+            <result column="UPDATE_DT" property="updateDt" jdbcType="DATE" />
+            <result column="STATUS" property="status" jdbcType="VARCHAR" />
+            <result column="IS_FIT" property="isFit" jdbcType="VARCHAR" />
+            <result column="FILE_TYPE" property="fileType" jdbcType="VARCHAR" />
+            <result column="ATTA_DETAIL" property="attaDetail" jdbcType="VARCHAR" />
+            <result column="ATTA_FILE" property="attaFile" jdbcType="VARCHAR" />
+
+            <result column="RAISE_AMOUNT" property="raiseAmount" jdbcType="VARCHAR" />
+            <result column="APPLY_MONEY" property="fundAdminApplyMoney" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <resultMap id="FundInfoResultCondition" type="com.ppmg.ei.model.FundInfoModel">
+        <result column="FUND_ID" property="fundId" jdbcType="VARCHAR" />
+        <result column="FUND_CODE" property="fundCode" jdbcType="VARCHAR" />
+        <result column="FUND_NAME" property="fundName" jdbcType="VARCHAR" />
+        <result column="REG_NAME" property="regName" jdbcType="VARCHAR" />
+        <result column="MC_ID" property="mcId" jdbcType="VARCHAR" />
+        <result column="MC_NAME" property="mcName" jdbcType="VARCHAR" />
+        <result column="GP" property="gp" jdbcType="VARCHAR" />
+        <result column="CONTACT" property="contact" jdbcType="VARCHAR" />
+        <result column="PHONE_NO" property="phoneNo" jdbcType="VARCHAR" />
+        <result column="CONTACT_EMAIL" property="contactEmail" jdbcType="VARCHAR" />
+        <result column="PLAN_AMOUNT" property="planAmount" jdbcType="NUMERIC" />
+        <result column="PLAN_CURR" property="planCurr" jdbcType="VARCHAR" />
+        <result column="RAISE_AMOUNT" property="raiseAmount" jdbcType="NUMERIC" />
+        <result column="RAISE_CURRENCY" property="raiseCurrency" jdbcType="VARCHAR" />
+        <result column="FUND_STRUCT" property="fundStruct" jdbcType="VARCHAR" />
+        <result column="PLAT_PROP" property="platProp" jdbcType="VARCHAR" />
+        <result column="SUB_PLAT_PROP" property="subPlatProp" jdbcType="VARCHAR" />
+        <result column="SETUP_DT" property="setupDt" jdbcType="TIMESTAMP" />
+        <result column="CLOSE_DT" property="closeDt" jdbcType="TIMESTAMP" />
+        <result column="REG_ADD" property="regAdd" jdbcType="VARCHAR" />
+        <result column="ORGN_CODE" property="orgnCode" jdbcType="VARCHAR" />
+        <result column="LEGAL_PERSON" property="legalPerson" jdbcType="VARCHAR" />
+        <result column="CUSTODIAN_BANK" property="custodianBank" jdbcType="VARCHAR" />
+        <result column="REG_CAPITAL" property="regCapital" jdbcType="NUMERIC" />
+        <result column="REG_CURRENCY" property="regCurrency" jdbcType="VARCHAR" />
+        <result column="CAPITAL_ACCOUNT" property="capitalAccount" jdbcType="VARCHAR" />
+        <result column="RETURN_ACCOUNT" property="returnAccount" jdbcType="VARCHAR" />
+        <result column="FUND_STS" property="fundSts" jdbcType="VARCHAR" />
+        <result column="DESC_FILE" property="descFile" jdbcType="VARCHAR" />
+        <result column="FUND_SRC" property="fundSrc" jdbcType="VARCHAR" />
+        <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+        <result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+        <result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+        <result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+        <result column="FUND_GENRE" property="fundGenre" jdbcType="VARCHAR" />
+        <result column="CUSTODIAN_BANKACCOUNT" property="custodianBankaccount" jdbcType="VARCHAR" />
+        <result column="CAPITAL_BANK" property="capitalBank" jdbcType="VARCHAR" />
+        <result column="RETURN_BANK" property="returnBank" jdbcType="VARCHAR" />
+        <result column="PARTNERS" property="partners" jdbcType="VARCHAR" />
+        <result column="GROUP_ID" property="groupId" jdbcType="NUMERIC" />
+        <result column="GP_ID" property="gpId" jdbcType="VARCHAR" />
+        <result column="RMB_RAISE_AMOUNT" property="rmbRaiseAmount" jdbcType="NUMERIC" />
+        <result column="CURRENT_AMOUNT" property="currentAmount" jdbcType="NUMERIC" />
+        <result column="CURRENT_CURRENCY" property="currentCurrency" jdbcType="VARCHAR" />
+        <result column="RMB_CURRENT_AMOUNT" property="rmbCurrentAmount" jdbcType="NUMERIC" />
+        <result column="MAINTENANCE_ID" property="maintenanceId" jdbcType="VARCHAR" />
+        <result column="MAINTENANCE" property="maintenance" jdbcType="VARCHAR" />
+        <result column="SOCIAL_CODE" property="socialCode" jdbcType="VARCHAR" />
+        <result column="KEY_PERSON_LOCK" property="keyPersonLock" jdbcType="VARCHAR" />
+        <result column="RATIO_IN_GP" property="ratioInGp" jdbcType="NUMERIC" />
+        <result column="RMB_PLAN_AMOUNT" property="rmbPlanAmount" jdbcType="NUMERIC" />
+        <result column="FUND_SCOPE" property="fundScope" jdbcType="VARCHAR" />
+        <result column="YH_RATIO_AS_LP" property="yhRatioAsLp" jdbcType="NUMERIC" />
+        <result column="YH_RATIO_IN_GP" property="yhRatioInGp" jdbcType="NUMERIC" />
+        <result column="YH_RATIO_IN_MC" property="yhRatioInMc" jdbcType="NUMERIC" />
+        <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+        <result column="ENTE_ID" property="enteId" jdbcType="VARCHAR" />
+        <result column="EMAIL_PASSWORD" property="emailPassword" jdbcType="VARCHAR" />
+        <result column="FINANCE_ID" property="financeId" jdbcType="VARCHAR" />
+        <result column="FINANCE_NAME" property="financeName" jdbcType="VARCHAR" />
+        <result column="EXECUTIVE_PARTNER_ID" property="executivePartnerId" jdbcType="VARCHAR" />
+        <result column="EXECUTIVE_PARTNER_NAME" property="executivePartnerName" jdbcType="VARCHAR" />
+        <result column="IS_FIT" property="isFit" jdbcType="VARCHAR" />
+        <result column="CUSTODIAN_OPEN_BANK" property="custodianOpenBank" jdbcType="VARCHAR" />
+        <result column="CUSTODIAN_BANK_NUM" property="custodianBankNum" jdbcType="VARCHAR" />
+        <result column="IS_RECORD" property="isRecord" jdbcType="VARCHAR" />
+        <result column="RECORD_CODE" property="recordCode" jdbcType="VARCHAR" />
+        <result column="RECORD_DATE" property="recordDate" jdbcType="TIMESTAMP" />
+        <result column="RECORD_ATTA" property="recordAtta" jdbcType="VARCHAR" />
+        <result column="IS_CUSTODIAN" property="isCustodian" jdbcType="VARCHAR" />
+        <result column="CUSTODIAN_ATTA" property="custodianAtta" jdbcType="VARCHAR" />
+        <result column="IS_AUTH" property="isAuth" jdbcType="VARCHAR" />
+        <result column="AUTH_ATTA" property="authAtta" jdbcType="VARCHAR" />
+        <result column="PROMISE_AMOUNT" property="promiseAmount" jdbcType="NUMERIC" />
+        <result column="PROFIT_AMOUNT" property="profitAmount" jdbcType="NUMERIC" />
+        <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="searchSql">
+        SELECT * FROM TZ_T_COO_CONDITION
+        <where>
+            <include refid="searchCondition.searchClause" />
+        </where>
+        order by UPDATE_DT desc
+    </sql>
+
+    <select id="selectListPage" resultMap="ConditionResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+        <include refid="searchSql" />
+    </select>
+
+    <select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+        SELECT COUNT(*) FROM (
+        <include refid="searchSql" />
+        ) t
+    </select>
+    <select id="selectById" parameterType="String" resultMap="ConditionResult">
+		SELECT * FROM TZ_T_COO_CONDITION WHERE CONDITION_ID = #{conditionId,jdbcType=VARCHAR}
+	</select>
+    <!--查询母基金-->
+    <sql id="searchSqlFundInfo">
+        select * from BD_T_FUND_INFO where sub_plat_prop ='2'
+        <where>
+            <include refid="searchCondition.searchClause" />
+        </where>
+    </sql>
+    <select id="selectListPageFundInfo" resultMap="FundInfoResultCondition" parameterType="com.founder.ssm.core.common.SearchCondition">
+        <include refid="searchSqlFundInfo" />
+    </select>
+    <!--公开征集，插入-->
+    <insert id="insert" parameterType="com.ppmg.ei.model.ConditionModel">
+		INSERT INTO TZ_T_COO_CONDITION (CONDITION_ID,FUND_NAME,FUND_SIZE,MAN_DEP,REGISTRANT,REG_DATE,REMARK,METHOD_FILE,CONDITION_FILE,
+		CREATE_BY,UPDATE_BY,CARRIER,CARRIER_NAME,CARRIER_TYPE,PROCESS_INST_ID,STATUS,MEETING_FILE,FUND_ID,PLAN_SIZE,PLAN_NUM,START_DATE,END_DATE,SPECIAL_FILE)
+		values(#{conditionId,jdbcType=VARCHAR},#{fundName,jdbcType=VARCHAR},#{fundSize,jdbcType=NUMERIC},#{manDep,jdbcType=VARCHAR}
+		,#{registrant,jdbcType=VARCHAR},#{regDate,jdbcType=DATE},#{remark,jdbcType=VARCHAR},#{methodFile,jdbcType=VARCHAR}
+		,#{conditionFile,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{updateBy,jdbcType=VARCHAR},
+		#{carrier,jdbcType=VARCHAR},#{carrierName,jdbcType=VARCHAR},#{carrierType,jdbcType=VARCHAR},
+		#{processInstId,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{meetingFile,jdbcType=VARCHAR},#{fundId,jdbcType=VARCHAR},
+		#{planSize,jdbcType=NUMERIC},#{planNum,jdbcType=NUMERIC},#{startDate,jdbcType=DATE},
+		#{endDate,jdbcType=DATE},#{specialFile,jdbcType=VARCHAR})
+	</insert>
+    <!--公开征集，更新-->
+    <update id="updatePK" parameterType="com.ppmg.ei.model.ConditionModel">
+        UPDATE TZ_T_COO_CONDITION
+        <set>
+            <if test="conditionId != null and conditionId != ''" >
+                CONDITION_ID = #{conditionId,jdbcType=VARCHAR},
+            </if>
+            <if test="fundName != null and fundName != ''" >
+                FUND_NAME = #{fundName,jdbcType=VARCHAR},
+            </if>
+            <if test="fundSize != null and fundSize != ''" >
+                FUND_SIZE = #{fundSize,jdbcType=VARCHAR},
+            </if>
+            <if test="manDep != null and manDep != ''" >
+                MAN_DEP = #{manDep,jdbcType=VARCHAR},
+            </if>
+            <if test="registrant != null and registrant != ''" >
+                REGISTRANT = #{registrant,jdbcType=VARCHAR},
+            </if>
+            <if test="regDate != null" >
+                REG_DATE = #{regDate,jdbcType=DATE},
+            </if>
+            <if test="remark != null and remark != ''" >
+                REMARK = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="methodFile != null and methodFile != ''" >
+                METHOD_FILE = #{methodFile,jdbcType=VARCHAR},
+            </if>
+            <if test="conditionFile != null and conditionFile != ''" >
+                CONDITION_FILE = #{conditionFile,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null and createBy != ''" >
+                CREATE_BY = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateBy != null and updateBy != ''" >
+                UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDt != null" >
+                UPDATE_DT = #{updateDt,jdbcType=VARCHAR},
+            </if>
+            <if test="carrier != null and carrier != ''" >
+                CARRIER = #{carrier,jdbcType=VARCHAR},
+            </if>
+            <if test="carrierName != null and carrierName != ''" >
+                CARRIER_NAME = #{carrierName,jdbcType=VARCHAR},
+            </if>
+            <if test="carrierType != null and carrierType != ''" >
+                CARRIER_TYPE = #{carrierType,jdbcType=VARCHAR},
+            </if>
+            <if test="processInstId != null and processInstId != ''" >
+                PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null and status != ''" >
+                STATUS = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="meetingFile != null and meetingFile != ''" >
+                MEETING_FILE = #{meetingFile,jdbcType=VARCHAR},
+            </if>
+            <if test="fundId != null and fundId != ''" >
+                FUND_ID = #{fundId,jdbcType=VARCHAR},
+            </if>
+            <if test="planSize != null and planSize != ''" >
+                PLAN_SIZE = #{planSize,jdbcType=NUMERIC},
+            </if>
+            <if test="planNum != null and planNum != ''" >
+                PLAN_NUM = #{planNum,jdbcType=NUMERIC},
+            </if>
+            <if test="startDate != null" >
+                START_DATE = #{startDate,jdbcType=DATE},
+            </if>
+            <if test="endDate != null" >
+                END_DATE = #{endDate,jdbcType=DATE},
+            </if>
+            <if test="specialFile != null and specialFile != ''" >
+                SPECIAL_FILE = #{specialFile,jdbcType=VARCHAR},
+            </if>
+
+        </set>
+        WHERE CONDITION_ID = #{conditionId,jdbcType=VARCHAR}
+    </update>
+    <!--公开征集单条删除-->
+    <delete id="deleteById" parameterType="String">
+		DELETE FROM  TZ_T_COO_CONDITION WHERE CONDITION_ID = #{id,jdbcType=VARCHAR}
+	</delete>
+    <!--公开征集单条删除-->
+    <delete id="deleteByConditonId" parameterType="String">
+		DELETE FROM  TZ_T_COO_CONDITION WHERE CONDITION_ID = #{conditionId,jdbcType=VARCHAR}
+	</delete>
+    <!--公开征集批量删除-->
+    <delete id="deleteBatch" parameterType="List">
+        DELETE FROM  TZ_T_COO_CONDITION WHERE CONDITION_ID IN
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <!--##############华丽分隔线##############征集信息########################华丽分隔线###########################-->
+    <!--征集信息分页查询列表-->
+    <sql id="searchSql2">
+        SELECT * FROM
+        (SELECT ct.condition_id,
+        ct.fund_name,
+        ct.fund_size,
+        ct.plan_size,
+        ct.plan_num,
+        i.coo_size,
+        i.total_coo_num,
+        i.fit_coo_num,
+        i.status,
+        i.info_id,
+        i.UPDATE_DT,
+        i.PROCESS_INST_ID
+        FROM tz_t_coo_condition ct
+        right JOIN tz_t_coo_condition_info i
+        ON ct.condition_id = i.condition_id)
+        <where>
+            <include refid="searchCondition.searchClause" />
+        </where>
+        order by UPDATE_DT desc
+    </sql>
+    <select id="selectListPage2" resultMap="ConditionInfoResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+        <include refid="searchSql2" />
+    </select>
+    <!--征集信息查询详情-->
+    <sql id="TZ_T_COO_CONDITIONS">
+      T.*
+    </sql>
+    <sql id="TZ_T_COO_CONDITION_INFOS">
+      OP.INFO_ID opInfoId,
+      OP.CONDITION_ID opConditionId,
+      OP.COO_SIZE opCooSize,
+      OP.TOTAL_COO_NUM opTotalCooNum,
+      OP.FIT_COO_NUM opFitCooNum,
+      OP.MEETING_FILE opMeetingFile,
+      OP.ATTA_FILE opAttaFile,
+      OP.CREATE_BY opCreateBy,
+      OP.CREATE_DT opCreateDt,
+      OP.UPDATE_BY opUpdateBy,
+      OP.UPDATE_DT opUpdateDt,
+      OP.PROCESS_INST_ID opProcessInstId,
+      OP.STATUS opStatus,
+      OP.FUND_ID opFundId,
+      OP.ATTA_DETAIL opAttaDetail
+    </sql>
+    <sql id="TZ_T_COO_CONDITION_ITEMS">
+      Z.ITEM_ID itItemId,
+      Z.INFO_ID itInfoId,
+      Z.FUND_ADMIN_NAME itFundAdminName,
+      Z.FUND_ADMIN_ID itFundAdminId,
+      Z.FUND_NAME itFundName,
+      Z.FUND_ID itFundId,
+      Z.CREATE_BY itCreateBy,
+      Z.CREATE_DT itCreateDt,
+      Z.UPDATE_BY itUpdateBy,
+      Z.UPDATE_DT itUpdateDt,
+      Z.STATUS itStatus,
+      Z.IS_FIT itIsFit,
+      Z.FILE_TYPE itFileType,
+      Z.ATTA_DETAIL itAttaDetail,
+      Z.ATTA_FILE itAttaFile
+    </sql>
+    <select id="getAllConditionInfoItim" parameterType="String" resultMap="ConditionResultAll">
+        SELECT
+        <include refid="TZ_T_COO_CONDITIONS" />,
+        <include refid="TZ_T_COO_CONDITION_INFOS" />,
+        <include refid="TZ_T_COO_CONDITION_ITEMS" />
+        FROM TZ_T_COO_CONDITION T
+        left join TZ_T_COO_CONDITION_INFO OP on T.CONDITION_ID = OP.CONDITION_ID
+        left join TZ_T_COO_CONDITION_ITEM Z on OP.INFO_ID = Z.INFO_ID
+        where T.CONDITION_ID = #{conditionId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectByInfoId" parameterType="String" resultMap="ConditionInfoResult">
+		SELECT * FROM TZ_T_COO_CONDITION_INFO WHERE CONDITION_ID = #{conditionId,jdbcType=VARCHAR}
+	</select>
+
+    <select id="selectByInfoIdT" parameterType="String" resultMap="ConditionInfoResult">
+		SELECT * FROM TZ_T_COO_CONDITION_INFO WHERE INFO_ID = #{infoId,jdbcType=VARCHAR}
+	</select>
+
+    <!--根据infoId查询TZ_T_COO_CONDITION_ITEM表-->
+    <select id="selectByItemIdOne2" parameterType="String" resultMap="conditionItemResults">
+		SELECT * FROM TZ_T_COO_CONDITION_ITEM WHERE INFO_ID = #{infoId,jdbcType=VARCHAR}
+	</select>
+    <!--插入征集信息：TZ_T_COO_CONDITION_INFO表-->
+    <insert id="insertConditionInfo" parameterType="java.util.List">
+        insert into TZ_T_COO_CONDITION_INFO
+        ( INFO_ID,CONDITION_ID,COO_SIZE,TOTAL_COO_NUM,FIT_COO_NUM,MEETING_FILE,ATTA_FILE,
+        CREATE_BY,UPDATE_BY,PROCESS_INST_ID,STATUS,FUND_ID,ATTA_DETAIL)
+        <foreach collection="list" item="item" index="index" separator="union all">
+            (select
+            #{item.infoId,jdbcType=VARCHAR},
+            #{item.conditionId,jdbcType=VARCHAR},
+            #{item.cooSize,jdbcType=VARCHAR},
+            #{item.totalCooNum,jdbcType=VARCHAR},
+            #{item.fitCooNum,jdbcType=VARCHAR},
+            #{item.meetingFile,jdbcType=VARCHAR},
+            #{item.attaFile,jdbcType=VARCHAR},
+            #{item.createBy,jdbcType=VARCHAR},
+            #{item.updateBy,jdbcType=VARCHAR},
+            #{item.processInstId,jdbcType=VARCHAR},
+            #{item.status,jdbcType=VARCHAR},
+            #{item.fundId,jdbcType=VARCHAR},
+            #{item.attaDetail,jdbcType=VARCHAR}
+            from dual)
+        </foreach>
+    </insert>
+    <!--更新征集信息：TZ_T_COO_CONDITION_INFO表-->
+    <update id="updateConditionInfo" parameterType="com.ppmg.ei.model.ConditionInfoModel">
+        UPDATE TZ_T_COO_CONDITION_INFO
+        <set>
+            <if test="infoId != null and infoId != ''" >
+                INFO_ID = #{infoId,jdbcType=VARCHAR},
+            </if>
+            <if test="conditionId != null and conditionId != ''" >
+                CONDITION_ID = #{conditionId,jdbcType=VARCHAR},
+            </if>
+            <if test="cooSize != null and cooSize != ''" >
+                COO_SIZE = #{cooSize,jdbcType=NUMERIC},
+            </if>
+            <if test="totalCooNum != null and totalCooNum != ''" >
+                TOTAL_COO_NUM = #{totalCooNum,jdbcType=NUMERIC},
+            </if>
+            <if test="fitCooNum != null and fitCooNum != ''" >
+                FIT_COO_NUM = #{fitCooNum,jdbcType=NUMERIC},
+            </if>
+            <if test="meetingFile != null and meetingFile != ''" >
+                MEETING_FILE = #{meetingFile,jdbcType=VARCHAR},
+            </if>
+            <if test="attaFile != null and attaFile != ''" >
+                ATTA_FILE = #{attaFile,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null and createBy != ''" >
+                CREATE_BY = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateBy != null and updateBy != ''" >
+                UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDt != null" >
+                UPDATE_DT = #{updateDt,jdbcType=VARCHAR},
+            </if>
+            <if test="processInstId != null and processInstId != ''" >
+                PROCESS_INST_ID = #{processInstId,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null and status != ''" >
+                STATUS = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="fundId != null and fundId != ''" >
+                FUND_ID = #{fundId,jdbcType=VARCHAR},
+            </if>
+            <if test="attaDetail != null and attaDetail != ''" >
+                ATTA_DETAIL = #{attaDetail,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE INFO_ID = #{infoId,jdbcType=VARCHAR}
+    </update>
+    <!--删除征集信息表-->
+    <delete id="deleteConditionInfo" parameterType="java.lang.String">
+        delete from TZ_T_COO_CONDITION_INFO where INFO_ID in
+        <foreach collection="array" item="arr" index="no" open="("
+                 separator="," close=")">
+            #{arr}
+        </foreach>
+    </delete>
+    <!--根据infoid删除,TZ_T_COO_CONDITION_INFO-->
+    <delete id="deleteByInfoId" parameterType="String">
+		DELETE FROM  TZ_T_COO_CONDITION_INFO WHERE INFO_ID = #{infoId,jdbcType=VARCHAR}
+	</delete>
+
+    <!--##############华丽分隔线##############基金管理人##########华丽分隔线#############-->
+    <!--查询基金管理人-->
+    <sql id="searchSqlItem">
+        SELECT * FROM TZ_T_COO_CONDITION_ITEM
+        <where>
+            <include refid="searchCondition.searchClause" />
+        </where>
+    </sql>
+
+    <select id="selectListPageItems" resultMap="conditionItemModelResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+        <include refid="searchSqlItem" />
+    </select>
+    <!--查询基金管理人详情-->
+    <select id="selectConditionItemDetails" parameterType="String" resultMap="conditionItemFileModelResult">
+        select i.*,
+        f.file_id as F_FILE_ID,
+        f.item_id as F_ITEM_ID,
+        f.FILE_TYPE as F_FILE_TYPE,
+        f.FILE_DATE as F_FILE_DATE,
+        f.FILE_DETAIL as F_FILE_DETAIL,
+        f.ATTA_FILE as F_ATTA_FILE,
+        f.CREATE_BY as F_CREATE_BY,
+        f.CREATE_DT as F_CREATE_DT,
+        f.UPDATE_BY as F_UPDATE_BY,
+        f.UPDATE_DT as F_UPDATE_DT,
+        f.STATUS as F_STATUS
+        from TZ_T_COO_CONDITION_ITEM i
+        left join TZ_T_COO_CONDITION_FILE f on i.ITEM_ID = f.ITEM_ID  where i.ITEM_ID = #{itemId,jdbcType=VARCHAR}
+    </select>
+    <!--插入，基金管理人：TZ_T_COO_CONDITION_ITEM表-->
+    <insert id="insertConditionItem" parameterType="List">
+        insert into TZ_T_COO_CONDITION_ITEM
+        (ITEM_ID,INFO_ID,FUND_ADMIN_NAME,FUND_ADMIN_ID,FUND_NAME,FUND_ID,
+        CREATE_BY,UPDATE_BY,STATUS,IS_FIT,FILE_TYPE,ATTA_DETAIL,ATTA_FILE,RAISE_AMOUNT,APPLY_MONEY)
+        <foreach collection="list" item="item" index="index" separator="union all">
+            (select
+                #{item.itemId,jdbcType=VARCHAR},
+                #{item.infoId,jdbcType=VARCHAR},
+                #{item.fundAdminName,jdbcType=VARCHAR},
+                #{item.fundAdminId,jdbcType=VARCHAR},
+                #{item.fundName,jdbcType=VARCHAR},
+                #{item.fundId,jdbcType=VARCHAR},
+                #{item.createBy,jdbcType=VARCHAR},
+                #{item.updateBy,jdbcType=VARCHAR},
+                #{item.status,jdbcType=VARCHAR},
+                #{item.isFit,jdbcType=VARCHAR},
+                #{item.fileType,jdbcType=VARCHAR},
+                #{item.attaDetail,jdbcType=VARCHAR},
+                #{item.attaFile,jdbcType=VARCHAR},
+                #{item.raiseAmount,jdbcType=NUMERIC},
+                #{item.fundAdminApplyMoney,jdbcType=NUMERIC}
+                from dual)
+        </foreach>
+    </insert>
+    <!--单条更新，基金管理人：TZ_T_COO_CONDITION_ITEM表-->
+    <update id="updateConditionItem" parameterType="com.ppmg.ei.model.ConditionItemModel">
+        UPDATE TZ_T_COO_CONDITION_ITEM
+        <set>
+            <if test="itemId != null and itemId != ''" >
+                ITEM_ID = #{itemId,jdbcType=VARCHAR},
+            </if>
+            <if test="infoId != null and infoId != ''" >
+                INFO_ID = #{infoId,jdbcType=VARCHAR},
+            </if>
+            <if test="fundAdminName != null and fundAdminName != ''" >
+                FUND_ADMIN_NAME = #{fundAdminName,jdbcType=NUMERIC},
+            </if>
+            <if test="fundAdminId != null and fundAdminId != ''" >
+                FUND_ADMIN_ID = #{fundAdminId,jdbcType=NUMERIC},
+            </if>
+            <if test="fundName != null and fundName != ''" >
+                FUND_NAME = #{fundName,jdbcType=NUMERIC},
+            </if>
+            <if test="fundId != null and fundId != ''" >
+                FUND_ID = #{fundId,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null and createBy != ''" >
+                CREATE_BY = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateBy != null and updateBy != ''" >
+                UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null and status != ''" >
+                STATUS = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="isFit != null and isFit != ''" >
+                IS_FIT = #{isFit,jdbcType=VARCHAR},
+            </if>
+            <if test="fileType != null and fileType != ''" >
+                FILE_TYPE = #{fileType,jdbcType=VARCHAR},
+            </if>
+            <if test="attaDetail != null and attaDetail != ''" >
+                ATTA_DETAIL = #{attaDetail,jdbcType=VARCHAR},
+            </if>
+            <if test="attaFile != null and attaFile != ''" >
+                ATTA_FILE = #{attaFile,jdbcType=VARCHAR},
+            </if>
+            <if test="raiseAmount != null and raiseAmount != ''" >
+                RAISE_AMOUNT = #{raiseAmount,jdbcType=VARCHAR},
+            </if>
+            <if test="fundAdminApplyMoney != null and fundAdminApplyMoney != ''" >
+                APPLY_MONEY = #{fundAdminApplyMoney,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE ITEM_ID = #{itemId,jdbcType=VARCHAR}
+    </update>
+    <!--批量删除，基金管理人：TZ_T_COO_CONDITION_ITEM表-->
+    <delete id="deleteConditionItem" parameterType="java.lang.String">
+        delete from TZ_T_COO_CONDITION_ITEM where ITEM_ID in
+        <foreach collection="array" item="arr" index="no" open="("
+                 separator="," close=")">
+            #{arr}
+        </foreach>
+    </delete>
+    <!--根据infoid删除,TZ_T_COO_CONDITION_ITEM-->
+    <delete id="deleteByItemId" parameterType="String">
+		DELETE FROM  TZ_T_COO_CONDITION_ITEM WHERE INFO_ID = #{infoId,jdbcType=VARCHAR}
+	</delete>
+    <!--=======================征集材料===================-->
+    <!--查询征集材料详情-->
+    <select id="selectConditionFileDetail" parameterType="String" resultMap="conditionFileModelsResult">
+        SELECT * FROM TZ_T_COO_CONDITION_FILE
+        where file_id = #{fileId,jdbcType=VARCHAR}
+    </select>
+    <!--征集材料增加-->
+    <insert id="insertConditionFile" parameterType="List">
+        insert into TZ_T_COO_CONDITION_FILE
+        (FILE_ID,ITEM_ID,FILE_TYPE,FILE_DATE,FILE_DETAIL,ATTA_FILE,
+        CREATE_BY,UPDATE_BY,STATUS)
+        <foreach collection="list" item="item" index="index" separator="union all">
+            (select
+                (SELECT sys_guid() FROM DUAL),
+                #{item.itemId,jdbcType=VARCHAR},
+                #{item.fileType,jdbcType=VARCHAR},
+                #{item.fileDate,jdbcType=VARCHAR},
+                #{item.fileDetail,jdbcType=VARCHAR},
+                #{item.attaFile,jdbcType=VARCHAR},
+                #{item.createBy,jdbcType=VARCHAR},
+                #{item.updateBy,jdbcType=VARCHAR},
+                #{item.status,jdbcType=VARCHAR}
+            from dual)
+        </foreach>
+    </insert>
+    <!--征集材料更新-->
+    <update id="updateConditionFile" parameterType="com.ppmg.ei.model.ConditionFileModel">
+        UPDATE TZ_T_COO_CONDITION_FILE
+        <set>
+            <if test="fileId != null and fileId != ''" >
+                FILE_ID = #{fileId,jdbcType=VARCHAR},
+            </if>
+            <if test="itemId != null and itemId != ''" >
+                ITEM_ID = #{itemId,jdbcType=VARCHAR},
+            </if>
+            <if test="fileType != null and fileType != ''" >
+                FILE_TYPE = #{fileType,jdbcType=VARCHAR},
+            </if>
+            <if test="fileDate != null" >
+                FILE_DATE = #{fileDate,jdbcType=DATE},
+            </if>
+            <if test="fileDetail != null and fileDetail != ''" >
+                FILE_DETAIL = #{fileDetail,jdbcType=VARCHAR},
+            </if>
+            <if test="attaFile != null and attaFile != ''" >
+                ATTA_FILE = #{attaFile,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null and createBy != ''" >
+                CREATE_BY = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateBy != null and updateBy != ''" >
+                UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null and status != ''" >
+                STATUS = #{status,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE FILE_ID = #{fileId,jdbcType=VARCHAR}
+    </update>
+    <!--征集材料删除-->
+    <delete id="deleteConditionFile" parameterType="String">
+		DELETE FROM  TZ_T_COO_CONDITION_FILE WHERE ITEM_ID = #{itemId,jdbcType=VARCHAR}
+	</delete>
+</mapper>

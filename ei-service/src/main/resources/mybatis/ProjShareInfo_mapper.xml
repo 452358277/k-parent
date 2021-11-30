@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProjShareInfo">
+	<!-- start autocreate -->
+
+	<resultMap id="ProjShareInfoResult" type="com.ppmg.ei.model.ProjShareInfoModel">
+		<result column="PK_ID" property="pkId" jdbcType="VARCHAR" />
+		<result column="OS_ID" property="osId" jdbcType="VARCHAR" />
+		<result column="INVESTOR_ID" property="investorId" jdbcType="VARCHAR" />
+		<result column="INVESTOR_NAME" property="investorName" jdbcType="VARCHAR" />
+		<result column="SHARE_RATE" property="shareRate" jdbcType="NUMERIC" />
+		<result column="INVE_AMOUNT" property="inveAmount" jdbcType="NUMERIC" />
+		<result column="INVE_CURRENCY" property="inveCurrency" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+		<result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+		<result column="INVESTMENT_ATTRIBUTES" property="investmentAttributes" jdbcType="VARCHAR" />
+		<result column="INVESTOR_PRO" property="investorPro" jdbcType="VARCHAR" />
+		<result column="PLAN_AMOUNT" property="planAmount" jdbcType="NUMERIC" />
+		<result column="TOTAL_RATE" property="totalRate" jdbcType="NUMERIC" />
+		<result column="PAID_AMOUNT" property="paidAmount" jdbcType="NUMERIC" />
+		<result column="INVEST_RATE" property="investRate" jdbcType="NUMERIC" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ppmg.ei.model.ProjShareInfoModel">
+		INSERT INTO TZ_T_PROJ_SHARE_INFO (PK_ID,OS_ID,INVESTOR_ID,INVESTOR_NAME,SHARE_RATE,INVE_AMOUNT,INVE_CURRENCY,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,INVESTOR_PRO,PLAN_AMOUNT,TOTAL_RATE,PAID_AMOUNT,INVEST_RATE) values(#{pkId,jdbcType=VARCHAR},#{osId,jdbcType=VARCHAR},#{investorId,jdbcType=VARCHAR},#{investorName,jdbcType=VARCHAR},#{shareRate,jdbcType=NUMERIC},#{inveAmount,jdbcType=NUMERIC},#{inveCurrency,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{createBy,jdbcType=VARCHAR},#{createDt,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateDt,jdbcType=TIMESTAMP},#{investorPro,jdbcType=VARCHAR},#{planAmount,jdbcType=NUMERIC},#{totalRate,jdbcType=NUMERIC},#{paidAmount,jdbcType=NUMERIC},#{investRate,jdbcType=NUMERIC})
+	</insert>
+
+	<insert id="insertBatch" parameterType="List">
+		INSERT INTO TZ_T_PROJ_SHARE_INFO (PK_ID,OS_ID,INVESTOR_ID,INVESTOR_NAME,SHARE_RATE,INVE_AMOUNT,INVE_CURRENCY,STATUS,CREATE_BY,CREATE_DT,UPDATE_BY,UPDATE_DT,INVESTOR_PRO,PLAN_AMOUNT,TOTAL_RATE,PAID_AMOUNT,INVEST_RATE)
+		<foreach collection="list" item="item" index="index" separator="union all">
+			( select
+				#{item.pkId,jdbcType=VARCHAR},
+				#{item.osId,jdbcType=VARCHAR},
+				#{item.investorId,jdbcType=VARCHAR},
+				#{item.investorName,jdbcType=VARCHAR},
+				#{item.shareRate,jdbcType=NUMERIC},
+				#{item.inveAmount,jdbcType=NUMERIC},
+				#{item.inveCurrency,jdbcType=VARCHAR},
+				#{item.status,jdbcType=VARCHAR},
+				#{item.createBy,jdbcType=VARCHAR},
+				#{item.createDt,jdbcType=TIMESTAMP},
+				#{item.updateBy,jdbcType=VARCHAR},
+				#{item.updateDt,jdbcType=TIMESTAMP},
+				#{item.investorPro,jdbcType=VARCHAR},
+				#{item.planAmount,jdbcType=NUMERIC},
+				#{item.totalRate,jdbcType=NUMERIC},
+				#{item.paidAmount,jdbcType=NUMERIC},
+				#{item.investRate,jdbcType=NUMERIC}
+		 	from dual)
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  TZ_T_PROJ_SHARE_INFO WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deletePK" parameterType="com.ppmg.ei.model.ProjShareInfoModel">
+		DELETE FROM TZ_T_PROJ_SHARE_INFO
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="osId != null and osId != ''" >
+				AND OS_ID = #{osId,jdbcType=VARCHAR}
+			</if>
+			<if test="investorId != null and investorId != ''" >
+				AND INVESTOR_ID = #{investorId,jdbcType=VARCHAR}
+			</if>
+			<if test="investorName != null and investorName != ''" >
+				AND INVESTOR_NAME = #{investorName,jdbcType=VARCHAR}
+			</if>
+			<if test="shareRate != null and shareRate != ''" >
+				AND SHARE_RATE = #{shareRate,jdbcType=NUMERIC}
+			</if>
+			<if test="inveAmount != null and inveAmount != ''" >
+				AND INVE_AMOUNT = #{inveAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="inveCurrency != null and inveCurrency != ''" >
+				AND INVE_CURRENCY = #{inveCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteBatch" parameterType="List">
+		DELETE FROM  TZ_T_PROJ_SHARE_INFO WHERE PK_ID IN
+		<foreach collection="array" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<update id="updatePK" parameterType="com.ppmg.ei.model.ProjShareInfoModel">
+		UPDATE TZ_T_PROJ_SHARE_INFO 
+		<set>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR},
+			</if>
+			<if test="osId != null and osId != ''" >
+				OS_ID = #{osId,jdbcType=VARCHAR},
+			</if>
+			<if test="investorId != null and investorId != ''" >
+				INVESTOR_ID = #{investorId,jdbcType=VARCHAR},
+			</if>
+			<if test="investorName != null and investorName != ''" >
+				INVESTOR_NAME = #{investorName,jdbcType=VARCHAR},
+			</if>
+			<if test="shareRate != null and shareRate != ''" >
+				SHARE_RATE = #{shareRate,jdbcType=NUMERIC},
+			</if>
+			<if test="inveAmount != null and inveAmount != ''" >
+				INVE_AMOUNT = #{inveAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="inveCurrency != null and inveCurrency != ''" >
+				INVE_CURRENCY = #{inveCurrency,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null and status != ''" >
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				CREATE_BY = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createDt != null" >
+				CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDt != null" >
+				UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="investorPro != null and investorPro != ''" >
+				INVESTOR_PRO = #{investorPro,jdbcType=VARCHAR},
+			</if>
+			<if test="planAmount != null " >
+				PLAN_AMOUNT = #{planAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="totalRate != null " >
+				TOTAL_RATE = #{totalRate,jdbcType=NUMERIC},
+			</if>
+			<if test="paidAmount != null " >
+				PAID_AMOUNT = #{paidAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="investRate != null " >
+				INVEST_RATE = #{investRate,jdbcType=NUMERIC},
+			</if>
+		</set>
+		WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectById" parameterType="String" resultMap="ProjShareInfoResult">
+		SELECT * FROM TZ_T_PROJ_SHARE_INFO WHERE PK_ID = #{pkId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectBy" parameterType="com.ppmg.ei.model.ProjShareInfoModel" resultMap="ProjShareInfoResult">
+		SELECT * FROM TZ_T_PROJ_SHARE_INFO
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="osId != null and osId != ''" >
+				AND OS_ID = #{osId,jdbcType=VARCHAR}
+			</if>
+			<if test="investorId != null and investorId != ''" >
+				AND INVESTOR_ID = #{investorId,jdbcType=VARCHAR}
+			</if>
+			<if test="investorName != null and investorName != ''" >
+				AND INVESTOR_NAME = #{investorName,jdbcType=VARCHAR}
+			</if>
+			<if test="shareRate != null and shareRate != ''" >
+				AND SHARE_RATE = #{shareRate,jdbcType=NUMERIC}
+			</if>
+			<if test="inveAmount != null and inveAmount != ''" >
+				AND INVE_AMOUNT = #{inveAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="inveCurrency != null and inveCurrency != ''" >
+				AND INVE_CURRENCY = #{inveCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+			<if test="investorPro != null and investorPro != ''" >
+				AND INVESTOR_PRO = #{investorPro,jdbcType=VARCHAR}
+			</if>
+			<if test="planAmount != null " >
+				AND PLAN_AMOUNT = #{planAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="totalRate != null " >
+				AND TOTAL_RATE = #{totalRate,jdbcType=NUMERIC}
+			</if>
+			<if test="paidAmount != null " >
+				AND PAID_AMOUNT = #{paidAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="investRate != null " >
+				AND INVEST_RATE = #{investRate,jdbcType=NUMERIC}
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchSql">
+		SELECT * FROM TZ_T_PROJ_SHARE_INFO
+		<where>
+			<include refid="searchCondition.searchClause" />
+		</where>
+	</sql>
+
+	<select id="selectListPage" resultMap="ProjShareInfoResult" parameterType="com.founder.ssm.core.common.SearchCondition">
+				<include refid="searchSql" />
+	</select>
+
+	<select id="selectCount" resultType="Integer" parameterType="com.founder.ssm.core.common.SearchCondition">
+		SELECT COUNT(*) FROM (
+			<include refid="searchSql" />
+		) t 
+	</select>
+
+	<select id="selectCountBy" resultType="Integer" parameterType="com.ppmg.ei.model.ProjShareInfoModel">
+		SELECT COUNT(*) FROM TZ_T_PROJ_SHARE_INFO
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="osId != null and osId != ''" >
+				AND OS_ID = #{osId,jdbcType=VARCHAR}
+			</if>
+			<if test="investorId != null and investorId != ''" >
+				AND INVESTOR_ID = #{investorId,jdbcType=VARCHAR}
+			</if>
+			<if test="investorName != null and investorName != ''" >
+				AND INVESTOR_NAME = #{investorName,jdbcType=VARCHAR}
+			</if>
+			<if test="shareRate != null and shareRate != ''" >
+				AND SHARE_RATE = #{shareRate,jdbcType=NUMERIC}
+			</if>
+			<if test="inveAmount != null and inveAmount != ''" >
+				AND INVE_AMOUNT = #{inveAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="inveCurrency != null and inveCurrency != ''" >
+				AND INVE_CURRENCY = #{inveCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectList" parameterType="com.ppmg.ei.model.ProjShareInfoModel" resultMap="ProjShareInfoResult">
+		SELECT * FROM TZ_T_PROJ_SHARE_INFO
+		<where>
+			<if test="pkId != null and pkId != ''" >
+				PK_ID = #{pkId,jdbcType=VARCHAR}
+			</if>
+			<if test="osId != null and osId != ''" >
+				AND OS_ID = #{osId,jdbcType=VARCHAR}
+			</if>
+			<if test="investorId != null and investorId != ''" >
+				AND INVESTOR_ID = #{investorId,jdbcType=VARCHAR}
+			</if>
+			<if test="investorName != null and investorName != ''" >
+				AND INVESTOR_NAME = #{investorName,jdbcType=VARCHAR}
+			</if>
+			<if test="shareRate != null and shareRate != ''" >
+				AND SHARE_RATE = #{shareRate,jdbcType=NUMERIC}
+			</if>
+			<if test="inveAmount != null and inveAmount != ''" >
+				AND INVE_AMOUNT = #{inveAmount,jdbcType=NUMERIC}
+			</if>
+			<if test="inveCurrency != null and inveCurrency != ''" >
+				AND INVE_CURRENCY = #{inveCurrency,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="createBy != null and createBy != ''" >
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="createDt != null" >
+				AND CREATE_DT = #{createDt,jdbcType=VARCHAR}
+			</if>
+			<if test="updateBy != null and updateBy != ''" >
+				AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+			</if>
+			<if test="updateDt != null" >
+				AND UPDATE_DT = #{updateDt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectSql2Obj" parameterType="java.lang.String" resultMap="ProjShareInfoResult">
+		${value}
+	</select>
+	<select id="selectSql2Map" parameterType="java.lang.String" resultType="Map">
+		${value}
+	</select>
+	<update id="updateSql" parameterType="java.lang.String">
+		${value}
+	</update>
+	<select id="selectCountSql" parameterType="java.lang.String" resultType="Integer">
+		${value}
+	</select>
+	<!-- end autocreate -->
+
+	<select id="selectListShare" parameterType="com.ppmg.ei.model.ProjShareInfoModel" resultMap="ProjShareInfoResult">
+		SELECT a.*,b.INVESTMENT_ATTRIBUTES FROM TZ_T_PROJ_SHARE_INFO a
+		left join BD_T_INVE_INFO b on a.INVESTOR_ID=b.INVESTOR_ID
+		<where>
+			<if test="osId != null and osId != ''" >
+				AND a.OS_ID = #{osId,jdbcType=VARCHAR}
+			</if>
+			<if test="investorId != null and investorId != ''" >
+				AND a.INVESTOR_ID = #{investorId,jdbcType=VARCHAR}
+			</if>
+			<if test="investorName != null and investorName != ''" >
+				AND a.INVESTOR_NAME = #{investorName,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status != ''" >
+				AND a.STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+
+		</where>
+
+	</select>
+</mapper>
